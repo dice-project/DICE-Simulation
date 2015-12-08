@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ptnet:PetriNetDoc xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ptnet="http:///ptnet.ecore">
+  <nets id="net">
+    <pages id="page">
+      <objects xsi:type="ptnet:Place" id="Start" InArcs="close_to_Start" OutArcs="Start_to_t_Start">
+        <name text="Start"/>
+        <initialMarking text="2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="M1" InArcs="t_Start_to_M1" OutArcs="M1_to_t_M1">
+        <name text="M1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_Start" InArcs="Start_to_t_Start" OutArcs="t_Start_to_M1">
+        <name text="t_Start"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="Start_to_t_Start" source="Start" target="t_Start"/>
+      <objects xsi:type="ptnet:Arc" id="t_Start_to_M1" source="t_Start" target="M1"/>
+      <objects xsi:type="ptnet:Place" id="F1" InArcs="t_M1_to_F1" OutArcs="F1_to_t_F1">
+        <name text="F1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_M1" InArcs="M1_to_t_M1" OutArcs="t_M1_to_F1">
+        <name text="t_M1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="M1_to_t_M1" source="M1" target="t_M1"/>
+      <objects xsi:type="ptnet:Arc" id="t_M1_to_F1" source="t_M1" target="F1"/>
+      <objects xsi:type="ptnet:Place" id="R1" InArcs="t_F1_to_R1" OutArcs="R1_to_t_R1">
+        <name text="R1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_F1" InArcs="F1_to_t_F1" OutArcs="t_F1_to_R1 t_F1_to_R2">
+        <name text="t_F1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="F1_to_t_F1" source="F1" target="t_F1"/>
+      <objects xsi:type="ptnet:Arc" id="t_F1_to_R1" source="t_F1" target="R1"/>
+      <objects xsi:type="ptnet:Place" id="R2" InArcs="t_F1_to_R2" OutArcs="R2_to_t_R2">
+        <name text="R2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="t_F1_to_R2" source="t_F1" target="R2"/>
+      <objects xsi:type="ptnet:Place" id="R1-J1" InArcs="t_R1_to_R1-J1" OutArcs="R1-J1_to_t_J1">
+        <name text="R1-J1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_R1" InArcs="R1_to_t_R1" OutArcs="t_R1_to_R1-J1">
+        <name text="t_R1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_J1" InArcs="R1-J1_to_t_J1 R2-J1_to_t_J1" OutArcs="t_J1_to_M2">
+        <name text="t_J1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="R1_to_t_R1" source="R1" target="t_R1"/>
+      <objects xsi:type="ptnet:Arc" id="t_R1_to_R1-J1" source="t_R1" target="R1-J1"/>
+      <objects xsi:type="ptnet:Arc" id="R1-J1_to_t_J1" source="R1-J1" target="t_J1"/>
+      <objects xsi:type="ptnet:Place" id="R2-J1" InArcs="t_R2_to_R2-J1" OutArcs="R2-J1_to_t_J1">
+        <name text="R2-J1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_R2" InArcs="R2_to_t_R2" OutArcs="t_R2_to_R2-J1">
+        <name text="t_R2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="R2_to_t_R2" source="R2" target="t_R2"/>
+      <objects xsi:type="ptnet:Arc" id="t_R2_to_R2-J1" source="t_R2" target="R2-J1"/>
+      <objects xsi:type="ptnet:Arc" id="R2-J1_to_t_J1" source="R2-J1" target="t_J1"/>
+      <objects xsi:type="ptnet:Place" id="M2" InArcs="t_J1_to_M2" OutArcs="M2_to_t_M2">
+        <name text="M2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="t_J1_to_M2" source="t_J1" target="M2"/>
+      <objects xsi:type="ptnet:Place" id="D1" InArcs="t_M2_to_D1" OutArcs="D1_to_t_D1-R3 D1_to_t_D1-R4">
+        <name text="D1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_M2" InArcs="M2_to_t_M2" OutArcs="t_M2_to_D1">
+        <name text="t_M2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="M2_to_t_M2" source="M2" target="t_M2"/>
+      <objects xsi:type="ptnet:Arc" id="t_M2_to_D1" source="t_M2" target="D1"/>
+      <objects xsi:type="ptnet:Place" id="R3" InArcs="t_D1-R3_to_R3" OutArcs="R3_to_t_R3">
+        <name text="R3"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_D1-R3" InArcs="D1_to_t_D1-R3" OutArcs="t_D1-R3_to_R3">
+        <name text="t_D1-R3"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>0.2&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="D1_to_t_D1-R3" source="D1" target="t_D1-R3"/>
+      <objects xsi:type="ptnet:Arc" id="t_D1-R3_to_R3" source="t_D1-R3" target="R3"/>
+      <objects xsi:type="ptnet:Place" id="R4" InArcs="t_D1-R4_to_R4" OutArcs="R4_to_t_R4">
+        <name text="R4"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_D1-R4" InArcs="D1_to_t_D1-R4" OutArcs="t_D1-R4_to_R4">
+        <name text="t_D1-R4"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>0.8&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="D1_to_t_D1-R4" source="D1" target="t_D1-R4"/>
+      <objects xsi:type="ptnet:Arc" id="t_D1-R4_to_R4" source="t_D1-R4" target="R4"/>
+      <objects xsi:type="ptnet:Place" id="MG1" InArcs="t_R3_to_MG1 t_R4_to_MG1" OutArcs="MG1_to_t_MG1">
+        <name text="MG1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_R3" InArcs="R3_to_t_R3" OutArcs="t_R3_to_MG1">
+        <name text="t_R3"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="R3_to_t_R3" source="R3" target="t_R3"/>
+      <objects xsi:type="ptnet:Arc" id="t_R3_to_MG1" source="t_R3" target="MG1"/>
+      <objects xsi:type="ptnet:Transition" id="t_R4" InArcs="R4_to_t_R4" OutArcs="t_R4_to_MG1">
+        <name text="t_R4"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="R4_to_t_R4" source="R4" target="t_R4"/>
+      <objects xsi:type="ptnet:Arc" id="t_R4_to_MG1" source="t_R4" target="MG1"/>
+      <objects xsi:type="ptnet:Place" id="M3" InArcs="t_MG1_to_M3" OutArcs="M3_to_t_M3">
+        <name text="M3"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_MG1" InArcs="MG1_to_t_MG1" OutArcs="t_MG1_to_M3">
+        <name text="t_MG1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="MG1_to_t_MG1" source="MG1" target="t_MG1"/>
+      <objects xsi:type="ptnet:Arc" id="t_MG1_to_M3" source="t_MG1" target="M3"/>
+      <objects xsi:type="ptnet:Place" id="End" InArcs="t_M3_to_End" OutArcs="End_to_close">
+        <name text="End"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="t_M3" InArcs="M3_to_t_M3" OutArcs="t_M3_to_End">
+        <name text="t_M3"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="M3_to_t_M3" source="M3" target="t_M3"/>
+      <objects xsi:type="ptnet:Arc" id="t_M3_to_End" source="t_M3" target="End"/>
+      <objects xsi:type="ptnet:Transition" id="close" InArcs="End_to_close" OutArcs="close_to_Start">
+        <name text="close"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="End_to_close" source="End" target="close"/>
+      <objects xsi:type="ptnet:Arc" id="close_to_Start" source="close" target="Start"/>
+    </pages>
+    <name text="RootElement"/>
+  </nets>
+</ptnet:PetriNetDoc>

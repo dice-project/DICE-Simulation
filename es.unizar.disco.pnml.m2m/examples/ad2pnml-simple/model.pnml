@@ -1,0 +1,130 @@
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="net" type="http://www.pnml.org/version-2009/grammar/highlevelnet">
+    <page id="page">
+      <place id="ini_InitialNode1">
+        <name>
+          <text>ini_InitialNode1</text>
+        </name>
+      </place>
+      <place id="ini_Think">
+        <name>
+          <text>ini_Think</text>
+        </name>
+      </place>
+      <transition id="cond_ev_InitialNode1">
+        <name>
+          <text>cond_ev_InitialNode1</text>
+        </name>
+      </transition>
+      <arc id="ini_InitialNode1_to_cond_ev_InitialNode1" source="ini_InitialNode1" target="cond_ev_InitialNode1">
+      </arc>
+      <arc id="cond_ev_InitialNode1_to_ini_Think" source="cond_ev_InitialNode1" target="ini_Think">
+      </arc>
+      <place id="ini_Fork1">
+        <name>
+          <text>ini_Fork1</text>
+        </name>
+      </place>
+      <transition id="cond_ev_Think">
+        <name>
+          <text>cond_ev_Think</text>
+        </name>
+      </transition>
+      <arc id="ini_Think_to_cond_ev_Think" source="ini_Think" target="cond_ev_Think">
+      </arc>
+      <arc id="cond_ev_Think_to_ini_Fork1" source="cond_ev_Think" target="ini_Fork1">
+      </arc>
+      <place id="ini_Map1">
+        <name>
+          <text>ini_Map1</text>
+        </name>
+      </place>
+      <transition id="cond_ev_Fork1">
+        <name>
+          <text>cond_ev_Fork1</text>
+        </name>
+      </transition>
+      <arc id="ini_Fork1_to_cond_ev_Fork1" source="ini_Fork1" target="cond_ev_Fork1">
+      </arc>
+      <arc id="cond_ev_Fork1_to_ini_Map1" source="cond_ev_Fork1" target="ini_Map1">
+      </arc>
+      <place id="ini_Map2">
+        <name>
+          <text>ini_Map2</text>
+        </name>
+      </place>
+      <arc id="cond_ev_Fork1_to_ini_Map2" source="cond_ev_Fork1" target="ini_Map2">
+      </arc>
+      <place id="ini_Map3">
+        <name>
+          <text>ini_Map3</text>
+        </name>
+      </place>
+      <arc id="cond_ev_Fork1_to_ini_Map3" source="cond_ev_Fork1" target="ini_Map3">
+      </arc>
+      <place id="ini_Join1">
+        <name>
+          <text>ini_Join1</text>
+        </name>
+      </place>
+      <transition id="cond_ev_Map1">
+        <name>
+          <text>cond_ev_Map1</text>
+        </name>
+      </transition>
+      <arc id="ini_Map1_to_cond_ev_Map1" source="ini_Map1" target="cond_ev_Map1">
+      </arc>
+      <arc id="cond_ev_Map1_to_ini_Join1" source="cond_ev_Map1" target="ini_Join1">
+      </arc>
+      <transition id="cond_ev_Map2">
+        <name>
+          <text>cond_ev_Map2</text>
+        </name>
+      </transition>
+      <arc id="ini_Map2_to_cond_ev_Map2" source="ini_Map2" target="cond_ev_Map2">
+      </arc>
+      <arc id="cond_ev_Map2_to_ini_Join1" source="cond_ev_Map2" target="ini_Join1">
+      </arc>
+      <transition id="cond_ev_Map3">
+        <name>
+          <text>cond_ev_Map3</text>
+        </name>
+      </transition>
+      <arc id="ini_Map3_to_cond_ev_Map3" source="ini_Map3" target="cond_ev_Map3">
+      </arc>
+      <arc id="cond_ev_Map3_to_ini_Join1" source="cond_ev_Map3" target="ini_Join1">
+      </arc>
+      <place id="ini_Reduce1">
+        <name>
+          <text>ini_Reduce1</text>
+        </name>
+      </place>
+      <transition id="cond_ev_Join1">
+        <name>
+          <text>cond_ev_Join1</text>
+        </name>
+      </transition>
+      <arc id="ini_Join1_to_cond_ev_Join1" source="ini_Join1" target="cond_ev_Join1">
+      </arc>
+      <arc id="cond_ev_Join1_to_ini_Reduce1" source="cond_ev_Join1" target="ini_Reduce1">
+      </arc>
+      <place id="ini_ActivityFinalNode1">
+        <name>
+          <text>ini_ActivityFinalNode1</text>
+        </name>
+      </place>
+      <transition id="cond_ev_Reduce1">
+        <name>
+          <text>cond_ev_Reduce1</text>
+        </name>
+      </transition>
+      <arc id="ini_Reduce1_to_cond_ev_Reduce1" source="ini_Reduce1" target="cond_ev_Reduce1">
+      </arc>
+      <arc id="cond_ev_Reduce1_to_ini_ActivityFinalNode1" source="cond_ev_Reduce1" target="ini_ActivityFinalNode1">
+      </arc>
+    </page>
+    <name>
+      <text>model</text>
+    </name>
+  </net>
+</pnml>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated pnextensions -->
+      <package
+            uri="http://es.unizar.disco/pnconstants/1.0"
+            class="es.unizar.disco.pnextensions.pnconstants.PnconstantsPackage"
+            genModel="model/pnextensions.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated pnextensions -->
+      <package
+            uri="http://es.unizar.disco/pnutils/1.0"
+            class="es.unizar.disco.pnextensions.pnutils.PnutilsPackage"
+            genModel="model/pnextensions.genmodel"/>
+   </extension>
+</plugin>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="es.unizar.disco.simulation.simulators">
+      <Simulator
+            id="es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator"
+            name="GreatSPN SSH Simulator"
+            simulator="es.unizar.disco.simulation.greatspn.ssh.simulator.GspnSshSimulator">
+      </Simulator>
+   </extension>
+
+</plugin>

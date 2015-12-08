@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnconfig:PetriNetConfig
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pnconfig="http://es.unizar.disco/pnconfig/1.0"
+    xsi:schemaLocation="http://es.unizar.disco/pnconfig/1.0 platform:/plugin/es.unizar.disco.pnconfig/model/pnconfig.ecore"
+    analysisType="steadyState"
+    initialMarking="//@variableAssignments.2">
+  <variableAssignments
+      key="$p1">
+    <value>0.2</value>
+  </variableAssignments>
+  <variableAssignments
+      key="$p2">
+    <value>0.8</value>
+  </variableAssignments>
+  <variableAssignments
+      key="$Njobs">
+    <value>2.0</value>
+  </variableAssignments>
+</pnconfig:PetriNetConfig>

@@ -1,0 +1,6 @@
+<ivy-module version="2.0">
+    <info organisation="es.unizar.disco.simulation" module="sshj"/>
+    <dependencies>
+		<dependency org="com.hierynomus" name="sshj" rev="0.15.0" />
+    </dependencies>
+</ivy-module>

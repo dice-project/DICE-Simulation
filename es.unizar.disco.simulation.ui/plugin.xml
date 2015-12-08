@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="es.unizar.disco.simulation.ui.launcher.SimulationLaunchConfigurationTabGroup"
+            description="Launches a Simulation"
+            id="es.unizar.disco.simulation.ui.launchConfigurationTabGroup"
+            type="es.unizar.disco.simulation.ui.launchConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabs">
+      <tab
+            class="es.unizar.disco.simulation.ui.launcher.MainLaunchConfigurationTab"
+            group="es.unizar.disco.simulation.ui.launchConfigurationTabGroup"
+            id="es.unizar.disco.simulation.ui.mainTab"
+            name="Main">
+      </tab>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="es.unizar.disco.simulation.ui.launchConfigurationType"
+            icon="icons/full/obj16/clock.png"
+            id="es.unizar.disco.simulation.ui.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="es.unizar.disco.simulation.ui.launcher.SimulationLaunchShortcut"
+            icon="icons/full/obj16/clock.png"
+            id="es.unizar.disco.simulation.ui.shortcut"
+            label="DICE &amp;Simulation"
+            modes="run">
+            <contextualLaunch>
+         <enablement>
+           <with variable="selection">
+             <count value="1"/>
+              <iterate>
+               <and>
+                  <test
+                        forcePluginActivation="true"
+                        property="org.eclipse.core.resources.extension"
+                        value="uml">
+                  </test>
+               </and>
+              </iterate>
+             </with>
+         </enablement>
+ 		</contextualLaunch>
+       <configurationType
+              id="es.unizar.disco.simulation.ui.launchConfigurationType">
+       </configurationType>
+       <description
+              description="Launches a simulation job on the specified UML model"
+              mode="run">
+       </description>
+            
+      </shortcut>
+   </extension>
+
+</plugin>

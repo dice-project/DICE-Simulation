@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.m2m.qvt.oml.javaBlackboxUnits">
+      <unit
+            name="PnmlDiceUtils"
+            namespace="es.unizar.disco.pnml.utils">
+         <library
+               class="es.unizar.disco.pnml.m2m.utils.PnmlDatatypesUtil"
+               name="PnmlDatatypesUtil">
+            <metamodel
+                  nsURI="http:///ptnet.ecore">
+            </metamodel>
+            <metamodel
+                  nsURI="http:///pnmlcoremodel.ecore">
+            </metamodel>
+            <metamodel
+                  nsURI="http:///hlpn.hlcorestructure.ecore">
+            </metamodel>
+            <metamodel
+                  nsURI="http:///symmetricnet.hlcorestructure.ecore">
+            </metamodel>
+         </library>
+         <library
+               class="es.unizar.disco.pnml.m2m.utils.PnmlToolInfoUtils"
+               name="PnmlToolInfoUtils">
+            <metamodel
+                  nsURI="http:///ptnet.ecore">
+            </metamodel>
+            <metamodel
+                  nsURI="http:///pnmlcoremodel.ecore">
+            </metamodel>
+            <metamodel
+                  nsURI="http:///hlpn.hlcorestructure.ecore">
+            </metamodel>
+            <metamodel
+                  nsURI="http:///symmetricnet.hlcorestructure.ecore">
+            </metamodel>
+            <metamodel
+                  nsURI="http://es.unizar.disco/pnconstants/1.0">
+            </metamodel>
+         </library>
+      </unit>
+   </extension>
+
+</plugin>

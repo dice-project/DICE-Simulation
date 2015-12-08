@@ -1,0 +1,227 @@
+<pnml xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net id="net" type="http://www.pnml.org/version-2009/grammar/ptnet">
+    <page id="page">
+      <place id="Start">
+        <name>
+          <text>Start</text>
+        </name>
+      </place>
+      <place id="M1">
+        <name>
+          <text>M1</text>
+        </name>
+      </place>
+      <transition id="t_Start">
+        <name>
+          <text>t_Start</text>
+        </name>
+      </transition>
+      <arc id="Start_to_t_Start" source="Start" target="t_Start">
+      </arc>
+      <arc id="t_Start_to_M1" source="t_Start" target="M1">
+      </arc>
+      <place id="F1">
+        <name>
+          <text>F1</text>
+        </name>
+      </place>
+      <transition id="t_M1">
+        <name>
+          <text>t_M1</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>2.0</value>        </toolspecific>
+      </transition>
+      <arc id="M1_to_t_M1" source="M1" target="t_M1">
+      </arc>
+      <arc id="t_M1_to_F1" source="t_M1" target="F1">
+      </arc>
+      <place id="R1">
+        <name>
+          <text>R1</text>
+        </name>
+      </place>
+      <transition id="t_F1">
+        <name>
+          <text>t_F1</text>
+        </name>
+      </transition>
+      <arc id="F1_to_t_F1" source="F1" target="t_F1">
+      </arc>
+      <arc id="t_F1_to_R1" source="t_F1" target="R1">
+      </arc>
+      <place id="R2">
+        <name>
+          <text>R2</text>
+        </name>
+      </place>
+      <arc id="t_F1_to_R2" source="t_F1" target="R2">
+      </arc>
+      <place id="R1-J1">
+        <name>
+          <text>R1-J1</text>
+        </name>
+      </place>
+      <transition id="t_R1">
+        <name>
+          <text>t_R1</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>5.0</value>        </toolspecific>
+      </transition>
+      <transition id="t_J1">
+        <name>
+          <text>t_J1</text>
+        </name>
+      </transition>
+      <arc id="R1_to_t_R1" source="R1" target="t_R1">
+      </arc>
+      <arc id="t_R1_to_R1-J1" source="t_R1" target="R1-J1">
+      </arc>
+      <arc id="R1-J1_to_t_J1" source="R1-J1" target="t_J1">
+      </arc>
+      <place id="R2-J1">
+        <name>
+          <text>R2-J1</text>
+        </name>
+      </place>
+      <transition id="t_R2">
+        <name>
+          <text>t_R2</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>2.0</value>        </toolspecific>
+      </transition>
+      <arc id="R2_to_t_R2" source="R2" target="t_R2">
+      </arc>
+      <arc id="t_R2_to_R2-J1" source="t_R2" target="R2-J1">
+      </arc>
+      <arc id="R2-J1_to_t_J1" source="R2-J1" target="t_J1">
+      </arc>
+      <place id="M2">
+        <name>
+          <text>M2</text>
+        </name>
+      </place>
+      <arc id="t_J1_to_M2" source="t_J1" target="M2">
+      </arc>
+      <place id="D1">
+        <name>
+          <text>D1</text>
+        </name>
+      </place>
+      <transition id="t_M2">
+        <name>
+          <text>t_M2</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>1.4285714285714286</value>        </toolspecific>
+      </transition>
+      <arc id="M2_to_t_M2" source="M2" target="t_M2">
+      </arc>
+      <arc id="t_M2_to_D1" source="t_M2" target="D1">
+      </arc>
+      <place id="R3">
+        <name>
+          <text>R3</text>
+        </name>
+      </place>
+      <transition id="t_D1-R3">
+        <name>
+          <text>t_D1-R3</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>0.2</value>        </toolspecific>
+      </transition>
+      <arc id="D1_to_t_D1-R3" source="D1" target="t_D1-R3">
+      </arc>
+      <arc id="t_D1-R3_to_R3" source="t_D1-R3" target="R3">
+      </arc>
+      <place id="R4">
+        <name>
+          <text>R4</text>
+        </name>
+      </place>
+      <transition id="t_D1-R4">
+        <name>
+          <text>t_D1-R4</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>0.8</value>        </toolspecific>
+      </transition>
+      <arc id="D1_to_t_D1-R4" source="D1" target="t_D1-R4">
+      </arc>
+      <arc id="t_D1-R4_to_R4" source="t_D1-R4" target="R4">
+      </arc>
+      <place id="MG1">
+        <name>
+          <text>MG1</text>
+        </name>
+      </place>
+      <transition id="t_R3">
+        <name>
+          <text>t_R3</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>5.0</value>        </toolspecific>
+      </transition>
+      <arc id="R3_to_t_R3" source="R3" target="t_R3">
+      </arc>
+      <arc id="t_R3_to_MG1" source="t_R3" target="MG1">
+      </arc>
+      <transition id="t_R4">
+        <name>
+          <text>t_R4</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>2.0</value>        </toolspecific>
+      </transition>
+      <arc id="R4_to_t_R4" source="R4" target="t_R4">
+      </arc>
+      <arc id="t_R4_to_MG1" source="t_R4" target="MG1">
+      </arc>
+      <place id="M3">
+        <name>
+          <text>M3</text>
+        </name>
+      </place>
+      <transition id="t_MG1">
+        <name>
+          <text>t_MG1</text>
+        </name>
+      </transition>
+      <arc id="MG1_to_t_MG1" source="MG1" target="t_MG1">
+      </arc>
+      <arc id="t_MG1_to_M3" source="t_MG1" target="M3">
+      </arc>
+      <place id="End">
+        <name>
+          <text>End</text>
+        </name>
+      </place>
+      <transition id="t_M3">
+        <name>
+          <text>t_M3</text>
+        </name>
+        <toolspecific tool="DICE PNML Extensions" version="0.1">
+<value>1.4285714285714286</value>        </toolspecific>
+      </transition>
+      <arc id="M3_to_t_M3" source="M3" target="t_M3">
+      </arc>
+      <arc id="t_M3_to_End" source="t_M3" target="End">
+      </arc>
+      <transition id="close">
+        <name>
+          <text>close</text>
+        </name>
+      </transition>
+      <arc id="End_to_close" source="End" target="close">
+      </arc>
+      <arc id="close_to_Start" source="close" target="Start">
+      </arc>
+    </page>
+    <name>
+      <text>RootElement</text>
+    </name>
+  </net>
+</pnml>

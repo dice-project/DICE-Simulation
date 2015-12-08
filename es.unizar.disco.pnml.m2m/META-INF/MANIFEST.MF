@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PNML M2M Plug-in
+Bundle-SymbolicName: es.unizar.disco.pnml.m2m;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: es.unizar.disco.pnml.m2m.PnmlM2mPlugin
+Bundle-Vendor: DisCo - Unizar
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.m2m.qvt.oml;bundle-version="3.5.0";visibility:=reexport,
+ es.unizar.disco.pnextensions;bundle-version="0.1.0";visibility:=reexport,
+ fr.lip6.pnml.framework.ptnet;bundle-version="2.2.9",
+ fr.lip6.pnml.framework.coremodel;bundle-version="2.2.9",
+ fr.lip6.pnml.framework.hlpn;bundle-version="2.2.9",
+ fr.lip6.pnml.framework.symmetricnet;bundle-version="2.2.9"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Export-Package: es.unizar.disco.pnml.m2m,
+ es.unizar.disco.pnml.m2m.utils

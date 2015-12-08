@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: DICE Core
+Bundle-SymbolicName: es.unizar.disco.core
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: es.unizar.disco.core.DiceCorePlugin
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
+Export-Package: es.unizar.disco.core.logger,
+ es.unizar.disco.core.util

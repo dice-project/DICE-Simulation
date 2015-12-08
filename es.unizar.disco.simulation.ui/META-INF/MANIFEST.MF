@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: DICE Simulation UI Plugin
+Bundle-SymbolicName: es.unizar.disco.simulation.ui;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Bundle-Activator: es.unizar.disco.simulation.ui.DiceSimulationUiPlugin
+Bundle-Vendor: DisCo - Unizar
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.debug.ui,
+ org.eclipse.emf.ecore,
+ org.eclipse.uml2.uml,
+ org.eclipse.emf.edit.ui,
+ es.unizar.disco.core;bundle-version="0.1.0",
+ es.unizar.disco.core.ui;bundle-version="0.1.0",
+ es.unizar.disco.simulation;bundle-version="0.1.0",
+ es.unizar.disco.pnconfig;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

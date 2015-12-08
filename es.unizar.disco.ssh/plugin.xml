@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="connectionProviders" name="SSH Connection Providers" schema="schema/connectionProviders.exsd"/>
+   <extension
+         point="es.unizar.disco.ssh.connectionProviders">
+      <ConnectionProvider
+            hostProvider="es.unizar.disco.ssh.providers.local.LocalHostProvider"
+            id="es.unizar.disco.ssh.localConnectionProvider"
+            name="Local Connection Provider">
+         <UserPasswordAuthProvider
+               authProvider="es.unizar.disco.ssh.providers.local.LocalUserPasswordAuthProvider">
+         </UserPasswordAuthProvider>
+      </ConnectionProvider>
+   </extension>
+
+</plugin>
