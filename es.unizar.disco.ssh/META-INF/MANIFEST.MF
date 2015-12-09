@@ -10,3 +10,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: DisCo - Unizar
 Export-Package: es.unizar.disco.ssh.providers
+Bundle-Activator: es.unizar.disco.ssh.DiceSshConnectorPlugin

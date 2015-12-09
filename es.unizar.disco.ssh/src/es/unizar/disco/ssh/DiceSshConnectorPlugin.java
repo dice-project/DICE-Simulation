@@ -3,17 +3,17 @@ package es.unizar.disco.ssh;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-public class DiceSshConnector extends Plugin {
+public class DiceSshConnectorPlugin extends Plugin {
 
 
 	public static final String PLUGIN_ID = "es.unizar.disco.ssh"; //$NON-NLS-1$
 
-	private static DiceSshConnector plugin;
+	private static DiceSshConnectorPlugin plugin;
 	
 	/**
 	 * The constructor.
 	 */
-	public DiceSshConnector() {
+	public DiceSshConnectorPlugin() {
 		plugin = this;
 	}
 
@@ -37,7 +37,7 @@ public class DiceSshConnector extends Plugin {
 	/**
 	 * Returns the shared instance.
 	 */
-	public static DiceSshConnector getDefault() {
+	public static DiceSshConnectorPlugin getDefault() {
 		return plugin;
 	}
 

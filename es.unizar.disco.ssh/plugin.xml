@@ -5,11 +5,11 @@
    <extension
          point="es.unizar.disco.ssh.connectionProviders">
       <ConnectionProvider
-            hostProvider="es.unizar.disco.ssh.providers.local.LocalHostProvider"
+            hostProvider="es.unizar.disco.ssh.providers.local.LocalConnectionProvider"
             id="es.unizar.disco.ssh.localConnectionProvider"
             name="Local Connection Provider">
          <UserPasswordAuthProvider
-               authProvider="es.unizar.disco.ssh.providers.local.LocalUserPasswordAuthProvider">
+               authProvider="es.unizar.disco.ssh.providers.local.LocalConnectionProvider">
          </UserPasswordAuthProvider>
       </ConnectionProvider>
    </extension>
