@@ -9,7 +9,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.UUID;
 
 import org.eclipse.acceleo.common.preference.AcceleoPreferences;
 import org.eclipse.core.resources.IContainer;
@@ -64,7 +63,6 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 	public static final String SIMULATION_CONFIGURATION = "SIMULATION_CONFIGURATION";
 
-	private UUID simulationId;
 	
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
@@ -72,9 +70,8 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		if (monitor == null) {
 			monitor = new NullProgressMonitor();
 		}
+		String simulationId;
 		try {
-			simulationId = UUID.randomUUID();
-			
 			monitor.beginTask("Simulating", IProgressMonitor.UNKNOWN);
 			PetriNetConfig pnConfig = getPetriNetConfig(configuration);
 	
@@ -105,7 +102,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				}
 				String netName = new Path(gspnNetFile.getName()).removeFileExtension().toString();
 				Process simulationProcess = simulator.simulate(netName, gspnNetFile, gspnDefFile);
-				new RuntimeProcess(launch, simulationProcess, getSimulationName(), null);
+				new RuntimeProcess(launch, simulationProcess, getSimulationName(simulator.getId()), null);
 			} catch (IOException | SimulationException e) {
 				throw new CoreException(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			}
@@ -237,7 +234,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 	}
 	
 
-	private String getSimulationName() {
-		return String.format("Simulation [%s]", simulationId.toString());
+	private static String getSimulationName(String id) {
+		return String.format("Simulation [%s]", id.toString());
 	}
 }

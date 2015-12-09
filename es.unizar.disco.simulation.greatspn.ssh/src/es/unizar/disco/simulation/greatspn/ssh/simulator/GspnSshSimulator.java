@@ -57,14 +57,12 @@ public class GspnSshSimulator implements ISimulator {
 		private Session session;
 		private Command simulationCommand;
 		
-		private UUID id;
 		private String remoteWorkingDir;
 		private String subject;
 		
 		public GspnProcess(String subject) {
 			this.subject = subject;
-			this.id = UUID.randomUUID();
-			this.remoteWorkingDir = String.format("/tmp/%s", id);
+			this.remoteWorkingDir = String.format("/tmp/%s", getId());
 		}
 		
 		public void initialize(File... inputFiles) throws IOException {
@@ -173,6 +171,13 @@ public class GspnSshSimulator implements ISimulator {
 		}	
 	}
 
+	private String id = UUID.randomUUID().toString();
+	
+	@Override
+	public String getId() {
+		return id;
+	}
+	
 	@Override
 	public Process simulate(String subject, File... inputFiles) throws SimulationException {
 		GspnProcess gspnProcess = new GspnProcess(subject);
