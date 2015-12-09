@@ -2,6 +2,8 @@ package es.unizar.disco.core.util;
 
 public class StringUtils {
 
+	public final static String EMPTY_STRING = "";
+	
 	/**
 	 * <p>
 	 * Compares two CharSequences, returning {@code true} if they represent
