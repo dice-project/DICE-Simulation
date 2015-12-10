@@ -144,31 +144,24 @@
   </GQAM:GaScenario>
   <GQAM:GaWorkloadEvent xmi:id="_QUz7UHZVEeWEvv44s1yQgg" pattern="(closed=(population=$Njobs))" base_NamedElement="_F38owGeMEeWvl7zxZhjBbQ"/>
   <GQAM:GaStep xmi:id="_eBFeEHZVEeWEvv44s1yQgg" base_NamedElement="_NGlZsGeMEeWvl7zxZhjBbQ" base_Action="_NGlZsGeMEeWvl7zxZhjBbQ">
-    <hostDemand></hostDemand>
     <hostDemand>(value=0.5,unit=s,statQ=mean,source=assm)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_rF5YMHZVEeWEvv44s1yQgg" base_NamedElement="_OjRaIGeMEeWvl7zxZhjBbQ" base_Action="_OjRaIGeMEeWvl7zxZhjBbQ">
-    <hostDemand></hostDemand>
     <hostDemand>(value=0.2,unit=s,statQ=mean,source=assm)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_r-z9MHZVEeWEvv44s1yQgg" base_NamedElement="_P-6RsGeMEeWvl7zxZhjBbQ" base_Action="_P-6RsGeMEeWvl7zxZhjBbQ">
-    <hostDemand></hostDemand>
     <hostDemand>(value=0.5,unit=s,statQ=mean,source=assm)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_snNZ8HZVEeWEvv44s1yQgg" base_NamedElement="_TBhHEGeMEeWvl7zxZhjBbQ" base_Action="_TBhHEGeMEeWvl7zxZhjBbQ">
-    <hostDemand></hostDemand>
     <hostDemand>(value=0.7,unit=s,statQ=mean,source=assm)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_tTw98HZVEeWEvv44s1yQgg" base_NamedElement="_RDf7MGeMEeWvl7zxZhjBbQ" base_Action="_RDf7MGeMEeWvl7zxZhjBbQ">
-    <hostDemand></hostDemand>
     <hostDemand>(value=0.2,unit=s,statQ=mean,source=assm)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_t7uV0HZVEeWEvv44s1yQgg" base_NamedElement="_RrE4kGeMEeWvl7zxZhjBbQ" base_Action="_RrE4kGeMEeWvl7zxZhjBbQ">
-    <hostDemand></hostDemand>
     <hostDemand>(value=0.5,unit=s,statQ=mean,source=assm)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_uwrn4HZVEeWEvv44s1yQgg" base_NamedElement="_Tkn0IGeMEeWvl7zxZhjBbQ" base_Action="_Tkn0IGeMEeWvl7zxZhjBbQ">
-    <hostDemand></hostDemand>
     <hostDemand>(value=0.7,unit=s,statQ=mean,source=assm)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_P62twHZWEeWEvv44s1yQgg" base_NamedElement="__d458GeMEeWvl7zxZhjBbQ" prob="(value=$p1,source=assm)"/>
