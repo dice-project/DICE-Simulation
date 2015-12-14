@@ -70,7 +70,6 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		if (monitor == null) {
 			monitor = new NullProgressMonitor();
 		}
-		String simulationId;
 		try {
 			monitor.beginTask("Simulating", IProgressMonitor.UNKNOWN);
 			PetriNetConfig pnConfig = getPetriNetConfig(configuration);
