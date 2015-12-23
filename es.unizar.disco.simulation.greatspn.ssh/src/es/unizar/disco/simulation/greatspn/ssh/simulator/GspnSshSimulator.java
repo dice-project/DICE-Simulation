@@ -3,6 +3,7 @@
  */
 package es.unizar.disco.simulation.greatspn.ssh.simulator;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,7 +31,6 @@ import net.schmizz.keepalive.KeepAliveProvider;
 import net.schmizz.sshj.DefaultConfig;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.common.IOUtils;
-import net.schmizz.sshj.connection.ConnectionException;
 import net.schmizz.sshj.connection.channel.Channel;
 import net.schmizz.sshj.connection.channel.direct.Session;
 import net.schmizz.sshj.connection.channel.direct.Session.Command;
@@ -56,6 +56,7 @@ public class GspnSshSimulator implements ISimulator {
 		private SSHClient ssh;
 		private Session session;
 		private Command simulationCommand;
+		private Thread simulationFinishedThread;
 		
 		private String remoteWorkingDir;
 		private String subject;
@@ -104,21 +105,31 @@ public class GspnSshSimulator implements ISimulator {
 	        session = ssh.startSession();
 	        simulationCommand = session.exec(
 	        		String.format("/usr/local/GreatSPN/bin/WNSIM %s/%s", remoteWorkingDir, subject));
-	        addCleanupHook(simulationCommand);
+	        simulationFinishedThread = addSimulationFinishedHook(simulationCommand);
 		}
 		
-		private void addCleanupHook(final Channel channel) {
-			new Thread() {
+		private Thread addSimulationFinishedHook(final Channel channel) {
+			Thread thread = new Thread() {
 				@Override
 				public void run() {
 					try {
 						channel.join();
-						IOUtils.closeQuietly(ssh, session, simulationCommand);
+						try (
+							Session catSession = ssh.startSession(); 
+							Command catCommand = catSession.exec(String.format("cat %s/%s.simres", remoteWorkingDir, subject))
+						) {
+					        catCommand.join();
+					        rawResults = IOUtils.readFully(catCommand.getInputStream()).toByteArray();
+						}
 					} catch (IOException e) {
 						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+					} finally {
+						IOUtils.closeQuietly(ssh, session, simulationCommand);
 					}
 				}
-			}.start();
+			};
+			thread.start();
+			return thread;
 		}
 		
 		@Override
@@ -147,11 +158,10 @@ public class GspnSshSimulator implements ISimulator {
 
 		@Override
 		public int waitFor() throws InterruptedException {
-			try {
-				simulationCommand.join();
-			} catch (ConnectionException e) {
-				throw new InterruptedException(e.getLocalizedMessage());
+			if (simulationFinishedThread == null) {
+				throw new IllegalThreadStateException("Waiting thread not started yet");
 			}
+			simulationFinishedThread.join();
 			// If no exit status found, return 1 (error)
 			return simulationCommand.getExitStatus() != null ? simulationCommand.getExitStatus() : 1;
 		}
@@ -172,6 +182,7 @@ public class GspnSshSimulator implements ISimulator {
 	}
 
 	private String id = UUID.randomUUID().toString();
+	private byte[] rawResults = new byte[0];
 	
 	@Override
 	public String getId() {
@@ -220,7 +231,7 @@ public class GspnSshSimulator implements ISimulator {
 	
 	@Override
 	public InputStream getRawResult() {
-		throw new UnsupportedOperationException("Not implemented yet");
+		return new ByteArrayInputStream(Arrays.copyOf(rawResults, rawResults.length));
 	}
 
 	private IConfigurationElement getConnectionProvider(String id) throws SimulationException {
