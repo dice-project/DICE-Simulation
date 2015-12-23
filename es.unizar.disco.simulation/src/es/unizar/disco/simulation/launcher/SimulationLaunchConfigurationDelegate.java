@@ -1,5 +1,6 @@
 package es.unizar.disco.simulation.launcher;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +9,10 @@ import java.nio.file.attribute.FileAttribute;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.acceleo.common.preference.AcceleoPreferences;
 import org.eclipse.core.resources.IContainer;
@@ -23,6 +27,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
@@ -43,6 +48,7 @@ import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 
 import es.unizar.disco.core.logger.DiceLogger;
+import es.unizar.disco.core.util.StreamRedirector;
 import es.unizar.disco.core.util.StringUtils;
 import es.unizar.disco.pnconfig.PetriNetConfig;
 import es.unizar.disco.pnconfig.util.PetriNetConfigSerializer;
@@ -72,6 +78,10 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		}
 		try {
 			monitor.beginTask("Simulating", IProgressMonitor.UNKNOWN);
+			
+			Map<String, String> simulationAttrs = new HashMap<>();
+			simulationAttrs.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
+			
 			PetriNetConfig pnConfig = getPetriNetConfig(configuration);
 	
 			File intermediateFilesDir = getIntermediateFilesDir(configuration);
@@ -95,13 +105,30 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 					}
 				}
 				String id = "es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator";
-				ISimulator simulator = getSimulator(id);
+				final ISimulator simulator = getSimulator(id);
 				if (simulator == null) {
 					throw new SimulationException(MessageFormat.format("Unable to find simulator ''{0}''", id));
 				}
 				String netName = new Path(gspnNetFile.getName()).removeFileExtension().toString();
-				Process simulationProcess = simulator.simulate(netName, gspnNetFile, gspnDefFile);
-				new RuntimeProcess(launch, simulationProcess, getSimulationName(simulator.getId()), null);
+				
+				// TODO: change this quick & dirty way to show the raw results
+				final Process simulationProcess = simulator.simulate(netName, gspnNetFile, gspnDefFile);
+				final RuntimeProcess runtimeProcess = new RuntimeProcess(launch, simulationProcess, getSimulationName(simulator.getId()), simulationAttrs);
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							simulationProcess.waitFor();
+							ByteArrayOutputStream out = new ByteArrayOutputStream();
+							new StreamRedirector(simulator.getRawResult(), out).join();
+							String rawResults = "*** SIMULATION RAW RESULTS ***\n" + out.toString();
+							runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, rawResults);
+						} catch (InterruptedException e) {
+							DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
+						}
+					}
+				}).start();
+				
 			} catch (IOException | SimulationException e) {
 				throw new CoreException(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			}
@@ -109,7 +136,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			monitor.done();
 		}
 	}
-
+	
 	private File getInputFile(ILaunchConfiguration configuration) throws CoreException {
 		String inputFileUriString = configuration.getAttribute(INPUT_FILE, "");
 		java.net.URI inputFileUri;
