@@ -2,6 +2,7 @@ package es.unizar.disco.simulation.launcher;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -84,13 +85,16 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			
 			PetriNetConfig pnConfig = getPetriNetConfig(configuration);
 	
-			File intermediateFilesDir = getIntermediateFilesDir(configuration);
+			final boolean keepIntermediateFiles = configuration.getAttribute(KEEP_INTERMEDIATE_FILES, false);
+			final File intermediateFilesDir = getIntermediateFilesDir(configuration);
 	
-			File umlFile = getInputFile(configuration);
-			File configFile = Paths.get(intermediateFilesDir.toURI()).resolve("dump.pnconfig").toFile();
-			File pnmlFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.pnml.xmi").toFile();
-			File gspnNetFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.net").toFile();
-			File gspnDefFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.def").toFile();
+			final File umlFile = getInputFile(configuration);
+			final File configFile = Paths.get(intermediateFilesDir.toURI()).resolve("dump.pnconfig").toFile();
+			final File pnmlFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.pnml.xmi").toFile();
+			final File gspnNetFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.net").toFile();
+			final File gspnDefFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.def").toFile();
+			final File resultFile = Paths.get(intermediateFilesDir.toURI()).resolve("result.txt").toFile();
+
 			try {
 				try {
 					dumpConfig(pnConfig, configFile, new SubProgressMonitor(monitor, 1));
@@ -98,7 +102,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 					transformPnmlToGspn(pnmlFile, intermediateFilesDir, new SubProgressMonitor(monitor, 1));
 				} finally {
 					// Refresh workspace if intermediate files were stored in it
-					if (configuration.getAttribute(KEEP_INTERMEDIATE_FILES, false)) {
+					if (keepIntermediateFiles) {
 						for (IContainer container : ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(intermediateFilesDir.toURI())) {
 							container.refreshLocal(IResource.DEPTH_ONE, new SubProgressMonitor(monitor, 1));
 						}
@@ -121,10 +125,26 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 							simulationProcess.waitFor();
 							ByteArrayOutputStream out = new ByteArrayOutputStream();
 							new StreamRedirector(simulator.getRawResult(), out).join();
-							String rawResults = "*** SIMULATION RAW RESULTS ***\n" + out.toString();
-							runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, rawResults);
+							runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, "*** SIMULATION RAW RESULTS ***\n" + out.toString());
+							
+							try (FileWriter writer = new FileWriter(resultFile);) {
+								writer.write(out.toString());
+							} catch (IOException e) {
+								DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
+							}
 						} catch (InterruptedException e) {
 							DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
+						} finally {
+							// Refresh workspace if intermediate files were stored in it
+							if (keepIntermediateFiles) {
+								for (IContainer container : ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(intermediateFilesDir.toURI())) {
+									try {
+										container.refreshLocal(IResource.DEPTH_ONE, new NullProgressMonitor());
+									} catch (CoreException e) {
+										DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
+									}
+								}
+							}
 						}
 					}
 				}).start();
