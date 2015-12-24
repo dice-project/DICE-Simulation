@@ -31,6 +31,7 @@ import net.schmizz.keepalive.KeepAliveProvider;
 import net.schmizz.sshj.DefaultConfig;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.common.IOUtils;
+import net.schmizz.sshj.connection.ConnectionException;
 import net.schmizz.sshj.connection.channel.Channel;
 import net.schmizz.sshj.connection.channel.direct.Session;
 import net.schmizz.sshj.connection.channel.direct.Session.Command;
@@ -54,12 +55,14 @@ public class GspnSshSimulator implements ISimulator {
 		}
 
 		private SSHClient ssh;
-		private Session session;
+		private Session simulationSession;
 		private Command simulationCommand;
 		private Thread simulationFinishedThread;
 		
 		private String remoteWorkingDir;
 		private String subject;
+		private volatile boolean finished = false;
+		private volatile int exitValue = Integer.MIN_VALUE;
 		
 		public GspnProcess(String subject) {
 			this.subject = subject;
@@ -102,8 +105,8 @@ public class GspnSshSimulator implements ISimulator {
 		}
 		
 		public void launch() throws IOException {
-	        session = ssh.startSession();
-	        simulationCommand = session.exec(
+	        simulationSession = ssh.startSession();
+	        simulationCommand = simulationSession.exec(
 	        		String.format("/usr/local/GreatSPN/bin/WNSIM %s/%s", remoteWorkingDir, subject));
 	        simulationFinishedThread = addSimulationFinishedHook(simulationCommand);
 		}
@@ -120,11 +123,16 @@ public class GspnSshSimulator implements ISimulator {
 						) {
 					        catCommand.join();
 					        rawResults = IOUtils.readFully(catCommand.getInputStream()).toByteArray();
+					        finished = true;
+					        exitValue = simulationCommand.getExitStatus() != null ? simulationCommand.getExitStatus() : 1;
 						}
+					} catch (ConnectionException e) {
+						DiceLogger.logError(GspnSshSimulationPlugin.getDefault(), 
+								MessageFormat.format("Connection to ''{0}:{1}'' was closed unexpectedly", ssh.getRemoteHostname(), ssh.getRemotePort()),e);
 					} catch (IOException e) {
 						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
 					} finally {
-						IOUtils.closeQuietly(ssh, session, simulationCommand);
+						IOUtils.closeQuietly(ssh, simulationSession, simulationCommand);
 					}
 				}
 			};
@@ -163,21 +171,20 @@ public class GspnSshSimulator implements ISimulator {
 			}
 			simulationFinishedThread.join();
 			// If no exit status found, return 1 (error)
-			return simulationCommand.getExitStatus() != null ? simulationCommand.getExitStatus() : 1;
+			return exitValue;
 		}
 
 		@Override
 		public int exitValue() {
-			Integer exitStatus = simulationCommand.getExitStatus();
-			if (exitStatus == null) {
+			if (simulationCommand.isOpen() && finished == false) {
 				throw new IllegalThreadStateException("The command has not finished yet");
 			}
-			return exitStatus;
+			return exitValue;
 		}
 
 		@Override
 		public void destroy() {
-			IOUtils.closeQuietly(ssh, session, simulationCommand);
+			IOUtils.closeQuietly(ssh, simulationSession, simulationCommand);
 		}	
 	}
 
