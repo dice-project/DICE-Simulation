@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import es.unizar.disco.core.DiceCorePlugin;
-import es.unizar.disco.core.logger.DiceLogger;
-
 public class StreamRedirector extends Thread {
 
 	public StreamRedirector(final InputStream in, final OutputStream out){
@@ -32,7 +29,6 @@ public class StreamRedirector extends Thread {
 				} catch (IOException ex) {
 					throw new RuntimeException("Unable to redirect streams", ex);
 				}
-				DiceLogger.logInfo(DiceCorePlugin.getDefault(), "StreamRedirector finished");
 			}
 		};
 	}
