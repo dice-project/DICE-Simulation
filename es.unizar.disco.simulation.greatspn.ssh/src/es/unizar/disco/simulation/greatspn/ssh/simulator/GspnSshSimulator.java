@@ -38,6 +38,7 @@ import net.schmizz.sshj.connection.channel.direct.Session.Command;
 import net.schmizz.sshj.sftp.SFTPClient;
 import net.schmizz.sshj.transport.verification.HostKeyVerifier;
 import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
+import net.schmizz.sshj.userauth.password.PasswordUtils;
 
 /**
  * @author Abel Gómez <abel.gomez@unizar.es>
@@ -99,7 +100,8 @@ public class GspnSshSimulator implements ISimulator {
 				ssh.authPassword(userPassProvider.getUser(), userPassProvider.getPassword());
 			} else if (authProvider instanceof IKeyAuthProvider) {
 				IKeyAuthProvider keyProvider = (IKeyAuthProvider) authProvider;
-				KeyProvider keys = ssh.loadKeys(keyProvider.getKeyFile().getAbsolutePath(), keyProvider.getPassphrase());
+				KeyProvider keys = ssh.loadKeys(keyProvider.getPrivateKey(), null, 
+						PasswordUtils.createOneOff(keyProvider.getPassphrase().toCharArray()));
 				ssh.authPublickey(keyProvider.getUser(), keys);
 			}
 		}
