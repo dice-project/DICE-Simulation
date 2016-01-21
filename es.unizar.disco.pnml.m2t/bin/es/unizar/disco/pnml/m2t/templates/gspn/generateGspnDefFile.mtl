@@ -1,0 +1,10 @@
+[comment encoding = UTF-8 /]
+[module generateGspnDefFile('http:///ptnet.ecore')]
+
+[template public generateGspnDefFile(petriNet : PetriNet)]
+[file (petriNet.id.concat('.gspn.def'), false, 'Cp1252')]
+|256
+%
+|
+[/file]
+[/template]
