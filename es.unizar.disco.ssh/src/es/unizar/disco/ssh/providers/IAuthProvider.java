@@ -4,4 +4,6 @@ public interface IAuthProvider {
 	
 	public String getUser();
 
+	public boolean isEnabled();
+	
 }

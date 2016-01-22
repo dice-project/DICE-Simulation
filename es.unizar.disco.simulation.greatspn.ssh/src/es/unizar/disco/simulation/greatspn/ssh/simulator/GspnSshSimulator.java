@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
 import es.unizar.disco.core.logger.DiceLogger;
-import es.unizar.disco.core.util.StringUtils;
 import es.unizar.disco.simulation.greatspn.ssh.GspnSshSimulationPlugin;
 import es.unizar.disco.simulation.simulators.ISimulator;
 import es.unizar.disco.simulation.simulators.SimulationException;
@@ -205,16 +204,19 @@ public class GspnSshSimulator implements ISimulator {
 		IHostProvider hostProvider = null;
 		IAuthProvider authProvider = null;
 		try {
-			IConfigurationElement configElement = getConnectionProvider(SshConnectionProviderConstants.DEFAUL_LOCAL_PROVIDER_ID);
+			IConfigurationElement configElement = getConnectionProvider();
 			if (configElement == null) {
-				throw new SimulationException(MessageFormat.format("Unable to find connection provider ''{0}''", 
-						SshConnectionProviderConstants.DEFAUL_LOCAL_PROVIDER_ID));
+				throw new SimulationException("Unable to find an SSH connection provider");
 			}
 
 			hostProvider = (IHostProvider) configElement.createExecutableExtension(SshConnectionProviderConstants.HOST_PROVIDER_ATTR);
-			authProvider = (IAuthProvider) configElement.getChildren()[0].createExecutableExtension(SshConnectionProviderConstants.AUTH_PROVIDER_ATTR);
-			
-			gspnProcess.connect(hostProvider, authProvider);
+			for (IConfigurationElement child : configElement.getChildren()) {
+				// Try to connect using each one of the authentication provider as they are declared
+				authProvider = (IAuthProvider) child.createExecutableExtension(SshConnectionProviderConstants.AUTH_PROVIDER_ATTR);
+				if (authProvider.isEnabled()) {
+					gspnProcess.connect(hostProvider, authProvider);
+				}
+			}
 		} catch (CoreException e) {
 			throw new SimulationException("Unable to gather connection information", e);
 		} catch (IOException e) {
@@ -243,15 +245,18 @@ public class GspnSshSimulator implements ISimulator {
 		return new ByteArrayInputStream(Arrays.copyOf(rawResults, rawResults.length));
 	}
 
-	private IConfigurationElement getConnectionProvider(String id) throws SimulationException {
+	private IConfigurationElement getConnectionProvider() throws SimulationException {
 		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(SshConnectionProviderConstants.EXTENSION_ID);
 		
+		int currentPriority = -1;
+		IConfigurationElement prioritaryElement = null;
 		for (IConfigurationElement configElement : configElements) {
 			String configId = configElement.getAttribute(SshConnectionProviderConstants.ID_ATTR);
-			if (StringUtils.equals(id,  configId)) {
-				return configElement;
+			int elementPriority = Integer.valueOf(configElement.getAttribute(SshConnectionProviderConstants.PRIORITY_ATTR));
+			if (elementPriority > currentPriority) {
+				prioritaryElement = configElement;
 			}
 		}
-		return null;
+		return prioritaryElement;
 	}
 }

@@ -73,4 +73,9 @@ public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuth
 		}
 		return propertiesStream;
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

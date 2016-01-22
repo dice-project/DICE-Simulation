@@ -12,6 +12,8 @@ public final class SshConnectionProviderConstants {
 	public static final String NAME_ATTR = "name";
 
 	public static final String ICON_ATTR = "icon";
+
+	public static final String PRIORITY_ATTR = "priority";
 	
 	public static final String DESCRIPTION_ATTR = "description";
 
@@ -19,6 +21,4 @@ public final class SshConnectionProviderConstants {
 
 	public static final String AUTH_PROVIDER_ATTR = "authProvider";
 
-	public static final String DEFAUL_LOCAL_PROVIDER_ID = "es.unizar.disco.ssh.localConnectionProvider";
-	
 }

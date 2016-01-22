@@ -7,7 +7,8 @@
       <ConnectionProvider
             hostProvider="es.unizar.disco.ssh.providers.local.LocalConnectionProvider"
             id="es.unizar.disco.ssh.localConnectionProvider"
-            name="Local Connection Provider">
+            name="Local Connection Provider"
+            priority="0">
          <UserPasswordAuthProvider
                authProvider="es.unizar.disco.ssh.providers.local.LocalConnectionProvider">
          </UserPasswordAuthProvider>
