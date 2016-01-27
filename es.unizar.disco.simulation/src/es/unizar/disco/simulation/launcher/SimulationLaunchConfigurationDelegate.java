@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.acceleo.common.preference.AcceleoPreferences;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
@@ -49,8 +51,6 @@ import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 
 import es.unizar.disco.core.logger.DiceLogger;
-import es.unizar.disco.core.util.StreamRedirector;
-import es.unizar.disco.core.util.StringUtils;
 import es.unizar.disco.pnconfig.PetriNetConfig;
 import es.unizar.disco.pnconfig.util.PetriNetConfigSerializer;
 import es.unizar.disco.pnml.m2m.PnmlM2mPlugin;
@@ -124,7 +124,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 						try {
 							simulationProcess.waitFor();
 							ByteArrayOutputStream out = new ByteArrayOutputStream();
-							new StreamRedirector(simulator.getRawResult(), out).join();
+							IOUtils.copy(simulator.getRawResult(), out);
 							runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, "*** SIMULATION RAW RESULTS ***\n" + out.toString());
 							
 							try (FileWriter writer = new FileWriter(resultFile);) {
@@ -132,7 +132,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 							} catch (IOException e) {
 								DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
 							}
-						} catch (InterruptedException e) {
+						} catch (InterruptedException | IOException e) {
 							DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
 						} finally {
 							// Refresh workspace if intermediate files were stored in it

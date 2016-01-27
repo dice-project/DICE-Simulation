@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="es.unizar.disco.core.ui.preferences"
+            class="es.unizar.disco.ssh.ui.preferences.SshConnectionProviderPreferencePage"
+            id="es.unizar.disco.ssh.ui.preferences.SshConnectionProviderPreferencePage"
+            name="SSH Connection">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="es.unizar.disco.ssh.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="es.unizar.disco.ssh.connectionProviders">
+      <ConnectionProvider
+            hostProvider="es.unizar.disco.ssh.ui.SshUiHostProvider"
+            id="es.unizar.disco.ssh.ui.connectionProvider"
+            name="UI Preferences Connection Provider"
+            priority="4">
+         <KeyAuthProvider
+               authProvider="es.unizar.disco.ssh.ui.SshUiKeyAuthProvider">
+         </KeyAuthProvider>
+         <UserPasswordAuthProvider
+               authProvider="es.unizar.disco.ssh.ui.SshUiUserPasswordAuthProvider">
+         </UserPasswordAuthProvider>
+      </ConnectionProvider>
+   </extension>
+
+</plugin>

@@ -5,8 +5,12 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+
 import es.unizar.disco.core.logger.DiceLogger;
-import es.unizar.disco.core.util.StringUtils;
 import es.unizar.disco.ssh.DiceSshConnectorPlugin;
 import es.unizar.disco.ssh.providers.IHostProvider;
 import es.unizar.disco.ssh.providers.IUserPasswordAuthProvider;
@@ -52,7 +56,7 @@ public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuth
 		} catch (IOException e) {
 			DiceLogger.logException(DiceSshConnectorPlugin.getDefault(), e);
 		}
-		return properties.getProperty(USER_PROPERTY, StringUtils.EMPTY_STRING);
+		return properties.getProperty(USER_PROPERTY, StringUtils.EMPTY);
 	}
 
 	@Override
@@ -63,7 +67,7 @@ public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuth
 		} catch (IOException e) {
 			DiceLogger.logException(DiceSshConnectorPlugin.getDefault(), e);
 		}
-		return properties.getProperty(PASSWORD_PROPERTY, StringUtils.EMPTY_STRING);
+		return properties.getProperty(PASSWORD_PROPERTY, StringUtils.EMPTY);
 	}
 
 	private InputStream getPropertiesStream() throws IOException {
@@ -77,5 +81,12 @@ public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuth
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public void configure() throws CoreException {
+		throw new CoreException(
+				new Status(IStatus.INFO, DiceSshConnectorPlugin.PLUGIN_ID,
+				MessageFormat.format("''{0}'' does not support self-configuration", LocalConnectionProvider.class.getName())));
 	}
 }

@@ -13,6 +13,7 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -100,7 +101,9 @@ public class GspnSshSimulator implements ISimulator {
 			} else if (authProvider instanceof IKeyAuthProvider) {
 				IKeyAuthProvider keyProvider = (IKeyAuthProvider) authProvider;
 				KeyProvider keys = ssh.loadKeys(keyProvider.getPrivateKey(), null, 
-						PasswordUtils.createOneOff(keyProvider.getPassphrase().toCharArray()));
+						!StringUtils.isEmpty(keyProvider.getPassphrase()) ?
+						PasswordUtils.createOneOff(keyProvider.getPassphrase().toCharArray()) :
+						null);
 				ssh.authPublickey(keyProvider.getUser(), keys);
 			}
 		}
@@ -129,7 +132,7 @@ public class GspnSshSimulator implements ISimulator {
 						}
 					} catch (ConnectionException e) {
 						DiceLogger.logError(GspnSshSimulationPlugin.getDefault(), 
-								MessageFormat.format("Connection to ''{0}:{1}'' was closed unexpectedly", ssh.getRemoteHostname(), ssh.getRemotePort()),e);
+								MessageFormat.format("Connection to ''{0}:{1,number,#}'' was closed unexpectedly", ssh.getRemoteHostname(), ssh.getRemotePort()),e);
 					} catch (IOException e) {
 						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
 					} finally {
@@ -212,17 +215,22 @@ public class GspnSshSimulator implements ISimulator {
 			hostProvider = (IHostProvider) configElement.createExecutableExtension(SshConnectionProviderConstants.HOST_PROVIDER_ATTR);
 			for (IConfigurationElement child : configElement.getChildren()) {
 				// Try to connect using each one of the authentication provider as they are declared
-				authProvider = (IAuthProvider) child.createExecutableExtension(SshConnectionProviderConstants.AUTH_PROVIDER_ATTR);
-				if (authProvider.isEnabled()) {
-					gspnProcess.connect(hostProvider, authProvider);
+				IAuthProvider childAuthProvider = (IAuthProvider) child.createExecutableExtension(SshConnectionProviderConstants.AUTH_PROVIDER_ATTR);
+				if (childAuthProvider.isEnabled()) {
+					authProvider = childAuthProvider;
+					break;
 				}
 			}
+			if (authProvider == null) {
+				hostProvider.configure();
+			}
+			gspnProcess.connect(hostProvider, authProvider);
 		} catch (CoreException e) {
 			throw new SimulationException("Unable to gather connection information", e);
 		} catch (IOException e) {
 			throw new SimulationException(
-					MessageFormat.format("Unable to establish a connection with ''{0}@{1}:{2}''", 
-							authProvider.getUser(), hostProvider.getHost(), hostProvider.getPort()), e);
+					MessageFormat.format("Unable to establish a connection with ''{0}@{1}:{2,number,#}''", 
+							authProvider != null ? authProvider.getUser() : null, hostProvider.getHost(), hostProvider.getPort()), e);
 		}
 		try {
 			gspnProcess.initialize(inputFiles);
@@ -251,7 +259,6 @@ public class GspnSshSimulator implements ISimulator {
 		int currentPriority = -1;
 		IConfigurationElement prioritaryElement = null;
 		for (IConfigurationElement configElement : configElements) {
-			String configId = configElement.getAttribute(SshConnectionProviderConstants.ID_ATTR);
 			int elementPriority = Integer.valueOf(configElement.getAttribute(SshConnectionProviderConstants.PRIORITY_ATTR));
 			if (elementPriority > currentPriority) {
 				prioritaryElement = configElement;

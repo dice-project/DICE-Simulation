@@ -2,5 +2,7 @@
     <info organisation="es.unizar.disco.simulation" module="sshj"/>
     <dependencies>
 		<dependency org="com.hierynomus" name="sshj" rev="0.15.0" />
+		<dependency org="org.bouncycastle" name="bcpkix-jdk15on" rev="1.51"/>
+		<dependency org="org.bouncycastle" name="bcprov-jdk15on" rev="1.51"/>
     </dependencies>
 </ivy-module>
