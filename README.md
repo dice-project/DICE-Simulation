@@ -7,8 +7,11 @@ This project contains the *Core plug-in*.
 
 The *Core plug-in* provides some utility clases for I/O, together with the shared logging capabilities. 
 
-## es.unizar.disco.core.ui --- This project contains the *Core UI plug-in*.
-  The *Core UI plug-in* provides UI components that are shared across the different plug-ins contained in this repository, such as file selection dialogs.
+## es.unizar.disco.core.ui
+
+This project contains the *Core UI plug-in*.
+
+The *Core UI plug-in* provides UI components that are shared across the different plug-ins contained in this repository, such as file selection dialogs.
 
 ## es.unizar.disco.pnconfig
 
