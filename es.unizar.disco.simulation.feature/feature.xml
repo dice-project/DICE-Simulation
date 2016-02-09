@@ -224,8 +224,32 @@ any resulting litigation.
    </url>
 
    <requires>
-      <import feature="org.eclipse.emf" version="2.10"/>
-      <import feature="org.eclipse.uml2" version="5.0.0"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
+      <import plugin="fr.lip6.pnml.framework.coremodel" version="2.2.9" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.ptnet" version="2.2.9" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.hlpn" version="2.2.9" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.symmetricnet" version="2.2.9" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.utils" version="2.2.9" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.m2m.qvt.oml" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnextensions" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
+      <import plugin="org.eclipse.acceleo.common" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.model" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.profiler" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.engine" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="es.unizar.disco.core" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnconfig" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnml.m2m" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnml.m2t" version="0.1.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.emf" version="2.10" match="compatible"/>
+      <import feature="org.eclipse.uml2" version="5.0.0" match="compatible"/>
+      <import feature="com.masdes.dam.profile" version="0.2.1" match="greaterOrEqual"/>
+      <import feature="com.masdes.dam.profile.ui.feature" version="0.2.1" match="greaterOrEqual"/>
+      <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.1.0" match="compatible"/>
    </requires>
 
    <plugin

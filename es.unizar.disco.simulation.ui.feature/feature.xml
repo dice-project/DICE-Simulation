@@ -224,7 +224,23 @@ any resulting litigation.
    </url>
 
    <requires>
-      <import feature="org.eclipse.papyrus.sdk.feature" version="1.1.0"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.jface"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.uml2.uml"/>
+      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="es.unizar.disco.core" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.core.ui" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.simulation" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnconfig" version="0.1.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.papyrus.sdk.feature" version="1.1.0" match="compatible"/>
+      <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.1.0" match="compatible"/>
+      <import feature="org.eclipse.papyrus.extra.marte.properties.feature" version="1.1.0" match="compatible"/>
+      <import feature="org.eclipse.papyrus.extra.marte.textedit.feature" version="1.1.0" match="compatible"/>
    </requires>
 
    <plugin

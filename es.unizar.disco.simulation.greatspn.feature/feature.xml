@@ -223,6 +223,13 @@ any resulting litigation.
       <update label="DICE Simulation Tools Update Site" url="http://dice-project.github.io/DICE-Simulation/updates"/>
    </url>
 
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="es.unizar.disco.core" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.ssh" version="0.1.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.simulation" version="0.1.0" match="greaterOrEqual"/>
+   </requires>
+
    <plugin
          id="es.unizar.disco.simulation.greatspn.ssh"
          download-size="0"
