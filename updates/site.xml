@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<site>
+<site associateSitesURL="http://dice-project.github.io/DICE-Simulation/updates/associateSites.xml">
    <description name="DICE Profiles" url="http://dice-project.github.io/DICE-Profiles/updates">
       Profiles used in the DICE Project
    </description>
