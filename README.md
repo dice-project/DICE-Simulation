@@ -3,7 +3,7 @@ Simulation tool for DICE
 
 # Installing the Profiles
 
-In Eclipse, go to + Help -> Install New Software...` and use http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
+In Eclipse, go to `Help -> Install New Software...` and use http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
 
 # Summary of contents
 
