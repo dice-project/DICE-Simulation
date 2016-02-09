@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<site associateSitesURL="http://dice-project.github.io/DICE-Simulation/updates/associateSites.xml">
+<site
+      associateSitesURL="http://dice-project.github.io/DICE-Simulation/updates/associateSites.xml">
    <description name="DICE Profiles" url="http://dice-project.github.io/DICE-Profiles/updates">
       Profiles used in the DICE Project
    </description>
-   <feature url="features/es.unizar.disco.simulation.feature_0.1.0.qualifier.jar" id="es.unizar.disco.simulation.feature" version="0.1.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.feature_0.1.0.201602091937.jar" id="es.unizar.disco.simulation.feature" version="0.1.0.201602091937">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.0.qualifier.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.0.201602091937.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.0.201602091937">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.0.qualifier.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.0.201602091937.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.0.201602091937">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.1.0.qualifier.jar" id="es.unizar.disco.ssh.feature" version="0.1.0.qualifier">
+   <feature url="features/es.unizar.disco.ssh.feature_0.1.0.201602091937.jar" id="es.unizar.disco.ssh.feature" version="0.1.0.201602091937">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.0.qualifier.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.0.qualifier">
+   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.0.201602091937.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.0.201602091937">
       <category name="DICE Simulation"/>
    </feature>
    <category-def name="DICE Simulation" label="DICE Simulation">
