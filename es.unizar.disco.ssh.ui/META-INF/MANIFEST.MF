@@ -17,3 +17,4 @@ Require-Bundle: org.eclipse.equinox.security,
  es.unizar.disco.core;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
+Bundle-Vendor: DisCo - Unizar
