@@ -1,6 +1,12 @@
 # DICE-Simulation
 Simulation tool for DICE
 
+# Installing the Profiles
+
+In Eclipse, go to + Help -> Install New Software...` and use http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
+
+# Summary of contents
+
 ## es.unizar.disco.core  
 
 This project contains the *Core plug-in*.
