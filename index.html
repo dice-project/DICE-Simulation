@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>DICE Simulation Tools by dice-project</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>DICE Simulation Tools</h1>
+        <p>Simulation Tools for the DICE project</p>
+
+        <p class="view"><a href="https://github.com/dice-project/DICE-Simulation">View the Project on GitHub <small>dice-project/DICE-Simulation</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/dice-project/DICE-Simulation/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/dice-project/DICE-Simulation/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/dice-project/DICE-Simulation">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="dice-simulation" class="anchor" href="#dice-simulation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DICE-Simulation</h1>
+
+<p>Simulation tool for DICE</p>
+
+<h1>
+<a id="installing-the-profiles" class="anchor" href="#installing-the-profiles" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing the Profiles</h1>
+
+<p>In Eclipse, go to <code>Help -&gt; Install New Software...</code> and use <a href="http://dice-project.github.io/DICE-Simulation/updates">http://dice-project.github.io/DICE-Simulation/updates</a> as the URL for the update site.</p>
+
+<h1>
+<a id="summary-of-contents" class="anchor" href="#summary-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Summary of contents</h1>
+
+<h2>
+<a id="esunizardiscocore" class="anchor" href="#esunizardiscocore" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.core</h2>
+
+<p>This project contains the <em>Core plug-in</em>.</p>
+
+<p>The <em>Core plug-in</em> provides some utility clases for I/O, together with the shared logging capabilities. </p>
+
+<h2>
+<a id="esunizardiscocoreui" class="anchor" href="#esunizardiscocoreui" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.core.ui</h2>
+
+<p>This project contains the <em>Core UI plug-in</em>.</p>
+
+<p>The <em>Core UI plug-in</em> provides UI components that are shared across the different plug-ins contained in this repository, such as file selection dialogs.</p>
+
+<h2>
+<a id="esunizardiscopnconfig" class="anchor" href="#esunizardiscopnconfig" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.pnconfig</h2>
+
+<p>This project contains the implementation of the <em>Configuration Model</em> as an EMF plug-in.</p>
+
+<h2>
+<a id="esunizardiscopnmlm2m" class="anchor" href="#esunizardiscopnmlm2m" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.pnml.m2m</h2>
+
+<p>This project implements the M2M tranformation from UML to PNML using QVTo. </p>
+
+<h2>
+<a id="esunizardiscopnextensions" class="anchor" href="#esunizardiscopnextensions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.pnextensions</h2>
+
+<p>This project provides some utilities to handle some extensions in PNML models.</p>
+
+<p>The PNML standard does not provide support for timed and stochastic petri nets.</p>
+
+<p>Thus, this plug-in provides the utility methods to handle this information by using the <em>ToolSpecifics</em> tags provided by the PNML standard. </p>
+
+<h2>
+<a id="esunizardiscopnmlm2t" class="anchor" href="#esunizardiscopnmlm2t" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.pnml.m2t</h2>
+
+<p>This project contains the Acceleo transformation to convert a DICE-annotated PNML file to a set GreatSPN files. </p>
+
+<h2>
+<a id="esunizardiscosimulationgreatspnssh" class="anchor" href="#esunizardiscosimulationgreatspnssh" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.simulation.greatspn.ssh</h2>
+
+<p>This project contains the OSGi component that controls a remote GreatSPN instance by using SSH commands.</p>
+
+<h2>
+<a id="esunizardiscosimulation" class="anchor" href="#esunizardiscosimulation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.simulation</h2>
+
+<p>This project contains the core component that executes a simulation by orchestrating the interactions among all the previous components.</p>
+
+<h2>
+<a id="esunizardiscosimulationui" class="anchor" href="#esunizardiscosimulationui" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.simulation.ui</h2>
+
+<p>This project contains the UI contributions that allow the users to invoke a simulation within the Eclipse GUI.</p>
+
+<h2>
+<a id="esunizardiscossh" class="anchor" href="#esunizardiscossh" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>es.unizar.disco.ssh</h2>
+
+<p>This project provides a simple extension point contribution to access a remote host by issuing the connection data using a local file.</p>
+
+<h2>
+<a id="comhierynomussshj" class="anchor" href="#comhierynomussshj" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>com.hierynomus.sshj</h2>
+
+<p>This project contains the <em>sshj - SSHv2 library for Java</em> as an OSGi-friendly bundle.</p>
+
+<p>This module is required by <code>es.unizar.disco.simulation.greatspn.ssh</code> to access a remote <em>GreatSPN</em> instance using SSH/SFTP.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/dice-project">dice-project</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
