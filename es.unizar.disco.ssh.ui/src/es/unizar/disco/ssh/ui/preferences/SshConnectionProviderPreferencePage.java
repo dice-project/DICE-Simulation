@@ -294,7 +294,7 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 			if (value != null && StringUtils.isNotBlank(value.toString())) {
 				return ValidationStatus.ok();
 			}
-			return ValidationStatus.error("Username cannot empty");
+			return ValidationStatus.error("Username cannot be empty");
 		}
 	}
 
