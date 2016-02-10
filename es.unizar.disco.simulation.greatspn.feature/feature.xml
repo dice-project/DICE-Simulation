@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="es.unizar.disco.simulation.greatspn.feature"
-      label="GreatSPN Through SSH Simulator"
+      label="GreatSPN-Through-SSH Simulator"
       version="0.1.0.qualifier"
       provider-name="DisCo - Unizar">
 

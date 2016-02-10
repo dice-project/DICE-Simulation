@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: GreatSPN SSH Simulator
+Bundle-Name: GreatSPN-Through-SSH Simulator
 Bundle-SymbolicName: es.unizar.disco.simulation.greatspn.ssh;singleton:=true
 Bundle-Version: 0.1.0.qualifier
 Bundle-Activator: es.unizar.disco.simulation.greatspn.ssh.GspnSshSimulationPlugin
