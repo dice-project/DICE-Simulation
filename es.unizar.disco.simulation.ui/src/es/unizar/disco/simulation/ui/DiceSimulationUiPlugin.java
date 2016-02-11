@@ -67,7 +67,7 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	@Override
 	protected void initializeImageRegistry(ImageRegistry reg) {
 		super.initializeImageRegistry(reg);
-		reg.put(IMG_OBJ16_MAIN_TAB, getImageDescriptor("icons/full/obj16/main_tab.png").createImage());
-		reg.put(IMG_OBJ16_CLOCK, getImageDescriptor("icons/full/obj16/clock.png").createImage());
+		reg.put(IMG_OBJ16_MAIN_TAB, getImageDescriptor("icons/full/obj16/main_tab.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_CLOCK, getImageDescriptor("icons/full/obj16/clock.png").createImage()); //$NON-NLS-1$
 	}
 }

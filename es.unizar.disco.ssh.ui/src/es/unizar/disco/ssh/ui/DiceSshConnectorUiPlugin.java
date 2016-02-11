@@ -77,7 +77,9 @@ public class DiceSshConnectorUiPlugin extends AbstractUIPlugin {
 	
 	private static class SecurePreferenceStoreDecorator implements IPersistentPreferenceStore {
 		
-		private static final URI LOCATION = getDefault().getStateLocation().append("secure.store").toFile().toURI();
+		private static final String SECURE_STORE_FILENAME = "secure.store"; ////$NON-NLS-1$
+
+		private static final URI LOCATION = getDefault().getStateLocation().append(SECURE_STORE_FILENAME).toFile().toURI();
 		
 		private final IPreferenceStore plainStore;
 		private final IPreferenceStore securePlainStore;

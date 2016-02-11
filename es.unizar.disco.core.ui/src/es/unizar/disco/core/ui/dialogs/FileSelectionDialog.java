@@ -1,5 +1,6 @@
 package es.unizar.disco.core.ui.dialogs;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -23,9 +24,9 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
 		@Override
 		public IStatus validate(Object[] selection) {
 			if (selection.length == 1 && selection[0] instanceof IFile) {
-				return new Status(IStatus.OK, DiceCoreUiPlugin.PLUGIN_ID, "");
+				return new Status(IStatus.OK, DiceCoreUiPlugin.PLUGIN_ID, StringUtils.EMPTY);
 			} else {
-				return new Status(IStatus.ERROR, DiceCoreUiPlugin.PLUGIN_ID, "Selected element is not a file");
+				return new Status(IStatus.ERROR, DiceCoreUiPlugin.PLUGIN_ID, Messages.FileSelectionDialog_notFileError);
 			}
 		}
 	}
@@ -37,8 +38,8 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
 	public FileSelectionDialog(Shell parent, IResource initialSelection) {
 		super(parent, WorkbenchLabelProvider.getDecoratingWorkbenchLabelProvider(), new WorkbenchContentProvider());
 		this.setAllowMultiple(false);
-		this.setTitle("File Selection"); //$NON-NLS-1$
-		this.setMessage("Select a file from the workspace:"); //$NON-NLS-1$
+		this.setTitle(Messages.FileSelectionDialog_dialogTitle);
+		this.setMessage(Messages.FileSelectionDialog_dialogMessage); 
 		
 		this.setInput(ResourcesPlugin.getWorkspace().getRoot());
 		

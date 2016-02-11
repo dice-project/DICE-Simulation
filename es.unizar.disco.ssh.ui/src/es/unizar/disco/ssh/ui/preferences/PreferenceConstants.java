@@ -5,15 +5,15 @@ package es.unizar.disco.ssh.ui.preferences;
  */
 public enum PreferenceConstants {
 	
-	HOST				("host", 				PreferenceType.SECURE_PLAIN),
-	PORT				("port", 				PreferenceType.SECURE_PLAIN),
-	USERNAME			("username", 			PreferenceType.SECURE_PLAIN),
-	PROVIDER			("provider", 			PreferenceType.SECURE_PLAIN),
-	KEY_PROVIDER		("key_provider", 		PreferenceType.SECURE_PLAIN),
-	PASSWORD_PROVIDER	("password_provider",	PreferenceType.SECURE_PLAIN),
-	PASSWORD			("password", 			PreferenceType.SECURE_ENCRYPTED),
-	KEY					("key", 				PreferenceType.SECURE_ENCRYPTED),
-	PASSPHRASE			("passphrase", 			PreferenceType.SECURE_ENCRYPTED);
+	HOST				("host", 				PreferenceType.SECURE_PLAIN), //$NON-NLS-1$
+	PORT				("port", 				PreferenceType.SECURE_PLAIN), //$NON-NLS-1$
+	USERNAME			("username", 			PreferenceType.SECURE_PLAIN), //$NON-NLS-1$
+	PROVIDER			("provider", 			PreferenceType.SECURE_PLAIN), //$NON-NLS-1$
+	KEY_PROVIDER		("key_provider", 		PreferenceType.SECURE_PLAIN), //$NON-NLS-1$
+	PASSWORD_PROVIDER	("password_provider",	PreferenceType.SECURE_PLAIN), //$NON-NLS-1$
+	PASSWORD			("password", 			PreferenceType.SECURE_ENCRYPTED), //$NON-NLS-1$
+	KEY					("key", 				PreferenceType.SECURE_ENCRYPTED), //$NON-NLS-1$
+	PASSPHRASE			("passphrase", 			PreferenceType.SECURE_ENCRYPTED); //$NON-NLS-1$
 
 	public enum PreferenceType {
 		PLAIN,

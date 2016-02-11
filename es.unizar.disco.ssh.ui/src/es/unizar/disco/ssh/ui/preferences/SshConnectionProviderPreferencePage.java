@@ -53,14 +53,14 @@ import es.unizar.disco.ssh.ui.DiceSshConnectorUiPlugin;
 
 public class SshConnectionProviderPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 	
-	public static final String ID = "es.unizar.disco.ssh.ui.preferences.SshConnectionProviderPreferencePage";
+	public static final String ID = "es.unizar.disco.ssh.ui.preferences.SshConnectionProviderPreferencePage"; //$NON-NLS-1$
 	
 	private IObservableMap preferencesMap = new WritableMap();
 	private DataBindingContext context;
 	
 	public SshConnectionProviderPreferencePage() {
 		setPreferenceStore(DiceSshConnectorUiPlugin.getDefault().getPreferenceStore());
-		setDescription("SSH Credentials to connect to the simulation server");
+		setDescription(Messages.SshConnectionProviderPreferencePage_prefsDescription);
 	}
 
 	@Override
@@ -81,18 +81,18 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 				// UI Declaration
 				final Group serverGroup = new Group(topComposite, SWT.NONE);
 				serverGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
-				serverGroup.setText("Remote server");
+				serverGroup.setText(Messages.SshConnectionProviderPreferencePage_remoteServerLabel);
 				serverGroup.setLayout(new GridLayout(2, false));
 
 				final Label serverLabel = new Label(serverGroup, SWT.NONE);
-				serverLabel.setText("Host:");
+				serverLabel.setText(Messages.SshConnectionProviderPreferencePage_hostLabel);
 				serverLabel.setLayoutData(labelGridData);
 
 				final Text serverText = new Text(serverGroup, SWT.BORDER);
 				serverText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
 				final Label portLabel = new Label(serverGroup, SWT.NONE);
-				portLabel.setText("Port:");
+				portLabel.setText(Messages.SshConnectionProviderPreferencePage_portLabel);
 				portLabel.setLayoutData(labelGridData);
 
 				final Spinner portSpinner = new Spinner(serverGroup, SWT.BORDER);
@@ -124,11 +124,11 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 				// UI Declaration
 				final Group authGroup = new Group(topComposite, SWT.NONE);
 				authGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-				authGroup.setText("Athentication");
+				authGroup.setText(Messages.SshConnectionProviderPreferencePage_authLabel);
 				authGroup.setLayout(new GridLayout(2, false));
 
 				final Label userLabel = new Label(authGroup, SWT.NONE);
-				userLabel.setText("User name:");
+				userLabel.setText(Messages.SshConnectionProviderPreferencePage_userLabel);
 				userLabel.setLayoutData(labelGridData);
 
 				final Text userText = new Text(authGroup, SWT.BORDER);
@@ -136,14 +136,14 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 
 				final Button passwordAuthButton = new Button(authGroup, SWT.RADIO);
 				passwordAuthButton.setLayoutData(labelGridData);
-				passwordAuthButton.setText("&Password:");
+				passwordAuthButton.setText(Messages.SshConnectionProviderPreferencePage_passwordLabel);
 
 				final Text passwordText = new Text(authGroup, SWT.BORDER | SWT.PASSWORD);
 				passwordText.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
 				final Button keyAuthButton = new Button(authGroup, SWT.RADIO);
 				keyAuthButton.setLayoutData(labelGridData);
-				keyAuthButton.setText("Private &Key:");
+				keyAuthButton.setText(Messages.SshConnectionProviderPreferencePage_keyLabel);
 
 				final Text keyText = new Text(authGroup, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 				keyText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -152,7 +152,7 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 				new Label(authGroup, SWT.NONE).setLayoutData(labelGridData);
 
 				final Label passphraseLabel = new Label(authGroup, SWT.NONE);
-				passphraseLabel.setText("Passphrase (empty for no passphrase):");
+				passphraseLabel.setText(Messages.SshConnectionProviderPreferencePage_passphraseLabel);
 				passphraseLabel.setLayoutData(labelGridData);
 
 				// Dummy label to create a spacer
@@ -252,7 +252,7 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 			DiceLogger.log(
 					DiceSshConnectorUiPlugin.getDefault(),
 					new Status(IStatus.ERROR, DiceSshConnectorUiPlugin.PLUGIN_ID,
-							MessageFormat.format("Unexpected type input data, expected a IPreferenceStore, found ''{0}''", data)));
+							MessageFormat.format(Messages.SshConnectionProviderPreferencePage_unexpectedInputError, data)));
 		}
 	}
 	
@@ -284,7 +284,7 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 					DomainValidator.getInstance(true).isValid(value.toString())) {
 				return ValidationStatus.ok();
 			}
-			return ValidationStatus.error("Invalid host name or IP address");
+			return ValidationStatus.error(Messages.SshConnectionProviderPreferencePage_invalidHostError);
 		}
 	}
 
@@ -294,7 +294,7 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 			if (value != null && StringUtils.isNotBlank(value.toString())) {
 				return ValidationStatus.ok();
 			}
-			return ValidationStatus.error("Username cannot be empty");
+			return ValidationStatus.error(Messages.SshConnectionProviderPreferencePage_usernameEmptyError);
 		}
 	}
 
@@ -308,7 +308,7 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 			}
 			if (value == null || StringUtils.isBlank(value.toString())) {
 				// Key is blank
-				return ValidationStatus.error("Key cannot be empty");
+				return ValidationStatus.error(Messages.SshConnectionProviderPreferencePage_keyEmptyError);
 			}
 			// Try to parse key to check format
 			PemReader reader = new PemReader(new InputStreamReader(new ByteArrayInputStream(value.toString().getBytes())));
@@ -317,10 +317,10 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 				if (pemObject != null && pemObject.getType() != null) { 
 					return ValidationStatus.ok();
 				} else {
-					return ValidationStatus.error("Unknown key format");
+					return ValidationStatus.error(Messages.SshConnectionProviderPreferencePage_unknownFormatError);
 				}
 			} catch (IOException e) {
-				return ValidationStatus.error("Invalid key format");
+				return ValidationStatus.error(Messages.SshConnectionProviderPreferencePage_invalidFormatError);
 			} finally {
 				IOUtils.closeQuietly(reader);
 			}

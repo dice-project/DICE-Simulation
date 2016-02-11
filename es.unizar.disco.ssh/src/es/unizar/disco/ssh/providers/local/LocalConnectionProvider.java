@@ -17,14 +17,14 @@ import es.unizar.disco.ssh.providers.IUserPasswordAuthProvider;
 
 public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuthProvider {
 
-	private static final String CONNECTION_PROPERTIES 	= "connection.properties";
+	private static final String CONNECTION_PROPERTIES 	= "connection.properties"; //$NON-NLS-1$
 	
-	private static final String HOST_PROPERTY 			= "host";
-	private static final String HOST_PROPERTY_DEFAULT 	= "localhost";
-	private static final String PORT_PROPERTY 			= "port";
-	private static final String PORT_PROPERTY_DEFAULT 	= "22";
-	private static final String USER_PROPERTY 			= "user";
-	private static final String PASSWORD_PROPERTY 		= "password";
+	private static final String HOST_PROPERTY 			= "host"; //$NON-NLS-1$
+	private static final String HOST_PROPERTY_DEFAULT 	= "localhost"; //$NON-NLS-1$
+	private static final String PORT_PROPERTY 			= "port"; //$NON-NLS-1$
+	private static final String PORT_PROPERTY_DEFAULT 	= "22"; //$NON-NLS-1$
+	private static final String USER_PROPERTY 			= "user"; //$NON-NLS-1$
+	private static final String PASSWORD_PROPERTY 		= "password"; //$NON-NLS-1$
 
 	@Override
 	public String getHost() {
@@ -73,7 +73,7 @@ public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuth
 	private InputStream getPropertiesStream() throws IOException {
 		InputStream propertiesStream = getClass().getResourceAsStream(CONNECTION_PROPERTIES);
 		if (propertiesStream == null) {
-			throw new IOException(MessageFormat.format("Unable to find ''{0}'' file", CONNECTION_PROPERTIES));
+			throw new IOException(MessageFormat.format(Messages.LocalConnectionProvider_unableFindFileError, CONNECTION_PROPERTIES));
 		}
 		return propertiesStream;
 	}
@@ -87,6 +87,6 @@ public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuth
 	public void configure() throws CoreException {
 		throw new CoreException(
 				new Status(IStatus.INFO, DiceSshConnectorPlugin.PLUGIN_ID,
-				MessageFormat.format("''{0}'' does not support self-configuration", LocalConnectionProvider.class.getName())));
+				MessageFormat.format(Messages.LocalConnectionProvider_selfConfigUnsupportedError, LocalConnectionProvider.class.getName())));
 	}
 }

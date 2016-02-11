@@ -62,13 +62,13 @@ import es.unizar.disco.simulation.simulators.SimulatorConstants;
 
 public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
-	public static final String INPUT_FILE = "INPUT_MODEL";
+	public static final String INPUT_FILE = "INPUT_MODEL"; //$NON-NLS-1$
 
-	public static final String KEEP_INTERMEDIATE_FILES= "KEEP_INTERMEDIATE_FILES";
+	public static final String KEEP_INTERMEDIATE_FILES= "KEEP_INTERMEDIATE_FILES"; //$NON-NLS-1$
 	
-	public static final String INTERMEDIATE_FILES_DIR = "INTERMEDIATE_FILES_FOLDER";
+	public static final String INTERMEDIATE_FILES_DIR = "INTERMEDIATE_FILES_FOLDER"; //$NON-NLS-1$
 
-	public static final String SIMULATION_CONFIGURATION = "SIMULATION_CONFIGURATION";
+	public static final String SIMULATION_CONFIGURATION = "SIMULATION_CONFIGURATION"; //$NON-NLS-1$
 
 	
 	@Override
@@ -78,7 +78,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			monitor = new NullProgressMonitor();
 		}
 		try {
-			monitor.beginTask("Simulating", IProgressMonitor.UNKNOWN);
+			monitor.beginTask(Messages.SimulationLaunchConfigurationDelegate_simulatingTaskTilte, IProgressMonitor.UNKNOWN);
 			
 			Map<String, String> simulationAttrs = new HashMap<>();
 			simulationAttrs.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
@@ -89,11 +89,11 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			final File intermediateFilesDir = getIntermediateFilesDir(configuration);
 	
 			final File umlFile = getInputFile(configuration);
-			final File configFile = Paths.get(intermediateFilesDir.toURI()).resolve("dump.pnconfig").toFile();
-			final File pnmlFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.pnml.xmi").toFile();
-			final File gspnNetFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.net").toFile();
-			final File gspnDefFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.def").toFile();
-			final File resultFile = Paths.get(intermediateFilesDir.toURI()).resolve("result.txt").toFile();
+			final File configFile = Paths.get(intermediateFilesDir.toURI()).resolve("dump.pnconfig").toFile(); //$NON-NLS-1$
+			final File pnmlFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.pnml.xmi").toFile(); //$NON-NLS-1$
+			final File gspnNetFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.net").toFile(); //$NON-NLS-1$
+			final File gspnDefFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.def").toFile(); //$NON-NLS-1$
+			final File resultFile = Paths.get(intermediateFilesDir.toURI()).resolve("result.txt").toFile(); //$NON-NLS-1$
 
 			try {
 				try {
@@ -108,10 +108,10 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 						}
 					}
 				}
-				String id = "es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator";
+				String id = "es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator"; //$NON-NLS-1$
 				final ISimulator simulator = getSimulator(id);
 				if (simulator == null) {
-					throw new SimulationException(MessageFormat.format("Unable to find simulator ''{0}''", id));
+					throw new SimulationException(MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError, id));
 				}
 				String netName = new Path(gspnNetFile.getName()).removeFileExtension().toString();
 				
@@ -125,7 +125,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 							simulationProcess.waitFor();
 							ByteArrayOutputStream out = new ByteArrayOutputStream();
 							IOUtils.copy(simulator.getRawResult(), out);
-							runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, "*** SIMULATION RAW RESULTS ***\n" + out.toString());
+							runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, "*** SIMULATION RAW RESULTS ***\n" + out.toString()); //$NON-NLS-1$
 							
 							try (FileWriter writer = new FileWriter(resultFile);) {
 								writer.write(out.toString());
@@ -158,13 +158,13 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 	}
 	
 	private File getInputFile(ILaunchConfiguration configuration) throws CoreException {
-		String inputFileUriString = configuration.getAttribute(INPUT_FILE, "");
+		String inputFileUriString = configuration.getAttribute(INPUT_FILE, StringUtils.EMPTY);
 		java.net.URI inputFileUri;
 		inputFileUri = java.net.URI.create(inputFileUriString);
 		File inputFile = new File(inputFileUri);
 		if (!inputFile.isFile()) {
 			throw new CoreException(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, 
-					MessageFormat.format("Invalid location for input file ''{0}''", inputFile)));
+					MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_invalidLocationError, inputFile)));
 		}
 		return inputFile;
 	}
@@ -172,33 +172,33 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 	private File getIntermediateFilesDir(ILaunchConfiguration configuration) throws CoreException {
 		File intermediateFilesDir;
 		if (configuration.getAttribute(KEEP_INTERMEDIATE_FILES, false)) {
-			String intermediateFilesDirUriString = configuration.getAttribute(INTERMEDIATE_FILES_DIR, "");
+			String intermediateFilesDirUriString = configuration.getAttribute(INTERMEDIATE_FILES_DIR, StringUtils.EMPTY);
 			java.net.URI intermediateFilesDirUri;
 			intermediateFilesDirUri = java.net.URI.create(intermediateFilesDirUriString);
 			intermediateFilesDir = new File(intermediateFilesDirUri);
 		} else {
 			try {
-				intermediateFilesDir = Files.createTempDirectory("dice-simulation-", new FileAttribute[] {}).toFile();
+				intermediateFilesDir = Files.createTempDirectory("dice-simulation-", new FileAttribute[] {}).toFile(); //$NON-NLS-1$
 				intermediateFilesDir.deleteOnExit();
 			} catch (IOException e) {
 				throw new CoreException(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, 
-						"Unable to create temp directory for intermediate files", e));
+						Messages.SimulationLaunchConfigurationDelegate_unableCreateTempFileError, e));
 			}
 		}
 		if (!intermediateFilesDir.isDirectory()) {
 			throw new CoreException(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, 
-					MessageFormat.format("Invalid location for intermediate files directory ''{0}''", intermediateFilesDir)));
+					MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_invalidLocationIntermediateFilesError, intermediateFilesDir)));
 		}
 		return intermediateFilesDir;
 	}
 	
 	private PetriNetConfig getPetriNetConfig(ILaunchConfiguration configuration) throws CoreException {
-		String serializedConfig = configuration.getAttribute(SIMULATION_CONFIGURATION, "");
+		String serializedConfig = configuration.getAttribute(SIMULATION_CONFIGURATION, StringUtils.EMPTY);
 		try {
 			return PetriNetConfigSerializer.deserialize(serializedConfig);
 		} catch (IOException e) {
 			throw new CoreException(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, 
-					MessageFormat.format("Unable to deserialize simulation configuration:\n''{0}''", serializedConfig), e));
+					MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_unableDeserializeError, serializedConfig), e));
 		}
 	}
 
@@ -207,7 +207,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			monitor = new NullProgressMonitor();
 		}
 		try {
-			monitor.beginTask("Dumping configuration file", 1);
+			monitor.beginTask(Messages.SimulationLaunchConfigurationDelegate_dumpingTaskTitle, 1);
 			ResourceSet resourceSet = new ResourceSetImpl();
 			Resource configResource = resourceSet.createResource(URI.createFileURI(pnConfigFile.getAbsolutePath()));
 			configResource.getContents().add(pnConfig);
@@ -224,7 +224,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			monitor = new NullProgressMonitor();
 		}
 		try {
-			monitor.beginTask("Generating PNML file", 1);
+			monitor.beginTask(Messages.SimulationLaunchConfigurationDelegate_generatingPnmlTaskTitle, 1);
 			ResourceSet resourceSet = new ResourceSetImpl();
 			
 			TransformationExecutor executor = new TransformationExecutor(URI.createURI(PnmlM2mPlugin.AD2PNML_TRANSFORMATION_URI));
@@ -258,7 +258,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			monitor = new NullProgressMonitor();
 		}
 		try {
-			monitor.beginTask("Generating GSPN files", 1);
+			monitor.beginTask(Messages.SimulationLaunchConfigurationDelegate_generatingGspnTaskTitle, 1);
 			GenerateGspn gspnGenerator = new GenerateGspn(URI.createFileURI(pnmlFile.getAbsolutePath()), intermediateFilesDir, new ArrayList<EObject>());
 			AcceleoPreferences.switchForceDeactivationNotifications(true);
 			gspnGenerator.doGenerate(BasicMonitor.toMonitor(new SubProgressMonitor(monitor, 1)));
@@ -281,6 +281,6 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 	
 
 	private static String getSimulationName(String id) {
-		return String.format("Simulation [%s]", id.toString());
+		return MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, id.toString());
 	}
 }

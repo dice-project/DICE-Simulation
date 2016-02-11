@@ -21,7 +21,7 @@ public class PnmlM2tPlugin extends Plugin {
     /**
      * The plug-in ID.
      */
-    public static final String PLUGIN_ID = "org.eclipse.acceleo.module.sample";
+    public static final String PLUGIN_ID = "org.eclipse.acceleo.module.sample"; //$NON-NLS-1$
 
     /**
      * The shared instance.

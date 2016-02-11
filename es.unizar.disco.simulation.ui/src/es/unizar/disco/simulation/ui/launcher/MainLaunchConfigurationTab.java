@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -135,7 +136,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 		protected void setInputFile(String inputFile) {
 			this.inputFile = inputFile;
 			String readableInputFile = toReadableString(inputFile);
-			inputFileText.setText(readableInputFile != null ? readableInputFile : "");
+			inputFileText.setText(readableInputFile != null ? readableInputFile : StringUtils.EMPTY);
 			config.getVariableAssignments().clear();
 			Set<String> vars = getVariablesFromUmlModel(new File(URI.create(inputFile)));
 			for (String var : vars) {
@@ -151,7 +152,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 		protected void setIntermediateFilesDir(String intermediateFilesDir) {
 			this.intermediateFilesDir = intermediateFilesDir;
 			String readableFilesDir = toReadableString(intermediateFilesDir);
-			intermediateFilesDirText.setText(readableFilesDir != null ? readableFilesDir : "");
+			intermediateFilesDirText.setText(readableFilesDir != null ? readableFilesDir : StringUtils.EMPTY);
 			setDirty(true);
 			updateLaunchConfigurationDialog();
 		}
@@ -256,7 +257,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 				((Entry<String, Float>) element).setValue(value);
 				viewer.update(element, null);
 			} catch (Throwable t) {
-				ErrorDialog.openError(getShell(), "Error", "Invalid float value", new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, t.getLocalizedMessage(), t));
+				ErrorDialog.openError(getShell(), Messages.MainLaunchConfigurationTab_errorTitle, Messages.MainLaunchConfigurationTab_invalidFloatError, new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, t.getLocalizedMessage(), t));
 			}
 		}
 	}
@@ -284,14 +285,14 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			group.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 			
 			group.setLayout(new GridLayout(2,  false));
-			group.setText("Model:");
+			group.setText(Messages.MainLaunchConfigurationTab_modelLabel);
 			
 			inputFileText = new Text(group, SWT.BORDER);
 			inputFileText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 			inputFileText.setEditable(false);
 			
 			Button fileButton = new Button(group, SWT.NONE);
-			fileButton.setText("&Browse");
+			fileButton.setText(Messages.MainLaunchConfigurationTab_browsLabel);
 			fileButton.setLayoutData(buttonsGridData);
 			
 			fileButton.addSelectionListener(new SelectionAdapter() {
@@ -307,9 +308,9 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 							} else {
 								IFile file = (IFile) selection[0];
 								if (isUmlModel(new File(file.getLocationURI()))) {
-									return new Status(IStatus.OK, DiceSimulationUiPlugin.PLUGIN_ID, "");
+									return new Status(IStatus.OK, DiceSimulationUiPlugin.PLUGIN_ID, StringUtils.EMPTY);
 								} else {
-									return new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, "Selected element is not a valid UML2 file");
+									return new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, Messages.MainLaunchConfigurationTab_invalidUmlFileError);
 								}
 							}
 						}
@@ -330,10 +331,10 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			group.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 			
 			group.setLayout(new GridLayout(2,  false));
-			group.setText("Intermediate files:");
+			group.setText(Messages.MainLaunchConfigurationTab_intermediateFilesLabel);
 
 			keepIntermediateFilesButton = new Button(group, SWT.CHECK);
-			keepIntermediateFilesButton.setText("&Save intermediate files in the workspace:");
+			keepIntermediateFilesButton.setText(Messages.MainLaunchConfigurationTab_saveIntermediateLabel);
 			keepIntermediateFilesButton.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 			
 			intermediateFilesDirText = new Text(group, SWT.BORDER);
@@ -342,7 +343,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			intermediateFilesDirText.setEditable(false);
 			
 			browseIntermediateFilesDirButton = new Button(group, SWT.NONE);
-			browseIntermediateFilesDirButton.setText("&Browse");
+			browseIntermediateFilesDirButton.setText(Messages.MainLaunchConfigurationTab_browseLabel);
 			browseIntermediateFilesDirButton.setLayoutData(buttonsGridData);
 			browseIntermediateFilesDirButton.setEnabled(false);
 
@@ -371,10 +372,10 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			group.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 			
 			group.setLayout(new RowLayout(SWT.VERTICAL));
-			group.setText("Analysis type:");
+			group.setText(Messages.MainLaunchConfigurationTab_analysisTypeLabel);
 			
 			Button steadyButton = new Button(group, SWT.RADIO);
-			steadyButton.setText("Steady State");
+			steadyButton.setText(Messages.MainLaunchConfigurationTab_steadyLabel);
 			steadyButton.setSelection(true);
 			data.getConfig().setAnalysisType(AnalysisType.STEADY_STATE);
 			steadyButton.addSelectionListener(new SelectionAdapter() {
@@ -384,7 +385,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			});
 			
 			Button transientButton = new Button(group, SWT.RADIO);
-			transientButton.setText("Transient");
+			transientButton.setText(Messages.MainLaunchConfigurationTab_transientLabel);
 			transientButton.addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
 					data.getConfig().setAnalysisType(AnalysisType.TRANSIENT);
@@ -397,7 +398,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			
 			group.setLayout(new GridLayout(1,  false));
-			group.setText("Variables:");
+			group.setText(Messages.MainLaunchConfigurationTab_variablesLabel);
 			
 			Composite tableComposite = new Composite(group, SWT.NONE);
 			tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -415,7 +416,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 			viewer.setComparator(comparator);
 
 			varViewerColumn = new TableViewerColumn(viewer, SWT.NONE);
-		    varViewerColumn.getColumn().setText("Variable");
+		    varViewerColumn.getColumn().setText(Messages.MainLaunchConfigurationTab_variableLabel);
 		    varViewerColumn.getColumn().setResizable(true);
 			varViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 				@Override
@@ -439,7 +440,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 
 			
 			valueViewerColumn = new TableViewerColumn(viewer, SWT.NONE);
-			valueViewerColumn.getColumn().setText("Variable");
+			valueViewerColumn.getColumn().setText(Messages.MainLaunchConfigurationTab_valueLabel);
 			valueViewerColumn.getColumn().setResizable(true);
 			valueViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 				@Override
@@ -484,22 +485,22 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
 			if (configuration.hasAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE)) {
-				data.setInputFile(configuration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, ""));
+				data.setInputFile(configuration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, StringUtils.EMPTY));
 			}
 			if (configuration.hasAttribute(SimulationLaunchConfigurationDelegate.KEEP_INTERMEDIATE_FILES)) {
 				data.setKeepIntermediateFiles(configuration.getAttribute(SimulationLaunchConfigurationDelegate.KEEP_INTERMEDIATE_FILES, false));
 			}
 			if (configuration.hasAttribute(SimulationLaunchConfigurationDelegate.INTERMEDIATE_FILES_DIR)) {
-				data.setIntermediateFilesDir(configuration.getAttribute(SimulationLaunchConfigurationDelegate.INTERMEDIATE_FILES_DIR, ""));
+				data.setIntermediateFilesDir(configuration.getAttribute(SimulationLaunchConfigurationDelegate.INTERMEDIATE_FILES_DIR, StringUtils.EMPTY));
 			}
-			String serializedConfig = "";
+			String serializedConfig = StringUtils.EMPTY;
 			if (configuration.hasAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_CONFIGURATION)) {
 				try {
-					serializedConfig = configuration.getAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_CONFIGURATION, "");
+					serializedConfig = configuration.getAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_CONFIGURATION, StringUtils.EMPTY);
 					data.setConfig(PetriNetConfigSerializer.deserialize(serializedConfig));
 				} catch (IOException e) {
 					DiceLogger.logException(DiceSimulationUiPlugin.getDefault(),
-							MessageFormat.format("Unable to parse serialized PetriNetConfig:\n''{0}''", serializedConfig), e);
+							MessageFormat.format(Messages.MainLaunchConfigurationTab_unableParserError, serializedConfig), e);
 				}
 			}
 		} catch (CoreException e) {
@@ -517,7 +518,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 
 	@Override
 	public String getName() {
-		return "Main";
+		return Messages.MainLaunchConfigurationTab_mainTabTitle;
 	}
 
 	@Override
@@ -530,7 +531,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 		try {
 			// Catch no input file defined
 			if (!configuration.hasAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE)) {
-				setErrorMessage("No input file defined");
+				setErrorMessage(Messages.MainLaunchConfigurationTab_noInpuntError);
 				return false;
 			}
 			// Catch no keep intermediate files flag defined
@@ -542,29 +543,29 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 				return false;
 			}
 			// Check input file exists
-			File inputFile = new File(URI.create(configuration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, "")));
+			File inputFile = new File(URI.create(configuration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, StringUtils.EMPTY)));
 			if (!inputFile.isFile()) {
 				// Should not happen...
-				setErrorMessage("Input file does not exist");
+				setErrorMessage(Messages.MainLaunchConfigurationTab_inputNotExistsError);
 				return false;
 			}
 			if (!isUmlModel(inputFile)) {
 				// Should not happen
-				setErrorMessage("Input file is not a valid UML2 model");
+				setErrorMessage(Messages.MainLaunchConfigurationTab_notUml2InputError);
 				return false;
 			}
 			// Check input file exists
 			if (configuration.getAttribute(SimulationLaunchConfigurationDelegate.KEEP_INTERMEDIATE_FILES, false)) {
 				// If keep intermediate files, catch no directory defined
 				if (!configuration.hasAttribute(SimulationLaunchConfigurationDelegate.INTERMEDIATE_FILES_DIR)) {
-					setErrorMessage("No directory set for the intermediate files");
+					setErrorMessage(Messages.MainLaunchConfigurationTab_noDirForIntermediateError);
 					return false;
 				}
 				// Check directory exists
-				File intermediateFilesDir = new File(URI.create(configuration.getAttribute(SimulationLaunchConfigurationDelegate.INTERMEDIATE_FILES_DIR, "")));
+				File intermediateFilesDir = new File(URI.create(configuration.getAttribute(SimulationLaunchConfigurationDelegate.INTERMEDIATE_FILES_DIR, StringUtils.EMPTY)));
 				if (!intermediateFilesDir.isDirectory()) {
 					// Should not happen...
-					setErrorMessage("Intermediate files directory does not exist");
+					setErrorMessage(Messages.MainLaunchConfigurationTab_intermediateDirNotExistError);
 					return false;
 				}			
 			}
@@ -631,7 +632,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 						            	}
 						            }
 						            for (String string : collectedValues) {
-						            	Pattern pattern = Pattern.compile(".*\\w+=(\\$\\w+).*");
+						            	Pattern pattern = Pattern.compile(".*\\w+=(\\$\\w+).*"); //$NON-NLS-1$
 						            	Matcher matcher = pattern.matcher(string);
 					            		while (matcher.find()) {
 					            			vars.add(matcher.group(1));
@@ -653,7 +654,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 	private boolean isDefinedInMarteLibrary(Classifier classifier) {
 	    Package pkg = classifier.getNearestPackage();
 	    while (pkg != null) {
-	        if ("MARTE_Library".equals(pkg.getQualifiedName())) {
+	        if ("MARTE_Library".equals(pkg.getQualifiedName())) { //$NON-NLS-1$
 	            return true;
 	        }
 	        pkg = pkg.getNestingPackage();

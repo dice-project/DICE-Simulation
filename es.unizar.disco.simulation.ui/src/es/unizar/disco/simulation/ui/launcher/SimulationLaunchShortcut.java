@@ -2,6 +2,7 @@ package es.unizar.disco.simulation.ui.launcher;
 
 import java.text.MessageFormat;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -51,14 +52,14 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		IFile file = type instanceof IFile ? (IFile) type : ((IAdaptable) type).getAdapter(IFile.class);
 		if (file == null) {
 			DiceLogger.logError(DiceSimulationUiPlugin.getDefault(),
-					MessageFormat.format("Unexpected argument for launch configuration ''{0}'': ''{1}''", 
+					MessageFormat.format(Messages.SimulationLaunchShortcut_unexpectedArgError, 
 					DiceSimulationPlugin.SIMULATION_LAUNCH_CONFIGURATION_TYPE,file));
 			return;
 		}
 		
-		if (!"run".equals(mode)) {
+		if (!"run".equals(mode)) { //$NON-NLS-1$
 			DiceLogger.logWarning(DiceSimulationUiPlugin.getDefault(),
-					MessageFormat.format("Unknown launch mode ''{0}'' for ''{1}''", mode, file));
+					MessageFormat.format(Messages.SimulationLaunchShortcut_unknownModeError, mode, file));
 		}
 
 		try {
@@ -84,7 +85,7 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		
 		// We search through the existing configurations if the actual configuration has been previously defined
 		for (ILaunchConfiguration previousConfiguration : existingConfigs) {
-			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, ""); 
+			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, StringUtils.EMPTY); 
 			if (previousFile.equals(file.getLocationURI().toString())) {
 				return previousConfiguration;
 			}

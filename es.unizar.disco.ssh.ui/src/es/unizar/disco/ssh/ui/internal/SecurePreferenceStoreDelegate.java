@@ -17,7 +17,7 @@ import es.unizar.disco.ssh.ui.DiceSshConnectorUiPlugin;
 
 public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore {
 
-	private static final String DEFAULT_PREFERENCES = "default-values";
+	private static final String DEFAULT_PREFERENCES = "default-values"; //$NON-NLS-1$
 	
 	private Set<IPropertyChangeListener> listeners = new HashSet<>();
 	private ISecurePreferences preferences;
@@ -87,7 +87,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return preferences.getBoolean(name, getDefaultBoolean(name));
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return BOOLEAN_DEFAULT_DEFAULT;
 	}
@@ -97,7 +97,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return preferences.getDouble(name, getDefaultDouble(name));
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return DOUBLE_DEFAULT_DEFAULT;
 	}
@@ -107,7 +107,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return preferences.getFloat(name, getDefaultFloat(name));
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return FLOAT_DEFAULT_DEFAULT;
 	}
@@ -117,7 +117,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return preferences.getInt(name, getDefaultInt(name));
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return INT_DEFAULT_DEFAULT;
 	}
@@ -127,7 +127,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return preferences.getLong(name, getDefaultLong(name));
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return LONG_DEFAULT_DEFAULT;
 	}
@@ -137,7 +137,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return preferences.get(name, getDefaultString(name));
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return STRING_DEFAULT_DEFAULT;
 	}
@@ -147,7 +147,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return defaultPreferences.getBoolean(name, BOOLEAN_DEFAULT_DEFAULT);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return BOOLEAN_DEFAULT_DEFAULT;
 	}
@@ -157,7 +157,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return defaultPreferences.getDouble(name, DOUBLE_DEFAULT_DEFAULT);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return DOUBLE_DEFAULT_DEFAULT;
 	}
@@ -167,7 +167,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return defaultPreferences.getFloat(name, FLOAT_DEFAULT_DEFAULT);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return FLOAT_DEFAULT_DEFAULT;
 	}
@@ -177,7 +177,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return defaultPreferences.getInt(name, INT_DEFAULT_DEFAULT);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return INT_DEFAULT_DEFAULT;
 	}
@@ -187,7 +187,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return defaultPreferences.getLong(name, LONG_DEFAULT_DEFAULT);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return LONG_DEFAULT_DEFAULT;
 	}
@@ -197,7 +197,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 		try {
 			return defaultPreferences.get(name, STRING_DEFAULT_DEFAULT);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to decrypt value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableDecryptValueError, name), e);
 		}
 		return STRING_DEFAULT_DEFAULT;
 	}
@@ -208,7 +208,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			defaultPreferences.putDouble(name, value, encrypt);
 			isDirty = true;
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -218,7 +218,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			defaultPreferences.putFloat(name, value, encrypt);
 			isDirty = true;
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -228,7 +228,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			defaultPreferences.putInt(name, value, encrypt);
 			isDirty = true;
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -238,7 +238,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			defaultPreferences.putLong(name, value, encrypt);
 			isDirty = true;
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -248,7 +248,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			defaultPreferences.put(name, defaultObject, encrypt);
 			isDirty = true;
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -258,7 +258,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			defaultPreferences.putBoolean(name, value, encrypt);
 			isDirty = true;
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}			
 	}
 
@@ -273,7 +273,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			isDirty = true;
 			firePropertyChangeEvent(name, oldValue, value);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -288,7 +288,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			isDirty = true;
 			firePropertyChangeEvent(name, oldValue, value);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -303,7 +303,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			isDirty = true;
 			firePropertyChangeEvent(name, oldValue, value);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -318,7 +318,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			isDirty = true;
 			firePropertyChangeEvent(name, oldValue, value);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -333,7 +333,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			isDirty = true;
 			firePropertyChangeEvent(name, oldValue, value);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -348,7 +348,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			isDirty = true;
 			firePropertyChangeEvent(name, oldValue, value);
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 
@@ -358,7 +358,7 @@ public class SecurePreferenceStoreDelegate implements IPersistentPreferenceStore
 			preferences.put(name, value, encrypt);
 			isDirty = true;
 		} catch (StorageException e) {
-			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format("Unable to store value for ''{0}''", name), e);
+			DiceLogger.logException(DiceSshConnectorUiPlugin.getDefault(), MessageFormat.format(Messages.SecurePreferenceStoreDelegate_unableStoreValueError, name), e);
 		}
 	}
 	

@@ -31,7 +31,7 @@ public abstract class DiceLogger {
     }
     
     public static void logError(Plugin plugin, Throwable t) {
-    	log(plugin, new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), "Unexpected error caught", t));
+    	log(plugin, new Status(IStatus.ERROR, plugin.getBundle().getSymbolicName(), Messages.DiceLogger_unexpectedError, t));
     }
     
     public static void logError(Plugin plugin, String message, Throwable t) {

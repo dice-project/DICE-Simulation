@@ -11,7 +11,7 @@ public class DummyPreferencePage
 
 	public DummyPreferencePage() {
 		super(GRID);
-		setDescription("DICE Simulation Tools Preference");
+		setDescription(Messages.DummyPreferencePage_preferencesDescription);
 	}
 	
 	public void createFieldEditors() {

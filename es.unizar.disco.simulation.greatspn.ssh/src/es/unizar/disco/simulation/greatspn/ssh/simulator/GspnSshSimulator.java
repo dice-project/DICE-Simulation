@@ -67,19 +67,19 @@ public class GspnSshSimulator implements ISimulator {
 		
 		public GspnProcess(String subject) {
 			this.subject = subject;
-			this.remoteWorkingDir = String.format("/tmp/%s", getId());
+			this.remoteWorkingDir = String.format("/tmp/%s", getId()); //$NON-NLS-1$
 		}
 		
 		public void initialize(File... inputFiles) throws IOException {
 			if (ssh == null) {
-				throw new IllegalStateException("Connection not established");
+				throw new IllegalStateException(Messages.GspnSshSimulator_connNotEstablishedError);
 			} 
 			SFTPClient sftpClient = null;
 			try {
 				sftpClient = ssh.newSFTPClient();
 				sftpClient.mkdirs(remoteWorkingDir);
 				for (File file : inputFiles) {
-					sftpClient.put(file.getCanonicalPath(), remoteWorkingDir + "/" + file.getName());
+					sftpClient.put(file.getCanonicalPath(), remoteWorkingDir + "/" + file.getName()); //$NON-NLS-1$
 				}
 			} finally {
 				IOUtils.closeQuietly(sftpClient);
@@ -111,7 +111,7 @@ public class GspnSshSimulator implements ISimulator {
 		public void launch() throws IOException {
 	        simulationSession = ssh.startSession();
 	        simulationCommand = simulationSession.exec(
-	        		String.format("/usr/local/GreatSPN/bin/WNSIM %s/%s", remoteWorkingDir, subject));
+	        		String.format("/usr/local/GreatSPN/bin/WNSIM %s/%s", remoteWorkingDir, subject)); //$NON-NLS-1$
 	        simulationFinishedThread = addSimulationFinishedHook(simulationCommand);
 		}
 		
@@ -123,7 +123,7 @@ public class GspnSshSimulator implements ISimulator {
 						channel.join();
 						try (
 							Session catSession = ssh.startSession(); 
-							Command catCommand = catSession.exec(String.format("cat %s/%s.simres", remoteWorkingDir, subject))
+							Command catCommand = catSession.exec(String.format("cat %s/%s.simres", remoteWorkingDir, subject)) //$NON-NLS-1$
 						) {
 					        catCommand.join();
 					        rawResults = IOUtils.readFully(catCommand.getInputStream()).toByteArray();
@@ -132,7 +132,7 @@ public class GspnSshSimulator implements ISimulator {
 						}
 					} catch (ConnectionException e) {
 						DiceLogger.logError(GspnSshSimulationPlugin.getDefault(), 
-								MessageFormat.format("Connection to ''{0}:{1,number,#}'' was closed unexpectedly", ssh.getRemoteHostname(), ssh.getRemotePort()),e);
+								MessageFormat.format(Messages.GspnSshSimulator_connClosedError, ssh.getRemoteHostname(), ssh.getRemotePort()),e);
 					} catch (IOException e) {
 						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
 					} finally {
@@ -147,7 +147,7 @@ public class GspnSshSimulator implements ISimulator {
 		@Override
 		public OutputStream getOutputStream() {
 			if (simulationCommand == null) {
-				throw new IllegalStateException("Connection not established");
+				throw new IllegalStateException(Messages.GspnSshSimulator_connNotEstablishedError);
 			}
 			return simulationCommand.getOutputStream();
 		}
@@ -155,7 +155,7 @@ public class GspnSshSimulator implements ISimulator {
 		@Override
 		public InputStream getInputStream() {
 			if (simulationCommand == null) {
-				throw new IllegalStateException("Connection not established");
+				throw new IllegalStateException(Messages.GspnSshSimulator_connNotEstablishedError);
 			}
 			return simulationCommand.getInputStream();
 		}
@@ -163,7 +163,7 @@ public class GspnSshSimulator implements ISimulator {
 		@Override
 		public InputStream getErrorStream() {
 			if (simulationCommand == null) {
-				throw new IllegalStateException("Connection not established");
+				throw new IllegalStateException(Messages.GspnSshSimulator_connNotEstablishedError);
 			}
 			return simulationCommand.getErrorStream();
 		}
@@ -171,7 +171,7 @@ public class GspnSshSimulator implements ISimulator {
 		@Override
 		public int waitFor() throws InterruptedException {
 			if (simulationFinishedThread == null) {
-				throw new IllegalThreadStateException("Waiting thread not started yet");
+				throw new IllegalThreadStateException(Messages.GspnSshSimulator_threadNotStartedError);
 			}
 			simulationFinishedThread.join();
 			// If no exit status found, return 1 (error)
@@ -181,7 +181,7 @@ public class GspnSshSimulator implements ISimulator {
 		@Override
 		public int exitValue() {
 			if (simulationCommand.isOpen() && finished == false) {
-				throw new IllegalThreadStateException("The command has not finished yet");
+				throw new IllegalThreadStateException(Messages.GspnSshSimulator_commandNotFinishedError);
 			}
 			return exitValue;
 		}
@@ -209,7 +209,7 @@ public class GspnSshSimulator implements ISimulator {
 		try {
 			IConfigurationElement configElement = getConnectionProvider();
 			if (configElement == null) {
-				throw new SimulationException("Unable to find an SSH connection provider");
+				throw new SimulationException(Messages.GspnSshSimulator_providerNotFoundError);
 			}
 
 			hostProvider = (IHostProvider) configElement.createExecutableExtension(SshConnectionProviderConstants.HOST_PROVIDER_ATTR);
@@ -226,21 +226,21 @@ public class GspnSshSimulator implements ISimulator {
 			}
 			gspnProcess.connect(hostProvider, authProvider);
 		} catch (CoreException e) {
-			throw new SimulationException("Unable to gather connection information", e);
+			throw new SimulationException(Messages.GspnSshSimulator_connInfoNotFoundError, e);
 		} catch (IOException e) {
 			throw new SimulationException(
-					MessageFormat.format("Unable to establish a connection with ''{0}@{1}:{2,number,#}''", 
+					MessageFormat.format(Messages.GspnSshSimulator_unableEstablishConnError, 
 							authProvider != null ? authProvider.getUser() : null, hostProvider.getHost(), hostProvider.getPort()), e);
 		}
 		try {
 			gspnProcess.initialize(inputFiles);
 		} catch (IOException e) {
-			throw new SimulationException(MessageFormat.format("Unable to setup input files ''{0}''", Arrays.asList(inputFiles)), e);
+			throw new SimulationException(MessageFormat.format(Messages.GspnSshSimulator_unableSetupFilesError, Arrays.asList(inputFiles)), e);
 		}
 		try {
 			gspnProcess.launch();
 		} catch (IOException e) {
-			throw new SimulationException("Unable to launch the remote simulation", e);
+			throw new SimulationException(Messages.GspnSshSimulator_unableLaunchError, e);
 		}
 		
 		return gspnProcess;

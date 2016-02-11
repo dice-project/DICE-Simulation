@@ -27,7 +27,7 @@ public class StreamRedirector extends Thread {
 						out.write(d);
 					}
 				} catch (IOException ex) {
-					throw new RuntimeException("Unable to redirect streams", ex);
+					throw new RuntimeException(Messages.StreamRedirector_unableToRedirectStreamError, ex);
 				}
 			}
 		};
