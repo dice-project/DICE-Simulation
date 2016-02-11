@@ -233,7 +233,6 @@ any resulting litigation.
       <import plugin="fr.lip6.pnml.framework.symmetricnet" version="2.2.9" match="greaterOrEqual"/>
       <import plugin="fr.lip6.pnml.framework.utils" version="2.2.9" match="greaterOrEqual"/>
       <import plugin="org.eclipse.m2m.qvt.oml" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.pnextensions" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.acceleo.common" version="3.3.0" match="greaterOrEqual"/>
@@ -241,10 +240,6 @@ any resulting litigation.
       <import plugin="org.eclipse.acceleo.profiler" version="3.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.acceleo.engine" version="3.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.debug.core"/>
-      <import plugin="es.unizar.disco.core" version="0.1.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.pnconfig" version="0.1.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.pnml.m2m" version="0.1.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.pnml.m2t" version="0.1.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.emf" version="2.10" match="compatible"/>
       <import feature="org.eclipse.uml2" version="5.0.0" match="compatible"/>
       <import feature="com.masdes.dam.profile" version="0.2.1" match="greaterOrEqual"/>

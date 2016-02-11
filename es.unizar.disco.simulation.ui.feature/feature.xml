@@ -229,12 +229,11 @@ any resulting litigation.
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.jface"/>
+      <import plugin="es.unizar.disco.core" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.debug.ui"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.uml2.uml"/>
       <import plugin="org.eclipse.emf.edit.ui"/>
-      <import plugin="es.unizar.disco.core" version="0.1.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.core.ui" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.simulation" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.pnconfig" version="0.1.0" match="greaterOrEqual"/>
       <import feature="org.eclipse.papyrus.sdk.feature" version="1.1.0" match="compatible"/>
