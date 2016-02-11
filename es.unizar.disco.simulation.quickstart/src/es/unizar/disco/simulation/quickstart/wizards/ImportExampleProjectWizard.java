@@ -37,7 +37,9 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkingSet;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
@@ -104,7 +106,19 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
 		getWorkbench().getWorkingSetManager().addToWorkingSets(newProject, workingSets);
 
 		BasicNewProjectResourceWizard.selectAndReveal(newProject, getWorkbench().getActiveWorkbenchWindow());
-
+		
+		// If active view is maximized and is the "introview", restore it to
+		// reveal the newly created project
+		final IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+        final IViewReference viewRef = page.findViewReference("org.eclipse.ui.internal.introview", null);
+        if (viewRef != null && page.getPartState(viewRef) == IWorkbenchPage.STATE_MAXIMIZED) {
+            PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
+                @Override
+                public void run() {
+                    page.setPartState(viewRef, IWorkbenchPage.STATE_RESTORED);
+                }
+            });
+        }		
 		return true;
 	}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <introContent>
-  	<extensionContent id="org.eclipse.ui.workbench" style="css/style.css" name="Sample Extension" path="overview/@">
+  	<extensionContent id="org.eclipse.ui.workbench" style="css/style.css" name="DICE Extension" path="overview/@">
 		<group style-id="content-group" id="esunizardiscosimulationquickstart-introLink-group">
        		<link 
        			label="Configure GreatSPN SSH Connection" 
