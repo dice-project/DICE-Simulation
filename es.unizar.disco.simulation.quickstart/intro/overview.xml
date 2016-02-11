@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+  	<extensionContent id="org.eclipse.ui.workbench" style="css/style.css" name="Sample Extension" path="overview/@">
+		<group style-id="content-group" id="esunizardiscosimulationquickstart-introLink-group">
+       		<link 
+       			label="Configure GreatSPN SSH Connection" 
+       			url="http://org.eclipse.ui.intro/runAction?pluginId=es.unizar.disco.simulation.quickstart&amp;class=es.unizar.disco.simulation.quickstart.actions.OpenPreferencesAction" 
+       			id="prefs-link" 
+       			style-id="content-link">
+          		<text>Opens the preferences of Eclipse to configure the SSH connection to a GreatSPN installation, whish is a pre-requisite for the DICE Simulation Tools</text>
+       		</link>
+       		<link 
+       			label="DICE Simulation Examples" 
+       			url="http://org.eclipse.ui.intro/runAction?pluginId=es.unizar.disco.simulation.quickstart&amp;class=es.unizar.disco.simulation.quickstart.actions.OpenWizardAction" 
+       			id="wizard-link" 
+       			style-id="content-link">
+          		<text>Create a new project with the example files to test the DICE Simulation Tools plug-ins</text>
+       		</link>
+       	</group>
+  	</extensionContent>
+</introContent>

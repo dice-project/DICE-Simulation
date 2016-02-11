@@ -2,7 +2,7 @@
 <feature
       id="es.unizar.disco.ssh.feature"
       label="SSH Connection Provider"
-      version="0.1.0.qualifier"
+      version="0.1.1.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -233,13 +233,13 @@ any resulting litigation.
          id="com.hierynomus.sshj"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.1.1.qualifier"/>
 
    <plugin
          id="es.unizar.disco.ssh"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.1.qualifier"
          unpack="false"/>
 
 </feature>

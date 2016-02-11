@@ -1,0 +1,5 @@
+
+a#wizard-link img { background-image : url(graphics/wizard52.png); }
+a#wizard-link:hover img { background-image : url(graphics/wizard52_hover.png); }
+a#prefs-link img { background-image : url(graphics/prefs52.png); }
+a#prefs-link:hover img { background-image : url(graphics/prefs52_hover.png); }

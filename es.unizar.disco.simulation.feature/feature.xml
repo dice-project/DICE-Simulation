@@ -2,14 +2,14 @@
 <feature
       id="es.unizar.disco.simulation.feature"
       label="DICE Simulation Tools"
-      version="0.1.0.qualifier"
+      version="0.1.1.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
       Core plug-ins of the DICE Simulation Tools. These plugins provide the core functionality to transforma UML models and simulate with a pluggable simulator.
    </description>
 
-   <copyright url="http://www.example.com/copyright">
+   <copyright url="https://github.com/dice-project/DICE-Simulation">
       DisCo Group - Universidad de Zaragoza
    </copyright>
 
@@ -256,42 +256,42 @@ any resulting litigation.
          id="es.unizar.disco.core"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnconfig"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnextensions"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2m"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2t"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.1.1.qualifier"
          unpack="false"/>
 
 </feature>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="es.unizar.disco.simulation.quickstart"
+            name="DICE Simulation">
+      </category>
+      <wizard
+            name="New DICE Simulation Example Project"
+            icon="icons/full/obj16/clock.png"
+            category="es.unizar.disco.simulation.quickstart"
+            class="es.unizar.disco.simulation.quickstart.wizards.ImportExampleProjectWizard"
+            id="es.unizar.disco.simulation.quickstart.wizards.ExampleProjectWizard">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.intro.configExtension">
+      <configExtension
+            content="intro/overview.xml"
+            configId="org.eclipse.ui.intro.universalConfig">
+      </configExtension>
+   </extension>
+
+</plugin>
