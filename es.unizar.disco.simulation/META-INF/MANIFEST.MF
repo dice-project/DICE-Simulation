@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DICE Simulation Plug-in
 Bundle-SymbolicName: es.unizar.disco.simulation;singleton:=true
-Bundle-Version: 0.1.1.qualifier
+Bundle-Version: 0.1.2.qualifier
 Bundle-Activator: es.unizar.disco.simulation.DiceSimulationPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core,
