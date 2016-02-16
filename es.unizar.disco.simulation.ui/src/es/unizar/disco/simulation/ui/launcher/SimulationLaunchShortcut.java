@@ -17,6 +17,7 @@ import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.papyrus.uml.tools.model.UmlModel;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -49,21 +50,21 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 	}
 
 	protected void launch(Object type, String mode) {
-		IFile file = type instanceof IFile ? (IFile) type : ((IAdaptable) type).getAdapter(IFile.class);
-		if (file == null) {
+		UmlModel model = type instanceof UmlModel ? (UmlModel) type : ((IAdaptable) type).getAdapter(UmlModel.class);
+		if (model == null) {
 			DiceLogger.logError(DiceSimulationUiPlugin.getDefault(),
 					MessageFormat.format(Messages.SimulationLaunchShortcut_unexpectedArgError, 
-					DiceSimulationPlugin.SIMULATION_LAUNCH_CONFIGURATION_TYPE,file));
+					DiceSimulationPlugin.SIMULATION_LAUNCH_CONFIGURATION_TYPE,model));
 			return;
 		}
 		
-		if (!"run".equals(mode)) { //$NON-NLS-1$
+		if (!ILaunchManager.RUN_MODE.equals(mode)) {
 			DiceLogger.logWarning(DiceSimulationUiPlugin.getDefault(),
-					MessageFormat.format(Messages.SimulationLaunchShortcut_unknownModeError, mode, file));
+					MessageFormat.format(Messages.SimulationLaunchShortcut_unknownModeError, mode, model));
 		}
 
 		try {
-            ILaunchConfiguration launchConfiguration = findLaunchConfiguration(file, mode);
+            ILaunchConfiguration launchConfiguration = findLaunchConfiguration(model, mode);
             if (launchConfiguration != null) {
 				Shell shell =  PlatformUI.getWorkbench().getDisplay().getActiveShell();
 				DebugUITools.openLaunchConfigurationDialogOnGroup(
@@ -75,7 +76,7 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
     }
 
 	
-	protected ILaunchConfiguration findLaunchConfiguration(IFile file, String mode) throws CoreException {
+	protected ILaunchConfiguration findLaunchConfiguration(UmlModel model, String mode) throws CoreException {
 		
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 		
@@ -86,15 +87,15 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		// We search through the existing configurations if the actual configuration has been previously defined
 		for (ILaunchConfiguration previousConfiguration : existingConfigs) {
 			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, StringUtils.EMPTY); 
-			if (previousFile.equals(file.getLocationURI().toString())) {
+			if (previousFile.equals(model.getURI().toString())) {
 				return previousConfiguration;
 			}
 		}
 		
-		String name = file.getFullPath().removeFileExtension().lastSegment();
+		String name = model.getURI().trimFileExtension().lastSegment();
 		String casedName = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 		ILaunchConfigurationWorkingCopy launchConf = simLaunchConfigurationType.newInstance(null, casedName);
-		launchConf.setAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, file.getLocationURI().toString());
+		launchConf.setAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, model.getURI().toString());
 		ILaunchConfiguration result = launchConf.doSave();
 		
 		return result;

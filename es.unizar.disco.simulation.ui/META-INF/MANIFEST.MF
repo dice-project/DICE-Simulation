@@ -12,9 +12,18 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.uml2.uml,
  org.eclipse.emf.edit.ui,
+ org.eclipse.core.expressions,
  es.unizar.disco.core;bundle-version="0.1.0",
  es.unizar.disco.core.ui;bundle-version="0.1.0",
  es.unizar.disco.simulation;bundle-version="0.1.0",
- es.unizar.disco.pnconfig;bundle-version="0.1.0"
+ es.unizar.disco.pnconfig;bundle-version="0.1.0",
+ org.eclipse.papyrus.infra.onefile;bundle-version="1.1.0",
+ org.eclipse.papyrus.infra.core;bundle-version="1.1.0",
+ org.eclipse.papyrus.uml.tools;bundle-version="1.1.0",
+ org.eclipse.papyrus.infra.services.resourceloading;bundle-version="1.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
+Export-Package: es.unizar.disco.simulation.ui,
+ es.unizar.disco.simulation.ui.adapters,
+ es.unizar.disco.simulation.ui.launcher,
+ es.unizar.disco.simulation.ui.tester

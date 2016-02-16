@@ -40,13 +40,31 @@
            <with variable="selection">
              <count value="1"/>
               <iterate>
-               <and>
-                  <test
-                        forcePluginActivation="true"
-                        property="org.eclipse.core.resources.extension"
-                        value="uml">
-                  </test>
-               </and>
+               <or>
+                  <adapt
+                        type="org.eclipse.papyrus.infra.onefile.model.IPapyrusElement">
+                  </adapt>
+                  <and>
+                     <adapt
+                           type="org.eclipse.core.resources.IFile">
+                     </adapt>
+                     <or>
+                        <test
+                              forcePluginActivation="true"
+                              property="org.eclipse.core.resources.extension"
+                              value="notation">
+                        </test>
+                        <test
+                              forcePluginActivation="true"
+                              property="org.eclipse.core.resources.extension"
+                              value="di">
+                        </test>
+                        <test
+                              forcePluginActivation="true"
+                              property="org.eclipse.core.resources.extension"
+                              value="uml">
+                        </test></or></and>
+               </or>
               </iterate>
              </with>
          </enablement>
@@ -60,6 +78,115 @@
        </description>
             
       </shortcut>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="org.eclipse.papyrus.infra.onefile.model.IPapyrusElement"
+            class="es.unizar.disco.simulation.ui.adapters.LaunchableDummyAdapterFactory">
+         <adapter
+               type="org.eclipse.debug.ui.actions.ILaunchable">
+         </adapter>
+      </factory>
+      <factory
+            adaptableType="org.eclipse.core.resources.IFile"
+            class="es.unizar.disco.simulation.ui.adapters.UmlModelAdapterFactory">
+         <adapter
+               type="org.eclipse.papyrus.uml.tools.model.UmlModel">
+         </adapter>
+      </factory>
+      <factory
+            adaptableType="org.eclipse.papyrus.infra.onefile.model.IPapyrusElement"
+            class="es.unizar.disco.simulation.ui.adapters.UmlModelAdapterFactory">
+         <adapter
+               type="org.eclipse.papyrus.uml.tools.model.UmlModel">
+         </adapter>
+      </factory>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="es.unizar.disco.simulation.ui.tester.PapyrusElementExtensionTester"
+            id="es.unizar.disco.simulation.ui.tester.extension"
+            namespace="org.eclipse.core.resources"
+            properties="extension"
+            type="org.eclipse.papyrus.infra.onefile.model.IPapyrusElement">
+      </propertyTester>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="es.unizar.disco.simulation.ui.handlers.LaunchSimulationHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.launchSimulationCommand">
+         <activeWhen>
+            <with
+                  variable="activeEditorId">
+               <equals
+                     value="org.eclipse.papyrus.infra.core.papyrusEditor">
+               </equals>
+            </with>
+         </activeWhen>
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=org.eclipse.papyrus.ui.menu">
+         <menu
+               id="es.unizar.disco.simulation.ui.menus.diceSimulationMenu"
+               label="DICE Simulation"
+               mnemonic="D">
+            <command
+                  commandId="es.unizar.disco.simulation.ui.commands.launchSimulationCommand"
+                  icon="icons/full/obj16/clock.png"
+                  id="es.unizar.disco.simulation.ui.menus.launchSimulationCommand"
+                  mnemonic="S">
+            </command>
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeEditorId">
+                  <equals
+                        value="org.eclipse.papyrus.infra.core.papyrusEditor">
+                  </equals>
+               </with>
+            </visibleWhen>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="es.unizar.disco.simulation.ui.toolbars.diceSimulationToolbar">
+            <command
+                  commandId="es.unizar.disco.simulation.ui.commands.launchSimulationCommand"
+                  icon="icons/full/obj16/clock.png"
+                  id="es.unizar.disco.simulation.ui.toolbars.launchSimulationCommand"
+                  tooltip="Launches a new DICE Simulation">
+            </command>
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeEditorId">
+                  <equals
+                        value="org.eclipse.papyrus.infra.core.papyrusEditor">
+                  </equals>
+               </with>
+            </visibleWhen>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="es.unizar.disco.simulation.ui.diceSimulationCategory"
+            description="Launches a new DICE Simulation"
+            id="es.unizar.disco.simulation.ui.commands.launchSimulationCommand"
+            name="Launch DICE Simulation">
+      </command>
+      <category
+            id="es.unizar.disco.simulation.ui.diceSimulationCategory"
+            name="DICE Simulation">
+      </category>
    </extension>
 
 </plugin>
