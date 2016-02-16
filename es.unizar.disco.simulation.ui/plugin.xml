@@ -141,6 +141,9 @@
                   icon="icons/full/obj16/clock.png"
                   id="es.unizar.disco.simulation.ui.menus.launchSimulationCommand"
                   mnemonic="S">
+               <visibleWhen
+                     checkEnabled="true">
+               </visibleWhen>
             </command>
             <visibleWhen
                   checkEnabled="false">
@@ -162,16 +165,10 @@
                   icon="icons/full/obj16/clock.png"
                   id="es.unizar.disco.simulation.ui.toolbars.launchSimulationCommand"
                   tooltip="Launches a new DICE Simulation">
+               <visibleWhen
+                     checkEnabled="true">
+               </visibleWhen>
             </command>
-            <visibleWhen
-                  checkEnabled="false">
-               <with
-                     variable="activeEditorId">
-                  <equals
-                        value="org.eclipse.papyrus.infra.core.papyrusEditor">
-                  </equals>
-               </with>
-            </visibleWhen>
          </toolbar>
       </menuContribution>
    </extension>
