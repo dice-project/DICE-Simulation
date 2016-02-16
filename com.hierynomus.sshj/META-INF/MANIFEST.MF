@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SSHv2 library for Java
 Bundle-SymbolicName: com.hierynomus.sshj
-Bundle-Version: 0.15.0.qualifier
+Bundle-Version: 0.15.0
 Bundle-Vendor: hierynomus
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: lib/jars/bcpkix-jdk15on-1.51.jar,

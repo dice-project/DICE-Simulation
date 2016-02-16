@@ -2,7 +2,7 @@
 <feature
       id="com.hierynomus.sshj.feature"
       label="SSHv2 library for Java"
-      version="0.15.0.qualifier"
+      version="0.15.0"
       provider-name="HIERYNOMUS">
 
    <description url="https://github.com/hierynomus/sshj">
@@ -285,6 +285,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
          id="com.hierynomus.sshj"
          download-size="0"
          install-size="0"
-         version="0.15.0.qualifier"/>
+         version="0.15.0"/>
 
 </feature>
