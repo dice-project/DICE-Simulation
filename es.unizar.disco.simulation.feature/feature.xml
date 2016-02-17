@@ -245,6 +245,7 @@ any resulting litigation.
       <import feature="com.masdes.dam.profile" version="0.2.1" match="greaterOrEqual"/>
       <import feature="com.masdes.dam.profile.ui.feature" version="0.2.1" match="greaterOrEqual"/>
       <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.1.0" match="compatible"/>
+      <import plugin="fr.lip6.pnml.framework.pthlpng" version="2.2.9" match="greaterOrEqual"/>
    </requires>
 
    <plugin
