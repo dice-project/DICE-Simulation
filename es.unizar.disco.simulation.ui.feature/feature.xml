@@ -2,7 +2,7 @@
 <feature
       id="es.unizar.disco.simulation.ui.feature"
       label="DICE Simulation Tools UI"
-      version="0.1.4.qualifier"
+      version="0.1.5.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -233,32 +233,31 @@ any resulting litigation.
       <import plugin="org.eclipse.debug.ui"/>
       <import plugin="org.eclipse.emf.ecore"/>
       <import plugin="org.eclipse.uml2.uml"/>
-      <import plugin="org.eclipse.emf.edit.ui"/>
+      <import plugin="org.eclipse.core.expressions"/>
       <import plugin="es.unizar.disco.simulation" version="0.1.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.pnconfig" version="0.1.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.papyrus.sdk.feature" version="1.1.0" match="compatible"/>
-      <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.1.0" match="compatible"/>
-      <import feature="org.eclipse.papyrus.extra.marte.properties.feature" version="1.1.0" match="compatible"/>
-      <import feature="org.eclipse.papyrus.extra.marte.textedit.feature" version="1.1.0" match="compatible"/>
-      <import plugin="org.eclipse.core.expressions"/>
       <import plugin="org.eclipse.papyrus.infra.onefile" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.infra.core" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.uml.tools" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.infra.services.resourceloading" version="1.1.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.papyrus.sdk.feature" version="1.1.0" match="compatible"/>
+      <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.1.0" match="compatible"/>
+      <import feature="org.eclipse.papyrus.extra.marte.properties.feature" version="1.1.0" match="compatible"/>
+      <import feature="org.eclipse.papyrus.extra.marte.textedit.feature" version="1.1.0" match="compatible"/>
    </requires>
 
    <plugin
          id="es.unizar.disco.core.ui"
          download-size="0"
          install-size="0"
-         version="0.1.4.qualifier"
+         version="0.1.5.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation.ui"
          download-size="0"
          install-size="0"
-         version="0.1.4.qualifier"
+         version="0.1.5.qualifier"
          unpack="false"/>
 
 </feature>

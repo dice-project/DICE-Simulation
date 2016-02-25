@@ -2,7 +2,7 @@
 <feature
       id="es.unizar.disco.simulation.feature"
       label="DICE Simulation Tools"
-      version="0.1.4.qualifier"
+      version="0.1.5.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -233,6 +233,7 @@ any resulting litigation.
       <import plugin="fr.lip6.pnml.framework.symmetricnet" version="2.2.9" match="greaterOrEqual"/>
       <import plugin="fr.lip6.pnml.framework.utils" version="2.2.9" match="greaterOrEqual"/>
       <import plugin="org.eclipse.m2m.qvt.oml" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.pthlpng" version="2.2.9" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ocl"/>
       <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.acceleo.common" version="3.3.0" match="greaterOrEqual"/>
@@ -244,49 +245,48 @@ any resulting litigation.
       <import feature="com.masdes.dam.profile" version="0.2.1" match="greaterOrEqual"/>
       <import feature="com.masdes.dam.profile.ui.feature" version="0.2.1" match="greaterOrEqual"/>
       <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.1.0" match="compatible"/>
-      <import plugin="fr.lip6.pnml.framework.pthlpng" version="2.2.9" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="es.unizar.disco.core"
          download-size="0"
          install-size="0"
-         version="0.1.4.qualifier"
+         version="0.1.5.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnconfig"
          download-size="0"
          install-size="0"
-         version="0.1.4.qualifier"
+         version="0.1.5.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnextensions"
          download-size="0"
          install-size="0"
-         version="0.1.4.qualifier"
+         version="0.1.5.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2m"
          download-size="0"
          install-size="0"
-         version="0.1.4.qualifier"
+         version="0.1.5.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2t"
          download-size="0"
          install-size="0"
-         version="0.1.4.qualifier"
+         version="0.1.5.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation"
          download-size="0"
          install-size="0"
-         version="0.1.4.qualifier"
+         version="0.1.5.qualifier"
          unpack="false"/>
 
 </feature>
