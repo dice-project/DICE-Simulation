@@ -159,7 +159,8 @@
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
          <toolbar
-               id="es.unizar.disco.simulation.ui.toolbars.diceSimulationToolbar">
+               id="es.unizar.disco.simulation.ui.toolbars.diceSimulationToolbar"
+               label="DICE Simulation">
             <command
                   commandId="es.unizar.disco.simulation.ui.commands.launchSimulationCommand"
                   icon="icons/full/obj16/clock.png"
