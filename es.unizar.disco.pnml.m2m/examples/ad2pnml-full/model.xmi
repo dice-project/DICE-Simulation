@@ -19,6 +19,7 @@
       </objects>
       <objects xsi:type="ptnet:Transition" id="t_M1" InArcs="M1_to_t_M1" OutArcs="t_M1_to_F1">
         <name text="t_M1"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>2.0&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
       </objects>
       <objects xsi:type="ptnet:Arc" id="M1_to_t_M1" source="M1" target="t_M1"/>
       <objects xsi:type="ptnet:Arc" id="t_M1_to_F1" source="t_M1" target="F1"/>
@@ -39,6 +40,7 @@
       </objects>
       <objects xsi:type="ptnet:Transition" id="t_R1" InArcs="R1_to_t_R1" OutArcs="t_R1_to_R1-J1">
         <name text="t_R1"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>5.0&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
       </objects>
       <objects xsi:type="ptnet:Transition" id="t_J1" InArcs="R1-J1_to_t_J1 R2-J1_to_t_J1" OutArcs="t_J1_to_M2">
         <name text="t_J1"/>
@@ -51,6 +53,7 @@
       </objects>
       <objects xsi:type="ptnet:Transition" id="t_R2" InArcs="R2_to_t_R2" OutArcs="t_R2_to_R2-J1">
         <name text="t_R2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>2.0&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
       </objects>
       <objects xsi:type="ptnet:Arc" id="R2_to_t_R2" source="R2" target="t_R2"/>
       <objects xsi:type="ptnet:Arc" id="t_R2_to_R2-J1" source="t_R2" target="R2-J1"/>
@@ -64,6 +67,7 @@
       </objects>
       <objects xsi:type="ptnet:Transition" id="t_M2" InArcs="M2_to_t_M2" OutArcs="t_M2_to_D1">
         <name text="t_M2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>1.4285714285714286&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
       </objects>
       <objects xsi:type="ptnet:Arc" id="M2_to_t_M2" source="M2" target="t_M2"/>
       <objects xsi:type="ptnet:Arc" id="t_M2_to_D1" source="t_M2" target="D1"/>
@@ -90,11 +94,13 @@
       </objects>
       <objects xsi:type="ptnet:Transition" id="t_R3" InArcs="R3_to_t_R3" OutArcs="t_R3_to_MG1">
         <name text="t_R3"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>5.0&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
       </objects>
       <objects xsi:type="ptnet:Arc" id="R3_to_t_R3" source="R3" target="t_R3"/>
       <objects xsi:type="ptnet:Arc" id="t_R3_to_MG1" source="t_R3" target="MG1"/>
       <objects xsi:type="ptnet:Transition" id="t_R4" InArcs="R4_to_t_R4" OutArcs="t_R4_to_MG1">
         <name text="t_R4"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>2.0&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
       </objects>
       <objects xsi:type="ptnet:Arc" id="R4_to_t_R4" source="R4" target="t_R4"/>
       <objects xsi:type="ptnet:Arc" id="t_R4_to_MG1" source="t_R4" target="MG1"/>
@@ -111,6 +117,7 @@
       </objects>
       <objects xsi:type="ptnet:Transition" id="t_M3" InArcs="M3_to_t_M3" OutArcs="t_M3_to_End">
         <name text="t_M3"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value>1.4285714285714286&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
       </objects>
       <objects xsi:type="ptnet:Arc" id="M3_to_t_M3" source="M3" target="t_M3"/>
       <objects xsi:type="ptnet:Arc" id="t_M3_to_End" source="t_M3" target="End"/>

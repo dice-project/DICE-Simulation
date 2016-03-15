@@ -5,6 +5,9 @@
         <name>
           <text>Start</text>
         </name>
+        <initialMarking>
+          <text>2</text>
+        </initialMarking>
       </place>
       <place id="M1">
         <name>

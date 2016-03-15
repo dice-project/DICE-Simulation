@@ -166,4 +166,8 @@
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_P62twHZWEeWEvv44s1yQgg" base_NamedElement="__d458GeMEeWvl7zxZhjBbQ" prob="(value=$p1,source=assm)"/>
   <GQAM:GaStep xmi:id="_YlEr4HZWEeWEvv44s1yQgg" base_NamedElement="___X2YGeMEeWvl7zxZhjBbQ" prob="(value=$p2,source=assm)"/>
+  <GQAM:GaAnalysisContext xmi:id="_53uMIOSSEeWH__TMWhs7Qw" base_StructuredClassifier="_BBgeQGeMEeWvl7zxZhjBbQ" base_NamedElement="_BBgeQGeMEeWvl7zxZhjBbQ">
+    <context>$var1</context>
+    <context>$var2</context>
+  </GQAM:GaAnalysisContext>
 </xmi:XMI>
