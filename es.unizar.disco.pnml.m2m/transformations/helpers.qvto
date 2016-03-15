@@ -1,0 +1,121 @@
+import es.unizar.disco.pnml.utils.PnmlDiceUtils;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
+modeltype PNML uses 'http:///ptnet.ecore';
+modeltype CONF uses 'http://es.unizar.disco/pnconfig/1.0';
+modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
+
+library helpers;
+
+helper createName(name : String) : PNML::Name
+{
+	return object PNML::Name {
+		text := name
+	};
+}
+
+helper UML::NamedElement::getPatternVsl() : String
+{
+	var stereotype := self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent");
+	if (stereotype != null) {
+		return self.getValue(stereotype,"pattern").toString();
+	};
+	return null;
+}
+
+helper UML::NamedElement::getHostDemandVsl() : List(String)
+{
+	var list := object List(String) {};
+	var stereotype := self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep");
+	if (stereotype != null) {
+		list->add(self.getValue(stereotype,"hostDemand").toString())
+	};
+	return list;
+}
+
+helper UML::NamedElement::getProbabilityVsl() : String
+{
+	var stereotype := self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep");
+	if (stereotype != null) {
+		return self.getValue(stereotype,"prob").toString();
+	};
+	return null;
+}
+
+helper String::getPopulationValue(pnConfig : CONF::PetriNetConfig) : Real
+{
+	return self.extractTagValue("population", pnConfig);
+}
+
+helper String::getValueValue(pnConfig : CONF::PetriNetConfig) : Real
+{
+	return self.extractTagValue("value", pnConfig);
+}
+
+helper String::extractTagValue(theTag : String, pnConfig : CONF::PetriNetConfig) : Real
+{
+	var floatExpr := self.searchFloat(theTag);
+	-- expression is a float
+	if (floatExpr != null) {
+		return floatExpr;
+	};
+	-- expression is a variable
+	var variableExpr := self.searchVariable(theTag);
+	if (variableExpr != null) {
+		return pnConfig.retrieveVariableValue(variableExpr);
+	};
+	-- expression is a expression with a value
+	var exprExpr := self.searchExpression(theTag);
+	if (exprExpr != null) {
+		return exprExpr.getValueValue(pnConfig);
+	};
+	return null;
+}
+
+
+helper String::searchFloat(key : String) : Real {
+	var pattern := ".*" + key + "=(\\d+(\\.\\d+)?).*";
+	var compactStr := self.replace(' ','');
+	if (compactStr.matches(pattern)) {
+		return compactStr.replaceAll(pattern, "$1").asFloat();
+	};
+	return null;
+}
+
+helper String::searchVariable(key : String) : String {
+	var pattern := ".*" + key + "=(\\$\\w+).*";
+	var compactStr := self.replace(' ','');
+	if (compactStr.matches(pattern)) {
+		return compactStr.replaceAll(pattern, "$1");
+	};
+	return null;
+	
+}
+
+helper String::searchExpression(key : String) : String {
+	var pattern := ".*" + key + "=(\\(.*\\)).*";
+	var compactStr := self.replace(' ','');
+	if (compactStr.matches(pattern)) {
+		return compactStr.replaceAll(pattern, "$1");
+	};
+	return null;
+}
+
+helper CONF::PetriNetConfig::retrieveVariableValue(variable : String) : Real {
+	return self.variableAssignments
+	->select(entry : CONF::EStringToEFloatObjectsMap | entry.key = variable).value
+	->asOrderedSet()->first();
+}
+
+helper PNML::PnObject::getToolInfoEntry(key : String) : PNML::ToolInfo {
+	return self.toolspecifics->select(toolInfo : PNML::ToolInfo | toolInfo.toolInfoGrammarURI.toString() = key)->asOrderedSet()->first();
+}
+
+helper UML::NamedElement::safeId() : String {
+	var name := self.name.normalizeSpace().replace(' ', '_');
+	if (name != null and name.length() > 0) {
+		return name;
+	};
+	// Otherwise
+  	return self.getEmfGlobalId();
+}

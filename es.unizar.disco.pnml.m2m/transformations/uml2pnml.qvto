@@ -1,0 +1,101 @@
+import es.unizar.disco.pnml.utils.PnmlDiceUtils;
+import helpers;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
+modeltype PNML uses 'http:///ptnet.ecore';
+modeltype CONF uses 'http://es.unizar.disco/pnconfig/1.0';
+modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
+
+
+transformation uml2pnml(in uml : UML, in config : CONF, out res : PNML) 
+access helpers;
+
+property moduleProp : String = '';
+
+main() {
+	uml.rootObjects()[UML::Model]->map model2net();
+}
+
+mapping UML::Model::model2net() : PNML::PetriNetDoc {
+	nets := object PNML::PetriNet {
+		id := 'net';
+		name := createName(self.name);
+		pages := object PNML::Page {
+			id := 'page';
+		}
+	}
+}
+
+abstract mapping UML::NamedElement::namedElement2node(in id : String) : PNML::PnObject
+{
+	result.containerPage := getGlobalPage();
+	result.id := id;
+	if (result.oclIsKindOf(PNML::Node) and name.oclIsUndefined()) {
+		name := createName(id);
+	};	
+} 
+
+mapping UML::NamedElement::namedElement2place(in id : String) : PNML::Place 
+inherits UML::NamedElement::namedElement2node
+{
+	init {
+		result := resolveoneIn(UML::NamedElement::namedElement2place, pnObject : PNML::Place | pnObject.id = id);
+	}
+	var pattern := self.getPatternVsl();
+	if (pattern != null) {
+		var value := pattern.getPopulationValue(config.currentConfig());
+		if (value != null) {
+			initialMarking := object PNML::PTMarking {
+				text := value.round();
+			}
+		}
+	};
+} 
+
+mapping UML::NamedElement::namedElement2transition(in id : String) : PNML::Transition 
+inherits UML::NamedElement::namedElement2node
+{
+	init {
+		result := resolveoneIn(UML::NamedElement::namedElement2transition, pnObject : PNML::Transition | pnObject.id = id);
+	}
+	var hostDemand := self.getHostDemandVsl();
+	if (hostDemand->notEmpty()) {
+		hostDemand->forEach(elt) {
+			-- hostDemand is many-valued, so that, we search for the value in all the entries
+			-- only the first valid value will be used
+			var value := elt.getValueValue(config.currentConfig());
+			if (value != null) {
+				result.setTransitionKind(CONST::TransitionKind::Exponential, (1 / value))
+			}
+		}
+	};
+	var probability := self.getProbabilityVsl();
+	if (probability != null) {
+		var value := probability.getValueValue(config.currentConfig());
+		if (value != null) {
+			result.setTransitionKind(CONST::TransitionKind::Immediate, value)
+		}
+	};
+} 
+
+mapping UML::NamedElement::namedElement2arc(in source : PNML::Node, in target : PNML::Node) : PNML::Arc 
+{
+	init {
+		var id := source.id + '_to_' + target.id;
+		result := resolveoneIn(UML::NamedElement::namedElement2arc, pnObject : PNML::Arc | pnObject.id = id);
+	}
+	result.id := id;
+	result.containerPage := getGlobalPage();
+	result.source := source;
+	result.target:= target;
+} 
+
+helper getGlobalPage() : PNML::Page
+{
+	return resolveoneIn(UML::Model::model2net, PNML::PetriNetDoc).nets.pages->asOrderedSet()->first();
+}
+
+helper CONF::currentConfig() : CONF::PetriNetConfig
+{
+	return self.objectsOfType(CONF::PetriNetConfig)->asSequence()->first();
+}

@@ -1,37 +1,32 @@
 import es.unizar.disco.pnml.utils.PnmlDiceUtils;
+import uml2pnml;
+import helpers;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
 modeltype PNML uses 'http:///ptnet.ecore';
 modeltype CONF uses 'http://es.unizar.disco/pnconfig/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
+	
 
-transformation ad2pnml(in ad : UML, in config : CONF, out res : PNML);
+transformation ad2pnml(in ad : UML, in config : CONF, out res : PNML) 
+extends uml2pnml();
 
 main() {
-	ad.rootObjects()[UML::Model]->map model2net();
+	new uml2pnml(ad, config, res)->transform();
 	ad.objectsOfType(UML::ControlFlow)->map abstractControlFlow2subNet();
 	if (config.rootObjects()[CONF::PetriNetConfig]->asOrderedSet()->first().analysisType = CONF::AnalysisType::steadyState) {
 		map net2steadyStateNet();
 	};
 }
 
-mapping UML::Model::model2net() : PNML::PetriNetDoc {
-	nets := object PNML::PetriNet {
-		id := 'net';
-		name := createName(self.name);
-		pages := object PNML::Page {
-			id := 'page';
-		}
-	}
-}
 
 mapping net2steadyStateNet() {
 	init {
 	-- transientFlow is a temporary ControlFlow that eases the creation of the 
 	-- closing loop for the SteadyState Analysis 
 		var transientFlow := object UML::ControlFlow {
-			source := ad.objectsOfType(UML::ActivityFinalNode)->asOrderedSet()->first();
-			target := ad.objectsOfType(UML::InitialNode)->asOrderedSet()->first();
+			source := ad.objectsOfKind(UML::FinalNode)->asOrderedSet()->first();
+			target := ad.objectsOfKind(UML::InitialNode)->asOrderedSet()->first();
 		}
 	}
 	transientFlow->map abstractControlFlow2subNet();
@@ -53,19 +48,14 @@ UML::ControlFlow::singleControlFlow2subNet
 
 mapping UML::ControlFlow::singleControlFlow2subNet()
 {
-	init {
-		var place1 := self.source->namedElement2place(self.source.name)->asOrderedSet()->first();
-		var place2 := self.target->namedElement2place(self.target.name)->asOrderedSet()->first();
-		var trans := self.source->namedElement2transition('t_' + self.source.name)->asOrderedSet()->first();
-		var arc1 := self->namedElement2arc(place1.id + '_to_' + trans.id)->asOrderedSet()->first();
-		var arc2 := self->namedElement2arc(trans.id + '_to_' + place2.id)->asOrderedSet()->first();
-	}
+	var place1 := self.source.map namedElement2place(self.source.safeId());
+	var place2 := self.target.map namedElement2place(self.target.safeId());
 	
-	arc1.source := place1;
-	arc1.target := trans;
+	var trans := self.source.map namedElement2transition('t_' + self.source.safeId());
 	
-	arc2.source := trans;
-	arc2.target := place2;
+	var arc1 := self.map namedElement2arc(place1, trans);
+	var arc2 := self.map namedElement2arc(trans, place2);
+
 }
 
 mapping UML::ControlFlow::preJoinControlFlow2subNet()
@@ -75,24 +65,15 @@ when {
 	 self.target.oclIsKindOf(UML::JoinNode) 
 }
 {
-	init {
-		var place1 := self.source->namedElement2place(self.source.name)->asOrderedSet()->first();
-		var place2 := self.target->namedElement2place(self.source.name + '-' + self.target.name)->asOrderedSet()->first();
-		var trans1 := self.source->namedElement2transition('t_' + self.source.name)->asOrderedSet()->first();
-		var trans2 := self.target->namedElement2transition('t_' + self.target.name)->asOrderedSet()->first();
-		var arc1 := self->namedElement2arc(place1.id + '_to_' + trans1.id)->asOrderedSet()->first();
-		var arc2 := self->namedElement2arc(trans1.id + '_to_' + place2.id)->asOrderedSet()->first();
-		var arc3 := self->namedElement2arc(place2.id + '_to_' + trans2.id)->asOrderedSet()->first();
-	}
+	var place1 := self.source.map namedElement2place(self.source.safeId());
+	var place2 := self.target.map namedElement2place(self.source.safeId() + '-' + self.target.safeId());
 	
-	arc1.source := place1;
-	arc1.target := trans1;
+	var trans1 := self.source.map namedElement2transition('t_' + self.source.safeId());
+	var trans2 := self.target.map namedElement2transition('t_' + self.target.safeId());
 	
-	arc2.source := trans1;
-	arc2.target := place2;
-
-	arc3.source := place2;
-	arc3.target := trans2;
+	self.map namedElement2arc(place1, trans1);
+	self.map namedElement2arc(trans1, place2);
+	self.map namedElement2arc(place2, trans2);
 }
 
 mapping UML::ControlFlow::postJoinControlFlow2subNet()
@@ -102,14 +83,11 @@ when {
 	 self.target.oclIsKindOf(UML::ActivityNode) 
 }
 {
-	init {
-		var place2 := self.target->namedElement2place(self.target.name)->asOrderedSet()->first();
-		var trans := self.source->namedElement2transition('t_' + self.source.name)->asOrderedSet()->first();
-		var arc2 := self->namedElement2arc(trans.id + '_to_' + place2.id)->asOrderedSet()->first();
-	}
+	var place2 := self.target.map namedElement2place(self.target.safeId());
 	
-	arc2.source := trans;
-	arc2.target := place2;
+	var trans := self.source.map namedElement2transition('t_' + self.source.safeId());
+	
+	self.map namedElement2arc(trans, place2);
 }
 
 mapping UML::ControlFlow::decissionControlFlow2subNet()
@@ -119,20 +97,13 @@ when {
 	 self.target.oclIsKindOf(UML::ActivityNode) 
 }
 {
-	init {
-		var place1 := self.source->namedElement2place(self.source.name)->asOrderedSet()->first();
-		var place2 := self.target->namedElement2place(self.target.name)->asOrderedSet()->first();
-		var trans := self->namedElement2transition('t_' + self.source.name + '-' + self.target.name)->asOrderedSet()->first();
-		var arc1 := self->namedElement2arc(place1.id + '_to_' + trans.id)->asOrderedSet()->first();
-		var arc2 := self->namedElement2arc(trans.id + '_to_' + place2.id)->asOrderedSet()->first();
-	}
+	var place1 := self.source.map namedElement2place(self.source.safeId());
+	var place2 := self.target.map namedElement2place(self.target.safeId());
 	
-	arc1.source := place1;
-	arc1.target := trans;
+	var trans := self.map namedElement2transition('t_' + self.source.safeId() + '-' + self.target.safeId());
 	
-	arc2.source := trans;
-	arc2.target := place2;
-
+	self.map namedElement2arc(place1, trans);
+	self.map namedElement2arc(trans, place2);
 }
 
 mapping UML::ControlFlow::closingControlFlow2subNet()
@@ -142,194 +113,11 @@ when {
 	 self.target.oclIsKindOf(UML::InitialNode) 
 }
 {
-	init {
-		var place1 := self.source->namedElement2place(self.source.name)->asOrderedSet()->first();
-		var place2 := self.target->namedElement2place(self.target.name)->asOrderedSet()->first();
-		var trans := self->namedElement2transition('close')->asOrderedSet()->first();
-		var arc1 := self->namedElement2arc(place1.id + '_to_' + trans.id)->asOrderedSet()->first();
-		var arc2 := self->namedElement2arc(trans.id + '_to_' + place2.id)->asOrderedSet()->first();
-	}
+	var place1 := self.source.map namedElement2place(self.source.safeId());
+	var place2 := self.target.map namedElement2place(self.target.safeId());
 	
-	arc1.source := place1;
-	arc1.target := trans;
+	var trans := self.map namedElement2transition('close');
 	
-	arc2.source := trans;
-	arc2.target := place2;
-}
-
-mapping UML::NamedElement::namedElement2pnObject(in id : String) : PNML::PnObject
-{
-	init {
-	}
-	containerPage := getGlobalPage();
-	result.id := id;
-} 
-
-mapping UML::NamedElement::namedElement2place(in id : String) : PNML::Place 
-inherits UML::NamedElement::namedElement2pnObject
-{
-	init {
-		result := resolveoneIn(UML::NamedElement::namedElement2place, pnObject : PNML::Place| pnObject.id = id);
-	}
-	if (name.oclIsUndefined()) {
-		name := createName(id);
-	};
-	var pattern := getPattern(self);
-	if (pattern != null) {
-		var value := getPopulation(pattern);
-		if (value != null) {
-			initialMarking := object PNML::PTMarking {
-				text := value.round();
-			}
-		}
-	};
-} 
-
-mapping UML::NamedElement::namedElement2transition(in id : String) : PNML::Transition 
-inherits UML::NamedElement::namedElement2pnObject
-{
-	init {
-		result := resolveoneIn(UML::NamedElement::namedElement2transition, pnObject : PNML::Transition| pnObject.id = id);
-	}
-	if (name.oclIsUndefined()) {
-		name := createName(id);
-	};
-	var hostDemand := getHostDemand(self);
-	if (hostDemand->notEmpty()) {
-		hostDemand->forEach(elt) {
-			-- hostDemand is many-valued, so that, we search for the value in all the entries
-			-- only the first valid value will be used
-			var value := getValue(elt);
-			if (value != null) {
-				--toolspecifics := object PNML::ToolInfo {
-				--	tool := CONST::ToolInfoConstants::uri.toString();
-				--	toolInfoGrammarURI := createURI(uri);
-				--	formattedXMLBuffer := createLongString((1 / value).toString());
-				--};
-				result.setTransitionKind(CONST::TransitionKind::Exponential, (1 / value))
-			}
-		}
-	};
-	var probability := getProbability(self);
-	if (probability != null) {
-		var value := getValue(probability);
-		if (value != null) {
-			result.setTransitionKind(CONST::TransitionKind::Immediate, value)
-		}
-	};
-} 
-
-mapping UML::NamedElement::namedElement2arc(in id : String) : PNML::Arc 
-inherits UML::NamedElement::namedElement2pnObject
-{
-	init {
-		result := resolveoneIn(UML::NamedElement::namedElement2arc, pnObject : PNML::Arc | pnObject.id = id);
-	}
-} 
-
-helper getGlobalPage() : PNML::Page
-{
-	return resolveoneIn(UML::Model::model2net, PNML::PetriNetDoc).nets.pages->asOrderedSet()->first();
-}
-
-helper createName(name : String) : PNML::Name
-{
-	return object PNML::Name {
-		text := name
-	};
-}
-
-helper getPattern(element : UML::NamedElement) : String
-{
-	var stereotype := element.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent");
-	if (stereotype != null) {
-		return element.getValue(stereotype,"pattern").toString();
-	};
-	return null;
-}
-
-helper getHostDemand(element : UML::NamedElement) : List(String)
-{
-	var list := object List(String) {};
-	var stereotype := element.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep");
-	if (stereotype != null) {
-		list->add(element.getValue(stereotype,"hostDemand").toString())
-	};
-	return list;
-}
-
-helper getProbability(element : UML::NamedElement) : String
-{
-	var stereotype := element.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep");
-	if (stereotype != null) {
-		return element.getValue(stereotype,"prob").toString();
-	};
-	return null;
-}
-
-helper getPopulation(expression : String) : Real
-{
-	return getValue(expression, "population");
-}
-
-helper getValue(expression : String) : Real
-{
-	return getValue(expression, "value");
-}
-
-helper getValue(expression : String, value : String) : Real
-{
-	var floatExpr := searchFloat(expression, value);
-	-- expression is a float
-	if (floatExpr != null) {
-		return floatExpr;
-	};
-	-- expression is a variable
-	var variableExpr := searchVariable(expression, value);
-	if (variableExpr != null) {
-		return getVariableValue(variableExpr);
-	};
-	-- expression is a expression with a value
-	var exprExpr := searchExpression(expression, value);
-	if (exprExpr != null) {
-		return getValue(exprExpr);
-	};
-	return null;
-}
-
-
-helper searchFloat(expression : String, key : String) : Real {
-	var pattern := ".*" + key + "=(\\d+(\\.\\d+)?).*";
-	if (expression.matches(pattern)) {
-		return expression.replaceAll(pattern, "$1").asFloat();
-	};
-	return null;
-}
-
-helper searchVariable(expression : String, key : String) : String {
-	var pattern := ".*" + key + "=(\\$\\w+).*";
-	if (expression.matches(pattern)) {
-		return expression.replaceAll(pattern, "$1");
-	};
-	return null;
-	
-}
-
-
-helper searchExpression(expression : String, key : String) : String {
-	var pattern := ".*" + key + "=(\\(.*\\)).*";
-	if (expression.matches(pattern)) {
-		return expression.replaceAll(pattern, "$1");
-	};
-	return null;
-}
-
-helper getVariableValue(variable : String) : Real {
-	return config.objectsOfType(CONF::PetriNetConfig).variableAssignments->flatten()
-	->select(entry : CONF::EStringToEFloatObjectsMap | entry.key = variable).value
-	->asOrderedSet()->first();
-}
-
-helper PnObject::getToolInfoEntry(key : String) : ToolInfo {
-	return self.toolspecifics->select(toolInfo : ToolInfo | toolInfo.toolInfoGrammarURI.toString() = key)->asOrderedSet()->first();
+	self.map namedElement2arc(place1, trans);
+	self.map namedElement2arc(trans, place2);
 }
