@@ -12,9 +12,6 @@ public class PnmlToolInfoUtils {
 	
 	private static final ToolInfoUtils TOOL_INFO_UTILS = PnutilsFactory.eINSTANCE.createToolInfoUtils();
 
-	public PnmlToolInfoUtils() {
-	}
-
 	/**
 	 * @param transition
 	 * @param serverType
