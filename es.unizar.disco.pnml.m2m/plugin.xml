@@ -41,6 +41,14 @@
                   nsURI="http://es.unizar.disco/pnconstants/1.0">
             </metamodel>
          </library>
+         <library
+               class="es.unizar.disco.pnml.m2m.utils.IdentifierUtils"
+               name="IdentifierUtils">
+         </library>
+         <library
+               class="es.unizar.disco.pnml.m2m.utils.ErrorHandlingUtils"
+               name="ErrorHandlingUtils">
+         </library>
       </unit>
    </extension>
 
