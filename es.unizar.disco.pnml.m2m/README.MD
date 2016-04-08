@@ -38,7 +38,7 @@ The following list summarizes the main elements that can be used in a UML Activi
 </p>
 
 
-## Sequence diagram to PNML
+## Sequence diagram to PNML (Work in progress)
 
 * **`UML::Packages::Model`**: A `Model` captures a view of a physical system. It is an abstraction of the physical system, with a certain purpose.
 * **`UML::Interactions::Interaction`**: `Interactions` are units of behavior, and focus on the passing of information with `Messages` between the `ConnectableElements`. `Interactions` are the top-level elements of a UML sequence diagram. 
