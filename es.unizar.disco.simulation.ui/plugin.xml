@@ -131,10 +131,10 @@
    <extension
          point="org.eclipse.ui.menus">
       <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu?after=org.eclipse.papyrus.ui.menu">
+            locationURI="menu:org.dice.menu.tools">
          <menu
                id="es.unizar.disco.simulation.ui.menus.diceSimulationMenu"
-               label="DICE Simulation"
+               label="Simulation Tools"
                mnemonic="D">
             <command
                   commandId="es.unizar.disco.simulation.ui.commands.launchSimulationCommand"
