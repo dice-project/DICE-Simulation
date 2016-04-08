@@ -2,7 +2,7 @@
 <feature
       id="es.unizar.disco.ssh.feature"
       label="SSH Connection Provider"
-      version="0.1.5.qualifier"
+      version="0.1.6.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -234,7 +234,7 @@ any resulting litigation.
          id="es.unizar.disco.ssh"
          download-size="0"
          install-size="0"
-         version="0.1.5.qualifier"
+         version="0.1.6.qualifier"
          unpack="false"/>
 
 </feature>
