@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="wnsim" nsURI="http://es.unizar.disco/simulation/configuration/wnsim/1.0"
+    nsPrefix="wnsim">
+  <eClassifiers xsi:type="ecore:EEnum" name="SimulationParameters">
+    <eLiterals name="first_tr_length"/>
+    <eLiterals name="tr_length"/>
+    <eLiterals name="min_btc"/>
+    <eLiterals name="max_btc"/>
+    <eLiterals name="approx"/>
+    <eLiterals name="conf_level"/>
+    <eLiterals name="seed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WnsimResult" eSuperTypes="configuration.ecore#//ToolResult"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WnsimElementInfo" abstract="true" eSuperTypes="configuration.ecore#//AnalyzableElementInfo"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PlaceInfo" eSuperTypes="#//WnsimElementInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionInfo" eSuperTypes="#//WnsimElementInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="meanNumberOfTokens" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+  </eClassifiers>
+</ecore:EPackage>

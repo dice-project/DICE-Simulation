@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="measures" nsURI="http://es.unizar.disco/simulation/measures/1.0"
+    nsPrefix="measures">
+  <eClassifiers xsi:type="ecore:EClass" name="Throughput" eSuperTypes="configuration.ecore#//DomainMeasure"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ResponseTime" eSuperTypes="configuration.ecore#//DomainMeasure"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Utilization" eSuperTypes="configuration.ecore#//DomainMeasure"/>
+</ecore:EPackage>

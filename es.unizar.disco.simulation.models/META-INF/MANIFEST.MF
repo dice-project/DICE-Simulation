@@ -1,8 +1,22 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: DICE Simulation Core Models Plug-in
-Bundle-SymbolicName: es.unizar.disco.simulation.models; singleton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: es.unizar.disco.simulation.models;singleton:=true
 Bundle-Version: 0.1.0.qualifier
-Require-Bundle: org.eclipse.emf.ecore
+Bundle-ClassPath: .
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ es.unizar.disco.simulation.models;visibility:=reexport
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-Vendor: DisCo - Unizar
+Export-Package: configuration,
+ configuration.impl,
+ configuration.util,
+ measures,
+ measures.impl,
+ measures.util,
+ wnsim,
+ wnsim.impl,
+ wnsim.util
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/es.unizar.disco.simulation.models/src" modelPluginID="es.unizar.disco.simulation.models"
+    modelName="Measures" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    usedGenPackages="configuration.genmodel#//configuration" operationReflection="true"
+    importOrganizing="true">
+  <foreignModel>measures.ecore</foreignModel>
+  <genPackages prefix="Measures" disposableProviderFactory="true" ecorePackage="measures.ecore#/">
+    <genClasses ecoreClass="measures.ecore#//Throughput"/>
+    <genClasses ecoreClass="measures.ecore#//ResponseTime"/>
+    <genClasses ecoreClass="measures.ecore#//Utilization"/>
+  </genPackages>
+</genmodel:GenModel>

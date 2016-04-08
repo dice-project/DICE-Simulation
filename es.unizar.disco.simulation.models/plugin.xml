@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated configuration -->
+      <package
+            uri="http://es.unizar.disco/simulation/configuration/1.0"
+            class="configuration.ConfigurationPackage"
+            genModel="model/configuration.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated measures -->
+      <package
+            uri="http://es.unizar.disco/simulation/measures/1.0"
+            class="measures.MeasuresPackage"
+            genModel="model/measures.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated wnsim -->
+      <package
+            uri="http://es.unizar.disco/simulation/configuration/wnsim/1.0"
+            class="wnsim.WnsimPackage"
+            genModel="model/wnsim.genmodel"/>
+   </extension>
+
+</plugin>
