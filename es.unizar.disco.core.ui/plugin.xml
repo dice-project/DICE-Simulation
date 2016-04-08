@@ -4,9 +4,10 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
+      		category="org.dice.ui.preferences"
             class="es.unizar.disco.core.ui.preferences.DummyPreferencePage"
             id="es.unizar.disco.core.ui.preferences"
-            name="DICE Simulation">
+            name="Simulation Tools">
       </page>
    </extension>
 
