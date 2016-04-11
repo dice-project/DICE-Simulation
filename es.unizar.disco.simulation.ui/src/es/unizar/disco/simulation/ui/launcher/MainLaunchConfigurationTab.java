@@ -632,7 +632,7 @@ public class MainLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
 						            	}
 						            }
 						            for (String string : collectedValues) {
-						            	Pattern pattern = Pattern.compile(".*\\w+=(\\$\\w+).*"); //$NON-NLS-1$
+						            	Pattern pattern = Pattern.compile("[^\\W]\\w+=(\\$\\w+)[$\\W]"); //$NON-NLS-1$
 						            	Matcher matcher = pattern.matcher(string);
 					            		while (matcher.find()) {
 					            			vars.add(matcher.group(1));
