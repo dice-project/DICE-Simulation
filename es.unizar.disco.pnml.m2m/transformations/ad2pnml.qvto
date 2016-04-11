@@ -217,6 +217,16 @@ inherits UML::NamedElement::namedElement2pnObject
 			result.setTransitionKind(CONST::TransitionKind::Immediate, value)
 		}
 	};
+	-- TODO: This may collide with the hostDemand, currently the extdelay should only be used in the initial node
+	if (self.oclIsKindOf(UML::InitialNode)) {
+		var pattern := getPattern(self);
+		if (pattern != null) {
+			var value := getExtDelay(pattern);
+			if (value != null) {
+				result.setTransitionKind(CONST::TransitionKind::Exponential, (1 / value))
+			}
+		};
+	}
 } 
 
 mapping UML::NamedElement::namedElement2arc(in id : String) : PNML::Arc 
@@ -271,6 +281,12 @@ helper getPopulation(expression : String) : Real
 {
 	return getValue(expression, "population");
 }
+
+helper getExtDelay(expression : String) : Real
+{
+	return getValue(expression, "extDelay");
+}
+
 
 helper getValue(expression : String) : Real
 {
