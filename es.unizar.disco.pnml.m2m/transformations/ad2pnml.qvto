@@ -145,7 +145,7 @@ when {
 	init {
 		var place1 := self.source->namedElement2place(self.source.name)->asOrderedSet()->first();
 		var place2 := self.target->namedElement2place(self.target.name)->asOrderedSet()->first();
-		var trans := self->namedElement2transition('close')->asOrderedSet()->first();
+		var trans := self->namedElement2transition('System')->asOrderedSet()->first();
 		var arc1 := self->namedElement2arc(place1.id + '_to_' + trans.id)->asOrderedSet()->first();
 		var arc2 := self->namedElement2arc(trans.id + '_to_' + place2.id)->asOrderedSet()->first();
 	}
