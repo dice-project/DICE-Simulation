@@ -46,9 +46,9 @@ when {
 	getPoolSize(self.represents.oclAsType(UML::NamedElement)) != null
 }
 {
-	var poolSize := getValue(getPoolSize(self));
 	var place := self.map namedElement2place(self.name.replaceAll(" ", "_"));
 	
+	--ad.objectsOfType(UML::ControlFlow)
 	var partitions := self->closure(subpartition)->including(self);
 	var containedNodes := ad.objectsOfKind(UML::ActivityNode)->select(node : ActivityNode | partitions->intersection(node.inPartition)->notEmpty());
 	var incomingArcs := ad.objectsOfKind(UML::ActivityEdge)
@@ -58,7 +58,6 @@ when {
 							->select(edge : ActivityEdge | containedNodes->includes(edge.source))
 							->select(edge : ActivityEdge | containedNodes->includes(edge.target).not());
 	
-	-- TODO: Assert there's only one first node and final node
 	var firstNode := incomingArcs.target->asOrderedSet()->first();
 	var lastNode := outgoinArcs.source->asOrderedSet()->first();
 	
@@ -220,7 +219,8 @@ inherits UML::NamedElement::namedElement2pnObject
 			}
 		}
 	};
-	var poolSize := getPoolSize(self);
+	
+	var poolSize := getPoolSize(self.oclAsType(ActivityPartition).represents.oclAsType(UML::NamedElement));
 	if (poolSize != null) {
 		var value := getValue(poolSize);
 		if (value != null) {
