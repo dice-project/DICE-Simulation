@@ -10,6 +10,7 @@ transformation ad2pnml(in ad : UML, in config : CONF, out res : PNML);
 main() {
 	ad.rootObjects()[UML::Model]->map model2net();
 	ad.objectsOfType(UML::ControlFlow)->map abstractControlFlow2subNet();
+	ad.objectsOfType(UML::ActivityPartition)->map activityPartition2subNet();
 	if (config.rootObjects()[CONF::PetriNetConfig]->asOrderedSet()->first().analysisType = CONF::AnalysisType::steadyState) {
 		map net2steadyStateNet();
 	};
@@ -39,6 +40,19 @@ mapping net2steadyStateNet() {
 	-- We must delete it 
 	res.removeElement(transientFlow);
 }
+
+mapping UML::ActivityPartition::activityPartition2subNet()
+when {
+	getPoolSize(self.represents.oclAsType(UML::NamedElement)) != null
+}
+{
+	var poolSize := getValue(getPoolSize(self));
+	var place := self.map namedElement2place(self.name.replaceAll(" ", "_"));
+	
+	--ad.objectsOfType(UML::ControlFlow)
+	
+}
+
 
 mapping UML::ControlFlow::abstractControlFlow2subNet()
 disjuncts 
@@ -273,6 +287,15 @@ helper getProbability(element : UML::NamedElement) : String
 	var stereotype := element.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep");
 	if (stereotype != null) {
 		return element.getValue(stereotype,"prob").toString();
+	};
+	return null;
+}
+
+helper getPoolSize(element : UML::NamedElement) : String
+{
+	var stereotype := element.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource");
+	if (stereotype != null) {
+		return element.getValue(stereotype,"poolSize").toString();
 	};
 	return null;
 }
