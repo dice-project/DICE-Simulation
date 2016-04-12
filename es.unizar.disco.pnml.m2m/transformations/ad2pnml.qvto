@@ -49,7 +49,30 @@ when {
 	var poolSize := getValue(getPoolSize(self));
 	var place := self.map namedElement2place(self.name.replaceAll(" ", "_"));
 	
-	--ad.objectsOfType(UML::ControlFlow)
+	var partitions := self->closure(subpartition)->including(self);
+	var containedNodes := ad.objectsOfKind(UML::ActivityNode)->select(node : ActivityNode | partitions->intersection(node.inPartition)->notEmpty());
+	var incomingArcs := ad.objectsOfKind(UML::ActivityEdge)
+							->select(edge : ActivityEdge | containedNodes->includes(edge.source).not())
+							->select(edge : ActivityEdge | containedNodes->includes(edge.target));
+	var outgoinArcs := ad.objectsOfKind(UML::ActivityEdge)
+							->select(edge : ActivityEdge | containedNodes->includes(edge.source))
+							->select(edge : ActivityEdge | containedNodes->includes(edge.target).not());
+	
+	-- TODO: Assert there's only one first node and final node
+	var firstNode := incomingArcs.target->asOrderedSet()->first();
+	var lastNode := outgoinArcs.source->asOrderedSet()->first();
+	
+	var trans1 := resolveoneIn(UML::NamedElement::namedElement2transition, pnObject : PNML::Transition| pnObject.id = 't_' + lastNode.name);
+	var trans2 := resolveoneIn(UML::NamedElement::namedElement2transition, pnObject : PNML::Transition| pnObject.id = 't_' + firstNode.name);
+	
+	var arc1 := self->namedElement2arc(trans1.id + '_to_' + place.id)->asOrderedSet()->first();
+	var arc2 := self->namedElement2arc(place.id + '_to_' + trans2.id)->asOrderedSet()->first();
+	
+	arc1.source := trans1;
+	arc1.target := place;
+	
+	arc2.source := place;
+	arc2.target := trans2;
 	
 }
 
@@ -197,6 +220,15 @@ inherits UML::NamedElement::namedElement2pnObject
 			}
 		}
 	};
+	var poolSize := getPoolSize(self);
+	if (poolSize != null) {
+		var value := getValue(poolSize);
+		if (value != null) {
+			initialMarking := object PNML::PTMarking {
+				text := value.round();
+			}
+		}
+	};
 } 
 
 mapping UML::NamedElement::namedElement2transition(in id : String) : PNML::Transition 
@@ -240,7 +272,7 @@ inherits UML::NamedElement::namedElement2pnObject
 				result.setTransitionKind(CONST::TransitionKind::Exponential, (1 / value))
 			}
 		};
-	}
+	};
 } 
 
 mapping UML::NamedElement::namedElement2arc(in id : String) : PNML::Arc 
