@@ -29,12 +29,12 @@ public interface TransitionInfo extends WnsimElementInfo {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Mean Number Of Tokens</em>' attribute.
-	 * @see #setMeanNumberOfTokens(Float)
+	 * @see #setMeanNumberOfTokens(Number)
 	 * @see es.unizar.disco.simulation.models.wnsim.WnsimPackage#getTransitionInfo_MeanNumberOfTokens()
-	 * @model
+	 * @model dataType="es.unizar.disco.simulation.models.datatypes.Number"
 	 * @generated
 	 */
-	Float getMeanNumberOfTokens();
+	Number getMeanNumberOfTokens();
 
 	/**
 	 * Sets the value of the '{@link es.unizar.disco.simulation.models.wnsim.TransitionInfo#getMeanNumberOfTokens <em>Mean Number Of Tokens</em>}' attribute.
@@ -44,6 +44,15 @@ public interface TransitionInfo extends WnsimElementInfo {
 	 * @see #getMeanNumberOfTokens()
 	 * @generated
 	 */
-	void setMeanNumberOfTokens(Float value);
+	void setMeanNumberOfTokens(Number value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="es.unizar.disco.simulation.models.datatypes.Number"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return meanNumberOfTokens;'"
+	 * @generated
+	 */
+	Number getValue();
 
 } // TransitionInfo

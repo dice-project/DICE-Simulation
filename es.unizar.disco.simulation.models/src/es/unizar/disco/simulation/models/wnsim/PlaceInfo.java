@@ -29,12 +29,12 @@ public interface PlaceInfo extends WnsimElementInfo {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Throughput</em>' attribute.
-	 * @see #setThroughput(Float)
+	 * @see #setThroughput(Number)
 	 * @see es.unizar.disco.simulation.models.wnsim.WnsimPackage#getPlaceInfo_Throughput()
-	 * @model
+	 * @model dataType="es.unizar.disco.simulation.models.datatypes.Number"
 	 * @generated
 	 */
-	Float getThroughput();
+	Number getThroughput();
 
 	/**
 	 * Sets the value of the '{@link es.unizar.disco.simulation.models.wnsim.PlaceInfo#getThroughput <em>Throughput</em>}' attribute.
@@ -44,6 +44,15 @@ public interface PlaceInfo extends WnsimElementInfo {
 	 * @see #getThroughput()
 	 * @generated
 	 */
-	void setThroughput(Float value);
+	void setThroughput(Number value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" dataType="es.unizar.disco.simulation.models.datatypes.Number"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return throughput;'"
+	 * @generated
+	 */
+	Number getValue();
 
 } // PlaceInfo

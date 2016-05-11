@@ -71,13 +71,22 @@
   <genPackages prefix="Measures" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"
       ecorePackage="measures.ecore#/">
     <genClasses image="false" ecoreClass="measures.ecore#//DomainMeasure">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/value"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/value"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasure/measuredElement"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/unit"/>
     </genClasses>
-    <genClasses ecoreClass="measures.ecore#//Throughput"/>
-    <genClasses ecoreClass="measures.ecore#//ResponseTime"/>
-    <genClasses ecoreClass="measures.ecore#//Utilization"/>
+    <genClasses ecoreClass="measures.ecore#//Throughput">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//Throughput/throughput"/>
+      <genOperations ecoreOperation="measures.ecore#//Throughput/getValue"/>
+    </genClasses>
+    <genClasses ecoreClass="measures.ecore#//ResponseTime">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//ResponseTime/responseTime"/>
+      <genOperations ecoreOperation="measures.ecore#//ResponseTime/getValue"/>
+    </genClasses>
+    <genClasses ecoreClass="measures.ecore#//Utilization">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//Utilization/utilization"/>
+      <genOperations ecoreOperation="measures.ecore#//Utilization/getValue"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="measures.ecore#//MeasureConverter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/to"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/from"/>
@@ -91,7 +100,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference toolresult.ecore#//ToolResult/infos"/>
     </genClasses>
     <genClasses image="false" ecoreClass="toolresult.ecore#//AnalyzableElementInfo">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute toolresult.ecore#//AnalyzableElementInfo/value"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute toolresult.ecore#//AnalyzableElementInfo/value"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference toolresult.ecore#//AnalyzableElementInfo/analyzedElement"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute toolresult.ecore#//AnalyzableElementInfo/unit"/>
     </genClasses>
@@ -122,9 +131,11 @@
     <genClasses image="false" ecoreClass="wnsim.ecore#//WnsimElementInfo"/>
     <genClasses ecoreClass="wnsim.ecore#//PlaceInfo">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wnsim.ecore#//PlaceInfo/throughput"/>
+      <genOperations ecoreOperation="wnsim.ecore#//PlaceInfo/getValue"/>
     </genClasses>
     <genClasses ecoreClass="wnsim.ecore#//TransitionInfo">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wnsim.ecore#//TransitionInfo/meanNumberOfTokens"/>
+      <genOperations ecoreOperation="wnsim.ecore#//TransitionInfo/getValue"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

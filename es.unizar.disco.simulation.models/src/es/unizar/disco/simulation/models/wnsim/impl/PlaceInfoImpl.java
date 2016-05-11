@@ -5,7 +5,11 @@ package es.unizar.disco.simulation.models.wnsim.impl;
 import es.unizar.disco.simulation.models.wnsim.PlaceInfo;
 import es.unizar.disco.simulation.models.wnsim.WnsimPackage;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -33,7 +37,7 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Float THROUGHPUT_EDEFAULT = null;
+	protected static final Number THROUGHPUT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getThroughput() <em>Throughput</em>}' attribute.
@@ -43,7 +47,7 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	 * @generated
 	 * @ordered
 	 */
-	protected Float throughput = THROUGHPUT_EDEFAULT;
+	protected Number throughput = THROUGHPUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,7 +73,7 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Float getThroughput() {
+	public Number getThroughput() {
 		return throughput;
 	}
 
@@ -78,11 +82,20 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setThroughput(Float newThroughput) {
-		Float oldThroughput = throughput;
+	public void setThroughput(Number newThroughput) {
+		Number oldThroughput = throughput;
 		throughput = newThroughput;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WnsimPackage.PLACE_INFO__THROUGHPUT, oldThroughput, throughput));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Number getValue() {
+		return throughput;
 	}
 
 	/**
@@ -108,7 +121,7 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case WnsimPackage.PLACE_INFO__THROUGHPUT:
-				setThroughput((Float)newValue);
+				setThroughput((Number)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -141,6 +154,20 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 				return THROUGHPUT_EDEFAULT == null ? throughput != null : !THROUGHPUT_EDEFAULT.equals(throughput);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case WnsimPackage.PLACE_INFO___GET_VALUE:
+				return getValue();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -34,22 +34,11 @@ public interface AnalyzableElementInfo extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(Number)
 	 * @see es.unizar.disco.simulation.models.toolresult.ToolresultPackage#getAnalyzableElementInfo_Value()
-	 * @model dataType="es.unizar.disco.simulation.models.datatypes.Number" required="true" derived="true"
+	 * @model dataType="es.unizar.disco.simulation.models.datatypes.Number" required="true" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	Number getValue();
-
-	/**
-	 * Sets the value of the '{@link es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(Number value);
 
 	/**
 	 * Returns the value of the '<em><b>Analyzed Element</b></em>' reference.

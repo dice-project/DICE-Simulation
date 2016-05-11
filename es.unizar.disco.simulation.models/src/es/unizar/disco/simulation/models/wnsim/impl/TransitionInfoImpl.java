@@ -5,7 +5,11 @@ package es.unizar.disco.simulation.models.wnsim.impl;
 import es.unizar.disco.simulation.models.wnsim.TransitionInfo;
 import es.unizar.disco.simulation.models.wnsim.WnsimPackage;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -33,7 +37,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Float MEAN_NUMBER_OF_TOKENS_EDEFAULT = null;
+	protected static final Number MEAN_NUMBER_OF_TOKENS_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMeanNumberOfTokens() <em>Mean Number Of Tokens</em>}' attribute.
@@ -43,7 +47,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * @generated
 	 * @ordered
 	 */
-	protected Float meanNumberOfTokens = MEAN_NUMBER_OF_TOKENS_EDEFAULT;
+	protected Number meanNumberOfTokens = MEAN_NUMBER_OF_TOKENS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,7 +73,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Float getMeanNumberOfTokens() {
+	public Number getMeanNumberOfTokens() {
 		return meanNumberOfTokens;
 	}
 
@@ -78,11 +82,20 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMeanNumberOfTokens(Float newMeanNumberOfTokens) {
-		Float oldMeanNumberOfTokens = meanNumberOfTokens;
+	public void setMeanNumberOfTokens(Number newMeanNumberOfTokens) {
+		Number oldMeanNumberOfTokens = meanNumberOfTokens;
 		meanNumberOfTokens = newMeanNumberOfTokens;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WnsimPackage.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS, oldMeanNumberOfTokens, meanNumberOfTokens));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Number getValue() {
+		return meanNumberOfTokens;
 	}
 
 	/**
@@ -108,7 +121,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case WnsimPackage.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS:
-				setMeanNumberOfTokens((Float)newValue);
+				setMeanNumberOfTokens((Number)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -141,6 +154,20 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 				return MEAN_NUMBER_OF_TOKENS_EDEFAULT == null ? meanNumberOfTokens != null : !MEAN_NUMBER_OF_TOKENS_EDEFAULT.equals(meanNumberOfTokens);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case WnsimPackage.TRANSITION_INFO___GET_VALUE:
+				return getValue();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -9,7 +9,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AnalyzableElementInfo" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Number"
-        derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="analyzedElement" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" lowerBound="1" eType="ecore:EEnum datatypes.ecore#//Unit"/>

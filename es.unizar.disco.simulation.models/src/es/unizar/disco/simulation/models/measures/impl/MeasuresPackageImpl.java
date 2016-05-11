@@ -215,6 +215,24 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getThroughput_Throughput() {
+		return (EAttribute)throughputEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getThroughput__GetValue() {
+		return throughputEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getResponseTime() {
 		return responseTimeEClass;
 	}
@@ -224,8 +242,44 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getResponseTime_ResponseTime() {
+		return (EAttribute)responseTimeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getResponseTime__GetValue() {
+		return responseTimeEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getUtilization() {
 		return utilizationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUtilization_Utilization() {
+		return (EAttribute)utilizationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getUtilization__GetValue() {
+		return utilizationEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -298,10 +352,16 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		createEAttribute(domainMeasureEClass, DOMAIN_MEASURE__UNIT);
 
 		throughputEClass = createEClass(THROUGHPUT);
+		createEAttribute(throughputEClass, THROUGHPUT__THROUGHPUT);
+		createEOperation(throughputEClass, THROUGHPUT___GET_VALUE);
 
 		responseTimeEClass = createEClass(RESPONSE_TIME);
+		createEAttribute(responseTimeEClass, RESPONSE_TIME__RESPONSE_TIME);
+		createEOperation(responseTimeEClass, RESPONSE_TIME___GET_VALUE);
 
 		utilizationEClass = createEClass(UTILIZATION);
+		createEAttribute(utilizationEClass, UTILIZATION__UTILIZATION);
+		createEOperation(utilizationEClass, UTILIZATION___GET_VALUE);
 
 		measureConverterEClass = createEClass(MEASURE_CONVERTER);
 		createEReference(measureConverterEClass, MEASURE_CONVERTER__TO);
@@ -347,15 +407,24 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(domainMeasureEClass, DomainMeasure.class, "DomainMeasure", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDomainMeasure_Value(), theDatatypesPackage.getNumber(), "value", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainMeasure_Value(), theDatatypesPackage.getNumber(), "value", null, 1, 1, DomainMeasure.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainMeasure_MeasuredElement(), ecorePackage.getEObject(), null, "measuredElement", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainMeasure_Unit(), theDatatypesPackage.getUnit(), "unit", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(throughputEClass, Throughput.class, "Throughput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getThroughput_Throughput(), theDatatypesPackage.getNumber(), "throughput", null, 1, 1, Throughput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getThroughput__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(responseTimeEClass, ResponseTime.class, "ResponseTime", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getResponseTime_ResponseTime(), theDatatypesPackage.getNumber(), "responseTime", null, 1, 1, ResponseTime.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getResponseTime__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(utilizationEClass, Utilization.class, "Utilization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getUtilization_Utilization(), theDatatypesPackage.getNumber(), "utilization", null, 1, 1, Utilization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getUtilization__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(measureConverterEClass, MeasureConverter.class, "MeasureConverter", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMeasureConverter_To(), this.getDomainMeasure(), null, "to", null, 1, 1, MeasureConverter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

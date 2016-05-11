@@ -43,16 +43,6 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	protected static final Number VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected Number value = VALUE_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getAnalyzedElement() <em>Analyzed Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,19 +97,9 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * @generated
 	 */
 	public Number getValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValue(Number newValue) {
-		Number oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ToolresultPackage.ANALYZABLE_ELEMENT_INFO__VALUE, oldValue, value));
+		// TODO: implement this method to return the 'Value' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -208,9 +188,6 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__VALUE:
-				setValue((Number)newValue);
-				return;
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__ANALYZED_ELEMENT:
 				setAnalyzedElement((EObject)newValue);
 				return;
@@ -229,9 +206,6 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__VALUE:
-				setValue(VALUE_EDEFAULT);
-				return;
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__ANALYZED_ELEMENT:
 				setAnalyzedElement((EObject)null);
 				return;
@@ -251,7 +225,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+				return VALUE_EDEFAULT == null ? getValue() != null : !VALUE_EDEFAULT.equals(getValue());
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__ANALYZED_ELEMENT:
 				return analyzedElement != null;
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__UNIT:
@@ -270,9 +244,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
-		result.append(", unit: ");
+		result.append(" (unit: ");
 		result.append(unit);
 		result.append(')');
 		return result.toString();

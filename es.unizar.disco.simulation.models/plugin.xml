@@ -61,5 +61,16 @@
             class="es.unizar.disco.simulation.models.wnsim.WnsimPackage"
             genModel="model/all.genmodel"/>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.conversion_delegate">
+      <factory
+            class="es.unizar.disco.simulation.models.NumberConversionDelegate$Factory"
+            uri="http://es.unizar.disco/simulation/conversion/number/1.0">
+      </factory>
+      <factory
+            class="es.unizar.disco.simulation.models.UriConversionDelegate$Factory"
+            uri="http://es.unizar.disco/simulation/conversion/uri/1.0">
+      </factory>
+   </extension>
 
 </plugin>

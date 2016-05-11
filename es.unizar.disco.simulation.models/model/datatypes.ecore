@@ -2,8 +2,17 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="datatypes" nsURI="http://es.unizar.disco/simulation/datatypes/1.0"
     nsPrefix="datatypes">
-  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="Number" instanceClassName="java.lang.Number"/>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="conversionDelegates" value="http://es.unizar.disco/simulation/conversion/number/1.0 http://es.unizar.disco/simulation/conversion/uri/1.0"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EDataType" name="URI" instanceClassName="org.eclipse.emf.common.util.URI">
+    <eAnnotations source="http://es.unizar.disco/simulation/conversion/uri/1.0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Number" instanceClassName="java.lang.Number">
+    <eAnnotations source="http://es.unizar.disco/simulation/conversion/number/1.0">
+      <details key="conversionDelegates" value="http://es.unizar.disco/simulation/conversion/1.0"/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Unit">
     <eLiterals name="unspecified" literal="unspecified"/>
     <eLiterals name="s" value="10" literal="s"/>

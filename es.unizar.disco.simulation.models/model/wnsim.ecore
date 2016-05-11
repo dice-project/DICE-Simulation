@@ -14,9 +14,19 @@
   <eClassifiers xsi:type="ecore:EClass" name="WnsimResult" eSuperTypes="toolresult.ecore#//ToolResult"/>
   <eClassifiers xsi:type="ecore:EClass" name="WnsimElementInfo" abstract="true" eSuperTypes="toolresult.ecore#//AnalyzableElementInfo"/>
   <eClassifiers xsi:type="ecore:EClass" name="PlaceInfo" eSuperTypes="#//WnsimElementInfo">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+    <eOperations name="getValue" eType="ecore:EDataType datatypes.ecore#//Number">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return throughput;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughput" eType="ecore:EDataType datatypes.ecore#//Number"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionInfo" eSuperTypes="#//WnsimElementInfo">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="meanNumberOfTokens" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloatObject"/>
+    <eOperations name="getValue" eType="ecore:EDataType datatypes.ecore#//Number">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="return meanNumberOfTokens;"/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="meanNumberOfTokens" eType="ecore:EDataType datatypes.ecore#//Number"/>
   </eClassifiers>
 </ecore:EPackage>

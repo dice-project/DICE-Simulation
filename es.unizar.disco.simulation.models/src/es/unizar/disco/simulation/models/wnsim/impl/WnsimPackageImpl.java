@@ -37,6 +37,7 @@ import es.unizar.disco.simulation.models.wnsim.WnsimResult;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -205,6 +206,15 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getPlaceInfo__GetValue() {
+		return placeInfoEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTransitionInfo() {
 		return transitionInfoEClass;
 	}
@@ -216,6 +226,15 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 	 */
 	public EAttribute getTransitionInfo_MeanNumberOfTokens() {
 		return (EAttribute)transitionInfoEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getTransitionInfo__GetValue() {
+		return transitionInfoEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -261,9 +280,11 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 
 		placeInfoEClass = createEClass(PLACE_INFO);
 		createEAttribute(placeInfoEClass, PLACE_INFO__THROUGHPUT);
+		createEOperation(placeInfoEClass, PLACE_INFO___GET_VALUE);
 
 		transitionInfoEClass = createEClass(TRANSITION_INFO);
 		createEAttribute(transitionInfoEClass, TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS);
+		createEOperation(transitionInfoEClass, TRANSITION_INFO___GET_VALUE);
 
 		// Create enums
 		simulationParametersEEnum = createEEnum(SIMULATION_PARAMETERS);
@@ -294,6 +315,7 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 
 		// Obtain other dependent packages
 		ToolresultPackage theToolresultPackage = (ToolresultPackage)EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI);
+		DatatypesPackage theDatatypesPackage = (DatatypesPackage)EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -311,10 +333,14 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 		initEClass(wnsimElementInfoEClass, WnsimElementInfo.class, "WnsimElementInfo", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(placeInfoEClass, PlaceInfo.class, "PlaceInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPlaceInfo_Throughput(), ecorePackage.getEFloatObject(), "throughput", null, 0, 1, PlaceInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPlaceInfo_Throughput(), theDatatypesPackage.getNumber(), "throughput", null, 0, 1, PlaceInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getPlaceInfo__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(transitionInfoEClass, TransitionInfo.class, "TransitionInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTransitionInfo_MeanNumberOfTokens(), ecorePackage.getEFloatObject(), "meanNumberOfTokens", null, 0, 1, TransitionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransitionInfo_MeanNumberOfTokens(), theDatatypesPackage.getNumber(), "meanNumberOfTokens", null, 0, 1, TransitionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getTransitionInfo__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(simulationParametersEEnum, SimulationParameters.class, "SimulationParameters");

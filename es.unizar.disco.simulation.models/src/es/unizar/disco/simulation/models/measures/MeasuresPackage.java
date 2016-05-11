@@ -150,13 +150,31 @@ public interface MeasuresPackage extends EPackage {
 	int THROUGHPUT__UNIT = DOMAIN_MEASURE__UNIT;
 
 	/**
+	 * The feature id for the '<em><b>Throughput</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THROUGHPUT__THROUGHPUT = DOMAIN_MEASURE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Throughput</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int THROUGHPUT_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 0;
+	int THROUGHPUT_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int THROUGHPUT___GET_VALUE = DOMAIN_MEASURE_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Throughput</em>' class.
@@ -165,7 +183,7 @@ public interface MeasuresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int THROUGHPUT_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 0;
+	int THROUGHPUT_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.impl.ResponseTimeImpl <em>Response Time</em>}' class.
@@ -205,13 +223,31 @@ public interface MeasuresPackage extends EPackage {
 	int RESPONSE_TIME__UNIT = DOMAIN_MEASURE__UNIT;
 
 	/**
+	 * The feature id for the '<em><b>Response Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESPONSE_TIME__RESPONSE_TIME = DOMAIN_MEASURE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Response Time</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESPONSE_TIME_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 0;
+	int RESPONSE_TIME_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESPONSE_TIME___GET_VALUE = DOMAIN_MEASURE_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Response Time</em>' class.
@@ -220,7 +256,7 @@ public interface MeasuresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESPONSE_TIME_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 0;
+	int RESPONSE_TIME_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.impl.UtilizationImpl <em>Utilization</em>}' class.
@@ -260,13 +296,31 @@ public interface MeasuresPackage extends EPackage {
 	int UTILIZATION__UNIT = DOMAIN_MEASURE__UNIT;
 
 	/**
+	 * The feature id for the '<em><b>Utilization</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UTILIZATION__UTILIZATION = DOMAIN_MEASURE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Utilization</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UTILIZATION_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 0;
+	int UTILIZATION_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UTILIZATION___GET_VALUE = DOMAIN_MEASURE_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Utilization</em>' class.
@@ -275,7 +329,7 @@ public interface MeasuresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UTILIZATION_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 0;
+	int UTILIZATION_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}' class.
@@ -387,6 +441,27 @@ public interface MeasuresPackage extends EPackage {
 	EClass getThroughput();
 
 	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.Throughput#getThroughput <em>Throughput</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Throughput</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.Throughput#getThroughput()
+	 * @see #getThroughput()
+	 * @generated
+	 */
+	EAttribute getThroughput_Throughput();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.Throughput#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see es.unizar.disco.simulation.models.measures.Throughput#getValue()
+	 * @generated
+	 */
+	EOperation getThroughput__GetValue();
+
+	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.ResponseTime <em>Response Time</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -397,6 +472,27 @@ public interface MeasuresPackage extends EPackage {
 	EClass getResponseTime();
 
 	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.ResponseTime#getResponseTime <em>Response Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Response Time</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.ResponseTime#getResponseTime()
+	 * @see #getResponseTime()
+	 * @generated
+	 */
+	EAttribute getResponseTime_ResponseTime();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.ResponseTime#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see es.unizar.disco.simulation.models.measures.ResponseTime#getValue()
+	 * @generated
+	 */
+	EOperation getResponseTime__GetValue();
+
+	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.Utilization <em>Utilization</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -405,6 +501,27 @@ public interface MeasuresPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getUtilization();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.Utilization#getUtilization <em>Utilization</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Utilization</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.Utilization#getUtilization()
+	 * @see #getUtilization()
+	 * @generated
+	 */
+	EAttribute getUtilization_Utilization();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.Utilization#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see es.unizar.disco.simulation.models.measures.Utilization#getValue()
+	 * @generated
+	 */
+	EOperation getUtilization__GetValue();
 
 	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}'.
@@ -516,6 +633,22 @@ public interface MeasuresPackage extends EPackage {
 		EClass THROUGHPUT = eINSTANCE.getThroughput();
 
 		/**
+		 * The meta object literal for the '<em><b>Throughput</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute THROUGHPUT__THROUGHPUT = eINSTANCE.getThroughput_Throughput();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation THROUGHPUT___GET_VALUE = eINSTANCE.getThroughput__GetValue();
+
+		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.ResponseTimeImpl <em>Response Time</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -526,6 +659,22 @@ public interface MeasuresPackage extends EPackage {
 		EClass RESPONSE_TIME = eINSTANCE.getResponseTime();
 
 		/**
+		 * The meta object literal for the '<em><b>Response Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESPONSE_TIME__RESPONSE_TIME = eINSTANCE.getResponseTime_ResponseTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RESPONSE_TIME___GET_VALUE = eINSTANCE.getResponseTime__GetValue();
+
+		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.UtilizationImpl <em>Utilization</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -534,6 +683,22 @@ public interface MeasuresPackage extends EPackage {
 		 * @generated
 		 */
 		EClass UTILIZATION = eINSTANCE.getUtilization();
+
+		/**
+		 * The meta object literal for the '<em><b>Utilization</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UTILIZATION__UTILIZATION = eINSTANCE.getUtilization_Utilization();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation UTILIZATION___GET_VALUE = eINSTANCE.getUtilization__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}' class.

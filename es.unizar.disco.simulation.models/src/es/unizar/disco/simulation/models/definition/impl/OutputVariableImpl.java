@@ -45,16 +45,6 @@ public class OutputVariableImpl extends VariableImpl implements OutputVariable {
 	protected static final Number VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected Number value = VALUE_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getMeasuredElement() <em>Measured Element</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,19 +99,9 @@ public class OutputVariableImpl extends VariableImpl implements OutputVariable {
 	 * @generated
 	 */
 	public Number getValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValue(Number newValue) {
-		Number oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionPackage.OUTPUT_VARIABLE__VALUE, oldValue, value));
+		// TODO: implement this method to return the 'Value' attribute
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -210,9 +190,6 @@ public class OutputVariableImpl extends VariableImpl implements OutputVariable {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case DefinitionPackage.OUTPUT_VARIABLE__VALUE:
-				setValue((Number)newValue);
-				return;
 			case DefinitionPackage.OUTPUT_VARIABLE__MEASURED_ELEMENT:
 				setMeasuredElement((EObject)newValue);
 				return;
@@ -231,9 +208,6 @@ public class OutputVariableImpl extends VariableImpl implements OutputVariable {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case DefinitionPackage.OUTPUT_VARIABLE__VALUE:
-				setValue(VALUE_EDEFAULT);
-				return;
 			case DefinitionPackage.OUTPUT_VARIABLE__MEASURED_ELEMENT:
 				setMeasuredElement((EObject)null);
 				return;
@@ -253,7 +227,7 @@ public class OutputVariableImpl extends VariableImpl implements OutputVariable {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case DefinitionPackage.OUTPUT_VARIABLE__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+				return VALUE_EDEFAULT == null ? getValue() != null : !VALUE_EDEFAULT.equals(getValue());
 			case DefinitionPackage.OUTPUT_VARIABLE__MEASURED_ELEMENT:
 				return measuredElement != null;
 			case DefinitionPackage.OUTPUT_VARIABLE__UNIT:
@@ -308,9 +282,7 @@ public class OutputVariableImpl extends VariableImpl implements OutputVariable {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
-		result.append(", unit: ");
+		result.append(" (unit: ");
 		result.append(unit);
 		result.append(')');
 		return result.toString();

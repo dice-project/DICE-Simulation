@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
  * <!-- end-user-doc -->
  * @see es.unizar.disco.simulation.models.datatypes.DatatypesFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore conversionDelegates='http://es.unizar.disco/simulation/conversion/number/1.0 http://es.unizar.disco/simulation/conversion/uri/1.0'"
  * @generated
  */
 public interface DatatypesPackage extends EPackage {
@@ -114,6 +115,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @return the meta object for data type '<em>Number</em>'.
 	 * @see java.lang.Number
 	 * @model instanceClass="java.lang.Number"
+	 *        annotation="http://es.unizar.disco/simulation/conversion/number/1.0 conversionDelegates='http://es.unizar.disco/simulation/conversion/1.0'"
 	 * @generated
 	 */
 	EDataType getNumber();

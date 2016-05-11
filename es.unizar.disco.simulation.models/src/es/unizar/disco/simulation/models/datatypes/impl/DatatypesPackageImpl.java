@@ -242,6 +242,61 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+		// http://es.unizar.disco/simulation/conversion/uri/1.0
+		create_1Annotations();
+		// http://es.unizar.disco/simulation/conversion/number/1.0
+		create_1_1Annotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] {
+			 "conversionDelegates", "http://es.unizar.disco/simulation/conversion/number/1.0 http://es.unizar.disco/simulation/conversion/uri/1.0"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://es.unizar.disco/simulation/conversion/uri/1.0</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void create_1Annotations() {
+		String source = "http://es.unizar.disco/simulation/conversion/uri/1.0";	
+		addAnnotation
+		  (uriEDataType, 
+		   source, 
+		   new String[] {
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://es.unizar.disco/simulation/conversion/number/1.0</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void create_1_1Annotations() {
+		String source = "http://es.unizar.disco/simulation/conversion/number/1.0";	
+		addAnnotation
+		  (numberEDataType, 
+		   source, 
+		   new String[] {
+			 "conversionDelegates", "http://es.unizar.disco/simulation/conversion/1.0"
+		   });
 	}
 
 } //DatatypesPackageImpl

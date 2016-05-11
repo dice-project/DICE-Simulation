@@ -7,6 +7,7 @@ import es.unizar.disco.simulation.models.toolresult.ToolresultPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
@@ -215,13 +216,22 @@ public interface WnsimPackage extends EPackage {
 	int PLACE_INFO_FEATURE_COUNT = WNSIM_ELEMENT_INFO_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLACE_INFO___GET_VALUE = WNSIM_ELEMENT_INFO_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Place Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLACE_INFO_OPERATION_COUNT = WNSIM_ELEMENT_INFO_OPERATION_COUNT + 0;
+	int PLACE_INFO_OPERATION_COUNT = WNSIM_ELEMENT_INFO_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.wnsim.impl.TransitionInfoImpl <em>Transition Info</em>}' class.
@@ -279,13 +289,22 @@ public interface WnsimPackage extends EPackage {
 	int TRANSITION_INFO_FEATURE_COUNT = WNSIM_ELEMENT_INFO_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_INFO___GET_VALUE = WNSIM_ELEMENT_INFO_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Transition Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_INFO_OPERATION_COUNT = WNSIM_ELEMENT_INFO_OPERATION_COUNT + 0;
+	int TRANSITION_INFO_OPERATION_COUNT = WNSIM_ELEMENT_INFO_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.wnsim.SimulationParameters <em>Simulation Parameters</em>}' enum.
@@ -340,6 +359,16 @@ public interface WnsimPackage extends EPackage {
 	EAttribute getPlaceInfo_Throughput();
 
 	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.wnsim.PlaceInfo#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see es.unizar.disco.simulation.models.wnsim.PlaceInfo#getValue()
+	 * @generated
+	 */
+	EOperation getPlaceInfo__GetValue();
+
+	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.wnsim.TransitionInfo <em>Transition Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -359,6 +388,16 @@ public interface WnsimPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTransitionInfo_MeanNumberOfTokens();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.wnsim.TransitionInfo#getValue() <em>Get Value</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Value</em>' operation.
+	 * @see es.unizar.disco.simulation.models.wnsim.TransitionInfo#getValue()
+	 * @generated
+	 */
+	EOperation getTransitionInfo__GetValue();
 
 	/**
 	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.wnsim.SimulationParameters <em>Simulation Parameters</em>}'.
@@ -432,6 +471,14 @@ public interface WnsimPackage extends EPackage {
 		EAttribute PLACE_INFO__THROUGHPUT = eINSTANCE.getPlaceInfo_Throughput();
 
 		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation PLACE_INFO___GET_VALUE = eINSTANCE.getPlaceInfo__GetValue();
+
+		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.wnsim.impl.TransitionInfoImpl <em>Transition Info</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -448,6 +495,14 @@ public interface WnsimPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS = eINSTANCE.getTransitionInfo_MeanNumberOfTokens();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation TRANSITION_INFO___GET_VALUE = eINSTANCE.getTransitionInfo__GetValue();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.wnsim.SimulationParameters <em>Simulation Parameters</em>}' enum.
