@@ -103,13 +103,31 @@ public interface DefinitionPackage extends EPackage {
 	int SIMULATION_DEFINITION__PARAMETERS = 3;
 
 	/**
-	 * The feature id for the '<em><b>Scenario</b></em>' containment reference.
+	 * The feature id for the '<em><b>Active Scenario</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__SCENARIO = 4;
+	int SIMULATION_DEFINITION__ACTIVE_SCENARIO = 4;
+
+	/**
+	 * The feature id for the '<em><b>Scenarios</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__SCENARIOS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__VARIABLES = 6;
 
 	/**
 	 * The number of structural features of the '<em>Simulation Definition</em>' class.
@@ -118,7 +136,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION_FEATURE_COUNT = 5;
+	int SIMULATION_DEFINITION_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Simulation Definition</em>' class.
@@ -176,43 +194,6 @@ public interface DefinitionPackage extends EPackage {
 	int SIMULATION_PARAMETER_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.definition.impl.ScenarioImpl <em>Scenario</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.definition.impl.ScenarioImpl
-	 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getScenario()
-	 * @generated
-	 */
-	int SCENARIO = 2;
-
-	/**
-	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCENARIO__VARIABLES = 0;
-
-	/**
-	 * The number of structural features of the '<em>Scenario</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCENARIO_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Scenario</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCENARIO_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.definition.impl.VariableImpl <em>Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -220,7 +201,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getVariable()
 	 * @generated
 	 */
-	int VARIABLE = 3;
+	int VARIABLE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -257,7 +238,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getInputVariableValue()
 	 * @generated
 	 */
-	int INPUT_VARIABLE_VALUE = 4;
+	int INPUT_VARIABLE_VALUE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -303,7 +284,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getInputVariable()
 	 * @generated
 	 */
-	int INPUT_VARIABLE = 5;
+	int INPUT_VARIABLE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -349,7 +330,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getOutputVariable()
 	 * @generated
 	 */
-	int OUTPUT_VARIABLE = 6;
+	int OUTPUT_VARIABLE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -461,15 +442,37 @@ public interface DefinitionPackage extends EPackage {
 	EReference getSimulationDefinition_Parameters();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenario <em>Scenario</em>}'.
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveScenario <em>Active Scenario</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Scenario</em>'.
-	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenario()
+	 * @return the meta object for the reference '<em>Active Scenario</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveScenario()
 	 * @see #getSimulationDefinition()
 	 * @generated
 	 */
-	EReference getSimulationDefinition_Scenario();
+	EReference getSimulationDefinition_ActiveScenario();
+
+	/**
+	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenarios <em>Scenarios</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Scenarios</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenarios()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EReference getSimulationDefinition_Scenarios();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables <em>Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Variables</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EReference getSimulationDefinition_Variables();
 
 	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.definition.SimulationParameter <em>Simulation Parameter</em>}'.
@@ -502,27 +505,6 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSimulationParameter_Value();
-
-	/**
-	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.definition.Scenario <em>Scenario</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Scenario</em>'.
-	 * @see es.unizar.disco.simulation.models.definition.Scenario
-	 * @generated
-	 */
-	EClass getScenario();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.Scenario#getVariables <em>Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variables</em>'.
-	 * @see es.unizar.disco.simulation.models.definition.Scenario#getVariables()
-	 * @see #getScenario()
-	 * @generated
-	 */
-	EReference getScenario_Variables();
 
 	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.definition.Variable <em>Variable</em>}'.
@@ -674,12 +656,28 @@ public interface DefinitionPackage extends EPackage {
 		EReference SIMULATION_DEFINITION__PARAMETERS = eINSTANCE.getSimulationDefinition_Parameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Scenario</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Active Scenario</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMULATION_DEFINITION__SCENARIO = eINSTANCE.getSimulationDefinition_Scenario();
+		EReference SIMULATION_DEFINITION__ACTIVE_SCENARIO = eINSTANCE.getSimulationDefinition_ActiveScenario();
+
+		/**
+		 * The meta object literal for the '<em><b>Scenarios</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_DEFINITION__SCENARIOS = eINSTANCE.getSimulationDefinition_Scenarios();
+
+		/**
+		 * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_DEFINITION__VARIABLES = eINSTANCE.getSimulationDefinition_Variables();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.definition.impl.SimulationParameterImpl <em>Simulation Parameter</em>}' class.
@@ -706,24 +704,6 @@ public interface DefinitionPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SIMULATION_PARAMETER__VALUE = eINSTANCE.getSimulationParameter_Value();
-
-		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.definition.impl.ScenarioImpl <em>Scenario</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.definition.impl.ScenarioImpl
-		 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getScenario()
-		 * @generated
-		 */
-		EClass SCENARIO = eINSTANCE.getScenario();
-
-		/**
-		 * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCENARIO__VARIABLES = eINSTANCE.getScenario_Variables();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.definition.impl.VariableImpl <em>Variable</em>}' class.

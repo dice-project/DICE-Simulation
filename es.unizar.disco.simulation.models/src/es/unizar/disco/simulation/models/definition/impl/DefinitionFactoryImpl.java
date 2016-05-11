@@ -58,7 +58,6 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 		switch (eClass.getClassifierID()) {
 			case DefinitionPackage.SIMULATION_DEFINITION: return createSimulationDefinition();
 			case DefinitionPackage.SIMULATION_PARAMETER: return createSimulationParameter();
-			case DefinitionPackage.SCENARIO: return createScenario();
 			case DefinitionPackage.INPUT_VARIABLE_VALUE: return createInputVariableValue();
 			case DefinitionPackage.INPUT_VARIABLE: return createInputVariable();
 			case DefinitionPackage.OUTPUT_VARIABLE: return createOutputVariable();
@@ -85,16 +84,6 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	public SimulationParameter createSimulationParameter() {
 		SimulationParameterImpl simulationParameter = new SimulationParameterImpl();
 		return simulationParameter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Scenario createScenario() {
-		ScenarioImpl scenario = new ScenarioImpl();
-		return scenario;
 	}
 
 	/**

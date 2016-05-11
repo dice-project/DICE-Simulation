@@ -11,7 +11,6 @@ import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.definition.InputVariableValue;
 import es.unizar.disco.simulation.models.definition.OutputVariable;
-import es.unizar.disco.simulation.models.definition.Scenario;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.definition.SimulationParameter;
 import es.unizar.disco.simulation.models.definition.Variable;
@@ -63,13 +62,6 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	private EClass simulationParameterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass scenarioEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -230,8 +222,26 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimulationDefinition_Scenario() {
+	public EReference getSimulationDefinition_ActiveScenario() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSimulationDefinition_Scenarios() {
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSimulationDefinition_Variables() {
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -259,24 +269,6 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 */
 	public EAttribute getSimulationParameter_Value() {
 		return (EAttribute)simulationParameterEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getScenario() {
-		return scenarioEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getScenario_Variables() {
-		return (EReference)scenarioEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -384,14 +376,13 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__DOMAIN_RESOURCE);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__INVOCATIONS);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__PARAMETERS);
-		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__SCENARIO);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__ACTIVE_SCENARIO);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__SCENARIOS);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__VARIABLES);
 
 		simulationParameterEClass = createEClass(SIMULATION_PARAMETER);
 		createEAttribute(simulationParameterEClass, SIMULATION_PARAMETER__NAME);
 		createEAttribute(simulationParameterEClass, SIMULATION_PARAMETER__VALUE);
-
-		scenarioEClass = createEClass(SCENARIO);
-		createEReference(scenarioEClass, SCENARIO__VARIABLES);
 
 		variableEClass = createEClass(VARIABLE);
 		createEAttribute(variableEClass, VARIABLE__NAME);
@@ -449,14 +440,13 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		initEAttribute(getSimulationDefinition_DomainResource(), theDatatypesPackage.getURI(), "domainResource", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_Invocations(), theInvocationPackage.getSimulationInvocation(), theInvocationPackage.getSimulationInvocation_Definition(), "invocations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_Parameters(), this.getSimulationParameter(), null, "parameters", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimulationDefinition_Scenario(), this.getScenario(), null, "scenario", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_ActiveScenario(), ecorePackage.getEObject(), null, "activeScenario", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_Scenarios(), ecorePackage.getEObject(), null, "scenarios", null, 1, -1, SimulationDefinition.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_Variables(), this.getVariable(), null, "variables", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(simulationParameterEClass, SimulationParameter.class, "SimulationParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSimulationParameter_Name(), ecorePackage.getEString(), "name", null, 1, 1, SimulationParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationParameter_Value(), ecorePackage.getEString(), "value", null, 1, 1, SimulationParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScenario_Variables(), this.getVariable(), null, "variables", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableEClass, Variable.class, "Variable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

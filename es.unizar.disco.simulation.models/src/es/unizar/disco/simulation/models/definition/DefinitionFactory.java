@@ -40,15 +40,6 @@ public interface DefinitionFactory extends EFactory {
 	SimulationParameter createSimulationParameter();
 
 	/**
-	 * Returns a new object of class '<em>Scenario</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scenario</em>'.
-	 * @generated
-	 */
-	Scenario createScenario();
-
-	/**
 	 * Returns a new object of class '<em>Input Variable Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

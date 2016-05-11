@@ -3,9 +3,9 @@
 package es.unizar.disco.simulation.models.definition.impl;
 
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
-import es.unizar.disco.simulation.models.definition.Scenario;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.definition.SimulationParameter;
+import es.unizar.disco.simulation.models.definition.Variable;
 
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -40,7 +41,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getDomainResource <em>Domain Resource</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getInvocations <em>Invocations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getScenario <em>Scenario</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getActiveScenario <em>Active Scenario</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getScenarios <em>Scenarios</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getVariables <em>Variables</em>}</li>
  * </ul>
  *
  * @generated
@@ -107,14 +110,24 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	protected EList<SimulationParameter> parameters;
 
 	/**
-	 * The cached value of the '{@link #getScenario() <em>Scenario</em>}' containment reference.
+	 * The cached value of the '{@link #getActiveScenario() <em>Active Scenario</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getScenario()
+	 * @see #getActiveScenario()
 	 * @generated
 	 * @ordered
 	 */
-	protected Scenario scenario;
+	protected EObject activeScenario;
+
+	/**
+	 * The cached value of the '{@link #getVariables() <em>Variables</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariables()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Variable> variables;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -206,8 +219,16 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Scenario getScenario() {
-		return scenario;
+	public EObject getActiveScenario() {
+		if (activeScenario != null && activeScenario.eIsProxy()) {
+			InternalEObject oldActiveScenario = (InternalEObject)activeScenario;
+			activeScenario = eResolveProxy(oldActiveScenario);
+			if (activeScenario != oldActiveScenario) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_SCENARIO, oldActiveScenario, activeScenario));
+			}
+		}
+		return activeScenario;
 	}
 
 	/**
@@ -215,14 +236,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetScenario(Scenario newScenario, NotificationChain msgs) {
-		Scenario oldScenario = scenario;
-		scenario = newScenario;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DefinitionPackage.SIMULATION_DEFINITION__SCENARIO, oldScenario, newScenario);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+	public EObject basicGetActiveScenario() {
+		return activeScenario;
 	}
 
 	/**
@@ -230,18 +245,36 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setScenario(Scenario newScenario) {
-		if (newScenario != scenario) {
-			NotificationChain msgs = null;
-			if (scenario != null)
-				msgs = ((InternalEObject)scenario).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - DefinitionPackage.SIMULATION_DEFINITION__SCENARIO, null, msgs);
-			if (newScenario != null)
-				msgs = ((InternalEObject)newScenario).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - DefinitionPackage.SIMULATION_DEFINITION__SCENARIO, null, msgs);
-			msgs = basicSetScenario(newScenario, msgs);
-			if (msgs != null) msgs.dispatch();
+	public void setActiveScenario(EObject newActiveScenario) {
+		EObject oldActiveScenario = activeScenario;
+		activeScenario = newActiveScenario;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_SCENARIO, oldActiveScenario, activeScenario));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<EObject> getScenarios() {
+		// TODO: implement this method to return the 'Scenarios' reference list
+		// Ensure that you remove @generated or mark it @generated NOT
+		// The list is expected to implement org.eclipse.emf.ecore.util.InternalEList and org.eclipse.emf.ecore.EStructuralFeature.Setting
+		// so it's likely that an appropriate subclass of org.eclipse.emf.ecore.util.EcoreEList should be used.
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Variable> getVariables() {
+		if (variables == null) {
+			variables = new EObjectContainmentEList<Variable>(Variable.class, this, DefinitionPackage.SIMULATION_DEFINITION__VARIABLES);
 		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionPackage.SIMULATION_DEFINITION__SCENARIO, newScenario, newScenario));
+		return variables;
 	}
 
 	/**
@@ -271,8 +304,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return ((InternalEList<?>)getInvocations()).basicRemove(otherEnd, msgs);
 			case DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO:
-				return basicSetScenario(null, msgs);
+			case DefinitionPackage.SIMULATION_DEFINITION__VARIABLES:
+				return ((InternalEList<?>)getVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -293,8 +326,13 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return getInvocations();
 			case DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS:
 				return getParameters();
-			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO:
-				return getScenario();
+			case DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_SCENARIO:
+				if (resolve) return getActiveScenario();
+				return basicGetActiveScenario();
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIOS:
+				return getScenarios();
+			case DefinitionPackage.SIMULATION_DEFINITION__VARIABLES:
+				return getVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -322,8 +360,16 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends SimulationParameter>)newValue);
 				return;
-			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO:
-				setScenario((Scenario)newValue);
+			case DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_SCENARIO:
+				setActiveScenario((EObject)newValue);
+				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIOS:
+				getScenarios().clear();
+				getScenarios().addAll((Collection<? extends EObject>)newValue);
+				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__VARIABLES:
+				getVariables().clear();
+				getVariables().addAll((Collection<? extends Variable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -349,8 +395,14 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 			case DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS:
 				getParameters().clear();
 				return;
-			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO:
-				setScenario((Scenario)null);
+			case DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_SCENARIO:
+				setActiveScenario((EObject)null);
+				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIOS:
+				getScenarios().clear();
+				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__VARIABLES:
+				getVariables().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -372,8 +424,12 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return invocations != null && !invocations.isEmpty();
 			case DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
-			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO:
-				return scenario != null;
+			case DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_SCENARIO:
+				return activeScenario != null;
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIOS:
+				return !getScenarios().isEmpty();
+			case DefinitionPackage.SIMULATION_DEFINITION__VARIABLES:
+				return variables != null && !variables.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
