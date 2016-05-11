@@ -7,27 +7,59 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated configuration -->
+      <!-- @generated all -->
       <package
-            uri="http://es.unizar.disco/simulation/configuration/1.0"
-            class="configuration.ConfigurationPackage"
-            genModel="model/configuration.genmodel"/>
+            uri="http://es.unizar.disco/simulation/datatypes/1.0"
+            class="es.unizar.disco.simulation.models.datatypes.DatatypesPackage"
+            genModel="model/all.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated measures -->
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/definition/1.0"
+            class="es.unizar.disco.simulation.models.definition.DefinitionPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/invocation/1.0"
+            class="es.unizar.disco.simulation.models.invocation.InvocationPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
       <package
             uri="http://es.unizar.disco/simulation/measures/1.0"
-            class="measures.MeasuresPackage"
-            genModel="model/measures.genmodel"/>
+            class="es.unizar.disco.simulation.models.measures.MeasuresPackage"
+            genModel="model/all.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated wnsim -->
+      <!-- @generated all -->
       <package
-            uri="http://es.unizar.disco/simulation/configuration/wnsim/1.0"
-            class="wnsim.WnsimPackage"
-            genModel="model/wnsim.genmodel"/>
+            uri="http://es.unizar.disco/simulation/toolresult/1.0"
+            class="es.unizar.disco.simulation.models.toolresult.ToolresultPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/traces/1.0"
+            class="es.unizar.disco.simulation.models.traces.TracesPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/tool/wnsim/1.0"
+            class="es.unizar.disco.simulation.models.wnsim.WnsimPackage"
+            genModel="model/all.genmodel"/>
    </extension>
 
 </plugin>

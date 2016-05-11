@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/es.unizar.disco.simulation.models/src" modelPluginID="es.unizar.disco.simulation.models"
+    modelName="Measures" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    usedGenPackages="datatypes.genmodel#//datatypes toolresult.genmodel#//toolresult"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>measures.ecore</foreignModel>
+  <genPackages prefix="Measures" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"
+      ecorePackage="measures.ecore#/">
+    <genClasses image="false" ecoreClass="measures.ecore#//DomainMeasure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasure/measuredElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="measures.ecore#//Throughput"/>
+    <genClasses ecoreClass="measures.ecore#//ResponseTime"/>
+    <genClasses ecoreClass="measures.ecore#//Utilization"/>
+    <genClasses image="false" ecoreClass="measures.ecore#//MeasureConverter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/to"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/from"/>
+      <genOperations ecoreOperation="measures.ecore#//MeasureConverter/convert"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

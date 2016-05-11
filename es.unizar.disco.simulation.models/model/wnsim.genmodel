@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/es.unizar.disco.simulation.models/src" modelPluginID="es.unizar.disco.simulation.models"
+    modelName="Wnsim" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    usedGenPackages="datatypes.genmodel#//datatypes toolresult.genmodel#//toolresult"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>wnsim.ecore</foreignModel>
+  <genPackages prefix="Wnsim" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"
+      ecorePackage="wnsim.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="wnsim.ecore#//SimulationParameters">
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/first_tr_length"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/tr_length"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/min_btc"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/max_btc"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/approx"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/conf_level"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/seed"/>
+    </genEnums>
+    <genClasses ecoreClass="wnsim.ecore#//WnsimResult"/>
+    <genClasses image="false" ecoreClass="wnsim.ecore#//WnsimElementInfo"/>
+    <genClasses ecoreClass="wnsim.ecore#//PlaceInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wnsim.ecore#//PlaceInfo/throughput"/>
+    </genClasses>
+    <genClasses ecoreClass="wnsim.ecore#//TransitionInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wnsim.ecore#//TransitionInfo/meanNumberOfTokens"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
