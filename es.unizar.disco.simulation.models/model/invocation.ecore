@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="invocation" nsURI="http://es.unizar.disco/simulation/invocation/1.0"
+    nsPrefix="invocation">
+  <eClassifiers xsi:type="ecore:EClass" name="SimulationInvocation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="traceSet" eType="ecore:EClass traces.ecore#//TraceSet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toolResult" eType="ecore:EClass toolresult.ecore#//ToolResult"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableAssignments" upperBound="-1"
+        eType="#//VariableAssignment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="analizableResource" lowerBound="1"
+        eType="ecore:EDataType datatypes.ecore#//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+        eType="ecore:EClass definition.ecore#//SimulationDefinition" eOpposite="definition.ecore#//SimulationDefinition/invocations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calls" lowerBound="1" eType="#//SimulationTool"
+        volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="calculates" lowerBound="1"
+        upperBound="-1" eType="ecore:EClass definition.ecore#//OutputVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="ecore:EClass definition.ecore#//InputVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass definition.ecore#//InputVariableValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimulationTool" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="produces" lowerBound="1"
+        eType="ecore:EClass toolresult.ecore#//ToolResult" volatile="true" transient="true"/>
+  </eClassifiers>
+</ecore:EPackage>
