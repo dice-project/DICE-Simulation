@@ -12,4 +12,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jface,
  es.unizar.disco.core;bundle-version="0.1.0"
 Export-Package: es.unizar.disco.core.ui,
- es.unizar.disco.core.ui.dialogs
+ es.unizar.disco.core.ui.dialogs,
+ es.unizar.disco.core.ui.util
