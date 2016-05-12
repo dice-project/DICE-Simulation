@@ -11,8 +11,11 @@ import org.osgi.framework.BundleContext;
 public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 
 	// Image constants
-	public static final String IMG_OBJ16_MAIN_TAB = "IMG_OBJ16_MAIN_TAB"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_CLOCK = "IMG_OBJ16_CLOCK"; //$NON-NLS-1$
+	public static final String IMG_OBJ16_MAIN_TAB = "IMG_OBJ16_MAIN_TAB"; //$NON-NLS-1$
+	public static final String IMG_OBJ16_PARAMS_TAB = "IMG_OBJ16_PARAMS_TAB"; //$NON-NLS-1$
+	public static final String IMG_OBJ16_FILTERS_TAB = "IMG_OBJ16_FILTERS_TAB"; //$NON-NLS-1$
+	public static final String IMG_OBJ16_ADVANCED_TAB = "IMG_OBJ16_ADVANCED_TAB"; //$NON-NLS-1$
 	
 	// The plug-in ID
 	public static final String PLUGIN_ID = "es.unizar.disco.simulation.ui"; //$NON-NLS-1$
@@ -67,7 +70,10 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	@Override
 	protected void initializeImageRegistry(ImageRegistry reg) {
 		super.initializeImageRegistry(reg);
-		reg.put(IMG_OBJ16_MAIN_TAB, getImageDescriptor("icons/full/obj16/main_tab.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_OBJ16_CLOCK, getImageDescriptor("icons/full/obj16/clock.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_MAIN_TAB, getImageDescriptor("icons/full/obj16/main_tab.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_PARAMS_TAB, getImageDescriptor("icons/full/obj16/params_tab.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_FILTERS_TAB, getImageDescriptor("icons/full/obj16/filters_tab.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_ADVANCED_TAB, getImageDescriptor("icons/full/obj16/advanced_tab.png").createImage()); //$NON-NLS-1$
 	}
 }

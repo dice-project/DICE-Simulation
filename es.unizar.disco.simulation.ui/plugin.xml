@@ -11,15 +11,6 @@
       </launchConfigurationTabGroup>
    </extension>
    <extension
-         point="org.eclipse.debug.ui.launchConfigurationTabs">
-      <tab
-            class="es.unizar.disco.simulation.ui.launcher.MainLaunchConfigurationTab"
-            group="es.unizar.disco.simulation.ui.launchConfigurationTabGroup"
-            id="es.unizar.disco.simulation.ui.mainTab"
-            name="Main">
-      </tab>
-   </extension>
-   <extension
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">
       <launchConfigurationTypeImage
             configTypeID="es.unizar.disco.simulation.ui.launchConfigurationType"
