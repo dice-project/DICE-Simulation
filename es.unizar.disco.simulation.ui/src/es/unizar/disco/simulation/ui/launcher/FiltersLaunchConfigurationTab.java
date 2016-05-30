@@ -2,8 +2,6 @@ package es.unizar.disco.simulation.ui.launcher;
 
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -20,15 +18,7 @@ import org.eclipse.swt.widgets.Group;
 import es.unizar.disco.core.ui.util.UiConstants;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
 
-public class FiltersLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
-
-
-	
-	protected EditingDomain editingDomain;
-	
-	public FiltersLaunchConfigurationTab(EditingDomain editingDomain) {
-		this.editingDomain = editingDomain;
-	}
+public class FiltersLaunchConfigurationTab extends AbstractSimulationLaunchConfigurationTab {
 
 	@Override
 	public void createControl(Composite parent) {
@@ -92,6 +82,16 @@ public class FiltersLaunchConfigurationTab extends AbstractLaunchConfigurationTa
 	}
 
 	@Override
+	public String getName() {
+		return "Filters";
+	}
+
+	@Override
+	public Image getImage() {
+		return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_FILTERS_TAB);
+	}
+
+	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 	}
 
@@ -101,16 +101,6 @@ public class FiltersLaunchConfigurationTab extends AbstractLaunchConfigurationTa
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-	}
-
-	@Override
-	public String getName() {
-		return "Filters";
-	}
-
-	@Override
-	public Image getImage() {
-		return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_FILTERS_TAB);
 	}
 	
 }

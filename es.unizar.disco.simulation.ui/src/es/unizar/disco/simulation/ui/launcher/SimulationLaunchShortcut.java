@@ -1,5 +1,6 @@
 package es.unizar.disco.simulation.ui.launcher;
 
+import java.net.URI;
 import java.text.MessageFormat;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +28,7 @@ import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.simulation.DiceSimulationPlugin;
 import es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
+import es.unizar.disco.simulation.ui.util.UriConverter;
 
 public class SimulationLaunchShortcut implements ILaunchShortcut {
 
@@ -83,11 +85,14 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		ILaunchConfigurationType simLaunchConfigurationType = launchManager.getLaunchConfigurationType(DiceSimulationPlugin.SIMULATION_LAUNCH_CONFIGURATION_TYPE);
 		
 		ILaunchConfiguration[] existingConfigs = launchManager.getLaunchConfigurations(simLaunchConfigurationType);
+
+		// Configurations use platform-based URIs 
+		URI platformResourceUri = UriConverter.toPlatformResourceUri(model.getURI());
 		
 		// We search through the existing configurations if the actual configuration has been previously defined
 		for (ILaunchConfiguration previousConfiguration : existingConfigs) {
-			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, StringUtils.EMPTY); 
-			if (previousFile.equals(model.getURI().toString())) {
+			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, StringUtils.EMPTY); 
+			if (previousFile.equals(platformResourceUri.toString())) {
 				return previousConfiguration;
 			}
 		}
@@ -95,7 +100,7 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		String name = model.getURI().trimFileExtension().lastSegment();
 		String casedName = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 		ILaunchConfigurationWorkingCopy launchConf = simLaunchConfigurationType.newInstance(null, casedName);
-		launchConf.setAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, model.getURI().toString());
+		launchConf.setAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, platformResourceUri.toString());
 		ILaunchConfiguration result = launchConf.doSave();
 		
 		return result;

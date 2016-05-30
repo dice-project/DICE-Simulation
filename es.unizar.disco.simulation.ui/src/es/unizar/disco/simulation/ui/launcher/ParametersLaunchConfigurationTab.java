@@ -1,9 +1,24 @@
 package es.unizar.disco.simulation.ui.launcher;
 
+import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__MAX_EXECUTION_TIME;
+import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__PARAMETERS;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.StringUtils;
+import org.eclipse.core.databinding.observable.Observables;
+import org.eclipse.core.databinding.observable.map.IObservableMap;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -15,81 +30,104 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 
+import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.util.Highlighter;
+import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
+import es.unizar.disco.simulation.models.definition.DefinitionFactory;
+import es.unizar.disco.simulation.models.definition.DefinitionPackage;
+import es.unizar.disco.simulation.models.definition.SimulationDefinition;
+import es.unizar.disco.simulation.models.wnsim.SimulationParameters;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
+import es.unizar.disco.simulation.ui.launcher.strategies.IntegerToStringStrategy;
+import es.unizar.disco.simulation.ui.launcher.strategies.StringToIntegerStrategy;
 
-public class ParametersLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
+public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchConfigurationTab {
 
-	private static final int RIGHT_COL_WIDTH = 40;
-	
-	protected EditingDomain editingDomain;
-	
-	public ParametersLaunchConfigurationTab(EditingDomain editingDomain) {
-		this.editingDomain = editingDomain;
+	private final SimulationDefinition simulationDefinition;
+
+	public ParametersLaunchConfigurationTab() {
+		this.simulationDefinition = DefinitionFactory.eINSTANCE.createSimulationDefinition();
+		this.simulationDefinition.setDomainResource(DatatypesFactory.eINSTANCE.createResource());
+		this.simulationDefinition.eAdapters().add(contentAdapter);
 	}
 
 	@Override
 	public void createControl(Composite parent) {
 		final Composite topComposite = new Composite(parent, SWT.NONE);
 		topComposite.setLayout(new GridLayout(1, true));
-		
+
 		{ // General Group
-			
+
 			final Group group = new Group(topComposite, SWT.NONE);
 			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-			
-			group.setLayout(new GridLayout(2,  false));
+
+			group.setLayout(new GridLayout(2, false));
 			group.setText("General");
-			
-			final Label maxTimeLabel = createLabel(group, "Maximum execution time");
+
+			final Label maxTimeLabel = createLabel(group, "Maximum simulation execution time");
 			maxTimeLabel.setToolTipText("Time after which the simulation will be aborted");
 			final DateTime maxTimeDateTime = new DateTime(group, SWT.TIME);
 			maxTimeDateTime.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false));
 			maxTimeDateTime.setTime(1, 0, 0);
 
 			Highlighter.addHighlight(group, maxTimeLabel, maxTimeDateTime);
+
+			// @formatter:off
+			IObservableValue maxExecTimeEmfObservable = EMFProperties.value(
+					DefinitionPackage.Literals.SIMULATION_DEFINITION__MAX_EXECUTION_TIME)
+					.observe(simulationDefinition);
+			getContext().bindValue(maxExecTimeEmfObservable, WidgetProperties.selection().observe(maxTimeDateTime));
+			// @formatter:on
 		}
-		
+
 		{ // WNSIM Group
 
 			final Group group = new Group(topComposite, SWT.NONE);
 			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
-			
-			group.setLayout(new GridLayout(2,  false));
+
+			group.setLayout(new GridLayout(2, false));
 			group.setText("Simulation parameters");
-			
+
 			final Label confidenceLabel = createLabel(group, "Confidence level (%)");
-			final Combo confidenceCombo = createCombo(group, new String []{ "60", "70", "80", "90", "95", "99"}, 4);
 			confidenceLabel.setToolTipText("Confidence level (%)");
-			
+
+			final Combo confidenceCombo = createCombo(group, new String[] { "60", "70", "80", "90", "95", "99" }, 4);
+
 			final Label accuracyLabel = createLabel(group, "Accuracy (%)");
-			final Spinner accuracySpinner = createSpinner(group, 1, 20, 5);
 			accuracyLabel.setToolTipText("Accuracy of the results, i.e., half-width of the confidence interval");
 
+			final Spinner accuracySpinner = createSpinner(group, 1, 20, 5);
+
 			final Label seedLabel = createLabel(group, "Seed");
-			final Spinner seedSpinner = createSpinner(group, 1, Short.MAX_VALUE, 31415);
 			seedLabel.setToolTipText("Seed for the generation of pseudo-random numbers");
-			
+
+			final Spinner seedSpinner = createSpinner(group, 1, Short.MAX_VALUE, 31415);
+
 			final Label firstTrLenLabel = createLabel(group, "First transient period length ");
-			final Spinner firstTrLenSpinner = createSpinner(group, 1, Integer.MAX_VALUE, 1000);
 			firstTrLenLabel.setToolTipText("Length of the transient period in terms of the number of transition firings");
 
+			final Spinner firstTrLenSpinner = createSpinner(group, 1, Integer.MAX_VALUE, 1000);
+
 			final Label trLenLabel = createLabel(group, "Transient period length");
-			final Spinner trLenSpinner = createSpinner(group, 1, Short.MAX_VALUE, 1000);
 			trLenLabel.setToolTipText("Length of the transient period between two batches in terms of the number of transition firings");
-			
+
+			final Spinner trLenSpinner = createSpinner(group, 1, Short.MAX_VALUE, 1000);
+
 			final Label minBatchLenLabel = createLabel(group, "Minimum batch length");
-			final Spinner minBatchLenSpinner = createSpinner(group, 1, Short.MAX_VALUE, 1000);
 			minBatchLenLabel.setToolTipText("Minimum batch length in terms of the number of transition firings");
 
+			final Spinner minBatchLenSpinner = createSpinner(group, 1, Short.MAX_VALUE, 1000);
+
 			final Label maxBatchLenLabel = createLabel(group, "Maximum batch length");
-			final Spinner maxBatchLenSpinner = createSpinner(group, 1, Short.MAX_VALUE, 2000);
 			maxBatchLenLabel.setToolTipText("Maximum batch length in terms of the number of transition firings");
-			
+
+			final Spinner maxBatchLenSpinner = createSpinner(group, 1, Short.MAX_VALUE, 2000);
+
 			final Label startTimeLabel = createLabel(group, "Tracing starting point");
-			final Spinner startTimeSpinner = createSpinner(group, 0, Short.MAX_VALUE, 0);
 			startTimeLabel.setToolTipText("Starting time for debug output");
-			
+
+			final Spinner startTimeSpinner = createSpinner(group, 0, Short.MAX_VALUE, 0);
+
 			Highlighter.addHighlight(group, confidenceLabel, confidenceCombo);
 			Highlighter.addHighlight(group, accuracyLabel, accuracySpinner);
 			Highlighter.addHighlight(group, seedLabel, seedSpinner);
@@ -98,19 +136,85 @@ public class ParametersLaunchConfigurationTab extends AbstractLaunchConfiguratio
 			Highlighter.addHighlight(group, minBatchLenLabel, minBatchLenSpinner);
 			Highlighter.addHighlight(group, maxBatchLenLabel, maxBatchLenSpinner);
 			Highlighter.addHighlight(group, startTimeLabel, startTimeSpinner);
+
+			IObservableMap observableMap = EMFProperties.map(DefinitionPackage.Literals.SIMULATION_DEFINITION__PARAMETERS).observe(simulationDefinition);
+
+			IObservableValue confLevelEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.CONF_LEVEL.getName());
+			IObservableValue accuracyEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.APPROX.getName());
+			IObservableValue seedEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.SEED.getName());
+			IObservableValue firstTrLenEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.FIRST_TR_LENGTH.getName());
+			IObservableValue trLenEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.TR_LENGTH.getName());
+			IObservableValue minBatchEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.MIN_BTC.getName());
+			IObservableValue maxBatchEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.MAX_BTC.getName());
+			IObservableValue startEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.START.getName());
+
+			StringToIntegerStrategy s2iStrategy = new StringToIntegerStrategy();
+			IntegerToStringStrategy i2sStrategy = new IntegerToStringStrategy();
+
+			getContext().bindValue(confLevelEmfObservable, WidgetProperties.selection().observe(confidenceCombo));
+			getContext().bindValue(accuracyEmfObservable, WidgetProperties.selection().observe(accuracySpinner), s2iStrategy, i2sStrategy);
+			getContext().bindValue(seedEmfObservable, WidgetProperties.selection().observe(seedSpinner), s2iStrategy, i2sStrategy);
+			getContext().bindValue(firstTrLenEmfObservable, WidgetProperties.selection().observe(firstTrLenSpinner), s2iStrategy, i2sStrategy);
+			getContext().bindValue(trLenEmfObservable, WidgetProperties.selection().observe(trLenSpinner), s2iStrategy, i2sStrategy);
+			getContext().bindValue(minBatchEmfObservable, WidgetProperties.selection().observe(minBatchLenSpinner), s2iStrategy, i2sStrategy);
+			getContext().bindValue(maxBatchEmfObservable, WidgetProperties.selection().observe(maxBatchLenSpinner), s2iStrategy, i2sStrategy);
+			getContext().bindValue(startEmfObservable, WidgetProperties.selection().observe(startTimeSpinner), s2iStrategy, i2sStrategy);
+
 		}
 
 		setControl(topComposite);
 	}
 
-	private static Label createLabel(Composite parent, String text) {
+	@Override
+	public String getName() {
+		return "Parameters";
+	}
+
+	@Override
+	public Image getImage() {
+		return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_PARAMS_TAB);
+	}
+
+	@Override
+	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
+	}
+
+	@Override
+	public void initializeFrom(ILaunchConfiguration configuration) {
+		try {
+			Map<String, String> parameters = configuration.getAttribute(SIMULATION_DEFINITION__PARAMETERS, new HashMap<String, String>());
+			for (Entry<String, String> entry : parameters.entrySet()) {
+				if (!StringUtils.equals(entry.getValue(), simulationDefinition.getParameters().get(entry.getKey()))) {
+					simulationDefinition.getParameters().put(entry.getKey(), entry.getValue());
+				}
+			}
+			Date maxExecTime = (Date) EcoreUtil.createFromString(EcorePackage.Literals.EDATE,
+					configuration.getAttribute(SIMULATION_DEFINITION__MAX_EXECUTION_TIME, (String) null));
+			if (maxExecTime != null && !maxExecTime.equals(simulationDefinition.getMaxExecutionTime())) {
+				simulationDefinition.setMaxExecutionTime(maxExecTime);
+			}
+		} catch (CoreException e) {
+			DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
+		}
+	}
+
+	@Override
+	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+		configuration.setAttribute(SIMULATION_DEFINITION__PARAMETERS, simulationDefinition.getParameters().map());
+		configuration.setAttribute(SIMULATION_DEFINITION__MAX_EXECUTION_TIME,
+				EcoreUtil.convertToString(EcorePackage.Literals.EDATE, simulationDefinition.getMaxExecutionTime()));
+	}
+
+	private static final int RIGHT_COL_WIDTH = 40;
+
+	protected static Label createLabel(Composite parent, String text) {
 		final Label label = new Label(parent, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, true, false));
 		label.setText(text);
 		return label;
 	}
 
-	private static Combo createCombo(Composite parent, String[] options, int selection) {
+	protected static Combo createCombo(Composite parent, String[] options, int selection) {
 		final GridData gridData = new GridData(SWT.CENTER, SWT.CENTER, false, false);
 		gridData.widthHint = RIGHT_COL_WIDTH;
 
@@ -123,39 +227,16 @@ public class ParametersLaunchConfigurationTab extends AbstractLaunchConfiguratio
 		return combo;
 	}
 
-	private static Spinner createSpinner(Composite parent, int min, int max, int defValue) {
+	protected static Spinner createSpinner(Composite parent, int min, int max, int defValue) {
 		final GridData gridData = new GridData(SWT.CENTER, SWT.CENTER, false, false);
 		gridData.widthHint = RIGHT_COL_WIDTH;
-		
+
 		final Spinner spinner = new Spinner(parent, SWT.BORDER);
 		spinner.setLayoutData(gridData);
 		spinner.setMinimum(min);
 		spinner.setMaximum(max);
 		spinner.setSelection(defValue);
-		
+
 		return spinner;
 	}
-	
-	@Override
-	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-	}
-
-	@Override
-	public void initializeFrom(ILaunchConfiguration configuration) {
-	}
-
-	@Override
-	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-	}
-
-	@Override
-	public String getName() {
-		return "Parameters";
-	}
-
-	@Override
-	public Image getImage() {
-		return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_PARAMS_TAB);
-	}
-	
 }

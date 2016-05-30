@@ -16,6 +16,8 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	public static final String IMG_OBJ16_PARAMS_TAB = "IMG_OBJ16_PARAMS_TAB"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_FILTERS_TAB = "IMG_OBJ16_FILTERS_TAB"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_ADVANCED_TAB = "IMG_OBJ16_ADVANCED_TAB"; //$NON-NLS-1$
+	public static final String IMG_ETOOL16_UP = "IMG_ETOOL16_UP"; //$NON-NLS-1$
+	public static final String IMG_ETOOL16_DOWN = "IMG_ETOOL16_DOWN"; //$NON-NLS-1$
 	
 	// The plug-in ID
 	public static final String PLUGIN_ID = "es.unizar.disco.simulation.ui"; //$NON-NLS-1$
@@ -63,7 +65,7 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	 * @param path the path
 	 * @return the image descriptor
 	 */
-	public static ImageDescriptor getImageDescriptor(String path) {
+	private static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 	
@@ -75,5 +77,7 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 		reg.put(IMG_OBJ16_PARAMS_TAB, getImageDescriptor("icons/full/obj16/params_tab.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_OBJ16_FILTERS_TAB, getImageDescriptor("icons/full/obj16/filters_tab.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_OBJ16_ADVANCED_TAB, getImageDescriptor("icons/full/obj16/advanced_tab.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_ETOOL16_UP, getImageDescriptor("icons/full/etool16/up.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_ETOOL16_DOWN, getImageDescriptor("icons/full/etool16/down.png").createImage()); //$NON-NLS-1$
 	}
 }

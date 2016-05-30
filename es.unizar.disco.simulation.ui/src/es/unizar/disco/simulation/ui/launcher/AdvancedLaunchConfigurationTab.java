@@ -1,9 +1,13 @@
 package es.unizar.disco.simulation.ui.launcher;
 
+import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__IDENTIFIER;
+
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
-import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -16,21 +20,40 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
+import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.dialogs.ContainerSelectionDialog;
+import es.unizar.disco.simulation.models.definition.DefinitionFactory;
+import es.unizar.disco.simulation.models.definition.DefinitionPackage;
+import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
 
-public class AdvancedLaunchConfigurationTab extends AbstractLaunchConfigurationTab {
+public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConfigurationTab {
 
-	protected EditingDomain editingDomain;
-	
-	public AdvancedLaunchConfigurationTab(EditingDomain editingDomain) {
-		this.editingDomain = editingDomain;
-	}
+	private final SimulationDefinition simulationDefinition = DefinitionFactory.eINSTANCE.createSimulationDefinition();
 	
 	@Override
 	public void createControl(Composite parent) {
 		final Composite topComposite = new Composite(parent, SWT.NONE);
 		topComposite.setLayout(new GridLayout(1, true));
+		
+		{ // Identifier Group
+			
+			final Group group = new Group(topComposite, SWT.NONE);
+			group.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
+			
+			group.setLayout(new GridLayout(1,  false));
+			group.setText("Simulation Identifier");
+			
+			final Text uuidText = new Text(group, SWT.BORDER | SWT.READ_ONLY);
+			uuidText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+			IObservableValue uuidEmfSource = EMFProperties
+					.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__IDENTIFIER)
+					.observe(simulationDefinition);
+
+			IObservableValue uuidGuiTarget = WidgetProperties.text(SWT.Modify).observe(uuidText);
+			getContext().bindValue(uuidEmfSource, uuidGuiTarget);			
+		}
 		
 		{ // Intermediate Files Group
 
@@ -79,18 +102,6 @@ public class AdvancedLaunchConfigurationTab extends AbstractLaunchConfigurationT
 	}
 
 	@Override
-	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-	}
-
-	@Override
-	public void initializeFrom(ILaunchConfiguration configuration) {
-	}
-
-	@Override
-	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-	}
-
-	@Override
 	public String getName() {
 		return "Advanced";
 	}
@@ -98,5 +109,22 @@ public class AdvancedLaunchConfigurationTab extends AbstractLaunchConfigurationT
 	@Override
 	public Image getImage() {
 		return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_ADVANCED_TAB);
+	}
+
+	@Override
+	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
+	}
+
+	@Override
+	public void initializeFrom(ILaunchConfiguration configuration) {
+		try {
+			simulationDefinition.setIdentifier(configuration.getAttribute(SIMULATION_DEFINITION__IDENTIFIER, (String) null));
+		} catch (CoreException e) {
+			DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
+		}
+	}
+
+	@Override
+	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 	}
 }
