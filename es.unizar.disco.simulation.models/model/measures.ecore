@@ -8,6 +8,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="measuredElement" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" lowerBound="1" eType="ecore:EEnum datatypes.ecore#//Unit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputVariable" lowerBound="1"
+        eType="ecore:EClass definition.ecore#//OutputVariable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Throughput" eSuperTypes="#//DomainMeasure">
     <eOperations name="getValue" eType="ecore:EDataType datatypes.ecore#//Number">

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="marteconstants" nsURI="http://es.unizar.disco/simulation/marte/constants/1.0"
+    nsPrefix="marteconstants">
+  <eClassifiers xsi:type="ecore:EEnum" name="SupportedMetrics">
+    <eLiterals name="GaScenario_respT" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#respT"/>
+    <eLiterals name="GaScenario_througput" value="1" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"/>
+    <eLiterals name="GaScenario_utilization" value="2" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#utilization"/>
+    <eLiterals name="GaStep_respT" value="10" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#respT"/>
+    <eLiterals name="GaStep_througput" value="11" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#throughput"/>
+    <eLiterals name="GaStep_utilization" value="12" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#utilization"/>
+  </eClassifiers>
+</ecore:EPackage>

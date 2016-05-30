@@ -7,19 +7,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="toolResult" eType="ecore:EClass toolresult.ecore#//ToolResult"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableAssignments" upperBound="-1"
         eType="#//VariableAssignment" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="analizableResource" lowerBound="1"
-        eType="ecore:EDataType datatypes.ecore#//URI"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="ecore:EClass definition.ecore#//SimulationDefinition" eOpposite="definition.ecore#//SimulationDefinition/invocations"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="calls" lowerBound="1" eType="#//SimulationTool"
         volatile="true" transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="calculates" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass definition.ecore#//OutputVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
+        eType="ecore:EClass simresult.ecore#//SimulationResult" eOpposite="simresult.ecore#//SimulationResult/invocation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="analyzableResource" lowerBound="1"
+        eType="ecore:EClass datatypes.ecore#//Resource" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="ecore:EClass definition.ecore#//InputVariable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass definition.ecore#//InputVariableValue"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Number"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimulationTool" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="produces" lowerBound="1"

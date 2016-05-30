@@ -18,4 +18,10 @@
     <eLiterals name="s" value="10" literal="s"/>
     <eLiterals name="Hz" value="20" literal="Hz"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="#//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resource" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResource"
+        changeable="false" transient="true" derived="true"/>
+  </eClassifiers>
 </ecore:EPackage>

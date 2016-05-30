@@ -2,22 +2,28 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: es.unizar.disco.simulation.models;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.1.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: es.unizar.disco.simulation.models.datatypes,
  es.unizar.disco.simulation.models.datatypes.impl,
+ es.unizar.disco.simulation.models.datatypes.util,
  es.unizar.disco.simulation.models.definition,
  es.unizar.disco.simulation.models.definition.impl,
  es.unizar.disco.simulation.models.definition.util,
  es.unizar.disco.simulation.models.invocation,
  es.unizar.disco.simulation.models.invocation.impl,
  es.unizar.disco.simulation.models.invocation.util,
+ es.unizar.disco.simulation.models.marteconstants,
+ es.unizar.disco.simulation.models.marteconstants.impl,
  es.unizar.disco.simulation.models.measures,
  es.unizar.disco.simulation.models.measures.impl,
  es.unizar.disco.simulation.models.measures.util,
+ es.unizar.disco.simulation.models.simresult,
+ es.unizar.disco.simulation.models.simresult.impl,
+ es.unizar.disco.simulation.models.simresult.util,
  es.unizar.disco.simulation.models.toolresult,
  es.unizar.disco.simulation.models.toolresult.impl,
  es.unizar.disco.simulation.models.toolresult.util,
@@ -28,5 +34,8 @@ Export-Package: es.unizar.disco.simulation.models.datatypes,
  es.unizar.disco.simulation.models.wnsim.impl,
  es.unizar.disco.simulation.models.wnsim.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.uml2.uml;bundle-version="5.0.0",
+ org.eclipse.papyrus.marte.static.profile;bundle-version="1.1.0",
+ es.unizar.disco.core;bundle-version="0.1.5"
 Bundle-ActivationPolicy: lazy

@@ -1,0 +1,25 @@
+package es.unizar.disco.simulation.models.definition.provider;
+
+import org.eclipse.emf.common.notify.Adapter;
+
+
+public class CustomDefinitionItemProviderAdapterFactory extends DefinitionItemProviderAdapterFactory {
+
+	@Override
+	public Adapter createInputVariableAdapter() {
+		if (inputVariableItemProvider == null) {
+			inputVariableItemProvider = new CustomInputVariableItemProvider(this);
+		}
+
+		return inputVariableItemProvider;
+	}
+	
+	@Override
+	public Adapter createInputVariableValueAdapter() {
+		if (inputVariableValueItemProvider == null) {
+			inputVariableValueItemProvider = new CustomInputVariableValueItemProvider(this);
+		}
+		
+		return inputVariableValueItemProvider;
+	}
+}

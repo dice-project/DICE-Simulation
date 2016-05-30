@@ -33,8 +33,24 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated all -->
       <package
+            uri="http://es.unizar.disco/simulation/marte/constants/1.0"
+            class="es.unizar.disco.simulation.models.marteconstants.MarteconstantsPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
             uri="http://es.unizar.disco/simulation/measures/1.0"
             class="es.unizar.disco.simulation.models.measures.MeasuresPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/simresult/1.0"
+            class="es.unizar.disco.simulation.models.simresult.SimresultPackage"
             genModel="model/all.genmodel"/>
    </extension>
 
@@ -70,6 +86,17 @@
       <factory
             class="es.unizar.disco.simulation.models.UriConversionDelegate$Factory"
             uri="http://es.unizar.disco/simulation/conversion/uri/1.0">
+      </factory>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.factory_override">
+      <factory
+            class="es.unizar.disco.simulation.models.definition.impl.CustomDefinitionFactoryImpl"
+            uri="http://es.unizar.disco/simulation/definition/1.0">
+      </factory>
+      <factory
+            class="es.unizar.disco.simulation.models.definition.impl.CustomDatatypesFactoryImpl"
+            uri="http://es.unizar.disco/simulation/datatypes/1.0">
       </factory>
    </extension>
 

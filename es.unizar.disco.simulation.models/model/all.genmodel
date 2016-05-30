@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/es.unizar.disco.simulation.models/src" modelPluginID="es.unizar.disco.simulation.models"
-    modelName="All" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    operationReflection="true" importOrganizing="true">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/es.unizar.disco.simulation.models/src-gen" editDirectory="/es.unizar.disco.simulation.models.edit/src-gen"
+    modelPluginID="es.unizar.disco.simulation.models" modelName="DiceSimulationModels"
+    editPluginClass="es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>datatypes.ecore</foreignModel>
   <foreignModel>definition.ecore</foreignModel>
   <foreignModel>invocation.ecore</foreignModel>
+  <foreignModel>marteconstants.ecore</foreignModel>
   <foreignModel>measures.ecore</foreignModel>
+  <foreignModel>simresult.ecore</foreignModel>
   <foreignModel>toolresult.ecore</foreignModel>
   <foreignModel>traces.ecore</foreignModel>
   <foreignModel>wnsim.ecore</foreignModel>
@@ -20,34 +23,39 @@
     </genEnums>
     <genDataTypes ecoreDataType="datatypes.ecore#//URI"/>
     <genDataTypes ecoreDataType="datatypes.ecore#//Number"/>
+    <genClasses ecoreClass="datatypes.ecore#//Resource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datatypes.ecore#//Resource/uri"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute datatypes.ecore#//Resource/resource"/>
+    </genClasses>
   </genPackages>
   <genPackages prefix="Definition" basePackage="es.unizar.disco.simulation.models"
       disposableProviderFactory="true" ecorePackage="definition.ecore#/">
     <genClasses ecoreClass="definition.ecore#//SimulationDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/identifier"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/domainResource"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/invocations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/parameters"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/scenario"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/activeScenario"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/scenarios"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/variables"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/domainResource"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/syncScenarios"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/syncVariables"/>
     </genClasses>
     <genClasses ecoreClass="definition.ecore#//SimulationParameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationParameter/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationParameter/value"/>
     </genClasses>
-    <genClasses ecoreClass="definition.ecore#//Scenario">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//Scenario/variables"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="definition.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//Variable/name"/>
-    </genClasses>
-    <genClasses ecoreClass="definition.ecore#//InputVariableValue">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//InputVariableValue/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//InputVariableValue/unit"/>
     </genClasses>
     <genClasses ecoreClass="definition.ecore#//InputVariable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//InputVariable/values"/>
     </genClasses>
     <genClasses ecoreClass="definition.ecore#//OutputVariable"/>
+    <genClasses ecoreClass="definition.ecore#//InputVariableValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//InputVariableValue/value"/>
+    </genClasses>
   </genPackages>
   <genPackages prefix="Invocation" basePackage="es.unizar.disco.simulation.models"
       disposableProviderFactory="true" ecorePackage="invocation.ecore#/">
@@ -55,18 +63,29 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/traceSet"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/toolResult"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/variableAssignments"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//SimulationInvocation/analizableResource"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/definition"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/calls"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/calculates"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/results"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/analyzableResource"/>
     </genClasses>
     <genClasses ecoreClass="invocation.ecore#//VariableAssignment">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//VariableAssignment/variable"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//VariableAssignment/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EAttribute invocation.ecore#//VariableAssignment/value"/>
     </genClasses>
     <genClasses image="false" ecoreClass="invocation.ecore#//SimulationTool">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationTool/produces"/>
     </genClasses>
+  </genPackages>
+  <genPackages prefix="Marteconstants" basePackage="es.unizar.disco.simulation.models"
+      disposableProviderFactory="true" ecorePackage="marteconstants.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="marteconstants.ecore#//SupportedMetrics">
+      <genEnumLiterals ecoreEnumLiteral="marteconstants.ecore#//SupportedMetrics/GaScenario_respT"/>
+      <genEnumLiterals ecoreEnumLiteral="marteconstants.ecore#//SupportedMetrics/GaScenario_througput"/>
+      <genEnumLiterals ecoreEnumLiteral="marteconstants.ecore#//SupportedMetrics/GaScenario_utilization"/>
+      <genEnumLiterals ecoreEnumLiteral="marteconstants.ecore#//SupportedMetrics/GaStep_respT"/>
+      <genEnumLiterals ecoreEnumLiteral="marteconstants.ecore#//SupportedMetrics/GaStep_througput"/>
+      <genEnumLiterals ecoreEnumLiteral="marteconstants.ecore#//SupportedMetrics/GaStep_utilization"/>
+    </genEnums>
   </genPackages>
   <genPackages prefix="Measures" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"
       ecorePackage="measures.ecore#/">
@@ -74,6 +93,7 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/value"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasure/measuredElement"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/unit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasure/outputVariable"/>
     </genClasses>
     <genClasses ecoreClass="measures.ecore#//Throughput">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//Throughput/throughput"/>
@@ -91,6 +111,13 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/to"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/from"/>
       <genOperations ecoreOperation="measures.ecore#//MeasureConverter/convert"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Simresult" basePackage="es.unizar.disco.simulation.models"
+      ecorePackage="simresult.ecore#/">
+    <genClasses ecoreClass="simresult.ecore#//SimulationResult">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simresult.ecore#//SimulationResult/invocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simresult.ecore#//SimulationResult/measures"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Toolresult" basePackage="es.unizar.disco.simulation.models"
