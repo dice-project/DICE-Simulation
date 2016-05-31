@@ -9,5 +9,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/jars/commons-logging-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jars/commons-lang3-3.4.jar" sourcepath="lib/sources/commons-lang3-3.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jars/commons-io-2.4.jar" sourcepath="lib/sources/commons-io-2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jars/commons-collections4-4.1.jar" sourcepath="lib/sources/commons-collections4-4.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
