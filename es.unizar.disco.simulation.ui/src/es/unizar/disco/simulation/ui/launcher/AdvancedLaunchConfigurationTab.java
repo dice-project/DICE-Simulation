@@ -1,9 +1,5 @@
 package es.unizar.disco.simulation.ui.launcher;
 
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__BACKEND;
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__IDENTIFIER;
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__WORKING_AREA;
-
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IContainer;
@@ -31,6 +27,7 @@ import org.eclipse.swt.widgets.Text;
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.dialogs.ContainerSelectionDialog;
 import es.unizar.disco.simulation.DiceSimulationPlugin;
+import es.unizar.disco.simulation.launcher.SimulationDefinitionConfigurationHandler;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
@@ -41,8 +38,11 @@ import es.unizar.disco.simulation.ui.util.UriConverter;
 
 public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConfigurationTab {
 
+	private final SimulationDefinitionConfigurationHandler handler;
+
 	public AdvancedLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
 		super(simulationDefinition);
+		handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
 	}
 
 	@Override
@@ -149,22 +149,11 @@ public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConf
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			// @formatter:off
-			String identifier = configuration.getAttribute(SIMULATION_DEFINITION__IDENTIFIER, (String) null);
-			String workingArea = configuration.getAttribute(SIMULATION_DEFINITION__WORKING_AREA, DiceSimulationPlugin.getDefault().getStateLocation().toString());
+			handler.initializeIdentifier(configuration);
+			handler.initializeWorkingArea(configuration);
 			String preferredBackend = DiceSimulationUiPlugin.getDefault().getPreferenceStore().getString(PreferenceConstants.BACKEND);
-			String savedBackend = configuration.getAttribute(SIMULATION_DEFINITION__BACKEND, preferredBackend);
-			// @formatter:on
-			
-			if (!StringUtils.equals(identifier, simulationDefinition.getIdentifier())) {
-				simulationDefinition.setIdentifier(identifier);
-			}
-			if (!URI.createURI(workingArea).equals(simulationDefinition.getWorkingArea())) {
-				simulationDefinition.setWorkingArea(URI.createURI(workingArea));
-			}
-			if (!StringUtils.equals(savedBackend, simulationDefinition.getBackend())) {
-				simulationDefinition.setBackend(savedBackend);
-			}
+			handler.initializeBackend(configuration, preferredBackend);
+
 		} catch (CoreException e) {
 			DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
 		}
@@ -172,7 +161,7 @@ public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConf
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(SIMULATION_DEFINITION__WORKING_AREA, simulationDefinition.getWorkingArea().toString());
-		configuration.setAttribute(SIMULATION_DEFINITION__BACKEND, simulationDefinition.getBackend());
+		handler.saveWorkingArea(configuration);
+		handler.saveBackend(configuration);
 	}
 }

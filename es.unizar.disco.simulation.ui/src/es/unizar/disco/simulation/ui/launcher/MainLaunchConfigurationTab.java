@@ -1,18 +1,10 @@
 package es.unizar.disco.simulation.ui.launcher;
 
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__ACTIVE_SCENARIO;
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI;
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__INPUT_VARIABLES;
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__OUTPUT_VARIABLES;
-
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +26,6 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -84,16 +75,14 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
 import es.unizar.disco.core.collections.AlphanumComparator;
-import es.unizar.disco.core.collections.Function;
-import es.unizar.disco.core.collections.UnmodifiableTransformedMap;
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.dialogs.FileSelectionDialog;
+import es.unizar.disco.simulation.launcher.SimulationDefinitionConfigurationHandler;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.definition.InputVariableValue;
-import es.unizar.disco.simulation.models.definition.OutputVariable;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
 import es.unizar.disco.simulation.ui.dialogs.UmlFileSelectionDialog;
@@ -120,8 +109,12 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		};
 	};
 
+	private final SimulationDefinitionConfigurationHandler handler;
+	
+	
 	public MainLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
 		super(simulationDefinition);
+		handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
 		this.simulationDefinition.eAdapters().add(contentAdapter);
 	}
 
@@ -383,52 +376,16 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			// First gather all the info from the configuration
-			URI domainResourceUri = URI.createURI(configuration.getAttribute(SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, ""));
-			URI activeScenarioUri = URI.createURI(configuration.getAttribute(SIMULATION_DEFINITION__ACTIVE_SCENARIO, ""));
-			Map<String, String> inputVarsInfo = configuration.getAttribute(SIMULATION_DEFINITION__INPUT_VARIABLES, new HashMap<String, String>());
-			Map<String, String> outputVarsInfo = configuration.getAttribute(SIMULATION_DEFINITION__OUTPUT_VARIABLES, new HashMap<String, String>());
-
-			// Only those values that have change should be set to avoid extra
-			// calls to updateLaunchConfigurationDialog() (which is called by
-			// 'contentAdapter')
-
 			// Set the domain resource
-			if (!domainResourceUri.equals(simulationDefinition.getDomainResource().getUri())) {
-				simulationDefinition.getDomainResource().setUri(domainResourceUri);
-			}
-
+			handler.initializeResourceUri(configuration);
 			// Add the previously saved input variables
-			for (Entry<String, String> entry : inputVarsInfo.entrySet()) {
-				String varName = entry.getKey();
-				if (simulationDefinition.getInputVariablesMap().get(varName) == null) {
-					InputVariable var = DefinitionFactory.eINSTANCE.createInputVariable();
-					var.setName(varName);
-					var.deserializeValues(entry.getValue());
-					simulationDefinition.getInputVariables().add(var);
-				}
-			}
-
+			handler.initializeInputVariables(configuration);
 			// Add the previously saved output variables (not shown in this GUI)
-			for (Entry<String, String> entry : outputVarsInfo.entrySet()) {
-				String varName = entry.getKey();
-				if (simulationDefinition.getOutputVariablesMap().get(varName) == null) {
-					OutputVariable var = DefinitionFactory.eINSTANCE.createOutputVariable();
-					var.setName(varName);
-					simulationDefinition.getOutputVariables().add(var);
-				}
-			}
-
+			handler.initializeOutputVariables(configuration);
 			// If we do not have and active scenario, or it has changed, try to
 			// restore it in the model. This will trigger a cleanup of the
 			// invalid/unused variables
-			if (simulationDefinition.getActiveScenario() == null || EcoreUtil.getURI(simulationDefinition.getActiveScenario()).equals(activeScenarioUri)) {
-				for (EObject scenario : simulationDefinition.getScenarios()) {
-					if (EcoreUtil.getURI(scenario).equals(activeScenarioUri)) {
-						simulationDefinition.setActiveScenario(scenario);
-					}
-				}
-			}
+			handler.initializeActiveScenario(configuration);
 		} catch (CoreException e) {
 			DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
 		}
@@ -436,23 +393,10 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		// Gather information to be saved
-		// @formatter:off
-		String domainResourceUri = 
-				defaultToString(simulationDefinition.getDomainResource().getUri());
-		String activeScenarioUri = 
-				defaultToString(simulationDefinition.getActiveScenario() != null ? EcoreUtil.getURI(simulationDefinition.getActiveScenario()) : null);
-		Map<String, String> inputVarsInfo = 
-				new UnmodifiableTransformedMap<String, InputVariable, String>(simulationDefinition.getInputVariablesMap(), new InputVariableToSerializedValues());
-		Map<String, String> outputVarsInfo =
-				new UnmodifiableTransformedMap<String, OutputVariable, String>(simulationDefinition.getOutputVariablesMap(), new OutputVariableToEmptyString());
-		// @formatter:on
-
-		// Save persistent info
-		configuration.setAttribute(SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, domainResourceUri);
-		configuration.setAttribute(SIMULATION_DEFINITION__ACTIVE_SCENARIO, activeScenarioUri);
-		configuration.setAttribute(SIMULATION_DEFINITION__INPUT_VARIABLES, inputVarsInfo);
-		configuration.setAttribute(SIMULATION_DEFINITION__OUTPUT_VARIABLES, outputVarsInfo);
+		handler.saveResourceUri(configuration);
+		handler.saveActiveScenario(configuration);
+		handler.saveInputVariables(configuration);
+		handler.saveOutputVariables(configuration);
 	}
 
 	@Override
@@ -482,33 +426,6 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		}
 		setErrorMessage(null);
 		return true;
-	}
-
-	/**
-	 * {@link Function} which transforms an {@link InputVariable} to a
-	 * {@link String} containing its serialized {@link InputVariableValue}s
-	 * 
-	 * @author agomez
-	 *
-	 */
-	private final class InputVariableToSerializedValues implements Function<InputVariable, String> {
-		@Override
-		public String apply(InputVariable obj) {
-			return obj != null ? obj.serializeValues() : "";
-		}
-	}
-
-	/**
-	 * {@link Function} which always returns an empty String ("") value
-	 * 
-	 * @author agomez
-	 *
-	 */
-	private final class OutputVariableToEmptyString implements Function<OutputVariable, String> {
-		@Override
-		public String apply(OutputVariable obj) {
-			return "";
-		}
 	}
 
 	/**

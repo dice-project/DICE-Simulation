@@ -1,14 +1,5 @@
 package es.unizar.disco.simulation.ui.launcher;
 
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__MAX_EXECUTION_TIME;
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__PARAMETERS;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -17,9 +8,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.databinding.EMFProperties;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EContentAdapter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -34,6 +23,7 @@ import org.eclipse.swt.widgets.Spinner;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.util.Highlighter;
+import es.unizar.disco.simulation.launcher.SimulationDefinitionConfigurationHandler;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.wnsim.SimulationParameters;
@@ -55,9 +45,12 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 			}
 		};
 	};
+
+	private final SimulationDefinitionConfigurationHandler handler;
 	
 	public ParametersLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
 		super(simulationDefinition);
+		handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
 		this.simulationDefinition.eAdapters().add(contentAdapter);
 	}
 
@@ -188,17 +181,8 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			Map<String, String> parameters = configuration.getAttribute(SIMULATION_DEFINITION__PARAMETERS, new HashMap<String, String>());
-			for (Entry<String, String> entry : parameters.entrySet()) {
-				if (!StringUtils.equals(entry.getValue(), simulationDefinition.getParameters().get(entry.getKey()))) {
-					simulationDefinition.getParameters().put(entry.getKey(), entry.getValue());
-				}
-			}
-			Date maxExecTime = (Date) EcoreUtil.createFromString(EcorePackage.Literals.EDATE,
-					configuration.getAttribute(SIMULATION_DEFINITION__MAX_EXECUTION_TIME, (String) null));
-			if (maxExecTime != null && !maxExecTime.equals(simulationDefinition.getMaxExecutionTime())) {
-				simulationDefinition.setMaxExecutionTime(maxExecTime);
-			}
+			handler.initializeParameters(configuration);
+			handler.initializeMaxExecutionTime(configuration);
 		} catch (CoreException e) {
 			DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
 		}
@@ -206,9 +190,8 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(SIMULATION_DEFINITION__PARAMETERS, simulationDefinition.getParameters().map());
-		configuration.setAttribute(SIMULATION_DEFINITION__MAX_EXECUTION_TIME,
-				EcoreUtil.convertToString(EcorePackage.Literals.EDATE, simulationDefinition.getMaxExecutionTime()));
+		handler.saveParameters(configuration);
+		handler.saveMaxExecutionTime(configuration);
 	}
 
 	private static final int RIGHT_COL_WIDTH = 40;

@@ -1,14 +1,9 @@
 package es.unizar.disco.simulation.ui.launcher;
 
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS;
-import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__MEASURES_TO_COMPUTE;
-
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.core.databinding.observable.set.IObservableSet;
@@ -57,6 +52,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import es.unizar.disco.core.collections.AlphanumComparator;
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.util.UiConstants;
+import es.unizar.disco.simulation.launcher.SimulationDefinitionConfigurationHandler;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
@@ -98,8 +94,11 @@ public class FiltersLaunchConfigurationTab extends AbstractSimulationLaunchConfi
 
 	private CheckboxTableViewer varConfigsViewer;
 
+	private final SimulationDefinitionConfigurationHandler handler;
+	
 	public FiltersLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
 		super(simulationDefinition);
+		handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
 		this.simulationDefinition.eAdapters().add(contentAdapter);
 	}
 
@@ -341,39 +340,14 @@ public class FiltersLaunchConfigurationTab extends AbstractSimulationLaunchConfi
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			// First gather all the info from the configuration
-			Set<String> selectedMeasures = configuration.getAttribute(SIMULATION_DEFINITION__MEASURES_TO_COMPUTE, (Set<String>) null);
-			Set<String> activeConfigurations = configuration.getAttribute(SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS, (Set<String>) null);
-
 			// Once the scenario has been restored, the domain measures are
 			// synchronized.
 			// If we had a custom selection, select those that were previously
 			// saved
-			if (selectedMeasures != null) {
-				for (DomainMeasureDefinition domainMeasure : simulationDefinition.getDeclaredMeasures()) {
-					if (selectedMeasures.contains(EcoreUtil.getURI(domainMeasure).toString())) {
-						simulationDefinition.getMeasuresToCompute().add(domainMeasure);
-					} else {
-						simulationDefinition.getMeasuresToCompute().remove(domainMeasure);
-					}
-				}
-			}
+			handler.initializeSelectedMeasures(configuration);
 			// The same applies for the active configurations
-			if (activeConfigurations != null) {
-				for (VariableConfiguration possibleConfiguration : simulationDefinition.getPossibleConfigurations()) {
-					if (activeConfigurations.contains(EcoreUtil.getURI(possibleConfiguration).toString())) {
-						simulationDefinition.getActiveConfigurations().add(possibleConfiguration);
-					} else {
-						simulationDefinition.getActiveConfigurations().remove(possibleConfiguration);
-					}
-				}
-			} else {
-				// We must select them manually since the data binding
-				// mechanisms mechanisms interfere with the
-				// syncPossibleVariableConfigurations method from
-				// SimulationDefinition
-				simulationDefinition.getActiveConfigurations().addAll(simulationDefinition.getPossibleConfigurations());
-			}
+			handler.initializeActiveConfigurations(configuration);
+			
 		} catch (CoreException e) {
 			DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
 		}
@@ -384,25 +358,9 @@ public class FiltersLaunchConfigurationTab extends AbstractSimulationLaunchConfi
 		// Since the domain measures are obtained from the domain model, we only
 		// need to store which of them are selected
 		// We save the selected measures only if not all of them are selected
-		if (simulationDefinition.getDeclaredMeasures().size() != simulationDefinition.getMeasuresToCompute().size()) {
-			Set<String> selectedMeasures = new HashSet<>();
-			for (DomainMeasureDefinition measureDefinition : simulationDefinition.getMeasuresToCompute()) {
-				selectedMeasures.add(EcoreUtil.getURI(measureDefinition).toString());
-			}
-			configuration.setAttribute(SIMULATION_DEFINITION__MEASURES_TO_COMPUTE, selectedMeasures);
-		} else {
-			configuration.removeAttribute(SIMULATION_DEFINITION__MEASURES_TO_COMPUTE);
-		}
+		handler.saveSelectedMeasures(configuration);
 		// The same applies for the active configurations
-		if (simulationDefinition.getPossibleConfigurations().size() != simulationDefinition.getActiveConfigurations().size()) {
-			Set<String> activeConfigurations = new HashSet<>();
-			for (VariableConfiguration activeConfiguration : simulationDefinition.getActiveConfigurations()) {
-				activeConfigurations.add(EcoreUtil.getURI(activeConfiguration).toString());
-			}
-			configuration.setAttribute(SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS, activeConfigurations);
-		} else {
-			configuration.removeAttribute(SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS);
-		}
+		handler.saveActiveConfigurations(configuration);
 	}
 
 	@Override

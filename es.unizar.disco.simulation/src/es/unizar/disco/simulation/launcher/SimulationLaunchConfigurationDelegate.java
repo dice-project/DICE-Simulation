@@ -7,29 +7,11 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 
+import es.unizar.disco.simulation.DiceSimulationPlugin;
+import es.unizar.disco.simulation.models.definition.DefinitionFactory;
+import es.unizar.disco.simulation.models.definition.SimulationDefinition;
+
 public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
-
-	public static final String SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI = "SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI"; //$NON-NLS-1$
-
-	public static final String SIMULATION_DEFINITION__IDENTIFIER = "SIMULATION_DEFINITION__IDENTIFIER"; //$NON-NLS-1$
-
-	public static final String SIMULATION_DEFINITION__ACTIVE_SCENARIO = "SIMULATION_DEFINITION__ACTIVE_SCENARIO"; //$NON-NLS-1$
-
-	public static final String SIMULATION_DEFINITION__INPUT_VARIABLES = "SIMULATION_DEFINITION__INPUT_VARIABLES"; //$NON-NLS-1$
-
-	public static final String SIMULATION_DEFINITION__OUTPUT_VARIABLES = "SIMULATION_DEFINITION__OUTPUT_VARIABLES"; //$NON-NLS-1$
-
-	public static final String SIMULATION_DEFINITION__MAX_EXECUTION_TIME = "SIMULATION_DEFINITION__MAX_EXECUTION_TIME"; //$NON-NLS-1$
-
-	public static final String SIMULATION_DEFINITION__PARAMETERS = "SIMULATION_DEFINITION__PARAMETERS"; //$NON-NLS-1$
-
-	
-//	public static final String KEEP_INTERMEDIATE_FILES= "KEEP_INTERMEDIATE_FILES"; //$NON-NLS-1$
-//	
-//	public static final String INTERMEDIATE_FILES_DIR = "INTERMEDIATE_FILES_FOLDER"; //$NON-NLS-1$
-//
-//	public static final String SIMULATION_CONFIGURATION = "SIMULATION_CONFIGURATION"; //$NON-NLS-1$
-
 	
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
@@ -39,6 +21,21 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		}
 		try {
 			monitor.beginTask(Messages.SimulationLaunchConfigurationDelegate_simulatingTaskTilte, IProgressMonitor.UNKNOWN);
+			
+			SimulationDefinition simulationDefinition = DefinitionFactory.eINSTANCE.createSimulationDefinition();
+			
+			SimulationDefinitionConfigurationHandler handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
+			handler.initializeResourceUri(configuration);
+			handler.initializeIdentifier(configuration);
+			handler.initializeInputVariables(configuration);
+			handler.initializeOutputVariables(configuration);
+			handler.initializeActiveScenario(configuration);
+			handler.initializeSelectedMeasures(configuration);
+			handler.initializeActiveConfigurations(configuration);
+			handler.initializeParameters(configuration);
+			handler.initializeMaxExecutionTime(configuration);
+			handler.initializeWorkingArea(configuration);
+			handler.initializeBackend(configuration, DiceSimulationPlugin.getDefault().getDefaultSimulationBackend());
 //			
 //			Map<String, String> simulationAttrs = new HashMap<>();
 //			simulationAttrs.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
