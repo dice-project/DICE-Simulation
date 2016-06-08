@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Properties;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -56,7 +55,7 @@ public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuth
 		} catch (IOException e) {
 			DiceLogger.logException(DiceSshConnectorPlugin.getDefault(), e);
 		}
-		return properties.getProperty(USER_PROPERTY, StringUtils.EMPTY);
+		return properties.getProperty(USER_PROPERTY, "");
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class LocalConnectionProvider implements IHostProvider, IUserPasswordAuth
 		} catch (IOException e) {
 			DiceLogger.logException(DiceSshConnectorPlugin.getDefault(), e);
 		}
-		return properties.getProperty(PASSWORD_PROPERTY, StringUtils.EMPTY);
+		return properties.getProperty(PASSWORD_PROPERTY, "");
 	}
 
 	private InputStream getPropertiesStream() throws IOException {

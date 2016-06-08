@@ -8,6 +8,7 @@ Bundle-Vendor: DisCo - Unizar
 Require-Bundle: org.eclipse.core.runtime,
  es.unizar.disco.core;bundle-version="0.1.0",
  es.unizar.disco.ssh;bundle-version="0.1.0",
- es.unizar.disco.simulation;bundle-version="0.1.0"
+ es.unizar.disco.simulation;bundle-version="0.1.0",
+ org.apache.commons.lang;bundle-version="2.6.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

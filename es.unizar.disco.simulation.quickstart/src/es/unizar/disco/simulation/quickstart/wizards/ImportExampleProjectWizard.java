@@ -13,7 +13,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -212,7 +211,7 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
 					while (entries.hasMoreElements()) {
 						ZipEntry entry = entries.nextElement();
 						if (!entry.isDirectory() && entry.getName().startsWith(EXAMPLES_DIRECTORY)) {
-							filePaths.add(entry.getName().replaceFirst(EXAMPLES_DIRECTORY, StringUtils.EMPTY));
+							filePaths.add(entry.getName().replaceFirst(EXAMPLES_DIRECTORY, ""));
 						}
 					}
 				}
