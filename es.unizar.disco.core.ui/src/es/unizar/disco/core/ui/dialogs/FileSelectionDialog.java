@@ -1,6 +1,5 @@
 package es.unizar.disco.core.ui.dialogs;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -24,7 +23,7 @@ public class FileSelectionDialog extends ElementTreeSelectionDialog {
 		@Override
 		public IStatus validate(Object[] selection) {
 			if (selection.length == 1 && selection[0] instanceof IFile) {
-				return new Status(IStatus.OK, DiceCoreUiPlugin.PLUGIN_ID, StringUtils.EMPTY);
+				return new Status(IStatus.OK, DiceCoreUiPlugin.PLUGIN_ID, "");
 			} else {
 				return new Status(IStatus.ERROR, DiceCoreUiPlugin.PLUGIN_ID, Messages.FileSelectionDialog_notFileError);
 			}
