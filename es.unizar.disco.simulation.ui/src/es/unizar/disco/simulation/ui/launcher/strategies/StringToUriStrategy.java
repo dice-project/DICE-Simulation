@@ -1,6 +1,6 @@
 package es.unizar.disco.simulation.ui.launcher.strategies;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.emf.common.util.URI;
 

@@ -177,5 +177,20 @@
             name="DICE Simulation">
       </category>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="es.unizar.disco.core.ui.preferences"
+            class="es.unizar.disco.simulation.ui.preferences.SimulationUiPreferencePage"
+            id="es.unizar.disco.simulation.ui.preferences.SimulationUiPreferencePage"
+            name="Simulation">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="es.unizar.disco.simulation.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
 
 </plugin>

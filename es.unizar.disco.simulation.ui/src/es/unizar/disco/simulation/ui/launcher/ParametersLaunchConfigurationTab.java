@@ -8,15 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.databinding.observable.Observables;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
@@ -32,8 +34,6 @@ import org.eclipse.swt.widgets.Spinner;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.util.Highlighter;
-import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
-import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.wnsim.SimulationParameters;
@@ -43,11 +43,21 @@ import es.unizar.disco.simulation.ui.launcher.strategies.StringToIntegerStrategy
 
 public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchConfigurationTab {
 
-	private final SimulationDefinition simulationDefinition;
-
-	public ParametersLaunchConfigurationTab() {
-		this.simulationDefinition = DefinitionFactory.eINSTANCE.createSimulationDefinition();
-		this.simulationDefinition.setDomainResource(DatatypesFactory.eINSTANCE.createResource());
+	protected final EContentAdapter contentAdapter = new EContentAdapter() {
+		public void notifyChanged(Notification notification) {
+			super.notifyChanged(notification);
+			if (notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__MAX_EXECUTION_TIME ||
+					notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__PARAMETERS ||
+					notification.getFeature() == DefinitionPackage.Literals.SIMULATION_PARAMETER__VALUE) {
+				if (ParametersLaunchConfigurationTab.this.isActive()) {
+					updateLaunchConfigurationDialog();
+				}
+			}
+		};
+	};
+	
+	public ParametersLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
+		super(simulationDefinition);
 		this.simulationDefinition.eAdapters().add(contentAdapter);
 	}
 
@@ -76,7 +86,7 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 			IObservableValue maxExecTimeEmfObservable = EMFProperties.value(
 					DefinitionPackage.Literals.SIMULATION_DEFINITION__MAX_EXECUTION_TIME)
 					.observe(simulationDefinition);
-			getContext().bindValue(maxExecTimeEmfObservable, WidgetProperties.selection().observe(maxTimeDateTime));
+			context.bindValue(maxExecTimeEmfObservable, WidgetProperties.selection().observe(maxTimeDateTime));
 			// @formatter:on
 		}
 
@@ -151,14 +161,14 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 			StringToIntegerStrategy s2iStrategy = new StringToIntegerStrategy();
 			IntegerToStringStrategy i2sStrategy = new IntegerToStringStrategy();
 
-			getContext().bindValue(confLevelEmfObservable, WidgetProperties.selection().observe(confidenceCombo));
-			getContext().bindValue(accuracyEmfObservable, WidgetProperties.selection().observe(accuracySpinner), s2iStrategy, i2sStrategy);
-			getContext().bindValue(seedEmfObservable, WidgetProperties.selection().observe(seedSpinner), s2iStrategy, i2sStrategy);
-			getContext().bindValue(firstTrLenEmfObservable, WidgetProperties.selection().observe(firstTrLenSpinner), s2iStrategy, i2sStrategy);
-			getContext().bindValue(trLenEmfObservable, WidgetProperties.selection().observe(trLenSpinner), s2iStrategy, i2sStrategy);
-			getContext().bindValue(minBatchEmfObservable, WidgetProperties.selection().observe(minBatchLenSpinner), s2iStrategy, i2sStrategy);
-			getContext().bindValue(maxBatchEmfObservable, WidgetProperties.selection().observe(maxBatchLenSpinner), s2iStrategy, i2sStrategy);
-			getContext().bindValue(startEmfObservable, WidgetProperties.selection().observe(startTimeSpinner), s2iStrategy, i2sStrategy);
+			context.bindValue(confLevelEmfObservable, WidgetProperties.selection().observe(confidenceCombo));
+			context.bindValue(accuracyEmfObservable, WidgetProperties.selection().observe(accuracySpinner), s2iStrategy, i2sStrategy);
+			context.bindValue(seedEmfObservable, WidgetProperties.selection().observe(seedSpinner), s2iStrategy, i2sStrategy);
+			context.bindValue(firstTrLenEmfObservable, WidgetProperties.selection().observe(firstTrLenSpinner), s2iStrategy, i2sStrategy);
+			context.bindValue(trLenEmfObservable, WidgetProperties.selection().observe(trLenSpinner), s2iStrategy, i2sStrategy);
+			context.bindValue(minBatchEmfObservable, WidgetProperties.selection().observe(minBatchLenSpinner), s2iStrategy, i2sStrategy);
+			context.bindValue(maxBatchEmfObservable, WidgetProperties.selection().observe(maxBatchLenSpinner), s2iStrategy, i2sStrategy);
+			context.bindValue(startEmfObservable, WidgetProperties.selection().observe(startTimeSpinner), s2iStrategy, i2sStrategy);
 
 		}
 
@@ -173,10 +183,6 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 	@Override
 	public Image getImage() {
 		return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_PARAMS_TAB);
-	}
-
-	@Override
-	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
 	}
 
 	@Override

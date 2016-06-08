@@ -1,13 +1,21 @@
 package es.unizar.disco.simulation.ui.launcher;
 
+import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__BACKEND;
 import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__IDENTIFIER;
+import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__WORKING_AREA;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -22,81 +30,108 @@ import org.eclipse.swt.widgets.Text;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.dialogs.ContainerSelectionDialog;
-import es.unizar.disco.simulation.models.definition.DefinitionFactory;
+import es.unizar.disco.simulation.DiceSimulationPlugin;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
+import es.unizar.disco.simulation.ui.launcher.strategies.StringToUriStrategy;
+import es.unizar.disco.simulation.ui.launcher.strategies.UriToStringStrategy;
+import es.unizar.disco.simulation.ui.preferences.PreferenceConstants;
+import es.unizar.disco.simulation.ui.util.UriConverter;
 
 public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConfigurationTab {
 
-	private final SimulationDefinition simulationDefinition = DefinitionFactory.eINSTANCE.createSimulationDefinition();
-	
+	public AdvancedLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
+		super(simulationDefinition);
+	}
+
 	@Override
 	public void createControl(Composite parent) {
 		final Composite topComposite = new Composite(parent, SWT.NONE);
 		topComposite.setLayout(new GridLayout(1, true));
-		
+
 		{ // Identifier Group
-			
+
 			final Group group = new Group(topComposite, SWT.NONE);
 			group.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-			
-			group.setLayout(new GridLayout(1,  false));
+
+			group.setLayout(new GridLayout(1, false));
 			group.setText("Simulation Identifier");
-			
+
 			final Text uuidText = new Text(group, SWT.BORDER | SWT.READ_ONLY);
 			uuidText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
-			IObservableValue uuidEmfSource = EMFProperties
-					.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__IDENTIFIER)
-					.observe(simulationDefinition);
+			IObservableValue uuidEmfSource = EMFProperties.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__IDENTIFIER).observe(simulationDefinition);
 
 			IObservableValue uuidGuiTarget = WidgetProperties.text(SWT.Modify).observe(uuidText);
-			getContext().bindValue(uuidEmfSource, uuidGuiTarget);			
+			context.bindValue(uuidEmfSource, uuidGuiTarget);
 		}
-		
+
 		{ // Intermediate Files Group
 
 			final Group group = new Group(topComposite, SWT.NONE);
 			group.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-			
-			group.setLayout(new GridLayout(2,  false));
-			group.setText("Intermediate Files");
 
-			final Button saveIntermediateButton = new Button(group, SWT.CHECK);
-			saveIntermediateButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-			saveIntermediateButton.setText("&Save intermediate files in the workspace");
-			
-			final Text inputFileText = new Text(group, SWT.BORDER);
-			inputFileText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-			
-			final Button fileButton = new Button(group, SWT.NONE);
-			fileButton.setText(Messages.MainLaunchConfigurationTab_browseLabel);
+			group.setLayout(new GridLayout(2, false));
+			group.setText("Working Area");
+
+			final Text workingAreaText = new Text(group, SWT.BORDER | SWT.READ_ONLY);
+			workingAreaText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+			final Button workingAreaButton = new Button(group, SWT.NONE);
+			workingAreaButton.setText(Messages.MainLaunchConfigurationTab_browseLabel);
 
 			final GridData buttonsGridData = new GridData(SWT.CENTER, SWT.CENTER, false, false);
 			buttonsGridData.widthHint = 100;
-			fileButton.setLayoutData(buttonsGridData);
-			
-			fileButton.addSelectionListener(new SelectionAdapter() {
+			workingAreaButton.setLayoutData(buttonsGridData);
+
+			workingAreaButton.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell());
-					dialog.open();
+					String workingArea = workingAreaText.getText();
+					if (StringUtils.isNotBlank(workingArea)) {
+						String platformString = URI.createURI(workingArea).toPlatformString(true);
+						if (platformString != null) {
+							final Path workingAreaPath = new Path(platformString);
+							IContainer container = ResourcesPlugin.getWorkspace().getRoot().getFolder(workingAreaPath);
+							dialog.setInitialSelection(container);
+						}
+					}
+					if (dialog.open() == Dialog.OK) {
+						workingAreaText.setText(UriConverter.toPlatformResourceUri(dialog.getContainer().getLocationURI()).toString());
+					}
 				}
 			});
+
+			IObservableValue workingAreaEmfSource = EMFProperties.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__WORKING_AREA)
+					.observe(simulationDefinition);
+
+			IObservableValue workingAreaGuiTarget = WidgetProperties.text(SWT.Modify).observe(workingAreaText);
+			context.bindValue(workingAreaEmfSource, workingAreaGuiTarget, new UriToStringStrategy(), new StringToUriStrategy());
 		}
-		
+
 		{ // Simulation Backend Group
 
 			final Group group = new Group(topComposite, SWT.NONE);
 			group.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
-			
-			group.setLayout(new GridLayout(1,  false));
+
+			group.setLayout(new GridLayout(1, false));
 			group.setText("Simulation backend");
 
 			Combo simBackendCombo = new Combo(group, SWT.READ_ONLY);
 			simBackendCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-						
+			for (String backend : DiceSimulationPlugin.getDefault().getSimulationBackends()) {
+				simBackendCombo.add(backend);
+			}
+			// @formatter:off
+			IObservableValue selectedBackendEmfSource = EMFProperties
+					.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__BACKEND)
+					.observe(simulationDefinition);
+			// @formatter:on
+
+			IObservableValue selectedBackendGuiTarget = WidgetProperties.selection().observe(simBackendCombo);
+			context.bindValue(selectedBackendEmfSource, selectedBackendGuiTarget);
 		}
 		setControl(topComposite);
 	}
@@ -112,13 +147,24 @@ public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConf
 	}
 
 	@Override
-	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-	}
-
-	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			simulationDefinition.setIdentifier(configuration.getAttribute(SIMULATION_DEFINITION__IDENTIFIER, (String) null));
+			// @formatter:off
+			String identifier = configuration.getAttribute(SIMULATION_DEFINITION__IDENTIFIER, (String) null);
+			String workingArea = configuration.getAttribute(SIMULATION_DEFINITION__WORKING_AREA, DiceSimulationPlugin.getDefault().getStateLocation().toString());
+			String preferredBackend = DiceSimulationUiPlugin.getDefault().getPreferenceStore().getString(PreferenceConstants.BACKEND);
+			String savedBackend = configuration.getAttribute(SIMULATION_DEFINITION__BACKEND, preferredBackend);
+			// @formatter:on
+			
+			if (!StringUtils.equals(identifier, simulationDefinition.getIdentifier())) {
+				simulationDefinition.setIdentifier(identifier);
+			}
+			if (!URI.createURI(workingArea).equals(simulationDefinition.getWorkingArea())) {
+				simulationDefinition.setWorkingArea(URI.createURI(workingArea));
+			}
+			if (!StringUtils.equals(savedBackend, simulationDefinition.getBackend())) {
+				simulationDefinition.setBackend(savedBackend);
+			}
 		} catch (CoreException e) {
 			DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
 		}
@@ -126,5 +172,7 @@ public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConf
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
+		configuration.setAttribute(SIMULATION_DEFINITION__WORKING_AREA, simulationDefinition.getWorkingArea().toString());
+		configuration.setAttribute(SIMULATION_DEFINITION__BACKEND, simulationDefinition.getBackend());
 	}
 }

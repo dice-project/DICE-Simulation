@@ -5,6 +5,8 @@ import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationD
 import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__INPUT_VARIABLES;
 import static es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__OUTPUT_VARIABLES;
 
+import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,7 +17,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.databinding.observable.list.IListChangeListener;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.ListChangeEvent;
@@ -26,10 +28,15 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -41,18 +48,21 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.layout.TableColumnLayout;
+import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ColumnViewerEditor;
 import org.eclipse.jface.viewers.ColumnViewerEditorActivationEvent;
 import org.eclipse.jface.viewers.ColumnViewerEditorActivationStrategy;
 import org.eclipse.jface.viewers.ColumnWeightData;
+import org.eclipse.jface.viewers.EditingSupport;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TableViewerEditor;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.FocusEvent;
@@ -66,14 +76,18 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
+import es.unizar.disco.core.collections.AlphanumComparator;
+import es.unizar.disco.core.collections.Function;
+import es.unizar.disco.core.collections.UnmodifiableTransformedMap;
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.dialogs.FileSelectionDialog;
-import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
@@ -81,11 +95,9 @@ import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.definition.InputVariableValue;
 import es.unizar.disco.simulation.models.definition.OutputVariable;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
-import es.unizar.disco.simulation.models.definition.Variable;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
 import es.unizar.disco.simulation.ui.dialogs.UmlFileSelectionDialog;
-import es.unizar.disco.simulation.ui.launcher.providers.ValuesColumnLabelProvider;
-import es.unizar.disco.simulation.ui.launcher.providers.ValuesEditingSupport;
+import es.unizar.disco.simulation.ui.launcher.providers.DelegatedColumnLabelProvider;
 import es.unizar.disco.simulation.ui.launcher.strategies.NotNullTobooleanStrategy;
 import es.unizar.disco.simulation.ui.launcher.strategies.StringToUriStrategy;
 import es.unizar.disco.simulation.ui.launcher.strategies.UriToStringStrategy;
@@ -93,11 +105,23 @@ import es.unizar.disco.simulation.ui.util.UriConverter;
 
 public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigurationTab {
 
-	private final SimulationDefinition simulationDefinition;
-	
-	public MainLaunchConfigurationTab() {
-		this.simulationDefinition = DefinitionFactory.eINSTANCE.createSimulationDefinition();
-		this.simulationDefinition.setDomainResource(DatatypesFactory.eINSTANCE.createResource());
+	protected final EContentAdapter contentAdapter = new EContentAdapter() {
+		public void notifyChanged(Notification notification) {
+			super.notifyChanged(notification);
+			if (notification.getFeature() == DatatypesPackage.Literals.RESOURCE__URI
+					|| notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__ACTIVE_SCENARIO
+					|| notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES
+					|| notification.getFeature() == DefinitionPackage.Literals.INPUT_VARIABLE__VALUES
+					|| notification.getFeature() == DefinitionPackage.Literals.INPUT_VARIABLE_VALUE__VALUE) {
+				if (MainLaunchConfigurationTab.this.isActive()) {
+					updateLaunchConfigurationDialog();
+				}
+			}
+		};
+	};
+
+	public MainLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
+		super(simulationDefinition);
 		this.simulationDefinition.eAdapters().add(contentAdapter);
 	}
 
@@ -116,7 +140,6 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		createScenariosGroup(sashGroup);
 		createVariableGroup(sashGroup);
 		sashGroup.setWeights(new int[] { 1, 2 });
-		sashGroup.setSashWidth(5);
 
 		setControl(topComposite);
 	}
@@ -159,9 +182,9 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 				.value(FeaturePath.fromList(DefinitionPackage.Literals.SIMULATION_DEFINITION__DOMAIN_RESOURCE, DatatypesPackage.Literals.RESOURCE__URI))
 				.observe(simulationDefinition);
 		// @formatter:on
-		
+
 		IObservableValue inputResourceGuiTarget = WidgetProperties.text(SWT.Modify).observe(inputFileText);
-		getContext().bindValue(inputResourceEmfSource, inputResourceGuiTarget, new UriToStringStrategy(), new StringToUriStrategy());
+		context.bindValue(inputResourceEmfSource, inputResourceGuiTarget, new UriToStringStrategy(), new StringToUriStrategy());
 	}
 
 	private void createScenariosGroup(Composite composite) {
@@ -181,7 +204,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		scenariosViewer.setContentProvider(new ObservableListContentProvider());
 		scenariosViewer.setInput(EMFProperties.list(DefinitionPackage.Literals.SIMULATION_DEFINITION__SCENARIOS).observe(simulationDefinition));
 		scenariosViewer.setLabelProvider(new AdapterFactoryLabelProvider(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE)));
-		
+
 		final TableColumn column = new TableColumn(scenariosViewer.getTable(), SWT.NONE);
 
 		final TableColumnLayout tableLayout = new TableColumnLayout();
@@ -195,7 +218,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		// @formatter:on
 
 		IObservableValue activeScenarioGuiTarget = ViewerProperties.singleSelection().observe(scenariosViewer);
-		getContext().bindValue(activeScenarioEmfSource, activeScenarioGuiTarget);
+		context.bindValue(activeScenarioEmfSource, activeScenarioGuiTarget);
 	}
 
 	private void createVariableGroup(Composite composite) {
@@ -204,8 +227,12 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		GridData sashLayoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		sashLayoutData.heightHint = 0;
 
+		// Observable that holds the currently selected variable
 		final IViewerObservableValue variablesSelectionObservable;
+		// The variables viewer, needs to be refreshed when the values of the
+		// currently selected variable change
 		final TableViewer variablesViewer;
+
 		{
 			final Group inputGroup = new Group(sashGroup, SWT.NONE);
 			inputGroup.setLayout(new GridLayout(1, true));
@@ -220,30 +247,29 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			variablesViewer.getTable().setHeaderVisible(false);
 
 			variablesViewer.setContentProvider(new ObservableListContentProvider());
-			variablesViewer.setInput(EMFProperties.list(DefinitionPackage.Literals.SIMULATION_DEFINITION__VARIABLES).observe(simulationDefinition));
+			variablesViewer.setInput(EMFProperties.list(DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES).observe(simulationDefinition));
 			variablesViewer.setLabelProvider(new AdapterFactoryLabelProvider(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE)));
-			variablesViewer.setSorter(new ViewerSorter());
-			variablesViewer.setFilters(new ViewerFilter[] { new InputVariablesFilter()});
-			
+			variablesViewer.setComparator(new ViewerComparator(new AlphanumComparator()));
+
 			final TableColumn column = new TableColumn(variablesViewer.getTable(), SWT.NONE);
 
 			final TableColumnLayout tableLayout = new TableColumnLayout();
 			tableLayout.setColumnData(column, new ColumnWeightData(1));
 			tableComposite.setLayout(tableLayout);
-			
+
 			// @formatter:off
 			IObservableValue variablesEmfSource = EMFProperties
-					.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__VARIABLES)
+					.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES)
 					.observe(simulationDefinition);
 			// @formatter:on
 
 			IObservableValue variablesGuiTarget = ViewerProperties.input().observe(variablesViewer);
-			getContext().bindValue(variablesEmfSource, variablesGuiTarget);
-			
+			context.bindValue(variablesEmfSource, variablesGuiTarget);
+
 			variablesSelectionObservable = ViewerProperties.singleSelection().observe(variablesViewer);
 		}
 		{
-			
+
 			final Group valuesGroup = new Group(sashGroup, SWT.NONE);
 			GridLayout valuesGroupLayout = new GridLayout(2, false);
 			valuesGroupLayout.verticalSpacing = 0;
@@ -252,10 +278,10 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 			final Text valuesText = new Text(valuesGroup, SWT.BORDER);
 			valuesText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-			
+
 			final Button addButton = new Button(valuesGroup, SWT.PUSH);
 			addButton.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_ADD));
-			
+
 			final Composite tableComposite = new Composite(valuesGroup, SWT.NONE);
 			tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
@@ -265,20 +291,19 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			valuesViewer.getTable().setHeaderVisible(false);
 
 			valuesViewer.setContentProvider(new ObservableListContentProvider());
-			
-			final IObservableList selectedVariableValuesObservable = EMFProperties.list(DefinitionPackage.Literals.INPUT_VARIABLE__VALUES).observeDetail(variablesSelectionObservable);
-			valuesViewer.setInput(selectedVariableValuesObservable);
-			
-			final TableViewerColumn valuesViewerColumn = new TableViewerColumn(valuesViewer, SWT.NONE);
-			valuesViewerColumn.setLabelProvider(new ValuesColumnLabelProvider(new AdapterFactoryLabelProvider(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE))));
-			valuesViewerColumn.setEditingSupport(new ValuesEditingSupport(valuesViewer));
 
-			TableViewerEditor.create(valuesViewer, new DoubleClickActivationStrategy(valuesViewer), ColumnViewerEditor.TABBING_HORIZONTAL | 
-			    ColumnViewerEditor.TABBING_MOVE_TO_ROW_NEIGHBOR | 
-			    ColumnViewerEditor.TABBING_VERTICAL |
-			    ColumnViewerEditor.KEYBOARD_ACTIVATION);
-			
-			
+			final IObservableList selectedVariableValuesObservable = EMFProperties.list(DefinitionPackage.Literals.INPUT_VARIABLE__VALUES)
+					.observeDetail(variablesSelectionObservable);
+			valuesViewer.setInput(selectedVariableValuesObservable);
+
+			final TableViewerColumn valuesViewerColumn = new TableViewerColumn(valuesViewer, SWT.NONE);
+			valuesViewerColumn.setLabelProvider(new DelegatedColumnLabelProvider(
+					new AdapterFactoryLabelProvider(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE))));
+			valuesViewerColumn.setEditingSupport(new ValuesEditingSupport(valuesViewer, variablesViewer));
+
+			TableViewerEditor.create(valuesViewer, new DoubleClickActivationStrategy(valuesViewer), ColumnViewerEditor.TABBING_HORIZONTAL
+					| ColumnViewerEditor.TABBING_MOVE_TO_ROW_NEIGHBOR | ColumnViewerEditor.TABBING_VERTICAL | ColumnViewerEditor.KEYBOARD_ACTIVATION);
+
 			final TableColumnLayout tableLayout = new TableColumnLayout();
 			tableLayout.setColumnData(valuesViewerColumn.getColumn(), new ColumnWeightData(1));
 			tableComposite.setLayout(tableLayout);
@@ -286,23 +311,27 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			final Composite tableButtonsComposite = new Composite(valuesGroup, SWT.NONE);
 			tableButtonsComposite.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, false, false));
 			tableButtonsComposite.setLayout(new FillLayout(SWT.VERTICAL));
-			
+
 			final Button deleteButton = new Button(tableButtonsComposite, SWT.PUSH);
-			deleteButton.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_TOOL_DELETE));
-			
+			deleteButton.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_ELCL_REMOVE));
+
+			final Button deleteAllButton = new Button(tableButtonsComposite, SWT.PUSH);
+			deleteAllButton.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_ELCL_REMOVEALL));
+
 			final Button upButton = new Button(tableButtonsComposite, SWT.PUSH);
 			upButton.setImage(DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_ETOOL16_UP));
-			
+
 			final Button downButton = new Button(tableButtonsComposite, SWT.PUSH);
 			downButton.setImage(DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_ETOOL16_DOWN));
 
 			valuesText.addFocusListener(new SwitchDefaultFocusListener(addButton));
-		
-			addButton.addSelectionListener(new AddButtonSelectionAdapter(variablesSelectionObservable, valuesViewer, valuesText));
+
+			addButton.addSelectionListener(new AddButtonSelectionAdapter(variablesSelectionObservable, variablesViewer, valuesViewer, valuesText));
 			deleteButton.addSelectionListener(new DeleteButtonSelectionAdapter(variablesSelectionObservable, valuesViewer));
+			deleteAllButton.addSelectionListener(new DeleteAllButtonSelectionAdapter(variablesSelectionObservable));
 			upButton.addSelectionListener(new UpButtonSelectionAdapter(variablesSelectionObservable, valuesViewer));
 			downButton.addSelectionListener(new DownButtonSelectionAdapter(variablesSelectionObservable, valuesViewer));
-			
+
 			selectedVariableValuesObservable.addListChangeListener(new IListChangeListener() {
 				@Override
 				public void handleListChange(ListChangeEvent event) {
@@ -312,26 +341,33 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 					}
 				}
 			});
-			
+
+			variablesViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+				@Override
+				public void selectionChanged(SelectionChangedEvent event) {
+					valuesText.setFocus();
+				}
+			});
+
 			final ControlDecoration valueTextDecoration = new ControlDecoration(valuesText, SWT.TOP | SWT.LEFT);
 			valueTextDecoration.setImage(FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION).getImage());
-			valueTextDecoration.setDescriptionText("Single numeric values add a single entry\n"
-					+ "Space-separated values add multiple entries (e.g. '1 2.3 4.56')\n"
-					+ "Three values separated by semicolons between square brackets [lower; limit; increment]\n"
-					+ "add a range of values (e.g. '[1; 5; 1]' is equivalent to '1 2 3 4 5')");
+			valueTextDecoration
+					.setDescriptionText("Single numeric values add a single entry\n" + "Space-separated values add multiple entries (e.g. '1 2.3 4.56')\n"
+							+ "Three values separated by semicolons between square brackets [lower; limit; increment]\n"
+							+ "add a range of values (e.g. '[1; 5; 1]' is equivalent to '1 2 3 4 5')");
 			valueTextDecoration.setShowOnlyOnFocus(true);
-			
+
 			final NotNullTobooleanStrategy notNullToBooleanStrategy = new NotNullTobooleanStrategy();
-			getContext().bindValue(WidgetProperties.enabled().observe(valuesText), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			getContext().bindValue(WidgetProperties.enabled().observe(valuesViewer.getTable()), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			getContext().bindValue(WidgetProperties.enabled().observe(addButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			getContext().bindValue(WidgetProperties.enabled().observe(deleteButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			getContext().bindValue(WidgetProperties.enabled().observe(upButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			getContext().bindValue(WidgetProperties.enabled().observe(downButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(valuesText), variablesSelectionObservable, null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(valuesViewer.getTable()), variablesSelectionObservable, null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(addButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(deleteButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(deleteAllButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(upButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(downButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
 		}
-		
+
 		sashGroup.setLayoutData(sashLayoutData);
-		sashGroup.setSashWidth(5);
 	}
 
 	@Override
@@ -345,41 +381,47 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 	}
 
 	@Override
-	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.removeAttribute(SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI);
-	}
-
-	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
+			// First gather all the info from the configuration
 			URI domainResourceUri = URI.createURI(configuration.getAttribute(SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, ""));
 			URI activeScenarioUri = URI.createURI(configuration.getAttribute(SIMULATION_DEFINITION__ACTIVE_SCENARIO, ""));
 			Map<String, String> inputVarsInfo = configuration.getAttribute(SIMULATION_DEFINITION__INPUT_VARIABLES, new HashMap<String, String>());
 			Map<String, String> outputVarsInfo = configuration.getAttribute(SIMULATION_DEFINITION__OUTPUT_VARIABLES, new HashMap<String, String>());
-			
+
+			// Only those values that have change should be set to avoid extra
+			// calls to updateLaunchConfigurationDialog() (which is called by
+			// 'contentAdapter')
+
+			// Set the domain resource
 			if (!domainResourceUri.equals(simulationDefinition.getDomainResource().getUri())) {
 				simulationDefinition.getDomainResource().setUri(domainResourceUri);
 			}
 
+			// Add the previously saved input variables
 			for (Entry<String, String> entry : inputVarsInfo.entrySet()) {
 				String varName = entry.getKey();
-				if (simulationDefinition.getVariable(varName) == null){
+				if (simulationDefinition.getInputVariablesMap().get(varName) == null) {
 					InputVariable var = DefinitionFactory.eINSTANCE.createInputVariable();
 					var.setName(varName);
 					var.deserializeValues(entry.getValue());
-					simulationDefinition.getVariables().add(var);
-				}
-			}
-			
-			for (Entry<String, String> entry : outputVarsInfo.entrySet()) {
-				String varName = entry.getKey();
-				if (simulationDefinition.getVariable(varName) == null){
-					OutputVariable var = DefinitionFactory.eINSTANCE.createOutputVariable();
-					var.setName(varName);
-					simulationDefinition.getVariables().add(var);
+					simulationDefinition.getInputVariables().add(var);
 				}
 			}
 
+			// Add the previously saved output variables (not shown in this GUI)
+			for (Entry<String, String> entry : outputVarsInfo.entrySet()) {
+				String varName = entry.getKey();
+				if (simulationDefinition.getOutputVariablesMap().get(varName) == null) {
+					OutputVariable var = DefinitionFactory.eINSTANCE.createOutputVariable();
+					var.setName(varName);
+					simulationDefinition.getOutputVariables().add(var);
+				}
+			}
+
+			// If we do not have and active scenario, or it has changed, try to
+			// restore it in the model. This will trigger a cleanup of the
+			// invalid/unused variables
 			if (simulationDefinition.getActiveScenario() == null || EcoreUtil.getURI(simulationDefinition.getActiveScenario()).equals(activeScenarioUri)) {
 				for (EObject scenario : simulationDefinition.getScenarios()) {
 					if (EcoreUtil.getURI(scenario).equals(activeScenarioUri)) {
@@ -394,49 +436,103 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, defaultToString(simulationDefinition.getDomainResource().getUri()));
-		EObject activeScenario = simulationDefinition.getActiveScenario();
-		if (activeScenario != null) {
-			configuration.setAttribute(SIMULATION_DEFINITION__ACTIVE_SCENARIO, EcoreUtil.getURI(activeScenario).toString());
-		} else {
-			configuration.removeAttribute(SIMULATION_DEFINITION__ACTIVE_SCENARIO);
-		}
-		Map<String, String> inputVarsInfo = new HashMap<>();
-		Map<String, String> outputVarsInfo = new HashMap<>();
-		for (Variable var : simulationDefinition.getVariables()) {
-			String varName = var.getName();
-			if (var instanceof InputVariable) {
-				inputVarsInfo.put(varName, ((InputVariable) var).serializeValues());
-			} else {
-				outputVarsInfo.put(varName, StringUtils.EMPTY);
-			}
-		}
+		// Gather information to be saved
+		// @formatter:off
+		String domainResourceUri = 
+				defaultToString(simulationDefinition.getDomainResource().getUri());
+		String activeScenarioUri = 
+				defaultToString(simulationDefinition.getActiveScenario() != null ? EcoreUtil.getURI(simulationDefinition.getActiveScenario()) : null);
+		Map<String, String> inputVarsInfo = 
+				new UnmodifiableTransformedMap<String, InputVariable, String>(simulationDefinition.getInputVariablesMap(), new InputVariableToSerializedValues());
+		Map<String, String> outputVarsInfo =
+				new UnmodifiableTransformedMap<String, OutputVariable, String>(simulationDefinition.getOutputVariablesMap(), new OutputVariableToEmptyString());
+		// @formatter:on
+
+		// Save persistent info
+		configuration.setAttribute(SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, domainResourceUri);
+		configuration.setAttribute(SIMULATION_DEFINITION__ACTIVE_SCENARIO, activeScenarioUri);
 		configuration.setAttribute(SIMULATION_DEFINITION__INPUT_VARIABLES, inputVarsInfo);
 		configuration.setAttribute(SIMULATION_DEFINITION__OUTPUT_VARIABLES, outputVarsInfo);
 	}
 
-	private final class InputVariablesFilter extends ViewerFilter {
+	@Override
+	public boolean isValid(ILaunchConfiguration launchConfig) {
+		if (simulationDefinition.getDomainResource().getUri() == null) {
+			setErrorMessage("A domain UML model must be selected");
+			return false;
+		}
+		if (simulationDefinition.getScenarios().isEmpty()) {
+			setErrorMessage("The selected model does not declare any Scenarios");
+			return false;
+		}
+		if (simulationDefinition.getActiveScenario() == null) {
+			setErrorMessage("An active scenario must be selected");
+			return false;
+		}
+		for (InputVariable inputVariable : simulationDefinition.getInputVariables()) {
+			Diagnostic diagnostic = Diagnostician.INSTANCE.validate(inputVariable);
+			if (diagnostic.getSeverity() != Diagnostic.OK) {
+				if (!diagnostic.getChildren().isEmpty()) {
+					setErrorMessage(diagnostic.getChildren().get(0).getMessage());
+				} else {
+					setErrorMessage(diagnostic.getMessage());
+				}
+				return false;
+			}
+		}
+		setErrorMessage(null);
+		return true;
+	}
+
+	/**
+	 * {@link Function} which transforms an {@link InputVariable} to a
+	 * {@link String} containing its serialized {@link InputVariableValue}s
+	 * 
+	 * @author agomez
+	 *
+	 */
+	private final class InputVariableToSerializedValues implements Function<InputVariable, String> {
 		@Override
-		public boolean select(Viewer viewer, Object parentElement, Object element) {
-			return element instanceof InputVariable;
+		public String apply(InputVariable obj) {
+			return obj != null ? obj.serializeValues() : "";
 		}
 	}
 
+	/**
+	 * {@link Function} which always returns an empty String ("") value
+	 * 
+	 * @author agomez
+	 *
+	 */
+	private final class OutputVariableToEmptyString implements Function<OutputVariable, String> {
+		@Override
+		public String apply(OutputVariable obj) {
+			return "";
+		}
+	}
+
+	/**
+	 * {@link FocusListener} that changes and restores the {@link Shell} default
+	 * button to a specific {@link Button}
+	 * 
+	 * @author agomez
+	 *
+	 */
 	private final class SwitchDefaultFocusListener implements FocusListener {
-		
+
 		private final Button addButton;
-		
+
 		private Button prevDefaultButton;
-	
+
 		private SwitchDefaultFocusListener(Button addButton) {
 			this.addButton = addButton;
 		}
-	
+
 		@Override
 		public void focusLost(FocusEvent e) {
 			getShell().setDefaultButton(prevDefaultButton);
 		}
-	
+
 		@Override
 		public void focusGained(FocusEvent e) {
 			prevDefaultButton = getShell().getDefaultButton();
@@ -444,40 +540,64 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		}
 	}
 
+	/**
+	 * {@link ColumnViewerEditorActivationStrategy} that enables editing by
+	 * double clicking
+	 * 
+	 * @author agomez
+	 *
+	 */
 	private final class DoubleClickActivationStrategy extends ColumnViewerEditorActivationStrategy {
 		private DoubleClickActivationStrategy(ColumnViewer viewer) {
 			super(viewer);
 		}
-	
+
 		protected boolean isEditorActivationEvent(ColumnViewerEditorActivationEvent event) {
-		    // Enable editor only with mouse double click
-		    if (event.eventType == ColumnViewerEditorActivationEvent.MOUSE_DOUBLE_CLICK_SELECTION) {
-		        return true;
-		    }
-		    return false;
+			// Enable editor only with mouse double click
+			if (event.eventType == ColumnViewerEditorActivationEvent.MOUSE_DOUBLE_CLICK_SELECTION) {
+				return true;
+			}
+			return false;
 		}
 	}
 
+	/**
+	 * {@link SelectionAdapter} of the add button of this
+	 * {@link AbstractLaunchConfigurationTab}
+	 * 
+	 * @author agomez
+	 *
+	 */
 	private final class AddButtonSelectionAdapter extends SelectionAdapter {
-		
+
 		private final Text valuesText;
-		
+
 		private final IViewerObservableValue variablesSelectionObservable;
-	
-		private final TableViewer valuesViewer;
-		
-		private AddButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer valuesViewer, Text valuesText) {
+
+		private final TableViewer detailsViewer;
+
+		private final TableViewer masterViewer;
+
+		private AddButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer master, TableViewer detail, Text valuesText) {
 			this.valuesText = valuesText;
 			this.variablesSelectionObservable = variablesSelectionObservable;
-			this.valuesViewer = valuesViewer;
+			this.detailsViewer = detail;
+			this.masterViewer = master;
 		}
-	
+
 		@Override
 		public void widgetSelected(SelectionEvent e) {
+
+			if (valuesText.getText().isEmpty()) {
+				int selected = masterViewer.getTable().getSelectionIndex();
+				int index = (selected + 1) % (masterViewer.getTable().getItemCount());
+				masterViewer.setSelection(new StructuredSelection(masterViewer.getElementAt(index)), true);
+			}
+
 			List<InputVariableValue> newValues = new ArrayList<>();
 			InputVariable variable = (InputVariable) variablesSelectionObservable.getValue();
 			String text = valuesText.getText().trim();
-	
+
 			Pattern listPattern = Pattern.compile("^(-?\\d*(\\.\\d+)?\\s*)+$");
 			Matcher listMatcher = listPattern.matcher(text);
 			if (listMatcher.matches()) {
@@ -489,14 +609,17 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 					newValues.add(value);
 				}
 			} else {
-				Pattern rangePattern = Pattern.compile("^\\[\\s*(?<start>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<limit>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<increment>-?\\d*(?:\\.\\d+)?)\\s*\\]$");
+				Pattern rangePattern = Pattern
+						.compile("^\\[\\s*(?<start>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<limit>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<increment>-?\\d*(?:\\.\\d+)?)\\s*\\]$");
 				Matcher rangeMatcher = rangePattern.matcher(text);
 				if (rangeMatcher.matches()) {
-					double start = new Double(rangeMatcher.group("start"));
-					double limit = new Double(rangeMatcher.group("limit"));
-					double increment = new Double(rangeMatcher.group("increment"));
-					if (Math.abs(limit - start - increment) < Math.abs(limit - start)) { 
-						for (Double number = start; number <= limit; number += increment) {
+					// We perform the calculations using big decimals to avoid
+					// rounding issues
+					BigDecimal start = new BigDecimal(rangeMatcher.group("start"));
+					BigDecimal limit = new BigDecimal(rangeMatcher.group("limit"));
+					BigDecimal increment = new BigDecimal(rangeMatcher.group("increment"));
+					if (limit.subtract(start).subtract(increment).abs().compareTo(limit.subtract(start).abs()) < 0) {
+						for (BigDecimal number = start; number.compareTo(limit) <= 0; number = number.add(increment)) {
 							InputVariableValue value = DefinitionFactory.eINSTANCE.createInputVariableValue();
 							value.setValue(number);
 							newValues.add(value);
@@ -505,23 +628,41 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 				}
 			}
 			if (!newValues.isEmpty()) {
-				variable.getValues().addAll(newValues);
-				valuesText.setText(StringUtils.EMPTY);
-				valuesViewer.setSelection(new StructuredSelection(newValues));
+				boolean doit = true;
+				if (newValues.size() > 10) {
+					MessageBox dialog = new MessageBox(getShell(), SWT.ICON_QUESTION | SWT.OK | SWT.CANCEL);
+					dialog.setText("Continue");
+					dialog.setMessage(MessageFormat.format("You are about to add {0} new values. Adding too many variable values may take some time and, in extreme cases, may even crash your IDE.\nAre you sure you want to continue?", newValues.size()));
+					if (dialog.open() == SWT.CANCEL) {
+						doit = false;
+					}
+				}
+				if (doit) {
+					variable.getValues().addAll(newValues);
+					valuesText.setText("");
+					detailsViewer.setSelection(new StructuredSelection(newValues));
+				}
 			}
 			valuesText.setFocus();
 		}
 	}
 
+	/**
+	 * {@link SelectionAdapter} of the delete button of this
+	 * {@link AbstractLaunchConfigurationTab}
+	 * 
+	 * @author agomez
+	 *
+	 */
 	private final class DeleteButtonSelectionAdapter extends SelectionAdapter {
 		private final IViewerObservableValue variablesSelectionObservable;
 		private final TableViewer valuesViewer;
-	
+
 		private DeleteButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer valuesViewer) {
 			this.variablesSelectionObservable = variablesSelectionObservable;
 			this.valuesViewer = valuesViewer;
 		}
-	
+
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			InputVariable variable = (InputVariable) variablesSelectionObservable.getValue();
@@ -529,15 +670,43 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		}
 	}
 
+	/**
+	 * {@link SelectionAdapter} of the delete all button of this
+	 * {@link AbstractLaunchConfigurationTab}
+	 * 
+	 * @author agomez
+	 *
+	 */
+	private final class DeleteAllButtonSelectionAdapter extends SelectionAdapter {
+		private final IViewerObservableValue variablesSelectionObservable;
+
+		private DeleteAllButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable) {
+			this.variablesSelectionObservable = variablesSelectionObservable;
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+			InputVariable variable = (InputVariable) variablesSelectionObservable.getValue();
+			variable.getValues().clear();
+		}
+	}
+
+	/**
+	 * {@link SelectionAdapter} of the move up button of this
+	 * {@link AbstractLaunchConfigurationTab}
+	 * 
+	 * @author agomez
+	 *
+	 */
 	private final class UpButtonSelectionAdapter extends SelectionAdapter {
 		private final TableViewer valuesViewer;
 		private final IViewerObservableValue variablesSelectionObservable;
-	
+
 		private UpButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer valuesViewer) {
 			this.valuesViewer = valuesViewer;
 			this.variablesSelectionObservable = variablesSelectionObservable;
 		}
-	
+
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			InputVariable variable = (InputVariable) variablesSelectionObservable.getValue();
@@ -549,21 +718,28 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 				} else if (selection.contains(variable.getValues().get(currentPos - 1))) {
 					continue;
 				} else {
-					variable.getValues().move(currentPos - 1 , currentPos);
+					variable.getValues().move(currentPos - 1, currentPos);
 				}
 			}
 		}
 	}
 
+	/**
+	 * {@link SelectionAdapter} of the move down button of this
+	 * {@link AbstractLaunchConfigurationTab}
+	 * 
+	 * @author agomez
+	 *
+	 */
 	private final class DownButtonSelectionAdapter extends SelectionAdapter {
 		private final IViewerObservableValue variablesSelectionObservable;
 		private final TableViewer valuesViewer;
-	
+
 		private DownButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer valuesViewer) {
 			this.variablesSelectionObservable = variablesSelectionObservable;
 			this.valuesViewer = valuesViewer;
 		}
-	
+
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			InputVariable variable = (InputVariable) variablesSelectionObservable.getValue();
@@ -576,9 +752,46 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 				} else if (selection.contains(variable.getValues().get(currentPos + 1))) {
 					continue;
 				} else {
-					variable.getValues().move(currentPos + 1 , currentPos);
+					variable.getValues().move(currentPos + 1, currentPos);
 				}
 			}
+		}
+	}
+
+	private class ValuesEditingSupport extends EditingSupport {
+
+		final private TableViewer master;
+
+		final private CellEditor editor;
+
+		public ValuesEditingSupport(TableViewer detail, TableViewer master) {
+			super(detail);
+			this.editor = new TextCellEditor(detail.getTable());
+			this.master = master;
+		}
+
+		@Override
+		protected void setValue(Object element, Object value) {
+			Number number = (Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, (String) value);
+			InputVariableValue inputVariableValue = (InputVariableValue) element;
+			inputVariableValue.setValue(number);
+			getViewer().update(element, null);
+			master.update(inputVariableValue.getVariable(), null);
+		}
+
+		@Override
+		protected Object getValue(Object element) {
+			return EcoreUtil.convertToString(DatatypesPackage.Literals.NUMBER, ((InputVariableValue) element).getValue());
+		}
+
+		@Override
+		protected CellEditor getCellEditor(Object element) {
+			return editor;
+		}
+
+		@Override
+		protected boolean canEdit(Object element) {
+			return true;
 		}
 	}
 }

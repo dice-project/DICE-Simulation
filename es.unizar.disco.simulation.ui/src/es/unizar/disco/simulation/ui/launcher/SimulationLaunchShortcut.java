@@ -3,7 +3,6 @@ package es.unizar.disco.simulation.ui.launcher;
 import java.net.URI;
 import java.text.MessageFormat;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -91,7 +90,7 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		
 		// We search through the existing configurations if the actual configuration has been previously defined
 		for (ILaunchConfiguration previousConfiguration : existingConfigs) {
-			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, StringUtils.EMPTY); 
+			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, ""); 
 			if (previousFile.equals(platformResourceUri.toString())) {
 				return previousConfiguration;
 			}

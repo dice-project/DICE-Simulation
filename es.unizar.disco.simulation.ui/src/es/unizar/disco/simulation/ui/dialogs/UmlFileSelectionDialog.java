@@ -2,7 +2,6 @@ package es.unizar.disco.simulation.ui.dialogs;
 
 import java.io.File;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IStatus;
@@ -28,7 +27,7 @@ public class UmlFileSelectionDialog extends FileSelectionDialog {
 			} else {
 				IFile file = (IFile) selection[0];
 				if (isUmlModel(new File(file.getLocationURI()))) {
-					return new Status(IStatus.OK, DiceSimulationUiPlugin.PLUGIN_ID, StringUtils.EMPTY);
+					return new Status(IStatus.OK, DiceSimulationUiPlugin.PLUGIN_ID, "");
 				} else {
 					return new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, "Selected element is not a valid UML2 file");
 				}

@@ -4,10 +4,10 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-public class ValuesColumnLabelProvider extends ColumnLabelProvider {
+public class DelegatedColumnLabelProvider extends ColumnLabelProvider {
 	private ILabelProvider labelProvider;
 	
-	public ValuesColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
+	public DelegatedColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
 		this.labelProvider = delegatedLabelProvider;
 	}
 
