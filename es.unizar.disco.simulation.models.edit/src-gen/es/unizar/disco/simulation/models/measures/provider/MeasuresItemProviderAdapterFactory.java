@@ -72,72 +72,49 @@ public class MeasuresItemProviderAdapterFactory extends MeasuresAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.measures.Throughput} instances.
+	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ThroughputItemProvider throughputItemProvider;
+	protected DomainMeasureDefinitionItemProvider domainMeasureDefinitionItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.measures.Throughput}.
+	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createThroughputAdapter() {
-		if (throughputItemProvider == null) {
-			throughputItemProvider = new ThroughputItemProvider(this);
+	public Adapter createDomainMeasureDefinitionAdapter() {
+		if (domainMeasureDefinitionItemProvider == null) {
+			domainMeasureDefinitionItemProvider = new DomainMeasureDefinitionItemProvider(this);
 		}
 
-		return throughputItemProvider;
+		return domainMeasureDefinitionItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.measures.ResponseTime} instances.
+	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ResponseTimeItemProvider responseTimeItemProvider;
+	protected EntryItemProvider entryItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.measures.ResponseTime}.
+	 * This creates an adapter for a {@link java.util.Map.Entry}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createResponseTimeAdapter() {
-		if (responseTimeItemProvider == null) {
-			responseTimeItemProvider = new ResponseTimeItemProvider(this);
+	public Adapter createEntryAdapter() {
+		if (entryItemProvider == null) {
+			entryItemProvider = new EntryItemProvider(this);
 		}
 
-		return responseTimeItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.measures.Utilization} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UtilizationItemProvider utilizationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.measures.Utilization}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUtilizationAdapter() {
-		if (utilizationItemProvider == null) {
-			utilizationItemProvider = new UtilizationItemProvider(this);
-		}
-
-		return utilizationItemProvider;
+		return entryItemProvider;
 	}
 
 	/**
@@ -239,9 +216,8 @@ public class MeasuresItemProviderAdapterFactory extends MeasuresAdapterFactory i
 	 * @generated
 	 */
 	public void dispose() {
-		if (throughputItemProvider != null) throughputItemProvider.dispose();
-		if (responseTimeItemProvider != null) responseTimeItemProvider.dispose();
-		if (utilizationItemProvider != null) utilizationItemProvider.dispose();
+		if (domainMeasureDefinitionItemProvider != null) domainMeasureDefinitionItemProvider.dispose();
+		if (entryItemProvider != null) entryItemProvider.dispose();
 	}
 
 }

@@ -77,22 +77,13 @@ public interface DefinitionPackage extends EPackage {
 	int SIMULATION_DEFINITION__IDENTIFIER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_DEFINITION__NAME = 1;
-
-	/**
 	 * The feature id for the '<em><b>Invocations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__INVOCATIONS = 2;
+	int SIMULATION_DEFINITION__INVOCATIONS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' map.
@@ -101,7 +92,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__PARAMETERS = 3;
+	int SIMULATION_DEFINITION__PARAMETERS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Active Scenario</b></em>' reference.
@@ -110,7 +101,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__ACTIVE_SCENARIO = 4;
+	int SIMULATION_DEFINITION__ACTIVE_SCENARIO = 3;
 
 	/**
 	 * The feature id for the '<em><b>Scenarios</b></em>' reference list.
@@ -119,16 +110,16 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__SCENARIOS = 5;
+	int SIMULATION_DEFINITION__SCENARIOS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Input Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__VARIABLES = 6;
+	int SIMULATION_DEFINITION__INPUT_VARIABLES = 5;
 
 	/**
 	 * The feature id for the '<em><b>Domain Resource</b></em>' containment reference.
@@ -137,7 +128,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__DOMAIN_RESOURCE = 7;
+	int SIMULATION_DEFINITION__DOMAIN_RESOURCE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Max Execution Time</b></em>' attribute.
@@ -146,7 +137,70 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__MAX_EXECUTION_TIME = 8;
+	int SIMULATION_DEFINITION__MAX_EXECUTION_TIME = 7;
+
+	/**
+	 * The feature id for the '<em><b>Output Variables</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__OUTPUT_VARIABLES = 8;
+
+	/**
+	 * The feature id for the '<em><b>Working Area</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__WORKING_AREA = 9;
+
+	/**
+	 * The feature id for the '<em><b>Declared Measures</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__DECLARED_MEASURES = 10;
+
+	/**
+	 * The feature id for the '<em><b>Measures To Compute</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__MEASURES_TO_COMPUTE = 11;
+
+	/**
+	 * The feature id for the '<em><b>Backend</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__BACKEND = 12;
+
+	/**
+	 * The feature id for the '<em><b>Possible Configurations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS = 13;
+
+	/**
+	 * The feature id for the '<em><b>Active Configurations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS = 14;
 
 	/**
 	 * The number of structural features of the '<em>Simulation Definition</em>' class.
@@ -155,7 +209,43 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION_FEATURE_COUNT = 9;
+	int SIMULATION_DEFINITION_FEATURE_COUNT = 15;
+
+	/**
+	 * The operation id for the '<em>Get Variables</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION___GET_VARIABLES = 0;
+
+	/**
+	 * The operation id for the '<em>Get Variables Map</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION___GET_VARIABLES_MAP = 1;
+
+	/**
+	 * The operation id for the '<em>Get Input Variables Map</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION___GET_INPUT_VARIABLES_MAP = 2;
+
+	/**
+	 * The operation id for the '<em>Get Output Variables Map</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION___GET_OUTPUT_VARIABLES_MAP = 3;
 
 	/**
 	 * The operation id for the '<em>Sync Scenarios</em>' operation.
@@ -164,7 +254,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION___SYNC_SCENARIOS = 0;
+	int SIMULATION_DEFINITION___SYNC_SCENARIOS = 4;
 
 	/**
 	 * The operation id for the '<em>Sync Variables</em>' operation.
@@ -173,16 +263,25 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION___SYNC_VARIABLES = 1;
+	int SIMULATION_DEFINITION___SYNC_VARIABLES = 5;
 
 	/**
-	 * The operation id for the '<em>Get Variable</em>' operation.
+	 * The operation id for the '<em>Sync Domain Measure Definitions</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION___GET_VARIABLE__STRING = 2;
+	int SIMULATION_DEFINITION___SYNC_DOMAIN_MEASURE_DEFINITIONS = 6;
+
+	/**
+	 * The operation id for the '<em>Sync Possible Variable Configurations</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION___SYNC_POSSIBLE_VARIABLE_CONFIGURATIONS = 7;
 
 	/**
 	 * The number of operations of the '<em>Simulation Definition</em>' class.
@@ -191,7 +290,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION_OPERATION_COUNT = 3;
+	int SIMULATION_DEFINITION_OPERATION_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.definition.impl.SimulationParameterImpl <em>Simulation Parameter</em>}' class.
@@ -305,13 +404,22 @@ public interface DefinitionPackage extends EPackage {
 	int INPUT_VARIABLE__VALUES = VARIABLE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Assignments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE__ASSIGNMENTS = VARIABLE_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Input Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_VARIABLE_FEATURE_COUNT = VARIABLE_FEATURE_COUNT + 1;
+	int INPUT_VARIABLE_FEATURE_COUNT = VARIABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Deserialize Values</em>' operation.
@@ -377,7 +485,6 @@ public interface DefinitionPackage extends EPackage {
 	 */
 	int OUTPUT_VARIABLE_OPERATION_COUNT = VARIABLE_OPERATION_COUNT + 0;
 
-
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.definition.impl.InputVariableValueImpl <em>Input Variable Value</em>}' class.
 	 * <!-- begin-user-doc -->
@@ -398,13 +505,31 @@ public interface DefinitionPackage extends EPackage {
 	int INPUT_VARIABLE_VALUE__VALUE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Assignments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE_VALUE__ASSIGNMENTS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_VARIABLE_VALUE__VARIABLE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Input Variable Value</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_VARIABLE_VALUE_FEATURE_COUNT = 1;
+	int INPUT_VARIABLE_VALUE_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Input Variable Value</em>' class.
@@ -414,6 +539,107 @@ public interface DefinitionPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_VARIABLE_VALUE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.definition.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.definition.impl.VariableAssignmentImpl
+	 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getVariableAssignment()
+	 * @generated
+	 */
+	int VARIABLE_ASSIGNMENT = 6;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT__VALUE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Configuration</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT__CONFIGURATION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT__VARIABLE = 2;
+
+	/**
+	 * The number of structural features of the '<em>Variable Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Variable Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.definition.impl.VariableConfigurationImpl <em>Variable Configuration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.definition.impl.VariableConfigurationImpl
+	 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getVariableConfiguration()
+	 * @generated
+	 */
+	int VARIABLE_CONFIGURATION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_CONFIGURATION__ASSIGNMENTS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Variable Configuration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_CONFIGURATION_FEATURE_COUNT = 1;
+
+	/**
+	 * The operation id for the '<em>Is Equivalent</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_CONFIGURATION___IS_EQUIVALENT__VARIABLECONFIGURATION = 0;
+
+	/**
+	 * The number of operations of the '<em>Variable Configuration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_CONFIGURATION_OPERATION_COUNT = 1;
 
 
 	/**
@@ -436,17 +662,6 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSimulationDefinition_Identifier();
-
-	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getName()
-	 * @see #getSimulationDefinition()
-	 * @generated
-	 */
-	EAttribute getSimulationDefinition_Name();
 
 	/**
 	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getInvocations <em>Invocations</em>}'.
@@ -493,15 +708,15 @@ public interface DefinitionPackage extends EPackage {
 	EReference getSimulationDefinition_Scenarios();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables <em>Variables</em>}'.
+	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getInputVariables <em>Input Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variables</em>'.
-	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables()
+	 * @return the meta object for the containment reference list '<em>Input Variables</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getInputVariables()
 	 * @see #getSimulationDefinition()
 	 * @generated
 	 */
-	EReference getSimulationDefinition_Variables();
+	EReference getSimulationDefinition_InputVariables();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getDomainResource <em>Domain Resource</em>}'.
@@ -526,6 +741,123 @@ public interface DefinitionPackage extends EPackage {
 	EAttribute getSimulationDefinition_MaxExecutionTime();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getOutputVariables <em>Output Variables</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Output Variables</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getOutputVariables()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EReference getSimulationDefinition_OutputVariables();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getWorkingArea <em>Working Area</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Working Area</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getWorkingArea()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EAttribute getSimulationDefinition_WorkingArea();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getDeclaredMeasures <em>Declared Measures</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Declared Measures</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getDeclaredMeasures()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EReference getSimulationDefinition_DeclaredMeasures();
+
+	/**
+	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getMeasuresToCompute <em>Measures To Compute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Measures To Compute</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getMeasuresToCompute()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EReference getSimulationDefinition_MeasuresToCompute();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getBackend <em>Backend</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Backend</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getBackend()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EAttribute getSimulationDefinition_Backend();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getPossibleConfigurations <em>Possible Configurations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Possible Configurations</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getPossibleConfigurations()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EReference getSimulationDefinition_PossibleConfigurations();
+
+	/**
+	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveConfigurations <em>Active Configurations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Active Configurations</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveConfigurations()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EReference getSimulationDefinition_ActiveConfigurations();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables() <em>Get Variables</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Variables</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables()
+	 * @generated
+	 */
+	EOperation getSimulationDefinition__GetVariables();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariablesMap() <em>Get Variables Map</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Variables Map</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariablesMap()
+	 * @generated
+	 */
+	EOperation getSimulationDefinition__GetVariablesMap();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getInputVariablesMap() <em>Get Input Variables Map</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Input Variables Map</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getInputVariablesMap()
+	 * @generated
+	 */
+	EOperation getSimulationDefinition__GetInputVariablesMap();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getOutputVariablesMap() <em>Get Output Variables Map</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Output Variables Map</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getOutputVariablesMap()
+	 * @generated
+	 */
+	EOperation getSimulationDefinition__GetOutputVariablesMap();
+
+	/**
 	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#syncScenarios() <em>Sync Scenarios</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -546,14 +878,24 @@ public interface DefinitionPackage extends EPackage {
 	EOperation getSimulationDefinition__SyncVariables();
 
 	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariable(java.lang.String) <em>Get Variable</em>}' operation.
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#syncDomainMeasureDefinitions() <em>Sync Domain Measure Definitions</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Variable</em>' operation.
-	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariable(java.lang.String)
+	 * @return the meta object for the '<em>Sync Domain Measure Definitions</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#syncDomainMeasureDefinitions()
 	 * @generated
 	 */
-	EOperation getSimulationDefinition__GetVariable__String();
+	EOperation getSimulationDefinition__SyncDomainMeasureDefinitions();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#syncPossibleVariableConfigurations() <em>Sync Possible Variable Configurations</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Sync Possible Variable Configurations</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#syncPossibleVariableConfigurations()
+	 * @generated
+	 */
+	EOperation getSimulationDefinition__SyncPossibleVariableConfigurations();
 
 	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Simulation Parameter</em>}'.
@@ -632,6 +974,17 @@ public interface DefinitionPackage extends EPackage {
 	EReference getInputVariable_Values();
 
 	/**
+	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.definition.InputVariable#getAssignments <em>Assignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Assignments</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.InputVariable#getAssignments()
+	 * @see #getInputVariable()
+	 * @generated
+	 */
+	EReference getInputVariable_Assignments();
+
+	/**
 	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.InputVariable#deserializeValues(java.lang.String) <em>Deserialize Values</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -683,6 +1036,102 @@ public interface DefinitionPackage extends EPackage {
 	EAttribute getInputVariableValue_Value();
 
 	/**
+	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.definition.InputVariableValue#getAssignments <em>Assignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Assignments</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.InputVariableValue#getAssignments()
+	 * @see #getInputVariableValue()
+	 * @generated
+	 */
+	EReference getInputVariableValue_Assignments();
+
+	/**
+	 * Returns the meta object for the container reference '{@link es.unizar.disco.simulation.models.definition.InputVariableValue#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Variable</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.InputVariableValue#getVariable()
+	 * @see #getInputVariableValue()
+	 * @generated
+	 */
+	EReference getInputVariableValue_Variable();
+
+	/**
+	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.definition.VariableAssignment <em>Variable Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Assignment</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.VariableAssignment
+	 * @generated
+	 */
+	EClass getVariableAssignment();
+
+	/**
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.definition.VariableAssignment#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Value</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.VariableAssignment#getValue()
+	 * @see #getVariableAssignment()
+	 * @generated
+	 */
+	EReference getVariableAssignment_Value();
+
+	/**
+	 * Returns the meta object for the container reference '{@link es.unizar.disco.simulation.models.definition.VariableAssignment#getConfiguration <em>Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Configuration</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.VariableAssignment#getConfiguration()
+	 * @see #getVariableAssignment()
+	 * @generated
+	 */
+	EReference getVariableAssignment_Configuration();
+
+	/**
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.definition.VariableAssignment#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Variable</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.VariableAssignment#getVariable()
+	 * @see #getVariableAssignment()
+	 * @generated
+	 */
+	EReference getVariableAssignment_Variable();
+
+	/**
+	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.definition.VariableConfiguration <em>Variable Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Configuration</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.VariableConfiguration
+	 * @generated
+	 */
+	EClass getVariableConfiguration();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.VariableConfiguration#getAssignments <em>Assignments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Assignments</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.VariableConfiguration#getAssignments()
+	 * @see #getVariableConfiguration()
+	 * @generated
+	 */
+	EReference getVariableConfiguration_Assignments();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.VariableConfiguration#isEquivalent(es.unizar.disco.simulation.models.definition.VariableConfiguration) <em>Is Equivalent</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Equivalent</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.VariableConfiguration#isEquivalent(es.unizar.disco.simulation.models.definition.VariableConfiguration)
+	 * @generated
+	 */
+	EOperation getVariableConfiguration__IsEquivalent__VariableConfiguration();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -724,14 +1173,6 @@ public interface DefinitionPackage extends EPackage {
 		EAttribute SIMULATION_DEFINITION__IDENTIFIER = eINSTANCE.getSimulationDefinition_Identifier();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SIMULATION_DEFINITION__NAME = eINSTANCE.getSimulationDefinition_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Invocations</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -764,12 +1205,12 @@ public interface DefinitionPackage extends EPackage {
 		EReference SIMULATION_DEFINITION__SCENARIOS = eINSTANCE.getSimulationDefinition_Scenarios();
 
 		/**
-		 * The meta object literal for the '<em><b>Variables</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Input Variables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMULATION_DEFINITION__VARIABLES = eINSTANCE.getSimulationDefinition_Variables();
+		EReference SIMULATION_DEFINITION__INPUT_VARIABLES = eINSTANCE.getSimulationDefinition_InputVariables();
 
 		/**
 		 * The meta object literal for the '<em><b>Domain Resource</b></em>' containment reference feature.
@@ -788,6 +1229,94 @@ public interface DefinitionPackage extends EPackage {
 		EAttribute SIMULATION_DEFINITION__MAX_EXECUTION_TIME = eINSTANCE.getSimulationDefinition_MaxExecutionTime();
 
 		/**
+		 * The meta object literal for the '<em><b>Output Variables</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_DEFINITION__OUTPUT_VARIABLES = eINSTANCE.getSimulationDefinition_OutputVariables();
+
+		/**
+		 * The meta object literal for the '<em><b>Working Area</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_DEFINITION__WORKING_AREA = eINSTANCE.getSimulationDefinition_WorkingArea();
+
+		/**
+		 * The meta object literal for the '<em><b>Declared Measures</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_DEFINITION__DECLARED_MEASURES = eINSTANCE.getSimulationDefinition_DeclaredMeasures();
+
+		/**
+		 * The meta object literal for the '<em><b>Measures To Compute</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_DEFINITION__MEASURES_TO_COMPUTE = eINSTANCE.getSimulationDefinition_MeasuresToCompute();
+
+		/**
+		 * The meta object literal for the '<em><b>Backend</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_DEFINITION__BACKEND = eINSTANCE.getSimulationDefinition_Backend();
+
+		/**
+		 * The meta object literal for the '<em><b>Possible Configurations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS = eINSTANCE.getSimulationDefinition_PossibleConfigurations();
+
+		/**
+		 * The meta object literal for the '<em><b>Active Configurations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS = eINSTANCE.getSimulationDefinition_ActiveConfigurations();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Variables</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SIMULATION_DEFINITION___GET_VARIABLES = eINSTANCE.getSimulationDefinition__GetVariables();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Variables Map</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SIMULATION_DEFINITION___GET_VARIABLES_MAP = eINSTANCE.getSimulationDefinition__GetVariablesMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Input Variables Map</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SIMULATION_DEFINITION___GET_INPUT_VARIABLES_MAP = eINSTANCE.getSimulationDefinition__GetInputVariablesMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Output Variables Map</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SIMULATION_DEFINITION___GET_OUTPUT_VARIABLES_MAP = eINSTANCE.getSimulationDefinition__GetOutputVariablesMap();
+
+		/**
 		 * The meta object literal for the '<em><b>Sync Scenarios</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -804,12 +1333,20 @@ public interface DefinitionPackage extends EPackage {
 		EOperation SIMULATION_DEFINITION___SYNC_VARIABLES = eINSTANCE.getSimulationDefinition__SyncVariables();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Variable</b></em>' operation.
+		 * The meta object literal for the '<em><b>Sync Domain Measure Definitions</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation SIMULATION_DEFINITION___GET_VARIABLE__STRING = eINSTANCE.getSimulationDefinition__GetVariable__String();
+		EOperation SIMULATION_DEFINITION___SYNC_DOMAIN_MEASURE_DEFINITIONS = eINSTANCE.getSimulationDefinition__SyncDomainMeasureDefinitions();
+
+		/**
+		 * The meta object literal for the '<em><b>Sync Possible Variable Configurations</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SIMULATION_DEFINITION___SYNC_POSSIBLE_VARIABLE_CONFIGURATIONS = eINSTANCE.getSimulationDefinition__SyncPossibleVariableConfigurations();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.definition.impl.SimulationParameterImpl <em>Simulation Parameter</em>}' class.
@@ -874,6 +1411,14 @@ public interface DefinitionPackage extends EPackage {
 		EReference INPUT_VARIABLE__VALUES = eINSTANCE.getInputVariable_Values();
 
 		/**
+		 * The meta object literal for the '<em><b>Assignments</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INPUT_VARIABLE__ASSIGNMENTS = eINSTANCE.getInputVariable_Assignments();
+
+		/**
 		 * The meta object literal for the '<em><b>Deserialize Values</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -916,6 +1461,82 @@ public interface DefinitionPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute INPUT_VARIABLE_VALUE__VALUE = eINSTANCE.getInputVariableValue_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Assignments</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INPUT_VARIABLE_VALUE__ASSIGNMENTS = eINSTANCE.getInputVariableValue_Assignments();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INPUT_VARIABLE_VALUE__VARIABLE = eINSTANCE.getInputVariableValue_Variable();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.definition.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.definition.impl.VariableAssignmentImpl
+		 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getVariableAssignment()
+		 * @generated
+		 */
+		EClass VARIABLE_ASSIGNMENT = eINSTANCE.getVariableAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_ASSIGNMENT__VALUE = eINSTANCE.getVariableAssignment_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Configuration</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_ASSIGNMENT__CONFIGURATION = eINSTANCE.getVariableAssignment_Configuration();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_ASSIGNMENT__VARIABLE = eINSTANCE.getVariableAssignment_Variable();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.definition.impl.VariableConfigurationImpl <em>Variable Configuration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.definition.impl.VariableConfigurationImpl
+		 * @see es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl#getVariableConfiguration()
+		 * @generated
+		 */
+		EClass VARIABLE_CONFIGURATION = eINSTANCE.getVariableConfiguration();
+
+		/**
+		 * The meta object literal for the '<em><b>Assignments</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_CONFIGURATION__ASSIGNMENTS = eINSTANCE.getVariableConfiguration_Assignments();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Equivalent</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VARIABLE_CONFIGURATION___IS_EQUIVALENT__VARIABLECONFIGURATION = eINSTANCE.getVariableConfiguration__IsEquivalent__VariableConfiguration();
 
 	}
 

@@ -13,6 +13,8 @@ import es.unizar.disco.simulation.models.definition.InputVariableValue;
 import es.unizar.disco.simulation.models.definition.OutputVariable;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.definition.Variable;
+import es.unizar.disco.simulation.models.definition.VariableAssignment;
+import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 
@@ -43,8 +45,10 @@ import es.unizar.disco.simulation.models.wnsim.WnsimPackage;
 import es.unizar.disco.simulation.models.wnsim.impl.WnsimPackageImpl;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -99,6 +103,20 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	private EClass inputVariableValueEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass variableAssignmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass variableConfigurationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -210,17 +228,8 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSimulationDefinition_Name() {
-		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getSimulationDefinition_Invocations() {
-		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(2);
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -229,7 +238,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	public EReference getSimulationDefinition_Parameters() {
-		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(3);
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -238,7 +247,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	public EReference getSimulationDefinition_ActiveScenario() {
-		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(4);
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -247,6 +256,15 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	public EReference getSimulationDefinition_Scenarios() {
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSimulationDefinition_InputVariables() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -255,7 +273,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimulationDefinition_Variables() {
+	public EReference getSimulationDefinition_DomainResource() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -264,17 +282,8 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimulationDefinition_DomainResource() {
-		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getSimulationDefinition_MaxExecutionTime() {
-		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -282,7 +291,70 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getSimulationDefinition__SyncScenarios() {
+	public EReference getSimulationDefinition_OutputVariables() {
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSimulationDefinition_WorkingArea() {
+		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSimulationDefinition_DeclaredMeasures() {
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSimulationDefinition_MeasuresToCompute() {
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSimulationDefinition_Backend() {
+		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSimulationDefinition_PossibleConfigurations() {
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSimulationDefinition_ActiveConfigurations() {
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getSimulationDefinition__GetVariables() {
 		return simulationDefinitionEClass.getEOperations().get(0);
 	}
 
@@ -291,7 +363,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getSimulationDefinition__SyncVariables() {
+	public EOperation getSimulationDefinition__GetVariablesMap() {
 		return simulationDefinitionEClass.getEOperations().get(1);
 	}
 
@@ -300,8 +372,53 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getSimulationDefinition__GetVariable__String() {
+	public EOperation getSimulationDefinition__GetInputVariablesMap() {
 		return simulationDefinitionEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getSimulationDefinition__GetOutputVariablesMap() {
+		return simulationDefinitionEClass.getEOperations().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getSimulationDefinition__SyncScenarios() {
+		return simulationDefinitionEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getSimulationDefinition__SyncVariables() {
+		return simulationDefinitionEClass.getEOperations().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getSimulationDefinition__SyncDomainMeasureDefinitions() {
+		return simulationDefinitionEClass.getEOperations().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getSimulationDefinition__SyncPossibleVariableConfigurations() {
+		return simulationDefinitionEClass.getEOperations().get(7);
 	}
 
 	/**
@@ -372,6 +489,15 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getInputVariable_Assignments() {
+		return (EReference)inputVariableEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getInputVariable__DeserializeValues__String() {
 		return inputVariableEClass.getEOperations().get(0);
 	}
@@ -417,6 +543,87 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getInputVariableValue_Assignments() {
+		return (EReference)inputVariableValueEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInputVariableValue_Variable() {
+		return (EReference)inputVariableValueEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVariableAssignment() {
+		return variableAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableAssignment_Value() {
+		return (EReference)variableAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableAssignment_Configuration() {
+		return (EReference)variableAssignmentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableAssignment_Variable() {
+		return (EReference)variableAssignmentEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVariableConfiguration() {
+		return variableConfigurationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableConfiguration_Assignments() {
+		return (EReference)variableConfigurationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getVariableConfiguration__IsEquivalent__VariableConfiguration() {
+		return variableConfigurationEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DefinitionFactory getDefinitionFactory() {
 		return (DefinitionFactory)getEFactoryInstance();
 	}
@@ -442,17 +649,28 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		// Create classes and their features
 		simulationDefinitionEClass = createEClass(SIMULATION_DEFINITION);
 		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__IDENTIFIER);
-		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__NAME);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__INVOCATIONS);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__PARAMETERS);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__ACTIVE_SCENARIO);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__SCENARIOS);
-		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__VARIABLES);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__INPUT_VARIABLES);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__DOMAIN_RESOURCE);
 		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__MAX_EXECUTION_TIME);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__OUTPUT_VARIABLES);
+		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__WORKING_AREA);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__DECLARED_MEASURES);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__MEASURES_TO_COMPUTE);
+		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__BACKEND);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS);
+		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS);
+		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_VARIABLES);
+		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_VARIABLES_MAP);
+		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_INPUT_VARIABLES_MAP);
+		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_OUTPUT_VARIABLES_MAP);
 		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___SYNC_SCENARIOS);
 		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___SYNC_VARIABLES);
-		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_VARIABLE__STRING);
+		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___SYNC_DOMAIN_MEASURE_DEFINITIONS);
+		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___SYNC_POSSIBLE_VARIABLE_CONFIGURATIONS);
 
 		simulationParameterEClass = createEClass(SIMULATION_PARAMETER);
 		createEAttribute(simulationParameterEClass, SIMULATION_PARAMETER__KEY);
@@ -463,6 +681,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 
 		inputVariableEClass = createEClass(INPUT_VARIABLE);
 		createEReference(inputVariableEClass, INPUT_VARIABLE__VALUES);
+		createEReference(inputVariableEClass, INPUT_VARIABLE__ASSIGNMENTS);
 		createEOperation(inputVariableEClass, INPUT_VARIABLE___DESERIALIZE_VALUES__STRING);
 		createEOperation(inputVariableEClass, INPUT_VARIABLE___SERIALIZE_VALUES);
 
@@ -470,6 +689,17 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 
 		inputVariableValueEClass = createEClass(INPUT_VARIABLE_VALUE);
 		createEAttribute(inputVariableValueEClass, INPUT_VARIABLE_VALUE__VALUE);
+		createEReference(inputVariableValueEClass, INPUT_VARIABLE_VALUE__ASSIGNMENTS);
+		createEReference(inputVariableValueEClass, INPUT_VARIABLE_VALUE__VARIABLE);
+
+		variableAssignmentEClass = createEClass(VARIABLE_ASSIGNMENT);
+		createEReference(variableAssignmentEClass, VARIABLE_ASSIGNMENT__VALUE);
+		createEReference(variableAssignmentEClass, VARIABLE_ASSIGNMENT__CONFIGURATION);
+		createEReference(variableAssignmentEClass, VARIABLE_ASSIGNMENT__VARIABLE);
+
+		variableConfigurationEClass = createEClass(VARIABLE_CONFIGURATION);
+		createEReference(variableConfigurationEClass, VARIABLE_CONFIGURATION__ASSIGNMENTS);
+		createEOperation(variableConfigurationEClass, VARIABLE_CONFIGURATION___IS_EQUIVALENT__VARIABLECONFIGURATION);
 	}
 
 	/**
@@ -498,6 +728,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		// Obtain other dependent packages
 		InvocationPackage theInvocationPackage = (InvocationPackage)EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI);
 		DatatypesPackage theDatatypesPackage = (DatatypesPackage)EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
+		MeasuresPackage theMeasuresPackage = (MeasuresPackage)EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -510,21 +741,58 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		// Initialize classes, features, and operations; add parameters
 		initEClass(simulationDefinitionEClass, SimulationDefinition.class, "SimulationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSimulationDefinition_Identifier(), ecorePackage.getEString(), "identifier", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSimulationDefinition_Name(), ecorePackage.getEString(), "name", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimulationDefinition_Invocations(), theInvocationPackage.getSimulationInvocation(), theInvocationPackage.getSimulationInvocation_Definition(), "invocations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_Invocations(), theInvocationPackage.getSimulationInvocation(), theInvocationPackage.getSimulationInvocation_Definition(), "invocations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_Parameters(), this.getSimulationParameter(), null, "parameters", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_ActiveScenario(), ecorePackage.getEObject(), null, "activeScenario", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_Scenarios(), ecorePackage.getEObject(), null, "scenarios", null, 1, -1, SimulationDefinition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getSimulationDefinition_Variables(), this.getVariable(), null, "variables", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getSimulationDefinition_InputVariables(), this.getInputVariable(), null, "inputVariables", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getSimulationDefinition_DomainResource(), theDatatypesPackage.getResource(), null, "domainResource", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationDefinition_MaxExecutionTime(), ecorePackage.getEDate(), "maxExecutionTime", "0000-00-00\'01:00:00", 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_OutputVariables(), this.getOutputVariable(), null, "outputVariables", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getSimulationDefinition_WorkingArea(), theDatatypesPackage.getURI(), "workingArea", null, 0, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_DeclaredMeasures(), theMeasuresPackage.getDomainMeasureDefinition(), theMeasuresPackage.getDomainMeasureDefinition_SimulationDefinition(), "declaredMeasures", null, 1, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_MeasuresToCompute(), theMeasuresPackage.getDomainMeasureDefinition(), null, "measuresToCompute", null, 1, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimulationDefinition_Backend(), ecorePackage.getEString(), "backend", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_PossibleConfigurations(), this.getVariableConfiguration(), null, "possibleConfigurations", null, 0, -1, SimulationDefinition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_ActiveConfigurations(), this.getVariableConfiguration(), null, "activeConfigurations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = initEOperation(getSimulationDefinition__GetVariables(), null, "getVariables", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EGenericType g1 = createEGenericType(theDatatypesPackage.getCollection());
+		EGenericType g2 = createEGenericType(this.getVariable());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = initEOperation(getSimulationDefinition__GetVariablesMap(), null, "getVariablesMap", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getVariable());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = initEOperation(getSimulationDefinition__GetInputVariablesMap(), null, "getInputVariablesMap", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getInputVariable());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
+
+		op = initEOperation(getSimulationDefinition__GetOutputVariablesMap(), null, "getOutputVariablesMap", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(this.getOutputVariable());
+		g1.getETypeArguments().add(g2);
+		initEOperation(op, g1);
 
 		initEOperation(getSimulationDefinition__SyncScenarios(), null, "syncScenarios", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getSimulationDefinition__SyncVariables(), null, "syncVariables", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		EOperation op = initEOperation(getSimulationDefinition__GetVariable__String(), this.getVariable(), "getVariable", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getSimulationDefinition__SyncDomainMeasureDefinitions(), null, "syncDomainMeasureDefinitions", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getSimulationDefinition__SyncPossibleVariableConfigurations(), null, "syncPossibleVariableConfigurations", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(simulationParameterEClass, Map.Entry.class, "SimulationParameter", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSimulationParameter_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -534,7 +802,8 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inputVariableEClass, InputVariable.class, "InputVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInputVariable_Values(), this.getInputVariableValue(), null, "values", null, 1, -1, InputVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInputVariable_Values(), this.getInputVariableValue(), this.getInputVariableValue_Variable(), "values", null, 1, -1, InputVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInputVariable_Assignments(), this.getVariableAssignment(), this.getVariableAssignment_Variable(), "assignments", null, 1, -1, InputVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getInputVariable__DeserializeValues__String(), null, "deserializeValues", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "values", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -545,6 +814,19 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 
 		initEClass(inputVariableValueEClass, InputVariableValue.class, "InputVariableValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInputVariableValue_Value(), theDatatypesPackage.getNumber(), "value", null, 1, 1, InputVariableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInputVariableValue_Assignments(), this.getVariableAssignment(), this.getVariableAssignment_Value(), "assignments", null, 1, -1, InputVariableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInputVariableValue_Variable(), this.getInputVariable(), this.getInputVariable_Values(), "variable", null, 1, 1, InputVariableValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(variableAssignmentEClass, VariableAssignment.class, "VariableAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariableAssignment_Value(), this.getInputVariableValue(), this.getInputVariableValue_Assignments(), "value", null, 1, 1, VariableAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableAssignment_Configuration(), this.getVariableConfiguration(), this.getVariableConfiguration_Assignments(), "configuration", null, 1, 1, VariableAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVariableAssignment_Variable(), this.getInputVariable(), this.getInputVariable_Assignments(), "variable", null, 1, 1, VariableAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(variableConfigurationEClass, VariableConfiguration.class, "VariableConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariableConfiguration_Assignments(), this.getVariableAssignment(), this.getVariableAssignment_Configuration(), "assignments", null, 1, -1, VariableConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = initEOperation(getVariableConfiguration__IsEquivalent__VariableConfiguration(), ecorePackage.getEBoolean(), "isEquivalent", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getVariableConfiguration(), "config", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

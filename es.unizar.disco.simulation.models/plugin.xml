@@ -95,8 +95,16 @@
             uri="http://es.unizar.disco/simulation/definition/1.0">
       </factory>
       <factory
-            class="es.unizar.disco.simulation.models.definition.impl.CustomDatatypesFactoryImpl"
+            class="es.unizar.disco.simulation.models.datatypes.impl.CustomDatatypesFactoryImpl"
             uri="http://es.unizar.disco/simulation/datatypes/1.0">
+      </factory>
+      <factory
+            class="es.unizar.disco.simulation.models.measures.impl.CustomMeasuresFactoryImpl"
+            uri="http://es.unizar.disco/simulation/measures/1.0">
+      </factory>
+      <factory
+            class="es.unizar.disco.simulation.models.invocation.impl.CustomInvocationFactoryImpl"
+            uri="http://es.unizar.disco/simulation/invocation/1.0">
       </factory>
    </extension>
 

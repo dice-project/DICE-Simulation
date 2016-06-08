@@ -6,10 +6,16 @@ import es.unizar.disco.simulation.models.datatypes.Resource;
 
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 
-import java.util.Date;
-import org.eclipse.emf.common.util.EList;
+import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.URI;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -22,14 +28,20 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getIdentifier <em>Identifier</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getName <em>Name</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getInvocations <em>Invocations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getParameters <em>Parameters</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveScenario <em>Active Scenario</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenarios <em>Scenarios</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables <em>Variables</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getInputVariables <em>Input Variables</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getDomainResource <em>Domain Resource</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getMaxExecutionTime <em>Max Execution Time</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getOutputVariables <em>Output Variables</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getWorkingArea <em>Working Area</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getDeclaredMeasures <em>Declared Measures</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getMeasuresToCompute <em>Measures To Compute</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getBackend <em>Backend</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getPossibleConfigurations <em>Possible Configurations</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveConfigurations <em>Active Configurations</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition()
@@ -64,32 +76,6 @@ public interface SimulationDefinition extends EObject {
 	void setIdentifier(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_Name()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
-	/**
 	 * Returns the value of the '<em><b>Invocations</b></em>' reference list.
 	 * The list contents are of type {@link es.unizar.disco.simulation.models.invocation.SimulationInvocation}.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDefinition <em>Definition</em>}'.
@@ -102,7 +88,7 @@ public interface SimulationDefinition extends EObject {
 	 * @return the value of the '<em>Invocations</em>' reference list.
 	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_Invocations()
 	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDefinition
-	 * @model opposite="definition"
+	 * @model opposite="definition" derived="true"
 	 * @generated
 	 */
 	EList<SimulationInvocation> getInvocations();
@@ -113,7 +99,7 @@ public interface SimulationDefinition extends EObject {
 	 * and the value is of type {@link java.lang.String},
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Parameters</em>' map isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -167,20 +153,20 @@ public interface SimulationDefinition extends EObject {
 	EList<EObject> getScenarios();
 
 	/**
-	 * Returns the value of the '<em><b>Variables</b></em>' containment reference list.
-	 * The list contents are of type {@link es.unizar.disco.simulation.models.definition.Variable}.
+	 * Returns the value of the '<em><b>Input Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link es.unizar.disco.simulation.models.definition.InputVariable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Variables</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Input Variables</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variables</em>' containment reference list.
-	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_Variables()
+	 * @return the value of the '<em>Input Variables</em>' containment reference list.
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_InputVariables()
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Variable> getVariables();
+	EList<InputVariable> getInputVariables();
 
 	/**
 	 * Returns the value of the '<em><b>Domain Resource</b></em>' containment reference.
@@ -236,8 +222,193 @@ public interface SimulationDefinition extends EObject {
 	void setMaxExecutionTime(Date value);
 
 	/**
+	 * Returns the value of the '<em><b>Output Variables</b></em>' containment reference list.
+	 * The list contents are of type {@link es.unizar.disco.simulation.models.definition.OutputVariable}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Output Variables</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Output Variables</em>' containment reference list.
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_OutputVariables()
+	 * @model containment="true" ordered="false"
+	 * @generated
+	 */
+	EList<OutputVariable> getOutputVariables();
+
+	/**
+	 * Returns the value of the '<em><b>Working Area</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Working Area</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Working Area</em>' attribute.
+	 * @see #setWorkingArea(URI)
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_WorkingArea()
+	 * @model dataType="es.unizar.disco.simulation.models.datatypes.URI"
+	 * @generated
+	 */
+	URI getWorkingArea();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getWorkingArea <em>Working Area</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Working Area</em>' attribute.
+	 * @see #getWorkingArea()
+	 * @generated
+	 */
+	void setWorkingArea(URI value);
+
+	/**
+	 * Returns the value of the '<em><b>Declared Measures</b></em>' containment reference list.
+	 * The list contents are of type {@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition}.
+	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSimulationDefinition <em>Simulation Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Declared Measures</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Declared Measures</em>' containment reference list.
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_DeclaredMeasures()
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSimulationDefinition
+	 * @model opposite="simulationDefinition" containment="true" required="true"
+	 * @generated
+	 */
+	EList<DomainMeasureDefinition> getDeclaredMeasures();
+
+	/**
+	 * Returns the value of the '<em><b>Measures To Compute</b></em>' reference list.
+	 * The list contents are of type {@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Measures To Compute</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Measures To Compute</em>' reference list.
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_MeasuresToCompute()
+	 * @model required="true"
+	 * @generated
+	 */
+	EList<DomainMeasureDefinition> getMeasuresToCompute();
+
+	/**
+	 * Returns the value of the '<em><b>Backend</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Backend</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Backend</em>' attribute.
+	 * @see #setBackend(String)
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_Backend()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getBackend();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getBackend <em>Backend</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Backend</em>' attribute.
+	 * @see #getBackend()
+	 * @generated
+	 */
+	void setBackend(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Possible Configurations</b></em>' containment reference list.
+	 * The list contents are of type {@link es.unizar.disco.simulation.models.definition.VariableConfiguration}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Possible Configurations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Possible Configurations</em>' containment reference list.
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_PossibleConfigurations()
+	 * @model containment="true" transient="true" derived="true"
+	 * @generated
+	 */
+	EList<VariableConfiguration> getPossibleConfigurations();
+
+	/**
+	 * Returns the value of the '<em><b>Active Configurations</b></em>' reference list.
+	 * The list contents are of type {@link es.unizar.disco.simulation.models.definition.VariableConfiguration}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Active Configurations</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Active Configurations</em>' reference list.
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_ActiveConfigurations()
+	 * @model
+	 * @generated
+	 */
+	EList<VariableConfiguration> getActiveConfigurations();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Aggregation of the {@link #getInputVariables()} and {@link #getOutputVariables()} {@link EStructuralFeature}s as a single {@link Collection}.
+	 * Changes in the {@link Collection} are reflected in the underlying {@link EStructuralFeature}.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation" dataType="es.unizar.disco.simulation.models.datatypes.Collection<es.unizar.disco.simulation.models.definition.Variable>"
+	 * @generated
+	 */
+	Collection<Variable> getVariables();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * {@link Map} view of the {@link Collection} returned by {@link getVariables}.
+	 * Changes in the {@link Map} are reflected in the underlying {@link Collection} and thus, to the underlying {@link EStructuralFeature}s.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	Map<String, Variable> getVariablesMap();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * {@link Map} view of the {@link getInputVariables} {@link EStructuralFeature}.
+	 * Changes in the {@link Map} are reflected in the underlying {@link EStructuralFeature}.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	Map<String, InputVariable> getInputVariablesMap();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * {@link Map} view of the {@link getOutputVariables} {@link EStructuralFeature}.
+	 * Changes in the {@link Map} are reflected in the underlying {@link EStructuralFeature}.
+	 * <!-- end-model-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	Map<String, OutputVariable> getOutputVariablesMap();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Synchronize the <code>Scenarios</code> information from the current {@link SimulationDefinition} {@link Resource}
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -246,6 +417,9 @@ public interface SimulationDefinition extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Synchronize the {@link Variable}s information from the <code>Scenario</code> returned by {@link #getActiveScenario()}
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
@@ -254,9 +428,20 @@ public interface SimulationDefinition extends EObject {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Synchronize the {@link DomainMeasuresDefinition}s information from the <code>Scenario</code> returned by {@link #getActiveScenario()}
+	 * <!-- end-model-doc -->
 	 * @model
 	 * @generated
 	 */
-	Variable getVariable(String name);
+	void syncDomainMeasureDefinitions();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void syncPossibleVariableConfigurations();
 
 } // SimulationDefinition

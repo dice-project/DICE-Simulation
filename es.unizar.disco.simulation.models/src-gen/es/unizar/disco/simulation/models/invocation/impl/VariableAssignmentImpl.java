@@ -2,12 +2,15 @@
  */
 package es.unizar.disco.simulation.models.invocation.impl;
 
-import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
-import es.unizar.disco.simulation.models.invocation.VariableAssignment;
+
 import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.common.util.BasicEMap;
+import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -20,38 +23,48 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl#getVariable <em>Variable</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl#getTypedKey <em>Key</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl#getTypedValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class VariableAssignmentImpl extends MinimalEObjectImpl.Container implements VariableAssignment {
+public class VariableAssignmentImpl extends MinimalEObjectImpl.Container implements BasicEMap.Entry<String,Number> {
 	/**
-	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
+	 * The default value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVariable()
+	 * @see #getTypedKey()
 	 * @generated
 	 * @ordered
 	 */
-	protected InputVariable variable;
+	protected static final String KEY_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getTypedKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected String key = KEY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTypedValue() <em>Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final Number VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
 	 */
@@ -81,17 +94,8 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
-	public InputVariable getVariable() {
-		if (variable != null && variable.eIsProxy()) {
-			InternalEObject oldVariable = (InternalEObject)variable;
-			variable = (InputVariable)eResolveProxy(oldVariable);
-			if (variable != oldVariable) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InvocationPackage.VARIABLE_ASSIGNMENT__VARIABLE, oldVariable, variable));
-			}
-		}
-		return variable;
+	public String getTypedKey() {
+		return key;
 	}
 
 	/**
@@ -99,20 +103,11 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InputVariable basicGetVariable() {
-		return variable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVariable(InputVariable newVariable) {
-		InputVariable oldVariable = variable;
-		variable = newVariable;
+	public void setTypedKey(String newKey) {
+		String oldKey = key;
+		key = newKey;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, InvocationPackage.VARIABLE_ASSIGNMENT__VARIABLE, oldVariable, variable));
+			eNotify(new ENotificationImpl(this, Notification.SET, InvocationPackage.VARIABLE_ASSIGNMENT__KEY, oldKey, key));
 	}
 
 	/**
@@ -120,7 +115,7 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Number getValue() {
+	public Number getTypedValue() {
 		return value;
 	}
 
@@ -129,7 +124,7 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(Number newValue) {
+	public void setTypedValue(Number newValue) {
 		Number oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
@@ -144,11 +139,10 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case InvocationPackage.VARIABLE_ASSIGNMENT__VARIABLE:
-				if (resolve) return getVariable();
-				return basicGetVariable();
+			case InvocationPackage.VARIABLE_ASSIGNMENT__KEY:
+				return getTypedKey();
 			case InvocationPackage.VARIABLE_ASSIGNMENT__VALUE:
-				return getValue();
+				return getTypedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,15 +152,14 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case InvocationPackage.VARIABLE_ASSIGNMENT__VARIABLE:
-				setVariable((InputVariable)newValue);
+			case InvocationPackage.VARIABLE_ASSIGNMENT__KEY:
+				setTypedKey((String)newValue);
 				return;
 			case InvocationPackage.VARIABLE_ASSIGNMENT__VALUE:
-				setValue((Number)newValue);
+				setTypedValue((Number)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -180,11 +173,11 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case InvocationPackage.VARIABLE_ASSIGNMENT__VARIABLE:
-				setVariable((InputVariable)null);
+			case InvocationPackage.VARIABLE_ASSIGNMENT__KEY:
+				setTypedKey(KEY_EDEFAULT);
 				return;
 			case InvocationPackage.VARIABLE_ASSIGNMENT__VALUE:
-				setValue(VALUE_EDEFAULT);
+				setTypedValue(VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -198,8 +191,8 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case InvocationPackage.VARIABLE_ASSIGNMENT__VARIABLE:
-				return variable != null;
+			case InvocationPackage.VARIABLE_ASSIGNMENT__KEY:
+				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 			case InvocationPackage.VARIABLE_ASSIGNMENT__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}
@@ -216,10 +209,90 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
+		result.append(" (key: ");
+		result.append(key);
+		result.append(", value: ");
 		result.append(value);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected int hash = -1;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getHash() {
+		if (hash == -1) {
+			Object theKey = getKey();
+			hash = (theKey == null ? 0 : theKey.hashCode());
+		}
+		return hash;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHash(int hash) {
+		this.hash = hash;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getKey() {
+		return getTypedKey();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKey(String key) {
+		setTypedKey(key);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Number getValue() {
+		return getTypedValue();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Number setValue(Number value) {
+		Number oldValue = getValue();
+		setTypedValue(value);
+		return oldValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public EMap<String, Number> getEMap() {
+		EObject container = eContainer();
+		return container == null ? null : (EMap<String, Number>)container.eGet(eContainmentFeature());
 	}
 
 } //VariableAssignmentImpl

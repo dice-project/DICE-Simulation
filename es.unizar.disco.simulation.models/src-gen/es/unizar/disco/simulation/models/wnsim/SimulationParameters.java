@@ -86,7 +86,9 @@ public enum SimulationParameters implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	SEED(6, "seed", "-s"), /**
+	SEED(6, "seed", "-s"),
+
+	/**
 	 * The '<em><b>Start</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

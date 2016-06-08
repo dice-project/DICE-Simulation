@@ -63,6 +63,7 @@ public class InputVariableValueItemProvider
 			super.getPropertyDescriptors(object);
 
 			addValuePropertyDescriptor(object);
+			addAssignmentsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -85,6 +86,28 @@ public class InputVariableValueItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Assignments feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAssignmentsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_InputVariableValue_assignments_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_InputVariableValue_assignments_feature", "_UI_InputVariableValue_type"),
+				 DefinitionPackage.Literals.INPUT_VARIABLE_VALUE__ASSIGNMENTS,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

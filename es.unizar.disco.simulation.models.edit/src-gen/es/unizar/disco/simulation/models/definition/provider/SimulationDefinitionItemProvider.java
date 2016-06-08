@@ -7,6 +7,8 @@ import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 
+import es.unizar.disco.simulation.models.measures.MeasuresFactory;
+
 import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
 
 import java.util.Collection;
@@ -66,12 +68,15 @@ public class SimulationDefinitionItemProvider
 			super.getPropertyDescriptors(object);
 
 			addIdentifierPropertyDescriptor(object);
-			addNamePropertyDescriptor(object);
 			addInvocationsPropertyDescriptor(object);
 			addActiveScenarioPropertyDescriptor(object);
 			addScenariosPropertyDescriptor(object);
 			addDomainResourcePropertyDescriptor(object);
 			addMaxExecutionTimePropertyDescriptor(object);
+			addWorkingAreaPropertyDescriptor(object);
+			addMeasuresToComputePropertyDescriptor(object);
+			addBackendPropertyDescriptor(object);
+			addActiveConfigurationsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,28 +95,6 @@ public class SimulationDefinitionItemProvider
 				 getString("_UI_SimulationDefinition_identifier_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_identifier_feature", "_UI_SimulationDefinition_type"),
 				 DefinitionPackage.Literals.SIMULATION_DEFINITION__IDENTIFIER,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addNamePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationDefinition_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_name_feature", "_UI_SimulationDefinition_type"),
-				 DefinitionPackage.Literals.SIMULATION_DEFINITION__NAME,
 				 true,
 				 false,
 				 false,
@@ -231,6 +214,94 @@ public class SimulationDefinitionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Working Area feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addWorkingAreaPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationDefinition_workingArea_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_workingArea_feature", "_UI_SimulationDefinition_type"),
+				 DefinitionPackage.Literals.SIMULATION_DEFINITION__WORKING_AREA,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Measures To Compute feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMeasuresToComputePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationDefinition_measuresToCompute_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_measuresToCompute_feature", "_UI_SimulationDefinition_type"),
+				 DefinitionPackage.Literals.SIMULATION_DEFINITION__MEASURES_TO_COMPUTE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Backend feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addBackendPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationDefinition_backend_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_backend_feature", "_UI_SimulationDefinition_type"),
+				 DefinitionPackage.Literals.SIMULATION_DEFINITION__BACKEND,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Active Configurations feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActiveConfigurationsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationDefinition_activeConfigurations_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_activeConfigurations_feature", "_UI_SimulationDefinition_type"),
+				 DefinitionPackage.Literals.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -243,7 +314,10 @@ public class SimulationDefinitionItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__PARAMETERS);
-			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__VARIABLES);
+			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES);
+			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__OUTPUT_VARIABLES);
+			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__DECLARED_MEASURES);
+			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -280,7 +354,7 @@ public class SimulationDefinitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((SimulationDefinition)object).getName();
+		String label = ((SimulationDefinition)object).getIdentifier();
 		return label == null || label.length() == 0 ?
 			getString("_UI_SimulationDefinition_type") :
 			getString("_UI_SimulationDefinition_type") + " " + label;
@@ -300,13 +374,17 @@ public class SimulationDefinitionItemProvider
 
 		switch (notification.getFeatureID(SimulationDefinition.class)) {
 			case DefinitionPackage.SIMULATION_DEFINITION__IDENTIFIER:
-			case DefinitionPackage.SIMULATION_DEFINITION__NAME:
 			case DefinitionPackage.SIMULATION_DEFINITION__DOMAIN_RESOURCE:
 			case DefinitionPackage.SIMULATION_DEFINITION__MAX_EXECUTION_TIME:
+			case DefinitionPackage.SIMULATION_DEFINITION__WORKING_AREA:
+			case DefinitionPackage.SIMULATION_DEFINITION__BACKEND:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS:
-			case DefinitionPackage.SIMULATION_DEFINITION__VARIABLES:
+			case DefinitionPackage.SIMULATION_DEFINITION__INPUT_VARIABLES:
+			case DefinitionPackage.SIMULATION_DEFINITION__OUTPUT_VARIABLES:
+			case DefinitionPackage.SIMULATION_DEFINITION__DECLARED_MEASURES:
+			case DefinitionPackage.SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -331,13 +409,23 @@ public class SimulationDefinitionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DefinitionPackage.Literals.SIMULATION_DEFINITION__VARIABLES,
+				(DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES,
 				 DefinitionFactory.eINSTANCE.createInputVariable()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(DefinitionPackage.Literals.SIMULATION_DEFINITION__VARIABLES,
+				(DefinitionPackage.Literals.SIMULATION_DEFINITION__OUTPUT_VARIABLES,
 				 DefinitionFactory.eINSTANCE.createOutputVariable()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DefinitionPackage.Literals.SIMULATION_DEFINITION__DECLARED_MEASURES,
+				 MeasuresFactory.eINSTANCE.createDomainMeasureDefinition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(DefinitionPackage.Literals.SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS,
+				 DefinitionFactory.eINSTANCE.createVariableConfiguration()));
 	}
 
 	/**

@@ -3,13 +3,15 @@
 package es.unizar.disco.simulation.models.definition.impl;
 
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -127,37 +129,6 @@ public class SimulationParameterImpl extends MinimalEObjectImpl.Container implem
 		value = newValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionPackage.SIMULATION_PARAMETER__VALUE, oldValue, value));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getValue() {
-		return getTypedValue();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String setValue(String value) {
-		String oldValue = getValue();
-		setTypedValue(value);
-		return oldValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	public EMap<String, String> getEMap() {
-		EObject container = eContainer();
-		return container == null ? null : (EMap<String, String>)container.eGet(eContainmentFeature());
 	}
 
 	/**
@@ -291,6 +262,37 @@ public class SimulationParameterImpl extends MinimalEObjectImpl.Container implem
 	 */
 	public void setKey(String key) {
 		setTypedKey(key);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getValue() {
+		return getTypedValue();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String setValue(String value) {
+		String oldValue = getValue();
+		setTypedValue(value);
+		return oldValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	public EMap<String, String> getEMap() {
+		EObject container = eContainer();
+		return container == null ? null : (EMap<String, String>)container.eGet(eContainmentFeature());
 	}
 
 } //SimulationParameterImpl

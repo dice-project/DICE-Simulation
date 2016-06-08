@@ -22,4 +22,13 @@ public class CustomDefinitionItemProviderAdapterFactory extends DefinitionItemPr
 		
 		return inputVariableValueItemProvider;
 	}
+	
+	@Override
+	public Adapter createVariableConfigurationAdapter() {
+		if (variableConfigurationItemProvider == null) {
+			variableConfigurationItemProvider = new CustomVariableConfigurationItemProvider(this);
+		}
+		
+		return variableConfigurationItemProvider;
+	}
 }

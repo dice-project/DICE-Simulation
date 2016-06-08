@@ -9,20 +9,19 @@
         eType="#//VariableAssignment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="ecore:EClass definition.ecore#//SimulationDefinition" eOpposite="definition.ecore#//SimulationDefinition/invocations"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="calls" lowerBound="1" eType="#//SimulationTool"
-        volatile="true" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
         eType="ecore:EClass simresult.ecore#//SimulationResult" eOpposite="simresult.ecore#//SimulationResult/invocation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="analyzableResource" lowerBound="1"
         eType="ecore:EClass datatypes.ecore#//Resource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EEnum datatypes.ecore#//SimulationStatus"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainResource" lowerBound="1"
+        eType="ecore:EDataType datatypes.ecore#//URI" changeable="false" volatile="true"
+        transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
-        eType="ecore:EClass definition.ecore#//InputVariable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Number"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SimulationTool" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="produces" lowerBound="1"
-        eType="ecore:EClass toolresult.ecore#//ToolResult" volatile="true" transient="true"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -31,15 +31,6 @@ public interface InvocationFactory extends EFactory {
 	SimulationInvocation createSimulationInvocation();
 
 	/**
-	 * Returns a new object of class '<em>Variable Assignment</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Assignment</em>'.
-	 * @generated
-	 */
-	VariableAssignment createVariableAssignment();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

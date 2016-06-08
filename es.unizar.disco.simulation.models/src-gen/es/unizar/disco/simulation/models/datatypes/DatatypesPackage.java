@@ -115,6 +115,26 @@ public interface DatatypesPackage extends EPackage {
 	int UNIT = 1;
 
 	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.Measure <em>Measure</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.datatypes.Measure
+	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getMeasure()
+	 * @generated
+	 */
+	int MEASURE = 2;
+
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.datatypes.SimulationStatus
+	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getSimulationStatus()
+	 * @generated
+	 */
+	int SIMULATION_STATUS = 3;
+
+	/**
 	 * The meta object id for the '<em>URI</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -122,7 +142,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 2;
+	int URI = 4;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -132,7 +152,17 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 3;
+	int NUMBER = 5;
+
+	/**
+	 * The meta object id for the '<em>Collection</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see java.util.Collection
+	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getCollection()
+	 * @generated
+	 */
+	int COLLECTION = 6;
 
 
 	/**
@@ -178,6 +208,26 @@ public interface DatatypesPackage extends EPackage {
 	EEnum getUnit();
 
 	/**
+	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.Measure <em>Measure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Measure</em>'.
+	 * @see es.unizar.disco.simulation.models.datatypes.Measure
+	 * @generated
+	 */
+	EEnum getMeasure();
+
+	/**
+	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Simulation Status</em>'.
+	 * @see es.unizar.disco.simulation.models.datatypes.SimulationStatus
+	 * @generated
+	 */
+	EEnum getSimulationStatus();
+
+	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -199,6 +249,17 @@ public interface DatatypesPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getNumber();
+
+	/**
+	 * Returns the meta object for data type '{@link java.util.Collection <em>Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Collection</em>'.
+	 * @see java.util.Collection
+	 * @model instanceClass="java.util.Collection" typeParameters="T"
+	 * @generated
+	 */
+	EDataType getCollection();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -260,6 +321,26 @@ public interface DatatypesPackage extends EPackage {
 		EEnum UNIT = eINSTANCE.getUnit();
 
 		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.Measure <em>Measure</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.datatypes.Measure
+		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getMeasure()
+		 * @generated
+		 */
+		EEnum MEASURE = eINSTANCE.getMeasure();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.datatypes.SimulationStatus
+		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getSimulationStatus()
+		 * @generated
+		 */
+		EEnum SIMULATION_STATUS = eINSTANCE.getSimulationStatus();
+
+		/**
 		 * The meta object literal for the '<em>URI</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -278,6 +359,16 @@ public interface DatatypesPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType NUMBER = eINSTANCE.getNumber();
+
+		/**
+		 * The meta object literal for the '<em>Collection</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see java.util.Collection
+		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getCollection()
+		 * @generated
+		 */
+		EDataType COLLECTION = eINSTANCE.getCollection();
 
 	}
 

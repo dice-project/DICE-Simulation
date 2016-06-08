@@ -5,6 +5,7 @@ package es.unizar.disco.simulation.models.definition.impl;
 import es.unizar.disco.simulation.models.definition.*;
 
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -62,6 +63,8 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 			case DefinitionPackage.INPUT_VARIABLE: return createInputVariable();
 			case DefinitionPackage.OUTPUT_VARIABLE: return createOutputVariable();
 			case DefinitionPackage.INPUT_VARIABLE_VALUE: return createInputVariableValue();
+			case DefinitionPackage.VARIABLE_ASSIGNMENT: return createVariableAssignment();
+			case DefinitionPackage.VARIABLE_CONFIGURATION: return createVariableConfiguration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -115,6 +118,26 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	public InputVariableValue createInputVariableValue() {
 		InputVariableValueImpl inputVariableValue = new InputVariableValueImpl();
 		return inputVariableValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableAssignment createVariableAssignment() {
+		VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
+		return variableAssignment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableConfiguration createVariableConfiguration() {
+		VariableConfigurationImpl variableConfiguration = new VariableConfigurationImpl();
+		return variableConfiguration;
 	}
 
 	/**

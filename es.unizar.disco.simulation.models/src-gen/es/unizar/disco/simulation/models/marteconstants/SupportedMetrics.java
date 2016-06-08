@@ -13,6 +13,12 @@ import org.eclipse.emf.common.util.Enumerator;
  * A representation of the literals of the enumeration '<em><b>Supported Metrics</b></em>',
  * and utility methods for working with them.
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * EEnum containing the constants of Stereotypes which represent supported metrics.
+ * An entry must be created for each supported metric. The literal value of the entry will contain the stereotype FQN and the tagged value in the form "fqn#tagged-value", e.g. "MARTE::MARTE_AnalysisModel::GQAM::GaScenario#respT".
+ * Only explicitly declared stereotypes will be considered as supported, i.e., a substereotype will not be considered as supported if it is not explicitly declared (e.g. GaStep must be explicitly declared as supported although it inherits from GaScenario).
+ * 
+ * <!-- end-model-doc -->
  * @see es.unizar.disco.simulation.models.marteconstants.MarteconstantsPackage#getSupportedMetrics()
  * @model
  * @generated
@@ -29,24 +35,14 @@ public enum SupportedMetrics implements Enumerator {
 	GA_SCENARIO_RESP_T(0, "GaScenario_respT", "MARTE::MARTE_AnalysisModel::GQAM::GaScenario#respT"),
 
 	/**
-	 * The '<em><b>Ga Scenario througput</b></em>' literal object.
+	 * The '<em><b>Ga Scenario throughput</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #GA_SCENARIO_THROUGPUT_VALUE
+	 * @see #GA_SCENARIO_THROUGHPUT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	GA_SCENARIO_THROUGPUT(1, "GaScenario_througput", "MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"),
-
-	/**
-	 * The '<em><b>Ga Scenario utilization</b></em>' literal object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #GA_SCENARIO_UTILIZATION_VALUE
-	 * @generated
-	 * @ordered
-	 */
-	GA_SCENARIO_UTILIZATION(2, "GaScenario_utilization", "MARTE::MARTE_AnalysisModel::GQAM::GaScenario#utilization"),
+	GA_SCENARIO_THROUGHPUT(1, "GaScenario_throughput", "MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"),
 
 	/**
 	 * The '<em><b>Ga Step resp T</b></em>' literal object.
@@ -59,24 +55,44 @@ public enum SupportedMetrics implements Enumerator {
 	GA_STEP_RESP_T(10, "GaStep_respT", "MARTE::MARTE_AnalysisModel::GQAM::GaStep#respT"),
 
 	/**
-	 * The '<em><b>Ga Step througput</b></em>' literal object.
+	 * The '<em><b>Ga Step throughput</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #GA_STEP_THROUGPUT_VALUE
+	 * @see #GA_STEP_THROUGHPUT_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	GA_STEP_THROUGPUT(11, "GaStep_througput", "MARTE::MARTE_AnalysisModel::GQAM::GaStep#throughput"),
+	GA_STEP_THROUGHPUT(11, "GaStep_throughput", "MARTE::MARTE_AnalysisModel::GQAM::GaStep#throughput"),
 
 	/**
-	 * The '<em><b>Ga Step utilization</b></em>' literal object.
+	 * The '<em><b>Pa Logical Resource utilization</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #GA_STEP_UTILIZATION_VALUE
+	 * @see #PA_LOGICAL_RESOURCE_UTILIZATION_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	GA_STEP_UTILIZATION(12, "GaStep_utilization", "MARTE::MARTE_AnalysisModel::GQAM::GaStep#utilization");
+	PA_LOGICAL_RESOURCE_UTILIZATION(20, "PaLogicalResource_utilization", "MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource#utilization"),
+
+	/**
+	 * The '<em><b>Ga Exec Host utilization</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GA_EXEC_HOST_UTILIZATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GA_EXEC_HOST_UTILIZATION(30, "GaExecHost_utilization", "MARTE::MARTE_AnalysisModel::GQAM::GaExecHost#utilization"),
+
+	/**
+	 * The '<em><b>Ga Comm Host utilization</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #GA_COMM_HOST_UTILIZATION_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	GA_COMM_HOST_UTILIZATION(40, "GaCommHost_utilization", "MARTE::MARTE_AnalysisModel::GQAM::GaCommHost#utilization");
 
 	/**
 	 * The '<em><b>Ga Scenario resp T</b></em>' literal value.
@@ -94,34 +110,19 @@ public enum SupportedMetrics implements Enumerator {
 	public static final int GA_SCENARIO_RESP_T_VALUE = 0;
 
 	/**
-	 * The '<em><b>Ga Scenario througput</b></em>' literal value.
+	 * The '<em><b>Ga Scenario throughput</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Ga Scenario througput</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Ga Scenario throughput</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #GA_SCENARIO_THROUGPUT
-	 * @model name="GaScenario_througput" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"
+	 * @see #GA_SCENARIO_THROUGHPUT
+	 * @model name="GaScenario_throughput" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GA_SCENARIO_THROUGPUT_VALUE = 1;
-
-	/**
-	 * The '<em><b>Ga Scenario utilization</b></em>' literal value.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Ga Scenario utilization</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @see #GA_SCENARIO_UTILIZATION
-	 * @model name="GaScenario_utilization" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#utilization"
-	 * @generated
-	 * @ordered
-	 */
-	public static final int GA_SCENARIO_UTILIZATION_VALUE = 2;
+	public static final int GA_SCENARIO_THROUGHPUT_VALUE = 1;
 
 	/**
 	 * The '<em><b>Ga Step resp T</b></em>' literal value.
@@ -139,34 +140,64 @@ public enum SupportedMetrics implements Enumerator {
 	public static final int GA_STEP_RESP_T_VALUE = 10;
 
 	/**
-	 * The '<em><b>Ga Step througput</b></em>' literal value.
+	 * The '<em><b>Ga Step throughput</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Ga Step througput</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Ga Step throughput</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #GA_STEP_THROUGPUT
-	 * @model name="GaStep_througput" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#throughput"
+	 * @see #GA_STEP_THROUGHPUT
+	 * @model name="GaStep_throughput" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#throughput"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GA_STEP_THROUGPUT_VALUE = 11;
+	public static final int GA_STEP_THROUGHPUT_VALUE = 11;
 
 	/**
-	 * The '<em><b>Ga Step utilization</b></em>' literal value.
+	 * The '<em><b>Pa Logical Resource utilization</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Ga Step utilization</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Pa Logical Resource utilization</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #GA_STEP_UTILIZATION
-	 * @model name="GaStep_utilization" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#utilization"
+	 * @see #PA_LOGICAL_RESOURCE_UTILIZATION
+	 * @model name="PaLogicalResource_utilization" literal="MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource#utilization"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GA_STEP_UTILIZATION_VALUE = 12;
+	public static final int PA_LOGICAL_RESOURCE_UTILIZATION_VALUE = 20;
+
+	/**
+	 * The '<em><b>Ga Exec Host utilization</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Ga Exec Host utilization</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GA_EXEC_HOST_UTILIZATION
+	 * @model name="GaExecHost_utilization" literal="MARTE::MARTE_AnalysisModel::GQAM::GaExecHost#utilization"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GA_EXEC_HOST_UTILIZATION_VALUE = 30;
+
+	/**
+	 * The '<em><b>Ga Comm Host utilization</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Ga Comm Host utilization</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #GA_COMM_HOST_UTILIZATION
+	 * @model name="GaCommHost_utilization" literal="MARTE::MARTE_AnalysisModel::GQAM::GaCommHost#utilization"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GA_COMM_HOST_UTILIZATION_VALUE = 40;
 
 	/**
 	 * An array of all the '<em><b>Supported Metrics</b></em>' enumerators.
@@ -177,11 +208,12 @@ public enum SupportedMetrics implements Enumerator {
 	private static final SupportedMetrics[] VALUES_ARRAY =
 		new SupportedMetrics[] {
 			GA_SCENARIO_RESP_T,
-			GA_SCENARIO_THROUGPUT,
-			GA_SCENARIO_UTILIZATION,
+			GA_SCENARIO_THROUGHPUT,
 			GA_STEP_RESP_T,
-			GA_STEP_THROUGPUT,
-			GA_STEP_UTILIZATION,
+			GA_STEP_THROUGHPUT,
+			PA_LOGICAL_RESOURCE_UTILIZATION,
+			GA_EXEC_HOST_UTILIZATION,
+			GA_COMM_HOST_UTILIZATION,
 		};
 
 	/**
@@ -239,11 +271,12 @@ public enum SupportedMetrics implements Enumerator {
 	public static SupportedMetrics get(int value) {
 		switch (value) {
 			case GA_SCENARIO_RESP_T_VALUE: return GA_SCENARIO_RESP_T;
-			case GA_SCENARIO_THROUGPUT_VALUE: return GA_SCENARIO_THROUGPUT;
-			case GA_SCENARIO_UTILIZATION_VALUE: return GA_SCENARIO_UTILIZATION;
+			case GA_SCENARIO_THROUGHPUT_VALUE: return GA_SCENARIO_THROUGHPUT;
 			case GA_STEP_RESP_T_VALUE: return GA_STEP_RESP_T;
-			case GA_STEP_THROUGPUT_VALUE: return GA_STEP_THROUGPUT;
-			case GA_STEP_UTILIZATION_VALUE: return GA_STEP_UTILIZATION;
+			case GA_STEP_THROUGHPUT_VALUE: return GA_STEP_THROUGHPUT;
+			case PA_LOGICAL_RESOURCE_UTILIZATION_VALUE: return PA_LOGICAL_RESOURCE_UTILIZATION;
+			case GA_EXEC_HOST_UTILIZATION_VALUE: return GA_EXEC_HOST_UTILIZATION;
+			case GA_COMM_HOST_UTILIZATION_VALUE: return GA_COMM_HOST_UTILIZATION;
 		}
 		return null;
 	}

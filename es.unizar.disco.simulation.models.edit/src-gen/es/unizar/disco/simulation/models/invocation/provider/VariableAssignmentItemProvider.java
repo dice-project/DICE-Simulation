@@ -4,12 +4,12 @@ package es.unizar.disco.simulation.models.invocation.provider;
 
 
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
-import es.unizar.disco.simulation.models.invocation.VariableAssignment;
 
 import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -25,9 +25,10 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link es.unizar.disco.simulation.models.invocation.VariableAssignment} object.
+ * This is the item provider adapter for a {@link java.util.Map.Entry} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
@@ -61,30 +62,30 @@ public class VariableAssignmentItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addVariablePropertyDescriptor(object);
+			addKeyPropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Variable feature.
+	 * This adds a property descriptor for the Key feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addVariablePropertyDescriptor(Object object) {
+	protected void addKeyPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_VariableAssignment_variable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_VariableAssignment_variable_feature", "_UI_VariableAssignment_type"),
-				 InvocationPackage.Literals.VARIABLE_ASSIGNMENT__VARIABLE,
+				 getString("_UI_VariableAssignment_key_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_VariableAssignment_key_feature", "_UI_VariableAssignment_type"),
+				 InvocationPackage.Literals.VARIABLE_ASSIGNMENT__KEY,
 				 true,
 				 false,
-				 true,
-				 null,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -130,11 +131,8 @@ public class VariableAssignmentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Number labelValue = ((VariableAssignment)object).getValue();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_VariableAssignment_type") :
-			getString("_UI_VariableAssignment_type") + " " + label;
+		Map.Entry<?, ?> variableAssignment = (Map.Entry<?, ?>)object;
+		return "" + variableAssignment.getKey() + " -> " + variableAssignment.getValue();
 	}
 	
 
@@ -148,6 +146,12 @@ public class VariableAssignmentItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(Map.Entry.class)) {
+			case InvocationPackage.VARIABLE_ASSIGNMENT__KEY:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 

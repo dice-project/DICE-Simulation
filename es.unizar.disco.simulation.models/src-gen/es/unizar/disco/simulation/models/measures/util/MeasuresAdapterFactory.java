@@ -4,6 +4,8 @@ package es.unizar.disco.simulation.models.measures.util;
 
 import es.unizar.disco.simulation.models.measures.*;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -72,20 +74,16 @@ public class MeasuresAdapterFactory extends AdapterFactoryImpl {
 				return createDomainMeasureAdapter();
 			}
 			@Override
-			public Adapter caseThroughput(Throughput object) {
-				return createThroughputAdapter();
-			}
-			@Override
-			public Adapter caseResponseTime(ResponseTime object) {
-				return createResponseTimeAdapter();
-			}
-			@Override
-			public Adapter caseUtilization(Utilization object) {
-				return createUtilizationAdapter();
-			}
-			@Override
 			public Adapter caseMeasureConverter(MeasureConverter object) {
 				return createMeasureConverterAdapter();
+			}
+			@Override
+			public Adapter caseDomainMeasureDefinition(DomainMeasureDefinition object) {
+				return createDomainMeasureDefinitionAdapter();
+			}
+			@Override
+			public Adapter caseEntry(Map.Entry<String, String> object) {
+				return createEntryAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -122,48 +120,6 @@ public class MeasuresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.measures.Throughput <em>Throughput</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see es.unizar.disco.simulation.models.measures.Throughput
-	 * @generated
-	 */
-	public Adapter createThroughputAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.measures.ResponseTime <em>Response Time</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see es.unizar.disco.simulation.models.measures.ResponseTime
-	 * @generated
-	 */
-	public Adapter createResponseTimeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.measures.Utilization <em>Utilization</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see es.unizar.disco.simulation.models.measures.Utilization
-	 * @generated
-	 */
-	public Adapter createUtilizationAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -174,6 +130,34 @@ public class MeasuresAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMeasureConverterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition <em>Domain Measure Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition
+	 * @generated
+	 */
+	public Adapter createDomainMeasureDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createEntryAdapter() {
 		return null;
 	}
 

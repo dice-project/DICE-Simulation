@@ -210,11 +210,12 @@ public class MarteconstantsPackageImpl extends EPackageImpl implements Martecons
 		// Initialize enums and add enum literals
 		initEEnum(supportedMetricsEEnum, SupportedMetrics.class, "SupportedMetrics");
 		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_SCENARIO_RESP_T);
-		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_SCENARIO_THROUGPUT);
-		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_SCENARIO_UTILIZATION);
+		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_SCENARIO_THROUGHPUT);
 		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_STEP_RESP_T);
-		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_STEP_THROUGPUT);
-		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_STEP_UTILIZATION);
+		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_STEP_THROUGHPUT);
+		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.PA_LOGICAL_RESOURCE_UTILIZATION);
+		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_EXEC_HOST_UTILIZATION);
+		addEEnumLiteral(supportedMetricsEEnum, SupportedMetrics.GA_COMM_HOST_UTILIZATION);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -4,15 +4,13 @@ package es.unizar.disco.simulation.models.measures.impl;
 
 import es.unizar.disco.simulation.models.datatypes.Unit;
 
-import es.unizar.disco.simulation.models.definition.OutputVariable;
-
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
+import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 import es.unizar.disco.simulation.models.measures.MeasuresPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -27,9 +25,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureImpl#getValue <em>Value</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureImpl#getMeasuredElement <em>Measured Element</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureImpl#getUnit <em>Unit</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureImpl#getOutputVariable <em>Output Variable</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureImpl#getDefinition <em>Definition</em>}</li>
  * </ul>
  *
  * @generated
@@ -46,14 +43,14 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	protected static final Number VALUE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getMeasuredElement() <em>Measured Element</em>}' reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMeasuredElement()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject measuredElement;
+	protected Number value = VALUE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getUnit() <em>Unit</em>}' attribute.
@@ -76,14 +73,14 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	protected Unit unit = UNIT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOutputVariable() <em>Output Variable</em>}' reference.
+	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOutputVariable()
+	 * @see #getDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected OutputVariable outputVariable;
+	protected DomainMeasureDefinition definition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -110,9 +107,7 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	 * @generated
 	 */
 	public Number getValue() {
-		// TODO: implement this method to return the 'Value' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return value;
 	}
 
 	/**
@@ -120,37 +115,11 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject getMeasuredElement() {
-		if (measuredElement != null && measuredElement.eIsProxy()) {
-			InternalEObject oldMeasuredElement = (InternalEObject)measuredElement;
-			measuredElement = eResolveProxy(oldMeasuredElement);
-			if (measuredElement != oldMeasuredElement) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MeasuresPackage.DOMAIN_MEASURE__MEASURED_ELEMENT, oldMeasuredElement, measuredElement));
-			}
-		}
-		return measuredElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EObject basicGetMeasuredElement() {
-		return measuredElement;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setMeasuredElement(EObject newMeasuredElement) {
-		EObject oldMeasuredElement = measuredElement;
-		measuredElement = newMeasuredElement;
+	public void setValue(Number newValue) {
+		Number oldValue = value;
+		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MeasuresPackage.DOMAIN_MEASURE__MEASURED_ELEMENT, oldMeasuredElement, measuredElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, MeasuresPackage.DOMAIN_MEASURE__VALUE, oldValue, value));
 	}
 
 	/**
@@ -179,16 +148,16 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OutputVariable getOutputVariable() {
-		if (outputVariable != null && outputVariable.eIsProxy()) {
-			InternalEObject oldOutputVariable = (InternalEObject)outputVariable;
-			outputVariable = (OutputVariable)eResolveProxy(oldOutputVariable);
-			if (outputVariable != oldOutputVariable) {
+	public DomainMeasureDefinition getDefinition() {
+		if (definition != null && definition.eIsProxy()) {
+			InternalEObject oldDefinition = (InternalEObject)definition;
+			definition = (DomainMeasureDefinition)eResolveProxy(oldDefinition);
+			if (definition != oldDefinition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MeasuresPackage.DOMAIN_MEASURE__OUTPUT_VARIABLE, oldOutputVariable, outputVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MeasuresPackage.DOMAIN_MEASURE__DEFINITION, oldDefinition, definition));
 			}
 		}
-		return outputVariable;
+		return definition;
 	}
 
 	/**
@@ -196,8 +165,8 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OutputVariable basicGetOutputVariable() {
-		return outputVariable;
+	public DomainMeasureDefinition basicGetDefinition() {
+		return definition;
 	}
 
 	/**
@@ -205,11 +174,11 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOutputVariable(OutputVariable newOutputVariable) {
-		OutputVariable oldOutputVariable = outputVariable;
-		outputVariable = newOutputVariable;
+	public void setDefinition(DomainMeasureDefinition newDefinition) {
+		DomainMeasureDefinition oldDefinition = definition;
+		definition = newDefinition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MeasuresPackage.DOMAIN_MEASURE__OUTPUT_VARIABLE, oldOutputVariable, outputVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, MeasuresPackage.DOMAIN_MEASURE__DEFINITION, oldDefinition, definition));
 	}
 
 	/**
@@ -222,14 +191,11 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 		switch (featureID) {
 			case MeasuresPackage.DOMAIN_MEASURE__VALUE:
 				return getValue();
-			case MeasuresPackage.DOMAIN_MEASURE__MEASURED_ELEMENT:
-				if (resolve) return getMeasuredElement();
-				return basicGetMeasuredElement();
 			case MeasuresPackage.DOMAIN_MEASURE__UNIT:
 				return getUnit();
-			case MeasuresPackage.DOMAIN_MEASURE__OUTPUT_VARIABLE:
-				if (resolve) return getOutputVariable();
-				return basicGetOutputVariable();
+			case MeasuresPackage.DOMAIN_MEASURE__DEFINITION:
+				if (resolve) return getDefinition();
+				return basicGetDefinition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -242,14 +208,14 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MeasuresPackage.DOMAIN_MEASURE__MEASURED_ELEMENT:
-				setMeasuredElement((EObject)newValue);
+			case MeasuresPackage.DOMAIN_MEASURE__VALUE:
+				setValue((Number)newValue);
 				return;
 			case MeasuresPackage.DOMAIN_MEASURE__UNIT:
 				setUnit((Unit)newValue);
 				return;
-			case MeasuresPackage.DOMAIN_MEASURE__OUTPUT_VARIABLE:
-				setOutputVariable((OutputVariable)newValue);
+			case MeasuresPackage.DOMAIN_MEASURE__DEFINITION:
+				setDefinition((DomainMeasureDefinition)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -263,14 +229,14 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MeasuresPackage.DOMAIN_MEASURE__MEASURED_ELEMENT:
-				setMeasuredElement((EObject)null);
+			case MeasuresPackage.DOMAIN_MEASURE__VALUE:
+				setValue(VALUE_EDEFAULT);
 				return;
 			case MeasuresPackage.DOMAIN_MEASURE__UNIT:
 				setUnit(UNIT_EDEFAULT);
 				return;
-			case MeasuresPackage.DOMAIN_MEASURE__OUTPUT_VARIABLE:
-				setOutputVariable((OutputVariable)null);
+			case MeasuresPackage.DOMAIN_MEASURE__DEFINITION:
+				setDefinition((DomainMeasureDefinition)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -285,13 +251,11 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MeasuresPackage.DOMAIN_MEASURE__VALUE:
-				return VALUE_EDEFAULT == null ? getValue() != null : !VALUE_EDEFAULT.equals(getValue());
-			case MeasuresPackage.DOMAIN_MEASURE__MEASURED_ELEMENT:
-				return measuredElement != null;
+				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case MeasuresPackage.DOMAIN_MEASURE__UNIT:
 				return unit != UNIT_EDEFAULT;
-			case MeasuresPackage.DOMAIN_MEASURE__OUTPUT_VARIABLE:
-				return outputVariable != null;
+			case MeasuresPackage.DOMAIN_MEASURE__DEFINITION:
+				return definition != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -306,7 +270,9 @@ public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container imp
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (unit: ");
+		result.append(" (value: ");
+		result.append(value);
+		result.append(", unit: ");
 		result.append(unit);
 		result.append(')');
 		return result.toString();

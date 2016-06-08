@@ -85,7 +85,7 @@ public interface InvocationPackage extends EPackage {
 	int SIMULATION_INVOCATION__TOOL_RESULT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Variable Assignments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Variable Assignments</b></em>' map.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -103,22 +103,13 @@ public interface InvocationPackage extends EPackage {
 	int SIMULATION_INVOCATION__DEFINITION = 3;
 
 	/**
-	 * The feature id for the '<em><b>Calls</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_INVOCATION__CALLS = 4;
-
-	/**
 	 * The feature id for the '<em><b>Results</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__RESULTS = 5;
+	int SIMULATION_INVOCATION__RESULTS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Analyzable Resource</b></em>' containment reference.
@@ -127,7 +118,43 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__ANALYZABLE_RESOURCE = 6;
+	int SIMULATION_INVOCATION__ANALYZABLE_RESOURCE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Start</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__START = 6;
+
+	/**
+	 * The feature id for the '<em><b>End</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__END = 7;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__STATUS = 8;
+
+	/**
+	 * The feature id for the '<em><b>Domain Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__DOMAIN_RESOURCE = 9;
 
 	/**
 	 * The number of structural features of the '<em>Simulation Invocation</em>' class.
@@ -136,7 +163,7 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION_FEATURE_COUNT = 7;
+	int SIMULATION_INVOCATION_FEATURE_COUNT = 10;
 
 	/**
 	 * The number of operations of the '<em>Simulation Invocation</em>' class.
@@ -158,13 +185,13 @@ public interface InvocationPackage extends EPackage {
 	int VARIABLE_ASSIGNMENT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT__VARIABLE = 0;
+	int VARIABLE_ASSIGNMENT__KEY = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -192,43 +219,6 @@ public interface InvocationPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_ASSIGNMENT_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.invocation.impl.SimulationToolImpl <em>Simulation Tool</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.invocation.impl.SimulationToolImpl
-	 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl#getSimulationTool()
-	 * @generated
-	 */
-	int SIMULATION_TOOL = 2;
-
-	/**
-	 * The feature id for the '<em><b>Produces</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_TOOL__PRODUCES = 0;
-
-	/**
-	 * The number of structural features of the '<em>Simulation Tool</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_TOOL_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>Simulation Tool</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_TOOL_OPERATION_COUNT = 0;
 
 
 	/**
@@ -264,10 +254,10 @@ public interface InvocationPackage extends EPackage {
 	EReference getSimulationInvocation_ToolResult();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableAssignments <em>Variable Assignments</em>}'.
+	 * Returns the meta object for the map '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableAssignments <em>Variable Assignments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Variable Assignments</em>'.
+	 * @return the meta object for the map '<em>Variable Assignments</em>'.
 	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableAssignments()
 	 * @see #getSimulationInvocation()
 	 * @generated
@@ -284,17 +274,6 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSimulationInvocation_Definition();
-
-	/**
-	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getCalls <em>Calls</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Calls</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getCalls()
-	 * @see #getSimulationInvocation()
-	 * @generated
-	 */
-	EReference getSimulationInvocation_Calls();
 
 	/**
 	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults <em>Results</em>}'.
@@ -319,57 +298,82 @@ public interface InvocationPackage extends EPackage {
 	EReference getSimulationInvocation_AnalyzableResource();
 
 	/**
-	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.invocation.VariableAssignment <em>Variable Assignment</em>}'.
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStart <em>Start</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Start</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStart()
+	 * @see #getSimulationInvocation()
+	 * @generated
+	 */
+	EAttribute getSimulationInvocation_Start();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getEnd <em>End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>End</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getEnd()
+	 * @see #getSimulationInvocation()
+	 * @generated
+	 */
+	EAttribute getSimulationInvocation_End();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStatus()
+	 * @see #getSimulationInvocation()
+	 * @generated
+	 */
+	EAttribute getSimulationInvocation_Status();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDomainResource <em>Domain Resource</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain Resource</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDomainResource()
+	 * @see #getSimulationInvocation()
+	 * @generated
+	 */
+	EAttribute getSimulationInvocation_DomainResource();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Variable Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Variable Assignment</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.VariableAssignment
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString" keyRequired="true"
+	 *        valueDataType="es.unizar.disco.simulation.models.datatypes.Number" valueRequired="true"
 	 * @generated
 	 */
 	EClass getVariableAssignment();
 
 	/**
-	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.VariableAssignment#getVariable <em>Variable</em>}'.
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Variable</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.VariableAssignment#getVariable()
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
 	 * @see #getVariableAssignment()
 	 * @generated
 	 */
-	EReference getVariableAssignment_Variable();
+	EAttribute getVariableAssignment_Key();
 
 	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.VariableAssignment#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.VariableAssignment#getValue()
+	 * @see java.util.Map.Entry
 	 * @see #getVariableAssignment()
 	 * @generated
 	 */
 	EAttribute getVariableAssignment_Value();
-
-	/**
-	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.invocation.SimulationTool <em>Simulation Tool</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simulation Tool</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationTool
-	 * @generated
-	 */
-	EClass getSimulationTool();
-
-	/**
-	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.SimulationTool#getProduces <em>Produces</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Produces</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationTool#getProduces()
-	 * @see #getSimulationTool()
-	 * @generated
-	 */
-	EReference getSimulationTool_Produces();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -421,7 +425,7 @@ public interface InvocationPackage extends EPackage {
 		EReference SIMULATION_INVOCATION__TOOL_RESULT = eINSTANCE.getSimulationInvocation_ToolResult();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable Assignments</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Variable Assignments</b></em>' map feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -435,14 +439,6 @@ public interface InvocationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SIMULATION_INVOCATION__DEFINITION = eINSTANCE.getSimulationInvocation_Definition();
-
-		/**
-		 * The meta object literal for the '<em><b>Calls</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMULATION_INVOCATION__CALLS = eINSTANCE.getSimulationInvocation_Calls();
 
 		/**
 		 * The meta object literal for the '<em><b>Results</b></em>' reference list feature.
@@ -461,6 +457,38 @@ public interface InvocationPackage extends EPackage {
 		EReference SIMULATION_INVOCATION__ANALYZABLE_RESOURCE = eINSTANCE.getSimulationInvocation_AnalyzableResource();
 
 		/**
+		 * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_INVOCATION__START = eINSTANCE.getSimulationInvocation_Start();
+
+		/**
+		 * The meta object literal for the '<em><b>End</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_INVOCATION__END = eINSTANCE.getSimulationInvocation_End();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_INVOCATION__STATUS = eINSTANCE.getSimulationInvocation_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain Resource</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_INVOCATION__DOMAIN_RESOURCE = eINSTANCE.getSimulationInvocation_DomainResource();
+
+		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -471,12 +499,12 @@ public interface InvocationPackage extends EPackage {
 		EClass VARIABLE_ASSIGNMENT = eINSTANCE.getVariableAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VARIABLE_ASSIGNMENT__VARIABLE = eINSTANCE.getVariableAssignment_Variable();
+		EAttribute VARIABLE_ASSIGNMENT__KEY = eINSTANCE.getVariableAssignment_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -485,24 +513,6 @@ public interface InvocationPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute VARIABLE_ASSIGNMENT__VALUE = eINSTANCE.getVariableAssignment_Value();
-
-		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.invocation.impl.SimulationToolImpl <em>Simulation Tool</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.invocation.impl.SimulationToolImpl
-		 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl#getSimulationTool()
-		 * @generated
-		 */
-		EClass SIMULATION_TOOL = eINSTANCE.getSimulationTool();
-
-		/**
-		 * The meta object literal for the '<em><b>Produces</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMULATION_TOOL__PRODUCES = eINSTANCE.getSimulationTool_Produces();
 
 	}
 

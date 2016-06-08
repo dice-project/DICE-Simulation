@@ -4,8 +4,6 @@ package es.unizar.disco.simulation.models.measures;
 
 import es.unizar.disco.simulation.models.datatypes.Unit;
 
-import es.unizar.disco.simulation.models.definition.OutputVariable;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,9 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getValue <em>Value</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getMeasuredElement <em>Measured Element</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getUnit <em>Unit</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getOutputVariable <em>Output Variable</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getDefinition <em>Definition</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasure()
@@ -37,37 +34,22 @@ public interface DomainMeasure extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
+	 * @see #setValue(Number)
 	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasure_Value()
-	 * @model dataType="es.unizar.disco.simulation.models.datatypes.Number" required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @model id="true" dataType="es.unizar.disco.simulation.models.datatypes.Number" required="true"
 	 * @generated
 	 */
 	Number getValue();
 
 	/**
-	 * Returns the value of the '<em><b>Measured Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Measured Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Measured Element</em>' reference.
-	 * @see #setMeasuredElement(EObject)
-	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasure_MeasuredElement()
-	 * @model required="true"
-	 * @generated
-	 */
-	EObject getMeasuredElement();
-
-	/**
-	 * Sets the value of the '{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getMeasuredElement <em>Measured Element</em>}' reference.
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Measured Element</em>' reference.
-	 * @see #getMeasuredElement()
+	 * @param value the new value of the '<em>Value</em>' attribute.
+	 * @see #getValue()
 	 * @generated
 	 */
-	void setMeasuredElement(EObject value);
+	void setValue(Number value);
 
 	/**
 	 * Returns the value of the '<em><b>Unit</b></em>' attribute.
@@ -99,29 +81,29 @@ public interface DomainMeasure extends EObject {
 	void setUnit(Unit value);
 
 	/**
-	 * Returns the value of the '<em><b>Output Variable</b></em>' reference.
+	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Output Variable</em>' reference isn't clear,
+	 * If the meaning of the '<em>Definition</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Output Variable</em>' reference.
-	 * @see #setOutputVariable(OutputVariable)
-	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasure_OutputVariable()
+	 * @return the value of the '<em>Definition</em>' reference.
+	 * @see #setDefinition(DomainMeasureDefinition)
+	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasure_Definition()
 	 * @model required="true"
 	 * @generated
 	 */
-	OutputVariable getOutputVariable();
+	DomainMeasureDefinition getDefinition();
 
 	/**
-	 * Sets the value of the '{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getOutputVariable <em>Output Variable</em>}' reference.
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getDefinition <em>Definition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Output Variable</em>' reference.
-	 * @see #getOutputVariable()
+	 * @param value the new value of the '<em>Definition</em>' reference.
+	 * @see #getDefinition()
 	 * @generated
 	 */
-	void setOutputVariable(OutputVariable value);
+	void setDefinition(DomainMeasureDefinition value);
 
 } // DomainMeasure

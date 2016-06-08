@@ -3,8 +3,6 @@
 package es.unizar.disco.simulation.models.simresult.provider;
 
 
-import es.unizar.disco.simulation.models.measures.MeasuresFactory;
-
 import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
 
 import es.unizar.disco.simulation.models.simresult.SimresultPackage;
@@ -174,21 +172,6 @@ public class SimulationResultItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SimresultPackage.Literals.SIMULATION_RESULT__MEASURES,
-				 MeasuresFactory.eINSTANCE.createThroughput()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SimresultPackage.Literals.SIMULATION_RESULT__MEASURES,
-				 MeasuresFactory.eINSTANCE.createResponseTime()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SimresultPackage.Literals.SIMULATION_RESULT__MEASURES,
-				 MeasuresFactory.eINSTANCE.createUtilization()));
 	}
 
 	/**

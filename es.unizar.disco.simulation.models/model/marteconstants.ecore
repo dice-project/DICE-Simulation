@@ -3,11 +3,15 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="marteconstants" nsURI="http://es.unizar.disco/simulation/marte/constants/1.0"
     nsPrefix="marteconstants">
   <eClassifiers xsi:type="ecore:EEnum" name="SupportedMetrics">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="EEnum containing the constants of Stereotypes which represent supported metrics.&#xD;&#xA;An entry must be created for each supported metric. The literal value of the entry will contain the stereotype FQN and the tagged value in the form &quot;fqn#tagged-value&quot;, e.g. &quot;MARTE::MARTE_AnalysisModel::GQAM::GaScenario#respT&quot;.&#xD;&#xA;Only explicitly declared stereotypes will be considered as supported, i.e., a substereotype will not be considered as supported if it is not explicitly declared (e.g. GaStep must be explicitly declared as supported although it inherits from GaScenario).&#xD;&#xA;"/>
+    </eAnnotations>
     <eLiterals name="GaScenario_respT" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#respT"/>
-    <eLiterals name="GaScenario_througput" value="1" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"/>
-    <eLiterals name="GaScenario_utilization" value="2" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#utilization"/>
+    <eLiterals name="GaScenario_throughput" value="1" literal="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"/>
     <eLiterals name="GaStep_respT" value="10" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#respT"/>
-    <eLiterals name="GaStep_througput" value="11" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#throughput"/>
-    <eLiterals name="GaStep_utilization" value="12" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#utilization"/>
+    <eLiterals name="GaStep_throughput" value="11" literal="MARTE::MARTE_AnalysisModel::GQAM::GaStep#throughput"/>
+    <eLiterals name="PaLogicalResource_utilization" value="20" literal="MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource#utilization"/>
+    <eLiterals name="GaExecHost_utilization" value="30" literal="MARTE::MARTE_AnalysisModel::GQAM::GaExecHost#utilization"/>
+    <eLiterals name="GaCommHost_utilization" value="40" literal="MARTE::MARTE_AnalysisModel::GQAM::GaCommHost#utilization"/>
   </eClassifiers>
 </ecore:EPackage>

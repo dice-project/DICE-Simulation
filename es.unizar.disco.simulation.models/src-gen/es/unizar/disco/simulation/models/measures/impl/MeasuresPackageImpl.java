@@ -19,12 +19,10 @@ import es.unizar.disco.simulation.models.marteconstants.MarteconstantsPackage;
 import es.unizar.disco.simulation.models.marteconstants.impl.MarteconstantsPackageImpl;
 
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
+import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 import es.unizar.disco.simulation.models.measures.MeasureConverter;
 import es.unizar.disco.simulation.models.measures.MeasuresFactory;
 import es.unizar.disco.simulation.models.measures.MeasuresPackage;
-import es.unizar.disco.simulation.models.measures.ResponseTime;
-import es.unizar.disco.simulation.models.measures.Throughput;
-import es.unizar.disco.simulation.models.measures.Utilization;
 
 import es.unizar.disco.simulation.models.simresult.SimresultPackage;
 
@@ -41,6 +39,8 @@ import es.unizar.disco.simulation.models.traces.impl.TracesPackageImpl;
 import es.unizar.disco.simulation.models.wnsim.WnsimPackage;
 
 import es.unizar.disco.simulation.models.wnsim.impl.WnsimPackageImpl;
+
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -69,28 +69,21 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass throughputEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass responseTimeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass utilizationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass measureConverterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass domainMeasureDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass entryEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -202,17 +195,8 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDomainMeasure_MeasuredElement() {
-		return (EReference)domainMeasureEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getDomainMeasure_Unit() {
-		return (EAttribute)domainMeasureEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)domainMeasureEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -220,89 +204,8 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDomainMeasure_OutputVariable() {
-		return (EReference)domainMeasureEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getThroughput() {
-		return throughputEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getThroughput_Throughput() {
-		return (EAttribute)throughputEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getThroughput__GetValue() {
-		return throughputEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getResponseTime() {
-		return responseTimeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getResponseTime_ResponseTime() {
-		return (EAttribute)responseTimeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getResponseTime__GetValue() {
-		return responseTimeEClass.getEOperations().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getUtilization() {
-		return utilizationEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getUtilization_Utilization() {
-		return (EAttribute)utilizationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getUtilization__GetValue() {
-		return utilizationEClass.getEOperations().get(0);
+	public EReference getDomainMeasure_Definition() {
+		return (EReference)domainMeasureEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -346,6 +249,96 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDomainMeasureDefinition() {
+		return domainMeasureDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainMeasureDefinition_MeasuredElement() {
+		return (EReference)domainMeasureDefinitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDomainMeasureDefinition_Measure() {
+		return (EAttribute)domainMeasureDefinitionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainMeasureDefinition_VslExpressionEntries() {
+		return (EReference)domainMeasureDefinitionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDomainMeasureDefinition_VslExpression() {
+		return (EAttribute)domainMeasureDefinitionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainMeasureDefinition_OutputVariable() {
+		return (EReference)domainMeasureDefinitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainMeasureDefinition_SimulationDefinition() {
+		return (EReference)domainMeasureDefinitionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEntry() {
+		return entryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEntry_Key() {
+		return (EAttribute)entryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEntry_Value() {
+		return (EAttribute)entryEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public MeasuresFactory getMeasuresFactory() {
 		return (MeasuresFactory)getEFactoryInstance();
 	}
@@ -371,26 +364,25 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		// Create classes and their features
 		domainMeasureEClass = createEClass(DOMAIN_MEASURE);
 		createEAttribute(domainMeasureEClass, DOMAIN_MEASURE__VALUE);
-		createEReference(domainMeasureEClass, DOMAIN_MEASURE__MEASURED_ELEMENT);
 		createEAttribute(domainMeasureEClass, DOMAIN_MEASURE__UNIT);
-		createEReference(domainMeasureEClass, DOMAIN_MEASURE__OUTPUT_VARIABLE);
-
-		throughputEClass = createEClass(THROUGHPUT);
-		createEAttribute(throughputEClass, THROUGHPUT__THROUGHPUT);
-		createEOperation(throughputEClass, THROUGHPUT___GET_VALUE);
-
-		responseTimeEClass = createEClass(RESPONSE_TIME);
-		createEAttribute(responseTimeEClass, RESPONSE_TIME__RESPONSE_TIME);
-		createEOperation(responseTimeEClass, RESPONSE_TIME___GET_VALUE);
-
-		utilizationEClass = createEClass(UTILIZATION);
-		createEAttribute(utilizationEClass, UTILIZATION__UTILIZATION);
-		createEOperation(utilizationEClass, UTILIZATION___GET_VALUE);
+		createEReference(domainMeasureEClass, DOMAIN_MEASURE__DEFINITION);
 
 		measureConverterEClass = createEClass(MEASURE_CONVERTER);
 		createEReference(measureConverterEClass, MEASURE_CONVERTER__TO);
 		createEReference(measureConverterEClass, MEASURE_CONVERTER__FROM);
 		createEOperation(measureConverterEClass, MEASURE_CONVERTER___CONVERT);
+
+		domainMeasureDefinitionEClass = createEClass(DOMAIN_MEASURE_DEFINITION);
+		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__MEASURED_ELEMENT);
+		createEAttribute(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__MEASURE);
+		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION_ENTRIES);
+		createEAttribute(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION);
+		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__OUTPUT_VARIABLE);
+		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION);
+
+		entryEClass = createEClass(ENTRY);
+		createEAttribute(entryEClass, ENTRY__KEY);
+		createEAttribute(entryEClass, ENTRY__VALUE);
 	}
 
 	/**
@@ -418,45 +410,38 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 
 		// Obtain other dependent packages
 		DatatypesPackage theDatatypesPackage = (DatatypesPackage)EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
-		DefinitionPackage theDefinitionPackage = (DefinitionPackage)EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI);
 		ToolresultPackage theToolresultPackage = (ToolresultPackage)EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI);
+		DefinitionPackage theDefinitionPackage = (DefinitionPackage)EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		throughputEClass.getESuperTypes().add(this.getDomainMeasure());
-		responseTimeEClass.getESuperTypes().add(this.getDomainMeasure());
-		utilizationEClass.getESuperTypes().add(this.getDomainMeasure());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(domainMeasureEClass, DomainMeasure.class, "DomainMeasure", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDomainMeasure_Value(), theDatatypesPackage.getNumber(), "value", null, 1, 1, DomainMeasure.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainMeasure_MeasuredElement(), ecorePackage.getEObject(), null, "measuredElement", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainMeasure_Value(), theDatatypesPackage.getNumber(), "value", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainMeasure_Unit(), theDatatypesPackage.getUnit(), "unit", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainMeasure_OutputVariable(), theDefinitionPackage.getOutputVariable(), null, "outputVariable", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(throughputEClass, Throughput.class, "Throughput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getThroughput_Throughput(), theDatatypesPackage.getNumber(), "throughput", null, 1, 1, Throughput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEOperation(getThroughput__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(responseTimeEClass, ResponseTime.class, "ResponseTime", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getResponseTime_ResponseTime(), theDatatypesPackage.getNumber(), "responseTime", null, 1, 1, ResponseTime.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEOperation(getResponseTime__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(utilizationEClass, Utilization.class, "Utilization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUtilization_Utilization(), theDatatypesPackage.getNumber(), "utilization", null, 1, 1, Utilization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEOperation(getUtilization__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEReference(getDomainMeasure_Definition(), this.getDomainMeasureDefinition(), null, "definition", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(measureConverterEClass, MeasureConverter.class, "MeasureConverter", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMeasureConverter_To(), this.getDomainMeasure(), null, "to", null, 1, 1, MeasureConverter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMeasureConverter_From(), theToolresultPackage.getAnalyzableElementInfo(), null, "from", null, 1, 1, MeasureConverter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getMeasureConverter__Convert(), null, "convert", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(domainMeasureDefinitionEClass, DomainMeasureDefinition.class, "DomainMeasureDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDomainMeasureDefinition_MeasuredElement(), ecorePackage.getEObject(), null, "measuredElement", null, 1, 1, DomainMeasureDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainMeasureDefinition_Measure(), theDatatypesPackage.getMeasure(), "measure", null, 1, 1, DomainMeasureDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainMeasureDefinition_VslExpressionEntries(), this.getEntry(), null, "vslExpressionEntries", null, 0, -1, DomainMeasureDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainMeasureDefinition_VslExpression(), ecorePackage.getEString(), "vslExpression", null, 1, 1, DomainMeasureDefinition.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainMeasureDefinition_OutputVariable(), theDefinitionPackage.getOutputVariable(), null, "outputVariable", null, 1, 1, DomainMeasureDefinition.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainMeasureDefinition_SimulationDefinition(), theDefinitionPackage.getSimulationDefinition(), theDefinitionPackage.getSimulationDefinition_DeclaredMeasures(), "simulationDefinition", null, 1, 1, DomainMeasureDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(entryEClass, Map.Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEntry_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEntry_Value(), ecorePackage.getEString(), "value", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

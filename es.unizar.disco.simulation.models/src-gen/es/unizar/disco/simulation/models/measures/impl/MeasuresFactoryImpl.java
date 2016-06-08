@@ -4,6 +4,8 @@ package es.unizar.disco.simulation.models.measures.impl;
 
 import es.unizar.disco.simulation.models.measures.*;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -56,9 +58,8 @@ public class MeasuresFactoryImpl extends EFactoryImpl implements MeasuresFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case MeasuresPackage.THROUGHPUT: return createThroughput();
-			case MeasuresPackage.RESPONSE_TIME: return createResponseTime();
-			case MeasuresPackage.UTILIZATION: return createUtilization();
+			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION: return createDomainMeasureDefinition();
+			case MeasuresPackage.ENTRY: return (EObject)createEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -69,9 +70,9 @@ public class MeasuresFactoryImpl extends EFactoryImpl implements MeasuresFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Throughput createThroughput() {
-		ThroughputImpl throughput = new ThroughputImpl();
-		return throughput;
+	public DomainMeasureDefinition createDomainMeasureDefinition() {
+		DomainMeasureDefinitionImpl domainMeasureDefinition = new DomainMeasureDefinitionImpl();
+		return domainMeasureDefinition;
 	}
 
 	/**
@@ -79,19 +80,9 @@ public class MeasuresFactoryImpl extends EFactoryImpl implements MeasuresFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ResponseTime createResponseTime() {
-		ResponseTimeImpl responseTime = new ResponseTimeImpl();
-		return responseTime;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Utilization createUtilization() {
-		UtilizationImpl utilization = new UtilizationImpl();
-		return utilization;
+	public Map.Entry<String, String> createEntry() {
+		EntryImpl entry = new EntryImpl();
+		return entry;
 	}
 
 	/**

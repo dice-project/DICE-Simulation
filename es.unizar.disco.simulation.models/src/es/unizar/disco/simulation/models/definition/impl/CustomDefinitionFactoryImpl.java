@@ -3,6 +3,7 @@ package es.unizar.disco.simulation.models.definition.impl;
 import es.unizar.disco.simulation.models.definition.CustomDefinitionFactory;
 import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
+import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 
 public class CustomDefinitionFactoryImpl extends DefinitionFactoryImpl implements CustomDefinitionFactory {
 
@@ -12,15 +13,17 @@ public class CustomDefinitionFactoryImpl extends DefinitionFactoryImpl implement
 	
 	@Override
 	public SimulationDefinition createSimulationDefinition() {
-		SimulationDefinition simulationDefinition = new CustomSimulationDefinitionImpl();
-		return simulationDefinition;
+		return new CustomSimulationDefinitionImpl();
 	}
 	
 	@Override
 	public InputVariable createInputVariable() {
-		InputVariable inputVariable = new CustomInputVariableImpl();
-		return inputVariable;
+		return new CustomInputVariableImpl();
 	}
 	
+	@Override
+	public VariableConfiguration createVariableConfiguration() {
+		return new CustomVariableConfigurationImpl();
+	}
 }
 

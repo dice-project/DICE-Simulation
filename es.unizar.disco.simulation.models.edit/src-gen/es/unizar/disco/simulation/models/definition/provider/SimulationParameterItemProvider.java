@@ -4,12 +4,13 @@ package es.unizar.disco.simulation.models.definition.provider;
 
 
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
+
 import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
 
 import java.util.Collection;
 import java.util.List;
-
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 

@@ -5,10 +5,12 @@ package es.unizar.disco.simulation.models.definition.util;
 import es.unizar.disco.simulation.models.definition.*;
 
 import java.util.Map;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -90,6 +92,14 @@ public class DefinitionAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseInputVariableValue(InputVariableValue object) {
 				return createInputVariableValueAdapter();
+			}
+			@Override
+			public Adapter caseVariableAssignment(VariableAssignment object) {
+				return createVariableAssignmentAdapter();
+			}
+			@Override
+			public Adapter caseVariableConfiguration(VariableConfiguration object) {
+				return createVariableConfigurationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -192,6 +202,34 @@ public class DefinitionAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInputVariableValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.definition.VariableAssignment <em>Variable Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see es.unizar.disco.simulation.models.definition.VariableAssignment
+	 * @generated
+	 */
+	public Adapter createVariableAssignmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.definition.VariableConfiguration <em>Variable Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see es.unizar.disco.simulation.models.definition.VariableConfiguration
+	 * @generated
+	 */
+	public Adapter createVariableConfigurationAdapter() {
 		return null;
 	}
 

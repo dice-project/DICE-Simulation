@@ -77,31 +77,22 @@ public interface MeasuresPackage extends EPackage {
 	int DOMAIN_MEASURE__VALUE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Measured Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_MEASURE__MEASURED_ELEMENT = 1;
-
-	/**
 	 * The feature id for the '<em><b>Unit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_MEASURE__UNIT = 2;
+	int DOMAIN_MEASURE__UNIT = 1;
 
 	/**
-	 * The feature id for the '<em><b>Output Variable</b></em>' reference.
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_MEASURE__OUTPUT_VARIABLE = 3;
+	int DOMAIN_MEASURE__DEFINITION = 2;
 
 	/**
 	 * The number of structural features of the '<em>Domain Measure</em>' class.
@@ -110,7 +101,7 @@ public interface MeasuresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_MEASURE_FEATURE_COUNT = 4;
+	int DOMAIN_MEASURE_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Domain Measure</em>' class.
@@ -122,252 +113,6 @@ public interface MeasuresPackage extends EPackage {
 	int DOMAIN_MEASURE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.impl.ThroughputImpl <em>Throughput</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.measures.impl.ThroughputImpl
-	 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getThroughput()
-	 * @generated
-	 */
-	int THROUGHPUT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THROUGHPUT__VALUE = DOMAIN_MEASURE__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Measured Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THROUGHPUT__MEASURED_ELEMENT = DOMAIN_MEASURE__MEASURED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Unit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THROUGHPUT__UNIT = DOMAIN_MEASURE__UNIT;
-
-	/**
-	 * The feature id for the '<em><b>Output Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THROUGHPUT__OUTPUT_VARIABLE = DOMAIN_MEASURE__OUTPUT_VARIABLE;
-
-	/**
-	 * The feature id for the '<em><b>Throughput</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THROUGHPUT__THROUGHPUT = DOMAIN_MEASURE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Throughput</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THROUGHPUT_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THROUGHPUT___GET_VALUE = DOMAIN_MEASURE_OPERATION_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Throughput</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int THROUGHPUT_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.impl.ResponseTimeImpl <em>Response Time</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.measures.impl.ResponseTimeImpl
-	 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getResponseTime()
-	 * @generated
-	 */
-	int RESPONSE_TIME = 2;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESPONSE_TIME__VALUE = DOMAIN_MEASURE__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Measured Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESPONSE_TIME__MEASURED_ELEMENT = DOMAIN_MEASURE__MEASURED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Unit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESPONSE_TIME__UNIT = DOMAIN_MEASURE__UNIT;
-
-	/**
-	 * The feature id for the '<em><b>Output Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESPONSE_TIME__OUTPUT_VARIABLE = DOMAIN_MEASURE__OUTPUT_VARIABLE;
-
-	/**
-	 * The feature id for the '<em><b>Response Time</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESPONSE_TIME__RESPONSE_TIME = DOMAIN_MEASURE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Response Time</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESPONSE_TIME_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESPONSE_TIME___GET_VALUE = DOMAIN_MEASURE_OPERATION_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Response Time</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESPONSE_TIME_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 1;
-
-	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.impl.UtilizationImpl <em>Utilization</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.measures.impl.UtilizationImpl
-	 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getUtilization()
-	 * @generated
-	 */
-	int UTILIZATION = 3;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UTILIZATION__VALUE = DOMAIN_MEASURE__VALUE;
-
-	/**
-	 * The feature id for the '<em><b>Measured Element</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UTILIZATION__MEASURED_ELEMENT = DOMAIN_MEASURE__MEASURED_ELEMENT;
-
-	/**
-	 * The feature id for the '<em><b>Unit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UTILIZATION__UNIT = DOMAIN_MEASURE__UNIT;
-
-	/**
-	 * The feature id for the '<em><b>Output Variable</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UTILIZATION__OUTPUT_VARIABLE = DOMAIN_MEASURE__OUTPUT_VARIABLE;
-
-	/**
-	 * The feature id for the '<em><b>Utilization</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UTILIZATION__UTILIZATION = DOMAIN_MEASURE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Utilization</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UTILIZATION_FEATURE_COUNT = DOMAIN_MEASURE_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Get Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UTILIZATION___GET_VALUE = DOMAIN_MEASURE_OPERATION_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Utilization</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UTILIZATION_OPERATION_COUNT = DOMAIN_MEASURE_OPERATION_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -375,7 +120,7 @@ public interface MeasuresPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getMeasureConverter()
 	 * @generated
 	 */
-	int MEASURE_CONVERTER = 4;
+	int MEASURE_CONVERTER = 1;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -422,6 +167,134 @@ public interface MeasuresPackage extends EPackage {
 	 */
 	int MEASURE_CONVERTER_OPERATION_COUNT = 1;
 
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl <em>Domain Measure Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl
+	 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getDomainMeasureDefinition()
+	 * @generated
+	 */
+	int DOMAIN_MEASURE_DEFINITION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Measured Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION__MEASURED_ELEMENT = 0;
+
+	/**
+	 * The feature id for the '<em><b>Measure</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION__MEASURE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Vsl Expression Entries</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION_ENTRIES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Vsl Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Output Variable</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION__OUTPUT_VARIABLE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Simulation Definition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION = 5;
+
+	/**
+	 * The number of structural features of the '<em>Domain Measure Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>Domain Measure Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.impl.EntryImpl <em>Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.measures.impl.EntryImpl
+	 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getEntry()
+	 * @generated
+	 */
+	int ENTRY = 3;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_OPERATION_COUNT = 0;
+
 
 	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.DomainMeasure <em>Domain Measure</em>}'.
@@ -445,17 +318,6 @@ public interface MeasuresPackage extends EPackage {
 	EAttribute getDomainMeasure_Value();
 
 	/**
-	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getMeasuredElement <em>Measured Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Measured Element</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.DomainMeasure#getMeasuredElement()
-	 * @see #getDomainMeasure()
-	 * @generated
-	 */
-	EReference getDomainMeasure_MeasuredElement();
-
-	/**
 	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getUnit <em>Unit</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -467,108 +329,15 @@ public interface MeasuresPackage extends EPackage {
 	EAttribute getDomainMeasure_Unit();
 
 	/**
-	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getOutputVariable <em>Output Variable</em>}'.
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.measures.DomainMeasure#getDefinition <em>Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Output Variable</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.DomainMeasure#getOutputVariable()
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasure#getDefinition()
 	 * @see #getDomainMeasure()
 	 * @generated
 	 */
-	EReference getDomainMeasure_OutputVariable();
-
-	/**
-	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.Throughput <em>Throughput</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Throughput</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.Throughput
-	 * @generated
-	 */
-	EClass getThroughput();
-
-	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.Throughput#getThroughput <em>Throughput</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Throughput</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.Throughput#getThroughput()
-	 * @see #getThroughput()
-	 * @generated
-	 */
-	EAttribute getThroughput_Throughput();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.Throughput#getValue() <em>Get Value</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Value</em>' operation.
-	 * @see es.unizar.disco.simulation.models.measures.Throughput#getValue()
-	 * @generated
-	 */
-	EOperation getThroughput__GetValue();
-
-	/**
-	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.ResponseTime <em>Response Time</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Response Time</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.ResponseTime
-	 * @generated
-	 */
-	EClass getResponseTime();
-
-	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.ResponseTime#getResponseTime <em>Response Time</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Response Time</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.ResponseTime#getResponseTime()
-	 * @see #getResponseTime()
-	 * @generated
-	 */
-	EAttribute getResponseTime_ResponseTime();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.ResponseTime#getValue() <em>Get Value</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Value</em>' operation.
-	 * @see es.unizar.disco.simulation.models.measures.ResponseTime#getValue()
-	 * @generated
-	 */
-	EOperation getResponseTime__GetValue();
-
-	/**
-	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.Utilization <em>Utilization</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Utilization</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.Utilization
-	 * @generated
-	 */
-	EClass getUtilization();
-
-	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.Utilization#getUtilization <em>Utilization</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Utilization</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.Utilization#getUtilization()
-	 * @see #getUtilization()
-	 * @generated
-	 */
-	EAttribute getUtilization_Utilization();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.Utilization#getValue() <em>Get Value</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Value</em>' operation.
-	 * @see es.unizar.disco.simulation.models.measures.Utilization#getValue()
-	 * @generated
-	 */
-	EOperation getUtilization__GetValue();
+	EReference getDomainMeasure_Definition();
 
 	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}'.
@@ -613,6 +382,116 @@ public interface MeasuresPackage extends EPackage {
 	EOperation getMeasureConverter__Convert();
 
 	/**
+	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition <em>Domain Measure Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Domain Measure Definition</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition
+	 * @generated
+	 */
+	EClass getDomainMeasureDefinition();
+
+	/**
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getMeasuredElement <em>Measured Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Measured Element</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getMeasuredElement()
+	 * @see #getDomainMeasureDefinition()
+	 * @generated
+	 */
+	EReference getDomainMeasureDefinition_MeasuredElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getMeasure <em>Measure</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Measure</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getMeasure()
+	 * @see #getDomainMeasureDefinition()
+	 * @generated
+	 */
+	EAttribute getDomainMeasureDefinition_Measure();
+
+	/**
+	 * Returns the meta object for the map '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getVslExpressionEntries <em>Vsl Expression Entries</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the map '<em>Vsl Expression Entries</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getVslExpressionEntries()
+	 * @see #getDomainMeasureDefinition()
+	 * @generated
+	 */
+	EReference getDomainMeasureDefinition_VslExpressionEntries();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getVslExpression <em>Vsl Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Vsl Expression</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getVslExpression()
+	 * @see #getDomainMeasureDefinition()
+	 * @generated
+	 */
+	EAttribute getDomainMeasureDefinition_VslExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getOutputVariable <em>Output Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Output Variable</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getOutputVariable()
+	 * @see #getDomainMeasureDefinition()
+	 * @generated
+	 */
+	EReference getDomainMeasureDefinition_OutputVariable();
+
+	/**
+	 * Returns the meta object for the container reference '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSimulationDefinition <em>Simulation Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Simulation Definition</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSimulationDefinition()
+	 * @see #getDomainMeasureDefinition()
+	 * @generated
+	 */
+	EReference getDomainMeasureDefinition_SimulationDefinition();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Entry</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString" keyRequired="true"
+	 *        valueDataType="org.eclipse.emf.ecore.EString" valueRequired="true"
+	 * @generated
+	 */
+	EClass getEntry();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getEntry()
+	 * @generated
+	 */
+	EAttribute getEntry_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getEntry()
+	 * @generated
+	 */
+	EAttribute getEntry_Value();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -654,14 +533,6 @@ public interface MeasuresPackage extends EPackage {
 		EAttribute DOMAIN_MEASURE__VALUE = eINSTANCE.getDomainMeasure_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Measured Element</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DOMAIN_MEASURE__MEASURED_ELEMENT = eINSTANCE.getDomainMeasure_MeasuredElement();
-
-		/**
 		 * The meta object literal for the '<em><b>Unit</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -670,90 +541,12 @@ public interface MeasuresPackage extends EPackage {
 		EAttribute DOMAIN_MEASURE__UNIT = eINSTANCE.getDomainMeasure_Unit();
 
 		/**
-		 * The meta object literal for the '<em><b>Output Variable</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOMAIN_MEASURE__OUTPUT_VARIABLE = eINSTANCE.getDomainMeasure_OutputVariable();
-
-		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.ThroughputImpl <em>Throughput</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.measures.impl.ThroughputImpl
-		 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getThroughput()
-		 * @generated
-		 */
-		EClass THROUGHPUT = eINSTANCE.getThroughput();
-
-		/**
-		 * The meta object literal for the '<em><b>Throughput</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute THROUGHPUT__THROUGHPUT = eINSTANCE.getThroughput_Throughput();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation THROUGHPUT___GET_VALUE = eINSTANCE.getThroughput__GetValue();
-
-		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.ResponseTimeImpl <em>Response Time</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.measures.impl.ResponseTimeImpl
-		 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getResponseTime()
-		 * @generated
-		 */
-		EClass RESPONSE_TIME = eINSTANCE.getResponseTime();
-
-		/**
-		 * The meta object literal for the '<em><b>Response Time</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RESPONSE_TIME__RESPONSE_TIME = eINSTANCE.getResponseTime_ResponseTime();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RESPONSE_TIME___GET_VALUE = eINSTANCE.getResponseTime__GetValue();
-
-		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.UtilizationImpl <em>Utilization</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.measures.impl.UtilizationImpl
-		 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getUtilization()
-		 * @generated
-		 */
-		EClass UTILIZATION = eINSTANCE.getUtilization();
-
-		/**
-		 * The meta object literal for the '<em><b>Utilization</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute UTILIZATION__UTILIZATION = eINSTANCE.getUtilization_Utilization();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation UTILIZATION___GET_VALUE = eINSTANCE.getUtilization__GetValue();
+		EReference DOMAIN_MEASURE__DEFINITION = eINSTANCE.getDomainMeasure_Definition();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}' class.
@@ -788,6 +581,90 @@ public interface MeasuresPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation MEASURE_CONVERTER___CONVERT = eINSTANCE.getMeasureConverter__Convert();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl <em>Domain Measure Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl
+		 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getDomainMeasureDefinition()
+		 * @generated
+		 */
+		EClass DOMAIN_MEASURE_DEFINITION = eINSTANCE.getDomainMeasureDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Measured Element</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_MEASURE_DEFINITION__MEASURED_ELEMENT = eINSTANCE.getDomainMeasureDefinition_MeasuredElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Measure</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_MEASURE_DEFINITION__MEASURE = eINSTANCE.getDomainMeasureDefinition_Measure();
+
+		/**
+		 * The meta object literal for the '<em><b>Vsl Expression Entries</b></em>' map feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION_ENTRIES = eINSTANCE.getDomainMeasureDefinition_VslExpressionEntries();
+
+		/**
+		 * The meta object literal for the '<em><b>Vsl Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION = eINSTANCE.getDomainMeasureDefinition_VslExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Output Variable</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_MEASURE_DEFINITION__OUTPUT_VARIABLE = eINSTANCE.getDomainMeasureDefinition_OutputVariable();
+
+		/**
+		 * The meta object literal for the '<em><b>Simulation Definition</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION = eINSTANCE.getDomainMeasureDefinition_SimulationDefinition();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.EntryImpl <em>Entry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.measures.impl.EntryImpl
+		 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getEntry()
+		 * @generated
+		 */
+		EClass ENTRY = eINSTANCE.getEntry();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENTRY__KEY = eINSTANCE.getEntry_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENTRY__VALUE = eINSTANCE.getEntry_Value();
 
 	}
 

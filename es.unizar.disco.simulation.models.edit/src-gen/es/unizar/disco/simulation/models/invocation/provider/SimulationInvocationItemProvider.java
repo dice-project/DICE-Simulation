@@ -12,6 +12,7 @@ import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -28,6 +29,7 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -69,8 +71,11 @@ public class SimulationInvocationItemProvider
 			addTraceSetPropertyDescriptor(object);
 			addToolResultPropertyDescriptor(object);
 			addDefinitionPropertyDescriptor(object);
-			addCallsPropertyDescriptor(object);
 			addResultsPropertyDescriptor(object);
+			addStartPropertyDescriptor(object);
+			addEndPropertyDescriptor(object);
+			addStatusPropertyDescriptor(object);
+			addDomainResourcePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -142,28 +147,6 @@ public class SimulationInvocationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Calls feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addCallsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationInvocation_calls_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_calls_feature", "_UI_SimulationInvocation_type"),
-				 InvocationPackage.Literals.SIMULATION_INVOCATION__CALLS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Results feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -181,6 +164,94 @@ public class SimulationInvocationItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Start feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStartPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationInvocation_start_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_start_feature", "_UI_SimulationInvocation_type"),
+				 InvocationPackage.Literals.SIMULATION_INVOCATION__START,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the End feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEndPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationInvocation_end_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_end_feature", "_UI_SimulationInvocation_type"),
+				 InvocationPackage.Literals.SIMULATION_INVOCATION__END,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Status feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatusPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationInvocation_status_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_status_feature", "_UI_SimulationInvocation_type"),
+				 InvocationPackage.Literals.SIMULATION_INVOCATION__STATUS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Domain Resource feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDomainResourcePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationInvocation_domainResource_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_domainResource_feature", "_UI_SimulationInvocation_type"),
+				 InvocationPackage.Literals.SIMULATION_INVOCATION__DOMAIN_RESOURCE,
+				 false,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -235,7 +306,11 @@ public class SimulationInvocationItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_SimulationInvocation_type");
+		Date labelValue = ((SimulationInvocation)object).getStart();
+		String label = labelValue == null ? null : labelValue.toString();
+		return label == null || label.length() == 0 ?
+			getString("_UI_SimulationInvocation_type") :
+			getString("_UI_SimulationInvocation_type") + " " + label;
 	}
 	
 
@@ -251,6 +326,12 @@ public class SimulationInvocationItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(SimulationInvocation.class)) {
+			case InvocationPackage.SIMULATION_INVOCATION__START:
+			case InvocationPackage.SIMULATION_INVOCATION__END:
+			case InvocationPackage.SIMULATION_INVOCATION__STATUS:
+			case InvocationPackage.SIMULATION_INVOCATION__DOMAIN_RESOURCE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS:
 			case InvocationPackage.SIMULATION_INVOCATION__ANALYZABLE_RESOURCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -273,7 +354,7 @@ public class SimulationInvocationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(InvocationPackage.Literals.SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS,
-				 InvocationFactory.eINSTANCE.createVariableAssignment()));
+				 InvocationFactory.eINSTANCE.create(InvocationPackage.Literals.VARIABLE_ASSIGNMENT)));
 
 		newChildDescriptors.add
 			(createChildParameter

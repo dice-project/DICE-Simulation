@@ -187,6 +187,52 @@ public class DefinitionItemProviderAdapterFactory extends DefinitionAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.definition.VariableAssignment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VariableAssignmentItemProvider variableAssignmentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.definition.VariableAssignment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createVariableAssignmentAdapter() {
+		if (variableAssignmentItemProvider == null) {
+			variableAssignmentItemProvider = new VariableAssignmentItemProvider(this);
+		}
+
+		return variableAssignmentItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.definition.VariableConfiguration} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected VariableConfigurationItemProvider variableConfigurationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.definition.VariableConfiguration}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createVariableConfigurationAdapter() {
+		if (variableConfigurationItemProvider == null) {
+			variableConfigurationItemProvider = new VariableConfigurationItemProvider(this);
+		}
+
+		return variableConfigurationItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -290,6 +336,8 @@ public class DefinitionItemProviderAdapterFactory extends DefinitionAdapterFacto
 		if (inputVariableItemProvider != null) inputVariableItemProvider.dispose();
 		if (outputVariableItemProvider != null) outputVariableItemProvider.dispose();
 		if (inputVariableValueItemProvider != null) inputVariableValueItemProvider.dispose();
+		if (variableAssignmentItemProvider != null) variableAssignmentItemProvider.dispose();
+		if (variableConfigurationItemProvider != null) variableConfigurationItemProvider.dispose();
 	}
 
 }

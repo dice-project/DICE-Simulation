@@ -4,6 +4,8 @@ package es.unizar.disco.simulation.models.datatypes.impl;
 
 import es.unizar.disco.simulation.models.datatypes.*;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
@@ -75,10 +77,16 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 		switch (eDataType.getClassifierID()) {
 			case DatatypesPackage.UNIT:
 				return createUnitFromString(eDataType, initialValue);
+			case DatatypesPackage.MEASURE:
+				return createMeasureFromString(eDataType, initialValue);
+			case DatatypesPackage.SIMULATION_STATUS:
+				return createSimulationStatusFromString(eDataType, initialValue);
 			case DatatypesPackage.URI:
 				return createURIFromString(eDataType, initialValue);
 			case DatatypesPackage.NUMBER:
 				return createNumberFromString(eDataType, initialValue);
+			case DatatypesPackage.COLLECTION:
+				return createCollectionFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -94,10 +102,16 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 		switch (eDataType.getClassifierID()) {
 			case DatatypesPackage.UNIT:
 				return convertUnitToString(eDataType, instanceValue);
+			case DatatypesPackage.MEASURE:
+				return convertMeasureToString(eDataType, instanceValue);
+			case DatatypesPackage.SIMULATION_STATUS:
+				return convertSimulationStatusToString(eDataType, instanceValue);
 			case DatatypesPackage.URI:
 				return convertURIToString(eDataType, instanceValue);
 			case DatatypesPackage.NUMBER:
 				return convertNumberToString(eDataType, instanceValue);
+			case DatatypesPackage.COLLECTION:
+				return convertCollectionToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -138,6 +152,46 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Measure createMeasureFromString(EDataType eDataType, String initialValue) {
+		Measure result = Measure.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertMeasureToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SimulationStatus createSimulationStatusFromString(EDataType eDataType, String initialValue) {
+		SimulationStatus result = SimulationStatus.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSimulationStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public URI createURIFromString(EDataType eDataType, String initialValue) {
 		return (URI)super.createFromString(eDataType, initialValue);
 	}
@@ -167,6 +221,24 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 */
 	public String convertNumberToString(EDataType eDataType, Object instanceValue) {
 		return super.convertToString(eDataType, instanceValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Collection<?> createCollectionFromString(EDataType eDataType, String initialValue) {
+		return (Collection<?>)super.createFromString(initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertCollectionToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(instanceValue);
 	}
 
 	/**

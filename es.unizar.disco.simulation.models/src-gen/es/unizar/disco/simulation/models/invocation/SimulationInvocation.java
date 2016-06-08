@@ -3,6 +3,7 @@
 package es.unizar.disco.simulation.models.invocation;
 
 import es.unizar.disco.simulation.models.datatypes.Resource;
+import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
 
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 
@@ -12,7 +13,11 @@ import es.unizar.disco.simulation.models.toolresult.ToolResult;
 
 import es.unizar.disco.simulation.models.traces.TraceSet;
 
+import java.util.Date;
+
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -29,9 +34,12 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getToolResult <em>Tool Result</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableAssignments <em>Variable Assignments</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDefinition <em>Definition</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getCalls <em>Calls</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults <em>Results</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableResource <em>Analyzable Resource</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStart <em>Start</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getEnd <em>End</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStatus <em>Status</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDomainResource <em>Domain Resource</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation()
@@ -92,20 +100,21 @@ public interface SimulationInvocation extends EObject {
 	void setToolResult(ToolResult value);
 
 	/**
-	 * Returns the value of the '<em><b>Variable Assignments</b></em>' containment reference list.
-	 * The list contents are of type {@link es.unizar.disco.simulation.models.invocation.VariableAssignment}.
+	 * Returns the value of the '<em><b>Variable Assignments</b></em>' map.
+	 * The key is of type {@link java.lang.String},
+	 * and the value is of type {@link java.lang.Number},
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Variable Assignments</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Variable Assignments</em>' map isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable Assignments</em>' containment reference list.
+	 * @return the value of the '<em>Variable Assignments</em>' map.
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_VariableAssignments()
-	 * @model containment="true"
+	 * @model mapType="es.unizar.disco.simulation.models.invocation.VariableAssignment<org.eclipse.emf.ecore.EString, es.unizar.disco.simulation.models.datatypes.Number>"
 	 * @generated
 	 */
-	EList<VariableAssignment> getVariableAssignments();
+	EMap<String, Number> getVariableAssignments();
 
 	/**
 	 * Returns the value of the '<em><b>Definition</b></em>' reference.
@@ -134,32 +143,6 @@ public interface SimulationInvocation extends EObject {
 	 * @generated
 	 */
 	void setDefinition(SimulationDefinition value);
-
-	/**
-	 * Returns the value of the '<em><b>Calls</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Calls</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Calls</em>' reference.
-	 * @see #setCalls(SimulationTool)
-	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_Calls()
-	 * @model required="true" transient="true" volatile="true"
-	 * @generated
-	 */
-	SimulationTool getCalls();
-
-	/**
-	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getCalls <em>Calls</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Calls</em>' reference.
-	 * @see #getCalls()
-	 * @generated
-	 */
-	void setCalls(SimulationTool value);
 
 	/**
 	 * Returns the value of the '<em><b>Results</b></em>' reference list.
@@ -204,5 +187,101 @@ public interface SimulationInvocation extends EObject {
 	 * @generated
 	 */
 	void setAnalyzableResource(Resource value);
+
+	/**
+	 * Returns the value of the '<em><b>Start</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Start</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Start</em>' attribute.
+	 * @see #setStart(Date)
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_Start()
+	 * @model
+	 * @generated
+	 */
+	Date getStart();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStart <em>Start</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Start</em>' attribute.
+	 * @see #getStart()
+	 * @generated
+	 */
+	void setStart(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>End</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>End</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>End</em>' attribute.
+	 * @see #setEnd(Date)
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_End()
+	 * @model
+	 * @generated
+	 */
+	Date getEnd();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getEnd <em>End</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>End</em>' attribute.
+	 * @see #getEnd()
+	 * @generated
+	 */
+	void setEnd(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * The literals are from the enumeration {@link es.unizar.disco.simulation.models.datatypes.SimulationStatus}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' attribute.
+	 * @see es.unizar.disco.simulation.models.datatypes.SimulationStatus
+	 * @see #setStatus(SimulationStatus)
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_Status()
+	 * @model
+	 * @generated
+	 */
+	SimulationStatus getStatus();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStatus <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Status</em>' attribute.
+	 * @see es.unizar.disco.simulation.models.datatypes.SimulationStatus
+	 * @see #getStatus()
+	 * @generated
+	 */
+	void setStatus(SimulationStatus value);
+
+	/**
+	 * Returns the value of the '<em><b>Domain Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Domain Resource</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Domain Resource</em>' attribute.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_DomainResource()
+	 * @model dataType="es.unizar.disco.simulation.models.datatypes.URI" required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	URI getDomainResource();
 
 } // SimulationInvocation

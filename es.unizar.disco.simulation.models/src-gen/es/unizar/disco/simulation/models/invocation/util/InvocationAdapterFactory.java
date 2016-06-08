@@ -4,6 +4,8 @@ package es.unizar.disco.simulation.models.invocation.util;
 
 import es.unizar.disco.simulation.models.invocation.*;
 
+import java.util.Map;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -72,12 +74,8 @@ public class InvocationAdapterFactory extends AdapterFactoryImpl {
 				return createSimulationInvocationAdapter();
 			}
 			@Override
-			public Adapter caseVariableAssignment(VariableAssignment object) {
+			public Adapter caseVariableAssignment(Map.Entry<String, Number> object) {
 				return createVariableAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseSimulationTool(SimulationTool object) {
-				return createSimulationToolAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -114,30 +112,16 @@ public class InvocationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.invocation.VariableAssignment <em>Variable Assignment</em>}'.
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Variable Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see es.unizar.disco.simulation.models.invocation.VariableAssignment
+	 * @see java.util.Map.Entry
 	 * @generated
 	 */
 	public Adapter createVariableAssignmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.invocation.SimulationTool <em>Simulation Tool</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationTool
-	 * @generated
-	 */
-	public Adapter createSimulationToolAdapter() {
 		return null;
 	}
 

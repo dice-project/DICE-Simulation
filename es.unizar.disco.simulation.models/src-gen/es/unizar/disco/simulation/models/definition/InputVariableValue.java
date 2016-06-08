@@ -2,6 +2,8 @@
  */
 package es.unizar.disco.simulation.models.definition;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link es.unizar.disco.simulation.models.definition.InputVariableValue#getValue <em>Value</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.InputVariableValue#getAssignments <em>Assignments</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.InputVariableValue#getVariable <em>Variable</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getInputVariableValue()
@@ -46,5 +50,51 @@ public interface InputVariableValue extends EObject {
 	 * @generated
 	 */
 	void setValue(Number value);
+
+	/**
+	 * Returns the value of the '<em><b>Assignments</b></em>' reference list.
+	 * The list contents are of type {@link es.unizar.disco.simulation.models.definition.VariableAssignment}.
+	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.definition.VariableAssignment#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Assignments</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Assignments</em>' reference list.
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getInputVariableValue_Assignments()
+	 * @see es.unizar.disco.simulation.models.definition.VariableAssignment#getValue
+	 * @model opposite="value" required="true"
+	 * @generated
+	 */
+	EList<VariableAssignment> getAssignments();
+
+	/**
+	 * Returns the value of the '<em><b>Variable</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.definition.InputVariable#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variable</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variable</em>' container reference.
+	 * @see #setVariable(InputVariable)
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getInputVariableValue_Variable()
+	 * @see es.unizar.disco.simulation.models.definition.InputVariable#getValues
+	 * @model opposite="values" required="true" transient="false"
+	 * @generated
+	 */
+	InputVariable getVariable();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.definition.InputVariableValue#getVariable <em>Variable</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Variable</em>' container reference.
+	 * @see #getVariable()
+	 * @generated
+	 */
+	void setVariable(InputVariable value);
 
 } // InputVariableValue

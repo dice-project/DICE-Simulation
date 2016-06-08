@@ -63,9 +63,8 @@ public class DomainMeasureItemProvider
 			super.getPropertyDescriptors(object);
 
 			addValuePropertyDescriptor(object);
-			addMeasuredElementPropertyDescriptor(object);
 			addUnitPropertyDescriptor(object);
-			addOutputVariablePropertyDescriptor(object);
+			addDefinitionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -93,28 +92,6 @@ public class DomainMeasureItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Measured Element feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMeasuredElementPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DomainMeasure_measuredElement_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DomainMeasure_measuredElement_feature", "_UI_DomainMeasure_type"),
-				 MeasuresPackage.Literals.DOMAIN_MEASURE__MEASURED_ELEMENT,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Unit feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -137,19 +114,19 @@ public class DomainMeasureItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Output Variable feature.
+	 * This adds a property descriptor for the Definition feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addOutputVariablePropertyDescriptor(Object object) {
+	protected void addDefinitionPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_DomainMeasure_outputVariable_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DomainMeasure_outputVariable_feature", "_UI_DomainMeasure_type"),
-				 MeasuresPackage.Literals.DOMAIN_MEASURE__OUTPUT_VARIABLE,
+				 getString("_UI_DomainMeasure_definition_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DomainMeasure_definition_feature", "_UI_DomainMeasure_type"),
+				 MeasuresPackage.Literals.DOMAIN_MEASURE__DEFINITION,
 				 true,
 				 false,
 				 true,

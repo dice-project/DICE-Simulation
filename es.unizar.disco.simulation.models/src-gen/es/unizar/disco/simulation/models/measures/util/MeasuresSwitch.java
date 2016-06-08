@@ -4,6 +4,8 @@ package es.unizar.disco.simulation.models.measures.util;
 
 import es.unizar.disco.simulation.models.measures.*;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -72,30 +74,21 @@ public class MeasuresSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MeasuresPackage.THROUGHPUT: {
-				Throughput throughput = (Throughput)theEObject;
-				T result = caseThroughput(throughput);
-				if (result == null) result = caseDomainMeasure(throughput);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MeasuresPackage.RESPONSE_TIME: {
-				ResponseTime responseTime = (ResponseTime)theEObject;
-				T result = caseResponseTime(responseTime);
-				if (result == null) result = caseDomainMeasure(responseTime);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case MeasuresPackage.UTILIZATION: {
-				Utilization utilization = (Utilization)theEObject;
-				T result = caseUtilization(utilization);
-				if (result == null) result = caseDomainMeasure(utilization);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case MeasuresPackage.MEASURE_CONVERTER: {
 				MeasureConverter measureConverter = (MeasureConverter)theEObject;
 				T result = caseMeasureConverter(measureConverter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION: {
+				DomainMeasureDefinition domainMeasureDefinition = (DomainMeasureDefinition)theEObject;
+				T result = caseDomainMeasureDefinition(domainMeasureDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case MeasuresPackage.ENTRY: {
+				@SuppressWarnings("unchecked") Map.Entry<String, String> entry = (Map.Entry<String, String>)theEObject;
+				T result = caseEntry(entry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -119,51 +112,6 @@ public class MeasuresSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Throughput</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Throughput</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseThroughput(Throughput object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Response Time</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Response Time</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseResponseTime(ResponseTime object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Utilization</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Utilization</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUtilization(Utilization object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Measure Converter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -175,6 +123,36 @@ public class MeasuresSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMeasureConverter(MeasureConverter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain Measure Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain Measure Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomainMeasureDefinition(DomainMeasureDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEntry(Map.Entry<String, String> object) {
 		return null;
 	}
 

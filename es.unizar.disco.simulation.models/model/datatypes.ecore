@@ -13,15 +13,65 @@
       <details key="conversionDelegates" value="http://es.unizar.disco/simulation/conversion/1.0"/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Collection" instanceClassName="java.util.Collection">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Unit">
     <eLiterals name="unspecified" literal="unspecified"/>
-    <eLiterals name="s" value="10" literal="s"/>
-    <eLiterals name="Hz" value="20" literal="Hz"/>
+    <eLiterals name="none" value="5"/>
+    <eLiterals name="s" value="10"/>
+    <eLiterals name="tick" value="11"/>
+    <eLiterals name="ms" value="12"/>
+    <eLiterals name="us" value="13"/>
+    <eLiterals name="min" value="14"/>
+    <eLiterals name="hrs" value="15"/>
+    <eLiterals name="day" value="16"/>
+    <eLiterals name="Hz" value="10"/>
+    <eLiterals name="KHz" value="11"/>
+    <eLiterals name="MHz" value="12"/>
+    <eLiterals name="GHz" value="13"/>
+    <eLiterals name="rpm" value="14"/>
+    <eLiterals name="W" value="30"/>
+    <eLiterals name="mW" value="31"/>
+    <eLiterals name="KW" value="32"/>
+    <eLiterals name="bit" value="40"/>
+    <eLiterals name="Byte" value="41"/>
+    <eLiterals name="KB" value="42"/>
+    <eLiterals name="MB" value="43"/>
+    <eLiterals name="GB" value="44"/>
+    <eLiterals name="b_per_s" value="50"/>
+    <eLiterals name="Kb_per_s" value="51"/>
+    <eLiterals name="Mb_per_s" value="52"/>
+    <eLiterals name="J" value="60"/>
+    <eLiterals name="KJ" value="61"/>
+    <eLiterals name="Wh" value="62"/>
+    <eLiterals name="KWh" value="63"/>
+    <eLiterals name="mWh" value="64"/>
+    <eLiterals name="m" value="70"/>
+    <eLiterals name="cm" value="71"/>
+    <eLiterals name="mm" value="72"/>
+    <eLiterals name="mm2" value="80"/>
+    <eLiterals name="um2" value="81"/>
+    <eLiterals name="g" value="90"/>
+    <eLiterals name="mg" value="91"/>
+    <eLiterals name="kg" value="92"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Resource">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="#//URI"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resource" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResource"
         changeable="false" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Measure">
+    <eLiterals name="unspecified" literal="Unspecified"/>
+    <eLiterals name="respT" value="1" literal="Response Time"/>
+    <eLiterals name="throughput" value="2" literal="Throughput"/>
+    <eLiterals name="utilization" value="3" literal="Utilization"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SimulationStatus">
+    <eLiterals name="unknown" literal="unknown"/>
+    <eLiterals name="running" value="1"/>
+    <eLiterals name="finished" value="2"/>
+    <eLiterals name="killed" value="3"/>
   </eClassifiers>
 </ecore:EPackage>

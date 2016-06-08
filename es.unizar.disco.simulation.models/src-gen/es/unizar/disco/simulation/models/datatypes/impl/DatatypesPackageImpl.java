@@ -4,7 +4,9 @@ package es.unizar.disco.simulation.models.datatypes.impl;
 
 import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
+import es.unizar.disco.simulation.models.datatypes.Measure;
 import es.unizar.disco.simulation.models.datatypes.Resource;
+import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
 import es.unizar.disco.simulation.models.datatypes.Unit;
 
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
@@ -38,6 +40,8 @@ import es.unizar.disco.simulation.models.traces.impl.TracesPackageImpl;
 import es.unizar.disco.simulation.models.wnsim.WnsimPackage;
 
 import es.unizar.disco.simulation.models.wnsim.impl.WnsimPackageImpl;
+
+import java.util.Collection;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -73,6 +77,20 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EEnum measureEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum simulationStatusEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType uriEDataType = null;
 
 	/**
@@ -81,6 +99,13 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * @generated
 	 */
 	private EDataType numberEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType collectionEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -210,6 +235,24 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getMeasure() {
+		return measureEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getSimulationStatus() {
+		return simulationStatusEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getURI() {
 		return uriEDataType;
 	}
@@ -221,6 +264,15 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 */
 	public EDataType getNumber() {
 		return numberEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EDataType getCollection() {
+		return collectionEDataType;
 	}
 
 	/**
@@ -257,10 +309,13 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 
 		// Create enums
 		unitEEnum = createEEnum(UNIT);
+		measureEEnum = createEEnum(MEASURE);
+		simulationStatusEEnum = createEEnum(SIMULATION_STATUS);
 
 		// Create data types
 		uriEDataType = createEDataType(URI);
 		numberEDataType = createEDataType(NUMBER);
+		collectionEDataType = createEDataType(COLLECTION);
 	}
 
 	/**
@@ -287,6 +342,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		setNsURI(eNS_URI);
 
 		// Create type parameters
+		addETypeParameter(collectionEDataType, "T");
 
 		// Set bounds for type parameters
 
@@ -300,12 +356,60 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		// Initialize enums and add enum literals
 		initEEnum(unitEEnum, Unit.class, "Unit");
 		addEEnumLiteral(unitEEnum, Unit.UNSPECIFIED);
+		addEEnumLiteral(unitEEnum, Unit.NONE);
 		addEEnumLiteral(unitEEnum, Unit.S);
+		addEEnumLiteral(unitEEnum, Unit.TICK);
+		addEEnumLiteral(unitEEnum, Unit.MS);
+		addEEnumLiteral(unitEEnum, Unit.US);
+		addEEnumLiteral(unitEEnum, Unit.MIN);
+		addEEnumLiteral(unitEEnum, Unit.HRS);
+		addEEnumLiteral(unitEEnum, Unit.DAY);
 		addEEnumLiteral(unitEEnum, Unit.HZ);
+		addEEnumLiteral(unitEEnum, Unit.KHZ);
+		addEEnumLiteral(unitEEnum, Unit.MHZ);
+		addEEnumLiteral(unitEEnum, Unit.GHZ);
+		addEEnumLiteral(unitEEnum, Unit.RPM);
+		addEEnumLiteral(unitEEnum, Unit.W);
+		addEEnumLiteral(unitEEnum, Unit.MW);
+		addEEnumLiteral(unitEEnum, Unit.KW);
+		addEEnumLiteral(unitEEnum, Unit.BIT);
+		addEEnumLiteral(unitEEnum, Unit.BYTE);
+		addEEnumLiteral(unitEEnum, Unit.KB);
+		addEEnumLiteral(unitEEnum, Unit.MB);
+		addEEnumLiteral(unitEEnum, Unit.GB);
+		addEEnumLiteral(unitEEnum, Unit.BPER_S);
+		addEEnumLiteral(unitEEnum, Unit.KB_PER_S);
+		addEEnumLiteral(unitEEnum, Unit.MB_PER_S);
+		addEEnumLiteral(unitEEnum, Unit.J);
+		addEEnumLiteral(unitEEnum, Unit.KJ);
+		addEEnumLiteral(unitEEnum, Unit.WH);
+		addEEnumLiteral(unitEEnum, Unit.KWH);
+		addEEnumLiteral(unitEEnum, Unit.MWH);
+		addEEnumLiteral(unitEEnum, Unit.M);
+		addEEnumLiteral(unitEEnum, Unit.CM);
+		addEEnumLiteral(unitEEnum, Unit.MM);
+		addEEnumLiteral(unitEEnum, Unit.MM2);
+		addEEnumLiteral(unitEEnum, Unit.UM2);
+		addEEnumLiteral(unitEEnum, Unit.G);
+		addEEnumLiteral(unitEEnum, Unit.MG);
+		addEEnumLiteral(unitEEnum, Unit.KG);
+
+		initEEnum(measureEEnum, Measure.class, "Measure");
+		addEEnumLiteral(measureEEnum, Measure.UNSPECIFIED);
+		addEEnumLiteral(measureEEnum, Measure.RESP_T);
+		addEEnumLiteral(measureEEnum, Measure.THROUGHPUT);
+		addEEnumLiteral(measureEEnum, Measure.UTILIZATION);
+
+		initEEnum(simulationStatusEEnum, SimulationStatus.class, "SimulationStatus");
+		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.UNKNOWN);
+		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.RUNNING);
+		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.FINISHED);
+		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.KILLED);
 
 		// Initialize data types
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(numberEDataType, Number.class, "Number", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(collectionEDataType, Collection.class, "Collection", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

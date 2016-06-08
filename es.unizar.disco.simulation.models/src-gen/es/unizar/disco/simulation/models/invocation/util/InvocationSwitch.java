@@ -4,6 +4,8 @@ package es.unizar.disco.simulation.models.invocation.util;
 
 import es.unizar.disco.simulation.models.invocation.*;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -73,14 +75,8 @@ public class InvocationSwitch<T> extends Switch<T> {
 				return result;
 			}
 			case InvocationPackage.VARIABLE_ASSIGNMENT: {
-				VariableAssignment variableAssignment = (VariableAssignment)theEObject;
+				@SuppressWarnings("unchecked") Map.Entry<String, Number> variableAssignment = (Map.Entry<String, Number>)theEObject;
 				T result = caseVariableAssignment(variableAssignment);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case InvocationPackage.SIMULATION_TOOL: {
-				SimulationTool simulationTool = (SimulationTool)theEObject;
-				T result = caseSimulationTool(simulationTool);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -114,22 +110,7 @@ public class InvocationSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVariableAssignment(VariableAssignment object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simulation Tool</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simulation Tool</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSimulationTool(SimulationTool object) {
+	public T caseVariableAssignment(Map.Entry<String, Number> object) {
 		return null;
 	}
 

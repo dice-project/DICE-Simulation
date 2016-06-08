@@ -4,43 +4,34 @@
     nsPrefix="measures">
   <eClassifiers xsi:type="ecore:EClass" name="DomainMeasure" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Number"
-        changeable="false" volatile="true" transient="true" derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="measuredElement" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+        iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" lowerBound="1" eType="ecore:EEnum datatypes.ecore#//Unit"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputVariable" lowerBound="1"
-        eType="ecore:EClass definition.ecore#//OutputVariable"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Throughput" eSuperTypes="#//DomainMeasure">
-    <eOperations name="getValue" eType="ecore:EDataType datatypes.ecore#//Number">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return throughput;"/>
-      </eAnnotations>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="throughput" lowerBound="1"
-        eType="ecore:EDataType datatypes.ecore#//Number"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ResponseTime" eSuperTypes="#//DomainMeasure">
-    <eOperations name="getValue" eType="ecore:EDataType datatypes.ecore#//Number">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return responseTime;"/>
-      </eAnnotations>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="responseTime" lowerBound="1"
-        eType="ecore:EDataType datatypes.ecore#//Number"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Utilization" eSuperTypes="#//DomainMeasure">
-    <eOperations name="getValue" eType="ecore:EDataType datatypes.ecore#//Number">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="return utilization;"/>
-      </eAnnotations>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="utilization" lowerBound="1"
-        eType="ecore:EDataType datatypes.ecore#//Number"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+        eType="#//DomainMeasureDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MeasureConverter" abstract="true" interface="true">
     <eOperations name="convert"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DomainMeasure"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="ecore:EClass toolresult.ecore#//AnalyzableElementInfo"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainMeasureDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="measuredElement" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="measure" lowerBound="1"
+        eType="ecore:EEnum datatypes.ecore#//Measure"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vslExpressionEntries" upperBound="-1"
+        eType="#//Entry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vslExpression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" volatile="true"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputVariable" lowerBound="1"
+        eType="ecore:EClass definition.ecore#//OutputVariable" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simulationDefinition" lowerBound="1"
+        eType="ecore:EClass definition.ecore#//SimulationDefinition" eOpposite="definition.ecore#//SimulationDefinition/declaredMeasures"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
