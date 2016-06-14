@@ -11,7 +11,7 @@ import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 
 import es.unizar.disco.core.logger.DiceLogger;
-import es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate;
+import es.unizar.disco.simulation.launcher.SimulationDefinitionConfigurationHandler;
 import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
@@ -21,7 +21,6 @@ public class SimulationLaunchConfigurationTabGroup extends AbstractLaunchConfigu
 
 	private final SimulationDefinition simulationDefinition = DefinitionFactory.eINSTANCE.createSimulationDefinition();
 
-	
 	@Override
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		// Tabs are added programmatically instead of using the "org.eclipse.debug.ui.launchConfigurationTabs" 
@@ -40,9 +39,9 @@ public class SimulationLaunchConfigurationTabGroup extends AbstractLaunchConfigu
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			if (!configuration.hasAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__IDENTIFIER)) {
+			if (!configuration.hasAttribute(SimulationDefinitionConfigurationHandler.SIMULATION_DEFINITION__IDENTIFIER)) {
 				ILaunchConfigurationWorkingCopy workingCopy = configuration.getWorkingCopy();
-				workingCopy.setAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__IDENTIFIER, UUID.randomUUID().toString());
+				workingCopy.setAttribute(SimulationDefinitionConfigurationHandler.SIMULATION_DEFINITION__IDENTIFIER, UUID.randomUUID().toString());
 				workingCopy.doSave();
 			}
 		} catch (CoreException e) {

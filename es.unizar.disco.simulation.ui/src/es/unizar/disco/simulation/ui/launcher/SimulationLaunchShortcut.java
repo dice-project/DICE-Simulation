@@ -25,7 +25,7 @@ import org.eclipse.ui.PlatformUI;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.simulation.DiceSimulationPlugin;
-import es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate;
+import es.unizar.disco.simulation.launcher.SimulationDefinitionConfigurationHandler;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
 import es.unizar.disco.simulation.ui.util.UriConverter;
 
@@ -90,7 +90,7 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		
 		// We search through the existing configurations if the actual configuration has been previously defined
 		for (ILaunchConfiguration previousConfiguration : existingConfigs) {
-			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, ""); 
+			String previousFile = previousConfiguration.getAttribute(SimulationDefinitionConfigurationHandler.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, ""); 
 			if (previousFile.equals(platformResourceUri.toString())) {
 				return previousConfiguration;
 			}
@@ -99,7 +99,7 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		String name = model.getURI().trimFileExtension().lastSegment();
 		String casedName = Character.toUpperCase(name.charAt(0)) + name.substring(1);
 		ILaunchConfigurationWorkingCopy launchConf = simLaunchConfigurationType.newInstance(null, casedName);
-		launchConf.setAttribute(SimulationLaunchConfigurationDelegate.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, platformResourceUri.toString());
+		launchConf.setAttribute(SimulationDefinitionConfigurationHandler.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, platformResourceUri.toString());
 		ILaunchConfiguration result = launchConf.doSave();
 		
 		return result;

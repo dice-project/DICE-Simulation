@@ -1,5 +1,8 @@
 package es.unizar.disco.simulation.ui.launcher;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.resources.IContainer;
@@ -8,6 +11,9 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
@@ -38,11 +44,25 @@ import es.unizar.disco.simulation.ui.util.UriConverter;
 
 public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConfigurationTab {
 
+	protected final Adapter adapter = new AdapterImpl() {
+		public void notifyChanged(Notification notification) {
+			super.notifyChanged(notification);
+			if (notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__WORKING_AREA |
+					notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__BACKEND) {
+				if (AdvancedLaunchConfigurationTab.this.isActive()) {
+					updateLaunchConfigurationDialog();
+				}
+			}
+		};
+	};
+
+	
 	private final SimulationDefinitionConfigurationHandler handler;
 
 	public AdvancedLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
 		super(simulationDefinition);
 		handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
+		this.simulationDefinition.eAdapters().add(adapter);
 	}
 
 	@Override
@@ -91,11 +111,14 @@ public class AdvancedLaunchConfigurationTab extends AbstractSimulationLaunchConf
 					ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell());
 					String workingArea = workingAreaText.getText();
 					if (StringUtils.isNotBlank(workingArea)) {
-						String platformString = URI.createURI(workingArea).toPlatformString(true);
-						if (platformString != null) {
-							final Path workingAreaPath = new Path(platformString);
-							IContainer container = ResourcesPlugin.getWorkspace().getRoot().getFolder(workingAreaPath);
-							dialog.setInitialSelection(container);
+						URI uri = URI.createURI(workingArea);
+						if (uri.isPlatformResource()) {
+							try {
+								Path workingAreaPath = new Path(new File(UriConverter.toFileResourceUri(UriConverter.toJavaUri(uri))).getCanonicalPath());
+								IContainer container = ResourcesPlugin.getWorkspace().getRoot().getContainerForLocation(workingAreaPath);
+								dialog.setInitialSelection(container);
+							} catch (IOException e1) {
+							}
 						}
 					}
 					if (dialog.open() == Dialog.OK) {
