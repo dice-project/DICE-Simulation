@@ -14,10 +14,6 @@ import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 
 import es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl;
 
-import es.unizar.disco.simulation.models.marteconstants.MarteconstantsPackage;
-
-import es.unizar.disco.simulation.models.marteconstants.impl.MarteconstantsPackageImpl;
-
 import es.unizar.disco.simulation.models.measures.MeasuresPackage;
 
 import es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl;
@@ -142,7 +138,6 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) : DatatypesPackage.eINSTANCE);
 		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) instanceof DefinitionPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) : DefinitionPackage.eINSTANCE);
 		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) instanceof InvocationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) : InvocationPackage.eINSTANCE);
-		MarteconstantsPackageImpl theMarteconstantsPackage = (MarteconstantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MarteconstantsPackage.eNS_URI) instanceof MarteconstantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MarteconstantsPackage.eNS_URI) : MarteconstantsPackage.eINSTANCE);
 		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) instanceof MeasuresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) : MeasuresPackage.eINSTANCE);
 		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) instanceof SimresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) : SimresultPackage.eINSTANCE);
 		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) instanceof ToolresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) : ToolresultPackage.eINSTANCE);
@@ -153,7 +148,6 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 		theDatatypesPackage.createPackageContents();
 		theDefinitionPackage.createPackageContents();
 		theInvocationPackage.createPackageContents();
-		theMarteconstantsPackage.createPackageContents();
 		theMeasuresPackage.createPackageContents();
 		theSimresultPackage.createPackageContents();
 		theToolresultPackage.createPackageContents();
@@ -164,7 +158,6 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 		theDatatypesPackage.initializePackageContents();
 		theDefinitionPackage.initializePackageContents();
 		theInvocationPackage.initializePackageContents();
-		theMarteconstantsPackage.initializePackageContents();
 		theMeasuresPackage.initializePackageContents();
 		theSimresultPackage.initializePackageContents();
 		theToolresultPackage.initializePackageContents();

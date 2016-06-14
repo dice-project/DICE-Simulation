@@ -3,7 +3,6 @@
 package es.unizar.disco.simulation.models.definition.impl;
 
 import es.unizar.disco.simulation.models.datatypes.Resource;
-
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.definition.OutputVariable;

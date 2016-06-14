@@ -5,8 +5,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import es.unizar.disco.simulation.models.datatypes.impl.ResourceImpl;
-
 public class CustomResourceImpl extends ResourceImpl {
 
 	private ResourceSet internalResourceSet;

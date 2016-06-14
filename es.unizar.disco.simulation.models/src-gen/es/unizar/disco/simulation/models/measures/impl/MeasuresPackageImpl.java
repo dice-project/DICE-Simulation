@@ -14,10 +14,6 @@ import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 
 import es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl;
 
-import es.unizar.disco.simulation.models.marteconstants.MarteconstantsPackage;
-
-import es.unizar.disco.simulation.models.marteconstants.impl.MarteconstantsPackageImpl;
-
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 import es.unizar.disco.simulation.models.measures.MeasureConverter;
@@ -135,7 +131,6 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) : DatatypesPackage.eINSTANCE);
 		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) instanceof DefinitionPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) : DefinitionPackage.eINSTANCE);
 		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) instanceof InvocationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) : InvocationPackage.eINSTANCE);
-		MarteconstantsPackageImpl theMarteconstantsPackage = (MarteconstantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MarteconstantsPackage.eNS_URI) instanceof MarteconstantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MarteconstantsPackage.eNS_URI) : MarteconstantsPackage.eINSTANCE);
 		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) instanceof SimresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) : SimresultPackage.eINSTANCE);
 		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) instanceof ToolresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) : ToolresultPackage.eINSTANCE);
 		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) instanceof TracesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) : TracesPackage.eINSTANCE);
@@ -146,7 +141,6 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		theDatatypesPackage.createPackageContents();
 		theDefinitionPackage.createPackageContents();
 		theInvocationPackage.createPackageContents();
-		theMarteconstantsPackage.createPackageContents();
 		theSimresultPackage.createPackageContents();
 		theToolresultPackage.createPackageContents();
 		theTracesPackage.createPackageContents();
@@ -157,7 +151,6 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		theDatatypesPackage.initializePackageContents();
 		theDefinitionPackage.initializePackageContents();
 		theInvocationPackage.initializePackageContents();
-		theMarteconstantsPackage.initializePackageContents();
 		theSimresultPackage.initializePackageContents();
 		theToolresultPackage.initializePackageContents();
 		theTracesPackage.initializePackageContents();

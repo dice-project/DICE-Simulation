@@ -20,10 +20,6 @@ import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 
 import es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl;
 
-import es.unizar.disco.simulation.models.marteconstants.MarteconstantsPackage;
-
-import es.unizar.disco.simulation.models.marteconstants.impl.MarteconstantsPackageImpl;
-
 import es.unizar.disco.simulation.models.measures.MeasuresPackage;
 
 import es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl;
@@ -167,7 +163,6 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		// Obtain or create and register interdependencies
 		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) : DatatypesPackage.eINSTANCE);
 		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) instanceof InvocationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) : InvocationPackage.eINSTANCE);
-		MarteconstantsPackageImpl theMarteconstantsPackage = (MarteconstantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MarteconstantsPackage.eNS_URI) instanceof MarteconstantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MarteconstantsPackage.eNS_URI) : MarteconstantsPackage.eINSTANCE);
 		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) instanceof MeasuresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) : MeasuresPackage.eINSTANCE);
 		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) instanceof SimresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) : SimresultPackage.eINSTANCE);
 		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) instanceof ToolresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) : ToolresultPackage.eINSTANCE);
@@ -178,7 +173,6 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		theDefinitionPackage.createPackageContents();
 		theDatatypesPackage.createPackageContents();
 		theInvocationPackage.createPackageContents();
-		theMarteconstantsPackage.createPackageContents();
 		theMeasuresPackage.createPackageContents();
 		theSimresultPackage.createPackageContents();
 		theToolresultPackage.createPackageContents();
@@ -189,7 +183,6 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		theDefinitionPackage.initializePackageContents();
 		theDatatypesPackage.initializePackageContents();
 		theInvocationPackage.initializePackageContents();
-		theMarteconstantsPackage.initializePackageContents();
 		theMeasuresPackage.initializePackageContents();
 		theSimresultPackage.initializePackageContents();
 		theToolresultPackage.initializePackageContents();
@@ -753,7 +746,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		initEReference(getSimulationDefinition_DeclaredMeasures(), theMeasuresPackage.getDomainMeasureDefinition(), theMeasuresPackage.getDomainMeasureDefinition_SimulationDefinition(), "declaredMeasures", null, 1, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_MeasuresToCompute(), theMeasuresPackage.getDomainMeasureDefinition(), null, "measuresToCompute", null, 1, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationDefinition_Backend(), ecorePackage.getEString(), "backend", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimulationDefinition_PossibleConfigurations(), this.getVariableConfiguration(), null, "possibleConfigurations", null, 0, -1, SimulationDefinition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationDefinition_PossibleConfigurations(), this.getVariableConfiguration(), null, "possibleConfigurations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_ActiveConfigurations(), this.getVariableConfiguration(), null, "activeConfigurations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getSimulationDefinition__GetVariables(), null, "getVariables", 0, 1, IS_UNIQUE, IS_ORDERED);

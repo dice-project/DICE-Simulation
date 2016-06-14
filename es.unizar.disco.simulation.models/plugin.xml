@@ -5,6 +5,9 @@
 -->
 
 <plugin>
+   <extension-point id="supported_scenarios" name="Supported Scenarios" schema="schema/supported_scenarios.exsd"/>
+   <extension-point id="supported_metrics" name="Supported Metrics" schema="schema/supported_metrics.exsd"/>
+   <extension-point id="analyzable_resource_builder" name="Analyzable Resource Builder" schema="schema/analyzable_resource_builder.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated all -->
@@ -27,14 +30,6 @@
       <package
             uri="http://es.unizar.disco/simulation/invocation/1.0"
             class="es.unizar.disco.simulation.models.invocation.InvocationPackage"
-            genModel="model/all.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated all -->
-      <package
-            uri="http://es.unizar.disco/simulation/marte/constants/1.0"
-            class="es.unizar.disco.simulation.models.marteconstants.MarteconstantsPackage"
             genModel="model/all.genmodel"/>
    </extension>
 
@@ -107,5 +102,4 @@
             uri="http://es.unizar.disco/simulation/invocation/1.0">
       </factory>
    </extension>
-
 </plugin>

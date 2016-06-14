@@ -4,8 +4,6 @@ package es.unizar.disco.simulation.models.invocation.impl;
 
 import es.unizar.disco.simulation.models.invocation.*;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -59,7 +57,6 @@ public class InvocationFactoryImpl extends EFactoryImpl implements InvocationFac
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case InvocationPackage.SIMULATION_INVOCATION: return createSimulationInvocation();
-			case InvocationPackage.VARIABLE_ASSIGNMENT: return (EObject)createVariableAssignment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -73,16 +70,6 @@ public class InvocationFactoryImpl extends EFactoryImpl implements InvocationFac
 	public SimulationInvocation createSimulationInvocation() {
 		SimulationInvocationImpl simulationInvocation = new SimulationInvocationImpl();
 		return simulationInvocation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Map.Entry<String, Number> createVariableAssignment() {
-		VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
-		return variableAssignment;
 	}
 
 	/**

@@ -95,29 +95,6 @@ public class InvocationItemProviderAdapterFactory extends InvocationAdapterFacto
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected VariableAssignmentItemProvider variableAssignmentItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link java.util.Map.Entry}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createVariableAssignmentAdapter() {
-		if (variableAssignmentItemProvider == null) {
-			variableAssignmentItemProvider = new VariableAssignmentItemProvider(this);
-		}
-
-		return variableAssignmentItemProvider;
-	}
-
-	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -217,7 +194,6 @@ public class InvocationItemProviderAdapterFactory extends InvocationAdapterFacto
 	 */
 	public void dispose() {
 		if (simulationInvocationItemProvider != null) simulationInvocationItemProvider.dispose();
-		if (variableAssignmentItemProvider != null) variableAssignmentItemProvider.dispose();
 	}
 
 }

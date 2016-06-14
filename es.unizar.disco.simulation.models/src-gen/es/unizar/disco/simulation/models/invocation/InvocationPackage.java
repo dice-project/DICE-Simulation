@@ -67,13 +67,22 @@ public interface InvocationPackage extends EPackage {
 	int SIMULATION_INVOCATION = 0;
 
 	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__IDENTIFIER = 0;
+
+	/**
 	 * The feature id for the '<em><b>Trace Set</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__TRACE_SET = 0;
+	int SIMULATION_INVOCATION__TRACE_SET = 1;
 
 	/**
 	 * The feature id for the '<em><b>Tool Result</b></em>' reference.
@@ -82,16 +91,7 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__TOOL_RESULT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Variable Assignments</b></em>' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS = 2;
+	int SIMULATION_INVOCATION__TOOL_RESULT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Definition</b></em>' reference.
@@ -157,13 +157,22 @@ public interface InvocationPackage extends EPackage {
 	int SIMULATION_INVOCATION__DOMAIN_RESOURCE = 9;
 
 	/**
+	 * The feature id for the '<em><b>Variable Configuration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__VARIABLE_CONFIGURATION = 10;
+
+	/**
 	 * The number of structural features of the '<em>Simulation Invocation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION_FEATURE_COUNT = 10;
+	int SIMULATION_INVOCATION_FEATURE_COUNT = 11;
 
 	/**
 	 * The number of operations of the '<em>Simulation Invocation</em>' class.
@@ -173,52 +182,6 @@ public interface InvocationPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIMULATION_INVOCATION_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl
-	 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl#getVariableAssignment()
-	 * @generated
-	 */
-	int VARIABLE_ASSIGNMENT = 1;
-
-	/**
-	 * The feature id for the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_ASSIGNMENT__KEY = 0;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_ASSIGNMENT__VALUE = 1;
-
-	/**
-	 * The number of structural features of the '<em>Variable Assignment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_ASSIGNMENT_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Variable Assignment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_ASSIGNMENT_OPERATION_COUNT = 0;
 
 
 	/**
@@ -230,6 +193,17 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getSimulationInvocation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getIdentifier <em>Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Identifier</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getIdentifier()
+	 * @see #getSimulationInvocation()
+	 * @generated
+	 */
+	EAttribute getSimulationInvocation_Identifier();
 
 	/**
 	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getTraceSet <em>Trace Set</em>}'.
@@ -252,17 +226,6 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSimulationInvocation_ToolResult();
-
-	/**
-	 * Returns the meta object for the map '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableAssignments <em>Variable Assignments</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the map '<em>Variable Assignments</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableAssignments()
-	 * @see #getSimulationInvocation()
-	 * @generated
-	 */
-	EReference getSimulationInvocation_VariableAssignments();
 
 	/**
 	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDefinition <em>Definition</em>}'.
@@ -342,38 +305,15 @@ public interface InvocationPackage extends EPackage {
 	EAttribute getSimulationInvocation_DomainResource();
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Variable Assignment</em>}'.
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableConfiguration <em>Variable Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Variable Assignment</em>'.
-	 * @see java.util.Map.Entry
-	 * @model keyDataType="org.eclipse.emf.ecore.EString" keyRequired="true"
-	 *        valueDataType="es.unizar.disco.simulation.models.datatypes.Number" valueRequired="true"
+	 * @return the meta object for the reference '<em>Variable Configuration</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableConfiguration()
+	 * @see #getSimulationInvocation()
 	 * @generated
 	 */
-	EClass getVariableAssignment();
-
-	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Key</em>'.
-	 * @see java.util.Map.Entry
-	 * @see #getVariableAssignment()
-	 * @generated
-	 */
-	EAttribute getVariableAssignment_Key();
-
-	/**
-	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see java.util.Map.Entry
-	 * @see #getVariableAssignment()
-	 * @generated
-	 */
-	EAttribute getVariableAssignment_Value();
+	EReference getSimulationInvocation_VariableConfiguration();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -409,6 +349,14 @@ public interface InvocationPackage extends EPackage {
 		EClass SIMULATION_INVOCATION = eINSTANCE.getSimulationInvocation();
 
 		/**
+		 * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_INVOCATION__IDENTIFIER = eINSTANCE.getSimulationInvocation_Identifier();
+
+		/**
 		 * The meta object literal for the '<em><b>Trace Set</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -423,14 +371,6 @@ public interface InvocationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SIMULATION_INVOCATION__TOOL_RESULT = eINSTANCE.getSimulationInvocation_ToolResult();
-
-		/**
-		 * The meta object literal for the '<em><b>Variable Assignments</b></em>' map feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS = eINSTANCE.getSimulationInvocation_VariableAssignments();
 
 		/**
 		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
@@ -489,30 +429,12 @@ public interface InvocationPackage extends EPackage {
 		EAttribute SIMULATION_INVOCATION__DOMAIN_RESOURCE = eINSTANCE.getSimulationInvocation_DomainResource();
 
 		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl <em>Variable Assignment</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.invocation.impl.VariableAssignmentImpl
-		 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl#getVariableAssignment()
-		 * @generated
-		 */
-		EClass VARIABLE_ASSIGNMENT = eINSTANCE.getVariableAssignment();
-
-		/**
-		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Variable Configuration</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute VARIABLE_ASSIGNMENT__KEY = eINSTANCE.getVariableAssignment_Key();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VARIABLE_ASSIGNMENT__VALUE = eINSTANCE.getVariableAssignment_Value();
+		EReference SIMULATION_INVOCATION__VARIABLE_CONFIGURATION = eINSTANCE.getSimulationInvocation_VariableConfiguration();
 
 	}
 

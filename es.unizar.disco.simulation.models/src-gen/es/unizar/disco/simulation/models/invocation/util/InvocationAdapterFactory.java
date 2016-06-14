@@ -4,8 +4,6 @@ package es.unizar.disco.simulation.models.invocation.util;
 
 import es.unizar.disco.simulation.models.invocation.*;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 
@@ -74,10 +72,6 @@ public class InvocationAdapterFactory extends AdapterFactoryImpl {
 				return createSimulationInvocationAdapter();
 			}
 			@Override
-			public Adapter caseVariableAssignment(Map.Entry<String, Number> object) {
-				return createVariableAssignmentAdapter();
-			}
-			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -108,20 +102,6 @@ public class InvocationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSimulationInvocationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>Variable Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see java.util.Map.Entry
-	 * @generated
-	 */
-	public Adapter createVariableAssignmentAdapter() {
 		return null;
 	}
 

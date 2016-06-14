@@ -6,6 +6,7 @@ import es.unizar.disco.simulation.models.datatypes.Resource;
 import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
 
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
+import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 
 import es.unizar.disco.simulation.models.simresult.SimulationResult;
 
@@ -16,7 +17,6 @@ import es.unizar.disco.simulation.models.traces.TraceSet;
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EObject;
@@ -30,9 +30,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getIdentifier <em>Identifier</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getTraceSet <em>Trace Set</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getToolResult <em>Tool Result</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableAssignments <em>Variable Assignments</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDefinition <em>Definition</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults <em>Results</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableResource <em>Analyzable Resource</em>}</li>
@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getEnd <em>End</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStatus <em>Status</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDomainResource <em>Domain Resource</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableConfiguration <em>Variable Configuration</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation()
@@ -47,6 +48,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface SimulationInvocation extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Identifier</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Identifier</em>' attribute.
+	 * @see #setIdentifier(String)
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_Identifier()
+	 * @model id="true" required="true"
+	 * @generated
+	 */
+	String getIdentifier();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getIdentifier <em>Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Identifier</em>' attribute.
+	 * @see #getIdentifier()
+	 * @generated
+	 */
+	void setIdentifier(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Trace Set</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -98,23 +125,6 @@ public interface SimulationInvocation extends EObject {
 	 * @generated
 	 */
 	void setToolResult(ToolResult value);
-
-	/**
-	 * Returns the value of the '<em><b>Variable Assignments</b></em>' map.
-	 * The key is of type {@link java.lang.String},
-	 * and the value is of type {@link java.lang.Number},
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Variable Assignments</em>' map isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable Assignments</em>' map.
-	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_VariableAssignments()
-	 * @model mapType="es.unizar.disco.simulation.models.invocation.VariableAssignment<org.eclipse.emf.ecore.EString, es.unizar.disco.simulation.models.datatypes.Number>"
-	 * @generated
-	 */
-	EMap<String, Number> getVariableAssignments();
 
 	/**
 	 * Returns the value of the '<em><b>Definition</b></em>' reference.
@@ -173,7 +183,7 @@ public interface SimulationInvocation extends EObject {
 	 * @return the value of the '<em>Analyzable Resource</em>' containment reference.
 	 * @see #setAnalyzableResource(Resource)
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_AnalyzableResource()
-	 * @model containment="true" required="true"
+	 * @model containment="true" required="true" derived="true"
 	 * @generated
 	 */
 	Resource getAnalyzableResource();
@@ -283,5 +293,31 @@ public interface SimulationInvocation extends EObject {
 	 * @generated
 	 */
 	URI getDomainResource();
+
+	/**
+	 * Returns the value of the '<em><b>Variable Configuration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Variable Configuration</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Variable Configuration</em>' reference.
+	 * @see #setVariableConfiguration(VariableConfiguration)
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_VariableConfiguration()
+	 * @model required="true"
+	 * @generated
+	 */
+	VariableConfiguration getVariableConfiguration();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableConfiguration <em>Variable Configuration</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Variable Configuration</em>' reference.
+	 * @see #getVariableConfiguration()
+	 * @generated
+	 */
+	void setVariableConfiguration(VariableConfiguration value);
 
 } // SimulationInvocation

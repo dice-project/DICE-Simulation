@@ -9,7 +9,8 @@ Bundle-ClassPath: .,
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: es.unizar.disco.simulation.models.datatypes,
+Export-Package: es.unizar.disco.simulation.models.builders,
+ es.unizar.disco.simulation.models.datatypes,
  es.unizar.disco.simulation.models.datatypes.impl,
  es.unizar.disco.simulation.models.datatypes.util,
  es.unizar.disco.simulation.models.definition,
@@ -18,8 +19,6 @@ Export-Package: es.unizar.disco.simulation.models.datatypes,
  es.unizar.disco.simulation.models.invocation,
  es.unizar.disco.simulation.models.invocation.impl,
  es.unizar.disco.simulation.models.invocation.util,
- es.unizar.disco.simulation.models.marteconstants,
- es.unizar.disco.simulation.models.marteconstants.impl,
  es.unizar.disco.simulation.models.measures,
  es.unizar.disco.simulation.models.measures.impl,
  es.unizar.disco.simulation.models.measures.util,

@@ -2,7 +2,6 @@ package es.unizar.disco.simulation.models.definition.impl;
 
 import static org.eclipse.papyrus.MARTE.MARTE_AnalysisModel.GQAM.GQAMPackage.Literals.GA_ANALYSIS_CONTEXT;
 import static org.eclipse.papyrus.MARTE.MARTE_AnalysisModel.GQAM.GQAMPackage.Literals.GA_ANALYSIS_CONTEXT__CONTEXT;
-import static org.eclipse.papyrus.MARTE.MARTE_AnalysisModel.GQAM.GQAMPackage.Literals.GA_SCENARIO;
 import static org.eclipse.papyrus.MARTE.MARTE_Foundations.GRM.GRMPackage.Literals.RESOURCE_USAGE__USED_RESOURCES;
 
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,12 +25,12 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.DelegatingEcoreEList;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
@@ -53,18 +53,17 @@ import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.definition.Variable;
 import es.unizar.disco.simulation.models.definition.VariableAssignment;
 import es.unizar.disco.simulation.models.definition.VariableConfiguration;
+import es.unizar.disco.simulation.models.invocation.InvocationFactory;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
-import es.unizar.disco.simulation.models.marteconstants.SupportedMetrics;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 import es.unizar.disco.simulation.models.measures.MeasuresFactory;
-import es.unizar.disco.simulation.models.util.MarteMetricsUtils;
+import es.unizar.disco.simulation.models.util.DiceMetricsUtils;
+import es.unizar.disco.simulation.models.util.DiceStereotypesUtils;
 import es.unizar.disco.simulation.models.util.MarteStereotypesUtils;
 
 public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 
 	private static final String GA_ANALYSIS_CONTEXT_QN = MarteStereotypesUtils.getStereotypeQn(GA_ANALYSIS_CONTEXT);
-
-	private static final String GA_SCENARIO_QN = MarteStereotypesUtils.getStereotypeQn(GA_SCENARIO);
 
 	/**
 	 * {@link CompositeCollection} that aggregates both
@@ -140,8 +139,27 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 
 	@Override
 	public EList<SimulationInvocation> getInvocations() {
-		// TODO: Implement this from the selected combinations of variables
-		return new BasicEList<SimulationInvocation>();
+		List<VariableConfiguration> configurations = new ArrayList<>();
+		configurations.addAll(getActiveConfigurations());
+		// Do some cleanup...
+		for (Iterator<SimulationInvocation> it = super.getInvocations().iterator(); it.hasNext();) {
+			SimulationInvocation invocation = it.next();
+			// If the invocation points to an outdated configuration, delete it
+			if (!configurations.contains(invocation.getVariableConfiguration())) {
+				it.remove();
+			} else {
+				// Else, the invocation points to an active configuration, and should no be re-added
+				configurations.remove(invocation.getVariableConfiguration());
+			}
+		}
+		// Create new invocations
+		for (VariableConfiguration configuration : configurations) {
+			SimulationInvocation invocation = InvocationFactory.eINSTANCE.createSimulationInvocation();
+			invocation.setIdentifier(this.getIdentifier() + "-" + UUID.randomUUID());
+			invocation.setVariableConfiguration(configuration);
+			super.getInvocations().add(invocation);
+		}
+		return super.getInvocations();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -160,12 +178,12 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 
 	@Override
 	public EList<DomainMeasureDefinition> getDeclaredMeasures() {
-		return ECollections.unmodifiableEList(super.getDeclaredMeasures());
+		return new DelegatingEcoreEList.UnmodifiableEList<DomainMeasureDefinition>(this, DefinitionPackage.Literals.SIMULATION_DEFINITION__DECLARED_MEASURES, super.getDeclaredMeasures());
 	}
 
 	@Override
 	public EList<VariableConfiguration> getPossibleConfigurations() {
-		return ECollections.unmodifiableEList(super.getPossibleConfigurations());
+		return new DelegatingEcoreEList.UnmodifiableEList<VariableConfiguration>(this, DefinitionPackage.Literals.SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS, super.getPossibleConfigurations());
 	}
 
 	@Override
@@ -240,9 +258,11 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 			EObject eObject = it.next();
 			if (eObject instanceof Element) {
 				Element element = (Element) eObject;
-				Stereotype gaScenarioStereotype = element.getApplicableStereotype(GA_SCENARIO_QN);
-				if (element.isStereotypeApplied(gaScenarioStereotype)) {
-					scenarios.add(eObject);
+				for (String scenarioName : DiceStereotypesUtils.getScenariosStereotypes()) {
+					Stereotype scenarioStereotype = element.getApplicableStereotype(scenarioName);
+					if (element.isStereotypeApplied(scenarioStereotype)) {
+						scenarios.add(eObject);
+					}
 				}
 			}
 		}
@@ -287,9 +307,15 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 				Map<String, InputVariable> oldInVarsMap = getInputVariablesMap();
 				Map<String, OutputVariable> oldOutVarsMap = getOutputVariablesMap();
 
-				// Keep all variables that the model still declares
+				// Delete variables the model no longer declares
 				oldInVarsMap.keySet().retainAll(inParsedVars.keySet());
 				oldOutVarsMap.keySet().retainAll(outParsedVars.keySet());
+//				for (String varName : CollectionUtils.subtract(oldInVarsMap.keySet(), inParsedVars.keySet())) {
+//					EcoreUtil.delete(oldInVarsMap.get(varName));
+//				}
+//				for (String varName : CollectionUtils.subtract(oldOutVarsMap.keySet(), outParsedVars.keySet())) {
+//					EcoreUtil.delete(oldOutVarsMap.get(varName));
+//				}
 				// Remove new vars that have been already configured
 				inParsedVars.keySet().removeAll(oldInVarsMap.keySet());
 				outParsedVars.keySet().removeAll(oldOutVarsMap.keySet());
@@ -353,8 +379,8 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 			// Build a map with the supported metrics stereotypes and tagged
 			// values
 			MultiValuedMap<String, String> metricsMap = MultiMapUtils.newSetValuedHashMap();
-			for (SupportedMetrics metric : SupportedMetrics.values()) {
-				metricsMap.put(MarteMetricsUtils.getStereotypeName(metric), MarteMetricsUtils.getTaggedValueName(metric));
+			for (DiceMetricsUtils.Metric metric : DiceMetricsUtils.getSupportedMetrics()) {
+				metricsMap.put(metric.stereotype, metric.tag);
 			}
 
 			// Collect all interesting elements, we use an auxiliary list to
@@ -368,13 +394,17 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 			elements.addAll(scenario.allOwnedElements());
 
 			// Include referenced resources
-			Stereotype gaScenarioStereotype = scenario.getAppliedStereotype(GA_SCENARIO_QN);
-			if (scenario.isStereotypeApplied(gaScenarioStereotype)) {
-				@SuppressWarnings("unchecked")
-				List<org.eclipse.papyrus.MARTE.MARTE_Foundations.GRM.Resource> resources = (List<org.eclipse.papyrus.MARTE.MARTE_Foundations.GRM.Resource>) scenario
-						.getValue(gaScenarioStereotype, RESOURCE_USAGE__USED_RESOURCES.getName());
-				for (org.eclipse.papyrus.MARTE.MARTE_Foundations.GRM.Resource resource : resources) {
-					elements.add(resource.getBase_Classifier());
+			for (String scenarioName : DiceStereotypesUtils.getScenariosStereotypes()) {
+				Stereotype scenarioStereotype = scenario.getAppliedStereotype(scenarioName);
+				if (scenario.isStereotypeApplied(scenarioStereotype)) {
+					Object value = scenario.getValue(scenarioStereotype, RESOURCE_USAGE__USED_RESOURCES.getName());
+					if (value != null) {
+						@SuppressWarnings("unchecked")
+						List<org.eclipse.papyrus.MARTE.MARTE_Foundations.GRM.Resource> resources = (List<org.eclipse.papyrus.MARTE.MARTE_Foundations.GRM.Resource>) value;
+						for (org.eclipse.papyrus.MARTE.MARTE_Foundations.GRM.Resource resource : resources) {
+							elements.add(resource.getBase_Classifier());
+						}
+					}
 				}
 			}
 
@@ -491,19 +521,30 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 		}
 
 		// Cleanup outdated configurations
+		Set<VariableAssignment> assignmentsToRemove = new HashSet<>();
 		for (Iterator<VariableConfiguration> itOld = super.getPossibleConfigurations().iterator(); itOld.hasNext();) {
 			VariableConfiguration oldConfig = itOld.next();
 			boolean found = false;
 			for (Iterator<VariableConfiguration> itNew = configurations.iterator(); itNew.hasNext();) {
 				VariableConfiguration newConfig = itNew.next();
 				if (newConfig.isEquivalent(oldConfig)) {
+					for (VariableAssignment assignment : newConfig.getAssignments()) {
+						assignment.getVariable().getAssignments().remove(assignment);
+						assignment.getValue().getAssignments().remove(assignment);
+					}
 					itNew.remove();
+					assignmentsToRemove.addAll(newConfig.getAssignments());
 					found = true;
 					break;
 				}
 			}
 			if (!found) {
+				for (VariableAssignment assignment : oldConfig.getAssignments()) {
+					assignment.getVariable().getAssignments().remove(assignment);
+					assignment.getValue().getAssignments().remove(assignment);
+				}
 				itOld.remove();
+				assignmentsToRemove.addAll(oldConfig.getAssignments());
 				getActiveConfigurations().remove(oldConfig);
 			}
 		}
@@ -513,8 +554,7 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 			super.getPossibleConfigurations().add(newConfig);
 			if (allSelected) {
 				// If all the previous Configurations were selected, select
-				// the new
-				// one too
+				// the new one too
 				getActiveConfigurations().add(newConfig);
 			}
 		}

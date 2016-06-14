@@ -7,6 +7,7 @@ import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
 
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
+import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
@@ -25,18 +26,15 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -47,9 +45,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getIdentifier <em>Identifier</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getTraceSet <em>Trace Set</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getToolResult <em>Tool Result</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getVariableAssignments <em>Variable Assignments</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getDefinition <em>Definition</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getResults <em>Results</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getAnalyzableResource <em>Analyzable Resource</em>}</li>
@@ -57,11 +55,32 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getEnd <em>End</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getStatus <em>Status</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getDomainResource <em>Domain Resource</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getVariableConfiguration <em>Variable Configuration</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class SimulationInvocationImpl extends MinimalEObjectImpl.Container implements SimulationInvocation {
+	/**
+	 * The default value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdentifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IDENTIFIER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdentifier()
+	 * @generated
+	 * @ordered
+	 */
+	protected String identifier = IDENTIFIER_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getTraceSet() <em>Trace Set</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -81,16 +100,6 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * @ordered
 	 */
 	protected ToolResult toolResult;
-
-	/**
-	 * The cached value of the '{@link #getVariableAssignments() <em>Variable Assignments</em>}' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVariableAssignments()
-	 * @generated
-	 * @ordered
-	 */
-	protected EMap<String, Number> variableAssignments;
 
 	/**
 	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
@@ -193,6 +202,16 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	protected static final URI DOMAIN_RESOURCE_EDEFAULT = null;
 
 	/**
+	 * The cached value of the '{@link #getVariableConfiguration() <em>Variable Configuration</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariableConfiguration()
+	 * @generated
+	 * @ordered
+	 */
+	protected VariableConfiguration variableConfiguration;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -209,6 +228,27 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	protected EClass eStaticClass() {
 		return InvocationPackage.Literals.SIMULATION_INVOCATION;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIdentifier(String newIdentifier) {
+		String oldIdentifier = identifier;
+		identifier = newIdentifier;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InvocationPackage.SIMULATION_INVOCATION__IDENTIFIER, oldIdentifier, identifier));
 	}
 
 	/**
@@ -285,18 +325,6 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 		toolResult = newToolResult;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, InvocationPackage.SIMULATION_INVOCATION__TOOL_RESULT, oldToolResult, toolResult));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EMap<String, Number> getVariableAssignments() {
-		if (variableAssignments == null) {
-			variableAssignments = new EcoreEMap<String,Number>(InvocationPackage.Literals.VARIABLE_ASSIGNMENT, VariableAssignmentImpl.class, this, InvocationPackage.SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS);
-		}
-		return variableAssignments;
 	}
 
 	/**
@@ -493,6 +521,44 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public VariableConfiguration getVariableConfiguration() {
+		if (variableConfiguration != null && variableConfiguration.eIsProxy()) {
+			InternalEObject oldVariableConfiguration = (InternalEObject)variableConfiguration;
+			variableConfiguration = (VariableConfiguration)eResolveProxy(oldVariableConfiguration);
+			if (variableConfiguration != oldVariableConfiguration) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InvocationPackage.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION, oldVariableConfiguration, variableConfiguration));
+			}
+		}
+		return variableConfiguration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableConfiguration basicGetVariableConfiguration() {
+		return variableConfiguration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVariableConfiguration(VariableConfiguration newVariableConfiguration) {
+		VariableConfiguration oldVariableConfiguration = variableConfiguration;
+		variableConfiguration = newVariableConfiguration;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InvocationPackage.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION, oldVariableConfiguration, variableConfiguration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -515,8 +581,6 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS:
-				return ((InternalEList<?>)getVariableAssignments()).basicRemove(otherEnd, msgs);
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				return basicSetDefinition(null, msgs);
 			case InvocationPackage.SIMULATION_INVOCATION__RESULTS:
@@ -535,15 +599,14 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case InvocationPackage.SIMULATION_INVOCATION__IDENTIFIER:
+				return getIdentifier();
 			case InvocationPackage.SIMULATION_INVOCATION__TRACE_SET:
 				if (resolve) return getTraceSet();
 				return basicGetTraceSet();
 			case InvocationPackage.SIMULATION_INVOCATION__TOOL_RESULT:
 				if (resolve) return getToolResult();
 				return basicGetToolResult();
-			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS:
-				if (coreType) return getVariableAssignments();
-				else return getVariableAssignments().map();
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				if (resolve) return getDefinition();
 				return basicGetDefinition();
@@ -559,6 +622,9 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 				return getStatus();
 			case InvocationPackage.SIMULATION_INVOCATION__DOMAIN_RESOURCE:
 				return getDomainResource();
+			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION:
+				if (resolve) return getVariableConfiguration();
+				return basicGetVariableConfiguration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -572,14 +638,14 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case InvocationPackage.SIMULATION_INVOCATION__IDENTIFIER:
+				setIdentifier((String)newValue);
+				return;
 			case InvocationPackage.SIMULATION_INVOCATION__TRACE_SET:
 				setTraceSet((TraceSet)newValue);
 				return;
 			case InvocationPackage.SIMULATION_INVOCATION__TOOL_RESULT:
 				setToolResult((ToolResult)newValue);
-				return;
-			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS:
-				((EStructuralFeature.Setting)getVariableAssignments()).set(newValue);
 				return;
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				setDefinition((SimulationDefinition)newValue);
@@ -600,6 +666,9 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 			case InvocationPackage.SIMULATION_INVOCATION__STATUS:
 				setStatus((SimulationStatus)newValue);
 				return;
+			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION:
+				setVariableConfiguration((VariableConfiguration)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -612,14 +681,14 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case InvocationPackage.SIMULATION_INVOCATION__IDENTIFIER:
+				setIdentifier(IDENTIFIER_EDEFAULT);
+				return;
 			case InvocationPackage.SIMULATION_INVOCATION__TRACE_SET:
 				setTraceSet((TraceSet)null);
 				return;
 			case InvocationPackage.SIMULATION_INVOCATION__TOOL_RESULT:
 				setToolResult((ToolResult)null);
-				return;
-			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS:
-				getVariableAssignments().clear();
 				return;
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				setDefinition((SimulationDefinition)null);
@@ -639,6 +708,9 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 			case InvocationPackage.SIMULATION_INVOCATION__STATUS:
 				setStatus(STATUS_EDEFAULT);
 				return;
+			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION:
+				setVariableConfiguration((VariableConfiguration)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -651,12 +723,12 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case InvocationPackage.SIMULATION_INVOCATION__IDENTIFIER:
+				return IDENTIFIER_EDEFAULT == null ? identifier != null : !IDENTIFIER_EDEFAULT.equals(identifier);
 			case InvocationPackage.SIMULATION_INVOCATION__TRACE_SET:
 				return traceSet != null;
 			case InvocationPackage.SIMULATION_INVOCATION__TOOL_RESULT:
 				return toolResult != null;
-			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_ASSIGNMENTS:
-				return variableAssignments != null && !variableAssignments.isEmpty();
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				return definition != null;
 			case InvocationPackage.SIMULATION_INVOCATION__RESULTS:
@@ -671,6 +743,8 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 				return status != STATUS_EDEFAULT;
 			case InvocationPackage.SIMULATION_INVOCATION__DOMAIN_RESOURCE:
 				return DOMAIN_RESOURCE_EDEFAULT == null ? getDomainResource() != null : !DOMAIN_RESOURCE_EDEFAULT.equals(getDomainResource());
+			case InvocationPackage.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION:
+				return variableConfiguration != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -685,7 +759,9 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (start: ");
+		result.append(" (identifier: ");
+		result.append(identifier);
+		result.append(", start: ");
 		result.append(start);
 		result.append(", end: ");
 		result.append(end);

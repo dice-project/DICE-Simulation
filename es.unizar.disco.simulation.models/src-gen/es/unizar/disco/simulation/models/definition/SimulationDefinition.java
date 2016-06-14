@@ -334,7 +334,7 @@ public interface SimulationDefinition extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Possible Configurations</em>' containment reference list.
 	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_PossibleConfigurations()
-	 * @model containment="true" transient="true" derived="true"
+	 * @model containment="true" derived="true"
 	 * @generated
 	 */
 	EList<VariableConfiguration> getPossibleConfigurations();

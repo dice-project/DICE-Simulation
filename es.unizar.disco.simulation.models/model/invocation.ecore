@@ -3,25 +3,23 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="invocation" nsURI="http://es.unizar.disco/simulation/invocation/1.0"
     nsPrefix="invocation">
   <eClassifiers xsi:type="ecore:EClass" name="SimulationInvocation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="traceSet" eType="ecore:EClass traces.ecore#//TraceSet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="toolResult" eType="ecore:EClass toolresult.ecore#//ToolResult"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variableAssignments" upperBound="-1"
-        eType="#//VariableAssignment" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="ecore:EClass definition.ecore#//SimulationDefinition" eOpposite="definition.ecore#//SimulationDefinition/invocations"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
         eType="ecore:EClass simresult.ecore#//SimulationResult" eOpposite="simresult.ecore#//SimulationResult/invocation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="analyzableResource" lowerBound="1"
-        eType="ecore:EClass datatypes.ecore#//Resource" containment="true"/>
+        eType="ecore:EClass datatypes.ecore#//Resource" derived="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EEnum datatypes.ecore#//SimulationStatus"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainResource" lowerBound="1"
         eType="ecore:EDataType datatypes.ecore#//URI" changeable="false" volatile="true"
         transient="true" derived="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableAssignment" instanceClassName="java.util.Map$Entry">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Number"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableConfiguration"
+        lowerBound="1" eType="ecore:EClass definition.ecore#//VariableConfiguration"/>
   </eClassifiers>
 </ecore:EPackage>
