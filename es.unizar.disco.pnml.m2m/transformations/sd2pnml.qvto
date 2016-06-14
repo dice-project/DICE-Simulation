@@ -4,11 +4,11 @@ import helpers;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
 modeltype PNML uses 'http:///ptnet.ecore';
-modeltype CONF uses 'http://es.unizar.disco/pnconfig/1.0';
+modeltype INVOC uses 'http://es.unizar.disco/simulation/invocation/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
 	
 
-transformation sd2pnml(in sd : UML, in config : CONF, out res : PNML) 
+transformation sd2pnml(in invocation : INVOC, out res : PNML) 
 extends uml2pnml();
 
 
@@ -19,11 +19,11 @@ main()
 	--   Ignore messages to-from the same lifeline
 	--   Implement CombinedFragments
 	--   Transform only elements hanging from the selected GaScenario in config model
-	new uml2pnml(sd, config, res)->transform();
-	sd.objectsOfKind(UML::InteractionFragment)->map interactionFragment2subNet();
-	sd.objectsOfKind(UML::Message)->map message2subNet();
-	sd.objectsOfKind(UML::ExecutionSpecification)->map executionSpecification2lockSubNet();
-	sd.objectsOfKind(UML::Lifeline)->map lifeline2subNet();
+	new uml2pnml(invocation, res)->transform();
+	invocation.activeScenario().fragment -> map interactionFragment2subNet();
+	invocation.activeScenario().message->map message2subNet();
+	invocation.activeScenario().fragment->selectByKind(UML::ExecutionSpecification) -> map executionSpecification2lockSubNet();
+	invocation.activeScenario().lifeline -> map lifeline2subNet();
 }
 
 mapping UML::Lifeline::lifeline2subNet()
@@ -226,4 +226,16 @@ helper String::toMboxSendId() : String {
 
 helper String::toMboxReceiveId() : String {
 	return 'mbox_recv_'.concat(self);
+}
+
+helper INVOC::currentInvocation() : INVOC::SimulationInvocation {
+	return self.objectsOfType(INVOC::SimulationInvocation)->asSequence()->first();
+}
+
+helper INVOC::varAssignments() : OrderedSet (INVOC::VariableAssignment) {
+	return self.currentInvocation().variableAssignments;
+}
+
+helper INVOC::activeScenario() : UML::Interaction {
+	return self.currentInvocation().definition.activeScenario.oclAsType(UML::Interaction);
 }

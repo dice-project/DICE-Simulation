@@ -4,29 +4,67 @@ import helpers;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
 modeltype PNML uses 'http:///ptnet.ecore';
-modeltype CONF uses 'http://es.unizar.disco/pnconfig/1.0';
+modeltype INVOC uses 'http://es.unizar.disco/simulation/invocation/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
 	
 
-transformation ad2pnml(in ad : UML, in config : CONF, out res : PNML) 
+transformation ad2pnml(in invocation : INVOC, out res : PNML) 
 extends uml2pnml();
 
-main() {
-	new uml2pnml(ad, config, res)->transform();
-	ad.objectsOfType(UML::ControlFlow)->map abstractControlFlow2subNet();
-	if (config.rootObjects()[CONF::PetriNetConfig]->asOrderedSet()->first().analysisType = CONF::AnalysisType::steadyState) {
-		map net2steadyStateNet();
+intermediate class ArrivalPattern {
+}
+
+constructor ClosedPattern::ClosedPattern() {};
+intermediate class ClosedPattern extends ArrivalPattern {
+	population_ : Integer;
+	extDelay : Real;
+}
+
+helper UML::NamedElement::getGaWorkloadEvent_pattern() : ArrivalPattern
+{
+	var stereotype := self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent");
+	if (stereotype != null) {
+		var patternString := self.getValue(stereotype, "pattern").oclAsType(String);
+		if (patternString != null) {
+			if (patternString.key() = "closed") {
+				var pattern := new ClosedPattern();
+				pattern.population_ := patternString.value().getNfpValue("population").toInteger();
+				pattern.extDelay := patternString.value().getNfpValue("extDelay").toReal();
+				return pattern;
+			} else {
+				abort("Unknown ArrivalPattern: " + patternString);
+			}
+		}
 	};
+	return null;
 }
 
 
-mapping net2steadyStateNet() {
+main() {
+	new uml2pnml(invocation, res)->transform();
+	invocation.activeScenario().edge->selectByKind(UML::ControlFlow) -> map abstractControlFlow2subNet();
+	var initialNodes := invocation.activeScenario().initialNodes();
+	if (initialNodes->size() <> 1) {
+		abort("Only Activities with a single Initial Node are supported");
+	};
+	var initialNode := initialNodes->first();
+	var pattern := initialNode.getGaWorkloadEvent_pattern();
+	if (pattern.oclIsTypeOf(ClosedPattern)) {
+		initialNode.map net2steadyStateNet();
+	}
+}
+
+
+mapping UML::InitialNode::net2steadyStateNet() {
 	init {
 	-- transientFlow is a temporary ControlFlow that eases the creation of the 
 	-- closing loop for the SteadyState Analysis 
+		if (invocation.activeScenario().finalNodes()->size() <> 1) {
+			abort("Only Activities with a single Final Node are supported");
+		};
 		var transientFlow := object UML::ControlFlow {
-			source := ad.objectsOfKind(UML::FinalNode)->asOrderedSet()->first();
-			target := ad.objectsOfKind(UML::InitialNode)->asOrderedSet()->first();
+			source := invocation.activeScenario().finalNodes()->first();
+			target := self;
 		}
 	}
 	transientFlow->map abstractControlFlow2subNet();
@@ -34,6 +72,7 @@ mapping net2steadyStateNet() {
 	-- We must delete it 
 	res.removeElement(transientFlow);
 }
+
 
 mapping UML::ControlFlow::abstractControlFlow2subNet()
 disjuncts 
@@ -120,4 +159,21 @@ when {
 	
 	self.map namedElement2arc(place1, trans);
 	self.map namedElement2arc(trans, place2);
+}
+
+
+helper INVOC::currentInvocation() : INVOC::SimulationInvocation {
+	return self.objectsOfType(INVOC::SimulationInvocation)->asSequence()->first();
+}
+
+helper INVOC::activeScenario() : UML::Activity {
+	return self.currentInvocation().definition.activeScenario.oclAsType(UML::Activity);
+}
+
+helper UML::Activity::initialNodes() : OrderedSet (UML::InitialNode) {
+	return invocation.activeScenario().node->selectByKind(UML::InitialNode)->asOrderedSet();
+}
+
+helper UML::Activity::finalNodes() : OrderedSet (UML::FinalNode) {
+	return invocation.activeScenario().node->selectByKind(UML::FinalNode)->asOrderedSet();
 }

@@ -51,5 +51,19 @@
          </library>
       </unit>
    </extension>
-
+   <extension
+         point="es.unizar.disco.simulation.models.supported_scenarios">
+      <Scenario
+            stereotypeName="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
+      </Scenario>
+   </extension>
+   <extension
+         point="es.unizar.disco.simulation.models.analyzable_resource_builder">
+      <AnalyzableResourceBuilder
+            builder="es.unizar.disco.pnml.m2m.builder.PnmlResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Activity"
+            priority="4"
+            scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
+      </AnalyzableResourceBuilder>
+   </extension>
 </plugin>

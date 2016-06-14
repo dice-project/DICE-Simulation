@@ -2,7 +2,8 @@ import es.unizar.disco.pnml.utils.PnmlDiceUtils;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
 modeltype PNML uses 'http:///ptnet.ecore';
-modeltype CONF uses 'http://es.unizar.disco/pnconfig/1.0';
+modeltype DEF uses 'http://es.unizar.disco/simulation/definition/1.0';
+modeltype INVOC uses 'http://es.unizar.disco/simulation/invocation/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
 
 library helpers;
@@ -42,17 +43,19 @@ helper UML::NamedElement::getProbabilityVsl() : String
 	return null;
 }
 
-helper String::getPopulationValue(pnConfig : CONF::PetriNetConfig) : Real
+
+
+helper String::getPopulationValue(config : DEF::VariableConfiguration) : Real
 {
-	return self.extractTagValue("population", pnConfig);
+	return self.extractTagValue("population", config);
 }
 
-helper String::getValueValue(pnConfig : CONF::PetriNetConfig) : Real
+helper String::getValueValue(config : DEF::VariableConfiguration) : Real
 {
-	return self.extractTagValue("value", pnConfig);
+	return self.extractTagValue("value", config);
 }
 
-helper String::extractTagValue(theTag : String, pnConfig : CONF::PetriNetConfig) : Real
+helper String::extractTagValue(theTag : String, config : DEF::VariableConfiguration) : Real
 {
 	var floatExpr := self.searchFloat(theTag);
 	-- expression is a float
@@ -62,12 +65,12 @@ helper String::extractTagValue(theTag : String, pnConfig : CONF::PetriNetConfig)
 	-- expression is a variable
 	var variableExpr := self.searchVariable(theTag);
 	if (variableExpr != null) {
-		return pnConfig.retrieveVariableValue(variableExpr);
+		return config.retrieveVariableValue(variableExpr);
 	};
 	-- expression is a expression with a value
 	var exprExpr := self.searchExpression(theTag);
 	if (exprExpr != null) {
-		return exprExpr.getValueValue(pnConfig);
+		return exprExpr.getValueValue(config);
 	};
 	return null;
 }
@@ -101,10 +104,10 @@ helper String::searchExpression(key : String) : String {
 	return null;
 }
 
-helper CONF::PetriNetConfig::retrieveVariableValue(variable : String) : Real {
-	return self.variableAssignments
-	->select(entry : CONF::EStringToEFloatObjectsMap | entry.key = variable).value
-	->asOrderedSet()->first();
+helper DEF::VariableConfiguration::retrieveVariableValue(variable : String) : Real {
+	return self.assignments
+	->select(assignment | assignment.variable.name = variable).value.value
+	->asOrderedSet()->first().toString().asFloat();
 }
 
 helper PNML::PnObject::getToolInfoEntry(key : String) : PNML::ToolInfo {
@@ -119,3 +122,4 @@ helper UML::NamedElement::safeId() : String {
 	// Otherwise
   	return self.getEmfGlobalId();
 }
+

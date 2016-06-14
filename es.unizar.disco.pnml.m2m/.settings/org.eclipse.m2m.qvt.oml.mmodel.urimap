@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <uriMap:MappingContainer xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:uriMap="http:///www.eclipse.org/m2m/qvt/oml/MModelUriMap/1.0.0">
-  <mapping sourceURI="http://es.unizar.disco/pnconfig/1.0" targetURI="platform:/resource/es.unizar.disco.pnconfig/model/pnconfig.ecore"/>
+  <mapping sourceURI="http://es.unizar.disco/simulation/invocation/1.0" targetURI="platform:/resource/es.unizar.disco.simulation.models/model/invocation.ecore"/>
+  <mapping sourceURI="http://es.unizar.disco/simulation/definition/1.0" targetURI="platform:/resource/es.unizar.disco.simulation.models/model/definition.ecore"/>
 </uriMap:MappingContainer>

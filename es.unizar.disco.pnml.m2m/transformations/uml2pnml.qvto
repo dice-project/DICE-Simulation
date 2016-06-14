@@ -3,20 +3,20 @@ import helpers;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
 modeltype PNML uses 'http:///ptnet.ecore';
-modeltype CONF uses 'http://es.unizar.disco/pnconfig/1.0';
+modeltype DEF uses 'http://es.unizar.disco/simulation/definition/1.0';
+modeltype INVOC uses 'http://es.unizar.disco/simulation/invocation/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 
 
-transformation uml2pnml(in uml : UML, in config : CONF, out res : PNML) 
+transformation uml2pnml(in invocation : INVOC, out res : PNML) 
 access helpers;
 
-property moduleProp : String = '';
-
 main() {
-	uml.rootObjects()[UML::Model]->map model2net();
+	invocation.activeScenario() -> map model2net();
 }
 
-mapping UML::Model::model2net() : PNML::PetriNetDoc {
+mapping UML::NamedElement::model2net() : PNML::PetriNetDoc {
 	nets := object PNML::PetriNet {
 		id := 'net';
 		name := createName(self.name);
@@ -41,15 +41,17 @@ inherits UML::NamedElement::namedElement2node
 	init {
 		result := resolveoneIn(UML::NamedElement::namedElement2place, pnObject : PNML::Place | pnObject.id = id);
 	}
+	/*
 	var pattern := self.getPatternVsl();
 	if (pattern != null) {
-		var value := pattern.getPopulationValue(config.currentConfig());
+		var value := pattern.getPopulationValue(invocation.varAssignments());
 		if (value != null) {
 			initialMarking := object PNML::PTMarking {
 				text := value.round();
 			}
 		}
 	};
+	*/
 } 
 
 mapping UML::NamedElement::namedElement2transition(in id : String) : PNML::Transition 
@@ -58,12 +60,13 @@ inherits UML::NamedElement::namedElement2node
 	init {
 		result := resolveoneIn(UML::NamedElement::namedElement2transition, pnObject : PNML::Transition | pnObject.id = id);
 	}
+	/*
 	var hostDemand := self.getHostDemandVsl();
 	if (hostDemand->notEmpty()) {
 		hostDemand->forEach(elt) {
 			-- hostDemand is many-valued, so that, we search for the value in all the entries
 			-- only the first valid value will be used
-			var value := elt.getValueValue(config.currentConfig());
+			var value := elt.getValueValue(invocation.varAssignments());
 			if (value != null) {
 				result.setTransitionKind(CONST::TransitionKind::Exponential, (1 / value))
 			}
@@ -71,11 +74,12 @@ inherits UML::NamedElement::namedElement2node
 	};
 	var probability := self.getProbabilityVsl();
 	if (probability != null) {
-		var value := probability.getValueValue(config.currentConfig());
+		var value := probability.getValueValue(invocation.varAssignments());
 		if (value != null) {
 			result.setTransitionKind(CONST::TransitionKind::Immediate, value)
 		}
 	};
+	*/
 } 
 
 mapping UML::NamedElement::namedElement2arc(in source : PNML::Node, in target : PNML::Node) : PNML::Arc 
@@ -92,10 +96,44 @@ mapping UML::NamedElement::namedElement2arc(in source : PNML::Node, in target : 
 
 helper getGlobalPage() : PNML::Page
 {
-	return resolveoneIn(UML::Model::model2net, PNML::PetriNetDoc).nets.pages->asOrderedSet()->first();
+	return resolveoneIn(UML::NamedElement::model2net, PNML::PetriNetDoc).nets.pages->asOrderedSet()->first();
 }
 
-helper CONF::currentConfig() : CONF::PetriNetConfig
-{
-	return self.objectsOfType(CONF::PetriNetConfig)->asSequence()->first();
+helper INVOC::currentInvocation() : INVOC::SimulationInvocation {
+	return self.objectsOfType(INVOC::SimulationInvocation)->asSequence()->first();
+}
+
+helper INVOC::activeScenario() : UML::Behavior {
+	return self.currentInvocation().definition.activeScenario.oclAsType(UML::Behavior);
+}
+/********************************************************
+  Utility intermediate classes for NFP Types
+********************************************************/
+
+helper String::key() : String {
+	if (self.indexOf("=") = -1) {
+		abort("Unexpected number of tokens in " + self);
+	} else {
+		return self.substringBefore("=")
+	};
+	return null;
+}
+
+helper String::value() : String {
+	if (self.indexOf("=") = -1) {
+		abort("Unexpected number of tokens in " + self);
+	} else {
+		return self.substringBefore("=")
+	};	
+	return null;
+}
+
+helper String::getNfpValue(key : String) : String {
+	var entries := self.tokenize(",");
+	entries->forEach(entry) {
+		if (entry.key() = key) {
+			return entry.value();
+		}
+	};
+	return null;
 }
