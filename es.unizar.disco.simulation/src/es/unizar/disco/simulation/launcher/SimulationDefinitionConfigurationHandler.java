@@ -30,9 +30,8 @@ import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 
 public final class SimulationDefinitionConfigurationHandler {
 
-	
 	public static final String SIMULATION_DEFINITION__IDENTIFIER = "SIMULATION_DEFINITION__IDENTIFIER"; //$NON-NLS-1$
-	
+
 	public static final String SIMULATION_DEFINITION__WORKING_AREA = "SIMULATION_DEFINITION__WORKING_AREA"; //$NON-NLS-1$
 
 	public static final String SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI = "SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI"; //$NON-NLS-1$
@@ -52,7 +51,7 @@ public final class SimulationDefinitionConfigurationHandler {
 	public static final String SIMULATION_DEFINITION__BACKEND = "SIMULATION_DEFINITION__BACKEND"; //$NON-NLS-1$
 
 	public static final String SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS = "SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS"; //$NON-NLS-1$
-	
+
 	private final SimulationDefinition definition;
 
 	private SimulationDefinitionConfigurationHandler(SimulationDefinition definition) {
@@ -230,7 +229,8 @@ public final class SimulationDefinitionConfigurationHandler {
 	}
 
 	public void initializeWorkingArea(ILaunchConfiguration configuration) throws CoreException {
-		String workingArea = configuration.getAttribute(SIMULATION_DEFINITION__WORKING_AREA, DiceSimulationPlugin.getDefault().getStateLocation().toString());
+		String workingArea = configuration.getAttribute(SIMULATION_DEFINITION__WORKING_AREA,
+				URI.createFileURI(DiceSimulationPlugin.getDefault().getStateLocation().toString()).toString());
 		if (!URI.createURI(workingArea).equals(definition.getWorkingArea())) {
 			definition.setWorkingArea(URI.createURI(workingArea));
 		}

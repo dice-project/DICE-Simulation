@@ -1,17 +1,11 @@
 package es.unizar.disco.simulation;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.osgi.framework.BundleContext;
 
-import es.unizar.disco.simulation.preferences.PreferenceConstants;
-import es.unizar.disco.simulation.simulators.SimulatorConstants;
+import es.unizar.disco.simulation.backend.SimulatorsManager;
 
 public class DiceSimulationPlugin extends Plugin {
 
@@ -58,15 +52,7 @@ public class DiceSimulationPlugin extends Plugin {
 	 * @return
 	 */
 	public List<String> getSimulationBackends() {
-		List<String> backends = new ArrayList<>();
-
-		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(SimulatorConstants.EXTENSION_ID);
-
-		for (IConfigurationElement configElement : configElements) {
-			backends.add(configElement.getAttribute(SimulatorConstants.ID_ATTR));
-		}
-
-		return backends;
+		return SimulatorsManager.INSTANCE.getSimulationBackends();
 	}
 
 	/**
@@ -76,17 +62,7 @@ public class DiceSimulationPlugin extends Plugin {
 	 * @return
 	 */
 	public String getDefaultSimulationBackend() {
-		// TODO: Change this implementation in the future by using priorities
-		IEclipsePreferences node = InstanceScope.INSTANCE.getNode(PLUGIN_ID);
-		String defaultBackend = node.get(PreferenceConstants.PRIORITY_BACKEND, null);
-		if (defaultBackend == null) {
-			List<String> backends = getSimulationBackends();
-			if (!backends.isEmpty()) {
-				defaultBackend = backends.get(0);
-				node.put(PreferenceConstants.PRIORITY_BACKEND, defaultBackend);
-			}
-		}
-		return defaultBackend;
+		return SimulatorsManager.INSTANCE.getDefaultSimulationBackend();
 	}
 
 }
