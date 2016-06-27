@@ -1,4 +1,6 @@
-import es.unizar.disco.pnml.utils.PnmlDiceUtils;
+import es.unizar.disco.pnml.m2m.utils.IdentifierUtils;
+import es.unizar.disco.pnml.m2m.utils.MathUtils;
+import es.unizar.disco.pnml.m2m.utils.PnmlDataTypesUtils;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
 modeltype PNML uses 'http:///ptnet.ecore';
