@@ -82,13 +82,14 @@ mapping UML::InitialNode::model2closedNet() {
 	closingTransitions->forEach(transition) {
 		map arc(transition, place);
 	};
-	assert fatal (pattern.population_.value() <= 32767) with log ("Maximum population value is 32767, error in expression '" + pattern._rawExpression + "'");
+	assert fatal (pattern.population_.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + pattern._rawExpression + "'");
 	place.initialMarking := object PNML::PTMarking {
 		text := pattern.population_.value();
 	};
 	// The extDelay is set in the time of the transition just next to the InitialNodePlace
 	var transition := self.resolveoneIn(UML::ActivityNode::activityNode2transition);
-	transition.toolspecifics += map expInfTransitionToolInfo(1 / pattern.extDelay.value());
+	transition.toolspecifics += expTransitionToolInfo(1 / pattern.extDelay.value());
+	transition.toolspecifics += infServerTransitionToolInfo();
 }
 
 /**
@@ -102,9 +103,11 @@ mapping UML::InitialNode::model2openNet() {
 	assert fatal (pattern.arrivalRate.oclIsUndefined() xor pattern.interArrivalTime.oclIsUndefined()) 
 		with log ("Only one 'arrivalRate' xor 'interArrivalTime' should be defined");
 	if (pattern.arrivalRate.oclIsUndefined().not()) {
-		transition.toolspecifics += map expOneTransitionToolInfo(pattern.arrivalRate.value());
+		transition.toolspecifics += expTransitionToolInfo(pattern.arrivalRate.value());
+		transition.toolspecifics += oneServerTransitionToolInfo();
 	} else if (pattern.interArrivalTime.oclIsUndefined().not()) {
-		transition.toolspecifics += map expOneTransitionToolInfo(1 / pattern.interArrivalTime.value());
+		transition.toolspecifics += expTransitionToolInfo(1 / pattern.interArrivalTime.value());
+		transition.toolspecifics += oneServerTransitionToolInfo();
 	}
 }
 
@@ -204,7 +207,8 @@ when {
 		self.getGaStep_hostDemand().oclIsUndefined().not();
 }{
 	var hostDemand := self.getGaStep_hostDemand();
-	result += map expInfTransitionToolInfo( 1 / hostDemand.value());
+	result += expTransitionToolInfo( 1 / hostDemand.value());
+	result += infServerTransitionToolInfo();
 }
 
 /**
@@ -293,58 +297,59 @@ mapping UML::ControlFlow::probabilisticControlFlow2toolInfo() : PNML::ToolInfo
 when {
 		self.getGaStep_prob().oclIsUndefined().not();
 }{
-	var prob := self.getGaStep_prob();
-	map probTransitionToolInfo(prob.value());
+	probTransitionToolInfo(self.getGaStep_prob().value());
 }
 
 /**
-	Creates the ToolInfos that identify an exponential infinite server timed transition,
-	i.e., CONST::TransitionKind::Exponential and CONST::ServerType::InfiniteServer
+	Creates the ToolInfo that identifies an exponential timed transition,
+	i.e., CONST::TransitionKind::Exponential 
 */
-abstract mapping expTransitionToolInfo(in rate : Real) : List ( PNML::ToolInfo ) {
-	result->add(object PNML::ToolInfo {
+helper expTransitionToolInfo(rate : Real) : PNML::ToolInfo {
+	return object PNML::ToolInfo { 
 		tool := CONST::ToolInfoConstants::toolName.toString();
 		version := CONST::ToolInfoConstants::toolVersion.toString();
 		toolInfoGrammarURI := CONST::TransitionKind::Exponential.toString().createURI();
 		formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::Exponential.toString() + "\">" + rate.toString() + "</value>").createLongString();
-	});	
+	};	
 }
 
 /**
-	Creates the ToolInfos that identify an exponential infinite server timed transition,
-	i.e., CONST::TransitionKind::Exponential and CONST::ServerType::InfiniteServer
+	Creates the ToolInfo that identifies an InfiniteServer timed transition,
+	i.e., CONST::ServerType::InfiniteServer
 */
-mapping expInfTransitionToolInfo(in rate : Real) : List ( PNML::ToolInfo ) inherits expTransitionToolInfo {
-	result->add(object PNML::ToolInfo {
+helper infServerTransitionToolInfo() : PNML::ToolInfo {
+	return object PNML::ToolInfo {
 		tool := CONST::ToolInfoConstants::toolName.toString();
 		version := CONST::ToolInfoConstants::toolVersion.toString();
 		toolInfoGrammarURI := CONST::ServerType::InfiniteServer.toString().createURI();
 		formattedXMLBuffer := ("<value grammar=\"" + CONST::ServerType::InfiniteServer.toString() + "\"/>").createLongString();
-	});	
+	};
 }
 
 /**
-	Creates the ToolInfos that identify an exponential one server timed transition,
-	i.e., CONST::TransitionKind::Exponential and CONST::ServerType::InfiniteServer
+	Creates the ToolInfo that identifies a OneServer timed transition,
+	i.e., CONST::ServerType::OneServer 
 */
-mapping expOneTransitionToolInfo(in rate : Real) : List ( PNML::ToolInfo ) inherits expTransitionToolInfo {
-	result->add(object PNML::ToolInfo {
+helper oneServerTransitionToolInfo() : PNML::ToolInfo {
+	return object PNML::ToolInfo {
 		tool := CONST::ToolInfoConstants::toolName.toString();
 		version := CONST::ToolInfoConstants::toolVersion.toString();
 		toolInfoGrammarURI := CONST::ServerType::OneServer.toString().createURI();
 		formattedXMLBuffer := ("<value grammar=\"" + CONST::ServerType::OneServer.toString() + "\"/>").createLongString();
-	});	
+	};
 }
 
 /**
-	Creates the ToolInfos that identify a probabilistic immediate transition,
+	Creates a ToolInfo that identifies a probabilistic immediate transition,
 	i.e., CONST::TransitionKind::Immediate
 */
-mapping probTransitionToolInfo(in prob: Real) : PNML::ToolInfo {
-	tool := CONST::ToolInfoConstants::toolName.toString();
-	version := CONST::ToolInfoConstants::toolVersion.toString();
-	toolInfoGrammarURI := CONST::TransitionKind::Immediate.toString().createURI();
-	formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::Immediate.toString() + "\">" + prob.toString() + "</value>").createLongString();	
+helper probTransitionToolInfo(prob: Real) : PNML::ToolInfo {
+	return object PNML::ToolInfo {
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::TransitionKind::Immediate.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::Immediate.toString() + "\">" + prob.toString() + "</value>").createLongString();
+	};
 }
 
 
@@ -378,10 +383,15 @@ helper OclAny::eObject() : ECORE::EObject {
 *******************************************************************************/
 
 helper UML::scenario() : UML::Activity {
--- Use the "rootObjects" version in production
-	return self.rootObjects()[UML::Activity]->asOrderedSet()->first();
--- Use the "objectsOfType" version in production
---	return self.objectsOfType(UML::Activity)->asOrderedSet()->first();
+	// When running the transformation from the simulation tool, the UML domain must 
+	// contain a single activity at its root 
+	assert warning (self.rootObjects()[UML::Activity]->size() = 1) with log ("No single Activity instance was found at the root of the UML input model, trying to use the first Activity in the model instead");
+	
+	if (self.rootObjects()[UML::Activity]->isEmpty().not()) {
+		return self.rootObjects()[UML::Activity]->asOrderedSet()->first();
+	};
+	// This execution path is useful when running the transformation at development time
+	return self.objectsOfType(UML::Activity)->asOrderedSet()->first();
 }
 
 helper TYPES::vars() : Set ( PrimitiveVariableAssignment ) {
@@ -652,7 +662,7 @@ helper String::toNfpFrequency() : NFP_Frequency {
 		res.unit := entries->get("unit");
 		res.precision := entries->get("precision").toReal();
 	};
-	assert warning (res.unit.oclIsUndefined() or res.unit = "s")
+	assert warning (res.unit.oclIsUndefined() or res.unit = "Hz")
 		with log ("Expression '" + self + "' defines an unsupported 'unit', assumming the only supported unit (Hertzs, 'Hz')");
 	assert warning (res.dir.oclIsUndefined())
 		with log ("Expression '" + self + "' defines a value for the unsupported 'clock' property");
