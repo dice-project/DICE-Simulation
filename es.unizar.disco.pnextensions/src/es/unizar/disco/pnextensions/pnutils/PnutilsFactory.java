@@ -40,15 +40,6 @@ public interface PnutilsFactory extends EFactory {
 	DataTypeUtils createDataTypeUtils();
 
 	/**
-	 * Returns a new object of class '<em>Tool Info Utils</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Tool Info Utils</em>'.
-	 * @generated
-	 */
-	ToolInfoUtils createToolInfoUtils();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

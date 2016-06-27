@@ -78,12 +78,6 @@ public class PnutilsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case PnutilsPackage.TOOL_INFO_UTILS: {
-				ToolInfoUtils toolInfoUtils = (ToolInfoUtils)theEObject;
-				T result = caseToolInfoUtils(toolInfoUtils);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -115,21 +109,6 @@ public class PnutilsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDataTypeUtils(DataTypeUtils object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Tool Info Utils</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Tool Info Utils</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseToolInfoUtils(ToolInfoUtils object) {
 		return null;
 	}
 

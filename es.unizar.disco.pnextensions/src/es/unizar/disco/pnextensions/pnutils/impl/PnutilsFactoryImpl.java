@@ -61,7 +61,6 @@ public class PnutilsFactoryImpl extends EFactoryImpl implements PnutilsFactory {
 		switch (eClass.getClassifierID()) {
 			case PnutilsPackage.PN_UTILS: return createPnUtils();
 			case PnutilsPackage.DATA_TYPE_UTILS: return createDataTypeUtils();
-			case PnutilsPackage.TOOL_INFO_UTILS: return createToolInfoUtils();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -119,16 +118,6 @@ public class PnutilsFactoryImpl extends EFactoryImpl implements PnutilsFactory {
 	public DataTypeUtils createDataTypeUtils() {
 		DataTypeUtilsImpl dataTypeUtils = new DataTypeUtilsImpl();
 		return dataTypeUtils;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ToolInfoUtils createToolInfoUtils() {
-		ToolInfoUtilsImpl toolInfoUtils = new ToolInfoUtilsImpl();
-		return toolInfoUtils;
 	}
 
 	/**
