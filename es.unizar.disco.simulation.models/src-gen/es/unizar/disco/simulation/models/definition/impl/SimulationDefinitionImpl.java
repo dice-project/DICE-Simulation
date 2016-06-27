@@ -3,6 +3,7 @@
 package es.unizar.disco.simulation.models.definition.impl;
 
 import es.unizar.disco.simulation.models.datatypes.Resource;
+
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.definition.OutputVariable;
@@ -27,7 +28,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -63,12 +63,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getDomainResource <em>Domain Resource</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getMaxExecutionTime <em>Max Execution Time</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getOutputVariables <em>Output Variables</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getWorkingArea <em>Working Area</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getDeclaredMeasures <em>Declared Measures</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getMeasuresToCompute <em>Measures To Compute</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getBackend <em>Backend</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getPossibleConfigurations <em>Possible Configurations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getActiveConfigurations <em>Active Configurations</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#isAutoSync <em>Auto Sync</em>}</li>
  * </ul>
  *
  * @generated
@@ -185,26 +185,6 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	protected EList<OutputVariable> outputVariables;
 
 	/**
-	 * The default value of the '{@link #getWorkingArea() <em>Working Area</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWorkingArea()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final URI WORKING_AREA_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getWorkingArea() <em>Working Area</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWorkingArea()
-	 * @generated
-	 * @ordered
-	 */
-	protected URI workingArea = WORKING_AREA_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getDeclaredMeasures() <em>Declared Measures</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -263,6 +243,26 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * @ordered
 	 */
 	protected EList<VariableConfiguration> activeConfigurations;
+
+	/**
+	 * The default value of the '{@link #isAutoSync() <em>Auto Sync</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAutoSync()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean AUTO_SYNC_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAutoSync() <em>Auto Sync</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAutoSync()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean autoSync = AUTO_SYNC_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -471,27 +471,6 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public URI getWorkingArea() {
-		return workingArea;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setWorkingArea(URI newWorkingArea) {
-		URI oldWorkingArea = workingArea;
-		workingArea = newWorkingArea;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionPackage.SIMULATION_DEFINITION__WORKING_AREA, oldWorkingArea, workingArea));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<DomainMeasureDefinition> getDeclaredMeasures() {
 		if (declaredMeasures == null) {
 			declaredMeasures = new EObjectContainmentWithInverseEList<DomainMeasureDefinition>(DomainMeasureDefinition.class, this, DefinitionPackage.SIMULATION_DEFINITION__DECLARED_MEASURES, MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION);
@@ -554,6 +533,27 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 			activeConfigurations = new EObjectResolvingEList<VariableConfiguration>(VariableConfiguration.class, this, DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS);
 		}
 		return activeConfigurations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAutoSync() {
+		return autoSync;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAutoSync(boolean newAutoSync) {
+		boolean oldAutoSync = autoSync;
+		autoSync = newAutoSync;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC, oldAutoSync, autoSync));
 	}
 
 	/**
@@ -715,8 +715,6 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return getMaxExecutionTime();
 			case DefinitionPackage.SIMULATION_DEFINITION__OUTPUT_VARIABLES:
 				return getOutputVariables();
-			case DefinitionPackage.SIMULATION_DEFINITION__WORKING_AREA:
-				return getWorkingArea();
 			case DefinitionPackage.SIMULATION_DEFINITION__DECLARED_MEASURES:
 				return getDeclaredMeasures();
 			case DefinitionPackage.SIMULATION_DEFINITION__MEASURES_TO_COMPUTE:
@@ -727,6 +725,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return getPossibleConfigurations();
 			case DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS:
 				return getActiveConfigurations();
+			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
+				return isAutoSync();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -771,9 +771,6 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				getOutputVariables().clear();
 				getOutputVariables().addAll((Collection<? extends OutputVariable>)newValue);
 				return;
-			case DefinitionPackage.SIMULATION_DEFINITION__WORKING_AREA:
-				setWorkingArea((URI)newValue);
-				return;
 			case DefinitionPackage.SIMULATION_DEFINITION__DECLARED_MEASURES:
 				getDeclaredMeasures().clear();
 				getDeclaredMeasures().addAll((Collection<? extends DomainMeasureDefinition>)newValue);
@@ -792,6 +789,9 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 			case DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS:
 				getActiveConfigurations().clear();
 				getActiveConfigurations().addAll((Collection<? extends VariableConfiguration>)newValue);
+				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
+				setAutoSync((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -832,9 +832,6 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 			case DefinitionPackage.SIMULATION_DEFINITION__OUTPUT_VARIABLES:
 				getOutputVariables().clear();
 				return;
-			case DefinitionPackage.SIMULATION_DEFINITION__WORKING_AREA:
-				setWorkingArea(WORKING_AREA_EDEFAULT);
-				return;
 			case DefinitionPackage.SIMULATION_DEFINITION__DECLARED_MEASURES:
 				getDeclaredMeasures().clear();
 				return;
@@ -849,6 +846,9 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return;
 			case DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS:
 				getActiveConfigurations().clear();
+				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
+				setAutoSync(AUTO_SYNC_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -880,8 +880,6 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return MAX_EXECUTION_TIME_EDEFAULT == null ? maxExecutionTime != null : !MAX_EXECUTION_TIME_EDEFAULT.equals(maxExecutionTime);
 			case DefinitionPackage.SIMULATION_DEFINITION__OUTPUT_VARIABLES:
 				return outputVariables != null && !outputVariables.isEmpty();
-			case DefinitionPackage.SIMULATION_DEFINITION__WORKING_AREA:
-				return WORKING_AREA_EDEFAULT == null ? workingArea != null : !WORKING_AREA_EDEFAULT.equals(workingArea);
 			case DefinitionPackage.SIMULATION_DEFINITION__DECLARED_MEASURES:
 				return declaredMeasures != null && !declaredMeasures.isEmpty();
 			case DefinitionPackage.SIMULATION_DEFINITION__MEASURES_TO_COMPUTE:
@@ -892,6 +890,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return possibleConfigurations != null && !possibleConfigurations.isEmpty();
 			case DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS:
 				return activeConfigurations != null && !activeConfigurations.isEmpty();
+			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
+				return autoSync != AUTO_SYNC_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -942,10 +942,10 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 		result.append(identifier);
 		result.append(", maxExecutionTime: ");
 		result.append(maxExecutionTime);
-		result.append(", workingArea: ");
-		result.append(workingArea);
 		result.append(", backend: ");
 		result.append(backend);
+		result.append(", autoSync: ");
+		result.append(autoSync);
 		result.append(')');
 		return result.toString();
 	}

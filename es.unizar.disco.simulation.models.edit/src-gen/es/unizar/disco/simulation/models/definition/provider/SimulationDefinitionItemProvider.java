@@ -68,15 +68,11 @@ public class SimulationDefinitionItemProvider
 			super.getPropertyDescriptors(object);
 
 			addIdentifierPropertyDescriptor(object);
-			addInvocationsPropertyDescriptor(object);
-			addActiveScenarioPropertyDescriptor(object);
-			addScenariosPropertyDescriptor(object);
-			addDomainResourcePropertyDescriptor(object);
 			addMaxExecutionTimePropertyDescriptor(object);
-			addWorkingAreaPropertyDescriptor(object);
 			addMeasuresToComputePropertyDescriptor(object);
 			addBackendPropertyDescriptor(object);
 			addActiveConfigurationsPropertyDescriptor(object);
+			addAutoSyncPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -104,94 +100,6 @@ public class SimulationDefinitionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Invocations feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInvocationsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationDefinition_invocations_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_invocations_feature", "_UI_SimulationDefinition_type"),
-				 DefinitionPackage.Literals.SIMULATION_DEFINITION__INVOCATIONS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Active Scenario feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addActiveScenarioPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationDefinition_activeScenario_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_activeScenario_feature", "_UI_SimulationDefinition_type"),
-				 DefinitionPackage.Literals.SIMULATION_DEFINITION__ACTIVE_SCENARIO,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Scenarios feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addScenariosPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationDefinition_scenarios_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_scenarios_feature", "_UI_SimulationDefinition_type"),
-				 DefinitionPackage.Literals.SIMULATION_DEFINITION__SCENARIOS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Domain Resource feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDomainResourcePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationDefinition_domainResource_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_domainResource_feature", "_UI_SimulationDefinition_type"),
-				 DefinitionPackage.Literals.SIMULATION_DEFINITION__DOMAIN_RESOURCE,
-				 true,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Max Execution Time feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -205,28 +113,6 @@ public class SimulationDefinitionItemProvider
 				 getString("_UI_SimulationDefinition_maxExecutionTime_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_maxExecutionTime_feature", "_UI_SimulationDefinition_type"),
 				 DefinitionPackage.Literals.SIMULATION_DEFINITION__MAX_EXECUTION_TIME,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Working Area feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addWorkingAreaPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationDefinition_workingArea_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_workingArea_feature", "_UI_SimulationDefinition_type"),
-				 DefinitionPackage.Literals.SIMULATION_DEFINITION__WORKING_AREA,
 				 true,
 				 false,
 				 false,
@@ -302,6 +188,28 @@ public class SimulationDefinitionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Auto Sync feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAutoSyncPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationDefinition_autoSync_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_autoSync_feature", "_UI_SimulationDefinition_type"),
+				 DefinitionPackage.Literals.SIMULATION_DEFINITION__AUTO_SYNC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -313,7 +221,9 @@ public class SimulationDefinitionItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__INVOCATIONS);
 			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__PARAMETERS);
+			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__ACTIVE_SCENARIO);
 			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES);
 			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__OUTPUT_VARIABLES);
 			childrenFeatures.add(DefinitionPackage.Literals.SIMULATION_DEFINITION__DECLARED_MEASURES);
@@ -376,8 +286,8 @@ public class SimulationDefinitionItemProvider
 			case DefinitionPackage.SIMULATION_DEFINITION__IDENTIFIER:
 			case DefinitionPackage.SIMULATION_DEFINITION__DOMAIN_RESOURCE:
 			case DefinitionPackage.SIMULATION_DEFINITION__MAX_EXECUTION_TIME:
-			case DefinitionPackage.SIMULATION_DEFINITION__WORKING_AREA:
 			case DefinitionPackage.SIMULATION_DEFINITION__BACKEND:
+			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS:

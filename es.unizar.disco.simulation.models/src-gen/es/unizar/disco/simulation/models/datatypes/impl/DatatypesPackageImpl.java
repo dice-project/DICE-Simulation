@@ -5,6 +5,7 @@ package es.unizar.disco.simulation.models.datatypes.impl;
 import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
 import es.unizar.disco.simulation.models.datatypes.Measure;
+import es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment;
 import es.unizar.disco.simulation.models.datatypes.Resource;
 import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
 import es.unizar.disco.simulation.models.datatypes.Unit;
@@ -39,6 +40,7 @@ import es.unizar.disco.simulation.models.wnsim.impl.WnsimPackageImpl;
 
 import java.util.Collection;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -60,6 +62,13 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * @generated
 	 */
 	private EClass resourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass primitiveVariableAssignmentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,6 +104,13 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * @generated
 	 */
 	private EDataType numberEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType iStatusEDataType = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -219,6 +235,33 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPrimitiveVariableAssignment() {
+		return primitiveVariableAssignmentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPrimitiveVariableAssignment_Variable() {
+		return (EAttribute)primitiveVariableAssignmentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPrimitiveVariableAssignment_Value() {
+		return (EAttribute)primitiveVariableAssignmentEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getUnit() {
 		return unitEEnum;
 	}
@@ -264,6 +307,15 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EDataType getIStatus() {
+		return iStatusEDataType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getCollection() {
 		return collectionEDataType;
 	}
@@ -300,6 +352,10 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		createEAttribute(resourceEClass, RESOURCE__URI);
 		createEAttribute(resourceEClass, RESOURCE__RESOURCE);
 
+		primitiveVariableAssignmentEClass = createEClass(PRIMITIVE_VARIABLE_ASSIGNMENT);
+		createEAttribute(primitiveVariableAssignmentEClass, PRIMITIVE_VARIABLE_ASSIGNMENT__VARIABLE);
+		createEAttribute(primitiveVariableAssignmentEClass, PRIMITIVE_VARIABLE_ASSIGNMENT__VALUE);
+
 		// Create enums
 		unitEEnum = createEEnum(UNIT);
 		measureEEnum = createEEnum(MEASURE);
@@ -308,6 +364,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		// Create data types
 		uriEDataType = createEDataType(URI);
 		numberEDataType = createEDataType(NUMBER);
+		iStatusEDataType = createEDataType(ISTATUS);
 		collectionEDataType = createEDataType(COLLECTION);
 	}
 
@@ -345,6 +402,10 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		initEClass(resourceEClass, Resource.class, "Resource", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getResource_Uri(), this.getURI(), "uri", null, 1, 1, Resource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResource_Resource(), ecorePackage.getEResource(), "resource", null, 1, 1, Resource.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(primitiveVariableAssignmentEClass, PrimitiveVariableAssignment.class, "PrimitiveVariableAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPrimitiveVariableAssignment_Variable(), ecorePackage.getEString(), "variable", null, 1, 1, PrimitiveVariableAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPrimitiveVariableAssignment_Value(), this.getNumber(), "value", null, 1, 1, PrimitiveVariableAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(unitEEnum, Unit.class, "Unit");
@@ -398,10 +459,13 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.RUNNING);
 		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.FINISHED);
 		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.KILLED);
+		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.WAITING);
+		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.FAILED);
 
 		// Initialize data types
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(numberEDataType, Number.class, "Number", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+		initEDataType(iStatusEDataType, IStatus.class, "IStatus", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(collectionEDataType, Collection.class, "Collection", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource

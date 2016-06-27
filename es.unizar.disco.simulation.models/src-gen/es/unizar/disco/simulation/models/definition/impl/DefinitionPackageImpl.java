@@ -293,17 +293,8 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSimulationDefinition_WorkingArea() {
-		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(9);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getSimulationDefinition_DeclaredMeasures() {
-		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(10);
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -312,7 +303,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	public EReference getSimulationDefinition_MeasuresToCompute() {
-		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(11);
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -321,7 +312,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	public EAttribute getSimulationDefinition_Backend() {
-		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(12);
+		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -330,7 +321,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	public EReference getSimulationDefinition_PossibleConfigurations() {
-		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(13);
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -339,7 +330,16 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * @generated
 	 */
 	public EReference getSimulationDefinition_ActiveConfigurations() {
-		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(14);
+		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSimulationDefinition_AutoSync() {
+		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -617,6 +617,15 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getVariableConfiguration__ToPrimitiveAssignments() {
+		return variableConfigurationEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DefinitionFactory getDefinitionFactory() {
 		return (DefinitionFactory)getEFactoryInstance();
 	}
@@ -650,12 +659,12 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__DOMAIN_RESOURCE);
 		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__MAX_EXECUTION_TIME);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__OUTPUT_VARIABLES);
-		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__WORKING_AREA);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__DECLARED_MEASURES);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__MEASURES_TO_COMPUTE);
 		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__BACKEND);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS);
+		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__AUTO_SYNC);
 		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_VARIABLES);
 		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_VARIABLES_MAP);
 		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_INPUT_VARIABLES_MAP);
@@ -693,6 +702,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		variableConfigurationEClass = createEClass(VARIABLE_CONFIGURATION);
 		createEReference(variableConfigurationEClass, VARIABLE_CONFIGURATION__ASSIGNMENTS);
 		createEOperation(variableConfigurationEClass, VARIABLE_CONFIGURATION___IS_EQUIVALENT__VARIABLECONFIGURATION);
+		createEOperation(variableConfigurationEClass, VARIABLE_CONFIGURATION___TO_PRIMITIVE_ASSIGNMENTS);
 	}
 
 	/**
@@ -733,7 +743,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(simulationDefinitionEClass, SimulationDefinition.class, "SimulationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSimulationDefinition_Identifier(), ecorePackage.getEString(), "identifier", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimulationDefinition_Identifier(), ecorePackage.getEString(), "identifier", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_Invocations(), theInvocationPackage.getSimulationInvocation(), theInvocationPackage.getSimulationInvocation_Definition(), "invocations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_Parameters(), this.getSimulationParameter(), null, "parameters", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_ActiveScenario(), ecorePackage.getEObject(), null, "activeScenario", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -742,12 +752,12 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		initEReference(getSimulationDefinition_DomainResource(), theDatatypesPackage.getResource(), null, "domainResource", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationDefinition_MaxExecutionTime(), ecorePackage.getEDate(), "maxExecutionTime", "0000-00-00\'01:00:00", 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_OutputVariables(), this.getOutputVariable(), null, "outputVariables", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEAttribute(getSimulationDefinition_WorkingArea(), theDatatypesPackage.getURI(), "workingArea", null, 0, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_DeclaredMeasures(), theMeasuresPackage.getDomainMeasureDefinition(), theMeasuresPackage.getDomainMeasureDefinition_SimulationDefinition(), "declaredMeasures", null, 1, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_MeasuresToCompute(), theMeasuresPackage.getDomainMeasureDefinition(), null, "measuresToCompute", null, 1, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationDefinition_Backend(), ecorePackage.getEString(), "backend", null, 1, 1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_PossibleConfigurations(), this.getVariableConfiguration(), null, "possibleConfigurations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_ActiveConfigurations(), this.getVariableConfiguration(), null, "activeConfigurations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimulationDefinition_AutoSync(), ecorePackage.getEBoolean(), "autoSync", "false", 1, 1, SimulationDefinition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getSimulationDefinition__GetVariables(), null, "getVariables", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(theDatatypesPackage.getCollection());
@@ -820,6 +830,8 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 
 		op = initEOperation(getVariableConfiguration__IsEquivalent__VariableConfiguration(), ecorePackage.getEBoolean(), "isEquivalent", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getVariableConfiguration(), "config", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getVariableConfiguration__ToPrimitiveAssignments(), theDatatypesPackage.getPrimitiveVariableAssignment(), "toPrimitiveAssignments", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

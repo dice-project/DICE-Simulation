@@ -72,6 +72,10 @@ public class DatatypesAdapterFactory extends AdapterFactoryImpl {
 				return createResourceAdapter();
 			}
 			@Override
+			public Adapter casePrimitiveVariableAssignment(PrimitiveVariableAssignment object) {
+				return createPrimitiveVariableAssignmentAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -102,6 +106,20 @@ public class DatatypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createResourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment <em>Primitive Variable Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment
+	 * @generated
+	 */
+	public Adapter createPrimitiveVariableAssignmentAdapter() {
 		return null;
 	}
 

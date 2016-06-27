@@ -149,22 +149,13 @@ public interface DefinitionPackage extends EPackage {
 	int SIMULATION_DEFINITION__OUTPUT_VARIABLES = 8;
 
 	/**
-	 * The feature id for the '<em><b>Working Area</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_DEFINITION__WORKING_AREA = 9;
-
-	/**
 	 * The feature id for the '<em><b>Declared Measures</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__DECLARED_MEASURES = 10;
+	int SIMULATION_DEFINITION__DECLARED_MEASURES = 9;
 
 	/**
 	 * The feature id for the '<em><b>Measures To Compute</b></em>' reference list.
@@ -173,7 +164,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__MEASURES_TO_COMPUTE = 11;
+	int SIMULATION_DEFINITION__MEASURES_TO_COMPUTE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Backend</b></em>' attribute.
@@ -182,7 +173,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__BACKEND = 12;
+	int SIMULATION_DEFINITION__BACKEND = 11;
 
 	/**
 	 * The feature id for the '<em><b>Possible Configurations</b></em>' containment reference list.
@@ -191,7 +182,7 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS = 13;
+	int SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Active Configurations</b></em>' reference list.
@@ -200,7 +191,16 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS = 14;
+	int SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS = 13;
+
+	/**
+	 * The feature id for the '<em><b>Auto Sync</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__AUTO_SYNC = 14;
 
 	/**
 	 * The number of structural features of the '<em>Simulation Definition</em>' class.
@@ -633,13 +633,22 @@ public interface DefinitionPackage extends EPackage {
 	int VARIABLE_CONFIGURATION___IS_EQUIVALENT__VARIABLECONFIGURATION = 0;
 
 	/**
+	 * The operation id for the '<em>To Primitive Assignments</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_CONFIGURATION___TO_PRIMITIVE_ASSIGNMENTS = 1;
+
+	/**
 	 * The number of operations of the '<em>Variable Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_CONFIGURATION_OPERATION_COUNT = 1;
+	int VARIABLE_CONFIGURATION_OPERATION_COUNT = 2;
 
 
 	/**
@@ -752,17 +761,6 @@ public interface DefinitionPackage extends EPackage {
 	EReference getSimulationDefinition_OutputVariables();
 
 	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getWorkingArea <em>Working Area</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Working Area</em>'.
-	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getWorkingArea()
-	 * @see #getSimulationDefinition()
-	 * @generated
-	 */
-	EAttribute getSimulationDefinition_WorkingArea();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getDeclaredMeasures <em>Declared Measures</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -816,6 +814,17 @@ public interface DefinitionPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSimulationDefinition_ActiveConfigurations();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#isAutoSync <em>Auto Sync</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Auto Sync</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#isAutoSync()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EAttribute getSimulationDefinition_AutoSync();
 
 	/**
 	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables() <em>Get Variables</em>}' operation.
@@ -1132,6 +1141,16 @@ public interface DefinitionPackage extends EPackage {
 	EOperation getVariableConfiguration__IsEquivalent__VariableConfiguration();
 
 	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.VariableConfiguration#toPrimitiveAssignments() <em>To Primitive Assignments</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>To Primitive Assignments</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.VariableConfiguration#toPrimitiveAssignments()
+	 * @generated
+	 */
+	EOperation getVariableConfiguration__ToPrimitiveAssignments();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1237,14 +1256,6 @@ public interface DefinitionPackage extends EPackage {
 		EReference SIMULATION_DEFINITION__OUTPUT_VARIABLES = eINSTANCE.getSimulationDefinition_OutputVariables();
 
 		/**
-		 * The meta object literal for the '<em><b>Working Area</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SIMULATION_DEFINITION__WORKING_AREA = eINSTANCE.getSimulationDefinition_WorkingArea();
-
-		/**
 		 * The meta object literal for the '<em><b>Declared Measures</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1283,6 +1294,14 @@ public interface DefinitionPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS = eINSTANCE.getSimulationDefinition_ActiveConfigurations();
+
+		/**
+		 * The meta object literal for the '<em><b>Auto Sync</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_DEFINITION__AUTO_SYNC = eINSTANCE.getSimulationDefinition_AutoSync();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Variables</b></em>' operation.
@@ -1537,6 +1556,14 @@ public interface DefinitionPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation VARIABLE_CONFIGURATION___IS_EQUIVALENT__VARIABLECONFIGURATION = eINSTANCE.getVariableConfiguration__IsEquivalent__VariableConfiguration();
+
+		/**
+		 * The meta object literal for the '<em><b>To Primitive Assignments</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VARIABLE_CONFIGURATION___TO_PRIMITIVE_ASSIGNMENTS = eINSTANCE.getVariableConfiguration__ToPrimitiveAssignments();
 
 	}
 

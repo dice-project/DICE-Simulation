@@ -95,6 +95,29 @@ public class InvocationItemProviderAdapterFactory extends InvocationAdapterFacto
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected InvocationsRegistryItemProvider invocationsRegistryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createInvocationsRegistryAdapter() {
+		if (invocationsRegistryItemProvider == null) {
+			invocationsRegistryItemProvider = new InvocationsRegistryItemProvider(this);
+		}
+
+		return invocationsRegistryItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -194,6 +217,7 @@ public class InvocationItemProviderAdapterFactory extends InvocationAdapterFacto
 	 */
 	public void dispose() {
 		if (simulationInvocationItemProvider != null) simulationInvocationItemProvider.dispose();
+		if (invocationsRegistryItemProvider != null) invocationsRegistryItemProvider.dispose();
 	}
 
 }

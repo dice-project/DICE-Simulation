@@ -26,7 +26,7 @@ public enum SimulationStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNKNOWN(0, "unknown", "unknown"),
+	UNKNOWN(0, "unknown", "Unknown"),
 
 	/**
 	 * The '<em><b>Running</b></em>' literal object.
@@ -36,7 +36,7 @@ public enum SimulationStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	RUNNING(1, "running", "running"),
+	RUNNING(1, "running", "Running"),
 
 	/**
 	 * The '<em><b>Finished</b></em>' literal object.
@@ -46,7 +46,7 @@ public enum SimulationStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	FINISHED(2, "finished", "finished"),
+	FINISHED(2, "finished", "Finished"),
 
 	/**
 	 * The '<em><b>Killed</b></em>' literal object.
@@ -56,7 +56,23 @@ public enum SimulationStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	KILLED(3, "killed", "killed");
+	KILLED(3, "killed", "Killed"), /**
+	 * The '<em><b>Waiting</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #WAITING_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	WAITING(4, "waiting", "Waiting"), /**
+	 * The '<em><b>Failed</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #FAILED_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	FAILED(5, "failed", "Failed");
 
 	/**
 	 * The '<em><b>Unknown</b></em>' literal value.
@@ -67,7 +83,7 @@ public enum SimulationStatus implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNKNOWN
-	 * @model name="unknown"
+	 * @model name="unknown" literal="Unknown"
 	 * @generated
 	 * @ordered
 	 */
@@ -82,7 +98,7 @@ public enum SimulationStatus implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #RUNNING
-	 * @model name="running"
+	 * @model name="running" literal="Running"
 	 * @generated
 	 * @ordered
 	 */
@@ -97,7 +113,7 @@ public enum SimulationStatus implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #FINISHED
-	 * @model name="finished"
+	 * @model name="finished" literal="Finished"
 	 * @generated
 	 * @ordered
 	 */
@@ -112,11 +128,41 @@ public enum SimulationStatus implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #KILLED
-	 * @model name="killed"
+	 * @model name="killed" literal="Killed"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int KILLED_VALUE = 3;
+
+	/**
+	 * The '<em><b>Waiting</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Waiting</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #WAITING
+	 * @model name="waiting" literal="Waiting"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int WAITING_VALUE = 4;
+
+	/**
+	 * The '<em><b>Failed</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Failed</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #FAILED
+	 * @model name="failed" literal="Failed"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FAILED_VALUE = 5;
 
 	/**
 	 * An array of all the '<em><b>Simulation Status</b></em>' enumerators.
@@ -130,6 +176,8 @@ public enum SimulationStatus implements Enumerator {
 			RUNNING,
 			FINISHED,
 			KILLED,
+			WAITING,
+			FAILED,
 		};
 
 	/**
@@ -190,6 +238,8 @@ public enum SimulationStatus implements Enumerator {
 			case RUNNING_VALUE: return RUNNING;
 			case FINISHED_VALUE: return FINISHED;
 			case KILLED_VALUE: return KILLED;
+			case WAITING_VALUE: return WAITING;
+			case FAILED_VALUE: return FAILED;
 		}
 		return null;
 	}

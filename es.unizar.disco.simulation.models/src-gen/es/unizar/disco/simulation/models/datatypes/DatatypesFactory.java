@@ -31,6 +31,15 @@ public interface DatatypesFactory extends EFactory {
 	Resource createResource();
 
 	/**
+	 * Returns a new object of class '<em>Primitive Variable Assignment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Primitive Variable Assignment</em>'.
+	 * @generated
+	 */
+	PrimitiveVariableAssignment createPrimitiveVariableAssignment();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

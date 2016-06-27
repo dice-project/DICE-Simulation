@@ -31,6 +31,15 @@ public interface InvocationFactory extends EFactory {
 	SimulationInvocation createSimulationInvocation();
 
 	/**
+	 * Returns a new object of class '<em>Invocations Registry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Invocations Registry</em>'.
+	 * @generated
+	 */
+	InvocationsRegistry createInvocationsRegistry();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

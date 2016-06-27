@@ -12,6 +12,7 @@ import es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl;
 
 import es.unizar.disco.simulation.models.invocation.InvocationFactory;
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
+import es.unizar.disco.simulation.models.invocation.InvocationsRegistry;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 
 import es.unizar.disco.simulation.models.measures.MeasuresPackage;
@@ -36,6 +37,7 @@ import es.unizar.disco.simulation.models.wnsim.impl.WnsimPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -54,6 +56,13 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * @generated
 	 */
 	private EClass simulationInvocationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass invocationsRegistryEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -198,17 +207,8 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimulationInvocation_AnalyzableResource() {
-		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getSimulationInvocation_Start() {
-		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * @generated
 	 */
 	public EAttribute getSimulationInvocation_End() {
-		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -226,16 +226,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * @generated
 	 */
 	public EAttribute getSimulationInvocation_Status() {
-		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(8);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSimulationInvocation_DomainResource() {
-		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(9);
+		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -244,7 +235,52 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * @generated
 	 */
 	public EReference getSimulationInvocation_VariableConfiguration() {
-		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(10);
+		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSimulationInvocation_AnalyzableModel() {
+		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSimulationInvocation_AutoBuild() {
+		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getSimulationInvocation__BuildAnalyzableModel() {
+		return simulationInvocationEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getInvocationsRegistry() {
+		return invocationsRegistryEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInvocationsRegistry_Invocations() {
+		return (EReference)invocationsRegistryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -281,12 +317,16 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__TOOL_RESULT);
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__DEFINITION);
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__RESULTS);
-		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__ANALYZABLE_RESOURCE);
 		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__START);
 		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__END);
 		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__STATUS);
-		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__DOMAIN_RESOURCE);
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__VARIABLE_CONFIGURATION);
+		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__ANALYZABLE_MODEL);
+		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__AUTO_BUILD);
+		createEOperation(simulationInvocationEClass, SIMULATION_INVOCATION___BUILD_ANALYZABLE_MODEL);
+
+		invocationsRegistryEClass = createEClass(INVOCATIONS_REGISTRY);
+		createEReference(invocationsRegistryEClass, INVOCATIONS_REGISTRY__INVOCATIONS);
 	}
 
 	/**
@@ -327,17 +367,22 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(simulationInvocationEClass, SimulationInvocation.class, "SimulationInvocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSimulationInvocation_Identifier(), ecorePackage.getEString(), "identifier", null, 1, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimulationInvocation_TraceSet(), theTracesPackage.getTraceSet(), null, "traceSet", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimulationInvocation_Identifier(), ecorePackage.getEString(), "identifier", null, 1, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationInvocation_TraceSet(), theTracesPackage.getTraceSet(), null, "traceSet", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationInvocation_ToolResult(), theToolresultPackage.getToolResult(), null, "toolResult", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationInvocation_Definition(), theDefinitionPackage.getSimulationDefinition(), theDefinitionPackage.getSimulationDefinition_Invocations(), "definition", null, 1, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationInvocation_Results(), theSimresultPackage.getSimulationResult(), theSimresultPackage.getSimulationResult_Invocation(), "results", null, 0, -1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimulationInvocation_AnalyzableResource(), theDatatypesPackage.getResource(), null, "analyzableResource", null, 1, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationInvocation_Start(), ecorePackage.getEDate(), "start", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationInvocation_End(), ecorePackage.getEDate(), "end", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationInvocation_Status(), theDatatypesPackage.getSimulationStatus(), "status", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSimulationInvocation_DomainResource(), theDatatypesPackage.getURI(), "domainResource", null, 1, 1, SimulationInvocation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationInvocation_VariableConfiguration(), theDefinitionPackage.getVariableConfiguration(), null, "variableConfiguration", null, 1, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationInvocation_AnalyzableModel(), ecorePackage.getEObject(), null, "analyzableModel", null, 0, -1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimulationInvocation_AutoBuild(), ecorePackage.getEBoolean(), "autoBuild", "false", 1, 1, SimulationInvocation.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getSimulationInvocation__BuildAnalyzableModel(), theDatatypesPackage.getIStatus(), "buildAnalyzableModel", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(invocationsRegistryEClass, InvocationsRegistry.class, "InvocationsRegistry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInvocationsRegistry_Invocations(), this.getSimulationInvocation(), null, "invocations", null, 0, -1, InvocationsRegistry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

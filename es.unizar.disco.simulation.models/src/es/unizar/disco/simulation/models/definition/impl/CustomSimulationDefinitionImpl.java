@@ -100,7 +100,7 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 	private AdapterImpl resourceUriAdapter = new AdapterImpl() {
 		@Override
 		public void notifyChanged(Notification msg) {
-			if (msg.getFeature() == DatatypesPackage.Literals.RESOURCE__URI) {
+			if (isAutoSync() && msg.getFeature() == DatatypesPackage.Literals.RESOURCE__URI) {
 				syncScenarios();
 			}
 		}
@@ -116,8 +116,8 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 		@Override
 		public void notifyChanged(final Notification notification) {
 			super.notifyChanged(notification);
-			if (notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES
-					|| notification.getFeature() == DefinitionPackage.Literals.INPUT_VARIABLE__VALUES) {
+			if (isAutoSync() && (notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES
+					|| notification.getFeature() == DefinitionPackage.Literals.INPUT_VARIABLE__VALUES)) {
 				switch (notification.getEventType()) {
 					case Notification.ADD:
 					case Notification.REMOVE:
@@ -138,6 +138,14 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 	}
 
 	@Override
+	public String getIdentifier() {
+		if (identifier == null) {
+			identifier = UUID.randomUUID().toString();
+		}
+		return identifier;
+	}
+
+	@Override
 	public EList<SimulationInvocation> getInvocations() {
 		List<VariableConfiguration> configurations = new ArrayList<>();
 		configurations.addAll(getActiveConfigurations());
@@ -148,14 +156,14 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 			if (!configurations.contains(invocation.getVariableConfiguration())) {
 				it.remove();
 			} else {
-				// Else, the invocation points to an active configuration, and should no be re-added
+				// Else, the invocation points to an active configuration, and
+				// should no be re-added
 				configurations.remove(invocation.getVariableConfiguration());
 			}
 		}
 		// Create new invocations
 		for (VariableConfiguration configuration : configurations) {
 			SimulationInvocation invocation = InvocationFactory.eINSTANCE.createSimulationInvocation();
-			invocation.setIdentifier(this.getIdentifier() + "-" + UUID.randomUUID());
 			invocation.setVariableConfiguration(configuration);
 			super.getInvocations().add(invocation);
 		}
@@ -178,12 +186,14 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 
 	@Override
 	public EList<DomainMeasureDefinition> getDeclaredMeasures() {
-		return new DelegatingEcoreEList.UnmodifiableEList<DomainMeasureDefinition>(this, DefinitionPackage.Literals.SIMULATION_DEFINITION__DECLARED_MEASURES, super.getDeclaredMeasures());
+		return new DelegatingEcoreEList.UnmodifiableEList<DomainMeasureDefinition>(this, DefinitionPackage.Literals.SIMULATION_DEFINITION__DECLARED_MEASURES,
+				super.getDeclaredMeasures());
 	}
 
 	@Override
 	public EList<VariableConfiguration> getPossibleConfigurations() {
-		return new DelegatingEcoreEList.UnmodifiableEList<VariableConfiguration>(this, DefinitionPackage.Literals.SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS, super.getPossibleConfigurations());
+		return new DelegatingEcoreEList.UnmodifiableEList<VariableConfiguration>(this,
+				DefinitionPackage.Literals.SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS, super.getPossibleConfigurations());
 	}
 
 	@Override
@@ -228,7 +238,7 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 	public void setActiveScenario(EObject newActiveScenario) {
 		EObject oldActiveScenario = super.getActiveScenario();
 		super.setActiveScenario(newActiveScenario);
-		if (newActiveScenario == null || newActiveScenario != oldActiveScenario) {
+		if (isAutoSync() && (newActiveScenario == null || newActiveScenario != oldActiveScenario)) {
 			syncVariables();
 			syncDomainMeasureDefinitions();
 		}
@@ -236,6 +246,7 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 
 	@Override
 	public void syncScenarios() {
+		
 		// Keep old data to restore it if necessary
 		EObject oldActiveScenario = super.getActiveScenario();
 
@@ -310,12 +321,6 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 				// Delete variables the model no longer declares
 				oldInVarsMap.keySet().retainAll(inParsedVars.keySet());
 				oldOutVarsMap.keySet().retainAll(outParsedVars.keySet());
-//				for (String varName : CollectionUtils.subtract(oldInVarsMap.keySet(), inParsedVars.keySet())) {
-//					EcoreUtil.delete(oldInVarsMap.get(varName));
-//				}
-//				for (String varName : CollectionUtils.subtract(oldOutVarsMap.keySet(), outParsedVars.keySet())) {
-//					EcoreUtil.delete(oldOutVarsMap.get(varName));
-//				}
 				// Remove new vars that have been already configured
 				inParsedVars.keySet().removeAll(oldInVarsMap.keySet());
 				outParsedVars.keySet().removeAll(oldOutVarsMap.keySet());

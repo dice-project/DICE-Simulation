@@ -3,6 +3,12 @@ package es.unizar.disco.simulation.models.definition.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.ECollections;
+import org.eclipse.emf.common.util.EList;
+
+import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
+import es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment;
 import es.unizar.disco.simulation.models.definition.VariableAssignment;
 import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 
@@ -24,5 +30,16 @@ public class CustomVariableConfigurationImpl extends VariableConfigurationImpl i
 			return thisAssignments.entrySet().containsAll(otherAssignments.entrySet());
 		}
 	}
-	
+
+	@Override
+	public EList<PrimitiveVariableAssignment> toPrimitiveAssignments() {
+		EList<PrimitiveVariableAssignment> assignments = new BasicEList<>();
+		for (VariableAssignment assignment : getAssignments()) {
+			PrimitiveVariableAssignment primitiveAssignment = DatatypesFactory.eINSTANCE.createPrimitiveVariableAssignment();
+			primitiveAssignment.setVariable("$" + assignment.getVariable().getName());
+			primitiveAssignment.setValue(assignment.getValue().getValue());
+			assignments.add(primitiveAssignment);
+		}
+		return ECollections.unmodifiableEList(assignments);
+	}
 }

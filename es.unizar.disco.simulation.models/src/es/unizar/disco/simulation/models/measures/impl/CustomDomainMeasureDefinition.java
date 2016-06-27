@@ -55,10 +55,10 @@ public class CustomDomainMeasureDefinition extends DomainMeasureDefinitionImpl i
 	@Override
 	public OutputVariable basicGetOutputVariable() {
 		String vslExpression = getVslExpression();
-		if (Pattern.compile("\\$\\w*.\\$\\w*").matcher(vslExpression).matches()) {
+		if (Pattern.compile("\\$\\w+.\\$\\w+").matcher(vslExpression).matches()) {
 			throw new IllegalVslExpressionException(MessageFormat.format("VSL expression ''{0}'' contains more than one variable", vslExpression));
 		}
-		Pattern varPattern = Pattern.compile(".*\\$(\\w*).*");
+		Pattern varPattern = Pattern.compile(".*\\$(\\w+).*");
 		Matcher matcher = varPattern.matcher(vslExpression);
 		if (matcher.matches()) {
 			String var = matcher.group(1);

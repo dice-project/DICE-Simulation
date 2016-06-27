@@ -4,6 +4,7 @@ package es.unizar.disco.simulation.models.invocation;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -112,22 +113,13 @@ public interface InvocationPackage extends EPackage {
 	int SIMULATION_INVOCATION__RESULTS = 4;
 
 	/**
-	 * The feature id for the '<em><b>Analyzable Resource</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_INVOCATION__ANALYZABLE_RESOURCE = 5;
-
-	/**
 	 * The feature id for the '<em><b>Start</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__START = 6;
+	int SIMULATION_INVOCATION__START = 5;
 
 	/**
 	 * The feature id for the '<em><b>End</b></em>' attribute.
@@ -136,7 +128,7 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__END = 7;
+	int SIMULATION_INVOCATION__END = 6;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -145,16 +137,7 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__STATUS = 8;
-
-	/**
-	 * The feature id for the '<em><b>Domain Resource</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMULATION_INVOCATION__DOMAIN_RESOURCE = 9;
+	int SIMULATION_INVOCATION__STATUS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Variable Configuration</b></em>' reference.
@@ -163,7 +146,25 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__VARIABLE_CONFIGURATION = 10;
+	int SIMULATION_INVOCATION__VARIABLE_CONFIGURATION = 8;
+
+	/**
+	 * The feature id for the '<em><b>Analyzable Model</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__ANALYZABLE_MODEL = 9;
+
+	/**
+	 * The feature id for the '<em><b>Auto Build</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__AUTO_BUILD = 10;
 
 	/**
 	 * The number of structural features of the '<em>Simulation Invocation</em>' class.
@@ -175,13 +176,59 @@ public interface InvocationPackage extends EPackage {
 	int SIMULATION_INVOCATION_FEATURE_COUNT = 11;
 
 	/**
+	 * The operation id for the '<em>Build Analyzable Model</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION___BUILD_ANALYZABLE_MODEL = 0;
+
+	/**
 	 * The number of operations of the '<em>Simulation Invocation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION_OPERATION_COUNT = 0;
+	int SIMULATION_INVOCATION_OPERATION_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.invocation.impl.InvocationsRegistryImpl <em>Invocations Registry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationsRegistryImpl
+	 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl#getInvocationsRegistry()
+	 * @generated
+	 */
+	int INVOCATIONS_REGISTRY = 1;
+
+	/**
+	 * The feature id for the '<em><b>Invocations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATIONS_REGISTRY__INVOCATIONS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Invocations Registry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATIONS_REGISTRY_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Invocations Registry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATIONS_REGISTRY_OPERATION_COUNT = 0;
 
 
 	/**
@@ -250,17 +297,6 @@ public interface InvocationPackage extends EPackage {
 	EReference getSimulationInvocation_Results();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableResource <em>Analyzable Resource</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Analyzable Resource</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableResource()
-	 * @see #getSimulationInvocation()
-	 * @generated
-	 */
-	EReference getSimulationInvocation_AnalyzableResource();
-
-	/**
 	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStart <em>Start</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -294,17 +330,6 @@ public interface InvocationPackage extends EPackage {
 	EAttribute getSimulationInvocation_Status();
 
 	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDomainResource <em>Domain Resource</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Domain Resource</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDomainResource()
-	 * @see #getSimulationInvocation()
-	 * @generated
-	 */
-	EAttribute getSimulationInvocation_DomainResource();
-
-	/**
 	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableConfiguration <em>Variable Configuration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -314,6 +339,59 @@ public interface InvocationPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSimulationInvocation_VariableConfiguration();
+
+	/**
+	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableModel <em>Analyzable Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Analyzable Model</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableModel()
+	 * @see #getSimulationInvocation()
+	 * @generated
+	 */
+	EReference getSimulationInvocation_AnalyzableModel();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#isAutoBuild <em>Auto Build</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Auto Build</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#isAutoBuild()
+	 * @see #getSimulationInvocation()
+	 * @generated
+	 */
+	EAttribute getSimulationInvocation_AutoBuild();
+
+	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#buildAnalyzableModel() <em>Build Analyzable Model</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Build Analyzable Model</em>' operation.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#buildAnalyzableModel()
+	 * @generated
+	 */
+	EOperation getSimulationInvocation__BuildAnalyzableModel();
+
+	/**
+	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry <em>Invocations Registry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Invocations Registry</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationsRegistry
+	 * @generated
+	 */
+	EClass getInvocationsRegistry();
+
+	/**
+	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry#getInvocations <em>Invocations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Invocations</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationsRegistry#getInvocations()
+	 * @see #getInvocationsRegistry()
+	 * @generated
+	 */
+	EReference getInvocationsRegistry_Invocations();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -389,14 +467,6 @@ public interface InvocationPackage extends EPackage {
 		EReference SIMULATION_INVOCATION__RESULTS = eINSTANCE.getSimulationInvocation_Results();
 
 		/**
-		 * The meta object literal for the '<em><b>Analyzable Resource</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMULATION_INVOCATION__ANALYZABLE_RESOURCE = eINSTANCE.getSimulationInvocation_AnalyzableResource();
-
-		/**
 		 * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -421,20 +491,54 @@ public interface InvocationPackage extends EPackage {
 		EAttribute SIMULATION_INVOCATION__STATUS = eINSTANCE.getSimulationInvocation_Status();
 
 		/**
-		 * The meta object literal for the '<em><b>Domain Resource</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SIMULATION_INVOCATION__DOMAIN_RESOURCE = eINSTANCE.getSimulationInvocation_DomainResource();
-
-		/**
 		 * The meta object literal for the '<em><b>Variable Configuration</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference SIMULATION_INVOCATION__VARIABLE_CONFIGURATION = eINSTANCE.getSimulationInvocation_VariableConfiguration();
+
+		/**
+		 * The meta object literal for the '<em><b>Analyzable Model</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_INVOCATION__ANALYZABLE_MODEL = eINSTANCE.getSimulationInvocation_AnalyzableModel();
+
+		/**
+		 * The meta object literal for the '<em><b>Auto Build</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_INVOCATION__AUTO_BUILD = eINSTANCE.getSimulationInvocation_AutoBuild();
+
+		/**
+		 * The meta object literal for the '<em><b>Build Analyzable Model</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation SIMULATION_INVOCATION___BUILD_ANALYZABLE_MODEL = eINSTANCE.getSimulationInvocation__BuildAnalyzableModel();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.invocation.impl.InvocationsRegistryImpl <em>Invocations Registry</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationsRegistryImpl
+		 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl#getInvocationsRegistry()
+		 * @generated
+		 */
+		EClass INVOCATIONS_REGISTRY = eINSTANCE.getInvocationsRegistry();
+
+		/**
+		 * The meta object literal for the '<em><b>Invocations</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INVOCATIONS_REGISTRY__INVOCATIONS = eINSTANCE.getInvocationsRegistry_Invocations();
 
 	}
 

@@ -14,7 +14,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -36,12 +35,12 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getDomainResource <em>Domain Resource</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getMaxExecutionTime <em>Max Execution Time</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getOutputVariables <em>Output Variables</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getWorkingArea <em>Working Area</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getDeclaredMeasures <em>Declared Measures</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getMeasuresToCompute <em>Measures To Compute</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getBackend <em>Backend</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getPossibleConfigurations <em>Possible Configurations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveConfigurations <em>Active Configurations</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#isAutoSync <em>Auto Sync</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition()
@@ -60,7 +59,7 @@ public interface SimulationDefinition extends EObject {
 	 * @return the value of the '<em>Identifier</em>' attribute.
 	 * @see #setIdentifier(String)
 	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_Identifier()
-	 * @model id="true" required="true"
+	 * @model id="true" required="true" derived="true"
 	 * @generated
 	 */
 	String getIdentifier();
@@ -238,32 +237,6 @@ public interface SimulationDefinition extends EObject {
 	EList<OutputVariable> getOutputVariables();
 
 	/**
-	 * Returns the value of the '<em><b>Working Area</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Working Area</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Working Area</em>' attribute.
-	 * @see #setWorkingArea(URI)
-	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_WorkingArea()
-	 * @model dataType="es.unizar.disco.simulation.models.datatypes.URI"
-	 * @generated
-	 */
-	URI getWorkingArea();
-
-	/**
-	 * Sets the value of the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getWorkingArea <em>Working Area</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Working Area</em>' attribute.
-	 * @see #getWorkingArea()
-	 * @generated
-	 */
-	void setWorkingArea(URI value);
-
-	/**
 	 * Returns the value of the '<em><b>Declared Measures</b></em>' containment reference list.
 	 * The list contents are of type {@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition}.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSimulationDefinition <em>Simulation Definition</em>}'.
@@ -354,6 +327,33 @@ public interface SimulationDefinition extends EObject {
 	 * @generated
 	 */
 	EList<VariableConfiguration> getActiveConfigurations();
+
+	/**
+	 * Returns the value of the '<em><b>Auto Sync</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Auto Sync</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Auto Sync</em>' attribute.
+	 * @see #setAutoSync(boolean)
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_AutoSync()
+	 * @model default="false" required="true" transient="true"
+	 * @generated
+	 */
+	boolean isAutoSync();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#isAutoSync <em>Auto Sync</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Auto Sync</em>' attribute.
+	 * @see #isAutoSync()
+	 * @generated
+	 */
+	void setAutoSync(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

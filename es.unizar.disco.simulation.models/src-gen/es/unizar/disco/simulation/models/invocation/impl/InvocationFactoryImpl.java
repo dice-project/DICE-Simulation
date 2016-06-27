@@ -57,6 +57,7 @@ public class InvocationFactoryImpl extends EFactoryImpl implements InvocationFac
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case InvocationPackage.SIMULATION_INVOCATION: return createSimulationInvocation();
+			case InvocationPackage.INVOCATIONS_REGISTRY: return createInvocationsRegistry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -70,6 +71,16 @@ public class InvocationFactoryImpl extends EFactoryImpl implements InvocationFac
 	public SimulationInvocation createSimulationInvocation() {
 		SimulationInvocationImpl simulationInvocation = new SimulationInvocationImpl();
 		return simulationInvocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InvocationsRegistry createInvocationsRegistry() {
+		InvocationsRegistryImpl invocationsRegistry = new InvocationsRegistryImpl();
+		return invocationsRegistry;
 	}
 
 	/**

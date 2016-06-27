@@ -105,6 +105,52 @@ public interface DatatypesPackage extends EPackage {
 	int RESOURCE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.impl.PrimitiveVariableAssignmentImpl <em>Primitive Variable Assignment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.datatypes.impl.PrimitiveVariableAssignmentImpl
+	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getPrimitiveVariableAssignment()
+	 * @generated
+	 */
+	int PRIMITIVE_VARIABLE_ASSIGNMENT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_VARIABLE_ASSIGNMENT__VARIABLE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_VARIABLE_ASSIGNMENT__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Primitive Variable Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_VARIABLE_ASSIGNMENT_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Primitive Variable Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_VARIABLE_ASSIGNMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.Unit <em>Unit</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -112,7 +158,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 1;
+	int UNIT = 2;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.Measure <em>Measure</em>}' enum.
@@ -122,7 +168,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getMeasure()
 	 * @generated
 	 */
-	int MEASURE = 2;
+	int MEASURE = 3;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}' enum.
@@ -132,7 +178,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getSimulationStatus()
 	 * @generated
 	 */
-	int SIMULATION_STATUS = 3;
+	int SIMULATION_STATUS = 4;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -142,7 +188,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 4;
+	int URI = 5;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -152,7 +198,17 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 5;
+	int NUMBER = 6;
+
+	/**
+	 * The meta object id for the '<em>IStatus</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.core.runtime.IStatus
+	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getIStatus()
+	 * @generated
+	 */
+	int ISTATUS = 7;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -162,7 +218,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 6;
+	int COLLECTION = 8;
 
 
 	/**
@@ -196,6 +252,38 @@ public interface DatatypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getResource_Resource();
+
+	/**
+	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment <em>Primitive Variable Assignment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Primitive Variable Assignment</em>'.
+	 * @see es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment
+	 * @generated
+	 */
+	EClass getPrimitiveVariableAssignment();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Variable</em>'.
+	 * @see es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment#getVariable()
+	 * @see #getPrimitiveVariableAssignment()
+	 * @generated
+	 */
+	EAttribute getPrimitiveVariableAssignment_Variable();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment#getValue()
+	 * @see #getPrimitiveVariableAssignment()
+	 * @generated
+	 */
+	EAttribute getPrimitiveVariableAssignment_Value();
 
 	/**
 	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.Unit <em>Unit</em>}'.
@@ -249,6 +337,17 @@ public interface DatatypesPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getNumber();
+
+	/**
+	 * Returns the meta object for data type '{@link org.eclipse.core.runtime.IStatus <em>IStatus</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>IStatus</em>'.
+	 * @see org.eclipse.core.runtime.IStatus
+	 * @model instanceClass="org.eclipse.core.runtime.IStatus" serializeable="false"
+	 * @generated
+	 */
+	EDataType getIStatus();
 
 	/**
 	 * Returns the meta object for data type '{@link java.util.Collection <em>Collection</em>}'.
@@ -311,6 +410,32 @@ public interface DatatypesPackage extends EPackage {
 		EAttribute RESOURCE__RESOURCE = eINSTANCE.getResource_Resource();
 
 		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.impl.PrimitiveVariableAssignmentImpl <em>Primitive Variable Assignment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.datatypes.impl.PrimitiveVariableAssignmentImpl
+		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getPrimitiveVariableAssignment()
+		 * @generated
+		 */
+		EClass PRIMITIVE_VARIABLE_ASSIGNMENT = eINSTANCE.getPrimitiveVariableAssignment();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PRIMITIVE_VARIABLE_ASSIGNMENT__VARIABLE = eINSTANCE.getPrimitiveVariableAssignment_Variable();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PRIMITIVE_VARIABLE_ASSIGNMENT__VALUE = eINSTANCE.getPrimitiveVariableAssignment_Value();
+
+		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.Unit <em>Unit</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -359,6 +484,16 @@ public interface DatatypesPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType NUMBER = eINSTANCE.getNumber();
+
+		/**
+		 * The meta object literal for the '<em>IStatus</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.core.runtime.IStatus
+		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getIStatus()
+		 * @generated
+		 */
+		EDataType ISTATUS = eINSTANCE.getIStatus();
 
 		/**
 		 * The meta object literal for the '<em>Collection</em>' data type.

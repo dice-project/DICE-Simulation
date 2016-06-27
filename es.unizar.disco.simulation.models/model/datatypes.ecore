@@ -13,6 +13,8 @@
       <details key="conversionDelegates" value="http://es.unizar.disco/simulation/conversion/1.0"/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="IStatus" instanceClassName="org.eclipse.core.runtime.IStatus"
+      serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="Collection" instanceClassName="java.util.Collection">
     <eTypeParameters name="T"/>
   </eClassifiers>
@@ -56,12 +58,6 @@
     <eLiterals name="mg" value="91"/>
     <eLiterals name="kg" value="92"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Resource">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="#//URI"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resource" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResource"
-        changeable="false" transient="true" derived="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Measure">
     <eLiterals name="unspecified" literal="Unspecified"/>
     <eLiterals name="respT" value="1" literal="Response Time"/>
@@ -69,9 +65,22 @@
     <eLiterals name="utilization" value="3" literal="Utilization"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SimulationStatus">
-    <eLiterals name="unknown" literal="unknown"/>
-    <eLiterals name="running" value="1"/>
-    <eLiterals name="finished" value="2"/>
-    <eLiterals name="killed" value="3"/>
+    <eLiterals name="unknown" literal="Unknown"/>
+    <eLiterals name="running" value="1" literal="Running"/>
+    <eLiterals name="finished" value="2" literal="Finished"/>
+    <eLiterals name="killed" value="3" literal="Killed"/>
+    <eLiterals name="waiting" value="4" literal="Waiting"/>
+    <eLiterals name="failed" value="5" literal="Failed"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Resource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" lowerBound="1" eType="#//URI"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resource" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EResource"
+        changeable="false" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveVariableAssignment">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variable" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="#//Number"/>
   </eClassifiers>
 </ecore:EPackage>

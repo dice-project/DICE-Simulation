@@ -62,6 +62,7 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case DatatypesPackage.RESOURCE: return createResource();
+			case DatatypesPackage.PRIMITIVE_VARIABLE_ASSIGNMENT: return createPrimitiveVariableAssignment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -125,6 +126,16 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	public Resource createResource() {
 		ResourceImpl resource = new ResourceImpl();
 		return resource;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveVariableAssignment createPrimitiveVariableAssignment() {
+		PrimitiveVariableAssignmentImpl primitiveVariableAssignment = new PrimitiveVariableAssignmentImpl();
+		return primitiveVariableAssignment;
 	}
 
 	/**

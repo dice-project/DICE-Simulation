@@ -72,6 +72,10 @@ public class InvocationAdapterFactory extends AdapterFactoryImpl {
 				return createSimulationInvocationAdapter();
 			}
 			@Override
+			public Adapter caseInvocationsRegistry(InvocationsRegistry object) {
+				return createInvocationsRegistryAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -102,6 +106,20 @@ public class InvocationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSimulationInvocationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry <em>Invocations Registry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationsRegistry
+	 * @generated
+	 */
+	public Adapter createInvocationsRegistryAdapter() {
 		return null;
 	}
 

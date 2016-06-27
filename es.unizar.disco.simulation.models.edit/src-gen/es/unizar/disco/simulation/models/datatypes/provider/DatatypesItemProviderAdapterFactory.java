@@ -95,6 +95,29 @@ public class DatatypesItemProviderAdapterFactory extends DatatypesAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveVariableAssignmentItemProvider primitiveVariableAssignmentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPrimitiveVariableAssignmentAdapter() {
+		if (primitiveVariableAssignmentItemProvider == null) {
+			primitiveVariableAssignmentItemProvider = new PrimitiveVariableAssignmentItemProvider(this);
+		}
+
+		return primitiveVariableAssignmentItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -194,6 +217,7 @@ public class DatatypesItemProviderAdapterFactory extends DatatypesAdapterFactory
 	 */
 	public void dispose() {
 		if (resourceItemProvider != null) resourceItemProvider.dispose();
+		if (primitiveVariableAssignmentItemProvider != null) primitiveVariableAssignmentItemProvider.dispose();
 	}
 
 }

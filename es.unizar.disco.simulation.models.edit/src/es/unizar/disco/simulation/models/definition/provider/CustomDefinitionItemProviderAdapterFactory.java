@@ -31,4 +31,13 @@ public class CustomDefinitionItemProviderAdapterFactory extends DefinitionItemPr
 		
 		return variableConfigurationItemProvider;
 	}
+	
+	@Override
+	public Adapter createVariableAssignmentAdapter() {
+		if (variableAssignmentItemProvider == null) {
+			variableAssignmentItemProvider = new CustomVariableAssignmentItemProvider(this);
+		}
+		
+		return variableAssignmentItemProvider;
+	}
 }

@@ -3,8 +3,6 @@
 package es.unizar.disco.simulation.models.invocation.provider;
 
 
-import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
-
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 
@@ -19,7 +17,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -74,8 +71,9 @@ public class SimulationInvocationItemProvider
 			addStartPropertyDescriptor(object);
 			addEndPropertyDescriptor(object);
 			addStatusPropertyDescriptor(object);
-			addDomainResourcePropertyDescriptor(object);
 			addVariableConfigurationPropertyDescriptor(object);
+			addAnalyzableModelPropertyDescriptor(object);
+			addAutoBuildPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -257,28 +255,6 @@ public class SimulationInvocationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Domain Resource feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addDomainResourcePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationInvocation_domainResource_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_domainResource_feature", "_UI_SimulationInvocation_type"),
-				 InvocationPackage.Literals.SIMULATION_INVOCATION__DOMAIN_RESOURCE,
-				 false,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Variable Configuration feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -301,6 +277,50 @@ public class SimulationInvocationItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Analyzable Model feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAnalyzableModelPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationInvocation_analyzableModel_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_analyzableModel_feature", "_UI_SimulationInvocation_type"),
+				 InvocationPackage.Literals.SIMULATION_INVOCATION__ANALYZABLE_MODEL,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Auto Build feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAutoBuildPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationInvocation_autoBuild_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_autoBuild_feature", "_UI_SimulationInvocation_type"),
+				 InvocationPackage.Literals.SIMULATION_INVOCATION__AUTO_BUILD,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -312,7 +332,12 @@ public class SimulationInvocationItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__ANALYZABLE_RESOURCE);
+			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__TRACE_SET);
+			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__TOOL_RESULT);
+			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__DEFINITION);
+			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__RESULTS);
+			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION);
+			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__ANALYZABLE_MODEL);
 		}
 		return childrenFeatures;
 	}
@@ -372,11 +397,8 @@ public class SimulationInvocationItemProvider
 			case InvocationPackage.SIMULATION_INVOCATION__START:
 			case InvocationPackage.SIMULATION_INVOCATION__END:
 			case InvocationPackage.SIMULATION_INVOCATION__STATUS:
-			case InvocationPackage.SIMULATION_INVOCATION__DOMAIN_RESOURCE:
+			case InvocationPackage.SIMULATION_INVOCATION__AUTO_BUILD:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case InvocationPackage.SIMULATION_INVOCATION__ANALYZABLE_RESOURCE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -392,11 +414,6 @@ public class SimulationInvocationItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(InvocationPackage.Literals.SIMULATION_INVOCATION__ANALYZABLE_RESOURCE,
-				 DatatypesFactory.eINSTANCE.createResource()));
 	}
 
 	/**

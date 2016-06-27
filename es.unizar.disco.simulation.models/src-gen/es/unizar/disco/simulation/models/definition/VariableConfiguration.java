@@ -2,6 +2,8 @@
  */
 package es.unizar.disco.simulation.models.definition;
 
+import es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -48,5 +50,13 @@ public interface VariableConfiguration extends EObject {
 	 * @generated
 	 */
 	boolean isEquivalent(VariableConfiguration config);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	EList<PrimitiveVariableAssignment> toPrimitiveAssignments();
 
 } // VariableConfiguration

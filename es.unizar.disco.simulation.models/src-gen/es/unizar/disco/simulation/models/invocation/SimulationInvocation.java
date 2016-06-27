@@ -2,7 +2,6 @@
  */
 package es.unizar.disco.simulation.models.invocation;
 
-import es.unizar.disco.simulation.models.datatypes.Resource;
 import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
 
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
@@ -16,8 +15,8 @@ import es.unizar.disco.simulation.models.traces.TraceSet;
 
 import java.util.Date;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 
 import org.eclipse.emf.ecore.EObject;
 
@@ -35,12 +34,12 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getToolResult <em>Tool Result</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDefinition <em>Definition</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults <em>Results</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableResource <em>Analyzable Resource</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStart <em>Start</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getEnd <em>End</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStatus <em>Status</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDomainResource <em>Domain Resource</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableConfiguration <em>Variable Configuration</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableModel <em>Analyzable Model</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#isAutoBuild <em>Auto Build</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation()
@@ -59,7 +58,7 @@ public interface SimulationInvocation extends EObject {
 	 * @return the value of the '<em>Identifier</em>' attribute.
 	 * @see #setIdentifier(String)
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_Identifier()
-	 * @model id="true" required="true"
+	 * @model id="true" required="true" derived="true"
 	 * @generated
 	 */
 	String getIdentifier();
@@ -85,7 +84,7 @@ public interface SimulationInvocation extends EObject {
 	 * @return the value of the '<em>Trace Set</em>' reference.
 	 * @see #setTraceSet(TraceSet)
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_TraceSet()
-	 * @model
+	 * @model derived="true"
 	 * @generated
 	 */
 	TraceSet getTraceSet();
@@ -173,32 +172,6 @@ public interface SimulationInvocation extends EObject {
 	EList<SimulationResult> getResults();
 
 	/**
-	 * Returns the value of the '<em><b>Analyzable Resource</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Analyzable Resource</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Analyzable Resource</em>' containment reference.
-	 * @see #setAnalyzableResource(Resource)
-	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_AnalyzableResource()
-	 * @model containment="true" required="true" derived="true"
-	 * @generated
-	 */
-	Resource getAnalyzableResource();
-
-	/**
-	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableResource <em>Analyzable Resource</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Analyzable Resource</em>' containment reference.
-	 * @see #getAnalyzableResource()
-	 * @generated
-	 */
-	void setAnalyzableResource(Resource value);
-
-	/**
 	 * Returns the value of the '<em><b>Start</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -280,21 +253,6 @@ public interface SimulationInvocation extends EObject {
 	void setStatus(SimulationStatus value);
 
 	/**
-	 * Returns the value of the '<em><b>Domain Resource</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Domain Resource</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Domain Resource</em>' attribute.
-	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_DomainResource()
-	 * @model dataType="es.unizar.disco.simulation.models.datatypes.URI" required="true" transient="true" changeable="false" volatile="true" derived="true"
-	 * @generated
-	 */
-	URI getDomainResource();
-
-	/**
 	 * Returns the value of the '<em><b>Variable Configuration</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -319,5 +277,56 @@ public interface SimulationInvocation extends EObject {
 	 * @generated
 	 */
 	void setVariableConfiguration(VariableConfiguration value);
+
+	/**
+	 * Returns the value of the '<em><b>Analyzable Model</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Analyzable Model</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Analyzable Model</em>' reference list.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_AnalyzableModel()
+	 * @model derived="true"
+	 * @generated
+	 */
+	EList<EObject> getAnalyzableModel();
+
+	/**
+	 * Returns the value of the '<em><b>Auto Build</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Auto Build</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Auto Build</em>' attribute.
+	 * @see #setAutoBuild(boolean)
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_AutoBuild()
+	 * @model default="false" required="true" transient="true"
+	 * @generated
+	 */
+	boolean isAutoBuild();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#isAutoBuild <em>Auto Build</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Auto Build</em>' attribute.
+	 * @see #isAutoBuild()
+	 * @generated
+	 */
+	void setAutoBuild(boolean value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model dataType="es.unizar.disco.simulation.models.datatypes.IStatus"
+	 * @generated
+	 */
+	IStatus buildAnalyzableModel();
 
 } // SimulationInvocation
