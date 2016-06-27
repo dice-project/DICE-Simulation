@@ -396,12 +396,10 @@ public class FiltersLaunchConfigurationTab extends AbstractSimulationLaunchConfi
 		return true;
 	}
 	
-	private class DomainElementColumnLabelProvider extends ColumnLabelProvider {
+	private class DomainElementColumnLabelProvider extends DelegatedColumnLabelProvider {
 
-		private ILabelProvider labelProvider;
-		
 		public DomainElementColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
-			this.labelProvider = delegatedLabelProvider;
+			super(delegatedLabelProvider);
 		}
 
 		@Override
@@ -415,14 +413,12 @@ public class FiltersLaunchConfigurationTab extends AbstractSimulationLaunchConfi
 		}
 	}
 
-	private class OutputVariableColumnLabelProvider extends ColumnLabelProvider {
+	private class OutputVariableColumnLabelProvider extends DelegatedColumnLabelProvider {
 
 		private final OutputVariable OUTPUT_VARIABLE = DefinitionFactory.eINSTANCE.createOutputVariable();
 		
-		private ILabelProvider labelProvider;
-		
 		public OutputVariableColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
-			this.labelProvider = delegatedLabelProvider;
+			super(delegatedLabelProvider);
 		}
 
 		@Override

@@ -21,6 +21,6 @@ public abstract class AbstractSimulationLaunchConfigurationTab extends AbstractL
 	}
 
 	protected boolean isActive() {
-		return getControl().isVisible();
+		return getControl() != null && getControl().isVisible();
 	}
 }

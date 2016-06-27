@@ -163,6 +163,7 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 			context.bindValue(maxBatchEmfObservable, WidgetProperties.selection().observe(maxBatchLenSpinner), s2iStrategy, i2sStrategy);
 			context.bindValue(startEmfObservable, WidgetProperties.selection().observe(startTimeSpinner), s2iStrategy, i2sStrategy);
 
+			context.updateTargets();
 		}
 
 		setControl(topComposite);

@@ -192,5 +192,31 @@
             class="es.unizar.disco.simulation.ui.preferences.PreferenceInitializer">
       </initializer>
    </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="es.unizar.disco.simulation.ui.views"
+            name="DICE Simulation">
+      </category>
+      <view
+            allowMultiple="true"
+            category="es.unizar.disco.simulation.ui.views"
+            class="es.unizar.disco.simulation.ui.views.InvocationsView"
+            icon="icons/full/eview16/simulation_registry.png"
+            id="es.unizar.disco.simulation.ui.views.InvocationsView"
+            name="Invocations Registry">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="es.unizar.disco.simulation.ui.editors.RootedReadOnlyEcoreEditor"
+            contributorClass="es.unizar.disco.simulation.ui.editors.DummyActionBarContributor"
+            default="false"
+            icon="platform:/plugin/org.eclipse.emf.edit/icons/full/obj16/ModelFile.gif"
+            id="es.unizar.disco.simulation.ui.editors.readonlyEcoreEditor"
+            name="Rooted Read Only Ecore Editor">
+      </editor>
+   </extension>
 
 </plugin>

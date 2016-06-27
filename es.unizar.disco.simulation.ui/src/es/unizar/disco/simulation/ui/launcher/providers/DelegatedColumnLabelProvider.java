@@ -5,7 +5,8 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 public class DelegatedColumnLabelProvider extends ColumnLabelProvider {
-	private ILabelProvider labelProvider;
+	
+	protected ILabelProvider labelProvider;
 	
 	public DelegatedColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
 		this.labelProvider = delegatedLabelProvider;
