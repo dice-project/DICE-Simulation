@@ -8,11 +8,29 @@ modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
 
 library helpers;
 
-helper createName(name : String) : PNML::Name
-{
-	return object PNML::Name {
-		text := name
+/********************************************************
+  Utility intermediate classes for NFP Types
+********************************************************/
+
+helper String::key() : String {
+	assert fatal (self.indexOf("=") <> -1) with log ("Unexpected number of tokens in " + self);
+	return self.substringBefore("=")
+
+}
+
+helper String::value() : String {
+	assert fatal (self.indexOf("=") <> -1) with log ("Unexpected number of tokens in " + self);
+	return self.substringAfter("=")
+}
+
+helper String::getNfpValue(key : String) : String {
+	var entries := self.tokenize(",");
+	entries->forEach(entry) {
+		if (entry.key() = key) {
+			return entry.value();
+		}
 	};
+	return null;
 }
 
 helper UML::NamedElement::getPatternVsl() : String

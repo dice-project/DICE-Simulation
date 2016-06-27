@@ -7,8 +7,8 @@
             name="PnmlDiceUtils"
             namespace="es.unizar.disco.pnml.utils">
          <library
-               class="es.unizar.disco.pnml.m2m.utils.PnmlDatatypesUtil"
-               name="PnmlDatatypesUtil">
+               class="es.unizar.disco.pnml.m2m.utils.PnmlDatatypesUtils"
+               name="PnmlDatatypesUtils">
             <metamodel
                   nsURI="http:///ptnet.ecore">
             </metamodel>
@@ -20,25 +20,6 @@
             </metamodel>
             <metamodel
                   nsURI="http:///symmetricnet.hlcorestructure.ecore">
-            </metamodel>
-         </library>
-         <library
-               class="es.unizar.disco.pnml.m2m.utils.PnmlToolInfoUtils"
-               name="PnmlToolInfoUtils">
-            <metamodel
-                  nsURI="http:///ptnet.ecore">
-            </metamodel>
-            <metamodel
-                  nsURI="http:///pnmlcoremodel.ecore">
-            </metamodel>
-            <metamodel
-                  nsURI="http:///hlpn.hlcorestructure.ecore">
-            </metamodel>
-            <metamodel
-                  nsURI="http:///symmetricnet.hlcorestructure.ecore">
-            </metamodel>
-            <metamodel
-                  nsURI="http://es.unizar.disco/pnconstants/1.0">
             </metamodel>
          </library>
          <library
@@ -46,8 +27,11 @@
                name="IdentifierUtils">
          </library>
          <library
-               class="es.unizar.disco.pnml.m2m.utils.ErrorHandlingUtils"
-               name="ErrorHandlingUtils">
+               class="es.unizar.disco.pnml.m2m.utils.MathUtils"
+               name="MathUtils">
+            <metamodel
+                  nsURI="http://es.unizar.disco/simulation/datatypes/1.0">
+            </metamodel>
          </library>
       </unit>
    </extension>
@@ -56,14 +40,23 @@
       <Scenario
             stereotypeName="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
       </Scenario>
+      <Scenario
+            stereotypeName="DICE::DICE_UML_Extensions::DPIM::DpimScenario">
+      </Scenario>
    </extension>
    <extension
          point="es.unizar.disco.simulation.models.analyzable_resource_builder">
       <AnalyzableResourceBuilder
-            builder="es.unizar.disco.pnml.m2m.builder.PnmlResourceBuilder"
+            builder="es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Activity"
             priority="4"
             scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
+      </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            builder="es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Activity"
+            priority="4"
+            scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario">
       </AnalyzableResourceBuilder>
    </extension>
 </plugin>

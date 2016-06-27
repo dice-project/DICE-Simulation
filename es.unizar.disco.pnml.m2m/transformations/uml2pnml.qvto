@@ -2,24 +2,23 @@ import es.unizar.disco.pnml.utils.PnmlDiceUtils;
 import helpers;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
+modeltype TYPES uses 'http://es.unizar.disco/simulation/datatypes/1.0';
+modeltype TRACE uses 'http://es.unizar.disco/simulation/traces/1.0';
 modeltype PNML uses 'http:///ptnet.ecore';
-modeltype DEF uses 'http://es.unizar.disco/simulation/definition/1.0';
-modeltype INVOC uses 'http://es.unizar.disco/simulation/invocation/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
-modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 
 
-transformation uml2pnml(in invocation : INVOC, out res : PNML) 
+transformation uml2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces : TRACE) 
 access helpers;
 
 main() {
-	invocation.activeScenario() -> map model2net();
+	ad.scenario() -> map model2net();
 }
 
 mapping UML::NamedElement::model2net() : PNML::PetriNetDoc {
 	nets := object PNML::PetriNet {
 		id := 'net';
-		name := createName(self.name);
+		// name := createName(self.name);
 		pages := object PNML::Page {
 			id := 'page';
 		}
@@ -31,7 +30,7 @@ abstract mapping UML::NamedElement::namedElement2node(in id : String) : PNML::Pn
 	result.containerPage := getGlobalPage();
 	result.id := id;
 	if (result.oclIsKindOf(PNML::Node) and name.oclIsUndefined()) {
-		name := createName(id);
+		// name := createName(id);
 	};	
 } 
 
@@ -99,41 +98,7 @@ helper getGlobalPage() : PNML::Page
 	return resolveoneIn(UML::NamedElement::model2net, PNML::PetriNetDoc).nets.pages->asOrderedSet()->first();
 }
 
-helper INVOC::currentInvocation() : INVOC::SimulationInvocation {
-	return self.objectsOfType(INVOC::SimulationInvocation)->asSequence()->first();
+helper UML::scenario() : UML::Behavior {
+	return self.rootObjects()[UML::Behavior]->asOrderedSet()->first();
 }
 
-helper INVOC::activeScenario() : UML::Behavior {
-	return self.currentInvocation().definition.activeScenario.oclAsType(UML::Behavior);
-}
-/********************************************************
-  Utility intermediate classes for NFP Types
-********************************************************/
-
-helper String::key() : String {
-	if (self.indexOf("=") = -1) {
-		abort("Unexpected number of tokens in " + self);
-	} else {
-		return self.substringBefore("=")
-	};
-	return null;
-}
-
-helper String::value() : String {
-	if (self.indexOf("=") = -1) {
-		abort("Unexpected number of tokens in " + self);
-	} else {
-		return self.substringBefore("=")
-	};	
-	return null;
-}
-
-helper String::getNfpValue(key : String) : String {
-	var entries := self.tokenize(",");
-	entries->forEach(entry) {
-		if (entry.key() = key) {
-			return entry.value();
-		}
-	};
-	return null;
-}

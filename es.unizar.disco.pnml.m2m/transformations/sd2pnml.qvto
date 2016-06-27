@@ -3,12 +3,13 @@ import uml2pnml;
 import helpers;
 
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
+modeltype TYPES uses 'http://es.unizar.disco/simulation/datatypes/1.0';
+modeltype TRACE uses 'http://es.unizar.disco/simulation/traces/1.0';
 modeltype PNML uses 'http:///ptnet.ecore';
-modeltype INVOC uses 'http://es.unizar.disco/simulation/invocation/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
 	
 
-transformation sd2pnml(in invocation : INVOC, out res : PNML) 
+transformation sd2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces : TRACE) 
 extends uml2pnml();
 
 
@@ -19,11 +20,11 @@ main()
 	--   Ignore messages to-from the same lifeline
 	--   Implement CombinedFragments
 	--   Transform only elements hanging from the selected GaScenario in config model
-	new uml2pnml(invocation, res)->transform();
-	invocation.activeScenario().fragment -> map interactionFragment2subNet();
-	invocation.activeScenario().message->map message2subNet();
-	invocation.activeScenario().fragment->selectByKind(UML::ExecutionSpecification) -> map executionSpecification2lockSubNet();
-	invocation.activeScenario().lifeline -> map lifeline2subNet();
+	new uml2pnml(ad, vars, res, traces)->transform();
+	ad.scenario().fragment -> map interactionFragment2subNet();
+	ad.scenario().message->map message2subNet();
+	ad.scenario().fragment->selectByKind(UML::ExecutionSpecification) -> map executionSpecification2lockSubNet();
+	ad.scenario().lifeline -> map lifeline2subNet();
 }
 
 mapping UML::Lifeline::lifeline2subNet()
@@ -228,14 +229,6 @@ helper String::toMboxReceiveId() : String {
 	return 'mbox_recv_'.concat(self);
 }
 
-helper INVOC::currentInvocation() : INVOC::SimulationInvocation {
-	return self.objectsOfType(INVOC::SimulationInvocation)->asSequence()->first();
-}
-
-helper INVOC::varAssignments() : OrderedSet (INVOC::VariableAssignment) {
-	return self.currentInvocation().variableAssignments;
-}
-
-helper INVOC::activeScenario() : UML::Interaction {
-	return self.currentInvocation().definition.activeScenario.oclAsType(UML::Interaction);
+helper UML::scenario() : UML::Interaction {
+	return self.rootObjects()[UML::Interaction]->asOrderedSet()->first();
 }
