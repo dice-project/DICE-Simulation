@@ -5,7 +5,7 @@ Bundle-SymbolicName: es.unizar.disco.core
 Bundle-Version: 0.1.5.qualifier
 Bundle-Activator: es.unizar.disco.core.DiceCorePlugin
 Require-Bundle: org.eclipse.core.runtime
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: es.unizar.disco.core.collections,
  es.unizar.disco.core.logger

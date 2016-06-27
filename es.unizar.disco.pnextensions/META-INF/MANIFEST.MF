@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: es.unizar.disco.pnextensions.PnextensionsPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: es.unizar.disco.pnextensions,
  es.unizar.disco.pnextensions.pnconstants,
  es.unizar.disco.pnextensions.pnconstants.impl,

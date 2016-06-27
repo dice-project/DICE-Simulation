@@ -6,15 +6,18 @@ Bundle-Version: 0.1.5.qualifier
 Bundle-Activator: es.unizar.disco.simulation.DiceSimulationPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core,
+ org.eclipse.emf.edit;bundle-version="2.11.0",
  es.unizar.disco.core;bundle-version="0.1.5",
  es.unizar.disco.pnml.m2m;bundle-version="0.1.0",
  es.unizar.disco.pnml.m2t;bundle-version="0.1.0",
- es.unizar.disco.simulation.models;bundle-version="0.1.0",
+ es.unizar.disco.simulation.models;bundle-version="0.1.0";visibility:=reexport,
  org.apache.commons.lang;bundle-version="2.6.0",
- org.apache.commons.io;bundle-version="2.2.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+ org.apache.commons.io;bundle-version="2.2.0",
+ org.eclipse.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: DisCo - Unizar
 Export-Package: es.unizar.disco.simulation,
  es.unizar.disco.simulation.launcher,
+ es.unizar.disco.simulation.registry;x-friends:="es.unizar.disco.simulation.ui",
  es.unizar.disco.simulation.simulators

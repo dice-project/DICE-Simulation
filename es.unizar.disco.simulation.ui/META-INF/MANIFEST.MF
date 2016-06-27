@@ -10,6 +10,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.ide,
  org.eclipse.debug.ui,
  org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.editor,
  org.eclipse.emf.edit.ui,
  org.eclipse.uml2.uml,
  org.eclipse.core.expressions,
@@ -30,7 +31,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.papyrus.infra.services.resourceloading;bundle-version="1.1.0",
  es.unizar.disco.simulation.models.edit;bundle-version="0.1.0",
  org.apache.commons.lang;bundle-version="2.6.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: es.unizar.disco.simulation.ui,
  es.unizar.disco.simulation.ui.adapters,

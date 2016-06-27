@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: es.unizar.disco.simulation.models.datatypes.provider,
  es.unizar.disco.simulation.models.definition.provider,
  es.unizar.disco.simulation.models.invocation.provider,
