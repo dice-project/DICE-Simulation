@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import es.unizar.disco.core.collections.Function;
 import es.unizar.disco.core.collections.UnmodifiableTransformedMap;
-import es.unizar.disco.simulation.DiceSimulationPlugin;
 import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.InputVariable;
@@ -29,10 +28,6 @@ import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 
 public final class SimulationDefinitionConfigurationHandler {
-
-	public static final String SIMULATION_DEFINITION__IDENTIFIER = "SIMULATION_DEFINITION__IDENTIFIER"; //$NON-NLS-1$
-
-	public static final String SIMULATION_DEFINITION__WORKING_AREA = "SIMULATION_DEFINITION__WORKING_AREA"; //$NON-NLS-1$
 
 	public static final String SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI = "SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI"; //$NON-NLS-1$
 
@@ -214,31 +209,6 @@ public final class SimulationDefinitionConfigurationHandler {
 	public void saveMaxExecutionTime(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(SIMULATION_DEFINITION__MAX_EXECUTION_TIME,
 				EcoreUtil.convertToString(EcorePackage.Literals.EDATE, definition.getMaxExecutionTime()));
-	}
-
-	public void initializeIdentifier(ILaunchConfiguration configuration) throws CoreException {
-		String identifier = configuration.getAttribute(SIMULATION_DEFINITION__IDENTIFIER, (String) null);
-		if (!StringUtils.equals(identifier, definition.getIdentifier())) {
-			definition.setIdentifier(identifier);
-		}
-
-	}
-
-	public void saveIdentifier(ILaunchConfigurationWorkingCopy configuration) {
-		throw new UnsupportedOperationException("Identifier must not be changed");
-	}
-
-	public void initializeWorkingArea(ILaunchConfiguration configuration) throws CoreException {
-		String workingArea = configuration.getAttribute(SIMULATION_DEFINITION__WORKING_AREA,
-				URI.createFileURI(DiceSimulationPlugin.getDefault().getStateLocation().toString()).toString());
-		if (!URI.createURI(workingArea).equals(definition.getWorkingArea())) {
-			definition.setWorkingArea(URI.createURI(workingArea));
-		}
-
-	}
-
-	public void saveWorkingArea(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(SIMULATION_DEFINITION__WORKING_AREA, definition.getWorkingArea().toString());
 	}
 
 	public void initializeBackend(ILaunchConfiguration configuration, String defaultValue) throws CoreException {

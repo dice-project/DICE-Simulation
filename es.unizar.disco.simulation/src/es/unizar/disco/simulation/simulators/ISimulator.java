@@ -1,13 +1,20 @@
 package es.unizar.disco.simulation.simulators;
 
-import java.io.File;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
+
+import es.unizar.disco.simulation.models.toolresult.ToolResult;
+import es.unizar.disco.simulation.models.traces.TraceSet;
 
 public interface ISimulator {
 	
-	public String getId();
+	public Process simulate(String id, List<EObject> analyzableModel, TraceSet traces, Map<String, String> options, IProgressMonitor monitor) throws SimulationException;
 	
-	public Process simulate(String subject, File... inputFiles) throws SimulationException;
+	public ToolResult getToolResult();
 
 	public InputStream getRawResult();
 

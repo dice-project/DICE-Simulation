@@ -1,147 +1,121 @@
 package es.unizar.disco.simulation.launcher;
 
-import java.io.IOException;
-import java.util.Collections;
+import java.text.MessageFormat;
+import java.util.Calendar;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.debug.core.model.RuntimeProcess;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 import es.unizar.disco.simulation.DiceSimulationPlugin;
+import es.unizar.disco.simulation.backend.SimulatorsManager;
+import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
+import es.unizar.disco.simulation.registry.SimulationInvocationsRegistry;
+import es.unizar.disco.simulation.simulators.ISimulator;
+import es.unizar.disco.simulation.simulators.SimulationException;
 
 public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
-	
-	
+
 	@Override
-	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
-			throws CoreException {
-		if (monitor == null) {
-			monitor = new NullProgressMonitor();
+	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
+
+		// Create submonitor with unknown worked
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.SimulationLaunchConfigurationDelegate_simulatingTaskTilte, IProgressMonitor.UNKNOWN);
+
+		final SimulationDefinition definition = reifySimulationDefinition(configuration);
+
+		{
+			// Check that the analyzable model can be built without errors.
+			// The errors should be the same for all possible configuration,
+			// thus, we only test the first one
+			final IStatus status = definition.getInvocations().get(0).buildAnalyzableModel();
+			if (status.getSeverity() == IStatus.ERROR) {
+				throw new CoreException(status);
+			} else if (!status.isOK()) {
+				StatusManager.getManager().handle(status, StatusManager.LOG);
+			}
 		}
-		
-		try {
-			
-			final ResourceSet resourceSet = new ResourceSetImpl();
 
-			monitor.beginTask(Messages.SimulationLaunchConfigurationDelegate_simulatingTaskTilte, IProgressMonitor.UNKNOWN);
-			
-			final SimulationDefinition definition = reifySimulationDefinition(configuration);
-			
-			final URI workingArea = definition.getWorkingArea();
-			
-			Resource defResource = resourceSet.createResource(buildUri(workingArea, definition.getIdentifier()));
-			defResource.getContents().add(definition);
-			
-			for (SimulationInvocation invocation : definition.getInvocations()) {
-				Resource invResource = resourceSet.createResource(buildUri(workingArea, invocation.getIdentifier()));
-				invResource.getContents().add(invocation);
-				final Resource analyzableResource = invocation.getAnalyzableResource().getResource();
-			}
+		for (SimulationInvocation invocation : definition.getInvocations()) {
+			invocation.setAutoBuild(true);
+			invocation.setStatus(SimulationStatus.WAITING);
+			SimulationInvocationsRegistry.INSTANCE.register(invocation);
+		}
 
-			for (Resource resource : resourceSet.getResources()) {
-				resource.save(Collections.emptyMap());
+		// Set the remaining ticks
+		subMonitor.setWorkRemaining(definition.getInvocations().size());
+
+		MultiStatus status = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
+
+		for (int i = 0; i < definition.getInvocations().size(); i++) {
+
+			SimulationInvocation invocation = definition.getInvocations().get(i);
+
+			try {
+				final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
+
+				if (simulator == null) {
+					throw new SimulationException(
+							MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError, definition.getBackend()));
+				}
+
+				subMonitor.subTask(MessageFormat.format("Running Simulation {0} out of {1}", i + 1, definition.getInvocations().size()));
+
+				invocation.setStart(Calendar.getInstance().getTime());
+				invocation.setStatus(SimulationStatus.RUNNING);
+
+				// @formatter:off
+				Process simulationProcess = simulator.simulate(
+						invocation.getIdentifier(),
+						invocation.getAnalyzableModel(),
+						invocation.getTraceSet(),
+						definition.getParameters().map(),
+						subMonitor.newChild(1));
+				// @formatter:on
+
+				RuntimeProcess runtimeProcess = new RuntimeProcess(launch, simulationProcess,
+						MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, invocation.getIdentifier().toString()), null);
+				runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
+				runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, definition.getParameters().toString());
+
+				simulationProcess.waitFor();
+
+				invocation.setToolResult(simulator.getToolResult());
+				invocation.setStatus(SimulationStatus.FINISHED);
+
+			} catch (SimulationException | InterruptedException e) {
+				status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+			} finally {
+				if (invocation.getStatus() != SimulationStatus.FINISHED) {
+					invocation.setStatus(SimulationStatus.FAILED);
+				}
+				invocation.setEnd(Calendar.getInstance().getTime());
 			}
-			
-//			
-//			Map<String, String> simulationAttrs = new HashMap<>();
-//			simulationAttrs.put(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
-//			
-//			PetriNetConfig pnConfig = getPetriNetConfig(configuration);
-//	
-//			final boolean keepIntermediateFiles = configuration.getAttribute(KEEP_INTERMEDIATE_FILES, false);
-//			final File intermediateFilesDir = getIntermediateFilesDir(configuration);
-//	
-//			final File umlFile = getInputFile(configuration);
-//			final File configFile = Paths.get(intermediateFilesDir.toURI()).resolve("dump.pnconfig").toFile(); //$NON-NLS-1$
-//			final File pnmlFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.pnml.xmi").toFile(); //$NON-NLS-1$
-//			final File gspnNetFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.net").toFile(); //$NON-NLS-1$
-//			final File gspnDefFile = Paths.get(intermediateFilesDir.toURI()).resolve("net.gspn.def").toFile(); //$NON-NLS-1$
-//			final File resultFile = Paths.get(intermediateFilesDir.toURI()).resolve("result.txt").toFile(); //$NON-NLS-1$
-//
-//			try {
-//				try {
-//					dumpConfig(pnConfig, configFile, new SubProgressMonitor(monitor, 1));
-//					transformUmlToPnml(umlFile, pnConfig, pnmlFile, new SubProgressMonitor(monitor, 1));
-//					transformPnmlToGspn(pnmlFile, intermediateFilesDir, new SubProgressMonitor(monitor, 1));
-//				} finally {
-//					// Refresh workspace if intermediate files were stored in it
-//					if (keepIntermediateFiles) {
-//						for (IContainer container : ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(intermediateFilesDir.toURI())) {
-//							container.refreshLocal(IResource.DEPTH_ONE, new SubProgressMonitor(monitor, 1));
-//						}
-//					}
-//				}
-//				String id = simulationDefinition.getBackend();
-//				final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(id);
-//				if (simulator == null) {
-//					throw new SimulationException(MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError, id));
-//				}
-//				String netName = new Path(gspnNetFile.getName()).removeFileExtension().toString();
-//				
-//				// TODO: change this quick & dirty way to show the raw results
-//				final Process simulationProcess = simulator.simulate(netName, gspnNetFile, gspnDefFile);
-//				final RuntimeProcess runtimeProcess = new RuntimeProcess(launch, simulationProcess, getSimulationName(simulator.getId()), simulationAttrs);
-//				new Thread(new Runnable() {
-//					@Override
-//					public void run() {
-//						try {
-//							simulationProcess.waitFor();
-//							ByteArrayOutputStream out = new ByteArrayOutputStream();
-//							IOUtils.copy(simulator.getRawResult(), out);
-//							runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, "*** SIMULATION RAW RESULTS ***\n" + out.toString()); //$NON-NLS-1$
-//							
-//							try (FileWriter writer = new FileWriter(resultFile);) {
-//								writer.write(out.toString());
-//							} catch (IOException e) {
-//								DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
-//							}
-//						} catch (InterruptedException | IOException e) {
-//							DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
-//						} finally {
-//							// Refresh workspace if intermediate files were stored in it
-//							if (keepIntermediateFiles) {
-//								for (IContainer container : ResourcesPlugin.getWorkspace().getRoot().findContainersForLocationURI(intermediateFilesDir.toURI())) {
-//									try {
-//										container.refreshLocal(IResource.DEPTH_ONE, new NullProgressMonitor());
-//									} catch (CoreException e) {
-//										DiceLogger.logException(DiceSimulationPlugin.getDefault(), e);
-//									}
-//								}
-//							}
-//						}
-//					}
-//				}).start();
-//				
-//			} catch (IOException | SimulationException e) {
-//				throw new CoreException(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-//			}
-		} catch (IOException e) {
-			throw new CoreException(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-		} finally {
-			monitor.done();
+		}
+		if (!status.isOK()) {
+			throw new CoreException(status);
 		}
 	}
 
-
 	private SimulationDefinition reifySimulationDefinition(ILaunchConfiguration configuration) throws CoreException {
 		SimulationDefinition simulationDefinition = DefinitionFactory.eINSTANCE.createSimulationDefinition();
-		
+
+		simulationDefinition.setAutoSync(true);
+
 		SimulationDefinitionConfigurationHandler handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
 		handler.initializeResourceUri(configuration);
-		handler.initializeIdentifier(configuration);
 		handler.initializeInputVariables(configuration);
 		handler.initializeOutputVariables(configuration);
 		handler.initializeActiveScenario(configuration);
@@ -149,30 +123,10 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		handler.initializeActiveConfigurations(configuration);
 		handler.initializeParameters(configuration);
 		handler.initializeMaxExecutionTime(configuration);
-		handler.initializeWorkingArea(configuration);
 		handler.initializeBackend(configuration, DiceSimulationPlugin.getDefault().getDefaultSimulationBackend());
+
+		simulationDefinition.setAutoSync(false);
+
 		return simulationDefinition;
-	}
-
-//	private static void transformPnmlToGspn(File pnmlFile, File intermediateFilesDir, IProgressMonitor monitor) throws IOException {
-//		if (monitor == null) {
-//			monitor = new NullProgressMonitor();
-//		}
-//		try {
-//			monitor.beginTask(Messages.SimulationLaunchConfigurationDelegate_generatingGspnTaskTitle, 1);
-//			GenerateGspn gspnGenerator = new GenerateGspn(URI.createFileURI(pnmlFile.getAbsolutePath()), intermediateFilesDir, new ArrayList<EObject>());
-//			AcceleoPreferences.switchForceDeactivationNotifications(true);
-//			gspnGenerator.doGenerate(BasicMonitor.toMonitor(new SubProgressMonitor(monitor, 1)));
-//		} finally {
-//			monitor.done();
-//		}
-//	}
-//	
-//	private static String getSimulationName(String id) {
-//		return MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, id.toString());
-//	}
-
-	private static URI buildUri(URI workingArea, String identifier) {
-		return workingArea.appendSegment(identifier).appendFileExtension(XMIResource.XMI_NS);
 	}
 }

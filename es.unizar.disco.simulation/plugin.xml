@@ -15,6 +15,16 @@
    <extension
          point="es.unizar.disco.simulation.models.supported_metrics">
       <Metric
+            name="DICE::DICE_UML_Extensions::DPIM::DpimScenario#respT"
+            stereotype="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
+            tag="respT">
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DPIM::DpimScenario#throughput"
+            stereotype="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
+            tag="throughput">
+      </Metric>
+      <Metric
             name="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#respT"
             stereotype="MARTE::MARTE_AnalysisModel::GQAM::GaScenario"
             tag="respT">

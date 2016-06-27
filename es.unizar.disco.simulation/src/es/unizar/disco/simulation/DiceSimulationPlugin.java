@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 import es.unizar.disco.simulation.backend.SimulatorsManager;
+import es.unizar.disco.simulation.registry.SimulationInvocationsRegistry;
 
 public class DiceSimulationPlugin extends Plugin {
 
@@ -35,6 +36,7 @@ public class DiceSimulationPlugin extends Plugin {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
+		SimulationInvocationsRegistry.INSTANCE.save();
 		super.stop(context);
 		plugin = null;
 	}
