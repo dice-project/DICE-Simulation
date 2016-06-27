@@ -118,7 +118,12 @@ public class SshConnectionProviderPreferencePage extends PreferencePage implemen
 				// Port binding
 				context.bindValue(portSpinnerObservable, portObservable, 
 						null,
-						new UpdateValueStrategy().setConverter(StringToNumberConverter.toInteger(true)));
+						new UpdateValueStrategy() {
+							@Override
+							public Object convert(Object value) {
+								return value != null ? StringToNumberConverter.toInteger(true).convert(value) : 0; 
+							}
+						});
 			}
 			{
 				// UI Declaration
