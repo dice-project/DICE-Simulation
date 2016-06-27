@@ -2,7 +2,7 @@
 [module generateGspnNetFile('http:///ptnet.ecore','http://es.unizar.disco/pnconstants/1.0')]
 
 [template public generateGspnNetFile(petriNet : PetriNet) post (trim())]
-[file (petriNet.id.concat('.gspn.net'), false, 'Cp1252')]
+[file (petriNet.id.concat('.net'), false, 'Cp1252')]
 [comment NETFILE ::= COMMENT NOOBJS MARKS PLACES RATES GROUPS TRANS LAYERS /]
 [comm(petriNet)/]
 [noObjs(petriNet)/]
@@ -219,28 +219,31 @@ G1 0.0 0.0 1
 
 [query public getRate(trans : Transition) : Real = 
 	-- ToolInfo-related queries are executed via the global utility methods
-	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getTransitionRate(org.eclipse.emf.ecore.EObject)', Sequence{trans})
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getTransitionRate(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+[query public getProbability(trans : Transition) : Real = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getTransitionProbability(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
 /]
 
 [query public isExponential(trans : Transition) : Boolean =
 	-- ToolInfo-related queries are executed via the global utility methods
-	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isExponential(org.eclipse.emf.ecore.EObject)', Sequence{trans})
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isExponential(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
 /]
 
 [query public isImmediate(trans : Transition) : Boolean = 
 	-- ToolInfo-related queries are executed via the global utility methods
-	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isImmediate(org.eclipse.emf.ecore.EObject)', Sequence{trans})
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isImmediate(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
 /]
 
-[query public isOneServer(trans : Transition) : Boolean =
+[query public isOneServer(trans : Transition) : Boolean = 
 	-- ToolInfo-related queries are executed via the global utility methods
-	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isOneServer(org.eclipse.emf.ecore.EObject)', Sequence{trans})
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isOneServer(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
 /]
 
 [query public isInfiniteServer(trans : Transition) : Boolean = 
 	-- ToolInfo-related queries are executed via the global utility methods
-	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isInfiniteServer(org.eclipse.emf.ecore.EObject)', Sequence{trans})
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isInfiniteServer(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
 /]
-
-
 

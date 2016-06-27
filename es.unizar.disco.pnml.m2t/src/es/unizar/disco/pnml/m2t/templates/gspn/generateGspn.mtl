@@ -3,10 +3,8 @@
 [import es::unizar::disco::pnml::m2t::templates::gspn::generateGspnDefFile /]
 [import es::unizar::disco::pnml::m2t::templates::gspn::generateGspnNetFile /]
 
-[template public generateGspn(petriNetDoc : PetriNetDoc)]
+[template public generateGspn(petriNet : PetriNet)]
 [comment @main /]
-[for (petriNet : PetriNet | petriNetDoc.nets)]
-	[generateGspnDefFile(petriNet) /]
-	[generateGspnNetFile(petriNet) /]
-[/for]
+[generateGspnDefFile(petriNet) /]
+[generateGspnNetFile(petriNet) /]
 [/template]
