@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry exported="true" kind="lib" path="lib/jars/bcpkix-jdk15on-1.51.jar" sourcepath="lib/sources/bcpkix-jdk15on-1.51.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jars/bcprov-jdk15on-1.51.jar" sourcepath="lib/sources/bcprov-jdk15on-1.51.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jars/bcpkix-jdk15on-1.54.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jars/bcprov-jdk15on-1.54.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jars/ecc-25519-java-1.0.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jars/jzlib-1.1.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jars/slf4j-api-1.7.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jars/sshj-0.15.0.jar" sourcepath="lib/sources/sshj-0.15.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jars/sshj-0.16.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
