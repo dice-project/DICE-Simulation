@@ -4,130 +4,25 @@
    <description name="DICE Simulation Tools" url="http://dice-project.github.io/DICE-Simulation/updates">
       Simulation Tools for the DICE Project
    </description>
-   <feature url="features/es.unizar.disco.simulation.feature_0.1.0.201602101554.jar" id="es.unizar.disco.simulation.feature" version="0.1.0.201602101554">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.0.201602101554.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.0.201602101554">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.0.201602101554.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.0.201602101554">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.1.0.201602101554.jar" id="es.unizar.disco.ssh.feature" version="0.1.0.201602101554">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.0.201602101554.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.0.201602101554">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.feature_0.1.1.201602121824.jar" id="es.unizar.disco.simulation.feature" version="0.1.1.201602121824">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.1.201602121824.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.1.201602121824">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.1.1.201602121824.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.1.1.201602121824">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.1.201602121824.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.1.201602121824">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.1.1.201602121824.jar" id="es.unizar.disco.ssh.feature" version="0.1.1.201602121824">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.1.201602121824.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.1.201602121824">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.feature_0.1.2.201602161613.jar" id="es.unizar.disco.simulation.feature" version="0.1.2.201602161613">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.2.201602161613.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.2.201602161613">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.1.2.201602161613.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.1.2.201602161613">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.2.201602161613.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.2.201602161613">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.1.2.201602161613.jar" id="es.unizar.disco.ssh.feature" version="0.1.2.201602161613">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.2.201602161613.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.2.201602161613">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.feature_0.1.3.201602161651.jar" id="es.unizar.disco.simulation.feature" version="0.1.3.201602161651">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.3.201602161651.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.3.201602161651">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.1.3.201602161651.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.1.3.201602161651">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.3.201602161651.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.3.201602161651">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.1.3.201602161651.jar" id="es.unizar.disco.ssh.feature" version="0.1.3.201602161651">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.3.201602161651.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.3.201602161651">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/com.hierynomus.sshj.feature_0.15.0.jar" id="com.hierynomus.sshj.feature" version="0.15.0">
+   <feature url="features/com.hierynomus.sshj.feature_0.16.0.jar" id="com.hierynomus.sshj.feature" version="0.16.0">
       <category name="External Dependencies"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.feature_0.1.4.201602252035.jar" id="es.unizar.disco.simulation.feature" version="0.1.4.201602252035">
+   <feature url="features/es.unizar.disco.simulation.feature_0.2.0.201606301536.jar" id="es.unizar.disco.simulation.feature" version="0.2.0.201606301536">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.4.201602252035.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.4.201602252035">
+   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.2.0.201606301536.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.2.0.201606301536">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.1.4.201602252035.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.1.4.201602252035">
+   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.2.0.201606301536.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.2.0.201606301536">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.4.201602252035.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.4.201602252035">
+   <feature url="features/es.unizar.disco.simulation.ui.feature_0.2.0.201606301536.jar" id="es.unizar.disco.simulation.ui.feature" version="0.2.0.201606301536">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.1.4.201602252035.jar" id="es.unizar.disco.ssh.feature" version="0.1.4.201602252035">
+   <feature url="features/es.unizar.disco.ssh.feature_0.2.0.201606301536.jar" id="es.unizar.disco.ssh.feature" version="0.2.0.201606301536">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.4.201602252035.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.4.201602252035">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.feature_0.1.5.201602252115.jar" id="es.unizar.disco.simulation.feature" version="0.1.5.201602252115">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.5.201602252115.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.5.201602252115">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.1.5.201602252115.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.1.5.201602252115">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.5.201602252115.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.5.201602252115">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.1.5.201602252115.jar" id="es.unizar.disco.ssh.feature" version="0.1.5.201602252115">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.5.201602252115.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.5.201602252115">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.feature_0.1.6.201604081552.jar" id="es.unizar.disco.simulation.feature" version="0.1.6.201604081552">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.1.6.201604081552.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.1.6.201604081552">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.1.6.201604081552.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.1.6.201604081552">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.1.6.201604081552.jar" id="es.unizar.disco.simulation.ui.feature" version="0.1.6.201604081552">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.1.6.201604081552.jar" id="es.unizar.disco.ssh.feature" version="0.1.6.201604081552">
-      <category name="DICE Simulation"/>
-   </feature>
-   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.1.6.201604081552.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.1.6.201604081552">
+   <feature url="features/es.unizar.dsico.ssh.ui.feature_0.2.0.201606301536.jar" id="es.unizar.dsico.ssh.ui.feature" version="0.2.0.201606301536">
       <category name="DICE Simulation"/>
    </feature>
    <category-def name="DICE Simulation" label="DICE Simulation">
