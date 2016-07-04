@@ -1,6 +1,9 @@
 package es.unizar.disco.simulation.launcher;
 
 import java.text.MessageFormat;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 
 import org.eclipse.core.runtime.CoreException;
@@ -9,6 +12,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -90,15 +94,32 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
 				runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, definition.getParameters().toString());
 
+				Job killJob = new Job("Kill job") {
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						if (simulationProcess.isAlive()) {
+							invocation.setStatus(SimulationStatus.KILLED);
+							simulationProcess.destroyForcibly();
+						}
+						return Status.OK_STATUS;
+					}
+				};
+				
+				ZonedDateTime universalTime = OffsetDateTime.ofInstant(definition.getMaxExecutionTime().toInstant(), ZoneOffset.systemDefault()).atZoneSimilarLocal(ZoneOffset.UTC);
+				
+				killJob.schedule(universalTime.toInstant().toEpochMilli());
+				
 				simulationProcess.waitFor();
-
-				invocation.setToolResult(simulator.getToolResult());
-				invocation.setStatus(SimulationStatus.FINISHED);
-
+				if (simulationProcess.exitValue() == 0) {
+					invocation.setToolResult(simulator.getToolResult());
+					invocation.setStatus(SimulationStatus.FINISHED);
+				}
 			} catch (SimulationException | InterruptedException e) {
 				status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			} finally {
-				if (invocation.getStatus() != SimulationStatus.FINISHED) {
+				if (invocation.getStatus() == SimulationStatus.RUNNING
+						|| invocation.getStatus() == SimulationStatus.WAITING
+						|| invocation.getStatus() == SimulationStatus.UNKNOWN) {
 					invocation.setStatus(SimulationStatus.FAILED);
 				}
 				invocation.setEnd(Calendar.getInstance().getTime());
