@@ -86,7 +86,7 @@ mapping UML::InitialNode::model2closedNet() {
 	closingTransitions->forEach(transition) {
 		map arc(transition, place);
 		// Add tracing information
-		ad.scenario().map trace(transition);
+		ad.scenario().map trace(transition, "model2closedNet");
 	};
 	assert fatal (pattern.population_.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + pattern._rawExpression + "'");
 	place.initialMarking := object PNML::PTMarking {
@@ -120,7 +120,7 @@ mapping UML::InitialNode::model2openNet() {
 	assert warning (finalTransitions->size() = 1) with log ("More than one final transition found, this can be problematic to compute the throughput of the system");
 	finalTransitions->forEach(finalTransition) {
 		// Add tracing information
-		ad.scenario().map trace(finalTransition);
+		ad.scenario().map trace(finalTransition, "model2openNet");
 	};
 	
 }
@@ -201,7 +201,7 @@ when {
 	};
 	
 	// Add tracing information
-	self.represents.map trace(place);
+	self.represents.map trace(place, "partitions2resources");
 }
 
 mapping UML::ActivityNode::activityNode2subNet() disjuncts 
@@ -218,8 +218,8 @@ mapping UML::ActivityNode::basicActivityNode2subNet() {
 	var transition := self.map activityNode2transition();
 	var arc := map arc(place, transition);
 	// Add tracing information
-	self.map trace(place);
-	self.map trace(transition);
+	self.map trace(place, "basicActivityNode2place");
+	self.map trace(transition, "basicActivityNode2transition");
 }
 
 /**
@@ -458,6 +458,16 @@ mapping OclAny::trace(to : OclAny) : TRACE::Trace {
 		result := object TRACE::Trace {
 			fromDomainElement := self.eObject();
 			toAnalyzableElement := to.eObject();
+		}
+	}
+}
+
+mapping OclAny::trace(to : OclAny, text : String) : TRACE::Trace {
+	init {
+		result := object TRACE::Trace {
+			fromDomainElement := self.eObject();
+			toAnalyzableElement := to.eObject();
+			rule := text;
 		}
 	}
 }
