@@ -126,10 +126,14 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 
 			final Spinner maxBatchLenSpinner = createSpinner(group, 1, Short.MAX_VALUE, 2000);
 
-			final Label startTimeLabel = createLabel(group, "Tracing starting point");
-			startTimeLabel.setToolTipText("Starting time for debug output");
+			/*
+			 * The tracing starting point option is unsupported since it changes
+			 * the output of the WNSIM command 
+			 */
+//			final Label startTimeLabel = createLabel(group, "Tracing starting point");
+//			startTimeLabel.setToolTipText("Starting time for debug output");
 
-			final Spinner startTimeSpinner = createSpinner(group, 0, Short.MAX_VALUE, 0);
+//			final Spinner startTimeSpinner = createSpinner(group, 0, Short.MAX_VALUE, 0);
 
 			Highlighter.addHighlight(group, confidenceLabel, confidenceCombo);
 			Highlighter.addHighlight(group, accuracyLabel, accuracySpinner);
@@ -138,18 +142,18 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 			Highlighter.addHighlight(group, trLenLabel, trLenSpinner);
 			Highlighter.addHighlight(group, minBatchLenLabel, minBatchLenSpinner);
 			Highlighter.addHighlight(group, maxBatchLenLabel, maxBatchLenSpinner);
-			Highlighter.addHighlight(group, startTimeLabel, startTimeSpinner);
+//			Highlighter.addHighlight(group, startTimeLabel, startTimeSpinner);
 
 			IObservableMap observableMap = EMFProperties.map(DefinitionPackage.Literals.SIMULATION_DEFINITION__PARAMETERS).observe(simulationDefinition);
 
-			IObservableValue confLevelEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.CONF_LEVEL.getName());
-			IObservableValue accuracyEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.APPROX.getName());
-			IObservableValue seedEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.SEED.getName());
-			IObservableValue firstTrLenEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.FIRST_TR_LENGTH.getName());
-			IObservableValue trLenEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.TR_LENGTH.getName());
-			IObservableValue minBatchEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.MIN_BTC.getName());
-			IObservableValue maxBatchEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.MAX_BTC.getName());
-			IObservableValue startEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.START.getName());
+			IObservableValue confLevelEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.CONF_LEVEL.getLiteral());
+			IObservableValue accuracyEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.APPROX.getLiteral());
+			IObservableValue seedEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.SEED.getLiteral());
+			IObservableValue firstTrLenEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.FIRST_TR_LENGTH.getLiteral());
+			IObservableValue trLenEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.TR_LENGTH.getLiteral());
+			IObservableValue minBatchEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.MIN_BTC.getLiteral());
+			IObservableValue maxBatchEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.MAX_BTC.getLiteral());
+//			IObservableValue startEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.START.getLiteral());
 
 			StringToIntegerStrategy s2iStrategy = new StringToIntegerStrategy();
 			IntegerToStringStrategy i2sStrategy = new IntegerToStringStrategy();
@@ -161,7 +165,7 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 			context.bindValue(trLenEmfObservable, WidgetProperties.selection().observe(trLenSpinner), s2iStrategy, i2sStrategy);
 			context.bindValue(minBatchEmfObservable, WidgetProperties.selection().observe(minBatchLenSpinner), s2iStrategy, i2sStrategy);
 			context.bindValue(maxBatchEmfObservable, WidgetProperties.selection().observe(maxBatchLenSpinner), s2iStrategy, i2sStrategy);
-			context.bindValue(startEmfObservable, WidgetProperties.selection().observe(startTimeSpinner), s2iStrategy, i2sStrategy);
+//			context.bindValue(startEmfObservable, WidgetProperties.selection().observe(startTimeSpinner), s2iStrategy, i2sStrategy);
 
 			context.updateTargets();
 		}
