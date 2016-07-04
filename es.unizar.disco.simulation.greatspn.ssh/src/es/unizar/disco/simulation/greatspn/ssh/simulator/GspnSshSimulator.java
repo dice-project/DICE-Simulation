@@ -128,7 +128,7 @@ public class GspnSshSimulator implements ISimulator {
 			simulationSession = ssh.startSession();
 			StringBuilder builder = new StringBuilder("/usr/local/GreatSPN/bin/WNSIM %s/%s ");
 			for (Entry<String, String> option : options.entrySet()) {
-				builder.append(MessageFormat.format("-{0} {1}", option.getKey(), option.getValue()));
+				builder.append(MessageFormat.format("{0} {1} ", option.getKey(), option.getValue()));
 			}
 			simulationCommand = simulationSession.exec(String.format(builder.toString(), remoteWorkingDir, identifier)); //$NON-NLS-1$
 			simulationFinishedThread = addSimulationFinishedHook(simulationCommand);
