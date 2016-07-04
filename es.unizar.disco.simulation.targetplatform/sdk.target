@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="DICE Simulation Tools SDK Target Platform" sequenceNumber="30">
+<?pde version="3.8"?><target includeMode="feature" name="DICE Simulation Tools SDK Target Platform" sequenceNumber="31">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.papyrus.extra.marte.properties.feature.source.feature.group" version="1.2.0.201606080903"/>
@@ -41,7 +41,7 @@
 <repository location="http://download.eclipse.org/releases/neon"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.abstratt.eclipsegraphviz.feature.feature.group" version="2.1.201501.201606262232"/>
+<unit id="com.abstratt.eclipsegraphviz.feature.feature.group" version="2.2.201606.201606280026"/>
 <repository location="jar:http://repository-textuml.forge.cloudbees.com/snapshot/com/abstratt/mdd/com.abstratt.mdd.oss.repository/2.1/com.abstratt.mdd.oss.repository-2.1.zip!/"/>
 </location>
 </locations>
