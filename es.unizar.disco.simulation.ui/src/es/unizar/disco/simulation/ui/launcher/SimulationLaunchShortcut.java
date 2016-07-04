@@ -98,10 +98,33 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		
 		String name = model.getURI().trimFileExtension().lastSegment();
 		String casedName = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+		// Check that we do not overwrite a existing launch configuration
+		if (exists(casedName)) {
+			int i = 1;
+			String baseName = casedName;
+			do {
+				casedName = String.format("%s (%d)", baseName, i++);
+			} while (exists(casedName));
+		}
 		ILaunchConfigurationWorkingCopy launchConf = simLaunchConfigurationType.newInstance(null, casedName);
 		launchConf.setAttribute(SimulationDefinitionConfigurationHandler.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, platformResourceUri.toString());
 		ILaunchConfiguration result = launchConf.doSave();
 		
 		return result;
+	}
+	
+	private boolean exists(String name) throws CoreException {
+		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
+		
+		ILaunchConfigurationType simLaunchConfigurationType = launchManager.getLaunchConfigurationType(DiceSimulationPlugin.SIMULATION_LAUNCH_CONFIGURATION_TYPE);
+		
+		ILaunchConfiguration[] existingConfigs = launchManager.getLaunchConfigurations(simLaunchConfigurationType);
+		
+		for (ILaunchConfiguration previousConfiguration : existingConfigs) {
+			if (name.equals(previousConfiguration.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
