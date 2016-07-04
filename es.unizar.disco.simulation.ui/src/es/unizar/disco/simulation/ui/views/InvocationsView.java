@@ -259,7 +259,7 @@ public class InvocationsView extends ViewPart {
 
 		linkFolderAsProjectAction = new Action() {
 			public void run() {
-				InputDialog dialog = new InputDialog(getSite().getShell(), "Project name", "Name for the registry projects", null, new IInputValidator() {
+				InputDialog dialog = new InputDialog(getSite().getShell(), "Project name", "Name for the project", null, new IInputValidator() {
 					@Override
 					public String isValid(String newText) {
 						if (StringUtils.isBlank(newText)) {
