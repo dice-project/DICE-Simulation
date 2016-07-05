@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="measures" nsURI="http://es.unizar.disco/simulation/measures/1.0"
     nsPrefix="measures">
-  <eClassifiers xsi:type="ecore:EClass" name="DomainMeasure" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainMeasure">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Number"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" lowerBound="1" eType="ecore:EEnum datatypes.ecore#//Unit"/>

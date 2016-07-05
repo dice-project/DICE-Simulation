@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasure()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface DomainMeasure extends EObject {

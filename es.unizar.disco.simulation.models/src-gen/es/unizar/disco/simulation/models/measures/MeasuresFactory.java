@@ -22,6 +22,15 @@ public interface MeasuresFactory extends EFactory {
 	MeasuresFactory eINSTANCE = es.unizar.disco.simulation.models.measures.impl.MeasuresFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Domain Measure</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Domain Measure</em>'.
+	 * @generated
+	 */
+	DomainMeasure createDomainMeasure();
+
+	/**
 	 * Returns a new object of class '<em>Domain Measure Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

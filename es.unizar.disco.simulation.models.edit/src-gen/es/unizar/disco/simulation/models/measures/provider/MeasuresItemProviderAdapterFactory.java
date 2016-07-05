@@ -72,6 +72,29 @@ public class MeasuresItemProviderAdapterFactory extends MeasuresAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.measures.DomainMeasure} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DomainMeasureItemProvider domainMeasureItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link es.unizar.disco.simulation.models.measures.DomainMeasure}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDomainMeasureAdapter() {
+		if (domainMeasureItemProvider == null) {
+			domainMeasureItemProvider = new DomainMeasureItemProvider(this);
+		}
+
+		return domainMeasureItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -216,6 +239,7 @@ public class MeasuresItemProviderAdapterFactory extends MeasuresAdapterFactory i
 	 * @generated
 	 */
 	public void dispose() {
+		if (domainMeasureItemProvider != null) domainMeasureItemProvider.dispose();
 		if (domainMeasureDefinitionItemProvider != null) domainMeasureDefinitionItemProvider.dispose();
 		if (entryItemProvider != null) entryItemProvider.dispose();
 	}

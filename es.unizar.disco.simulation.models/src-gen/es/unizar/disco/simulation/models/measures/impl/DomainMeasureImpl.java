@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public abstract class DomainMeasureImpl extends MinimalEObjectImpl.Container implements DomainMeasure {
+public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements DomainMeasure {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->

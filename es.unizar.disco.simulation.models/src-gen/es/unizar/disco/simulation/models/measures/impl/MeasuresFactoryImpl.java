@@ -58,11 +58,22 @@ public class MeasuresFactoryImpl extends EFactoryImpl implements MeasuresFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case MeasuresPackage.DOMAIN_MEASURE: return createDomainMeasure();
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION: return createDomainMeasureDefinition();
 			case MeasuresPackage.ENTRY: return (EObject)createEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DomainMeasure createDomainMeasure() {
+		DomainMeasureImpl domainMeasure = new DomainMeasureImpl();
+		return domainMeasure;
 	}
 
 	/**
