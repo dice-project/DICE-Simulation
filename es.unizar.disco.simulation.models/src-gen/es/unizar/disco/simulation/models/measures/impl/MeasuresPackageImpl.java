@@ -233,7 +233,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getMeasureConverter__Convert() {
+	public EOperation getMeasureConverter__Convert__AnalyzableElementInfo() {
 		return measureConverterEClass.getEOperations().get(0);
 	}
 
@@ -363,7 +363,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		measureConverterEClass = createEClass(MEASURE_CONVERTER);
 		createEReference(measureConverterEClass, MEASURE_CONVERTER__TO);
 		createEReference(measureConverterEClass, MEASURE_CONVERTER__FROM);
-		createEOperation(measureConverterEClass, MEASURE_CONVERTER___CONVERT);
+		createEOperation(measureConverterEClass, MEASURE_CONVERTER___CONVERT__ANALYZABLEELEMENTINFO);
 
 		domainMeasureDefinitionEClass = createEClass(DOMAIN_MEASURE_DEFINITION);
 		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__MEASURED_ELEMENT);
@@ -418,11 +418,12 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		initEAttribute(getDomainMeasure_Unit(), theDatatypesPackage.getUnit(), "unit", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainMeasure_Definition(), this.getDomainMeasureDefinition(), null, "definition", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(measureConverterEClass, MeasureConverter.class, "MeasureConverter", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMeasureConverter_To(), this.getDomainMeasure(), null, "to", null, 1, 1, MeasureConverter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMeasureConverter_From(), theToolresultPackage.getAnalyzableElementInfo(), null, "from", null, 1, 1, MeasureConverter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(measureConverterEClass, MeasureConverter.class, "MeasureConverter", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMeasureConverter_To(), this.getDomainMeasure(), null, "to", null, 1, 1, MeasureConverter.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getMeasureConverter_From(), theToolresultPackage.getAnalyzableElementInfo(), null, "from", null, 1, 1, MeasureConverter.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getMeasureConverter__Convert(), null, "convert", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getMeasureConverter__Convert__AnalyzableElementInfo(), this.getDomainMeasure(), "convert", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theToolresultPackage.getAnalyzableElementInfo(), "info", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(domainMeasureDefinitionEClass, DomainMeasureDefinition.class, "DomainMeasureDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainMeasureDefinition_MeasuredElement(), ecorePackage.getEObject(), null, "measuredElement", null, 1, 1, DomainMeasureDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

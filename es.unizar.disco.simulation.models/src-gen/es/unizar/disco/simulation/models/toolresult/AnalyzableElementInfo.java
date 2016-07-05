@@ -5,6 +5,7 @@ package es.unizar.disco.simulation.models.toolresult;
 import es.unizar.disco.simulation.models.datatypes.Unit;
 
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**

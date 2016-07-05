@@ -63,11 +63,31 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="tag" type="string" use="required">
+         <attribute name="tag" use="required">
             <annotation>
                <documentation>
                   Name of a tag expressing a NFP
                </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="respT">
+                  </enumeration>
+                  <enumeration value="throughput">
+                  </enumeration>
+                  <enumeration value="utilization">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+         <attribute name="converter" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.measures.MeasureConverter"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>

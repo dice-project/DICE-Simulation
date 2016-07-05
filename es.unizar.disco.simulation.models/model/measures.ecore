@@ -9,10 +9,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="#//DomainMeasureDefinition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MeasureConverter" abstract="true" interface="true">
-    <eOperations name="convert"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DomainMeasure"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="ecore:EClass toolresult.ecore#//AnalyzableElementInfo"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MeasureConverter" instanceClassName="es.unizar.disco.simulation.models.measures.MeasureConverter"
+      abstract="true" interface="true">
+    <eOperations name="convert" eType="#//DomainMeasure">
+      <eParameters name="info" eType="ecore:EClass toolresult.ecore#//AnalyzableElementInfo"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DomainMeasure"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="ecore:EClass toolresult.ecore#//AnalyzableElementInfo"
+        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainMeasureDefinition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="measuredElement" lowerBound="1"

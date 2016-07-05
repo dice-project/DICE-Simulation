@@ -156,7 +156,7 @@ public interface MeasuresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEASURE_CONVERTER___CONVERT = 0;
+	int MEASURE_CONVERTER___CONVERT__ANALYZABLEELEMENTINFO = 0;
 
 	/**
 	 * The number of operations of the '<em>Measure Converter</em>' class.
@@ -345,6 +345,7 @@ public interface MeasuresPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Measure Converter</em>'.
 	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter
+	 * @model instanceClass="es.unizar.disco.simulation.models.measures.MeasureConverter"
 	 * @generated
 	 */
 	EClass getMeasureConverter();
@@ -372,14 +373,14 @@ public interface MeasuresPackage extends EPackage {
 	EReference getMeasureConverter_From();
 
 	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter#convert() <em>Convert</em>}' operation.
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter#convert(es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo) <em>Convert</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the '<em>Convert</em>' operation.
-	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter#convert()
+	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter#convert(es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo)
 	 * @generated
 	 */
-	EOperation getMeasureConverter__Convert();
+	EOperation getMeasureConverter__Convert__AnalyzableElementInfo();
 
 	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition <em>Domain Measure Definition</em>}'.
@@ -580,7 +581,7 @@ public interface MeasuresPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation MEASURE_CONVERTER___CONVERT = eINSTANCE.getMeasureConverter__Convert();
+		EOperation MEASURE_CONVERTER___CONVERT__ANALYZABLEELEMENTINFO = eINSTANCE.getMeasureConverter__Convert__AnalyzableElementInfo();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl <em>Domain Measure Definition</em>}' class.
