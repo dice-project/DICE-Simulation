@@ -41,6 +41,7 @@ import es.unizar.disco.simulation.models.wnsim.impl.WnsimPackageImpl;
 import java.util.Collection;
 
 import org.eclipse.core.runtime.IStatus;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;

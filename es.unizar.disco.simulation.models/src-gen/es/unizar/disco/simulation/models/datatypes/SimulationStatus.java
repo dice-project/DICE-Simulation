@@ -56,7 +56,9 @@ public enum SimulationStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	KILLED(3, "killed", "Killed"), /**
+	KILLED(3, "killed", "Killed"),
+
+	/**
 	 * The '<em><b>Waiting</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,7 +66,9 @@ public enum SimulationStatus implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	WAITING(4, "waiting", "Waiting"), /**
+	WAITING(4, "waiting", "Waiting"),
+
+	/**
 	 * The '<em><b>Failed</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

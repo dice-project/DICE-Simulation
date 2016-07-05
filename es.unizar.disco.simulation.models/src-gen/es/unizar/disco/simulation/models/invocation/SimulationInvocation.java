@@ -16,6 +16,7 @@ import es.unizar.disco.simulation.models.traces.TraceSet;
 import java.util.Date;
 
 import org.eclipse.core.runtime.IStatus;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;

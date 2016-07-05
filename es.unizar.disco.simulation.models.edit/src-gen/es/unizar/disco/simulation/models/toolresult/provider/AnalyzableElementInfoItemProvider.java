@@ -65,6 +65,7 @@ public class AnalyzableElementInfoItemProvider
 			addValuePropertyDescriptor(object);
 			addAnalyzedElementPropertyDescriptor(object);
 			addUnitPropertyDescriptor(object);
+			addConfidenceIntervalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -136,6 +137,28 @@ public class AnalyzableElementInfoItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Confidence Interval feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addConfidenceIntervalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AnalyzableElementInfo_confidenceInterval_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AnalyzableElementInfo_confidenceInterval_feature", "_UI_AnalyzableElementInfo_type"),
+				 ToolresultPackage.Literals.ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,6 +188,7 @@ public class AnalyzableElementInfoItemProvider
 		switch (notification.getFeatureID(AnalyzableElementInfo.class)) {
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__VALUE:
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__UNIT:
+			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

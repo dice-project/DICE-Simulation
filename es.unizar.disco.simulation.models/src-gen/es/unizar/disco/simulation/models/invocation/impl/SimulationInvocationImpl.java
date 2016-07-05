@@ -19,10 +19,12 @@ import es.unizar.disco.simulation.models.toolresult.ToolResult;
 import es.unizar.disco.simulation.models.traces.TraceSet;
 
 import java.lang.reflect.InvocationTargetException;
+
 import java.util.Collection;
 import java.util.Date;
 
 import org.eclipse.core.runtime.IStatus;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 

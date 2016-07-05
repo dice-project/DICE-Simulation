@@ -204,7 +204,7 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPlaceInfo_Throughput() {
+	public EAttribute getPlaceInfo_MeanNumberOfTokens() {
 		return (EAttribute)placeInfoEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -231,7 +231,7 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTransitionInfo_MeanNumberOfTokens() {
+	public EAttribute getTransitionInfo_Throughput() {
 		return (EAttribute)transitionInfoEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -286,11 +286,11 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 		wnsimElementInfoEClass = createEClass(WNSIM_ELEMENT_INFO);
 
 		placeInfoEClass = createEClass(PLACE_INFO);
-		createEAttribute(placeInfoEClass, PLACE_INFO__THROUGHPUT);
+		createEAttribute(placeInfoEClass, PLACE_INFO__MEAN_NUMBER_OF_TOKENS);
 		createEOperation(placeInfoEClass, PLACE_INFO___GET_VALUE);
 
 		transitionInfoEClass = createEClass(TRANSITION_INFO);
-		createEAttribute(transitionInfoEClass, TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS);
+		createEAttribute(transitionInfoEClass, TRANSITION_INFO__THROUGHPUT);
 		createEOperation(transitionInfoEClass, TRANSITION_INFO___GET_VALUE);
 
 		// Create enums
@@ -340,12 +340,12 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 		initEClass(wnsimElementInfoEClass, WnsimElementInfo.class, "WnsimElementInfo", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(placeInfoEClass, PlaceInfo.class, "PlaceInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPlaceInfo_Throughput(), theDatatypesPackage.getNumber(), "throughput", null, 0, 1, PlaceInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPlaceInfo_MeanNumberOfTokens(), theDatatypesPackage.getNumber(), "meanNumberOfTokens", null, 0, 1, PlaceInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getPlaceInfo__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(transitionInfoEClass, TransitionInfo.class, "TransitionInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTransitionInfo_MeanNumberOfTokens(), theDatatypesPackage.getNumber(), "meanNumberOfTokens", null, 0, 1, TransitionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTransitionInfo_Throughput(), theDatatypesPackage.getNumber(), "throughput", null, 0, 1, TransitionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getTransitionInfo__GetValue(), theDatatypesPackage.getNumber(), "getValue", 0, 1, IS_UNIQUE, IS_ORDERED);
 

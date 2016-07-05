@@ -4,6 +4,7 @@ package es.unizar.disco.simulation.models.toolresult;
 
 import es.unizar.disco.simulation.models.datatypes.Unit;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo#getValue <em>Value</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo#getAnalyzedElement <em>Analyzed Element</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo#getUnit <em>Unit</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo#getConfidenceInterval <em>Confidence Interval</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.toolresult.ToolresultPackage#getAnalyzableElementInfo()
@@ -94,5 +96,21 @@ public interface AnalyzableElementInfo extends EObject {
 	 * @generated
 	 */
 	void setUnit(Unit value);
+
+	/**
+	 * Returns the value of the '<em><b>Confidence Interval</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.Number}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Confidence Interval</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Confidence Interval</em>' attribute list.
+	 * @see es.unizar.disco.simulation.models.toolresult.ToolresultPackage#getAnalyzableElementInfo_ConfidenceInterval()
+	 * @model dataType="es.unizar.disco.simulation.models.datatypes.Number" lower="2" upper="2"
+	 * @generated
+	 */
+	EList<Number> getConfidenceInterval();
 
 } // AnalyzableElementInfo

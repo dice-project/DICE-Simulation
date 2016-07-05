@@ -45,25 +45,25 @@ public class PlaceInfoItemProvider extends WnsimElementInfoItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addThroughputPropertyDescriptor(object);
+			addMeanNumberOfTokensPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Throughput feature.
+	 * This adds a property descriptor for the Mean Number Of Tokens feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addThroughputPropertyDescriptor(Object object) {
+	protected void addMeanNumberOfTokensPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_PlaceInfo_throughput_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_PlaceInfo_throughput_feature", "_UI_PlaceInfo_type"),
-				 WnsimPackage.Literals.PLACE_INFO__THROUGHPUT,
+				 getString("_UI_PlaceInfo_meanNumberOfTokens_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_PlaceInfo_meanNumberOfTokens_feature", "_UI_PlaceInfo_type"),
+				 WnsimPackage.Literals.PLACE_INFO__MEAN_NUMBER_OF_TOKENS,
 				 true,
 				 false,
 				 false,
@@ -111,7 +111,7 @@ public class PlaceInfoItemProvider extends WnsimElementInfoItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(PlaceInfo.class)) {
-			case WnsimPackage.PLACE_INFO__THROUGHPUT:
+			case WnsimPackage.PLACE_INFO__MEAN_NUMBER_OF_TOKENS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

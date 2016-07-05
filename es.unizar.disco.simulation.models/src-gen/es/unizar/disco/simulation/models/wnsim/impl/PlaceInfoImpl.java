@@ -23,31 +23,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link es.unizar.disco.simulation.models.wnsim.impl.PlaceInfoImpl#getThroughput <em>Throughput</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.wnsim.impl.PlaceInfoImpl#getMeanNumberOfTokens <em>Mean Number Of Tokens</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	/**
-	 * The default value of the '{@link #getThroughput() <em>Throughput</em>}' attribute.
+	 * The default value of the '{@link #getMeanNumberOfTokens() <em>Mean Number Of Tokens</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getThroughput()
+	 * @see #getMeanNumberOfTokens()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Number THROUGHPUT_EDEFAULT = null;
+	protected static final Number MEAN_NUMBER_OF_TOKENS_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getThroughput() <em>Throughput</em>}' attribute.
+	 * The cached value of the '{@link #getMeanNumberOfTokens() <em>Mean Number Of Tokens</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getThroughput()
+	 * @see #getMeanNumberOfTokens()
 	 * @generated
 	 * @ordered
 	 */
-	protected Number throughput = THROUGHPUT_EDEFAULT;
+	protected Number meanNumberOfTokens = MEAN_NUMBER_OF_TOKENS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,8 +73,8 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Number getThroughput() {
-		return throughput;
+	public Number getMeanNumberOfTokens() {
+		return meanNumberOfTokens;
 	}
 
 	/**
@@ -82,11 +82,11 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setThroughput(Number newThroughput) {
-		Number oldThroughput = throughput;
-		throughput = newThroughput;
+	public void setMeanNumberOfTokens(Number newMeanNumberOfTokens) {
+		Number oldMeanNumberOfTokens = meanNumberOfTokens;
+		meanNumberOfTokens = newMeanNumberOfTokens;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WnsimPackage.PLACE_INFO__THROUGHPUT, oldThroughput, throughput));
+			eNotify(new ENotificationImpl(this, Notification.SET, WnsimPackage.PLACE_INFO__MEAN_NUMBER_OF_TOKENS, oldMeanNumberOfTokens, meanNumberOfTokens));
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	 * @generated
 	 */
 	public Number getValue() {
-		return throughput;
+		return meanNumberOfTokens;
 	}
 
 	/**
@@ -106,8 +106,8 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WnsimPackage.PLACE_INFO__THROUGHPUT:
-				return getThroughput();
+			case WnsimPackage.PLACE_INFO__MEAN_NUMBER_OF_TOKENS:
+				return getMeanNumberOfTokens();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,8 +120,8 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WnsimPackage.PLACE_INFO__THROUGHPUT:
-				setThroughput((Number)newValue);
+			case WnsimPackage.PLACE_INFO__MEAN_NUMBER_OF_TOKENS:
+				setMeanNumberOfTokens((Number)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +135,8 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WnsimPackage.PLACE_INFO__THROUGHPUT:
-				setThroughput(THROUGHPUT_EDEFAULT);
+			case WnsimPackage.PLACE_INFO__MEAN_NUMBER_OF_TOKENS:
+				setMeanNumberOfTokens(MEAN_NUMBER_OF_TOKENS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,8 +150,8 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WnsimPackage.PLACE_INFO__THROUGHPUT:
-				return THROUGHPUT_EDEFAULT == null ? throughput != null : !THROUGHPUT_EDEFAULT.equals(throughput);
+			case WnsimPackage.PLACE_INFO__MEAN_NUMBER_OF_TOKENS:
+				return MEAN_NUMBER_OF_TOKENS_EDEFAULT == null ? meanNumberOfTokens != null : !MEAN_NUMBER_OF_TOKENS_EDEFAULT.equals(meanNumberOfTokens);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -180,8 +180,8 @@ public class PlaceInfoImpl extends WnsimElementInfoImpl implements PlaceInfo {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (throughput: ");
-		result.append(throughput);
+		result.append(" (meanNumberOfTokens: ");
+		result.append(meanNumberOfTokens);
 		result.append(')');
 		return result.toString();
 	}

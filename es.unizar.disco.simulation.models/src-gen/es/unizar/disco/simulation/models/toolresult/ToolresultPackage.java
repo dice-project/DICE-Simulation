@@ -140,13 +140,22 @@ public interface ToolresultPackage extends EPackage {
 	int ANALYZABLE_ELEMENT_INFO__UNIT = 2;
 
 	/**
+	 * The feature id for the '<em><b>Confidence Interval</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL = 3;
+
+	/**
 	 * The number of structural features of the '<em>Analyzable Element Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANALYZABLE_ELEMENT_INFO_FEATURE_COUNT = 3;
+	int ANALYZABLE_ELEMENT_INFO_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Analyzable Element Info</em>' class.
@@ -234,6 +243,17 @@ public interface ToolresultPackage extends EPackage {
 	EAttribute getAnalyzableElementInfo_Unit();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo#getConfidenceInterval <em>Confidence Interval</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Confidence Interval</em>'.
+	 * @see es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo#getConfidenceInterval()
+	 * @see #getAnalyzableElementInfo()
+	 * @generated
+	 */
+	EAttribute getAnalyzableElementInfo_ConfidenceInterval();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -315,6 +335,14 @@ public interface ToolresultPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ANALYZABLE_ELEMENT_INFO__UNIT = eINSTANCE.getAnalyzableElementInfo_Unit();
+
+		/**
+		 * The meta object literal for the '<em><b>Confidence Interval</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL = eINSTANCE.getAnalyzableElementInfo_ConfidenceInterval();
 
 	}
 

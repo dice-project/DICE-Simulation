@@ -45,25 +45,25 @@ public class TransitionInfoItemProvider extends WnsimElementInfoItemProvider {
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addMeanNumberOfTokensPropertyDescriptor(object);
+			addThroughputPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Mean Number Of Tokens feature.
+	 * This adds a property descriptor for the Throughput feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addMeanNumberOfTokensPropertyDescriptor(Object object) {
+	protected void addThroughputPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TransitionInfo_meanNumberOfTokens_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TransitionInfo_meanNumberOfTokens_feature", "_UI_TransitionInfo_type"),
-				 WnsimPackage.Literals.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS,
+				 getString("_UI_TransitionInfo_throughput_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TransitionInfo_throughput_feature", "_UI_TransitionInfo_type"),
+				 WnsimPackage.Literals.TRANSITION_INFO__THROUGHPUT,
 				 true,
 				 false,
 				 false,
@@ -111,7 +111,7 @@ public class TransitionInfoItemProvider extends WnsimElementInfoItemProvider {
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(TransitionInfo.class)) {
-			case WnsimPackage.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS:
+			case WnsimPackage.TRANSITION_INFO__THROUGHPUT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -23,31 +23,31 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link es.unizar.disco.simulation.models.wnsim.impl.TransitionInfoImpl#getMeanNumberOfTokens <em>Mean Number Of Tokens</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.wnsim.impl.TransitionInfoImpl#getThroughput <em>Throughput</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TransitionInfoImpl extends WnsimElementInfoImpl implements TransitionInfo {
 	/**
-	 * The default value of the '{@link #getMeanNumberOfTokens() <em>Mean Number Of Tokens</em>}' attribute.
+	 * The default value of the '{@link #getThroughput() <em>Throughput</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMeanNumberOfTokens()
+	 * @see #getThroughput()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Number MEAN_NUMBER_OF_TOKENS_EDEFAULT = null;
+	protected static final Number THROUGHPUT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getMeanNumberOfTokens() <em>Mean Number Of Tokens</em>}' attribute.
+	 * The cached value of the '{@link #getThroughput() <em>Throughput</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMeanNumberOfTokens()
+	 * @see #getThroughput()
 	 * @generated
 	 * @ordered
 	 */
-	protected Number meanNumberOfTokens = MEAN_NUMBER_OF_TOKENS_EDEFAULT;
+	protected Number throughput = THROUGHPUT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -73,8 +73,8 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Number getMeanNumberOfTokens() {
-		return meanNumberOfTokens;
+	public Number getThroughput() {
+		return throughput;
 	}
 
 	/**
@@ -82,11 +82,11 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMeanNumberOfTokens(Number newMeanNumberOfTokens) {
-		Number oldMeanNumberOfTokens = meanNumberOfTokens;
-		meanNumberOfTokens = newMeanNumberOfTokens;
+	public void setThroughput(Number newThroughput) {
+		Number oldThroughput = throughput;
+		throughput = newThroughput;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, WnsimPackage.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS, oldMeanNumberOfTokens, meanNumberOfTokens));
+			eNotify(new ENotificationImpl(this, Notification.SET, WnsimPackage.TRANSITION_INFO__THROUGHPUT, oldThroughput, throughput));
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * @generated
 	 */
 	public Number getValue() {
-		return meanNumberOfTokens;
+		return throughput;
 	}
 
 	/**
@@ -106,8 +106,8 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WnsimPackage.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS:
-				return getMeanNumberOfTokens();
+			case WnsimPackage.TRANSITION_INFO__THROUGHPUT:
+				return getThroughput();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -120,8 +120,8 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WnsimPackage.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS:
-				setMeanNumberOfTokens((Number)newValue);
+			case WnsimPackage.TRANSITION_INFO__THROUGHPUT:
+				setThroughput((Number)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +135,8 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WnsimPackage.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS:
-				setMeanNumberOfTokens(MEAN_NUMBER_OF_TOKENS_EDEFAULT);
+			case WnsimPackage.TRANSITION_INFO__THROUGHPUT:
+				setThroughput(THROUGHPUT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,8 +150,8 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WnsimPackage.TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS:
-				return MEAN_NUMBER_OF_TOKENS_EDEFAULT == null ? meanNumberOfTokens != null : !MEAN_NUMBER_OF_TOKENS_EDEFAULT.equals(meanNumberOfTokens);
+			case WnsimPackage.TRANSITION_INFO__THROUGHPUT:
+				return THROUGHPUT_EDEFAULT == null ? throughput != null : !THROUGHPUT_EDEFAULT.equals(throughput);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -180,8 +180,8 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (meanNumberOfTokens: ");
-		result.append(meanNumberOfTokens);
+		result.append(" (throughput: ");
+		result.append(throughput);
 		result.append(')');
 		return result.toString();
 	}

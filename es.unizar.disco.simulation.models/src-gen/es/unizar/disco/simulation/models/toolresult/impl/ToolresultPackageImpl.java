@@ -215,6 +215,15 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAnalyzableElementInfo_ConfidenceInterval() {
+		return (EAttribute)analyzableElementInfoEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ToolresultFactory getToolresultFactory() {
 		return (ToolresultFactory)getEFactoryInstance();
 	}
@@ -246,6 +255,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 		createEAttribute(analyzableElementInfoEClass, ANALYZABLE_ELEMENT_INFO__VALUE);
 		createEReference(analyzableElementInfoEClass, ANALYZABLE_ELEMENT_INFO__ANALYZED_ELEMENT);
 		createEAttribute(analyzableElementInfoEClass, ANALYZABLE_ELEMENT_INFO__UNIT);
+		createEAttribute(analyzableElementInfoEClass, ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL);
 	}
 
 	/**
@@ -289,6 +299,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 		initEAttribute(getAnalyzableElementInfo_Value(), theDatatypesPackage.getNumber(), "value", null, 1, 1, AnalyzableElementInfo.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getAnalyzableElementInfo_AnalyzedElement(), ecorePackage.getEObject(), null, "analyzedElement", null, 1, 1, AnalyzableElementInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAnalyzableElementInfo_Unit(), theDatatypesPackage.getUnit(), "unit", null, 1, 1, AnalyzableElementInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAnalyzableElementInfo_ConfidenceInterval(), theDatatypesPackage.getNumber(), "confidenceInterval", null, 2, 2, AnalyzableElementInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

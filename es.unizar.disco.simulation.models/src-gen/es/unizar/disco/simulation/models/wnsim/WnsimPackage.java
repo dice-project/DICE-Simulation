@@ -143,6 +143,15 @@ public interface WnsimPackage extends EPackage {
 	int WNSIM_ELEMENT_INFO__UNIT = ToolresultPackage.ANALYZABLE_ELEMENT_INFO__UNIT;
 
 	/**
+	 * The feature id for the '<em><b>Confidence Interval</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WNSIM_ELEMENT_INFO__CONFIDENCE_INTERVAL = ToolresultPackage.ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL;
+
+	/**
 	 * The number of structural features of the '<em>Element Info</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,13 +207,22 @@ public interface WnsimPackage extends EPackage {
 	int PLACE_INFO__UNIT = WNSIM_ELEMENT_INFO__UNIT;
 
 	/**
-	 * The feature id for the '<em><b>Throughput</b></em>' attribute.
+	 * The feature id for the '<em><b>Confidence Interval</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PLACE_INFO__THROUGHPUT = WNSIM_ELEMENT_INFO_FEATURE_COUNT + 0;
+	int PLACE_INFO__CONFIDENCE_INTERVAL = WNSIM_ELEMENT_INFO__CONFIDENCE_INTERVAL;
+
+	/**
+	 * The feature id for the '<em><b>Mean Number Of Tokens</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PLACE_INFO__MEAN_NUMBER_OF_TOKENS = WNSIM_ELEMENT_INFO_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Place Info</em>' class.
@@ -271,13 +289,22 @@ public interface WnsimPackage extends EPackage {
 	int TRANSITION_INFO__UNIT = WNSIM_ELEMENT_INFO__UNIT;
 
 	/**
-	 * The feature id for the '<em><b>Mean Number Of Tokens</b></em>' attribute.
+	 * The feature id for the '<em><b>Confidence Interval</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS = WNSIM_ELEMENT_INFO_FEATURE_COUNT + 0;
+	int TRANSITION_INFO__CONFIDENCE_INTERVAL = WNSIM_ELEMENT_INFO__CONFIDENCE_INTERVAL;
+
+	/**
+	 * The feature id for the '<em><b>Throughput</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION_INFO__THROUGHPUT = WNSIM_ELEMENT_INFO_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Transition Info</em>' class.
@@ -348,15 +375,15 @@ public interface WnsimPackage extends EPackage {
 	EClass getPlaceInfo();
 
 	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.wnsim.PlaceInfo#getThroughput <em>Throughput</em>}'.
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.wnsim.PlaceInfo#getMeanNumberOfTokens <em>Mean Number Of Tokens</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Throughput</em>'.
-	 * @see es.unizar.disco.simulation.models.wnsim.PlaceInfo#getThroughput()
+	 * @return the meta object for the attribute '<em>Mean Number Of Tokens</em>'.
+	 * @see es.unizar.disco.simulation.models.wnsim.PlaceInfo#getMeanNumberOfTokens()
 	 * @see #getPlaceInfo()
 	 * @generated
 	 */
-	EAttribute getPlaceInfo_Throughput();
+	EAttribute getPlaceInfo_MeanNumberOfTokens();
 
 	/**
 	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.wnsim.PlaceInfo#getValue() <em>Get Value</em>}' operation.
@@ -379,15 +406,15 @@ public interface WnsimPackage extends EPackage {
 	EClass getTransitionInfo();
 
 	/**
-	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.wnsim.TransitionInfo#getMeanNumberOfTokens <em>Mean Number Of Tokens</em>}'.
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.wnsim.TransitionInfo#getThroughput <em>Throughput</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Mean Number Of Tokens</em>'.
-	 * @see es.unizar.disco.simulation.models.wnsim.TransitionInfo#getMeanNumberOfTokens()
+	 * @return the meta object for the attribute '<em>Throughput</em>'.
+	 * @see es.unizar.disco.simulation.models.wnsim.TransitionInfo#getThroughput()
 	 * @see #getTransitionInfo()
 	 * @generated
 	 */
-	EAttribute getTransitionInfo_MeanNumberOfTokens();
+	EAttribute getTransitionInfo_Throughput();
 
 	/**
 	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.wnsim.TransitionInfo#getValue() <em>Get Value</em>}' operation.
@@ -463,12 +490,12 @@ public interface WnsimPackage extends EPackage {
 		EClass PLACE_INFO = eINSTANCE.getPlaceInfo();
 
 		/**
-		 * The meta object literal for the '<em><b>Throughput</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Mean Number Of Tokens</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PLACE_INFO__THROUGHPUT = eINSTANCE.getPlaceInfo_Throughput();
+		EAttribute PLACE_INFO__MEAN_NUMBER_OF_TOKENS = eINSTANCE.getPlaceInfo_MeanNumberOfTokens();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
@@ -489,12 +516,12 @@ public interface WnsimPackage extends EPackage {
 		EClass TRANSITION_INFO = eINSTANCE.getTransitionInfo();
 
 		/**
-		 * The meta object literal for the '<em><b>Mean Number Of Tokens</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Throughput</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TRANSITION_INFO__MEAN_NUMBER_OF_TOKENS = eINSTANCE.getTransitionInfo_MeanNumberOfTokens();
+		EAttribute TRANSITION_INFO__THROUGHPUT = eINSTANCE.getTransitionInfo_Throughput();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Value</b></em>' operation.
