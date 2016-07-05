@@ -17,7 +17,7 @@ public class CustomWnsimResultItemProvider extends WnsimResultItemProvider {
 		Date timestamp = ((WnsimResult)object).getTimestamp();
 
 		StringBuilder builder = new StringBuilder("Simulation Tool Result");
-		builder.append("[");
+		builder.append(" [");
 		builder.append(timestamp);
 		builder.append("]");
 		
