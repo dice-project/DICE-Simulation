@@ -293,11 +293,19 @@
                 <styles xmi:type="notation:FontStyle" xmi:id="_53muoSiyEeav0ZCEEQOTlA" fontName="Segoe UI" fontHeight="8"/>
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_53muoiiyEeav0ZCEEQOTlA"/>
               </children>
+              <children xmi:type="notation:Node" xmi:id="_3eveQELnEea2g-ytjJsztQ" type="3010" element="_3eiC4ELnEea2g-ytjJsztQ">
+                <styles xmi:type="notation:FontStyle" xmi:id="_3eveQULnEea2g-ytjJsztQ" fontName="Segoe UI" fontHeight="8"/>
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_3eveQkLnEea2g-ytjJsztQ"/>
+              </children>
+              <children xmi:type="notation:Node" xmi:id="_3ezIoELnEea2g-ytjJsztQ" type="3010" element="_3ekfIELnEea2g-ytjJsztQ">
+                <styles xmi:type="notation:FontStyle" xmi:id="_3ezIoULnEea2g-ytjJsztQ" fontName="Segoe UI" fontHeight="8"/>
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_3ezIokLnEea2g-ytjJsztQ"/>
+              </children>
               <styles xmi:type="notation:SortingStyle" xmi:id="_2Re8giiyEeav0ZCEEQOTlA"/>
               <styles xmi:type="notation:FilteringStyle" xmi:id="_2Re8gyiyEeav0ZCEEQOTlA"/>
             </children>
             <styles xmi:type="notation:ShapeStyle" xmi:id="_2RdHUSiyEeav0ZCEEQOTlA" fontName="Segoe UI" fontHeight="8"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2RdHUiiyEeav0ZCEEQOTlA" x="195" y="175" width="120" height="100"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2RdHUiiyEeav0ZCEEQOTlA" x="195" y="175" width="120" height="128"/>
           </children>
           <children xmi:type="notation:Node" xmi:id="_NijvgDLpEeali_GotjzBmg" type="2003" element="_NiVGADLpEeali_GotjzBmg">
             <children xmi:type="notation:Node" xmi:id="_NikWkDLpEeali_GotjzBmg" type="5007"/>
@@ -811,6 +819,22 @@
           <target xmi:type="ecore:EEnumLiteral" href="datatypes.ecore#//SimulationStatus/killed"/>
           <semanticElements xmi:type="ecore:EEnumLiteral" href="datatypes.ecore#//SimulationStatus/killed"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_53O7MSiyEeav0ZCEEQOTlA" labelAlignment="LEFT">
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_3eiC4ELnEea2g-ytjJsztQ" name="waiting" tooltipText="">
+          <target xmi:type="ecore:EEnumLiteral" href="datatypes.ecore#//SimulationStatus/waiting"/>
+          <semanticElements xmi:type="ecore:EEnumLiteral" href="datatypes.ecore#//SimulationStatus/waiting"/>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_3ej4EELnEea2g-ytjJsztQ" labelAlignment="LEFT">
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']"/>
+        </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_3ekfIELnEea2g-ytjJsztQ" name="failed" tooltipText="">
+          <target xmi:type="ecore:EEnumLiteral" href="datatypes.ecore#//SimulationStatus/failed"/>
+          <semanticElements xmi:type="ecore:EEnumLiteral" href="datatypes.ecore#//SimulationStatus/failed"/>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_3ekfIULnEea2g-ytjJsztQ" labelAlignment="LEFT">
             <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']/@style"/>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']"/>
