@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -182,7 +182,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 */
 	public EList<Number> getConfidenceInterval() {
 		if (confidenceInterval == null) {
-			confidenceInterval = new EDataTypeUniqueEList<Number>(Number.class, this, ToolresultPackage.ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL);
+			confidenceInterval = new EDataTypeEList<Number>(Number.class, this, ToolresultPackage.ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL);
 		}
 		return confidenceInterval;
 	}

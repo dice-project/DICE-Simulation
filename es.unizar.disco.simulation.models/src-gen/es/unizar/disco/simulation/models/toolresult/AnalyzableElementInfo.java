@@ -108,7 +108,7 @@ public interface AnalyzableElementInfo extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Confidence Interval</em>' attribute list.
 	 * @see es.unizar.disco.simulation.models.toolresult.ToolresultPackage#getAnalyzableElementInfo_ConfidenceInterval()
-	 * @model dataType="es.unizar.disco.simulation.models.datatypes.Number" lower="2" upper="2"
+	 * @model unique="false" dataType="es.unizar.disco.simulation.models.datatypes.Number" lower="2" upper="2"
 	 * @generated
 	 */
 	EList<Number> getConfidenceInterval();
