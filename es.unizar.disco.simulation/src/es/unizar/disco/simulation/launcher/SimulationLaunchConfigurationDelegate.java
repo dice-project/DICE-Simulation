@@ -67,8 +67,9 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 			SimulationInvocation invocation = definition.getInvocations().get(i);
 
+			final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
+
 			try {
-				final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
 
 				if (simulator == null) {
 					throw new SimulationException(
@@ -111,12 +112,12 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				
 				simulationProcess.waitFor();
 				if (simulationProcess.exitValue() == 0) {
-					invocation.setToolResult(simulator.getToolResult());
 					invocation.setStatus(SimulationStatus.FINISHED);
 				}
 			} catch (SimulationException | InterruptedException e) {
 				status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			} finally {
+				invocation.setToolResult(simulator.getToolResult());
 				if (invocation.getStatus() == SimulationStatus.RUNNING
 						|| invocation.getStatus() == SimulationStatus.WAITING
 						|| invocation.getStatus() == SimulationStatus.UNKNOWN) {
