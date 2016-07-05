@@ -112,6 +112,18 @@
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <factory
+            uri="http://es.unizar.disco/simulation/tool/wnsim/1.0"
+            class="es.unizar.disco.simulation.models.wnsim.provider.CustomWnsimItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <factory
             uri="http://es.unizar.disco/simulation/definition/1.0"
             class="es.unizar.disco.simulation.models.definition.provider.CustomDefinitionItemProviderAdapterFactory"
             supportedTypes=
