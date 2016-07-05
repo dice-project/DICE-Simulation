@@ -14,10 +14,13 @@ public class CustomWnsimResultItemProvider extends WnsimResultItemProvider {
 
 	@Override
 	public String getText(Object object) {
-		Date labelValue = ((WnsimResult)object).getTimestamp();
-		String label = labelValue == null ? null : labelValue.toString();
-		return label == null || label.length() == 0 ?
-			getString("_UI_WnsimResult_type") :
-			getString("_UI_WnsimResult_type") + " [" + label + "]";
+		Date timestamp = ((WnsimResult)object).getTimestamp();
+
+		StringBuilder builder = new StringBuilder("Simulation Tool Result");
+		builder.append("[");
+		builder.append(timestamp);
+		builder.append("]");
+		
+		return builder.toString();
 	}
 }
