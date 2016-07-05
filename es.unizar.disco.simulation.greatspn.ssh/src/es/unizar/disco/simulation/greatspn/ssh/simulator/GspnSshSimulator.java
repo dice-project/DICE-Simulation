@@ -3,20 +3,32 @@
  */
 package es.unizar.disco.simulation.greatspn.ssh.simulator;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.security.PublicKey;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.input.TeeInputStream;
+import org.apache.commons.io.output.NullOutputStream;
+import org.apache.commons.io.output.TeeOutputStream;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.acceleo.common.preference.AcceleoPreferences;
 import org.eclipse.core.runtime.CoreException;
@@ -31,8 +43,12 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.pnml.m2t.templates.gspn.GenerateGspn;
 import es.unizar.disco.simulation.greatspn.ssh.GspnSshSimulationPlugin;
+import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
 import es.unizar.disco.simulation.models.toolresult.ToolResult;
 import es.unizar.disco.simulation.models.traces.TraceSet;
+import es.unizar.disco.simulation.models.wnsim.PlaceInfo;
+import es.unizar.disco.simulation.models.wnsim.TransitionInfo;
+import es.unizar.disco.simulation.models.wnsim.WnsimElementInfo;
 import es.unizar.disco.simulation.models.wnsim.WnsimFactory;
 import es.unizar.disco.simulation.models.wnsim.WnsimResult;
 import es.unizar.disco.simulation.simulators.ISimulator;
@@ -44,6 +60,7 @@ import es.unizar.disco.ssh.providers.IUserPasswordAuthProvider;
 import es.unizar.disco.ssh.providers.SshConnectionProviderConstants;
 import fr.lip6.move.pnml.ptnet.PetriNet;
 import fr.lip6.move.pnml.ptnet.PetriNetDoc;
+import fr.lip6.move.pnml.ptnet.PnObject;
 import net.schmizz.keepalive.KeepAliveProvider;
 import net.schmizz.sshj.DefaultConfig;
 import net.schmizz.sshj.SSHClient;
@@ -65,6 +82,163 @@ public class GspnSshSimulator implements ISimulator {
 
 	private class GspnProcess extends Process {
 
+		private class ResultBuilder extends Thread {
+
+			private static final String STR_HEADER_1 = "USE : WNSIM netname [-f first_tr_length][-t tr_length][-m min_btc][-M max_btc][-a approx][-c conf_level][-s seed][-o start]";
+			private static final String STR_HEADER_2 = "Send files netname.net, .def to e-mail address";
+			private static final String STR_HEADER_3 = "greatspn@di.unito.it if you find any bug.";
+
+			private static final String STR_PARSING_ERROR = "Syntax error while parsing";
+			private static final String STR_INITIAL_DEAD_MARKING = "ERROR : initial dead marking !";
+
+			private static final String STS_SEPARATOR = "--";
+			private static final String STS_BATCH_HEADER = "| ";
+			private static final String STS_DEAD_MARKING = "ERROR : Dead marking reached at simulation step";
+			private static final String STS_START_END = "Start batch number";
+			private static final String STS_CURRENT_TIME = "Current time";
+			private static final String STS_EFFICIENCY = "Efficiency --->";
+			private static final String STS_TIME_REQUIRED = "Time required for";
+			private static final String STS_MALLOC = "MALLOC";
+			private static final String STS_PUSH  = "PUSH";
+			private static final String STS_POP = "POP";
+
+			private static final String REX_SEPARATOR = "^-+$";
+			private static final String REX_TRANSITION_INFO = "Throughput of (?<transition>\\S+) \\(\\S+ \\): (?<cilower>\\S+) <= X <= (?<ciupper>\\S+)";
+			private static final String REX_PLACE_INFO = "Mean n\\.of tokens in (?<place>\\S+) : (?<cilower>\\S+) <= mu <= (?<ciupper>\\S+)";
+			private static final String REX_VALUE = "Value (?<value>\\S+) Mean Value \\S+ Accuracy \\S+";
+
+			private WnsimResult latestResult;
+			private WnsimResult currentResult;
+
+			private BufferedReader reader;
+
+			public ResultBuilder(InputStream stream) {
+				this.reader = new BufferedReader(new InputStreamReader(stream));
+			}
+
+			public WnsimResult getLatestResult() {
+				return latestResult;
+			}
+
+			@Override
+			public void run() {
+				String line;
+				try {
+					// The header always is:
+					//
+					//
+					// --------------------------------------------------------------------------------------------------
+					// USE : WNSIM netname [-f first_tr_length][-t tr_length][-m
+					// min_btc][-M max_btc][-a approx][-c conf_level][-s
+					// seed][-o start]
+					// --------------------------------------------------------------------------------------------------
+					//
+					// Send files netname.net, .def to e-mail address
+					// greatspn@di.unito.it if you find any bug.
+					// --------------------------------------------------------------------------------------------------
+					//
+
+					// Check that the stream starts by the header:
+					boolean error = false;
+					try {
+						// @formatter:off
+						if (!reader.readLine().trim().isEmpty()) error = true;
+						if (!reader.readLine().trim().isEmpty()) error = true;
+						if (!reader.readLine().matches(REX_SEPARATOR)) error = true;
+						if (!reader.readLine().equals(STR_HEADER_1)) error = true;
+						if (!reader.readLine().matches(REX_SEPARATOR)) error = true;
+						if (!reader.readLine().trim().isEmpty()) error = true;
+						if (!reader.readLine().equals(STR_HEADER_2)) error = true;
+						if (!reader.readLine().equals(STR_HEADER_3)) error = true;
+						if (!reader.readLine().matches(REX_SEPARATOR)) error = true;
+						if (!reader.readLine().trim().isEmpty()) error = true; 
+						// @formatter:on
+					} catch (NullPointerException e) {
+						error = true;
+					}
+
+					// Fatal error, the tool returned an unexpected result
+					if (error) {
+						throw new RuntimeException("Unexpected content found in WNSIM stdout");
+					}
+
+					Pattern transPattern = Pattern.compile(REX_TRANSITION_INFO);
+					Pattern placePattern = Pattern.compile(REX_PLACE_INFO);
+					Pattern valuePattern = Pattern.compile(REX_VALUE);
+					Matcher matcher;
+					WnsimElementInfo info = null;
+					// Process the result
+					while ((line = reader.readLine()) != null) {
+						if (line.trim().isEmpty()) {
+							continue;
+						} else if (line.startsWith(STS_SEPARATOR)) {
+							continue;
+						} else if (line.startsWith(STS_BATCH_HEADER)) {
+							continue;
+						} else if (line.startsWith(STS_CURRENT_TIME)) {
+							continue;
+						} else if (line.startsWith(STS_START_END)) {
+							latestResult = currentResult;
+							currentResult = WnsimFactory.eINSTANCE.createWnsimResult();
+							currentResult.setTimestamp(Calendar.getInstance().getTime());
+							continue;
+						} else if ((matcher = transPattern.matcher(line.trim())).matches()) {
+							String id = matcher.group("transition");
+							String lower = matcher.group("cilower");
+							String upper = matcher.group("ciupper");
+							info = WnsimFactory.eINSTANCE.createTransitionInfo();
+							currentResult.getInfos().add(info);
+							info.setAnalyzedElement(findEObject(id));
+							info.getConfidenceInterval().add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, lower));
+							info.getConfidenceInterval().add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, upper));
+							continue;
+						} else if ((matcher = placePattern.matcher(line.trim())).matches()) {
+							String id = matcher.group("place");
+							String lower = matcher.group("cilower");
+							String upper = matcher.group("ciupper");
+							info = WnsimFactory.eINSTANCE.createPlaceInfo();
+							currentResult.getInfos().add(info);
+							info.setAnalyzedElement(findEObject(id));
+							info.getConfidenceInterval().add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, lower));
+							info.getConfidenceInterval().add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, upper));
+							continue;
+						} else if ((matcher = valuePattern.matcher(line.trim())).matches()) {
+							String value = matcher.group("value");
+							if (info instanceof PlaceInfo) {
+								((PlaceInfo) info).setMeanNumberOfTokens((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
+							} else if (info instanceof TransitionInfo) {
+								((TransitionInfo) info).setThroughput((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
+							} else {
+								throw new RuntimeException("Expected PlaceInfo or TransitionInfo");
+							}
+							continue;
+						} else if (line.startsWith(STS_EFFICIENCY)) {
+							continue;
+						} else if (line.startsWith(STS_TIME_REQUIRED)) {
+							continue;
+						} else if (line.startsWith(STS_MALLOC)) {
+							continue;
+						} else if (line.startsWith(STS_PUSH)) {
+							continue;
+						} else if (line.startsWith(STS_POP)) {
+							continue;
+							// Errors at the end: they are the least common
+						} else if (line.equals(STR_PARSING_ERROR)) {
+							throw new RuntimeException(line);
+						} else if (line.equals(STR_INITIAL_DEAD_MARKING)) {
+							throw new RuntimeException(line);
+						} else if (line.startsWith(STS_DEAD_MARKING)) {
+							throw new RuntimeException(line);
+						} else {
+							DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "Unmatched line while processing WNSIM output: " + line);
+						}
+					}
+				} catch (IOException e) {
+					DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+				}
+			}
+		};
+
 		private class NoHostVerifier implements HostKeyVerifier {
 			@Override
 			public boolean verify(String s, int i, PublicKey publicKey) {
@@ -75,7 +249,11 @@ public class GspnSshSimulator implements ISimulator {
 		private SSHClient ssh;
 		private Session simulationSession;
 		private Command simulationCommand;
+		private OutputStream outputStream;
+		private InputStream inputStream;
+		private InputStream errorStream;
 		private Thread simulationFinishedThread;
+		private ResultBuilder resultBuilder;
 
 		private String remoteWorkingDir;
 		private String identifier;
@@ -126,11 +304,21 @@ public class GspnSshSimulator implements ISimulator {
 
 		public void launch(Map<String, String> options) throws IOException {
 			simulationSession = ssh.startSession();
-			StringBuilder builder = new StringBuilder("/usr/local/GreatSPN/bin/WNSIM %s/%s ");
+			StringBuilder builder = new StringBuilder("/usr/local/GreatSPN/bin/WNSIM %s/%s "); //$NON-NLS-1$
 			for (Entry<String, String> option : options.entrySet()) {
-				builder.append(MessageFormat.format("{0} {1} ", option.getKey(), option.getValue()));
+				builder.append(MessageFormat.format("{0} {1} ", option.getKey(), option.getValue())); //$NON-NLS-1$
 			}
-			simulationCommand = simulationSession.exec(String.format(builder.toString(), remoteWorkingDir, identifier)); //$NON-NLS-1$
+			simulationCommand = simulationSession.exec(String.format(builder.toString(), remoteWorkingDir, identifier));
+
+			PipedOutputStream stdoutOutputStream = new PipedOutputStream();
+
+			resultBuilder = new ResultBuilder(new PipedInputStream(stdoutOutputStream));
+			resultBuilder.start();
+
+			inputStream = new TeeInputStream(simulationCommand.getInputStream(), stdoutOutputStream, true);
+			errorStream = new TeeInputStream(simulationCommand.getErrorStream(), new NullOutputStream(), true);
+			outputStream = new TeeOutputStream(simulationCommand.getOutputStream(), new NullOutputStream());
+
 			simulationFinishedThread = addSimulationFinishedHook(simulationCommand);
 		}
 
@@ -139,6 +327,7 @@ public class GspnSshSimulator implements ISimulator {
 				@Override
 				public void run() {
 					try {
+						resultBuilder.join();
 						channel.join();
 						try (Session catSession = ssh.startSession();
 								Command catCommand = catSession.exec(String.format("cat %s/%s.simres", remoteWorkingDir, identifier)) //$NON-NLS-1$
@@ -152,6 +341,8 @@ public class GspnSshSimulator implements ISimulator {
 						DiceLogger.logError(GspnSshSimulationPlugin.getDefault(),
 								MessageFormat.format(Messages.GspnSshSimulator_connClosedError, ssh.getRemoteHostname(), ssh.getRemotePort()), e);
 					} catch (IOException e) {
+						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+					} catch (InterruptedException e) {
 						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
 					} finally {
 						IOUtils.closeQuietly(ssh, simulationSession, simulationCommand);
@@ -167,7 +358,7 @@ public class GspnSshSimulator implements ISimulator {
 			if (simulationCommand == null) {
 				throw new IllegalStateException(Messages.GspnSshSimulator_connNotEstablishedError);
 			}
-			return simulationCommand.getOutputStream();
+			return outputStream;
 		}
 
 		@Override
@@ -175,7 +366,7 @@ public class GspnSshSimulator implements ISimulator {
 			if (simulationCommand == null) {
 				throw new IllegalStateException(Messages.GspnSshSimulator_connNotEstablishedError);
 			}
-			return simulationCommand.getInputStream();
+			return inputStream;
 		}
 
 		@Override
@@ -183,7 +374,7 @@ public class GspnSshSimulator implements ISimulator {
 			if (simulationCommand == null) {
 				throw new IllegalStateException(Messages.GspnSshSimulator_connNotEstablishedError);
 			}
-			return simulationCommand.getErrorStream();
+			return errorStream;
 		}
 
 		@Override
@@ -192,7 +383,6 @@ public class GspnSshSimulator implements ISimulator {
 				throw new IllegalThreadStateException(Messages.GspnSshSimulator_threadNotStartedError);
 			}
 			simulationFinishedThread.join();
-			// If no exit status found, return 1 (error)
 			return exitValue;
 		}
 
@@ -208,9 +398,15 @@ public class GspnSshSimulator implements ISimulator {
 		public void destroy() {
 			IOUtils.closeQuietly(ssh, simulationSession, simulationCommand);
 		}
+
+		public ResultBuilder getResultBuilder() {
+			return resultBuilder;
+		}
 	}
 
 	private byte[] rawResults = new byte[0];
+	private PetriNetDoc petriNetDoc;
+	private GspnProcess gspnProcess;
 
 	@Override
 	public Process simulate(String id, List<EObject> analyzableModel, TraceSet traces, Map<String, String> options, IProgressMonitor monitor)
@@ -223,31 +419,32 @@ public class GspnSshSimulator implements ISimulator {
 					MessageFormat.format("Unexpected number of model elements, expecting 1 EObject, found {0}", analyzableModel.size())));
 		} else if (!(analyzableModel.get(0) instanceof PetriNetDoc)) {
 			throw new SimulationException(new IllegalArgumentException("Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNetDoc''"));
-		} 
+		}
 
-		PetriNetDoc petriNetDoc = (PetriNetDoc) analyzableModel.get(0);
+		petriNetDoc = (PetriNetDoc) analyzableModel.get(0);
 		if (petriNetDoc.getNets().size() != 1) {
 			throw new SimulationException(new IllegalArgumentException(
 					MessageFormat.format("Unexpected number of model elements, expecting 1 EObject, found {0}", petriNetDoc.getNets().size())));
 		} else if (!(petriNetDoc.getNets().get(0) instanceof PetriNet)) {
 			throw new SimulationException(new IllegalArgumentException("Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNet''"));
-		} 
-
-		GspnProcess gspnProcess = new GspnProcess(id);
+		}
 
 		File targetDir = GspnSshSimulationPlugin.getDefault().getStateLocation().append(id).toFile();
-		targetDir.deleteOnExit();
-		try {
-			
-			if (!targetDir.exists()) {
-				if (!targetDir.mkdirs()) {
-					throw new SimulationException(MessageFormat.format("Unable to create temporaty directory ''{0}''", targetDir));
-				}
+
+		if (!targetDir.exists()) {
+			if (!targetDir.mkdirs()) {
+				throw new SimulationException(MessageFormat.format("Unable to create temporaty directory ''{0}''", targetDir));
 			}
+		}
+
+		gspnProcess = new GspnProcess(id);
+
+		try {
+			FileUtils.forceDeleteOnExit(targetDir);
 
 			PetriNet petriNet = EcoreUtil.copy(petriNetDoc.getNets().get(0));
 			petriNet.setId(id);
-			
+
 			File[] inputFiles = generateGspnFiles(petriNet, targetDir, subMonitor.newChild(1));
 
 			IHostProvider hostProvider = null;
@@ -288,7 +485,7 @@ public class GspnSshSimulator implements ISimulator {
 			}
 
 			gspnProcess.launch(options);
-			
+
 		} catch (Throwable t) {
 			throw new SimulationException(t.getLocalizedMessage(), t);
 		}
@@ -297,14 +494,30 @@ public class GspnSshSimulator implements ISimulator {
 
 	@Override
 	public ToolResult getToolResult() {
-		WnsimResult toolResult = WnsimFactory.eINSTANCE.createWnsimResult();
-		toolResult.setTimestamp(Calendar.getInstance().getTime());
-		return toolResult;
+		if (gspnProcess != null && gspnProcess.getResultBuilder() != null) {
+			return gspnProcess.getResultBuilder().getLatestResult();
+		}
+		return null;
 	}
 
 	@Override
 	public InputStream getRawResult() {
 		return new ByteArrayInputStream(Arrays.copyOf(rawResults, rawResults.length));
+	}
+
+	Map<String, EObject> mappings;
+
+	private EObject findEObject(String id) {
+		if (mappings == null && petriNetDoc != null) {
+			mappings = new HashMap<>();
+			for (Iterator<EObject> it = petriNetDoc.eAllContents(); it.hasNext();) {
+				EObject eObject = it.next();
+				if (eObject instanceof PnObject) {
+					mappings.put(((PnObject) eObject).getId(), eObject);
+				}
+			}
+		}
+		return mappings != null ? mappings.get(id) : null;
 	}
 
 	private IConfigurationElement getConnectionProvider() throws SimulationException {
@@ -327,10 +540,7 @@ public class GspnSshSimulator implements ISimulator {
 		GenerateGspn gspnGenerator = new GenerateGspn(model, targetDir, new ArrayList<EObject>());
 		AcceleoPreferences.switchForceDeactivationNotifications(true);
 		gspnGenerator.doGenerate(BasicMonitor.toMonitor(subMonitor.newChild(1)));
-		return new File[] {
-				targetDir.toPath().resolve(model.getId() + ".net").toFile(),
-				targetDir.toPath().resolve(model.getId() + ".def").toFile()
-		};
+		return new File[] { targetDir.toPath().resolve(model.getId() + ".net").toFile(), targetDir.toPath().resolve(model.getId() + ".def").toFile() };
 	}
 
 }
