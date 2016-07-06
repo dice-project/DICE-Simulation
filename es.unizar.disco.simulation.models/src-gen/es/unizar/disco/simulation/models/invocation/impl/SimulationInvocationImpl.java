@@ -38,8 +38,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -53,7 +51,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getTraceSet <em>Trace Set</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getToolResult <em>Tool Result</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getDefinition <em>Definition</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getResults <em>Results</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getResult <em>Result</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getStart <em>Start</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getEnd <em>End</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getStatus <em>Status</em>}</li>
@@ -116,14 +114,14 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	protected SimulationDefinition definition;
 
 	/**
-	 * The cached value of the '{@link #getResults() <em>Results</em>}' reference list.
+	 * The cached value of the '{@link #getResult() <em>Result</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResults()
+	 * @see #getResult()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SimulationResult> results;
+	protected SimulationResult result;
 
 	/**
 	 * The default value of the '{@link #getStart() <em>Start</em>}' attribute.
@@ -406,11 +404,59 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<SimulationResult> getResults() {
-		if (results == null) {
-			results = new EObjectWithInverseResolvingEList<SimulationResult>(SimulationResult.class, this, InvocationPackage.SIMULATION_INVOCATION__RESULTS, SimresultPackage.SIMULATION_RESULT__INVOCATION);
+	public SimulationResult getResult() {
+		if (result != null && result.eIsProxy()) {
+			InternalEObject oldResult = (InternalEObject)result;
+			result = (SimulationResult)eResolveProxy(oldResult);
+			if (result != oldResult) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InvocationPackage.SIMULATION_INVOCATION__RESULT, oldResult, result));
+			}
 		}
-		return results;
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SimulationResult basicGetResult() {
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetResult(SimulationResult newResult, NotificationChain msgs) {
+		SimulationResult oldResult = result;
+		result = newResult;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, InvocationPackage.SIMULATION_INVOCATION__RESULT, oldResult, newResult);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResult(SimulationResult newResult) {
+		if (newResult != result) {
+			NotificationChain msgs = null;
+			if (result != null)
+				msgs = ((InternalEObject)result).eInverseRemove(this, SimresultPackage.SIMULATION_RESULT__INVOCATION, SimulationResult.class, msgs);
+			if (newResult != null)
+				msgs = ((InternalEObject)newResult).eInverseAdd(this, SimresultPackage.SIMULATION_RESULT__INVOCATION, SimulationResult.class, msgs);
+			msgs = basicSetResult(newResult, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InvocationPackage.SIMULATION_INVOCATION__RESULT, newResult, newResult));
 	}
 
 	/**
@@ -571,8 +617,10 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 				if (definition != null)
 					msgs = ((InternalEObject)definition).eInverseRemove(this, DefinitionPackage.SIMULATION_DEFINITION__INVOCATIONS, SimulationDefinition.class, msgs);
 				return basicSetDefinition((SimulationDefinition)otherEnd, msgs);
-			case InvocationPackage.SIMULATION_INVOCATION__RESULTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getResults()).basicAdd(otherEnd, msgs);
+			case InvocationPackage.SIMULATION_INVOCATION__RESULT:
+				if (result != null)
+					msgs = ((InternalEObject)result).eInverseRemove(this, SimresultPackage.SIMULATION_RESULT__INVOCATION, SimulationResult.class, msgs);
+				return basicSetResult((SimulationResult)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -587,8 +635,8 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 		switch (featureID) {
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				return basicSetDefinition(null, msgs);
-			case InvocationPackage.SIMULATION_INVOCATION__RESULTS:
-				return ((InternalEList<?>)getResults()).basicRemove(otherEnd, msgs);
+			case InvocationPackage.SIMULATION_INVOCATION__RESULT:
+				return basicSetResult(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -612,8 +660,9 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				if (resolve) return getDefinition();
 				return basicGetDefinition();
-			case InvocationPackage.SIMULATION_INVOCATION__RESULTS:
-				return getResults();
+			case InvocationPackage.SIMULATION_INVOCATION__RESULT:
+				if (resolve) return getResult();
+				return basicGetResult();
 			case InvocationPackage.SIMULATION_INVOCATION__START:
 				return getStart();
 			case InvocationPackage.SIMULATION_INVOCATION__END:
@@ -652,9 +701,8 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				setDefinition((SimulationDefinition)newValue);
 				return;
-			case InvocationPackage.SIMULATION_INVOCATION__RESULTS:
-				getResults().clear();
-				getResults().addAll((Collection<? extends SimulationResult>)newValue);
+			case InvocationPackage.SIMULATION_INVOCATION__RESULT:
+				setResult((SimulationResult)newValue);
 				return;
 			case InvocationPackage.SIMULATION_INVOCATION__START:
 				setStart((Date)newValue);
@@ -699,8 +747,8 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				setDefinition((SimulationDefinition)null);
 				return;
-			case InvocationPackage.SIMULATION_INVOCATION__RESULTS:
-				getResults().clear();
+			case InvocationPackage.SIMULATION_INVOCATION__RESULT:
+				setResult((SimulationResult)null);
 				return;
 			case InvocationPackage.SIMULATION_INVOCATION__START:
 				setStart(START_EDEFAULT);
@@ -740,8 +788,8 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 				return toolResult != null;
 			case InvocationPackage.SIMULATION_INVOCATION__DEFINITION:
 				return definition != null;
-			case InvocationPackage.SIMULATION_INVOCATION__RESULTS:
-				return results != null && !results.isEmpty();
+			case InvocationPackage.SIMULATION_INVOCATION__RESULT:
+				return result != null;
 			case InvocationPackage.SIMULATION_INVOCATION__START:
 				return START_EDEFAULT == null ? start != null : !START_EDEFAULT.equals(start);
 			case InvocationPackage.SIMULATION_INVOCATION__END:

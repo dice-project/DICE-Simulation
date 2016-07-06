@@ -119,16 +119,6 @@
                </appInfo>
             </annotation>
          </attribute>
-         <attribute name="class" type="string" use="required">
-            <annotation>
-               <documentation>
-                  The class that implements the Converter, i.e., a class that can transform an AnalyzableElementInfo into a DomainMeasure
-               </documentation>
-               <appInfo>
-                  <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.measures.MeasureConverter"/>
-               </appInfo>
-            </annotation>
-         </attribute>
          <attribute name="analyzableElementInfo" type="string" use="required">
             <annotation>
                <documentation>
@@ -136,6 +126,16 @@
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The class that implements the Converter, i.e., a class that can transform an AnalyzableElementInfo into a DomainMeasure
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.measures.MeasureConverter"/>
                </appInfo>
             </annotation>
          </attribute>

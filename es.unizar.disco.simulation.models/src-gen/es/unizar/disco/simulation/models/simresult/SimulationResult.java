@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
 public interface SimulationResult extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Invocation</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults <em>Results</em>}'.
+	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResult <em>Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Invocation</em>' reference isn't clear,
@@ -40,8 +40,8 @@ public interface SimulationResult extends EObject {
 	 * @return the value of the '<em>Invocation</em>' reference.
 	 * @see #setInvocation(SimulationInvocation)
 	 * @see es.unizar.disco.simulation.models.simresult.SimresultPackage#getSimulationResult_Invocation()
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults
-	 * @model opposite="results" required="true"
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResult
+	 * @model opposite="result" required="true"
 	 * @generated
 	 */
 	SimulationInvocation getInvocation();

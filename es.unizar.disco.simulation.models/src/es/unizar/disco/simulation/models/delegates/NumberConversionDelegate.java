@@ -1,4 +1,4 @@
-package es.unizar.disco.simulation.models;
+package es.unizar.disco.simulation.models.delegates;
 
 import java.text.NumberFormat;
 import java.text.ParseException;

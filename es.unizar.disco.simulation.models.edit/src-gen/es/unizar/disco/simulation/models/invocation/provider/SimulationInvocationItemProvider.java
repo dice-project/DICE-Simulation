@@ -67,7 +67,7 @@ public class SimulationInvocationItemProvider
 			addTraceSetPropertyDescriptor(object);
 			addToolResultPropertyDescriptor(object);
 			addDefinitionPropertyDescriptor(object);
-			addResultsPropertyDescriptor(object);
+			addResultPropertyDescriptor(object);
 			addStartPropertyDescriptor(object);
 			addEndPropertyDescriptor(object);
 			addStatusPropertyDescriptor(object);
@@ -167,19 +167,19 @@ public class SimulationInvocationItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Results feature.
+	 * This adds a property descriptor for the Result feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addResultsPropertyDescriptor(Object object) {
+	protected void addResultPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_SimulationInvocation_results_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_results_feature", "_UI_SimulationInvocation_type"),
-				 InvocationPackage.Literals.SIMULATION_INVOCATION__RESULTS,
+				 getString("_UI_SimulationInvocation_result_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_result_feature", "_UI_SimulationInvocation_type"),
+				 InvocationPackage.Literals.SIMULATION_INVOCATION__RESULT,
 				 true,
 				 false,
 				 true,
@@ -335,7 +335,6 @@ public class SimulationInvocationItemProvider
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__TRACE_SET);
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__TOOL_RESULT);
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__DEFINITION);
-			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__RESULTS);
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION);
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__ANALYZABLE_MODEL);
 		}

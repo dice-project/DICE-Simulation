@@ -104,13 +104,13 @@ public interface InvocationPackage extends EPackage {
 	int SIMULATION_INVOCATION__DEFINITION = 3;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Result</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION__RESULTS = 4;
+	int SIMULATION_INVOCATION__RESULT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Start</b></em>' attribute.
@@ -286,15 +286,15 @@ public interface InvocationPackage extends EPackage {
 	EReference getSimulationInvocation_Definition();
 
 	/**
-	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults <em>Results</em>}'.
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResult <em>Result</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Results</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults()
+	 * @return the meta object for the reference '<em>Result</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResult()
 	 * @see #getSimulationInvocation()
 	 * @generated
 	 */
-	EReference getSimulationInvocation_Results();
+	EReference getSimulationInvocation_Result();
 
 	/**
 	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStart <em>Start</em>}'.
@@ -459,12 +459,12 @@ public interface InvocationPackage extends EPackage {
 		EReference SIMULATION_INVOCATION__DEFINITION = eINSTANCE.getSimulationInvocation_Definition();
 
 		/**
-		 * The meta object literal for the '<em><b>Results</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Result</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMULATION_INVOCATION__RESULTS = eINSTANCE.getSimulationInvocation_Results();
+		EReference SIMULATION_INVOCATION__RESULT = eINSTANCE.getSimulationInvocation_Result();
 
 		/**
 		 * The meta object literal for the '<em><b>Start</b></em>' attribute feature.

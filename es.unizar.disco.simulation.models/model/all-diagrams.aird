@@ -3454,8 +3454,8 @@
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>
         </ownedElements>
         <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_XVv3okLeEeab-uLTg9qwKQ" name=" results : SimulationResult" tooltipText="">
-          <target xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/results"/>
-          <semanticElements xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/results"/>
+          <target xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/result"/>
+          <semanticElements xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/result"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_XVv3o0LeEeab-uLTg9qwKQ" labelAlignment="LEFT" color="114,159,207">
             <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']/@style"/>
           </ownedStyle>
@@ -5319,10 +5319,10 @@
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>
         </ownedElements>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_CeNLkELfEeab-uLTg9qwKQ" sourceNode="_SPipABd_Eea1l5NBfdX6Zw" targetNode="_Cd6QoELfEeab-uLTg9qwKQ" beginLabel="[1..1] invocation" endLabel="[0..*] results">
-        <target xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/results"/>
+      <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_CeNLkELfEeab-uLTg9qwKQ" sourceNode="_SPipABd_Eea1l5NBfdX6Zw" targetNode="_Cd6QoELfEeab-uLTg9qwKQ" beginLabel="[1..1] invocation" endLabel="[0..1] result">
+        <target xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/result"/>
         <semanticElements xmi:type="ecore:EReference" href="simresult.ecore#//SimulationResult/invocation"/>
-        <semanticElements xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/results"/>
+        <semanticElements xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/result"/>
         <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_CeNyoELfEeab-uLTg9qwKQ" sourceArrow="InputArrow" strokeColor="0,0,0">
           <customFeatures>routingStyle</customFeatures>
           <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='Bi-directional%20EC_EReference%20']/@style"/>
@@ -6024,10 +6024,10 @@
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EReferenceNode']"/>
         </ownedElements>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_cUC-YBxiEeaNCoEYBbKOow" sourceNode="_nMUqIBxPEeaNCoEYBbKOow" targetNode="_qptXABxPEeaNCoEYBbKOow" beginLabel="[0..*] results" endLabel="[1..1] invocation">
+      <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_cUC-YBxiEeaNCoEYBbKOow" sourceNode="_nMUqIBxPEeaNCoEYBbKOow" targetNode="_qptXABxPEeaNCoEYBbKOow" beginLabel="[0..1] result" endLabel="[1..1] invocation">
         <target xmi:type="ecore:EReference" href="simresult.ecore#//SimulationResult/invocation"/>
         <semanticElements xmi:type="ecore:EReference" href="simresult.ecore#//SimulationResult/invocation"/>
-        <semanticElements xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/results"/>
+        <semanticElements xmi:type="ecore:EReference" href="invocation.ecore#//SimulationInvocation/result"/>
         <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_g2dZoxxiEeaNCoEYBbKOow" description="_g2dZoBxiEeaNCoEYBbKOow" sourceArrow="InputArrow" routingStyle="manhattan" strokeColor="0,0,0">
           <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_g2dZpBxiEeaNCoEYBbKOow" showIcon="false">
             <labelFormat>bold</labelFormat>
@@ -6047,9 +6047,8 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_jsEU0RxiEeaNCoEYBbKOow" iconPath="/org.eclipse.emf.ecoretools.design/icons/full/obj16/EClass_abstract.gif" borderSize="1" borderSizeComputationExpression="1" borderColor="125,125,125" backgroundStyle="Liquid" foregroundColor="228,228,228">
-          <labelFormat>italic</labelFormat>
-          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@conditionnalStyles.1/@style"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_tZt5UEOHEeaKKpqotTid8g" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_jsGxEBxiEeaNCoEYBbKOow" name="value : Number" tooltipText="">

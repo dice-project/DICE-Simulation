@@ -130,9 +130,9 @@ public class SimulationResultImpl extends MinimalEObjectImpl.Container implement
 		if (newInvocation != invocation) {
 			NotificationChain msgs = null;
 			if (invocation != null)
-				msgs = ((InternalEObject)invocation).eInverseRemove(this, InvocationPackage.SIMULATION_INVOCATION__RESULTS, SimulationInvocation.class, msgs);
+				msgs = ((InternalEObject)invocation).eInverseRemove(this, InvocationPackage.SIMULATION_INVOCATION__RESULT, SimulationInvocation.class, msgs);
 			if (newInvocation != null)
-				msgs = ((InternalEObject)newInvocation).eInverseAdd(this, InvocationPackage.SIMULATION_INVOCATION__RESULTS, SimulationInvocation.class, msgs);
+				msgs = ((InternalEObject)newInvocation).eInverseAdd(this, InvocationPackage.SIMULATION_INVOCATION__RESULT, SimulationInvocation.class, msgs);
 			msgs = basicSetInvocation(newInvocation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -162,7 +162,7 @@ public class SimulationResultImpl extends MinimalEObjectImpl.Container implement
 		switch (featureID) {
 			case SimresultPackage.SIMULATION_RESULT__INVOCATION:
 				if (invocation != null)
-					msgs = ((InternalEObject)invocation).eInverseRemove(this, InvocationPackage.SIMULATION_INVOCATION__RESULTS, SimulationInvocation.class, msgs);
+					msgs = ((InternalEObject)invocation).eInverseRemove(this, InvocationPackage.SIMULATION_INVOCATION__RESULT, SimulationInvocation.class, msgs);
 				return basicSetInvocation((SimulationInvocation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);

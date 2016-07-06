@@ -198,7 +198,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimulationInvocation_Results() {
+	public EReference getSimulationInvocation_Result() {
 		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -316,7 +316,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__TRACE_SET);
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__TOOL_RESULT);
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__DEFINITION);
-		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__RESULTS);
+		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__RESULT);
 		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__START);
 		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__END);
 		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__STATUS);
@@ -371,7 +371,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 		initEReference(getSimulationInvocation_TraceSet(), theTracesPackage.getTraceSet(), null, "traceSet", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationInvocation_ToolResult(), theToolresultPackage.getToolResult(), null, "toolResult", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationInvocation_Definition(), theDefinitionPackage.getSimulationDefinition(), theDefinitionPackage.getSimulationDefinition_Invocations(), "definition", null, 1, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimulationInvocation_Results(), theSimresultPackage.getSimulationResult(), theSimresultPackage.getSimulationResult_Invocation(), "results", null, 0, -1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationInvocation_Result(), theSimresultPackage.getSimulationResult(), theSimresultPackage.getSimulationResult_Invocation(), "result", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationInvocation_Start(), ecorePackage.getEDate(), "start", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationInvocation_End(), ecorePackage.getEDate(), "end", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationInvocation_Status(), theDatatypesPackage.getSimulationStatus(), "status", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

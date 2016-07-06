@@ -1,4 +1,4 @@
-package es.unizar.disco.simulation.models;
+package es.unizar.disco.simulation.models.delegates;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EDataType;

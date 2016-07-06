@@ -34,7 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getTraceSet <em>Trace Set</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getToolResult <em>Tool Result</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getDefinition <em>Definition</em>}</li>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResults <em>Results</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResult <em>Result</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStart <em>Start</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getEnd <em>End</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getStatus <em>Status</em>}</li>
@@ -155,22 +155,32 @@ public interface SimulationInvocation extends EObject {
 	void setDefinition(SimulationDefinition value);
 
 	/**
-	 * Returns the value of the '<em><b>Results</b></em>' reference list.
-	 * The list contents are of type {@link es.unizar.disco.simulation.models.simresult.SimulationResult}.
+	 * Returns the value of the '<em><b>Result</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.simresult.SimulationResult#getInvocation <em>Invocation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Results</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Result</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Results</em>' reference list.
-	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_Results()
+	 * @return the value of the '<em>Result</em>' reference.
+	 * @see #setResult(SimulationResult)
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_Result()
 	 * @see es.unizar.disco.simulation.models.simresult.SimulationResult#getInvocation
 	 * @model opposite="invocation"
 	 * @generated
 	 */
-	EList<SimulationResult> getResults();
+	SimulationResult getResult();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getResult <em>Result</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Result</em>' reference.
+	 * @see #getResult()
+	 * @generated
+	 */
+	void setResult(SimulationResult value);
 
 	/**
 	 * Returns the value of the '<em><b>Start</b></em>' attribute.

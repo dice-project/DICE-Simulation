@@ -233,7 +233,7 @@ public class SimresultPackageImpl extends EPackageImpl implements SimresultPacka
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(simulationResultEClass, SimulationResult.class, "SimulationResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimulationResult_Invocation(), theInvocationPackage.getSimulationInvocation(), theInvocationPackage.getSimulationInvocation_Results(), "invocation", null, 1, 1, SimulationResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationResult_Invocation(), theInvocationPackage.getSimulationInvocation(), theInvocationPackage.getSimulationInvocation_Result(), "invocation", null, 1, 1, SimulationResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationResult_Measures(), theMeasuresPackage.getDomainMeasure(), null, "measures", null, 0, -1, SimulationResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

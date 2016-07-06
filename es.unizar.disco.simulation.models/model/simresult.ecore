@@ -4,7 +4,7 @@
     nsPrefix="simresult">
   <eClassifiers xsi:type="ecore:EClass" name="SimulationResult">
     <eStructuralFeatures xsi:type="ecore:EReference" name="invocation" lowerBound="1"
-        eType="ecore:EClass invocation.ecore#//SimulationInvocation" eOpposite="invocation.ecore#//SimulationInvocation/results"/>
+        eType="ecore:EClass invocation.ecore#//SimulationInvocation" eOpposite="invocation.ecore#//SimulationInvocation/result"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="measures" upperBound="-1"
         eType="ecore:EClass measures.ecore#//DomainMeasure" containment="true"/>
   </eClassifiers>

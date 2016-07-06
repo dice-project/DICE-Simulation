@@ -31,6 +31,7 @@ Export-Package: es.unizar.disco.simulation.models.builders,
  es.unizar.disco.simulation.models.traces,
  es.unizar.disco.simulation.models.traces.impl,
  es.unizar.disco.simulation.models.traces.util,
+ es.unizar.disco.simulation.models.util,
  es.unizar.disco.simulation.models.wnsim,
  es.unizar.disco.simulation.models.wnsim.impl,
  es.unizar.disco.simulation.models.wnsim.util
@@ -42,3 +43,4 @@ Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.lang;bundle-version="2.6.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: es.unizar.disco.core.collections
+Bundle-Activator: es.unizar.disco.simulation.models.DiceModelsPlugin

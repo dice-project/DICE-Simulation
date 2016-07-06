@@ -75,11 +75,11 @@
    <extension
          point="org.eclipse.emf.ecore.conversion_delegate">
       <factory
-            class="es.unizar.disco.simulation.models.NumberConversionDelegate$Factory"
+            class="es.unizar.disco.simulation.models.delegates.NumberConversionDelegate$Factory"
             uri="http://es.unizar.disco/simulation/conversion/number/1.0">
       </factory>
       <factory
-            class="es.unizar.disco.simulation.models.UriConversionDelegate$Factory"
+            class="es.unizar.disco.simulation.models.delegates.UriConversionDelegate$Factory"
             uri="http://es.unizar.disco/simulation/conversion/uri/1.0">
       </factory>
    </extension>
