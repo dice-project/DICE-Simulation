@@ -11,59 +11,86 @@
    </extension>
    <extension
          point="es.unizar.disco.simulation.models.supported_metrics">
+      <MetricTag
+            id="respT">
+      </MetricTag>
+      <MetricTag
+            id="utilization">
+      </MetricTag>
+      <MetricTag
+            id="throughput">
+      </MetricTag>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.ResponseTimeConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.responseTimeConverter"
             name="DICE::DICE_UML_Extensions::DPIM::DpimScenario#respT"
             stereotype="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
             tag="respT">
       </Metric>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.ThroughputConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.throughputConverter"
             name="DICE::DICE_UML_Extensions::DPIM::DpimScenario#throughput"
             stereotype="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
             tag="throughput">
       </Metric>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.ResponseTimeConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.responseTimeConverter"
             name="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#respT"
             stereotype="MARTE::MARTE_AnalysisModel::GQAM::GaScenario"
             tag="respT">
       </Metric>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.ThroughputConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.throughputConverter"
             name="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"
             stereotype="MARTE::MARTE_AnalysisModel::GQAM::GaScenario"
             tag="throughput">
       </Metric>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.ResponseTimeConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.responseTimeConverter"
             name="MARTE::MARTE_AnalysisModel::GQAM::GaStep#respT"
             stereotype="MARTE::MARTE_AnalysisModel::GQAM::GaStep"
             tag="respT">
       </Metric>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.ThroughputConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.throughputConverter"
             name="MARTE::MARTE_AnalysisModel::GQAM::GaStep#throughput"
             stereotype="MARTE::MARTE_AnalysisModel::GQAM::GaStep"
             tag="throughput">
       </Metric>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.UtilizationConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.utilizationConverter"
             name="MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource#utilization"
             stereotype="MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource"
             tag="utilization">
       </Metric>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.UtilizationConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.utilizationConverter"
             name="MARTE::MARTE_AnalysisModel::GQAM::GaExecHost#utilization"
             stereotype="MARTE::MARTE_AnalysisModel::GQAM::GaExecHost"
             tag="utilization">
       </Metric>
       <Metric
-            converter="es.unizar.disco.simulation.greatspn.ssh.converters.UtilizationConverter"
+            converter="es.unizar.disco.simulation.greatspn.ssh.utilizationConverter"
             name="MARTE::MARTE_AnalysisModel::GQAM::GaCommHost#utilization"
             stereotype="MARTE::MARTE_AnalysisModel::GQAM::GaCommHost"
             tag="utilization">
       </Metric>
+      <Converter
+            analyzableElementInfo="es.unizar.disco.simulation.models.wnsim.PlaceInfo"
+            class="es.unizar.disco.simulation.greatspn.ssh.converters.ResponseTimeConverter"
+            id="es.unizar.disco.simulation.greatspn.ssh.responseTimeConverter"
+            metric="respT">
+      </Converter>
+      <Converter
+            analyzableElementInfo="es.unizar.disco.simulation.models.wnsim.TransitionInfo"
+            class="es.unizar.disco.simulation.greatspn.ssh.converters.ThroughputConverter"
+            id="es.unizar.disco.simulation.greatspn.ssh.throughputConverter"
+            metric="throughput">
+      </Converter>
+      <Converter
+            analyzableElementInfo="es.unizar.disco.simulation.models.wnsim.PlaceInfo"
+            class="es.unizar.disco.simulation.greatspn.ssh.converters.UtilizationConverter"
+            id="es.unizar.disco.simulation.greatspn.ssh.utilizationConverter"
+            metric="utilization">
+      </Converter>
    </extension>
 </plugin>

@@ -17,9 +17,11 @@
          </appInfo>
       </annotation>
       <complexType>
-         <choice minOccurs="1" maxOccurs="unbounded">
-            <element ref="Metric"/>
-         </choice>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="MetricTag"/>
+            <element ref="Converter" minOccurs="1" maxOccurs="unbounded"/>
+            <element ref="Metric" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
@@ -47,12 +49,24 @@
       </complexType>
    </element>
 
+   <element name="MetricTag">
+      <complexType>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Tag of an NFP value that denotes a metric
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
    <element name="Metric">
       <complexType>
          <attribute name="name" type="string">
             <annotation>
                <documentation>
-                  A descriptive name for the metric
+                  A descriptive name for the metric, only for clarification purposes
                </documentation>
             </annotation>
          </attribute>
@@ -63,30 +77,65 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="tag" use="required">
+         <attribute name="tag" type="string" use="required">
             <annotation>
                <documentation>
-                  Name of a tag expressing a NFP
+                  Name of a tag expressing a NFP denoting a metric
                </documentation>
+               <appInfo>
+                  <meta.attribute kind="identifier" basedOn="es.unizar.disco.simulation.models.supported_metrics/MetricTag/@id"/>
+               </appInfo>
             </annotation>
-            <simpleType>
-               <restriction base="string">
-                  <enumeration value="respT">
-                  </enumeration>
-                  <enumeration value="throughput">
-                  </enumeration>
-                  <enumeration value="utilization">
-                  </enumeration>
-               </restriction>
-            </simpleType>
          </attribute>
          <attribute name="converter" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  A contributed Converter that is able to compute this measure from an AnalyzableElementInfo
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="identifier" basedOn="es.unizar.disco.simulation.models.supported_metrics/Converter/@id"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="Converter">
+      <complexType>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The identifier of this Converter
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="metric" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The metric that is able to compute
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="identifier" basedOn="es.unizar.disco.simulation.models.supported_metrics/MetricTag/@id"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The class that implements the Converter, i.e., a class that can transform an AnalyzableElementInfo into a DomainMeasure
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.measures.MeasureConverter"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="analyzableElementInfo" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Subclass of AnalyzableElementInfo that this Converter is able to handle
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo"/>
                </appInfo>
             </annotation>
          </attribute>
