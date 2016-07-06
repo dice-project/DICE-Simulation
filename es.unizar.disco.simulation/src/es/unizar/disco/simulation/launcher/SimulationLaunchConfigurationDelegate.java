@@ -5,6 +5,8 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -18,6 +20,7 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.RuntimeProcess;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.statushandlers.StatusManager;
 
 import es.unizar.disco.simulation.DiceSimulationPlugin;
@@ -26,6 +29,16 @@ import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
+import es.unizar.disco.simulation.models.measures.DomainMeasure;
+import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
+import es.unizar.disco.simulation.models.measures.MeasureConverter;
+import es.unizar.disco.simulation.models.simresult.SimresultFactory;
+import es.unizar.disco.simulation.models.simresult.SimulationResult;
+import es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo;
+import es.unizar.disco.simulation.models.toolresult.ToolResult;
+import es.unizar.disco.simulation.models.traces.Trace;
+import es.unizar.disco.simulation.models.traces.TraceSet;
+import es.unizar.disco.simulation.models.util.DiceMetricsUtils;
 import es.unizar.disco.simulation.registry.SimulationInvocationsRegistry;
 import es.unizar.disco.simulation.simulators.ISimulator;
 import es.unizar.disco.simulation.simulators.SimulationException;
@@ -117,18 +130,62 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			} catch (SimulationException | InterruptedException e) {
 				status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
 			} finally {
-				invocation.setToolResult(simulator.getToolResult());
+				invocation.setEnd(Calendar.getInstance().getTime());
 				if (invocation.getStatus() == SimulationStatus.RUNNING
 						|| invocation.getStatus() == SimulationStatus.WAITING
 						|| invocation.getStatus() == SimulationStatus.UNKNOWN) {
 					invocation.setStatus(SimulationStatus.FAILED);
 				}
-				invocation.setEnd(Calendar.getInstance().getTime());
+				if (simulator.getToolResult() != null) {
+					invocation.setToolResult(simulator.getToolResult());
+					for (DomainMeasureDefinition measureDefinition : definition.getMeasuresToCompute()) {
+						EObject measuredElement = measureDefinition.getMeasuredElement();
+						String measure = measureDefinition.getMeasure();
+						SimulationResult simulationResult = SimresultFactory.eINSTANCE.createSimulationResult();
+						for (AnalyzableElementInfo info : findInfosForDomainElement(measuredElement, invocation.getTraceSet(), invocation.getToolResult())) {
+							MeasureConverter converter = DiceMetricsUtils.getConverter(info.getClass(), measure);
+							DomainMeasure domainMeasure = converter.convert(info);
+							domainMeasure.setDefinition(measureDefinition);
+							simulationResult.getMeasures().add(domainMeasure);
+						}
+						invocation.setResult(simulationResult);
+					}
+				}
 			}
 		}
 		if (!status.isOK()) {
 			throw new CoreException(status);
 		}
+	}
+
+	private static Set<AnalyzableElementInfo> findInfosForDomainElement(EObject domainelement, TraceSet traceSet, ToolResult toolResult) {
+		Set<AnalyzableElementInfo> infos = new HashSet<>();
+		for (Trace trace : findTraces(traceSet, domainelement)) {
+			AnalyzableElementInfo info = findAnalyzableElementInfo(toolResult, trace.getToAnalyzableElement());
+			if (info != null) {
+				infos.add(info);
+			}
+		}
+		return infos;
+	}
+	
+	private static AnalyzableElementInfo findAnalyzableElementInfo(ToolResult toolResult, EObject eObject) {
+		for (AnalyzableElementInfo info : toolResult.getInfos()) {
+			if (eObject.equals(info.getAnalyzedElement())) {
+				return info;
+			}
+		}
+		return null;
+	}
+	
+	private static Set<Trace> findTraces(TraceSet traceSet, EObject eObject) {
+		Set<Trace> traces = new HashSet<>();
+		for (Trace trace : traceSet.getTraces()) {
+			if (eObject.equals(trace.getFromDomainElement())) {
+				traces.add(trace);
+			}
+		}
+		return traces;
 	}
 
 	private SimulationDefinition reifySimulationDefinition(ILaunchConfiguration configuration) throws CoreException {
