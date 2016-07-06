@@ -43,7 +43,7 @@ public class SimulationInvocationsRegistry {
 	EContentAdapter invocationAdapter = new EContentAdapter() {
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
-			if (notification.getFeature() == InvocationPackage.Literals.SIMULATION_INVOCATION__RESULTS 
+			if (notification.getFeature() == InvocationPackage.Literals.SIMULATION_INVOCATION__RESULT 
 					|| notification.getFeature() == InvocationPackage.Literals.SIMULATION_INVOCATION__TOOL_RESULT) {
 				resourcefyInvocation((SimulationInvocation) notification.getNotifier());
 			}
@@ -226,10 +226,10 @@ public class SimulationInvocationsRegistry {
 		}
 		
 		// Save the result
-		EList<SimulationResult> results = invocation.getResults();
-		if (!results.isEmpty() && results.get(0).eResource() == null) {
+		SimulationResult result = invocation.getResult();
+		if (result != null && result.eResource() == null) {
 			Resource resResource = getResourceSet().createResource(resURI);
-			resResource.getContents().addAll(results);
+			resResource.getContents().add(result);
 		}
 	}
 }
