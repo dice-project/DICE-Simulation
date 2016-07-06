@@ -171,12 +171,13 @@
   </genPackages>
   <genPackages prefix="Measures" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"
       ecorePackage="measures.ecore#/">
-    <genClasses image="false" ecoreClass="measures.ecore#//DomainMeasure">
+    <genClasses ecoreClass="measures.ecore#//DomainMeasure">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/unit"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasure/definition"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference measures.ecore#//DomainMeasure/definition"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="measures.ecore#//MeasureConverter">
+    <genClasses ecoreClass="measures.ecore#//MeasureConverter">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/to"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/from"/>
       <genOperations ecoreOperation="measures.ecore#//MeasureConverter/convert">
