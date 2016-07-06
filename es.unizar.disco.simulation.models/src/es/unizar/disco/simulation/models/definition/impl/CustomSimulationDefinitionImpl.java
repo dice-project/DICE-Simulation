@@ -43,7 +43,6 @@ import com.google.common.collect.Lists;
 import es.unizar.disco.core.collections.DerivedMap;
 import es.unizar.disco.core.collections.Function;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
-import es.unizar.disco.simulation.models.datatypes.Measure;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.InputVariable;
@@ -487,7 +486,7 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 	private DomainMeasureDefinition createDomainMeasureDefinition(Element element, String taggedValueName, String expression) {
 		DomainMeasureDefinition measureDefinition = MeasuresFactory.eINSTANCE.createDomainMeasureDefinition();
 		measureDefinition.setMeasuredElement(element);
-		measureDefinition.setMeasure(Measure.getByName(taggedValueName));
+		measureDefinition.setMeasure(taggedValueName);
 		measureDefinition.setVslExpression(expression);
 		return measureDefinition;
 	}

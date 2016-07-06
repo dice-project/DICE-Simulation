@@ -3,7 +3,6 @@
 package es.unizar.disco.simulation.models.measures.provider;
 
 
-import es.unizar.disco.simulation.models.datatypes.Measure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 import es.unizar.disco.simulation.models.measures.MeasuresFactory;
 import es.unizar.disco.simulation.models.measures.MeasuresPackage;
@@ -210,8 +209,7 @@ public class DomainMeasureDefinitionItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Measure labelValue = ((DomainMeasureDefinition)object).getMeasure();
-		String label = labelValue == null ? null : labelValue.toString();
+		String label = ((DomainMeasureDefinition)object).getMeasure();
 		return label == null || label.length() == 0 ?
 			getString("_UI_DomainMeasureDefinition_type") :
 			getString("_UI_DomainMeasureDefinition_type") + " " + label;

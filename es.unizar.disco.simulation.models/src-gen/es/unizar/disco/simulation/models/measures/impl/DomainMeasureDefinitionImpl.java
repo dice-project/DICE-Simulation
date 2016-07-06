@@ -2,8 +2,6 @@
  */
 package es.unizar.disco.simulation.models.measures.impl;
 
-import es.unizar.disco.simulation.models.datatypes.Measure;
-
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
 import es.unizar.disco.simulation.models.definition.OutputVariable;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
@@ -65,7 +63,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Measure MEASURE_EDEFAULT = Measure.UNSPECIFIED;
+	protected static final String MEASURE_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getMeasure() <em>Measure</em>}' attribute.
@@ -75,7 +73,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * @generated
 	 * @ordered
 	 */
-	protected Measure measure = MEASURE_EDEFAULT;
+	protected String measure = MEASURE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getVslExpressionEntries() <em>Vsl Expression Entries</em>}' map.
@@ -159,7 +157,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Measure getMeasure() {
+	public String getMeasure() {
 		return measure;
 	}
 
@@ -168,9 +166,9 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMeasure(Measure newMeasure) {
-		Measure oldMeasure = measure;
-		measure = newMeasure == null ? MEASURE_EDEFAULT : newMeasure;
+	public void setMeasure(String newMeasure) {
+		String oldMeasure = measure;
+		measure = newMeasure;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MeasuresPackage.DOMAIN_MEASURE_DEFINITION__MEASURE, oldMeasure, measure));
 	}
@@ -357,7 +355,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 				setMeasuredElement((EObject)newValue);
 				return;
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__MEASURE:
-				setMeasure((Measure)newValue);
+				setMeasure((String)newValue);
 				return;
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION_ENTRIES:
 				((EStructuralFeature.Setting)getVslExpressionEntries()).set(newValue);
@@ -410,7 +408,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__MEASURED_ELEMENT:
 				return measuredElement != null;
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__MEASURE:
-				return measure != MEASURE_EDEFAULT;
+				return MEASURE_EDEFAULT == null ? measure != null : !MEASURE_EDEFAULT.equals(measure);
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION_ENTRIES:
 				return vslExpressionEntries != null && !vslExpressionEntries.isEmpty();
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION:

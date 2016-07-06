@@ -23,7 +23,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="measuredElement" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="measure" lowerBound="1"
-        eType="ecore:EEnum datatypes.ecore#//Measure"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="vslExpressionEntries" upperBound="-1"
         eType="#//Entry" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="vslExpression" lowerBound="1"

@@ -14,7 +14,7 @@ public class CustomDomainMeasureDefinitionItemProvider extends DomainMeasureDefi
 	public String getText(Object object) {
 		DomainMeasureDefinition definition = (DomainMeasureDefinition)object;
 		StringBuilder builder = new StringBuilder();
-		builder.append(definition.getMeasure().getLiteral());
+		builder.append(definition.getMeasure());
 		String expression = definition.getVslExpression();
 		if (expression != null && expression.length() > 0) {
 			builder.append(": ");

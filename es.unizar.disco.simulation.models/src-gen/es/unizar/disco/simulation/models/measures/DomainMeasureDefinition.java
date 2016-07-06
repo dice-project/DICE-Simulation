@@ -2,8 +2,6 @@
  */
 package es.unizar.disco.simulation.models.measures;
 
-import es.unizar.disco.simulation.models.datatypes.Measure;
-
 import es.unizar.disco.simulation.models.definition.OutputVariable;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 
@@ -61,7 +59,6 @@ public interface DomainMeasureDefinition extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Measure</b></em>' attribute.
-	 * The literals are from the enumeration {@link es.unizar.disco.simulation.models.datatypes.Measure}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Measure</em>' attribute isn't clear,
@@ -69,24 +66,22 @@ public interface DomainMeasureDefinition extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Measure</em>' attribute.
-	 * @see es.unizar.disco.simulation.models.datatypes.Measure
-	 * @see #setMeasure(Measure)
+	 * @see #setMeasure(String)
 	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasureDefinition_Measure()
 	 * @model required="true"
 	 * @generated
 	 */
-	Measure getMeasure();
+	String getMeasure();
 
 	/**
 	 * Sets the value of the '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getMeasure <em>Measure</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Measure</em>' attribute.
-	 * @see es.unizar.disco.simulation.models.datatypes.Measure
 	 * @see #getMeasure()
 	 * @generated
 	 */
-	void setMeasure(Measure value);
+	void setMeasure(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Vsl Expression Entries</b></em>' map.

@@ -58,12 +58,6 @@
     <eLiterals name="mg" value="91"/>
     <eLiterals name="kg" value="92"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EEnum" name="Measure">
-    <eLiterals name="unspecified" literal="Unspecified"/>
-    <eLiterals name="respT" value="1" literal="Response Time"/>
-    <eLiterals name="throughput" value="2" literal="Throughput"/>
-    <eLiterals name="utilization" value="3" literal="Utilization"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SimulationStatus">
     <eLiterals name="unknown" literal="Unknown"/>
     <eLiterals name="running" value="1" literal="Running"/>

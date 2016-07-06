@@ -161,16 +161,6 @@ public interface DatatypesPackage extends EPackage {
 	int UNIT = 2;
 
 	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.Measure <em>Measure</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.datatypes.Measure
-	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getMeasure()
-	 * @generated
-	 */
-	int MEASURE = 3;
-
-	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,7 +168,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getSimulationStatus()
 	 * @generated
 	 */
-	int SIMULATION_STATUS = 4;
+	int SIMULATION_STATUS = 3;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -188,7 +178,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 5;
+	int URI = 4;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -198,7 +188,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 6;
+	int NUMBER = 5;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type.
@@ -208,7 +198,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 7;
+	int ISTATUS = 6;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -218,7 +208,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 8;
+	int COLLECTION = 7;
 
 
 	/**
@@ -294,16 +284,6 @@ public interface DatatypesPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getUnit();
-
-	/**
-	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.Measure <em>Measure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Measure</em>'.
-	 * @see es.unizar.disco.simulation.models.datatypes.Measure
-	 * @generated
-	 */
-	EEnum getMeasure();
 
 	/**
 	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}'.
@@ -444,16 +424,6 @@ public interface DatatypesPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum UNIT = eINSTANCE.getUnit();
-
-		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.Measure <em>Measure</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.datatypes.Measure
-		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getMeasure()
-		 * @generated
-		 */
-		EEnum MEASURE = eINSTANCE.getMeasure();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}' enum.

@@ -78,8 +78,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 		switch (eDataType.getClassifierID()) {
 			case DatatypesPackage.UNIT:
 				return createUnitFromString(eDataType, initialValue);
-			case DatatypesPackage.MEASURE:
-				return createMeasureFromString(eDataType, initialValue);
 			case DatatypesPackage.SIMULATION_STATUS:
 				return createSimulationStatusFromString(eDataType, initialValue);
 			case DatatypesPackage.URI:
@@ -103,8 +101,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 		switch (eDataType.getClassifierID()) {
 			case DatatypesPackage.UNIT:
 				return convertUnitToString(eDataType, instanceValue);
-			case DatatypesPackage.MEASURE:
-				return convertMeasureToString(eDataType, instanceValue);
 			case DatatypesPackage.SIMULATION_STATUS:
 				return convertSimulationStatusToString(eDataType, instanceValue);
 			case DatatypesPackage.URI:
@@ -155,26 +151,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 * @generated
 	 */
 	public String convertUnitToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Measure createMeasureFromString(EDataType eDataType, String initialValue) {
-		Measure result = Measure.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertMeasureToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

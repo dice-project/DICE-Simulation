@@ -4,7 +4,6 @@ package es.unizar.disco.simulation.models.datatypes.impl;
 
 import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
-import es.unizar.disco.simulation.models.datatypes.Measure;
 import es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment;
 import es.unizar.disco.simulation.models.datatypes.Resource;
 import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
@@ -77,13 +76,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * @generated
 	 */
 	private EEnum unitEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EEnum measureEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -272,15 +264,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getMeasure() {
-		return measureEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getSimulationStatus() {
 		return simulationStatusEEnum;
 	}
@@ -359,7 +342,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 
 		// Create enums
 		unitEEnum = createEEnum(UNIT);
-		measureEEnum = createEEnum(MEASURE);
 		simulationStatusEEnum = createEEnum(SIMULATION_STATUS);
 
 		// Create data types
@@ -448,12 +430,6 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		addEEnumLiteral(unitEEnum, Unit.G);
 		addEEnumLiteral(unitEEnum, Unit.MG);
 		addEEnumLiteral(unitEEnum, Unit.KG);
-
-		initEEnum(measureEEnum, Measure.class, "Measure");
-		addEEnumLiteral(measureEEnum, Measure.UNSPECIFIED);
-		addEEnumLiteral(measureEEnum, Measure.RESP_T);
-		addEEnumLiteral(measureEEnum, Measure.THROUGHPUT);
-		addEEnumLiteral(measureEEnum, Measure.UTILIZATION);
 
 		initEEnum(simulationStatusEEnum, SimulationStatus.class, "SimulationStatus");
 		addEEnumLiteral(simulationStatusEEnum, SimulationStatus.UNKNOWN);
