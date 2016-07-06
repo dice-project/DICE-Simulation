@@ -97,6 +97,8 @@ public class InvocationsView extends ViewPart {
 
 	private Action openFolderAction;
 
+	private Action openResultAction;
+
 	private Action openInvocationAction;
 
 	private Action exportVariablesAction;
@@ -214,6 +216,9 @@ public class InvocationsView extends ViewPart {
 	}
 
 	private void fillContextMenu(IMenuManager manager) {
+		manager.add(openResultAction);
+		manager.add(openInvocationAction);
+		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 		manager.add(exportVariablesAction);
 		// Other plug-ins can contribute there actions here
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
@@ -362,11 +367,34 @@ public class InvocationsView extends ViewPart {
 				}
 			}
 		};
-		openInvocationAction.setText("Open Simulation Invocation");
+		openInvocationAction.setText("Inspect Simulation Invocation Data");
 		openInvocationAction.setToolTipText("Opens the Simulation invocation in the Ecore Reflective editor");
 		openInvocationAction
-				.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_EMF_EDITOR));
+				.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_SIMULATION_INVOCATION));
 
+		openResultAction = new Action() {
+			public void run() {
+				IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
+				SimulationInvocation invocation = (SimulationInvocation) selection.getFirstElement();
+				IWorkbench workbench = PlatformUI.getWorkbench();
+				IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
+				try {
+					SimulationInvocationsRegistry.INSTANCE.save();
+					page.openEditor(new URIEditorInput(EcoreUtil.getURI(invocation.getResult())), RootedReadOnlyEcoreEditor.ID);
+				} catch (IOException e) {
+					ErrorDialog.openError(getSite().getShell(), "Error", "Unable to save registry data",
+							new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				} catch (PartInitException e) {
+					ErrorDialog.openError(getSite().getShell(), "Error", "Unable open Simulation Results",
+							new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				}
+			}
+		};
+		openResultAction.setText("Open Simulation Result");
+		openResultAction.setToolTipText("Opens the Simulation result in the Ecore Reflective editor");
+		openResultAction
+		.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_SIMULATION_RESULT));
+		
 		exportVariablesAction = new Action() {
 			public void run() {
 				IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
@@ -396,7 +424,7 @@ public class InvocationsView extends ViewPart {
 	private void hookDoubleClickAction() {
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
-				openInvocationAction.run();
+				openResultAction.run();
 			}
 		});
 	}

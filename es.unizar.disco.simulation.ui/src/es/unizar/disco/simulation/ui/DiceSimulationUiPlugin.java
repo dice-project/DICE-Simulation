@@ -22,6 +22,8 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	public static final String IMG_OBJ16_WAITING = "IMG_OBJ16_WAITING"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_UNKNOWN = "IMG_OBJ16_UNKNOWN"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_EMF_EDITOR = "IMG_OBJ16_EMF_EDITOR"; //$NON-NLS-1$
+	public static final String IMG_OBJ16_SIMULATION_RESULT = "IMG_OBJ16_SIMULATION_RESULT"; //$NON-NLS-1$
+	public static final String IMG_OBJ16_SIMULATION_INVOCATION = "IMG_OBJ16_SIMULATION_INVOCATION"; //$NON-NLS-1$
 	public static final String IMG_ETOOL16_UP = "IMG_ETOOL16_UP"; //$NON-NLS-1$
 	public static final String IMG_ETOOL16_DOWN = "IMG_ETOOL16_DOWN"; //$NON-NLS-1$
 	public static final String IMG_ETOOL16_GO_TO_FOLDER = "IMG_ETOOL16_GO_TO_FOLDER"; //$NON-NLS-1$
@@ -92,6 +94,8 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 		reg.put(IMG_OBJ16_WAITING, getImageDescriptor("icons/full/obj16/waiting.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_OBJ16_UNKNOWN, getImageDescriptor("icons/full/obj16/unknown.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_OBJ16_EMF_EDITOR, getImageDescriptor("icons/full/obj16/emf_editor.gif").createImage()); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_SIMULATION_RESULT, getImageDescriptor("icons/full/obj16/simulation_result.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_SIMULATION_INVOCATION, getImageDescriptor("icons/full/obj16/simulation_invocation.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_ETOOL16_UP, getImageDescriptor("icons/full/etool16/up.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_ETOOL16_DOWN, getImageDescriptor("icons/full/etool16/down.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_ETOOL16_GO_TO_FOLDER, getImageDescriptor("icons/full/etool16/go_to_folder.png").createImage()); //$NON-NLS-1$
