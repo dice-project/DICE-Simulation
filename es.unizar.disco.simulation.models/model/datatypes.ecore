@@ -20,7 +20,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Unit">
     <eLiterals name="unspecified" literal="unspecified"/>
-    <eLiterals name="none" value="5"/>
+    <eLiterals name="percentage" value="3"/>
+    <eLiterals name="none" value="6"/>
     <eLiterals name="s" value="10"/>
     <eLiterals name="tick" value="11"/>
     <eLiterals name="ms" value="12"/>

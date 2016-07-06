@@ -393,6 +393,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		// Initialize enums and add enum literals
 		initEEnum(unitEEnum, Unit.class, "Unit");
 		addEEnumLiteral(unitEEnum, Unit.UNSPECIFIED);
+		addEEnumLiteral(unitEEnum, Unit.PERCENTAGE);
 		addEEnumLiteral(unitEEnum, Unit.NONE);
 		addEEnumLiteral(unitEEnum, Unit.S);
 		addEEnumLiteral(unitEEnum, Unit.TICK);

@@ -29,6 +29,14 @@ public enum Unit implements Enumerator {
 	UNSPECIFIED(0, "unspecified", "unspecified"),
 
 	/**
+	 * The '<em><b>Percentage</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #PERCENTAGE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	PERCENTAGE(3, "percentage", "percentage"), /**
 	 * The '<em><b>None</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -36,7 +44,7 @@ public enum Unit implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NONE(5, "none", "none"),
+	NONE(6, "none", "none"),
 
 	/**
 	 * The '<em><b>S</b></em>' literal object.
@@ -414,6 +422,21 @@ public enum Unit implements Enumerator {
 	public static final int UNSPECIFIED_VALUE = 0;
 
 	/**
+	 * The '<em><b>Percentage</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Percentage</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #PERCENTAGE
+	 * @model name="percentage"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PERCENTAGE_VALUE = 3;
+
+	/**
 	 * The '<em><b>None</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -426,7 +449,7 @@ public enum Unit implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int NONE_VALUE = 5;
+	public static final int NONE_VALUE = 6;
 
 	/**
 	 * The '<em><b>S</b></em>' literal value.
@@ -977,6 +1000,7 @@ public enum Unit implements Enumerator {
 	private static final Unit[] VALUES_ARRAY =
 		new Unit[] {
 			UNSPECIFIED,
+			PERCENTAGE,
 			NONE,
 			S,
 			TICK,
@@ -1071,6 +1095,7 @@ public enum Unit implements Enumerator {
 	public static Unit get(int value) {
 		switch (value) {
 			case UNSPECIFIED_VALUE: return UNSPECIFIED;
+			case PERCENTAGE_VALUE: return PERCENTAGE;
 			case NONE_VALUE: return NONE;
 			case S_VALUE: return S;
 			case TICK_VALUE: return TICK;
