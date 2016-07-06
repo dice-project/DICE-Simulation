@@ -335,6 +335,7 @@ public class SimulationInvocationItemProvider
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__TRACE_SET);
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__TOOL_RESULT);
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__DEFINITION);
+			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__RESULT);
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__VARIABLE_CONFIGURATION);
 			childrenFeatures.add(InvocationPackage.Literals.SIMULATION_INVOCATION__ANALYZABLE_MODEL);
 		}
