@@ -12,4 +12,13 @@ public class CustomMeasuresItemProviderAdapterFactory extends MeasuresItemProvid
 		
 		return domainMeasureDefinitionItemProvider;
 	}
+	
+	@Override
+	public Adapter createDomainMeasureAdapter() {
+		if (domainMeasureItemProvider == null) {
+			domainMeasureItemProvider = new CustomDomainMeasureItemProvider(this);
+		}
+		
+		return domainMeasureItemProvider;
+	}
 }
