@@ -74,8 +74,8 @@ public class MeasuresAdapterFactory extends AdapterFactoryImpl {
 				return createDomainMeasureAdapter();
 			}
 			@Override
-			public Adapter caseMeasureConverter(MeasureConverter object) {
-				return createMeasureConverterAdapter();
+			public Adapter caseMeasureCalculator(MeasureCalculator object) {
+				return createMeasureCalculatorAdapter();
 			}
 			@Override
 			public Adapter caseDomainMeasureDefinition(DomainMeasureDefinition object) {
@@ -120,16 +120,16 @@ public class MeasuresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}'.
+	 * Creates a new adapter for an object of class '{@link es.unizar.disco.simulation.models.measures.MeasureCalculator <em>Measure Calculator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter
+	 * @see es.unizar.disco.simulation.models.measures.MeasureCalculator
 	 * @generated
 	 */
-	public Adapter createMeasureConverterAdapter() {
+	public Adapter createMeasureCalculatorAdapter() {
 		return null;
 	}
 

@@ -36,7 +36,9 @@ public enum Unit implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PERCENTAGE(3, "percentage", "percentage"), /**
+	PERCENTAGE(3, "percentage", "percentage"),
+
+	/**
 	 * The '<em><b>None</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

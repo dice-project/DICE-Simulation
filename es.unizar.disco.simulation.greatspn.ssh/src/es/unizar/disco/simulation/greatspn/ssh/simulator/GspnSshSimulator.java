@@ -233,6 +233,7 @@ public class GspnSshSimulator implements ISimulator {
 							DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "Unmatched line while processing WNSIM output: " + line);
 						}
 					}
+					latestResult = currentResult;
 				} catch (IOException e) {
 					DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
 				}

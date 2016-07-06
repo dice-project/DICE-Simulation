@@ -11,8 +11,7 @@ import org.eclipse.core.runtime.Platform;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.simulation.models.DiceModelsPlugin;
-import es.unizar.disco.simulation.models.measures.MeasureConverter;
-import es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo;
+import es.unizar.disco.simulation.models.measures.MeasureCalculator;
 
 @SuppressWarnings("unused")
 public class DiceMetricsUtils {
@@ -33,7 +32,7 @@ public class DiceMetricsUtils {
 
 	private static final String CONVERTER_ID = "id";
 	private static final String CONVERTER_METRIC = "metric";
-	private static final String CONVERTER_ANALYZABLE_ELEMENT_INFO = "analyzableElementInfo";
+	private static final String CONVERTER_DOMAIN_ELEMENT = "domainElement";
 	private static final String CONVERTER_CLASS = "class";
 
 	public static class Metric {
@@ -63,14 +62,14 @@ public class DiceMetricsUtils {
 	}
 
 
-	public static MeasureConverter getConverter(Class<? extends AnalyzableElementInfo> clazz, String measure) {
+	public static MeasureCalculator getCalculator(Class<?> clazz, String measure) {
 		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSION_ID);
 		for (IConfigurationElement configElement : configElements) {
 			if (ELEMENT_CONVERTER.equals(configElement.getName())) {
 				try {
 					if (StringUtils.equals(measure, configElement.getAttribute(CONVERTER_METRIC)) &&
-							Class.forName(configElement.getAttribute(CONVERTER_ANALYZABLE_ELEMENT_INFO)).isAssignableFrom(clazz)) {
-						return (MeasureConverter) configElement.createExecutableExtension(CONVERTER_CLASS);
+							Class.forName(configElement.getAttribute(CONVERTER_DOMAIN_ELEMENT)).isAssignableFrom(clazz)) {
+						return (MeasureCalculator) configElement.createExecutableExtension(CONVERTER_CLASS);
 					}
 				} catch (ClassNotFoundException | CoreException e) {
 					// In case of error, log it and ignore the defective entry

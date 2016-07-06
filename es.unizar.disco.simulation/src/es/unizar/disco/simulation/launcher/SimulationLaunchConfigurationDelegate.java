@@ -5,8 +5,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -14,7 +12,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -22,6 +19,7 @@ import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.RuntimeProcess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.statushandlers.StatusManager;
+import org.eclipse.uml2.uml.Element;
 
 import es.unizar.disco.simulation.DiceSimulationPlugin;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
@@ -31,13 +29,9 @@ import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
-import es.unizar.disco.simulation.models.measures.MeasureConverter;
+import es.unizar.disco.simulation.models.measures.MeasureCalculator;
 import es.unizar.disco.simulation.models.simresult.SimresultFactory;
 import es.unizar.disco.simulation.models.simresult.SimulationResult;
-import es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo;
-import es.unizar.disco.simulation.models.toolresult.ToolResult;
-import es.unizar.disco.simulation.models.traces.Trace;
-import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.util.DiceMetricsUtils;
 import es.unizar.disco.simulation.registry.SimulationInvocationsRegistry;
 import es.unizar.disco.simulation.simulators.ISimulator;
@@ -108,21 +102,23 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
 				runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, definition.getParameters().toString());
 
-				Job killJob = new Job("Kill job") {
-					@Override
-					protected IStatus run(IProgressMonitor monitor) {
-						if (simulationProcess.isAlive()) {
-							invocation.setStatus(SimulationStatus.KILLED);
-							simulationProcess.destroyForcibly();
-						}
-						return Status.OK_STATUS;
-					}
-				};
-				
+				// @formatter:off
 				ZonedDateTime universalTime = OffsetDateTime.ofInstant(definition.getMaxExecutionTime().toInstant(), ZoneOffset.systemDefault()).atZoneSimilarLocal(ZoneOffset.UTC);
-				
-				killJob.schedule(universalTime.toInstant().toEpochMilli());
-				
+				new Thread() {
+					public void run() {
+						try {
+							sleep(universalTime.toInstant().toEpochMilli());
+							if (simulationProcess.isAlive()) {
+								invocation.setStatus(SimulationStatus.KILLED);
+								simulationProcess.destroyForcibly();
+							}
+						} catch (InterruptedException e) {
+							throw new RuntimeException(e);
+						}
+					}
+				}.start();
+				// @formatter:on
+
 				simulationProcess.waitFor();
 				if (simulationProcess.exitValue() == 0) {
 					invocation.setStatus(SimulationStatus.FINISHED);
@@ -138,17 +134,26 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				}
 				if (simulator.getToolResult() != null) {
 					invocation.setToolResult(simulator.getToolResult());
+					SimulationResult simulationResult = SimresultFactory.eINSTANCE.createSimulationResult();
+					invocation.setResult(simulationResult);
 					for (DomainMeasureDefinition measureDefinition : definition.getMeasuresToCompute()) {
 						EObject measuredElement = measureDefinition.getMeasuredElement();
-						String measure = measureDefinition.getMeasure();
-						SimulationResult simulationResult = SimresultFactory.eINSTANCE.createSimulationResult();
-						for (AnalyzableElementInfo info : findInfosForDomainElement(measuredElement, invocation.getTraceSet(), invocation.getToolResult())) {
-							MeasureConverter converter = DiceMetricsUtils.getConverter(info.getClass(), measure);
-							DomainMeasure domainMeasure = converter.convert(info);
-							domainMeasure.setDefinition(measureDefinition);
-							simulationResult.getMeasures().add(domainMeasure);
+						MeasureCalculator calculator = DiceMetricsUtils.getCalculator((Element) measuredElement, measureDefinition.getMeasure());
+						if (calculator == null) {
+							invocation.setStatus(SimulationStatus.FAILED);
+							status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
+									MessageFormat.format("Unable to find a ''{0}'' calculator for ''{1}'' ", measureDefinition.getMeasure(), measuredElement)));
+						} else {
+							DomainMeasure domainMeasure = calculator.calculate(measuredElement, invocation.getToolResult(), invocation.getTraceSet());
+							if (domainMeasure == null) {
+								invocation.setStatus(SimulationStatus.FAILED);
+								status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
+										MessageFormat.format("Unable to calculate measure ''{0}'' for ''{1}'' ", measureDefinition.getMeasure(), measuredElement)));
+							} else {
+								domainMeasure.setDefinition(measureDefinition);
+								simulationResult.getMeasures().add(domainMeasure);
+							}
 						}
-						invocation.setResult(simulationResult);
 					}
 				}
 			}
@@ -156,36 +161,6 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		if (!status.isOK()) {
 			throw new CoreException(status);
 		}
-	}
-
-	private static Set<AnalyzableElementInfo> findInfosForDomainElement(EObject domainelement, TraceSet traceSet, ToolResult toolResult) {
-		Set<AnalyzableElementInfo> infos = new HashSet<>();
-		for (Trace trace : findTraces(traceSet, domainelement)) {
-			AnalyzableElementInfo info = findAnalyzableElementInfo(toolResult, trace.getToAnalyzableElement());
-			if (info != null) {
-				infos.add(info);
-			}
-		}
-		return infos;
-	}
-	
-	private static AnalyzableElementInfo findAnalyzableElementInfo(ToolResult toolResult, EObject eObject) {
-		for (AnalyzableElementInfo info : toolResult.getInfos()) {
-			if (eObject.equals(info.getAnalyzedElement())) {
-				return info;
-			}
-		}
-		return null;
-	}
-	
-	private static Set<Trace> findTraces(TraceSet traceSet, EObject eObject) {
-		Set<Trace> traces = new HashSet<>();
-		for (Trace trace : traceSet.getTraces()) {
-			if (eObject.equals(trace.getFromDomainElement())) {
-				traces.add(trace);
-			}
-		}
-		return traces;
 	}
 
 	private SimulationDefinition reifySimulationDefinition(ILaunchConfiguration configuration) throws CoreException {

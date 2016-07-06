@@ -16,7 +16,7 @@ import es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl;
 
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
-import es.unizar.disco.simulation.models.measures.MeasureConverter;
+import es.unizar.disco.simulation.models.measures.MeasureCalculator;
 import es.unizar.disco.simulation.models.measures.MeasuresFactory;
 import es.unizar.disco.simulation.models.measures.MeasuresPackage;
 
@@ -65,7 +65,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass measureConverterEClass = null;
+	private EClass measureCalculatorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -206,8 +206,8 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMeasureConverter() {
-		return measureConverterEClass;
+	public EClass getMeasureCalculator() {
+		return measureCalculatorEClass;
 	}
 
 	/**
@@ -215,26 +215,8 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMeasureConverter_To() {
-		return (EReference)measureConverterEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMeasureConverter_From() {
-		return (EReference)measureConverterEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOperation getMeasureConverter__Convert__AnalyzableElementInfo() {
-		return measureConverterEClass.getEOperations().get(0);
+	public EOperation getMeasureCalculator__Calculate__EObject_TraceSet() {
+		return measureCalculatorEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -360,10 +342,8 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		createEAttribute(domainMeasureEClass, DOMAIN_MEASURE__UNIT);
 		createEReference(domainMeasureEClass, DOMAIN_MEASURE__DEFINITION);
 
-		measureConverterEClass = createEClass(MEASURE_CONVERTER);
-		createEReference(measureConverterEClass, MEASURE_CONVERTER__TO);
-		createEReference(measureConverterEClass, MEASURE_CONVERTER__FROM);
-		createEOperation(measureConverterEClass, MEASURE_CONVERTER___CONVERT__ANALYZABLEELEMENTINFO);
+		measureCalculatorEClass = createEClass(MEASURE_CALCULATOR);
+		createEOperation(measureCalculatorEClass, MEASURE_CALCULATOR___CALCULATE__EOBJECT_TRACESET);
 
 		domainMeasureDefinitionEClass = createEClass(DOMAIN_MEASURE_DEFINITION);
 		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__MEASURED_ELEMENT);
@@ -404,6 +384,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		// Obtain other dependent packages
 		DatatypesPackage theDatatypesPackage = (DatatypesPackage)EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
 		ToolresultPackage theToolresultPackage = (ToolresultPackage)EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI);
+		TracesPackage theTracesPackage = (TracesPackage)EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI);
 		DefinitionPackage theDefinitionPackage = (DefinitionPackage)EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI);
 
 		// Create type parameters
@@ -418,12 +399,12 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		initEAttribute(getDomainMeasure_Unit(), theDatatypesPackage.getUnit(), "unit", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainMeasure_Definition(), this.getDomainMeasureDefinition(), null, "definition", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(measureConverterEClass, MeasureConverter.class, "MeasureConverter", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMeasureConverter_To(), this.getDomainMeasure(), null, "to", null, 1, 1, MeasureConverter.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getMeasureConverter_From(), theToolresultPackage.getAnalyzableElementInfo(), null, "from", null, 1, 1, MeasureConverter.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEClass(measureCalculatorEClass, MeasureCalculator.class, "MeasureCalculator", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = initEOperation(getMeasureConverter__Convert__AnalyzableElementInfo(), this.getDomainMeasure(), "convert", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theToolresultPackage.getAnalyzableElementInfo(), "info", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getMeasureCalculator__Calculate__EObject_TraceSet(), this.getDomainMeasure(), "calculate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEObject(), "domainElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theToolresultPackage.getToolResult(), "toolResult", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theTracesPackage.getTraceSet(), "traceSet", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(domainMeasureDefinitionEClass, DomainMeasureDefinition.class, "DomainMeasureDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainMeasureDefinition_MeasuredElement(), ecorePackage.getEObject(), null, "measuredElement", null, 1, 1, DomainMeasureDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

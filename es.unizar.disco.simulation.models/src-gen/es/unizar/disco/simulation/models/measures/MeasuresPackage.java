@@ -113,59 +113,41 @@ public interface MeasuresPackage extends EPackage {
 	int DOMAIN_MEASURE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}' class.
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.MeasureCalculator <em>Measure Calculator</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter
-	 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getMeasureConverter()
+	 * @see es.unizar.disco.simulation.models.measures.MeasureCalculator
+	 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getMeasureCalculator()
 	 * @generated
 	 */
-	int MEASURE_CONVERTER = 1;
+	int MEASURE_CALCULATOR = 1;
 
 	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
+	 * The number of structural features of the '<em>Measure Calculator</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEASURE_CONVERTER__TO = 0;
+	int MEASURE_CALCULATOR_FEATURE_COUNT = 0;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * The operation id for the '<em>Calculate</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEASURE_CONVERTER__FROM = 1;
+	int MEASURE_CALCULATOR___CALCULATE__EOBJECT_TRACESET = 0;
 
 	/**
-	 * The number of structural features of the '<em>Measure Converter</em>' class.
+	 * The number of operations of the '<em>Measure Calculator</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEASURE_CONVERTER_FEATURE_COUNT = 2;
-
-	/**
-	 * The operation id for the '<em>Convert</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MEASURE_CONVERTER___CONVERT__ANALYZABLEELEMENTINFO = 0;
-
-	/**
-	 * The number of operations of the '<em>Measure Converter</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MEASURE_CONVERTER_OPERATION_COUNT = 1;
+	int MEASURE_CALCULATOR_OPERATION_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl <em>Domain Measure Definition</em>}' class.
@@ -340,47 +322,25 @@ public interface MeasuresPackage extends EPackage {
 	EReference getDomainMeasure_Definition();
 
 	/**
-	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}'.
+	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.MeasureCalculator <em>Measure Calculator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Measure Converter</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter
-	 * @model instanceClass="es.unizar.disco.simulation.models.measures.MeasureConverter"
+	 * @return the meta object for class '<em>Measure Calculator</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.MeasureCalculator
+	 * @model instanceClass="es.unizar.disco.simulation.models.measures.MeasureCalculator"
 	 * @generated
 	 */
-	EClass getMeasureConverter();
+	EClass getMeasureCalculator();
 
 	/**
-	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.measures.MeasureConverter#getTo <em>To</em>}'.
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.MeasureCalculator#calculate(org.eclipse.emf.ecore.EObject, es.unizar.disco.simulation.models.toolresult.ToolResult, es.unizar.disco.simulation.models.traces.TraceSet) <em>Calculate</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>To</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter#getTo()
-	 * @see #getMeasureConverter()
+	 * @return the meta object for the '<em>Calculate</em>' operation.
+	 * @see es.unizar.disco.simulation.models.measures.MeasureCalculator#calculate(org.eclipse.emf.ecore.EObject, es.unizar.disco.simulation.models.toolresult.ToolResult, es.unizar.disco.simulation.models.traces.TraceSet)
 	 * @generated
 	 */
-	EReference getMeasureConverter_To();
-
-	/**
-	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.measures.MeasureConverter#getFrom <em>From</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>From</em>'.
-	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter#getFrom()
-	 * @see #getMeasureConverter()
-	 * @generated
-	 */
-	EReference getMeasureConverter_From();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter#convert(es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo) <em>Convert</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Convert</em>' operation.
-	 * @see es.unizar.disco.simulation.models.measures.MeasureConverter#convert(es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo)
-	 * @generated
-	 */
-	EOperation getMeasureConverter__Convert__AnalyzableElementInfo();
+	EOperation getMeasureCalculator__Calculate__EObject_TraceSet();
 
 	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition <em>Domain Measure Definition</em>}'.
@@ -550,38 +510,22 @@ public interface MeasuresPackage extends EPackage {
 		EReference DOMAIN_MEASURE__DEFINITION = eINSTANCE.getDomainMeasure_Definition();
 
 		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.MeasureConverter <em>Measure Converter</em>}' class.
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.MeasureCalculator <em>Measure Calculator</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.measures.MeasureConverter
-		 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getMeasureConverter()
+		 * @see es.unizar.disco.simulation.models.measures.MeasureCalculator
+		 * @see es.unizar.disco.simulation.models.measures.impl.MeasuresPackageImpl#getMeasureCalculator()
 		 * @generated
 		 */
-		EClass MEASURE_CONVERTER = eINSTANCE.getMeasureConverter();
+		EClass MEASURE_CALCULATOR = eINSTANCE.getMeasureCalculator();
 
 		/**
-		 * The meta object literal for the '<em><b>To</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Calculate</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MEASURE_CONVERTER__TO = eINSTANCE.getMeasureConverter_To();
-
-		/**
-		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MEASURE_CONVERTER__FROM = eINSTANCE.getMeasureConverter_From();
-
-		/**
-		 * The meta object literal for the '<em><b>Convert</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MEASURE_CONVERTER___CONVERT__ANALYZABLEELEMENTINFO = eINSTANCE.getMeasureConverter__Convert__AnalyzableElementInfo();
+		EOperation MEASURE_CALCULATOR___CALCULATE__EOBJECT_TRACESET = eINSTANCE.getMeasureCalculator__Calculate__EObject_TraceSet();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl <em>Domain Measure Definition</em>}' class.

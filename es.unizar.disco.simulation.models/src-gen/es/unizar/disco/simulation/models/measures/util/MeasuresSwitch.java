@@ -74,9 +74,9 @@ public class MeasuresSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case MeasuresPackage.MEASURE_CONVERTER: {
-				MeasureConverter measureConverter = (MeasureConverter)theEObject;
-				T result = caseMeasureConverter(measureConverter);
+			case MeasuresPackage.MEASURE_CALCULATOR: {
+				MeasureCalculator measureCalculator = (MeasureCalculator)theEObject;
+				T result = caseMeasureCalculator(measureCalculator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -112,17 +112,17 @@ public class MeasuresSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Measure Converter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Measure Calculator</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Measure Converter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Measure Calculator</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMeasureConverter(MeasureConverter object) {
+	public T caseMeasureCalculator(MeasureCalculator object) {
 		return null;
 	}
 
