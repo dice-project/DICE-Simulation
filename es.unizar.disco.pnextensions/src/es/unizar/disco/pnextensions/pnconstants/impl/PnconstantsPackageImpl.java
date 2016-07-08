@@ -2,6 +2,7 @@
  */
 package es.unizar.disco.pnextensions.pnconstants.impl;
 
+import es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants;
 import es.unizar.disco.pnextensions.pnconstants.PnconstantsFactory;
 import es.unizar.disco.pnextensions.pnconstants.PnconstantsPackage;
 import es.unizar.disco.pnextensions.pnconstants.ServerType;
@@ -44,6 +45,13 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 	 * @generated
 	 */
 	private EEnum serverTypeEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum baseUnitsConstantsEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -143,6 +151,15 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getBaseUnitsConstants() {
+		return baseUnitsConstantsEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public PnconstantsFactory getPnconstantsFactory() {
 		return (PnconstantsFactory)getEFactoryInstance();
 	}
@@ -169,6 +186,7 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 		toolInfoConstantsEEnum = createEEnum(TOOL_INFO_CONSTANTS);
 		transitionKindEEnum = createEEnum(TRANSITION_KIND);
 		serverTypeEEnum = createEEnum(SERVER_TYPE);
+		baseUnitsConstantsEEnum = createEEnum(BASE_UNITS_CONSTANTS);
 	}
 
 	/**
@@ -210,6 +228,10 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 		addEEnumLiteral(serverTypeEEnum, ServerType.ONE_SERVER);
 		addEEnumLiteral(serverTypeEEnum, ServerType.LOAD_DEPENDENT);
 		addEEnumLiteral(serverTypeEEnum, ServerType.MARKING_DEPENDENT);
+
+		initEEnum(baseUnitsConstantsEEnum, BaseUnitsConstants.class, "BaseUnitsConstants");
+		addEEnumLiteral(baseUnitsConstantsEEnum, BaseUnitsConstants.BASE_TIME_UNIT);
+		addEEnumLiteral(baseUnitsConstantsEEnum, BaseUnitsConstants.BASE_FREQUENCY_UNIT);
 
 		// Create resource
 		createResource(eNS_URI);

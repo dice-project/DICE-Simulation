@@ -20,6 +20,10 @@
       <eLiterals name="LoadDependent" value="2" literal="http://es.unizar.dsico/pnconstants/tserv/loaddep"/>
       <eLiterals name="MarkingDependent" value="3" literal="http://es.unizar.dsico/pnconstants/tserv/markingddep"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="BaseUnitsConstants">
+      <eLiterals name="baseTimeUnit" literal="http://es.unizar.dsico/pnconstants/units/basetimeunit"/>
+      <eLiterals name="baseFrequencyUnit" value="1" literal="http://es.unizar.dsico/pnconstants/units/basefrequencyunit"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="pnutils" nsURI="http://es.unizar.disco/pnutils/1.0" nsPrefix="pnutils">
     <eClassifiers xsi:type="ecore:EClass" name="PnUtils">
