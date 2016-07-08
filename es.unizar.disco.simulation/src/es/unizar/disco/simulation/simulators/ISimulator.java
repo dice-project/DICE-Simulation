@@ -12,6 +12,13 @@ import es.unizar.disco.simulation.models.traces.TraceSet;
 
 public interface ISimulator {
 	
+	public static final int RET_CODE_OK = 0;
+	
+	public static final int RET_CODE_KILLED = -10;
+	
+	public static final int RET_CODE_UNKNOWN_ERROR = Integer.MIN_VALUE;
+	
+	
 	public Process simulate(String id, List<EObject> analyzableModel, TraceSet traces, Map<String, String> options, IProgressMonitor monitor) throws SimulationException;
 	
 	public ToolResult getToolResult();
