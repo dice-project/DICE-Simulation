@@ -12,8 +12,8 @@ import fr.lip6.move.pnml.ptnet.ToolInfo;
 import fr.lip6.move.pnml.ptnet.Transition;
 
 /**
- * Utility class used to communicate with {@link ToolInfoUtils} since Acceleo seems
- * to have some problems when dealing with {@link Enumeration}s
+ * Utility class used to communicate with {@link ToolInfoUtils} since Acceleo
+ * seems to have some problems when dealing with {@link Enumeration}s
  * 
  * @author Abel Gómez <abel.gomez@unizar.es>
  *
@@ -42,7 +42,7 @@ public class PnmlToolInfoUtils {
 		Set<String> otherTransitionKinds = new HashSet<>();
 		otherTransitionKinds.add(TransitionKind.EXPONENTIAL.getLiteral());
 		otherTransitionKinds.add(TransitionKind.DETERMINISTIC.getLiteral());
-		
+
 		for (ToolInfo info : transition.getToolspecifics()) {
 			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
 			if (matcher.matches()) {
@@ -54,7 +54,8 @@ public class PnmlToolInfoUtils {
 				}
 			}
 		}
-		// We return true since if no transition kind has been specified it is immediate
+		// We return true since if no transition kind has been specified it is
+		// immediate
 		return true;
 	}
 
@@ -67,7 +68,7 @@ public class PnmlToolInfoUtils {
 		}
 		return false;
 	}
-	
+
 	public static boolean isInfiniteServer(Transition transition) throws IllegalArgumentException {
 		for (ToolInfo info : transition.getToolspecifics()) {
 			Matcher matcher = Pattern.compile(SERVER_TYPE_PATTERN).matcher(info.getFormattedXMLBuffer());
@@ -75,8 +76,9 @@ public class PnmlToolInfoUtils {
 				return true;
 			}
 		}
-		return false;	}
-	
+		return false;
+	}
+
 	public Float getTransitionRate(Transition transition) throws IllegalArgumentException {
 		for (ToolInfo info : transition.getToolspecifics()) {
 			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
@@ -86,6 +88,7 @@ public class PnmlToolInfoUtils {
 		}
 		return 1f;
 	}
+
 	public Float getTransitionProbability(Transition transition) throws IllegalArgumentException {
 		for (ToolInfo info : transition.getToolspecifics()) {
 			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
@@ -96,6 +99,4 @@ public class PnmlToolInfoUtils {
 		return 1f;
 	}
 
-	
-	
 }
