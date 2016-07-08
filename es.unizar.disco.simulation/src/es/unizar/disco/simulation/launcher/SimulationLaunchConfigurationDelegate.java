@@ -16,8 +16,8 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
-import org.eclipse.debug.core.model.RuntimeProcess;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.uml2.uml.Element;
@@ -82,7 +82,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 						subMonitor.newChild(1));
 				// @formatter:on
 
-				RuntimeProcess runtimeProcess = new RuntimeProcess(launch, simulationProcess,
+				IProcess runtimeProcess = DebugPlugin.newProcess(launch, simulationProcess,
 						MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, invocation.getIdentifier()), null);
 				runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
 				runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, definition.getParameters().toString());
