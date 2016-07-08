@@ -4,5 +4,4 @@
   <mapping sourceURI="http://es.unizar.disco/simulation/definition/1.0" targetURI="platform:/resource/es.unizar.disco.simulation.models/model/definition.ecore"/>
   <mapping sourceURI="http://es.unizar.disco/simulation/datatypes/1.0" targetURI="platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore"/>
   <mapping sourceURI="http://es.unizar.disco/simulation/traces/1.0" targetURI="platform:/resource/es.unizar.disco.simulation.models/model/traces.ecore"/>
-  <mapping sourceURI="http://es.unizar.disco/pnconstants/1.0" targetURI="platform:/resource/es.unizar.disco.pnextensions/model/pnextensions.ecore#//pnconstants"/>
 </uriMap:MappingContainer>
