@@ -64,17 +64,22 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 		for (int i = 0; i < definition.getInvocations().size(); i++) {
 
-			MultiStatus invocationStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
 
 			SimulationInvocation invocation = definition.getInvocations().get(i);
 
-			final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
-
-			subMonitor.subTask(MessageFormat.format("Launching Simulation {0} out of {1}", i + 1, definition.getInvocations().size()));
-
-			invocation.setStart(Calendar.getInstance().getTime());
+			MultiStatus invocationStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
 
 			try {
+				final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
+				
+				subMonitor.subTask(MessageFormat.format("Launching Simulation {0} out of {1}", i + 1, definition.getInvocations().size()));
+				
+				invocation.setStart(Calendar.getInstance().getTime());
+				
+				if (controllingProcess.isTerminated()) {
+					throw new InterruptedException();
+				}
+				
 				if (simulator == null) {
 					throw new SimulationException(
 							MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError, definition.getBackend()));
@@ -259,13 +264,16 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 		@Override
 		public void terminate() throws DebugException {
-			fireTerminateEvent();
-			terminated = true;
+			if (!terminated) {
+				fireTerminateEvent();
+				terminated = true;
+				launch.terminate();
+			}
 		}
 
 		@Override
 		public String getLabel() {
-			return MessageFormat.format("Simulating definition ''{0}''", id);
+			return MessageFormat.format("Global control process for simulation {0}", id);
 		}
 
 		@Override
