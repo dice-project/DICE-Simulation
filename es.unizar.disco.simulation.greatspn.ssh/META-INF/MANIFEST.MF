@@ -11,6 +11,11 @@ Require-Bundle: org.eclipse.core.runtime,
  es.unizar.disco.simulation;bundle-version="0.1.0",
  org.apache.commons.lang;bundle-version="2.6.0",
  es.unizar.disco.pnml.m2t;bundle-version="0.1.5",
- org.apache.commons.io;bundle-version="2.2.0"
+ org.apache.commons.io;bundle-version="2.2.0",
+ es.unizar.disco.pnextensions;bundle-version="0.1.5"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,
+ lib/bundles/unit-api-0.9.jar,
+ lib/bundles/unit-ri-0.9.jar,
+ lib/jars/uom-lib-common-0.9.jar

@@ -25,7 +25,6 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.input.TeeInputStream;
 import org.apache.commons.io.output.NullOutputStream;
 import org.apache.commons.io.output.TeeOutputStream;
@@ -41,9 +40,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import es.unizar.disco.core.logger.DiceLogger;
+import es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants;
 import es.unizar.disco.pnml.m2t.templates.gspn.GenerateGspn;
 import es.unizar.disco.simulation.greatspn.ssh.GspnSshSimulationPlugin;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
+import es.unizar.disco.simulation.models.datatypes.NonStandardUnits;
 import es.unizar.disco.simulation.models.toolresult.ToolResult;
 import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.wnsim.PlaceInfo;
@@ -61,6 +62,7 @@ import es.unizar.disco.ssh.providers.SshConnectionProviderConstants;
 import fr.lip6.move.pnml.ptnet.PetriNet;
 import fr.lip6.move.pnml.ptnet.PetriNetDoc;
 import fr.lip6.move.pnml.ptnet.PnObject;
+import fr.lip6.move.pnml.ptnet.ToolInfo;
 import net.schmizz.keepalive.KeepAliveProvider;
 import net.schmizz.sshj.DefaultConfig;
 import net.schmizz.sshj.SSHClient;
@@ -73,6 +75,7 @@ import net.schmizz.sshj.sftp.SFTPClient;
 import net.schmizz.sshj.transport.verification.HostKeyVerifier;
 import net.schmizz.sshj.userauth.keyprovider.KeyProvider;
 import net.schmizz.sshj.userauth.password.PasswordUtils;
+import tec.units.ri.unit.Units;
 
 /**
  * @author Abel Gómez <abel.gomez@unizar.es>
@@ -99,7 +102,7 @@ public class GspnSshSimulator implements ISimulator {
 			private static final String STS_EFFICIENCY = "Efficiency --->";
 			private static final String STS_TIME_REQUIRED = "Time required for";
 			private static final String STS_MALLOC = "MALLOC";
-			private static final String STS_PUSH  = "PUSH";
+			private static final String STS_PUSH = "PUSH";
 			private static final String STS_POP = "POP";
 
 			private static final String REX_SEPARATOR = "^-+$";
@@ -208,6 +211,7 @@ public class GspnSshSimulator implements ISimulator {
 								((PlaceInfo) info).setMeanNumberOfTokens((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
 							} else if (info instanceof TransitionInfo) {
 								((TransitionInfo) info).setThroughput((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
+								((TransitionInfo) info).setUnit(getBaseFrequencyUnit());
 							} else {
 								throw new RuntimeException("Expected PlaceInfo or TransitionInfo");
 							}
@@ -246,7 +250,7 @@ public class GspnSshSimulator implements ISimulator {
 				return true;
 			}
 		}
-
+		
 		private SSHClient ssh;
 		private Session simulationSession;
 		private Command simulationCommand;
@@ -259,7 +263,7 @@ public class GspnSshSimulator implements ISimulator {
 		private String remoteWorkingDir;
 		private String identifier;
 		private volatile boolean finished = false;
-		private volatile int exitValue = Integer.MIN_VALUE;
+		private volatile int exitValue = RET_CODE_UNKNOWN_ERROR;
 
 		public GspnProcess(String identifier) {
 			this.identifier = identifier;
@@ -336,7 +340,7 @@ public class GspnSshSimulator implements ISimulator {
 							catCommand.join();
 							rawResults = IOUtils.readFully(catCommand.getInputStream()).toByteArray();
 							finished = true;
-							exitValue = simulationCommand.getExitStatus() != null ? simulationCommand.getExitStatus() : 1;
+							exitValue = simulationCommand.getExitStatus() != null ? simulationCommand.getExitStatus() : RET_CODE_UNKNOWN_ERROR;
 						}
 					} catch (ConnectionException e) {
 						DiceLogger.logError(GspnSshSimulationPlugin.getDefault(),
@@ -397,6 +401,7 @@ public class GspnSshSimulator implements ISimulator {
 
 		@Override
 		public void destroy() {
+			exitValue = RET_CODE_KILLED;
 			IOUtils.closeQuietly(ssh, simulationSession, simulationCommand);
 		}
 
@@ -406,7 +411,7 @@ public class GspnSshSimulator implements ISimulator {
 	}
 
 	private byte[] rawResults = new byte[0];
-	private PetriNetDoc petriNetDoc;
+	private PetriNet petriNet;
 	private GspnProcess gspnProcess;
 
 	@Override
@@ -422,7 +427,7 @@ public class GspnSshSimulator implements ISimulator {
 			throw new SimulationException(new IllegalArgumentException("Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNetDoc''"));
 		}
 
-		petriNetDoc = (PetriNetDoc) analyzableModel.get(0);
+		PetriNetDoc petriNetDoc = (PetriNetDoc) analyzableModel.get(0);
 		if (petriNetDoc.getNets().size() != 1) {
 			throw new SimulationException(new IllegalArgumentException(
 					MessageFormat.format("Unexpected number of model elements, expecting 1 EObject, found {0}", petriNetDoc.getNets().size())));
@@ -441,12 +446,15 @@ public class GspnSshSimulator implements ISimulator {
 		gspnProcess = new GspnProcess(id);
 
 		try {
-			FileUtils.forceDeleteOnExit(targetDir);
+			petriNet = petriNetDoc.getNets().get(0);
 
-			PetriNet petriNet = EcoreUtil.copy(petriNetDoc.getNets().get(0));
-			petriNet.setId(id);
+			// Run M2T transformation with a copy
+			// Thus, we can change the ID, which is used to compute the file
+			// name
+			PetriNet copy = EcoreUtil.copy(petriNet);
+			copy.setId(id);
 
-			File[] inputFiles = generateGspnFiles(petriNet, targetDir, subMonitor.newChild(1));
+			File[] inputFiles = generateGspnFiles(copy, targetDir, subMonitor.newChild(1));
 
 			IHostProvider hostProvider = null;
 			IAuthProvider authProvider = null;
@@ -509,9 +517,9 @@ public class GspnSshSimulator implements ISimulator {
 	Map<String, EObject> mappings;
 
 	private EObject findEObject(String id) {
-		if (mappings == null && petriNetDoc != null) {
+		if (mappings == null && petriNet != null) {
 			mappings = new HashMap<>();
-			for (Iterator<EObject> it = petriNetDoc.eAllContents(); it.hasNext();) {
+			for (Iterator<EObject> it = petriNet.eAllContents(); it.hasNext();) {
 				EObject eObject = it.next();
 				if (eObject instanceof PnObject) {
 					mappings.put(((PnObject) eObject).getId(), eObject);
@@ -542,6 +550,35 @@ public class GspnSshSimulator implements ISimulator {
 		AcceleoPreferences.switchForceDeactivationNotifications(true);
 		gspnGenerator.doGenerate(BasicMonitor.toMonitor(subMonitor.newChild(1)));
 		return new File[] { targetDir.toPath().resolve(model.getId() + ".net").toFile(), targetDir.toPath().resolve(model.getId() + ".def").toFile() };
+	}
+
+	private static final String VALUE_PATTERN = "<value grammar=\"(.+)\">(.+)</value>";
+
+	public String getBaseTimeUnit() throws IllegalArgumentException {
+		if (petriNet != null) {
+			for (ToolInfo info : petriNet.getToolspecifics()) {
+				Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+				if (matcher.matches() && BaseUnitsConstants.BASE_TIME_UNIT.getLiteral().equals(matcher.group(1))) {
+					try {
+						return matcher.group(2);
+					} catch (Throwable t) {
+						DiceLogger.logError(GspnSshSimulationPlugin.getDefault(), t);
+					}
+				}
+			}
+		}
+		return NonStandardUnits.TICK.getLiteral();
+	}
+
+	public String getBaseFrequencyUnit() throws IllegalArgumentException {
+		String unit = getBaseTimeUnit();
+		if (StringUtils.equals(unit, NonStandardUnits.TICK.getLiteral())) {
+			return NonStandardUnits.EVENTS_PER_TICK.getLiteral();
+		} else if (StringUtils.equals(unit, Units.SECOND.toString())) {
+			return Units.HERTZ.toString();
+		} else {
+			throw new RuntimeException(MessageFormat.format("Unexpected time unit ''{0}''", unit));
+		}
 	}
 
 }

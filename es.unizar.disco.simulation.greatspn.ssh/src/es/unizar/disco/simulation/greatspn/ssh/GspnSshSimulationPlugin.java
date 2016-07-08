@@ -1,15 +1,19 @@
 package es.unizar.disco.simulation.greatspn.ssh;
 
+import java.io.IOException;
+
+import org.apache.commons.io.FileUtils;
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
-public class GspnSshSimulationPlugin extends Plugin {
+import es.unizar.disco.core.logger.DiceLogger;
 
+public class GspnSshSimulationPlugin extends Plugin {
 
 	public static final String PLUGIN_ID = "es.unizar.disco.simulation.greatspn.ssh"; //$NON-NLS-1$
 
 	private static GspnSshSimulationPlugin plugin;
-	
+
 	/**
 	 * The constructor.
 	 */
@@ -30,6 +34,13 @@ public class GspnSshSimulationPlugin extends Plugin {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
+		// Cleanup the state location
+		// Should only contain the temporary files created by GspnSshSimulator
+		try {
+			FileUtils.forceDelete(getStateLocation().toFile());
+		} catch (IllegalStateException | IOException e) {
+			DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+		}
 		super.stop(context);
 		plugin = null;
 	}
@@ -40,6 +51,5 @@ public class GspnSshSimulationPlugin extends Plugin {
 	public static GspnSshSimulationPlugin getDefault() {
 		return plugin;
 	}
-
 
 }
