@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -43,7 +44,9 @@ import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.window.Window;
@@ -65,6 +68,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 import org.eclipse.ui.ide.IDE.SharedImages;
 import org.eclipse.ui.part.ViewPart;
+import org.eclipse.ui.progress.IWorkbenchSiteProgressService;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
@@ -83,11 +87,15 @@ public class InvocationsView extends ViewPart {
 
 	private static final int COLUMN_RIGHT_MARGIN = 20;
 
+	private volatile boolean visibleOnChange = true;
+
 	private TableViewer viewer;
 
 	private Action newViewAction;
 
 	private Action refreshAction;
+
+	private Action makeVisibleAction;
 
 	private Action clearRegistryAction;
 
@@ -113,6 +121,16 @@ public class InvocationsView extends ViewPart {
 					@Override
 					public void run() {
 						viewer.update(notification.getNotifier(), null);
+						viewer.reveal(notification.getNotifier());
+						if (getSite() != null) {
+							IWorkbenchSiteProgressService service = getSite().getAdapter(IWorkbenchSiteProgressService.class);
+							if (service != null) {
+								service.warnOfContentChange();
+							}
+							if (visibleOnChange) {
+								getSite().getPage().activate(getSite().getPart());
+							}
+						}
 					}
 				});
 			}
@@ -212,6 +230,7 @@ public class InvocationsView extends ViewPart {
 		manager.add(new Separator());
 		manager.add(openFolderAction);
 		manager.add(new Separator());
+		manager.add(makeVisibleAction);
 		manager.add(newViewAction);
 	}
 
@@ -345,9 +364,31 @@ public class InvocationsView extends ViewPart {
 				viewer.refresh(true);
 			}
 		};
-		refreshAction.setText("Refresh viewer");
+		refreshAction.setText("Refresh Viewer");
 		refreshAction.setToolTipText("Forces a refresh of the viewer's contents");
 		refreshAction.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_ETOOL16_REFRESH));
+
+		makeVisibleAction = new Action() {
+
+			@Override
+			public int getStyle() {
+				return IAction.AS_CHECK_BOX;
+			}
+
+			@Override
+			public void setChecked(boolean checked) {
+				visibleOnChange = !visibleOnChange;
+			}
+
+			@Override
+			public boolean isChecked() {
+				return visibleOnChange;
+			}
+		};
+		makeVisibleAction.setText("Show View on Change");
+		makeVisibleAction.setToolTipText("Show view when contents change");
+		makeVisibleAction
+				.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_ETOOL16_MAKE_VISIBLE));
 
 		openInvocationAction = new Action() {
 			public void run() {
@@ -369,10 +410,27 @@ public class InvocationsView extends ViewPart {
 		};
 		openInvocationAction.setText("Inspect Simulation Invocation Data");
 		openInvocationAction.setToolTipText("Opens the Simulation invocation in the Ecore Reflective editor");
-		openInvocationAction
-				.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_SIMULATION_INVOCATION));
+		openInvocationAction.setImageDescriptor(
+				DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_SIMULATION_INVOCATION));
 
 		openResultAction = new Action() {
+			{
+				viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+					@Override
+					public void selectionChanged(SelectionChangedEvent event) {
+						IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
+						if (!selection.isEmpty()) {
+							SimulationInvocation invocation = (SimulationInvocation) selection.getFirstElement();
+							if (invocation.getResult() == null) {
+								setEnabled(false);
+							} else {
+								setEnabled(true);
+							}
+						}
+					}
+				});
+			}
+
 			public void run() {
 				IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
 				SimulationInvocation invocation = (SimulationInvocation) selection.getFirstElement();
@@ -396,8 +454,8 @@ public class InvocationsView extends ViewPart {
 		openResultAction.setText("Open Simulation Result");
 		openResultAction.setToolTipText("Opens the Simulation result in the Ecore Reflective editor");
 		openResultAction
-		.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_SIMULATION_RESULT));
-		
+				.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_SIMULATION_RESULT));
+
 		exportVariablesAction = new Action() {
 			public void run() {
 				IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
@@ -542,18 +600,18 @@ public class InvocationsView extends ViewPart {
 		@Override
 		protected Image doGetImage(SimulationInvocation invocation) {
 			switch (invocation.getStatus().getValue()) {
-				case SimulationStatus.FINISHED_VALUE:
-					return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_FINISHED);
-				case SimulationStatus.FAILED_VALUE:
-				case SimulationStatus.KILLED_VALUE:
-					return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_FAILED);
-				case SimulationStatus.RUNNING_VALUE:
-					return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_RUNNING);
-				case SimulationStatus.WAITING_VALUE:
-					return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_WAITING);
-				case SimulationStatus.UNKNOWN_VALUE:
-				default:
-					return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_UNKNOWN);
+			case SimulationStatus.FINISHED_VALUE:
+				return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_FINISHED);
+			case SimulationStatus.FAILED_VALUE:
+			case SimulationStatus.KILLED_VALUE:
+				return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_FAILED);
+			case SimulationStatus.RUNNING_VALUE:
+				return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_RUNNING);
+			case SimulationStatus.WAITING_VALUE:
+				return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_WAITING);
+			case SimulationStatus.UNKNOWN_VALUE:
+			default:
+				return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_UNKNOWN);
 			}
 		}
 	}

@@ -28,6 +28,7 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	public static final String IMG_ETOOL16_DOWN = "IMG_ETOOL16_DOWN"; //$NON-NLS-1$
 	public static final String IMG_ETOOL16_GO_TO_FOLDER = "IMG_ETOOL16_GO_TO_FOLDER"; //$NON-NLS-1$
 	public static final String IMG_ETOOL16_REFRESH = "IMG_ETOOL16_REFRESH"; //$NON-NLS-1$
+	public static final String IMG_ETOOL16_MAKE_VISIBLE = "IMG_ETOOL16_MAKE_VISIBLE"; //$NON-NLS-1$
 	public static final String IMG_EVIEW16_SIMULATION_REGISTRY = "IMG_EVIEW16_SIMULATION_REGISTRY"; //$NON-NLS-1$
 	
 	// The plug-in ID
@@ -100,6 +101,7 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 		reg.put(IMG_ETOOL16_DOWN, getImageDescriptor("icons/full/etool16/down.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_ETOOL16_GO_TO_FOLDER, getImageDescriptor("icons/full/etool16/go_to_folder.png").createImage()); //$NON-NLS-1$
 		reg.put(IMG_ETOOL16_REFRESH, getImageDescriptor("icons/full/etool16/refresh.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_ETOOL16_MAKE_VISIBLE, getImageDescriptor("icons/full/etool16/make_visible.gif").createImage()); //$NON-NLS-1$
 		reg.put(IMG_EVIEW16_SIMULATION_REGISTRY, getImageDescriptor("icons/full/eview16/simulation_registry.png").createImage()); //$NON-NLS-1$
 	}
 }
