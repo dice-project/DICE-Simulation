@@ -151,16 +151,6 @@ public interface DatatypesPackage extends EPackage {
 	int PRIMITIVE_VARIABLE_ASSIGNMENT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.Unit <em>Unit</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.simulation.models.datatypes.Unit
-	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getUnit()
-	 * @generated
-	 */
-	int UNIT = 2;
-
-	/**
 	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -168,7 +158,17 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getSimulationStatus()
 	 * @generated
 	 */
-	int SIMULATION_STATUS = 3;
+	int SIMULATION_STATUS = 2;
+
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.NonStandardUnits <em>Non Standard Units</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.datatypes.NonStandardUnits
+	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getNonStandardUnits()
+	 * @generated
+	 */
+	int NON_STANDARD_UNITS = 3;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -276,16 +276,6 @@ public interface DatatypesPackage extends EPackage {
 	EAttribute getPrimitiveVariableAssignment_Value();
 
 	/**
-	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.Unit <em>Unit</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Unit</em>'.
-	 * @see es.unizar.disco.simulation.models.datatypes.Unit
-	 * @generated
-	 */
-	EEnum getUnit();
-
-	/**
 	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -294,6 +284,16 @@ public interface DatatypesPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getSimulationStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.NonStandardUnits <em>Non Standard Units</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Non Standard Units</em>'.
+	 * @see es.unizar.disco.simulation.models.datatypes.NonStandardUnits
+	 * @generated
+	 */
+	EEnum getNonStandardUnits();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
@@ -416,16 +416,6 @@ public interface DatatypesPackage extends EPackage {
 		EAttribute PRIMITIVE_VARIABLE_ASSIGNMENT__VALUE = eINSTANCE.getPrimitiveVariableAssignment_Value();
 
 		/**
-		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.Unit <em>Unit</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.simulation.models.datatypes.Unit
-		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getUnit()
-		 * @generated
-		 */
-		EEnum UNIT = eINSTANCE.getUnit();
-
-		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.SimulationStatus <em>Simulation Status</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -434,6 +424,16 @@ public interface DatatypesPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum SIMULATION_STATUS = eINSTANCE.getSimulationStatus();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.NonStandardUnits <em>Non Standard Units</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.datatypes.NonStandardUnits
+		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getNonStandardUnits()
+		 * @generated
+		 */
+		EEnum NON_STANDARD_UNITS = eINSTANCE.getNonStandardUnits();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.

@@ -19,8 +19,7 @@
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
             <element ref="MetricTag"/>
-            <element ref="Calculator" minOccurs="1" maxOccurs="unbounded"/>
-            <element ref="Metric" minOccurs="1" maxOccurs="unbounded"/>
+            <element ref="Metric"/>
          </sequence>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -63,6 +62,9 @@
 
    <element name="Metric">
       <complexType>
+         <choice minOccurs="1" maxOccurs="unbounded">
+            <element ref="Calculator"/>
+         </choice>
          <attribute name="name" type="string">
             <annotation>
                <documentation>
@@ -87,52 +89,35 @@
                </appInfo>
             </annotation>
          </attribute>
-         <attribute name="calculator" type="string" use="required">
-            <annotation>
-               <documentation>
-                  A contributed Calculator that is able to compute this measure.
-               </documentation>
-               <appInfo>
-                  <meta.attribute kind="identifier" basedOn="es.unizar.disco.simulation.models.supported_metrics/Calculator/@id"/>
-               </appInfo>
-            </annotation>
-         </attribute>
       </complexType>
    </element>
 
    <element name="Calculator">
       <complexType>
-         <attribute name="id" type="string" use="required">
-            <annotation>
-               <documentation>
-                  The identifier of this Converter
-               </documentation>
-            </annotation>
-         </attribute>
-         <attribute name="metric" type="string" use="required">
-            <annotation>
-               <documentation>
-                  The metric that is able to compute
-               </documentation>
-               <appInfo>
-                  <meta.attribute kind="identifier" basedOn="es.unizar.disco.simulation.models.supported_metrics/MetricTag/@id"/>
-               </appInfo>
-            </annotation>
-         </attribute>
-         <attribute name="domainElement" type="string" use="required">
+         <attribute name="scenario" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.emf.ecore.EObject"/>
+                  <meta.attribute kind="identifier" basedOn="es.unizar.disco.simulation.models.supported_scenarios/Scenario/@stereotypeName"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="toolResult" type="string" use="required">
+            <annotation>
+               <documentation>
+                  ToolResult kind that this Calculator is hable to process.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.toolresult.ToolResult"/>
                </appInfo>
             </annotation>
          </attribute>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  The class that implements the Calculator, i.e., a class that can calculate DomainMeasure for a Domain Element using a ToolResult and a TraceSet
+                  Class implementing a measure calculator using the given ToolResult.
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.measures.MeasureCalculator"/>

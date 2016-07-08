@@ -2,8 +2,6 @@
  */
 package es.unizar.disco.simulation.models.toolresult.impl;
 
-import es.unizar.disco.simulation.models.datatypes.Unit;
-
 import es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo;
 import es.unizar.disco.simulation.models.toolresult.ToolresultPackage;
 
@@ -67,7 +65,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Unit UNIT_EDEFAULT = Unit.UNSPECIFIED;
+	protected static final String UNIT_EDEFAULT = "unspecified";
 
 	/**
 	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' attribute.
@@ -77,7 +75,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * @generated
 	 * @ordered
 	 */
-	protected Unit unit = UNIT_EDEFAULT;
+	protected String unit = UNIT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getConfidenceInterval() <em>Confidence Interval</em>}' attribute list.
@@ -162,7 +160,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Unit getUnit() {
+	public String getUnit() {
 		return unit;
 	}
 
@@ -171,9 +169,9 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUnit(Unit newUnit) {
-		Unit oldUnit = unit;
-		unit = newUnit == null ? UNIT_EDEFAULT : newUnit;
+	public void setUnit(String newUnit) {
+		String oldUnit = unit;
+		unit = newUnit;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ToolresultPackage.ANALYZABLE_ELEMENT_INFO__UNIT, oldUnit, unit));
 	}
@@ -224,7 +222,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 				setAnalyzedElement((EObject)newValue);
 				return;
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__UNIT:
-				setUnit((Unit)newValue);
+				setUnit((String)newValue);
 				return;
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL:
 				getConfidenceInterval().clear();
@@ -268,7 +266,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__ANALYZED_ELEMENT:
 				return analyzedElement != null;
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__UNIT:
-				return unit != UNIT_EDEFAULT;
+				return UNIT_EDEFAULT == null ? unit != null : !UNIT_EDEFAULT.equals(unit);
 			case ToolresultPackage.ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL:
 				return confidenceInterval != null && !confidenceInterval.isEmpty();
 		}

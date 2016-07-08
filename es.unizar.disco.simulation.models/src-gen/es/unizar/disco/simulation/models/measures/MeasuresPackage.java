@@ -138,7 +138,7 @@ public interface MeasuresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEASURE_CALCULATOR___CALCULATE__EOBJECT_TRACESET = 0;
+	int MEASURE_CALCULATOR___CALCULATE__EOBJECT_DOMAINMEASUREDEFINITION_TOOLRESULT_TRACESET = 0;
 
 	/**
 	 * The number of operations of the '<em>Measure Calculator</em>' class.
@@ -333,14 +333,14 @@ public interface MeasuresPackage extends EPackage {
 	EClass getMeasureCalculator();
 
 	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.MeasureCalculator#calculate(org.eclipse.emf.ecore.EObject, es.unizar.disco.simulation.models.toolresult.ToolResult, es.unizar.disco.simulation.models.traces.TraceSet) <em>Calculate</em>}' operation.
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.measures.MeasureCalculator#calculate(org.eclipse.emf.ecore.EObject, es.unizar.disco.simulation.models.measures.DomainMeasureDefinition, es.unizar.disco.simulation.models.toolresult.ToolResult, es.unizar.disco.simulation.models.traces.TraceSet) <em>Calculate</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the '<em>Calculate</em>' operation.
-	 * @see es.unizar.disco.simulation.models.measures.MeasureCalculator#calculate(org.eclipse.emf.ecore.EObject, es.unizar.disco.simulation.models.toolresult.ToolResult, es.unizar.disco.simulation.models.traces.TraceSet)
+	 * @see es.unizar.disco.simulation.models.measures.MeasureCalculator#calculate(org.eclipse.emf.ecore.EObject, es.unizar.disco.simulation.models.measures.DomainMeasureDefinition, es.unizar.disco.simulation.models.toolresult.ToolResult, es.unizar.disco.simulation.models.traces.TraceSet)
 	 * @generated
 	 */
-	EOperation getMeasureCalculator__Calculate__EObject_TraceSet();
+	EOperation getMeasureCalculator__Calculate__EObject_DomainMeasureDefinition_ToolResult_TraceSet();
 
 	/**
 	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition <em>Domain Measure Definition</em>}'.
@@ -525,7 +525,7 @@ public interface MeasuresPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation MEASURE_CALCULATOR___CALCULATE__EOBJECT_TRACESET = eINSTANCE.getMeasureCalculator__Calculate__EObject_TraceSet();
+		EOperation MEASURE_CALCULATOR___CALCULATE__EOBJECT_DOMAINMEASUREDEFINITION_TOOLRESULT_TRACESET = eINSTANCE.getMeasureCalculator__Calculate__EObject_DomainMeasureDefinition_ToolResult_TraceSet();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl <em>Domain Measure Definition</em>}' class.

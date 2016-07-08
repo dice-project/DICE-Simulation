@@ -146,25 +146,27 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 
 	@Override
 	public EList<SimulationInvocation> getInvocations() {
-		List<VariableConfiguration> configurations = new ArrayList<>();
-		configurations.addAll(getActiveConfigurations());
-		// Do some cleanup...
-		for (Iterator<SimulationInvocation> it = super.getInvocations().iterator(); it.hasNext();) {
-			SimulationInvocation invocation = it.next();
-			// If the invocation points to an outdated configuration, delete it
-			if (!configurations.contains(invocation.getVariableConfiguration())) {
-				it.remove();
-			} else {
-				// Else, the invocation points to an active configuration, and
-				// should no be re-added
-				configurations.remove(invocation.getVariableConfiguration());
+		if (isAutoSync()) {
+			List<VariableConfiguration> configurations = new ArrayList<>();
+			configurations.addAll(getActiveConfigurations());
+			// Do some cleanup...
+			for (Iterator<SimulationInvocation> it = super.getInvocations().iterator(); it.hasNext();) {
+				SimulationInvocation invocation = it.next();
+				// If the invocation points to an outdated configuration, delete it
+				if (!configurations.contains(invocation.getVariableConfiguration())) {
+					it.remove();
+				} else {
+					// Else, the invocation points to an active configuration, and
+					// should no be re-added
+					configurations.remove(invocation.getVariableConfiguration());
+				}
 			}
-		}
-		// Create new invocations
-		for (VariableConfiguration configuration : configurations) {
-			SimulationInvocation invocation = InvocationFactory.eINSTANCE.createSimulationInvocation();
-			invocation.setVariableConfiguration(configuration);
-			super.getInvocations().add(invocation);
+			// Create new invocations
+			for (VariableConfiguration configuration : configurations) {
+				SimulationInvocation invocation = InvocationFactory.eINSTANCE.createSimulationInvocation();
+				invocation.setVariableConfiguration(configuration);
+				super.getInvocations().add(invocation);
+			}
 		}
 		return super.getInvocations();
 	}
@@ -237,6 +239,16 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 	public void setActiveScenario(EObject newActiveScenario) {
 		EObject oldActiveScenario = super.getActiveScenario();
 		super.setActiveScenario(newActiveScenario);
+		if (newActiveScenario instanceof Element) {
+			// Save which of the supported scenarios has the newActiveScenario applied
+			Element element = (Element) newActiveScenario;
+			for (String scenarioName : DiceStereotypesUtils.getScenariosStereotypes()) {
+				Stereotype scenarioStereotype = element.getApplicableStereotype(scenarioName);
+				if (element.isStereotypeApplied(scenarioStereotype)) {
+					getScenarioStereotypes().add(scenarioName);
+				}
+			}
+		}
 		if (isAutoSync() && (newActiveScenario == null || newActiveScenario != oldActiveScenario)) {
 			syncVariables();
 			syncDomainMeasureDefinitions();

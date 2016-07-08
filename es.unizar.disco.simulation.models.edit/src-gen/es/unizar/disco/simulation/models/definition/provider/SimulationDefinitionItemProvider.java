@@ -73,6 +73,7 @@ public class SimulationDefinitionItemProvider
 			addBackendPropertyDescriptor(object);
 			addActiveConfigurationsPropertyDescriptor(object);
 			addAutoSyncPropertyDescriptor(object);
+			addScenarioStereotypesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -210,6 +211,28 @@ public class SimulationDefinitionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Scenario Stereotypes feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addScenarioStereotypesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationDefinition_scenarioStereotypes_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_scenarioStereotypes_feature", "_UI_SimulationDefinition_type"),
+				 DefinitionPackage.Literals.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -288,6 +311,7 @@ public class SimulationDefinitionItemProvider
 			case DefinitionPackage.SIMULATION_DEFINITION__MAX_EXECUTION_TIME:
 			case DefinitionPackage.SIMULATION_DEFINITION__BACKEND:
 			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS:

@@ -9,13 +9,15 @@ Bundle-ClassPath: .,
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: es.unizar.disco.simulation.models.builders,
+Export-Package: es.unizar.disco.simulation.models,
+ es.unizar.disco.simulation.models.builders,
  es.unizar.disco.simulation.models.datatypes,
  es.unizar.disco.simulation.models.datatypes.impl,
  es.unizar.disco.simulation.models.datatypes.util,
  es.unizar.disco.simulation.models.definition,
  es.unizar.disco.simulation.models.definition.impl,
  es.unizar.disco.simulation.models.definition.util,
+ es.unizar.disco.simulation.models.delegates,
  es.unizar.disco.simulation.models.invocation,
  es.unizar.disco.simulation.models.invocation.impl,
  es.unizar.disco.simulation.models.invocation.util,

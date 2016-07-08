@@ -76,10 +76,10 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case DatatypesPackage.UNIT:
-				return createUnitFromString(eDataType, initialValue);
 			case DatatypesPackage.SIMULATION_STATUS:
 				return createSimulationStatusFromString(eDataType, initialValue);
+			case DatatypesPackage.NON_STANDARD_UNITS:
+				return createNonStandardUnitsFromString(eDataType, initialValue);
 			case DatatypesPackage.URI:
 				return createURIFromString(eDataType, initialValue);
 			case DatatypesPackage.NUMBER:
@@ -99,10 +99,10 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case DatatypesPackage.UNIT:
-				return convertUnitToString(eDataType, instanceValue);
 			case DatatypesPackage.SIMULATION_STATUS:
 				return convertSimulationStatusToString(eDataType, instanceValue);
+			case DatatypesPackage.NON_STANDARD_UNITS:
+				return convertNonStandardUnitsToString(eDataType, instanceValue);
 			case DatatypesPackage.URI:
 				return convertURIToString(eDataType, instanceValue);
 			case DatatypesPackage.NUMBER:
@@ -139,26 +139,6 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Unit createUnitFromString(EDataType eDataType, String initialValue) {
-		Unit result = Unit.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertUnitToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public SimulationStatus createSimulationStatusFromString(EDataType eDataType, String initialValue) {
 		SimulationStatus result = SimulationStatus.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -171,6 +151,26 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 * @generated
 	 */
 	public String convertSimulationStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NonStandardUnits createNonStandardUnitsFromString(EDataType eDataType, String initialValue) {
+		NonStandardUnits result = NonStandardUnits.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertNonStandardUnitsToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

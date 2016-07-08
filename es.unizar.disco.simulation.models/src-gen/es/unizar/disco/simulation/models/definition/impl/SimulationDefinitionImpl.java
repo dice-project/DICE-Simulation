@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -69,6 +70,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getPossibleConfigurations <em>Possible Configurations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getActiveConfigurations <em>Active Configurations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#isAutoSync <em>Auto Sync</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getScenarioStereotypes <em>Scenario Stereotypes</em>}</li>
  * </ul>
  *
  * @generated
@@ -263,6 +265,16 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * @ordered
 	 */
 	protected boolean autoSync = AUTO_SYNC_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getScenarioStereotypes() <em>Scenario Stereotypes</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScenarioStereotypes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> scenarioStereotypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -561,6 +573,18 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getScenarioStereotypes() {
+		if (scenarioStereotypes == null) {
+			scenarioStereotypes = new EDataTypeUniqueEList<String>(String.class, this, DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES);
+		}
+		return scenarioStereotypes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Collection<Variable> getVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -727,6 +751,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return getActiveConfigurations();
 			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
 				return isAutoSync();
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
+				return getScenarioStereotypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -793,6 +819,10 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
 				setAutoSync((Boolean)newValue);
 				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
+				getScenarioStereotypes().clear();
+				getScenarioStereotypes().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -850,6 +880,9 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
 				setAutoSync(AUTO_SYNC_EDEFAULT);
 				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
+				getScenarioStereotypes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -892,6 +925,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return activeConfigurations != null && !activeConfigurations.isEmpty();
 			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
 				return autoSync != AUTO_SYNC_EDEFAULT;
+			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
+				return scenarioStereotypes != null && !scenarioStereotypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -946,6 +981,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 		result.append(backend);
 		result.append(", autoSync: ");
 		result.append(autoSync);
+		result.append(", scenarioStereotypes: ");
+		result.append(scenarioStereotypes);
 		result.append(')');
 		return result.toString();
 	}

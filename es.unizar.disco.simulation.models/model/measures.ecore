@@ -5,7 +5,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="DomainMeasure">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType datatypes.ecore#//Number"
         iD="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" lowerBound="1" eType="ecore:EEnum datatypes.ecore#//Unit"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="unspecified"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
         eType="#//DomainMeasureDefinition"/>
   </eClassifiers>
@@ -13,6 +14,7 @@
       abstract="true" interface="true">
     <eOperations name="calculate" eType="#//DomainMeasure">
       <eParameters name="domainElement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      <eParameters name="definition" eType="#//DomainMeasureDefinition"/>
       <eParameters name="toolResult" eType="ecore:EClass toolresult.ecore#//ToolResult"/>
       <eParameters name="traceSet" eType="ecore:EClass traces.ecore#//TraceSet"/>
     </eOperations>

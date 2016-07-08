@@ -203,13 +203,22 @@ public interface DefinitionPackage extends EPackage {
 	int SIMULATION_DEFINITION__AUTO_SYNC = 14;
 
 	/**
+	 * The feature id for the '<em><b>Scenario Stereotypes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_DEFINITION__SCENARIO_STEREOTYPES = 15;
+
+	/**
 	 * The number of structural features of the '<em>Simulation Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_DEFINITION_FEATURE_COUNT = 15;
+	int SIMULATION_DEFINITION_FEATURE_COUNT = 16;
 
 	/**
 	 * The operation id for the '<em>Get Variables</em>' operation.
@@ -827,6 +836,17 @@ public interface DefinitionPackage extends EPackage {
 	EAttribute getSimulationDefinition_AutoSync();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenarioStereotypes <em>Scenario Stereotypes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Scenario Stereotypes</em>'.
+	 * @see es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenarioStereotypes()
+	 * @see #getSimulationDefinition()
+	 * @generated
+	 */
+	EAttribute getSimulationDefinition_ScenarioStereotypes();
+
+	/**
 	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getVariables() <em>Get Variables</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1302,6 +1322,14 @@ public interface DefinitionPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SIMULATION_DEFINITION__AUTO_SYNC = eINSTANCE.getSimulationDefinition_AutoSync();
+
+		/**
+		 * The meta object literal for the '<em><b>Scenario Stereotypes</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SIMULATION_DEFINITION__SCENARIO_STEREOTYPES = eINSTANCE.getSimulationDefinition_ScenarioStereotypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Variables</b></em>' operation.

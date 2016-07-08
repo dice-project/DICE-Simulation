@@ -7,6 +7,6 @@ import es.unizar.disco.simulation.models.traces.TraceSet;
 
 public interface MeasureCalculator {
 	
-	public DomainMeasure calculate(EObject domainElement, ToolResult toolResult, TraceSet traceSet);
+	public DomainMeasure calculate(EObject domainElement, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet);
 
 }

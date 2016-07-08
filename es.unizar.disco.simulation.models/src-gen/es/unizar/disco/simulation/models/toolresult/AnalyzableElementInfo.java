@@ -2,8 +2,6 @@
  */
 package es.unizar.disco.simulation.models.toolresult;
 
-import es.unizar.disco.simulation.models.datatypes.Unit;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -71,7 +69,7 @@ public interface AnalyzableElementInfo extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Unit</b></em>' attribute.
-	 * The literals are from the enumeration {@link es.unizar.disco.simulation.models.datatypes.Unit}.
+	 * The default value is <code>"unspecified"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Unit</em>' attribute isn't clear,
@@ -79,24 +77,22 @@ public interface AnalyzableElementInfo extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Unit</em>' attribute.
-	 * @see es.unizar.disco.simulation.models.datatypes.Unit
-	 * @see #setUnit(Unit)
+	 * @see #setUnit(String)
 	 * @see es.unizar.disco.simulation.models.toolresult.ToolresultPackage#getAnalyzableElementInfo_Unit()
-	 * @model required="true"
+	 * @model default="unspecified" required="true"
 	 * @generated
 	 */
-	Unit getUnit();
+	String getUnit();
 
 	/**
 	 * Sets the value of the '{@link es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo#getUnit <em>Unit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Unit</em>' attribute.
-	 * @see es.unizar.disco.simulation.models.datatypes.Unit
 	 * @see #getUnit()
 	 * @generated
 	 */
-	void setUnit(Unit value);
+	void setUnit(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Confidence Interval</b></em>' attribute list.

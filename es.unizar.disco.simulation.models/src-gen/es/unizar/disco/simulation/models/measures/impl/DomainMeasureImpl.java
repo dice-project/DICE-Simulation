@@ -2,8 +2,6 @@
  */
 package es.unizar.disco.simulation.models.measures.impl;
 
-import es.unizar.disco.simulation.models.datatypes.Unit;
-
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
 import es.unizar.disco.simulation.models.measures.MeasuresPackage;
@@ -60,7 +58,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Unit UNIT_EDEFAULT = Unit.UNSPECIFIED;
+	protected static final String UNIT_EDEFAULT = "unspecified";
 
 	/**
 	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' attribute.
@@ -70,7 +68,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * @generated
 	 * @ordered
 	 */
-	protected Unit unit = UNIT_EDEFAULT;
+	protected String unit = UNIT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDefinition() <em>Definition</em>}' reference.
@@ -127,7 +125,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Unit getUnit() {
+	public String getUnit() {
 		return unit;
 	}
 
@@ -136,9 +134,9 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUnit(Unit newUnit) {
-		Unit oldUnit = unit;
-		unit = newUnit == null ? UNIT_EDEFAULT : newUnit;
+	public void setUnit(String newUnit) {
+		String oldUnit = unit;
+		unit = newUnit;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, MeasuresPackage.DOMAIN_MEASURE__UNIT, oldUnit, unit));
 	}
@@ -212,7 +210,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 				setValue((Number)newValue);
 				return;
 			case MeasuresPackage.DOMAIN_MEASURE__UNIT:
-				setUnit((Unit)newValue);
+				setUnit((String)newValue);
 				return;
 			case MeasuresPackage.DOMAIN_MEASURE__DEFINITION:
 				setDefinition((DomainMeasureDefinition)newValue);
@@ -253,7 +251,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 			case MeasuresPackage.DOMAIN_MEASURE__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case MeasuresPackage.DOMAIN_MEASURE__UNIT:
-				return unit != UNIT_EDEFAULT;
+				return UNIT_EDEFAULT == null ? unit != null : !UNIT_EDEFAULT.equals(unit);
 			case MeasuresPackage.DOMAIN_MEASURE__DEFINITION:
 				return definition != null;
 		}

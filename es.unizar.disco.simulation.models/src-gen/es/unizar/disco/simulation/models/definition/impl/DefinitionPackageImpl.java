@@ -347,6 +347,15 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getSimulationDefinition_ScenarioStereotypes() {
+		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(15);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getSimulationDefinition__GetVariables() {
 		return simulationDefinitionEClass.getEOperations().get(0);
 	}
@@ -665,6 +674,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS);
 		createEReference(simulationDefinitionEClass, SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS);
 		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__AUTO_SYNC);
+		createEAttribute(simulationDefinitionEClass, SIMULATION_DEFINITION__SCENARIO_STEREOTYPES);
 		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_VARIABLES);
 		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_VARIABLES_MAP);
 		createEOperation(simulationDefinitionEClass, SIMULATION_DEFINITION___GET_INPUT_VARIABLES_MAP);
@@ -758,6 +768,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		initEReference(getSimulationDefinition_PossibleConfigurations(), this.getVariableConfiguration(), null, "possibleConfigurations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationDefinition_ActiveConfigurations(), this.getVariableConfiguration(), null, "activeConfigurations", null, 0, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationDefinition_AutoSync(), ecorePackage.getEBoolean(), "autoSync", "false", 1, 1, SimulationDefinition.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSimulationDefinition_ScenarioStereotypes(), ecorePackage.getEString(), "scenarioStereotypes", null, 1, -1, SimulationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getSimulationDefinition__GetVariables(), null, "getVariables", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(theDatatypesPackage.getCollection());

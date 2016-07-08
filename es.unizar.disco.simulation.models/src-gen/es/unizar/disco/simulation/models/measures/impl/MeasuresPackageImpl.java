@@ -215,7 +215,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getMeasureCalculator__Calculate__EObject_TraceSet() {
+	public EOperation getMeasureCalculator__Calculate__EObject_DomainMeasureDefinition_ToolResult_TraceSet() {
 		return measureCalculatorEClass.getEOperations().get(0);
 	}
 
@@ -343,7 +343,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		createEReference(domainMeasureEClass, DOMAIN_MEASURE__DEFINITION);
 
 		measureCalculatorEClass = createEClass(MEASURE_CALCULATOR);
-		createEOperation(measureCalculatorEClass, MEASURE_CALCULATOR___CALCULATE__EOBJECT_TRACESET);
+		createEOperation(measureCalculatorEClass, MEASURE_CALCULATOR___CALCULATE__EOBJECT_DOMAINMEASUREDEFINITION_TOOLRESULT_TRACESET);
 
 		domainMeasureDefinitionEClass = createEClass(DOMAIN_MEASURE_DEFINITION);
 		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__MEASURED_ELEMENT);
@@ -396,13 +396,14 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		// Initialize classes, features, and operations; add parameters
 		initEClass(domainMeasureEClass, DomainMeasure.class, "DomainMeasure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomainMeasure_Value(), theDatatypesPackage.getNumber(), "value", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDomainMeasure_Unit(), theDatatypesPackage.getUnit(), "unit", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainMeasure_Unit(), ecorePackage.getEString(), "unit", "unspecified", 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainMeasure_Definition(), this.getDomainMeasureDefinition(), null, "definition", null, 1, 1, DomainMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(measureCalculatorEClass, MeasureCalculator.class, "MeasureCalculator", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = initEOperation(getMeasureCalculator__Calculate__EObject_TraceSet(), this.getDomainMeasure(), "calculate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = initEOperation(getMeasureCalculator__Calculate__EObject_DomainMeasureDefinition_ToolResult_TraceSet(), this.getDomainMeasure(), "calculate", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEObject(), "domainElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getDomainMeasureDefinition(), "definition", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theToolresultPackage.getToolResult(), "toolResult", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theTracesPackage.getTraceSet(), "traceSet", 0, 1, IS_UNIQUE, IS_ORDERED);
 

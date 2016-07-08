@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getPossibleConfigurations <em>Possible Configurations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveConfigurations <em>Active Configurations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#isAutoSync <em>Auto Sync</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenarioStereotypes <em>Scenario Stereotypes</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition()
@@ -354,6 +355,22 @@ public interface SimulationDefinition extends EObject {
 	 * @generated
 	 */
 	void setAutoSync(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Scenario Stereotypes</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Scenario Stereotypes</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Scenario Stereotypes</em>' attribute list.
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_ScenarioStereotypes()
+	 * @model required="true"
+	 * @generated
+	 */
+	EList<String> getScenarioStereotypes();
 
 	/**
 	 * <!-- begin-user-doc -->
