@@ -77,7 +77,7 @@ public class SimulationInvocationsRegistry {
 	 * 
 	 * @param invocation
 	 */
-	public void register(SimulationInvocation invocation) {
+	public synchronized void register(SimulationInvocation invocation) {
 		if (!getRegistry().getInvocations().contains(invocation)) {
 			resourcefyInvocation(invocation);
 			getRegistry().getInvocations().add(invocation);
@@ -88,7 +88,7 @@ public class SimulationInvocationsRegistry {
 	/**
 	 * Deletes all the information on the registry and all its associated files
 	 */
-	public void clear() {
+	public synchronized void clear() {
 		getRegistry().getInvocations().clear();
 		for (Iterator<Resource> it = getResourceSet().getResources().iterator(); it.hasNext();) {
 			Resource resource = it.next();
@@ -107,7 +107,7 @@ public class SimulationInvocationsRegistry {
 	 * 
 	 * @throws IOException
 	 */
-	public void save() throws IOException {
+	public synchronized void save() throws IOException {
 		save(true);
 	}
 
@@ -119,7 +119,7 @@ public class SimulationInvocationsRegistry {
 	 *            whether dangling HREF references will be discarded or not
 	 * @throws IOException
 	 */
-	public void save(boolean discard) throws IOException {
+	public synchronized void save(boolean discard) throws IOException {
 		if (!FILES_DIRECTORY.exists()) {
 			if (!FILES_DIRECTORY.mkdirs()) {
 				throw new RuntimeException(MessageFormat.format("Unable to create directory ''{0}''", FILES_DIRECTORY.toString()));
@@ -146,7 +146,7 @@ public class SimulationInvocationsRegistry {
 	 * 
 	 * @return the {@link InvocationsRegistry}
 	 */
-	public InvocationsRegistry getRegistry() {
+	public synchronized InvocationsRegistry getRegistry() {
 		if (registry == null) {
 			if (getResource().getContents().isEmpty()) {
 				registry = InvocationFactory.eINSTANCE.createInvocationsRegistry();
@@ -158,14 +158,14 @@ public class SimulationInvocationsRegistry {
 		return registry;
 	}
 
-	public ResourceSet getResourceSet() {
+	public synchronized ResourceSet getResourceSet() {
 		if (resourceSet == null) {
 			resourceSet = new ResourceSetImpl();
 		}
 		return resourceSet;
 	}
 
-	private Resource getResource() {
+	private synchronized Resource getResource() {
 		if (resource == null) {
 			try {
 				if (new File(REGISTRY_URI.toFileString()).exists()) {
@@ -181,7 +181,7 @@ public class SimulationInvocationsRegistry {
 		return resource;
 	}
 
-	private void resourcefyInvocation(SimulationInvocation invocation) {
+	private synchronized void resourcefyInvocation(SimulationInvocation invocation) {
 		final URI baseUri = URI.createFileURI(FILES_DIRECTORY.getPath());
 
 		final URI defURI = baseUri.appendSegment(invocation.getDefinition().getIdentifier()).appendFileExtension("def").appendFileExtension(XMIResource.XMI_NS);
