@@ -11,12 +11,17 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
+import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.model.IStreamsProxy;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ui.statushandlers.StatusManager;
@@ -52,7 +57,10 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		// Set the remaining ticks
 		subMonitor.setWorkRemaining(definition.getInvocations().size());
 
-		MultiStatus globalStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
+		MultiStatus globalStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0,
+				MessageFormat.format("Simulation ''{0}'' finished with errors", definition.getIdentifier()), null);
+
+		ControllingProcess controllingProcess = new ControllingProcess(launch, definition.getIdentifier());
 
 		for (int i = 0; i < definition.getInvocations().size(); i++) {
 
@@ -120,6 +128,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				globalStatus.merge(invocationStatus);
 			}
 		}
+		controllingProcess.terminate();
 		if (!globalStatus.isOK()) {
 			throw new CoreException(globalStatus);
 		}
@@ -222,5 +231,110 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		}
 
 		return status;
+	}
+
+	private class ControllingProcess extends PlatformObject implements IProcess {
+
+		private int exitValue = 0;
+		private String id;
+		private ILaunch launch;
+		private volatile boolean terminated = false;
+
+		public ControllingProcess(ILaunch launch, String id) {
+			this.launch = launch;
+			this.id = id;
+			fireCreationEvent();
+			launch.addProcess(this);
+		}
+
+		@Override
+		public boolean canTerminate() {
+			return !terminated;
+		}
+
+		@Override
+		public boolean isTerminated() {
+			return terminated;
+		}
+
+		@Override
+		public void terminate() throws DebugException {
+			fireTerminateEvent();
+			terminated = true;
+		}
+
+		@Override
+		public String getLabel() {
+			return MessageFormat.format("Simulating definition ''{0}''", id);
+		}
+
+		@Override
+		public ILaunch getLaunch() {
+			return launch;
+		}
+
+		@Override
+		public IStreamsProxy getStreamsProxy() {
+			return null;
+		}
+
+		@Override
+		public void setAttribute(String key, String value) {
+			fireChangeEvent();
+		}
+
+		@Override
+		public String getAttribute(String key) {
+			return null;
+		}
+
+		@Override
+		public int getExitValue() throws DebugException {
+			return exitValue;
+		}
+
+		protected void fireCreationEvent() {
+			fireEvent(new DebugEvent(this, DebugEvent.CREATE));
+		}
+
+		protected void fireEvent(DebugEvent event) {
+			DebugPlugin manager = DebugPlugin.getDefault();
+			if (manager != null) {
+				manager.fireDebugEventSet(new DebugEvent[] { event });
+			}
+		}
+
+		protected void fireTerminateEvent() {
+			fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));
+		}
+
+		protected void fireChangeEvent() {
+			fireEvent(new DebugEvent(this, DebugEvent.CHANGE));
+		}
+
+		@Override
+		public <T> T getAdapter(Class<T> adapter) {
+			if (adapter.equals(IProcess.class)) {
+				return (T) this;
+			}
+			if (adapter.equals(IDebugTarget.class)) {
+				ILaunch launch = getLaunch();
+				IDebugTarget[] targets = launch.getDebugTargets();
+				for (int i = 0; i < targets.length; i++) {
+					if (this.equals(targets[i].getProcess())) {
+						return (T) targets[i];
+					}
+				}
+				return null;
+			}
+			if (adapter.equals(ILaunch.class)) {
+				return (T) getLaunch();
+			}
+			// CONTEXTLAUNCHING
+			if (adapter.equals(ILaunchConfiguration.class)) {
+				return (T) getLaunch().getLaunchConfiguration();
+			}
+			return super.getAdapter(adapter);
+		}
 	}
 }
