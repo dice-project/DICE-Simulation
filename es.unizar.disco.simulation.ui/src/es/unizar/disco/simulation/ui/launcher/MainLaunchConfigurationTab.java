@@ -110,8 +110,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 	};
 
 	private final SimulationDefinitionConfigurationHandler handler;
-	
-	
+
 	public MainLaunchConfigurationTab(SimulationDefinition simulationDefinition) {
 		super(simulationDefinition);
 		handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
@@ -535,12 +534,26 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 					BigDecimal start = new BigDecimal(rangeMatcher.group("start"));
 					BigDecimal limit = new BigDecimal(rangeMatcher.group("limit"));
 					BigDecimal increment = new BigDecimal(rangeMatcher.group("increment"));
-					if (limit.subtract(start).subtract(increment).abs().compareTo(limit.subtract(start).abs()) < 0) {
-						for (BigDecimal number = start; number.compareTo(limit) <= 0; number = number.add(increment)) {
-							InputVariableValue value = DefinitionFactory.eINSTANCE.createInputVariableValue();
-							value.setValue(number);
-							newValues.add(value);
+					// @formatter:off
+					if ((increment.compareTo(BigDecimal.ZERO)) != 0) { // increment != 0
+						// We calculate increment and decrement intervals separately since it's 
+						// easier to implement when the upper limit is inclusive
+						if (limit.subtract(start).compareTo(BigDecimal.ZERO) > 0 && increment.compareTo(BigDecimal.ZERO) > 0) { // limit - start > 0 && increment > 0
+							// Incrementing intervals
+							for (BigDecimal number = start; number.compareTo(limit) <= 0; number = number.add(increment)) {
+								InputVariableValue value = DefinitionFactory.eINSTANCE.createInputVariableValue();
+								value.setValue(number);
+								newValues.add(value);
+							}
+						} else  if (limit.subtract(start).compareTo(BigDecimal.ZERO) < 0 && increment.compareTo(BigDecimal.ZERO) < 0) { // limit - start < 0 && increment < 0
+							// Decrementing intervals
+							for (BigDecimal number = start; number.compareTo(limit) >= 0; number = number.add(increment)) {
+								InputVariableValue value = DefinitionFactory.eINSTANCE.createInputVariableValue();
+								value.setValue(number);
+								newValues.add(value);
+							}
 						}
+					// @formatter:on
 					}
 				}
 			}
@@ -549,7 +562,9 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 				if (newValues.size() > 10) {
 					MessageBox dialog = new MessageBox(getShell(), SWT.ICON_QUESTION | SWT.OK | SWT.CANCEL);
 					dialog.setText("Continue");
-					dialog.setMessage(MessageFormat.format("You are about to add {0} new values. Adding too many variable values may take some time and, in extreme cases, may even crash your IDE.\nAre you sure you want to continue?", newValues.size()));
+					dialog.setMessage(MessageFormat.format(
+							"You are about to add {0} new values. Adding too many variable values may take some time and, in extreme cases, may even crash your IDE.\nAre you sure you want to continue?",
+							newValues.size()));
 					if (dialog.open() == SWT.CANCEL) {
 						doit = false;
 					}

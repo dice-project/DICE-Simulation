@@ -376,6 +376,9 @@ public class InvocationsView extends ViewPart {
 			public void run() {
 				IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
 				SimulationInvocation invocation = (SimulationInvocation) selection.getFirstElement();
+				if (invocation.getResult() == null) {
+					return;
+				}
 				IWorkbench workbench = PlatformUI.getWorkbench();
 				IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 				try {
