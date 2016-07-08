@@ -7,7 +7,7 @@ import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 import es.unizar.disco.pnextensions.pnutils.DataTypeUtils;
 import es.unizar.disco.pnextensions.pnutils.PnutilsFactory;
 
-public class PnmlDatatypesUtils {
+public class DatatypeUtils {
 	
 	private static final DataTypeUtils DATATYPE_UTILS = PnutilsFactory.eINSTANCE.createDataTypeUtils();
 

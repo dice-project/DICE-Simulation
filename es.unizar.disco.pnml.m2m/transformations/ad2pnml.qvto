@@ -19,7 +19,7 @@ transformation ad2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces 
 */
 main() {
 	// Transform top-level elements
-	ad.scenario().map model2net();
+	ad.scenario().map model2doc();
 	
 	// Transform net contents
 	ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
@@ -32,19 +32,29 @@ main() {
 	var initialNodes := ad.scenario().node[UML::InitialNode];
 	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
 	initialNodes[getGaWorkloadEvent().oclIsUndefined().not()] -> map initialNodes2AnalysisType();
+	
+	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
+		log("Base time unit is 's'");
+		log("Base frequency unit is 'Hz'");
+	} else {
+		log("Base time unit is 'tick'");
+		log("Base frequency unit is 'events per tick'");
+	}
 }
 
 /**
 	Create the PetriNetDoc and the PetriNet
 */
-mapping UML::NamedElement::model2net() : PNML::PetriNetDoc {
-	nets := object PNML::PetriNet {
-		id := createRandomUniqueId();
-		name := object PNML::Name {
-			text := self.name;
-		};
-		pages := self.map model2page();
-	}
+mapping UML::NamedElement::model2doc() : PNML::PetriNetDoc {
+	nets := self.map model2net();
+}
+
+mapping UML::NamedElement::model2net() : PNML::PetriNet {
+	id := createRandomUniqueId();
+	name := object PNML::Name {
+		text := self.name;
+	};
+	pages := self.map model2page();
 }
 
 /**
@@ -52,6 +62,19 @@ mapping UML::NamedElement::model2net() : PNML::PetriNetDoc {
 */
 mapping UML::NamedElement::model2page() : PNML::Page {
 	id := createRandomUniqueId();
+}
+
+/**
+	Sets the metadata for the base time unit on the PNML file
+*/
+mapping baseTimeUnit(unit : String) {
+	var net := resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet);
+	net.toolspecifics += object PNML::ToolInfo {
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::BaseUnitsConstants::baseTimeUnit.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::BaseUnitsConstants::baseTimeUnit.toString() + "\">" + unit  + "</value>").createLongString();
+	};
 }
 
 /**
@@ -733,8 +756,8 @@ helper String::toNfpDuration() : NFP_Duration {
 		res.worst := entries->get("worst").toReal();
 		res.best := entries->get("best").toReal();
 	};
-	assert warning (res.unit.oclIsUndefined() or res.unit = "s")
-		with log ("Expression '" + self + "' defines an unsupported 'unit', assumming the only supported unit (seconds, 's')");
+	assert warning (res.unit.oclIsUndefined().not())
+		with log ("Expression '" + self + "' does not define a 'unit', assumming the default base unit (see complete log)");
 	assert warning (res.dir.oclIsUndefined())
 		with log ("Expression '" + self + "' defines a value for the unsupported 'clock' property");
 	assert warning (res.dir.oclIsUndefined())
@@ -768,8 +791,8 @@ helper String::toNfpFrequency() : NFP_Frequency {
 		res.unit := entries->get("unit");
 		res.precision := entries->get("precision").toReal();
 	};
-	assert warning (res.unit.oclIsUndefined() or res.unit = "Hz")
-		with log ("Expression '" + self + "' defines an unsupported 'unit', assumming the only supported unit (Hertzs, 'Hz')");
+	assert warning (res.unit.oclIsUndefined().not())
+		with log ("Expression '" + self + "' does not define a 'unit', assumming the default base unit (see complete log)");
 	assert warning (res.dir.oclIsUndefined())
 		with log ("Expression '" + self + "' defines a value for the unsupported 'clock' property");
 	assert warning (res.dir.oclIsUndefined())
@@ -794,6 +817,32 @@ helper NFP_Real::value() : Real {
 		return self.value;
 	};
 	return self.expr.eval(vars.vars()).toReal();
+}
+
+helper NFP_Duration::value() : Real {
+	var value : Real;	
+	if (self.value.oclIsUndefined().not()) {
+		value := self.value;
+	};
+	value := self.expr.eval(vars.vars()).toReal();
+	if (self.unit.oclIsUndefined().not()) {
+		map baseTimeUnit("s");			
+		value := value.convert(self.unit, "s");
+	};
+	return value;
+}
+
+helper NFP_Frequency::value() : Real {
+	var value : Real;	
+	if (self.value.oclIsUndefined().not()) {
+		value := self.value;
+	};
+	value := self.expr.eval(vars.vars()).toReal();
+	if (self.unit.oclIsUndefined().not()) {
+		map baseTimeUnit("s");
+		value := value.convert(self.unit, "Hz");
+	};
+	return value;
 }
 
 helper UML::Element::getGaWorkloadEvent() : UML::Stereotype {

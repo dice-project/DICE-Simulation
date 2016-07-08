@@ -1,6 +1,6 @@
 package es.unizar.disco.pnml.m2m.utils;
 
-import java.util.Collection;
+import java.util.Set;
 
 import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlContext;
@@ -14,7 +14,7 @@ import es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment;
 public class MathUtils {
 
 	@Operation(contextual = true)
-	public static String eval(String expression, Collection<PrimitiveVariableAssignment> vars) {
+	public static String eval(String expression, Set<PrimitiveVariableAssignment> vars) {
 	    JexlEngine engine = new JexlBuilder().create();
 	    JexlExpression expr = engine.createExpression(expression);
 	    JexlContext context = new MapContext();
@@ -24,4 +24,11 @@ public class MathUtils {
 	    return expr.evaluate(context).toString();
 	}
 
+	@Operation(contextual = true)
+	public static String eval(String expression) {
+	    JexlEngine engine = new JexlBuilder().create();
+	    JexlExpression expr = engine.createExpression(expression);
+	    JexlContext context = new MapContext();
+	    return expr.evaluate(context).toString();
+	}
 }

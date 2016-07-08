@@ -7,4 +7,6 @@
         status="integration">
 	</info>
 	<dependency org="org.apache.commons" name="commons-jexl3" rev="3.0" />
+	<dependency org="javax.measure" name="unit-api" rev="0.9"/>
+	<dependency org="tec.units" name="unit-ri" rev="0.9"/>
 </ivy-module>
