@@ -8,6 +8,10 @@
             description="Launches a Simulation"
             id="es.unizar.disco.simulation.ui.launchConfigurationTabGroup"
             type="es.unizar.disco.simulation.ui.launchConfigurationType">
+         <launchMode
+               mode="run"
+               perspective="es.unizar.disco.simulation.ui.perspective">
+         </launchMode>
       </launchConfigurationTabGroup>
    </extension>
    <extension
@@ -217,6 +221,18 @@
             id="es.unizar.disco.simulation.ui.editors.readonlyEcoreEditor"
             name="Rooted Read Only Ecore Editor">
       </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="es.unizar.disco.simulation.ui.perspective.SimulationPerspective"
+            icon="icons/full/obj16/perspective.png"
+            id="es.unizar.disco.simulation.ui.perspective"
+            name="DICE Simulation">
+         <description>
+            The DICE SImulation perspectice allows tracking the status of the running simulations more efficiently.
+         </description>
+      </perspective>
    </extension>
 
 </plugin>
