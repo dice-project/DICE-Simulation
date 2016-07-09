@@ -14,7 +14,9 @@ public class SimulationPerspective implements IPerspectiveFactory {
 	private static final String TOP_LEFT_FOLDER = "TOP_LEFT_FOLDER";
 	private static final String TOP_RIGHT_FOLDER = "TOP_RIGHT_FOLDER";
 
-	private static final String BOTTOM_FOLDER = "TOP_FOLDER";
+	private static final String BOTTOM_FOLDER = "BOTTOM_FOLDER";
+	private static final String BOTTOM_LEFT_FOLDER = "BOTTOM_LEFT_FOLDER";
+	private static final String BOTTOM_RIGHT_FOLDER = "BOTTOM_RIGHT_FOLDER";
 
 	private IPageLayout factory;
 
@@ -31,11 +33,16 @@ public class SimulationPerspective implements IPerspectiveFactory {
 		IFolderLayout top = factory.createFolder(TOP_FOLDER, IPageLayout.TOP, 0.33f, factory.getEditorArea());
 		IFolderLayout topLeft = factory.createFolder(TOP_LEFT_FOLDER, IPageLayout.LEFT, 0.5f, TOP_FOLDER);
 		IFolderLayout topRight = factory.createFolder(TOP_RIGHT_FOLDER, IPageLayout.RIGHT, 0.5f, TOP_FOLDER);
-		topLeft.addView("org.eclipse.debug.ui.DebugView");
-		topRight.addView(IConsoleConstants.ID_CONSOLE_VIEW);
 
+		@SuppressWarnings("unused")
 		IFolderLayout bottom = factory.createFolder(BOTTOM_FOLDER, IPageLayout.BOTTOM, 0.5f, factory.getEditorArea());
-		bottom.addView(InvocationsView.ID);
+		IFolderLayout bottomLeft = factory.createFolder(BOTTOM_LEFT_FOLDER, IPageLayout.LEFT, 0.5f, BOTTOM_FOLDER);
+		IFolderLayout bottomRight = factory.createFolder(BOTTOM_RIGHT_FOLDER, IPageLayout.RIGHT, 0.5f, BOTTOM_FOLDER);
+
+		topLeft.addView("org.eclipse.debug.ui.DebugView");
+		topRight.addView("org.eclipse.pde.runtime.LogView");
+		bottomRight.addView(IConsoleConstants.ID_CONSOLE_VIEW);
+		bottomLeft.addView(InvocationsView.ID);
 
 	}
 
