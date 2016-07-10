@@ -28,21 +28,20 @@ public class SimulationPerspective implements IPerspectiveFactory {
 		addViewShortcuts();
 	}
 
+	@SuppressWarnings("unused")
 	private void addViews() {
-		@SuppressWarnings("unused")
 		IFolderLayout top = factory.createFolder(TOP_FOLDER, IPageLayout.TOP, 0.33f, factory.getEditorArea());
 		IFolderLayout topLeft = factory.createFolder(TOP_LEFT_FOLDER, IPageLayout.LEFT, 0.5f, TOP_FOLDER);
 		IFolderLayout topRight = factory.createFolder(TOP_RIGHT_FOLDER, IPageLayout.RIGHT, 0.5f, TOP_FOLDER);
 
-		@SuppressWarnings("unused")
 		IFolderLayout bottom = factory.createFolder(BOTTOM_FOLDER, IPageLayout.BOTTOM, 0.5f, factory.getEditorArea());
 		IFolderLayout bottomLeft = factory.createFolder(BOTTOM_LEFT_FOLDER, IPageLayout.LEFT, 0.5f, BOTTOM_FOLDER);
 		IFolderLayout bottomRight = factory.createFolder(BOTTOM_RIGHT_FOLDER, IPageLayout.RIGHT, 0.5f, BOTTOM_FOLDER);
 
 		topLeft.addView("org.eclipse.debug.ui.DebugView");
+		topRight.addView(IConsoleConstants.ID_CONSOLE_VIEW);
 		topRight.addView("org.eclipse.pde.runtime.LogView");
-		bottomRight.addView(IConsoleConstants.ID_CONSOLE_VIEW);
-		bottomLeft.addView(InvocationsView.ID);
+		bottom.addView(InvocationsView.ID);
 
 	}
 
