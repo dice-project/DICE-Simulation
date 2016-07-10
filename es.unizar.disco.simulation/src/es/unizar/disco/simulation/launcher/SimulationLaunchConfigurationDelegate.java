@@ -61,6 +61,9 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 		ControllingProcess controllingProcess = new ControllingProcess(launch, definition.getIdentifier());
 
+		controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
+				MessageFormat.format("Validating analizable model for simulation definition ''{0}''...", definition.getIdentifier())));
+
 		IStatus validateStatus = validateAnalyzableModel(definition);
 
 		if (!validateStatus.isOK()) {
@@ -79,6 +82,9 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		for (int i = 0; i < definition.getInvocations().size(); i++) {
 
 			SimulationInvocation invocation = definition.getInvocations().get(i);
+
+			controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
+					MessageFormat.format("Launching invocation ''{0}''", invocation.getIdentifier())));
 
 			MultiStatus invocationStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
 
@@ -136,15 +142,22 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				invocationStatus.add(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, t.getLocalizedMessage(), t));
 			} finally {
 				invocation.setEnd(Calendar.getInstance().getTime());
-				if (invocation.getStatus() != SimulationStatus.KILLED) {
-					if (invocationStatus.isOK()) {
-						invocation.setStatus(SimulationStatus.FINISHED);
-					} else {
-						invocation.setStatus(SimulationStatus.FAILED);
-					}
-				}
 				globalStatus.merge(invocationStatus);
 				controllingProcess.log(invocationStatus);
+				if (invocation.getStatus() == SimulationStatus.KILLED) {
+					controllingProcess.log(new Status(IStatus.CANCEL, DiceSimulationPlugin.PLUGIN_ID,
+							MessageFormat.format("Invocation ''{0}'' killed", invocation.getIdentifier())));
+				} else {
+					if (invocationStatus.isOK()) {
+						invocation.setStatus(SimulationStatus.FINISHED);
+						controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
+								MessageFormat.format("Invocation ''{0}'' finished", invocation.getIdentifier())));
+					} else {
+						invocation.setStatus(SimulationStatus.FAILED);
+						controllingProcess.log(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
+								MessageFormat.format("Invocation ''{0}'' failed", invocation.getIdentifier())));
+					}
+				}
 			}
 		}
 		controllingProcess.terminate();
@@ -310,7 +323,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				return errorStreamMonitor;
 			}
 		};
-		
+
 		private int exitValue = 0;
 		private String id;
 		private ILaunch launch;
@@ -359,7 +372,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 		public void log(IStatus status) {
 			if (!status.isMultiStatus()) {
-				log(status);
+				logStatus(status);
 			} else {
 				for (IStatus child : status.getChildren()) {
 					logStatus(child);
