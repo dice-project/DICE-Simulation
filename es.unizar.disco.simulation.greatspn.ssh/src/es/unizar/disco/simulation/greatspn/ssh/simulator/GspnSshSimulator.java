@@ -239,7 +239,9 @@ public class GspnSshSimulator implements ISimulator {
 					}
 					latestResult = currentResult;
 				} catch (IOException e) {
-					DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+					if (!killed) {
+						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+					}
 				}
 			}
 		};
@@ -250,7 +252,7 @@ public class GspnSshSimulator implements ISimulator {
 				return true;
 			}
 		}
-		
+
 		private SSHClient ssh;
 		private Session simulationSession;
 		private Command simulationCommand;
@@ -263,6 +265,7 @@ public class GspnSshSimulator implements ISimulator {
 		private String remoteWorkingDir;
 		private String identifier;
 		private volatile boolean finished = false;
+		private volatile boolean killed = false;
 		private volatile int exitValue = RET_CODE_UNKNOWN_ERROR;
 
 		public GspnProcess(String identifier) {
@@ -345,9 +348,9 @@ public class GspnSshSimulator implements ISimulator {
 					} catch (ConnectionException e) {
 						DiceLogger.logError(GspnSshSimulationPlugin.getDefault(),
 								MessageFormat.format(Messages.GspnSshSimulator_connClosedError, ssh.getRemoteHostname(), ssh.getRemotePort()), e);
-					} catch (IOException e) {
-						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
 					} catch (InterruptedException e) {
+						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+					} catch (IOException e) {
 						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
 					} finally {
 						IOUtils.closeQuietly(ssh, simulationSession, simulationCommand);
@@ -401,6 +404,7 @@ public class GspnSshSimulator implements ISimulator {
 
 		@Override
 		public void destroy() {
+			killed = true;
 			exitValue = RET_CODE_KILLED;
 			IOUtils.closeQuietly(ssh, simulationSession, simulationCommand);
 		}
