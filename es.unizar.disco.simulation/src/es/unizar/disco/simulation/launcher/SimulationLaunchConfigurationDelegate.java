@@ -1,10 +1,15 @@
 package es.unizar.disco.simulation.launcher;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.MessageFormat;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.CoreException;
@@ -19,8 +24,10 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.IStreamListener;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.model.IStreamMonitor;
 import org.eclipse.debug.core.model.IStreamsProxy;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.ecore.EObject;
@@ -51,7 +58,16 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.SimulationLaunchConfigurationDelegate_simulatingTaskTilte, IProgressMonitor.UNKNOWN);
 
 		final SimulationDefinition definition = reifySimulationDefinition(configuration);
-		validateAnalyzableModel(definition);
+
+		ControllingProcess controllingProcess = new ControllingProcess(launch, definition.getIdentifier());
+
+		IStatus validateStatus = validateAnalyzableModel(definition);
+
+		if (!validateStatus.isOK()) {
+			StatusManager.getManager().handle(validateStatus, StatusManager.LOG);
+			controllingProcess.log(validateStatus);
+		}
+
 		registerInvocations(definition.getInvocations());
 
 		// Set the remaining ticks
@@ -60,10 +76,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		MultiStatus globalStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0,
 				MessageFormat.format("Simulation ''{0}'' finished with errors", definition.getIdentifier()), null);
 
-		ControllingProcess controllingProcess = new ControllingProcess(launch, definition.getIdentifier());
-
 		for (int i = 0; i < definition.getInvocations().size(); i++) {
-
 
 			SimulationInvocation invocation = definition.getInvocations().get(i);
 
@@ -71,15 +84,15 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 			try {
 				final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
-				
+
 				subMonitor.subTask(MessageFormat.format("Launching Simulation {0} out of {1}", i + 1, definition.getInvocations().size()));
-				
+
 				invocation.setStart(Calendar.getInstance().getTime());
-				
+
 				if (controllingProcess.isTerminated()) {
 					throw new InterruptedException();
 				}
-				
+
 				if (simulator == null) {
 					throw new SimulationException(
 							MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError, definition.getBackend()));
@@ -131,6 +144,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 					}
 				}
 				globalStatus.merge(invocationStatus);
+				controllingProcess.log(invocationStatus);
 			}
 		}
 		controllingProcess.terminate();
@@ -163,16 +177,15 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		return simulationDefinition;
 	}
 
-	private void validateAnalyzableModel(SimulationDefinition definition) throws CoreException {
+	private IStatus validateAnalyzableModel(SimulationDefinition definition) throws CoreException {
 		// Check that the analyzable model can be built without errors.
 		// The errors should be the same for all possible configuration,
 		// thus, we only test the first one
 		final IStatus status = definition.getInvocations().get(0).buildAnalyzableModel();
 		if (status.getSeverity() == IStatus.ERROR) {
 			throw new CoreException(status);
-		} else if (!status.isOK()) {
-			StatusManager.getManager().handle(status, StatusManager.LOG);
 		}
+		return status;
 	}
 
 	private void registerInvocations(List<SimulationInvocation> invocations) {
@@ -240,6 +253,64 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 	private class ControllingProcess extends PlatformObject implements IProcess {
 
+		private class MonitoredByteOutputStream implements IStreamMonitor {
+
+			private ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			private OutputStreamWriter writer = new OutputStreamWriter(stream);
+			private List<IStreamListener> listeners = Collections.synchronizedList(new ArrayList<IStreamListener>());
+
+			@Override
+			public void removeListener(IStreamListener listener) {
+				listeners.remove(listener);
+			}
+
+			@Override
+			public synchronized String getContents() {
+				String contents = stream.toString();
+				stream.reset();
+				return contents;
+			}
+
+			@Override
+			public void addListener(IStreamListener listener) {
+				listeners.add(listener);
+			}
+
+			private void notifyChanged(String text) {
+				for (IStreamListener listener : listeners) {
+					listener.streamAppended(text, this);
+				}
+			}
+
+			public synchronized void write(String text) {
+				try {
+					writer.append(text);
+					notifyChanged(text);
+				} catch (IOException e) {
+					// Should not happen
+				}
+			}
+		}
+
+		private IStreamsProxy streamsProxy = new IStreamsProxy() {
+			MonitoredByteOutputStream outputStreamMonitor = new MonitoredByteOutputStream();
+			MonitoredByteOutputStream errorStreamMonitor = new MonitoredByteOutputStream();
+
+			@Override
+			public void write(String input) throws IOException {
+			}
+
+			@Override
+			public IStreamMonitor getOutputStreamMonitor() {
+				return outputStreamMonitor;
+			}
+
+			@Override
+			public IStreamMonitor getErrorStreamMonitor() {
+				return errorStreamMonitor;
+			}
+		};
+		
 		private int exitValue = 0;
 		private String id;
 		private ILaunch launch;
@@ -283,7 +354,42 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 		@Override
 		public IStreamsProxy getStreamsProxy() {
-			return null;
+			return streamsProxy;
+		}
+
+		public void log(IStatus status) {
+			if (!status.isMultiStatus()) {
+				log(status);
+			} else {
+				for (IStatus child : status.getChildren()) {
+					logStatus(child);
+				}
+			}
+		}
+
+		private void logStatus(IStatus status) {
+			MonitoredByteOutputStream stdout = (MonitoredByteOutputStream) getStreamsProxy().getOutputStreamMonitor();
+			MonitoredByteOutputStream stderr = (MonitoredByteOutputStream) getStreamsProxy().getErrorStreamMonitor();
+			switch (status.getSeverity()) {
+			case IStatus.OK:
+				stdout.write("[OK] " + status.getMessage() + "\n");
+				break;
+			case IStatus.INFO:
+				stdout.write("[INFO] " + status.getMessage() + "\n");
+				break;
+			case IStatus.WARNING:
+				stderr.write("[WARNING] " + status.getMessage() + "\n");
+				break;
+			case IStatus.ERROR:
+				stderr.write("[ERROR] " + status.getMessage() + "\n");
+				break;
+			case IStatus.CANCEL:
+				stderr.write("[CANCEL] " + status.getMessage() + "\n");
+				break;
+			default:
+				stdout.write(status.getMessage() + "\n");
+				break;
+			}
 		}
 
 		@Override
