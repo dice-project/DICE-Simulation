@@ -61,49 +61,51 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 		ControllingProcess controllingProcess = new ControllingProcess(launch, definition.getIdentifier());
 
-		controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
-				MessageFormat.format("Validating analizable model for simulation definition ''{0}''...", definition.getIdentifier())));
-
-		IStatus validateStatus = validateAnalyzableModel(definition);
-
-		if (!validateStatus.isOK()) {
-			DiceLogger.log(DiceSimulationPlugin.getDefault(), validateStatus);
-			controllingProcess.log(validateStatus);
-		}
-
-		registerInvocations(definition.getInvocations());
-
-		// Set the remaining ticks
-		subMonitor.setWorkRemaining(definition.getInvocations().size());
-
 		MultiStatus globalStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0,
 				MessageFormat.format("Simulation ''{0}'' finished with errors", definition.getIdentifier()), null);
 
-		for (int i = 0; i < definition.getInvocations().size(); i++) {
-
-			SimulationInvocation invocation = definition.getInvocations().get(i);
-
+		try {
 			controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
-					MessageFormat.format("Launching invocation ''{0}''", invocation.getIdentifier())));
+					MessageFormat.format("Validating analizable model for simulation definition ''{0}''...", definition.getIdentifier())));
 
-			MultiStatus invocationStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
+			IStatus validateStatus = validateAnalyzableModel(definition);
 
-			try {
-				final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
+			if (!validateStatus.isOK()) {
+				DiceLogger.log(DiceSimulationPlugin.getDefault(), validateStatus);
+				controllingProcess.log(validateStatus);
+			}
 
-				subMonitor.subTask(MessageFormat.format("Launching Simulation {0} out of {1}", i + 1, definition.getInvocations().size()));
+			registerInvocations(definition.getInvocations());
 
-				invocation.setStart(Calendar.getInstance().getTime());
+			// Set the remaining ticks
+			subMonitor.setWorkRemaining(definition.getInvocations().size());
 
-				if (controllingProcess.isTerminated()) {
-					throw new InterruptedException();
-				}
 
-				if (simulator == null) {
-					throw new SimulationException(
-							MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError, definition.getBackend()));
-				}
-				invocation.setStatus(SimulationStatus.RUNNING);
+			for (int i = 0; i < definition.getInvocations().size(); i++) {
+
+				SimulationInvocation invocation = definition.getInvocations().get(i);
+
+				controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
+						MessageFormat.format("Launching invocation ''{0}''", invocation.getIdentifier())));
+
+				MultiStatus invocationStatus = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
+
+				try {
+					final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
+
+					subMonitor.subTask(MessageFormat.format("Launching Simulation {0} out of {1}", i + 1, definition.getInvocations().size()));
+
+					invocation.setStart(Calendar.getInstance().getTime());
+
+					if (controllingProcess.isTerminated()) {
+						throw new InterruptedException();
+					}
+
+					if (simulator == null) {
+						throw new SimulationException(
+								MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError, definition.getBackend()));
+					}
+					invocation.setStatus(SimulationStatus.RUNNING);
 
 				// @formatter:off
 				Process simulationProcess = simulator.simulate(
@@ -114,55 +116,58 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 						subMonitor.newChild(1));
 				// @formatter:on
 
-				IProcess runtimeProcess = DebugPlugin.newProcess(launch, simulationProcess,
-						MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, invocation.getIdentifier()), null);
-				runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
-				runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, definition.getParameters().toString());
+					IProcess runtimeProcess = DebugPlugin.newProcess(launch, simulationProcess,
+							MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, invocation.getIdentifier()), null);
+					runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
+					runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, definition.getParameters().toString());
 
 				// @formatter:off
 				ZonedDateTime universalTime = OffsetDateTime.ofInstant(definition.getMaxExecutionTime().toInstant(), ZoneOffset.systemDefault()).atZoneSimilarLocal(ZoneOffset.UTC);
 				registerKillHook(invocation, simulationProcess, universalTime.toInstant().toEpochMilli());
 				// @formatter:on
 
-				simulationProcess.waitFor();
-				if (simulationProcess.exitValue() != 0) {
-					if (simulationProcess.exitValue() == ISimulator.RET_CODE_KILLED) {
-						invocation.setStatus(SimulationStatus.KILLED);
+					simulationProcess.waitFor();
+					if (simulationProcess.exitValue() != 0) {
+						if (simulationProcess.exitValue() == ISimulator.RET_CODE_KILLED) {
+							invocation.setStatus(SimulationStatus.KILLED);
+						}
+						invocationStatus.add(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
+								MessageFormat.format("Simulation process for invocation ''{0}'' exited with error ''{1}''", invocation.getIdentifier(),
+										simulationProcess.exitValue())));
 					}
-					invocationStatus.add(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, MessageFormat.format(
-							"Simulation process for invocation ''{0}'' exited with error ''{1}''", invocation.getIdentifier(), simulationProcess.exitValue())));
-				}
-				if (simulator.getToolResult() != null) {
-					invocation.setToolResult(simulator.getToolResult());
-					invocationStatus.merge(buildResult(invocation));
-				}
-			} catch (InterruptedException e) {
-				invocation.setStatus(SimulationStatus.KILLED);
-			} catch (Throwable t) {
-				invocationStatus.add(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, t.getLocalizedMessage(), t));
-			} finally {
-				invocation.setEnd(Calendar.getInstance().getTime());
-				globalStatus.merge(invocationStatus);
-				controllingProcess.log(invocationStatus);
-				if (invocation.getStatus() == SimulationStatus.KILLED) {
-					controllingProcess.log(new Status(IStatus.CANCEL, DiceSimulationPlugin.PLUGIN_ID,
-							MessageFormat.format("Invocation ''{0}'' killed", invocation.getIdentifier())));
-				} else {
-					if (invocationStatus.isOK()) {
-						invocation.setStatus(SimulationStatus.FINISHED);
-						controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
-								MessageFormat.format("Invocation ''{0}'' finished", invocation.getIdentifier())));
+					if (simulator.getToolResult() != null) {
+						invocation.setToolResult(simulator.getToolResult());
+						invocationStatus.merge(buildResult(invocation));
+					}
+				} catch (InterruptedException e) {
+					invocation.setStatus(SimulationStatus.KILLED);
+				} catch (Throwable t) {
+					invocationStatus.add(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, t.getLocalizedMessage(), t));
+				} finally {
+					invocation.setEnd(Calendar.getInstance().getTime());
+					globalStatus.merge(invocationStatus);
+					controllingProcess.log(invocationStatus);
+					if (invocation.getStatus() == SimulationStatus.KILLED) {
+						controllingProcess.log(new Status(IStatus.CANCEL, DiceSimulationPlugin.PLUGIN_ID,
+								MessageFormat.format("Invocation ''{0}'' killed", invocation.getIdentifier())));
 					} else {
-						invocation.setStatus(SimulationStatus.FAILED);
-						controllingProcess.log(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
-								MessageFormat.format("Invocation ''{0}'' failed", invocation.getIdentifier())));
+						if (invocationStatus.isOK()) {
+							invocation.setStatus(SimulationStatus.FINISHED);
+							controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
+									MessageFormat.format("Invocation ''{0}'' finished", invocation.getIdentifier())));
+						} else {
+							invocation.setStatus(SimulationStatus.FAILED);
+							controllingProcess.log(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
+									MessageFormat.format("Invocation ''{0}'' failed", invocation.getIdentifier())));
+						}
 					}
 				}
 			}
-		}
-		controllingProcess.terminate();
-		if (!globalStatus.isOK()) {
-			throw new CoreException(globalStatus);
+		} finally {
+			controllingProcess.terminate();
+			if (!globalStatus.isOK()) {
+				throw new CoreException(globalStatus);
+			}
 		}
 	}
 
