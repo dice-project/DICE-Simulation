@@ -2,7 +2,7 @@
 <feature
       id="es.unizar.disco.simulation.feature"
       label="DICE Simulation Tools"
-      version="0.2.0.qualifier"
+      version="0.3.0.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -224,70 +224,76 @@ any resulting litigation.
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.emf.ecore"/>
-      <import plugin="org.eclipse.emf.ecore.xmi"/>
-      <import plugin="fr.lip6.pnml.framework.coremodel" version="2.2.9" match="greaterOrEqual"/>
-      <import plugin="fr.lip6.pnml.framework.ptnet" version="2.2.9" match="greaterOrEqual"/>
-      <import plugin="fr.lip6.pnml.framework.hlpn" version="2.2.9" match="greaterOrEqual"/>
-      <import plugin="fr.lip6.pnml.framework.symmetricnet" version="2.2.9" match="greaterOrEqual"/>
-      <import plugin="fr.lip6.pnml.framework.utils" version="2.2.9" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.m2m.qvt.oml" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="fr.lip6.pnml.framework.pthlpng" version="2.2.9" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ocl"/>
-      <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="org.eclipse.acceleo.common" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.model" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.profiler" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.engine" version="3.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.debug.core"/>
-      <import feature="org.eclipse.uml2" version="5.0.0" match="greaterOrEqual"/>
-      <import feature="com.masdes.dam.profile" version="0.5.0" match="greaterOrEqual"/>
-      <import feature="com.masdes.dam.profile.ui.feature" version="0.5.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.1.0" match="greaterOrEqual"/>
-      <import feature="es.unizar.disco.dice.profile.feature" version="0.5.0" match="greaterOrEqual"/>
+      <import feature="es.unizar.disco.dice.profile.feature" version="0.5.2.qualifier" match="greaterOrEqual"/>
+      <import feature="com.masdes.dam.profile" version="0.5.2.qualifier" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.12.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.12.0" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.coremodel" version="2.2.12" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.ptnet" version="2.2.12" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.utils" version="2.2.12" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.m2m.qvt.oml" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.12.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl.ecore" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.common" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.model" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.profiler" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.engine" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.core" version="3.10.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit" version="2.12.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.io" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.uml2.uml" version="5.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.papyrus.marte.static.profile" version="1.2.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="es.unizar.disco.core"
          download-size="0"
          install-size="0"
-         version="0.2.0.qualifier"
-         unpack="false"/>
-
-   <plugin
-         id="es.unizar.disco.pnconfig"
-         download-size="0"
-         install-size="0"
-         version="0.2.0.qualifier"
+         version="0.3.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnextensions"
          download-size="0"
          install-size="0"
-         version="0.2.0.qualifier"
+         version="0.3.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2m"
          download-size="0"
          install-size="0"
-         version="0.2.0.qualifier"
+         version="0.3.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2t"
          download-size="0"
          install-size="0"
-         version="0.2.0.qualifier"
+         version="0.3.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation"
          download-size="0"
          install-size="0"
-         version="0.2.0.qualifier"
+         version="0.3.0.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="es.unizar.disco.simulation.models"
+         download-size="0"
+         install-size="0"
+         version="0.3.0.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="es.unizar.disco.simulation.models.edit"
+         download-size="0"
+         install-size="0"
+         version="0.3.0.qualifier"
          unpack="false"/>
 
 </feature>

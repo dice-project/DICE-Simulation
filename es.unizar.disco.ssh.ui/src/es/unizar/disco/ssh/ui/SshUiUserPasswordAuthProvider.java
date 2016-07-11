@@ -1,6 +1,6 @@
 package es.unizar.disco.ssh.ui;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import es.unizar.disco.ssh.providers.IUserPasswordAuthProvider;
 import es.unizar.disco.ssh.ui.preferences.PreferenceConstants;

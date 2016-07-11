@@ -1,8 +1,8 @@
 package es.unizar.disco.simulation.ui.launcher;
 
+import java.net.URI;
 import java.text.MessageFormat;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
@@ -25,8 +25,9 @@ import org.eclipse.ui.PlatformUI;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.simulation.DiceSimulationPlugin;
-import es.unizar.disco.simulation.launcher.SimulationLaunchConfigurationDelegate;
+import es.unizar.disco.simulation.launcher.SimulationDefinitionConfigurationHandler;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
+import es.unizar.disco.simulation.ui.util.UriConverter;
 
 public class SimulationLaunchShortcut implements ILaunchShortcut {
 
@@ -83,21 +84,47 @@ public class SimulationLaunchShortcut implements ILaunchShortcut {
 		ILaunchConfigurationType simLaunchConfigurationType = launchManager.getLaunchConfigurationType(DiceSimulationPlugin.SIMULATION_LAUNCH_CONFIGURATION_TYPE);
 		
 		ILaunchConfiguration[] existingConfigs = launchManager.getLaunchConfigurations(simLaunchConfigurationType);
+
+		// Configurations use platform-based URIs 
+		URI platformResourceUri = UriConverter.toPlatformResourceUri(model.getURI());
 		
 		// We search through the existing configurations if the actual configuration has been previously defined
 		for (ILaunchConfiguration previousConfiguration : existingConfigs) {
-			String previousFile = previousConfiguration.getAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, StringUtils.EMPTY); 
-			if (previousFile.equals(model.getURI().toString())) {
+			String previousFile = previousConfiguration.getAttribute(SimulationDefinitionConfigurationHandler.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, ""); 
+			if (previousFile.equals(platformResourceUri.toString())) {
 				return previousConfiguration;
 			}
 		}
 		
 		String name = model.getURI().trimFileExtension().lastSegment();
 		String casedName = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+		// Check that we do not overwrite a existing launch configuration
+		if (exists(casedName)) {
+			int i = 1;
+			String baseName = casedName;
+			do {
+				casedName = String.format("%s (%d)", baseName, i++);
+			} while (exists(casedName));
+		}
 		ILaunchConfigurationWorkingCopy launchConf = simLaunchConfigurationType.newInstance(null, casedName);
-		launchConf.setAttribute(SimulationLaunchConfigurationDelegate.INPUT_FILE, model.getURI().toString());
+		launchConf.setAttribute(SimulationDefinitionConfigurationHandler.SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, platformResourceUri.toString());
 		ILaunchConfiguration result = launchConf.doSave();
 		
 		return result;
+	}
+	
+	private boolean exists(String name) throws CoreException {
+		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
+		
+		ILaunchConfigurationType simLaunchConfigurationType = launchManager.getLaunchConfigurationType(DiceSimulationPlugin.SIMULATION_LAUNCH_CONFIGURATION_TYPE);
+		
+		ILaunchConfiguration[] existingConfigs = launchManager.getLaunchConfigurations(simLaunchConfigurationType);
+		
+		for (ILaunchConfiguration previousConfiguration : existingConfigs) {
+			if (name.equals(previousConfiguration.getName())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -86,6 +86,17 @@ public interface PnconstantsPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants <em>Base Units Constants</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants
+	 * @see es.unizar.disco.pnextensions.pnconstants.impl.PnconstantsPackageImpl#getBaseUnitsConstants()
+	 * @generated
+	 */
+	int BASE_UNITS_CONSTANTS = 3;
+
+
+	/**
 	 * Returns the meta object for enum '{@link es.unizar.disco.pnextensions.pnconstants.ToolInfoConstants <em>Tool Info Constants</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -114,6 +125,16 @@ public interface PnconstantsPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getServerType();
+
+	/**
+	 * Returns the meta object for enum '{@link es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants <em>Base Units Constants</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Base Units Constants</em>'.
+	 * @see es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants
+	 * @generated
+	 */
+	EEnum getBaseUnitsConstants();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -167,6 +188,16 @@ public interface PnconstantsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum SERVER_TYPE = eINSTANCE.getServerType();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants <em>Base Units Constants</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants
+		 * @see es.unizar.disco.pnextensions.pnconstants.impl.PnconstantsPackageImpl#getBaseUnitsConstants()
+		 * @generated
+		 */
+		EEnum BASE_UNITS_CONSTANTS = eINSTANCE.getBaseUnitsConstants();
 
 	}
 

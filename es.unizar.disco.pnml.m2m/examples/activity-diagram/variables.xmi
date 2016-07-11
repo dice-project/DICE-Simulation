@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:datatypes="http://es.unizar.disco/simulation/datatypes/1.0">
+  <datatypes:PrimitiveVariableAssignment variable="$a1" value="0.5"/>
+  <datatypes:PrimitiveVariableAssignment variable="$a2" value="0.5"/>
+  <datatypes:PrimitiveVariableAssignment variable="$a3" value="0.5"/>
+  <datatypes:PrimitiveVariableAssignment variable="$rate" value="0.5"/>
+  <datatypes:PrimitiveVariableAssignment variable="$threads" value="5"/>
+</xmi:XMI>

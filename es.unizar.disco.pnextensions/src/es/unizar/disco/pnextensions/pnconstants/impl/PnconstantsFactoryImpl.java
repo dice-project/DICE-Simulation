@@ -76,6 +76,8 @@ public class PnconstantsFactoryImpl extends EFactoryImpl implements PnconstantsF
 				return createTransitionKindFromString(eDataType, initialValue);
 			case PnconstantsPackage.SERVER_TYPE:
 				return createServerTypeFromString(eDataType, initialValue);
+			case PnconstantsPackage.BASE_UNITS_CONSTANTS:
+				return createBaseUnitsConstantsFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -95,6 +97,8 @@ public class PnconstantsFactoryImpl extends EFactoryImpl implements PnconstantsF
 				return convertTransitionKindToString(eDataType, instanceValue);
 			case PnconstantsPackage.SERVER_TYPE:
 				return convertServerTypeToString(eDataType, instanceValue);
+			case PnconstantsPackage.BASE_UNITS_CONSTANTS:
+				return convertBaseUnitsConstantsToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -157,6 +161,26 @@ public class PnconstantsFactoryImpl extends EFactoryImpl implements PnconstantsF
 	 * @generated
 	 */
 	public String convertServerTypeToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BaseUnitsConstants createBaseUnitsConstantsFromString(EDataType eDataType, String initialValue) {
+		BaseUnitsConstants result = BaseUnitsConstants.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertBaseUnitsConstantsToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

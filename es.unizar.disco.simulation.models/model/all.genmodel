@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/es.unizar.disco.simulation.models/src-gen" editDirectory="/es.unizar.disco.simulation.models.edit/src-gen"
+    modelPluginID="es.unizar.disco.simulation.models" modelName="DiceSimulationModels"
+    editPluginClass="es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>datatypes.ecore</foreignModel>
+  <foreignModel>definition.ecore</foreignModel>
+  <foreignModel>invocation.ecore</foreignModel>
+  <foreignModel>measures.ecore</foreignModel>
+  <foreignModel>simresult.ecore</foreignModel>
+  <foreignModel>toolresult.ecore</foreignModel>
+  <foreignModel>traces.ecore</foreignModel>
+  <foreignModel>wnsim.ecore</foreignModel>
+  <genPackages prefix="Datatypes" basePackage="es.unizar.disco.simulation.models"
+      disposableProviderFactory="true" ecorePackage="datatypes.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="datatypes.ecore#//Unit">
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/none"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/s"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/tick"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/ms"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/us"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/min"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/hrs"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/day"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Hz"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KHz"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/MHz"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/GHz"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/rpm"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/W"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mW"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KW"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/bit"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Byte"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KB"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/MB"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/GB"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/b_per_s"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Kb_per_s"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Mb_per_s"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/J"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KJ"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Wh"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KWh"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mWh"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/m"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/cm"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mm"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mm2"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/um2"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/g"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mg"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/kg"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="datatypes.ecore#//SimulationStatus">
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/unknown"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/running"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/finished"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/killed"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/waiting"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/failed"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="datatypes.ecore#//URI"/>
+    <genDataTypes ecoreDataType="datatypes.ecore#//Number"/>
+    <genDataTypes ecoreDataType="datatypes.ecore#//IStatus"/>
+    <genDataTypes ecoreDataType="datatypes.ecore#//Collection">
+      <genTypeParameters ecoreTypeParameter="datatypes.ecore#//Collection/T"/>
+    </genDataTypes>
+    <genClasses ecoreClass="datatypes.ecore#//Resource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datatypes.ecore#//Resource/uri"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute datatypes.ecore#//Resource/resource"/>
+    </genClasses>
+    <genClasses ecoreClass="datatypes.ecore#//PrimitiveVariableAssignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datatypes.ecore#//PrimitiveVariableAssignment/variable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute datatypes.ecore#//PrimitiveVariableAssignment/value"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Definition" basePackage="es.unizar.disco.simulation.models"
+      disposableProviderFactory="true" ecorePackage="definition.ecore#/">
+    <genClasses ecoreClass="definition.ecore#//SimulationDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/identifier"/>
+      <genFeatures property="None" notify="false" children="true" createChild="false"
+          propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/invocations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/parameters"/>
+      <genFeatures property="None" notify="false" children="true" createChild="false"
+          propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/activeScenario"/>
+      <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/scenarios"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/inputVariables"/>
+      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/domainResource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/maxExecutionTime"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/outputVariables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/declaredMeasures"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/measuresToCompute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/backend"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/possibleConfigurations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/activeConfigurations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/autoSync"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/getVariables"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/getVariablesMap"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/getInputVariablesMap"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/getOutputVariablesMap"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/syncScenarios"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/syncVariables"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/syncDomainMeasureDefinitions"/>
+      <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/syncPossibleVariableConfigurations"/>
+    </genClasses>
+    <genClasses ecoreClass="definition.ecore#//SimulationParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationParameter/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationParameter/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="definition.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//Variable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="definition.ecore#//InputVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//InputVariable/values"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//InputVariable/assignments"/>
+      <genOperations ecoreOperation="definition.ecore#//InputVariable/deserializeValues">
+        <genParameters ecoreParameter="definition.ecore#//InputVariable/deserializeValues/values"/>
+      </genOperations>
+      <genOperations ecoreOperation="definition.ecore#//InputVariable/serializeValues"/>
+    </genClasses>
+    <genClasses ecoreClass="definition.ecore#//OutputVariable"/>
+    <genClasses ecoreClass="definition.ecore#//InputVariableValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//InputVariableValue/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//InputVariableValue/assignments"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference definition.ecore#//InputVariableValue/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="definition.ecore#//VariableAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//VariableAssignment/value"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference definition.ecore#//VariableAssignment/configuration"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//VariableAssignment/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="definition.ecore#//VariableConfiguration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//VariableConfiguration/assignments"/>
+      <genOperations ecoreOperation="definition.ecore#//VariableConfiguration/isEquivalent">
+        <genParameters ecoreParameter="definition.ecore#//VariableConfiguration/isEquivalent/config"/>
+      </genOperations>
+      <genOperations ecoreOperation="definition.ecore#//VariableConfiguration/toPrimitiveAssignments"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Invocation" basePackage="es.unizar.disco.simulation.models"
+      disposableProviderFactory="true" ecorePackage="invocation.ecore#/">
+    <genClasses ecoreClass="invocation.ecore#//SimulationInvocation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//SimulationInvocation/identifier"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/traceSet"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/toolResult"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/definition"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/result"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//SimulationInvocation/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//SimulationInvocation/end"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//SimulationInvocation/status"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/variableConfiguration"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/analyzableModel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//SimulationInvocation/autoBuild"/>
+      <genOperations ecoreOperation="invocation.ecore#//SimulationInvocation/buildAnalyzableModel"/>
+    </genClasses>
+    <genClasses ecoreClass="invocation.ecore#//InvocationsRegistry">
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference invocation.ecore#//InvocationsRegistry/invocations"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Measures" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"
+      ecorePackage="measures.ecore#/">
+    <genClasses ecoreClass="measures.ecore#//DomainMeasure">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasure/unit"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference measures.ecore#//DomainMeasure/definition"/>
+    </genClasses>
+    <genClasses ecoreClass="measures.ecore#//MeasureConverter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/to"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/from"/>
+      <genOperations ecoreOperation="measures.ecore#//MeasureConverter/convert">
+        <genParameters ecoreParameter="measures.ecore#//MeasureConverter/convert/info"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="measures.ecore#//DomainMeasureDefinition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasureDefinition/measuredElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasureDefinition/measure"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasureDefinition/vslExpressionEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasureDefinition/vslExpression"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasureDefinition/outputVariable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasureDefinition/simulationDefinition"/>
+    </genClasses>
+    <genClasses ecoreClass="measures.ecore#//Entry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//Entry/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//Entry/value"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Simresult" basePackage="es.unizar.disco.simulation.models"
+      ecorePackage="simresult.ecore#/">
+    <genClasses ecoreClass="simresult.ecore#//SimulationResult">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simresult.ecore#//SimulationResult/invocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simresult.ecore#//SimulationResult/measures"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Toolresult" basePackage="es.unizar.disco.simulation.models"
+      disposableProviderFactory="true" ecorePackage="toolresult.ecore#/">
+    <genClasses image="false" ecoreClass="toolresult.ecore#//ToolResult">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute toolresult.ecore#//ToolResult/timestamp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference toolresult.ecore#//ToolResult/infos"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="toolresult.ecore#//AnalyzableElementInfo">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute toolresult.ecore#//AnalyzableElementInfo/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference toolresult.ecore#//AnalyzableElementInfo/analyzedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute toolresult.ecore#//AnalyzableElementInfo/unit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute toolresult.ecore#//AnalyzableElementInfo/confidenceInterval"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Traces" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"
+      ecorePackage="traces.ecore#/">
+    <genClasses ecoreClass="traces.ecore#//TraceSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference traces.ecore#//TraceSet/traces"/>
+    </genClasses>
+    <genClasses ecoreClass="traces.ecore#//Trace">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference traces.ecore#//Trace/fromDomainElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference traces.ecore#//Trace/toAnalyzableElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute traces.ecore#//Trace/rule"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Wnsim" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"
+      ecorePackage="wnsim.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="wnsim.ecore#//SimulationParameters">
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/first_tr_length"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/tr_length"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/min_btc"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/max_btc"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/approx"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/conf_level"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/seed"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/start"/>
+    </genEnums>
+    <genClasses ecoreClass="wnsim.ecore#//WnsimResult"/>
+    <genClasses image="false" ecoreClass="wnsim.ecore#//WnsimElementInfo"/>
+    <genClasses ecoreClass="wnsim.ecore#//PlaceInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wnsim.ecore#//PlaceInfo/meanNumberOfTokens"/>
+      <genOperations ecoreOperation="wnsim.ecore#//PlaceInfo/getValue"/>
+    </genClasses>
+    <genClasses ecoreClass="wnsim.ecore#//TransitionInfo">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute wnsim.ecore#//TransitionInfo/throughput"/>
+      <genOperations ecoreOperation="wnsim.ecore#//TransitionInfo/getValue"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

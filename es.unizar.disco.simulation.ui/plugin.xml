@@ -8,16 +8,11 @@
             description="Launches a Simulation"
             id="es.unizar.disco.simulation.ui.launchConfigurationTabGroup"
             type="es.unizar.disco.simulation.ui.launchConfigurationType">
+         <launchMode
+               mode="run"
+               perspective="es.unizar.disco.simulation.ui.perspective">
+         </launchMode>
       </launchConfigurationTabGroup>
-   </extension>
-   <extension
-         point="org.eclipse.debug.ui.launchConfigurationTabs">
-      <tab
-            class="es.unizar.disco.simulation.ui.launcher.MainLaunchConfigurationTab"
-            group="es.unizar.disco.simulation.ui.launchConfigurationTabGroup"
-            id="es.unizar.disco.simulation.ui.mainTab"
-            name="Main">
-      </tab>
    </extension>
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">
@@ -185,6 +180,59 @@
             id="es.unizar.disco.simulation.ui.diceSimulationCategory"
             name="DICE Simulation">
       </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="es.unizar.disco.core.ui.preferences"
+            class="es.unizar.disco.simulation.ui.preferences.SimulationUiPreferencePage"
+            id="es.unizar.disco.simulation.ui.preferences.SimulationUiPreferencePage"
+            name="Simulation">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="es.unizar.disco.simulation.ui.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="es.unizar.disco.simulation.ui.views"
+            name="DICE Simulation">
+      </category>
+      <view
+            allowMultiple="true"
+            category="es.unizar.disco.simulation.ui.views"
+            class="es.unizar.disco.simulation.ui.views.InvocationsView"
+            icon="icons/full/eview16/simulation_registry.png"
+            id="es.unizar.disco.simulation.ui.views.InvocationsView"
+            name="Invocations Registry">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="es.unizar.disco.simulation.ui.editors.RootedReadOnlyEcoreEditor"
+            contributorClass="org.eclipse.emf.ecore.presentation.EcoreActionBarContributor"
+            default="false"
+            icon="icons/full/obj16/simulation_result.png"
+            id="es.unizar.disco.simulation.ui.editors.readonlyEcoreEditor"
+            name="Rooted Read Only Ecore Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="es.unizar.disco.simulation.ui.perspective.SimulationPerspective"
+            icon="icons/full/obj16/perspective.png"
+            id="es.unizar.disco.simulation.ui.perspective"
+            name="DICE Simulation">
+         <description>
+            The DICE SImulation perspectice allows tracking the status of the running simulations more efficiently.
+         </description>
+      </perspective>
    </extension>
 
 </plugin>

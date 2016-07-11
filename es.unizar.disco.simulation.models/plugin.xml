@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension-point id="supported_scenarios" name="Supported Scenarios" schema="schema/supported_scenarios.exsd"/>
+   <extension-point id="supported_metrics" name="Supported Metrics" schema="schema/supported_metrics.exsd"/>
+   <extension-point id="analyzable_resource_builder" name="Analyzable Resource Builder" schema="schema/analyzable_resource_builder.exsd"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/datatypes/1.0"
+            class="es.unizar.disco.simulation.models.datatypes.DatatypesPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/definition/1.0"
+            class="es.unizar.disco.simulation.models.definition.DefinitionPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/invocation/1.0"
+            class="es.unizar.disco.simulation.models.invocation.InvocationPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/measures/1.0"
+            class="es.unizar.disco.simulation.models.measures.MeasuresPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/simresult/1.0"
+            class="es.unizar.disco.simulation.models.simresult.SimresultPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/toolresult/1.0"
+            class="es.unizar.disco.simulation.models.toolresult.ToolresultPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/traces/1.0"
+            class="es.unizar.disco.simulation.models.traces.TracesPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated all -->
+      <package
+            uri="http://es.unizar.disco/simulation/tool/wnsim/1.0"
+            class="es.unizar.disco.simulation.models.wnsim.WnsimPackage"
+            genModel="model/all.genmodel"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.conversion_delegate">
+      <factory
+            class="es.unizar.disco.simulation.models.delegates.NumberConversionDelegate$Factory"
+            uri="http://es.unizar.disco/simulation/conversion/number/1.0">
+      </factory>
+      <factory
+            class="es.unizar.disco.simulation.models.delegates.UriConversionDelegate$Factory"
+            uri="http://es.unizar.disco/simulation/conversion/uri/1.0">
+      </factory>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.factory_override">
+      <factory
+            class="es.unizar.disco.simulation.models.definition.impl.CustomDefinitionFactoryImpl"
+            uri="http://es.unizar.disco/simulation/definition/1.0">
+      </factory>
+      <factory
+            class="es.unizar.disco.simulation.models.datatypes.impl.CustomDatatypesFactoryImpl"
+            uri="http://es.unizar.disco/simulation/datatypes/1.0">
+      </factory>
+      <factory
+            class="es.unizar.disco.simulation.models.measures.impl.CustomMeasuresFactoryImpl"
+            uri="http://es.unizar.disco/simulation/measures/1.0">
+      </factory>
+      <factory
+            class="es.unizar.disco.simulation.models.invocation.impl.CustomInvocationFactoryImpl"
+            uri="http://es.unizar.disco/simulation/invocation/1.0">
+      </factory>
+   </extension>
+</plugin>

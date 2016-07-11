@@ -140,124 +140,6 @@ public interface PnutilsPackage extends EPackage {
 	int DATA_TYPE_UTILS_OPERATION_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link es.unizar.disco.pnextensions.pnutils.impl.ToolInfoUtilsImpl <em>Tool Info Utils</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see es.unizar.disco.pnextensions.pnutils.impl.ToolInfoUtilsImpl
-	 * @see es.unizar.disco.pnextensions.pnutils.impl.PnutilsPackageImpl#getToolInfoUtils()
-	 * @generated
-	 */
-	int TOOL_INFO_UTILS = 2;
-
-	/**
-	 * The number of structural features of the '<em>Tool Info Utils</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS_FEATURE_COUNT = 0;
-
-	/**
-	 * The operation id for the '<em>Is EObject Valid Pn Object</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___IS_EOBJECT_VALID_PN_OBJECT__EOBJECT = 0;
-
-	/**
-	 * The operation id for the '<em>Is EObject Valid Transition</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___IS_EOBJECT_VALID_TRANSITION__EOBJECT = 1;
-
-	/**
-	 * The operation id for the '<em>Get Tool Info Entry By Grammar Uri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___GET_TOOL_INFO_ENTRY_BY_GRAMMAR_URI__EOBJECT_STRING = 2;
-
-	/**
-	 * The operation id for the '<em>Delete Tool Info Entry By Grammar Uri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___DELETE_TOOL_INFO_ENTRY_BY_GRAMMAR_URI__EOBJECT_STRING = 3;
-
-	/**
-	 * The operation id for the '<em>Set Tool Info Entry By Grammar Uri</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___SET_TOOL_INFO_ENTRY_BY_GRAMMAR_URI__EOBJECT_STRING_STRING = 4;
-
-	/**
-	 * The operation id for the '<em>Is Transition Kind</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___IS_TRANSITION_KIND__EOBJECT_TRANSITIONKIND = 5;
-
-	/**
-	 * The operation id for the '<em>Is Transition Server Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___IS_TRANSITION_SERVER_TYPE__EOBJECT_SERVERTYPE = 6;
-
-	/**
-	 * The operation id for the '<em>Set Transition Kind</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___SET_TRANSITION_KIND__EOBJECT_TRANSITIONKIND_OBJECT = 7;
-
-	/**
-	 * The operation id for the '<em>Set Transition Server Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___SET_TRANSITION_SERVER_TYPE__EOBJECT_SERVERTYPE_OBJECT = 8;
-
-	/**
-	 * The operation id for the '<em>Get Transition Rate</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS___GET_TRANSITION_RATE__EOBJECT = 9;
-
-	/**
-	 * The number of operations of the '<em>Tool Info Utils</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOOL_INFO_UTILS_OPERATION_COUNT = 10;
-
-	/**
 	 * The meta object id for the '<em>URI</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -265,7 +147,7 @@ public interface PnutilsPackage extends EPackage {
 	 * @see es.unizar.disco.pnextensions.pnutils.impl.PnutilsPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 3;
+	int URI = 2;
 
 	/**
 	 * The meta object id for the '<em>URI Syntax Exception</em>' data type.
@@ -275,7 +157,7 @@ public interface PnutilsPackage extends EPackage {
 	 * @see es.unizar.disco.pnextensions.pnutils.impl.PnutilsPackageImpl#getURISyntaxException()
 	 * @generated
 	 */
-	int URI_SYNTAX_EXCEPTION = 4;
+	int URI_SYNTAX_EXCEPTION = 3;
 
 	/**
 	 * The meta object id for the '<em>String Buffer</em>' data type.
@@ -285,17 +167,7 @@ public interface PnutilsPackage extends EPackage {
 	 * @see es.unizar.disco.pnextensions.pnutils.impl.PnutilsPackageImpl#getStringBuffer()
 	 * @generated
 	 */
-	int STRING_BUFFER = 5;
-
-	/**
-	 * The meta object id for the '<em>Illegal Argument Exception</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.IllegalArgumentException
-	 * @see es.unizar.disco.pnextensions.pnutils.impl.PnutilsPackageImpl#getIllegalArgumentException()
-	 * @generated
-	 */
-	int ILLEGAL_ARGUMENT_EXCEPTION = 6;
+	int STRING_BUFFER = 4;
 
 
 	/**
@@ -349,116 +221,6 @@ public interface PnutilsPackage extends EPackage {
 	EOperation getDataTypeUtils__CreateLongString__String();
 
 	/**
-	 * Returns the meta object for class '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils <em>Tool Info Utils</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Tool Info Utils</em>'.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils
-	 * @generated
-	 */
-	EClass getToolInfoUtils();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#isEObjectValidPnObject(org.eclipse.emf.ecore.EObject) <em>Is EObject Valid Pn Object</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Is EObject Valid Pn Object</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#isEObjectValidPnObject(org.eclipse.emf.ecore.EObject)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__IsEObjectValidPnObject__EObject();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#isEObjectValidTransition(org.eclipse.emf.ecore.EObject) <em>Is EObject Valid Transition</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Is EObject Valid Transition</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#isEObjectValidTransition(org.eclipse.emf.ecore.EObject)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__IsEObjectValidTransition__EObject();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#getToolInfoEntryByGrammarUri(org.eclipse.emf.ecore.EObject, java.lang.String) <em>Get Tool Info Entry By Grammar Uri</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Tool Info Entry By Grammar Uri</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#getToolInfoEntryByGrammarUri(org.eclipse.emf.ecore.EObject, java.lang.String)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__GetToolInfoEntryByGrammarUri__EObject_String();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#deleteToolInfoEntryByGrammarUri(org.eclipse.emf.ecore.EObject, java.lang.String) <em>Delete Tool Info Entry By Grammar Uri</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Delete Tool Info Entry By Grammar Uri</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#deleteToolInfoEntryByGrammarUri(org.eclipse.emf.ecore.EObject, java.lang.String)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__DeleteToolInfoEntryByGrammarUri__EObject_String();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#setToolInfoEntryByGrammarUri(org.eclipse.emf.ecore.EObject, java.lang.String, java.lang.String) <em>Set Tool Info Entry By Grammar Uri</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Set Tool Info Entry By Grammar Uri</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#setToolInfoEntryByGrammarUri(org.eclipse.emf.ecore.EObject, java.lang.String, java.lang.String)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__SetToolInfoEntryByGrammarUri__EObject_String_String();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#isTransitionKind(org.eclipse.emf.ecore.EObject, es.unizar.disco.pnextensions.pnconstants.TransitionKind) <em>Is Transition Kind</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Is Transition Kind</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#isTransitionKind(org.eclipse.emf.ecore.EObject, es.unizar.disco.pnextensions.pnconstants.TransitionKind)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__IsTransitionKind__EObject_TransitionKind();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#isTransitionServerType(org.eclipse.emf.ecore.EObject, es.unizar.disco.pnextensions.pnconstants.ServerType) <em>Is Transition Server Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Is Transition Server Type</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#isTransitionServerType(org.eclipse.emf.ecore.EObject, es.unizar.disco.pnextensions.pnconstants.ServerType)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__IsTransitionServerType__EObject_ServerType();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#setTransitionKind(org.eclipse.emf.ecore.EObject, es.unizar.disco.pnextensions.pnconstants.TransitionKind, java.lang.Object) <em>Set Transition Kind</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Set Transition Kind</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#setTransitionKind(org.eclipse.emf.ecore.EObject, es.unizar.disco.pnextensions.pnconstants.TransitionKind, java.lang.Object)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__SetTransitionKind__EObject_TransitionKind_Object();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#setTransitionServerType(org.eclipse.emf.ecore.EObject, es.unizar.disco.pnextensions.pnconstants.ServerType, java.lang.Object) <em>Set Transition Server Type</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Set Transition Server Type</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#setTransitionServerType(org.eclipse.emf.ecore.EObject, es.unizar.disco.pnextensions.pnconstants.ServerType, java.lang.Object)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__SetTransitionServerType__EObject_ServerType_Object();
-
-	/**
-	 * Returns the meta object for the '{@link es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#getTransitionRate(org.eclipse.emf.ecore.EObject) <em>Get Transition Rate</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Transition Rate</em>' operation.
-	 * @see es.unizar.disco.pnextensions.pnutils.ToolInfoUtils#getTransitionRate(org.eclipse.emf.ecore.EObject)
-	 * @generated
-	 */
-	EOperation getToolInfoUtils__GetTransitionRate__EObject();
-
-	/**
 	 * Returns the meta object for data type '{@link java.net.URI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -490,17 +252,6 @@ public interface PnutilsPackage extends EPackage {
 	 * @generated
 	 */
 	EDataType getStringBuffer();
-
-	/**
-	 * Returns the meta object for data type '{@link java.lang.IllegalArgumentException <em>Illegal Argument Exception</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Illegal Argument Exception</em>'.
-	 * @see java.lang.IllegalArgumentException
-	 * @model instanceClass="java.lang.IllegalArgumentException" serializeable="false"
-	 * @generated
-	 */
-	EDataType getIllegalArgumentException();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -570,96 +321,6 @@ public interface PnutilsPackage extends EPackage {
 		EOperation DATA_TYPE_UTILS___CREATE_LONG_STRING__STRING = eINSTANCE.getDataTypeUtils__CreateLongString__String();
 
 		/**
-		 * The meta object literal for the '{@link es.unizar.disco.pnextensions.pnutils.impl.ToolInfoUtilsImpl <em>Tool Info Utils</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see es.unizar.disco.pnextensions.pnutils.impl.ToolInfoUtilsImpl
-		 * @see es.unizar.disco.pnextensions.pnutils.impl.PnutilsPackageImpl#getToolInfoUtils()
-		 * @generated
-		 */
-		EClass TOOL_INFO_UTILS = eINSTANCE.getToolInfoUtils();
-
-		/**
-		 * The meta object literal for the '<em><b>Is EObject Valid Pn Object</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___IS_EOBJECT_VALID_PN_OBJECT__EOBJECT = eINSTANCE.getToolInfoUtils__IsEObjectValidPnObject__EObject();
-
-		/**
-		 * The meta object literal for the '<em><b>Is EObject Valid Transition</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___IS_EOBJECT_VALID_TRANSITION__EOBJECT = eINSTANCE.getToolInfoUtils__IsEObjectValidTransition__EObject();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Tool Info Entry By Grammar Uri</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___GET_TOOL_INFO_ENTRY_BY_GRAMMAR_URI__EOBJECT_STRING = eINSTANCE.getToolInfoUtils__GetToolInfoEntryByGrammarUri__EObject_String();
-
-		/**
-		 * The meta object literal for the '<em><b>Delete Tool Info Entry By Grammar Uri</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___DELETE_TOOL_INFO_ENTRY_BY_GRAMMAR_URI__EOBJECT_STRING = eINSTANCE.getToolInfoUtils__DeleteToolInfoEntryByGrammarUri__EObject_String();
-
-		/**
-		 * The meta object literal for the '<em><b>Set Tool Info Entry By Grammar Uri</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___SET_TOOL_INFO_ENTRY_BY_GRAMMAR_URI__EOBJECT_STRING_STRING = eINSTANCE.getToolInfoUtils__SetToolInfoEntryByGrammarUri__EObject_String_String();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Transition Kind</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___IS_TRANSITION_KIND__EOBJECT_TRANSITIONKIND = eINSTANCE.getToolInfoUtils__IsTransitionKind__EObject_TransitionKind();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Transition Server Type</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___IS_TRANSITION_SERVER_TYPE__EOBJECT_SERVERTYPE = eINSTANCE.getToolInfoUtils__IsTransitionServerType__EObject_ServerType();
-
-		/**
-		 * The meta object literal for the '<em><b>Set Transition Kind</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___SET_TRANSITION_KIND__EOBJECT_TRANSITIONKIND_OBJECT = eINSTANCE.getToolInfoUtils__SetTransitionKind__EObject_TransitionKind_Object();
-
-		/**
-		 * The meta object literal for the '<em><b>Set Transition Server Type</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___SET_TRANSITION_SERVER_TYPE__EOBJECT_SERVERTYPE_OBJECT = eINSTANCE.getToolInfoUtils__SetTransitionServerType__EObject_ServerType_Object();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Transition Rate</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TOOL_INFO_UTILS___GET_TRANSITION_RATE__EOBJECT = eINSTANCE.getToolInfoUtils__GetTransitionRate__EObject();
-
-		/**
 		 * The meta object literal for the '<em>URI</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -688,16 +349,6 @@ public interface PnutilsPackage extends EPackage {
 		 * @generated
 		 */
 		EDataType STRING_BUFFER = eINSTANCE.getStringBuffer();
-
-		/**
-		 * The meta object literal for the '<em>Illegal Argument Exception</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.IllegalArgumentException
-		 * @see es.unizar.disco.pnextensions.pnutils.impl.PnutilsPackageImpl#getIllegalArgumentException()
-		 * @generated
-		 */
-		EDataType ILLEGAL_ARGUMENT_EXCEPTION = eINSTANCE.getIllegalArgumentException();
 
 	}
 
