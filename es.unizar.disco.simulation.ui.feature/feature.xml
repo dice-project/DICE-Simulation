@@ -255,6 +255,7 @@ any resulting litigation.
       <import plugin="es.unizar.disco.simulation" version="0.3.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.simulation.models" version="0.3.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.simulation.models.edit" version="0.3.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.papyrus.sdk.feature" version="2.0.0.201606080854"/>
    </requires>
 
    <plugin
