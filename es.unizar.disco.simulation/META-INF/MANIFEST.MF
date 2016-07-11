@@ -1,19 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: DICE Simulation Plug-in
+Bundle-Name: DICE Simulation
 Bundle-SymbolicName: es.unizar.disco.simulation;singleton:=true
-Bundle-Version: 0.1.5.qualifier
+Bundle-Version: 0.3.0.qualifier
 Bundle-Activator: es.unizar.disco.simulation.DiceSimulationPlugin
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.debug.core,
- org.eclipse.emf.edit;bundle-version="2.11.0",
- es.unizar.disco.core;bundle-version="0.1.5",
- es.unizar.disco.pnml.m2m;bundle-version="0.1.0",
- es.unizar.disco.pnml.m2t;bundle-version="0.1.0",
- es.unizar.disco.simulation.models;bundle-version="0.1.0";visibility:=reexport,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
+ org.eclipse.debug.core;bundle-version="3.10.100",
+ org.eclipse.emf.edit;bundle-version="2.12.0",
  org.apache.commons.lang;bundle-version="2.6.0",
  org.apache.commons.io;bundle-version="2.2.0",
- org.eclipse.ui
+ es.unizar.disco.core;bundle-version="0.3.0",
+ es.unizar.disco.pnml.m2m;bundle-version="0.3.0",
+ es.unizar.disco.pnml.m2t;bundle-version="0.3.0",
+ es.unizar.disco.simulation.models;bundle-version="0.3.0";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: DisCo - Unizar

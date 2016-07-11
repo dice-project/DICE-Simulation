@@ -31,9 +31,9 @@ import org.eclipse.debug.core.model.IStreamMonitor;
 import org.eclipse.debug.core.model.IStreamsProxy;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ui.statushandlers.StatusManager;
 import org.eclipse.uml2.uml.Element;
 
+import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.simulation.DiceSimulationPlugin;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
 import es.unizar.disco.simulation.models.datatypes.SimulationStatus;
@@ -67,7 +67,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		IStatus validateStatus = validateAnalyzableModel(definition);
 
 		if (!validateStatus.isOK()) {
-			StatusManager.getManager().handle(validateStatus, StatusManager.LOG);
+			DiceLogger.log(DiceSimulationPlugin.getDefault(), validateStatus);
 			controllingProcess.log(validateStatus);
 		}
 
@@ -439,6 +439,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			fireEvent(new DebugEvent(this, DebugEvent.CHANGE));
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public <T> T getAdapter(Class<T> adapter) {
 			if (adapter.equals(IProcess.class)) {
