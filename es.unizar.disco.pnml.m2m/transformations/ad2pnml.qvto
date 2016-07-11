@@ -416,7 +416,9 @@ mapping UML::ControlFlow::probabilisticControlFlow2toolInfo() : PNML::ToolInfo
 when {
 		self.getGaStep_prob().oclIsUndefined().not();
 }{
-	probTransitionToolInfo(self.getGaStep_prob().value());
+	init {
+		result := probTransitionToolInfo(self.getGaStep_prob().value());
+	}
 }
 
 /**
