@@ -7,7 +7,9 @@ public class PnmlM2mPlugin implements BundleActivator {
 	
 	public static final String PLUGIN_ID = "es.unizar.disco.pnml.m2m"; //$NON-NLS-1$
 
-	public static final String AD2PNML_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/ad2pnml.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
+	public static final String DPIM_AD2PNML_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dpim-ad2pnml.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
+
+	public static final String DPIM_SD2PNML_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dpim-sd2pnml.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
 	
 	private static BundleContext context;
 
