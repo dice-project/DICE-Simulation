@@ -10,7 +10,7 @@ modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
 modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 	
 
-transformation ad2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces : TRACE); 
+transformation ad2pnml(in sd : UML, in vars : TYPES, out res : PNML, out traces : TRACE); 
 
 
 /**
@@ -22,7 +22,7 @@ transformation ad2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces 
 */
 main() {
 	// Transform top-level elements
-	ad.scenario().map model2doc();
+	sd.scenario().map model2doc();
 	
 	// Transform net contents
 	
@@ -67,12 +67,7 @@ mapping UML::NamedElement::model2page() : PNML::Page {
 */
 mapping baseTimeUnit(unit : String) {
 	var net := resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet);
-	net.toolspecifics += object PNML::ToolInfo {
-		tool := CONST::ToolInfoConstants::toolName.toString();
-		version := CONST::ToolInfoConstants::toolVersion.toString();
-		toolInfoGrammarURI := CONST::BaseUnitsConstants::baseTimeUnit.toString().createURI();
-		formattedXMLBuffer := ("<value grammar=\"" + CONST::BaseUnitsConstants::baseTimeUnit.toString() + "\">" + unit  + "</value>").createLongString();
-	};
+	net.toolspecifics += baseTimeUnitToolInfo(unit);
 }
 
 
@@ -82,16 +77,16 @@ mapping baseTimeUnit(unit : String) {
   cannot be moved to a library
 *******************************************************************************/
 
-helper UML::scenario() : UML::Activity {
+helper UML::scenario() : UML::Interaction {
 	// When running the transformation from the simulation tool, the UML domain must 
 	// contain a single activity at its root 
-	assert warning (self.rootObjects()[UML::Activity]->size() = 1) with log ("No single Activity instance was found at the root of the UML input model, trying to use the first Activity in the model instead");
+	assert warning (self.rootObjects()[UML::Interaction]->size() = 1) with log ("No single Interaction instance was found at the root of the UML input model, trying to use the first Interaction in the model instead");
 	
-	if (self.rootObjects()[UML::Activity]->isEmpty().not()) {
-		return self.rootObjects()[UML::Activity]->asOrderedSet()->first();
+	if (self.rootObjects()[UML::Interaction]->isEmpty().not()) {
+		return self.rootObjects()[UML::Interaction]->asOrderedSet()->first();
 	};
 	// This execution path is useful when running the transformation at development time
-	return self.objectsOfType(UML::Activity)->asOrderedSet()->first();
+	return self.objectsOfType(UML::Interaction)->asOrderedSet()->first();
 }
 
 helper TYPES::vars() : Set ( PrimitiveVariableAssignment ) {

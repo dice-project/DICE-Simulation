@@ -100,6 +100,19 @@ helper probTransitionToolInfo(prob: Real) : PNML::ToolInfo {
 	};
 }
 
+/**
+	Creates a ToolInfo for the passed base time unit
+	i.e., CONST::BaseUnitsConstants::baseTimeUnit
+*/
+helper baseTimeUnitToolInfo(unit : String) : PNML::ToolInfo {
+	return object PNML::ToolInfo {
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::BaseUnitsConstants::baseTimeUnit.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::BaseUnitsConstants::baseTimeUnit.toString() + "\">" + unit  + "</value>").createLongString();
+	};
+}
+
 
 /*******************************************************************************
   Tagged values utilities

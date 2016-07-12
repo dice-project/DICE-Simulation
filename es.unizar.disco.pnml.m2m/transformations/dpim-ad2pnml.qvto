@@ -72,12 +72,7 @@ mapping UML::NamedElement::model2page() : PNML::Page {
 */
 mapping baseTimeUnit(unit : String) {
 	var net := resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet);
-	net.toolspecifics += object PNML::ToolInfo {
-		tool := CONST::ToolInfoConstants::toolName.toString();
-		version := CONST::ToolInfoConstants::toolVersion.toString();
-		toolInfoGrammarURI := CONST::BaseUnitsConstants::baseTimeUnit.toString().createURI();
-		formattedXMLBuffer := ("<value grammar=\"" + CONST::BaseUnitsConstants::baseTimeUnit.toString() + "\">" + unit  + "</value>").createLongString();
-	};
+	net.toolspecifics += baseTimeUnitToolInfo(unit);
 }
 
 /**
