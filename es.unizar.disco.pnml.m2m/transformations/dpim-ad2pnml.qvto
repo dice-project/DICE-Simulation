@@ -35,6 +35,7 @@ main() {
 	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
 	initialNodes[getGaWorkloadEvent().oclIsUndefined().not()] -> map initialNodes2AnalysisType();
 	
+	// Set time metadata
 	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
 		log("Base time unit is 's'");
 		log("Base frequency unit is 'Hz'");
@@ -449,6 +450,8 @@ mapping OclAny::trace(to : OclAny, text : String) : TRACE::Trace {
 
 /*******************************************************************************
   Navigation helpers
+  Helpers on domains are only valid in the context of a transformations and
+  cannot be moved to a library
 *******************************************************************************/
 
 helper UML::scenario() : UML::Activity {
@@ -473,6 +476,10 @@ helper TYPES::PrimitiveVariableAssignment::asDict() : Dict(String, Real) {
 		vars->put(assignment.variable, assignment.value.toString().toReal());
 	};
 	return vars;
+}
+
+helper TRACE::set() : TRACE::TraceSet {
+	return self.rootObjects()[TRACE::TraceSet]->asSequence()->first();
 }
 
 /*******************************************************************************

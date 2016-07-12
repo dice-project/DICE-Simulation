@@ -3,18 +3,15 @@ import es.unizar.disco.pnml.utils.PnmlDiceUtils;
 modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
 modeltype PNML uses 'http:///ptnet.ecore';
 modeltype TRACE uses 'http://es.unizar.disco/simulation/traces/1.0';
+modeltype TYPES uses 'http://es.unizar.disco/simulation/datatypes/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
 modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 
 library helpers;
 
 /*******************************************************************************
-  Traceability helpers
+  Types helpers
 *******************************************************************************/
-
-helper TRACE::set() : TRACE::TraceSet {
-	return self.rootObjects()[TRACE::TraceSet]->asSequence()->first();
-}
 
 helper OclAny::eObject() : ECORE::EObject {
 	return self.oclAsType(ECORE::EObject);
