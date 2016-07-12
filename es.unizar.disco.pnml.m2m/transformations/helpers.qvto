@@ -1,0 +1,169 @@
+import es.unizar.disco.pnml.utils.PnmlDiceUtils;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
+modeltype PNML uses 'http:///ptnet.ecore';
+modeltype TRACE uses 'http://es.unizar.disco/simulation/traces/1.0';
+modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+
+library helpers;
+
+/*******************************************************************************
+  Traceability helpers
+*******************************************************************************/
+
+helper TRACE::set() : TRACE::TraceSet {
+	return self.rootObjects()[TRACE::TraceSet]->asSequence()->first();
+}
+
+helper OclAny::eObject() : ECORE::EObject {
+	return self.oclAsType(ECORE::EObject);
+}
+
+/*******************************************************************************
+  Getters for stereotypes
+*******************************************************************************/
+
+helper UML::Element::getGaWorkloadEvent() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent"))) { 
+		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent");
+	};
+	return null;	
+}
+
+helper UML::Element::getGaStep() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep"))) { 
+		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep");
+	};
+	return null;	
+}
+
+helper UML::Element::getPaLogicalResource() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource"))) { 
+		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource");
+	};
+	return null;	
+}
+
+
+
+/*******************************************************************************
+  ToolInfo utilities
+*******************************************************************************/
+
+/**
+	Creates the ToolInfo that identifies an exponential timed transition,
+	i.e., CONST::TransitionKind::Exponential 
+*/
+helper expTransitionToolInfo(rate : Real) : PNML::ToolInfo {
+	return object PNML::ToolInfo { 
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::TransitionKind::Exponential.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::Exponential.toString() + "\">" + rate.toString() + "</value>").createLongString();
+	};	
+}
+
+/**
+	Creates the ToolInfo that identifies an InfiniteServer timed transition,
+	i.e., CONST::ServerType::InfiniteServer
+*/
+helper infServerTransitionToolInfo() : PNML::ToolInfo {
+	return object PNML::ToolInfo {
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::ServerType::InfiniteServer.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::ServerType::InfiniteServer.toString() + "\"/>").createLongString();
+	};
+}
+
+/**
+	Creates the ToolInfo that identifies a OneServer timed transition,
+	i.e., CONST::ServerType::OneServer 
+*/
+helper oneServerTransitionToolInfo() : PNML::ToolInfo {
+	return object PNML::ToolInfo {
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::ServerType::OneServer.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::ServerType::OneServer.toString() + "\"/>").createLongString();
+	};
+}
+
+/**
+	Creates a ToolInfo that identifies a probabilistic immediate transition,
+	i.e., CONST::TransitionKind::Immediate
+*/
+helper probTransitionToolInfo(prob: Real) : PNML::ToolInfo {
+	return object PNML::ToolInfo {
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::TransitionKind::Immediate.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::Immediate.toString() + "\">" + prob.toString() + "</value>").createLongString();
+	};
+}
+
+
+/*******************************************************************************
+  Tagged values utilities
+*******************************************************************************/
+
+/**
+	Helper to get the key from a string in the form 'key=value'
+*/
+helper String::key() : String {
+	assert fatal (self.indexOf("=") <> -1) with log ("Unexpected number of tokens in " + self);
+	return self.substringBefore("=").trim()
+
+}
+
+/**
+	Helper to get the value from a string in the form 'key=value'
+*/
+helper String::value() : String {
+	assert fatal (self.indexOf("=") <> -1) with log ("Unexpected number of tokens in " + self);
+	return self.substringAfter("=").trim()
+}
+
+/**
+	Helper that determines if a given String represents a Tuple
+*/
+helper String::isTuple() : Boolean {
+	var trimmed := self.trim();
+	return trimmed.startsWith("(") and trimmed.trim().endsWith(")");
+}
+
+/**
+	Helper that parses a VSL Tuple and returns a Dictionary
+*/
+helper String::asTuple() : Dict (String, String) {
+	var trimmed := self.trim();
+	assert warning (trimmed.startsWith("(")) with log ("Tuple string '" + self + "' does not start with '('");
+	assert warning (trimmed.trim().endsWith(")")) with log ("Tuple string '" + self + "' does not end with ')'");
+
+	var segments : List (String) := List {};
+	var pars : Integer := 0;
+	var segment : String;
+	trimmed.substring(2, trimmed.size() - 1).characters()->forEach(c) {
+		switch {
+			case (c = '(') {
+				pars := pars + 1;
+			} case (c = ')') {
+				pars := pars - 1;
+			} case (c = ',') {
+				if (pars = 0) { 
+					segments->add(segment);
+					segment := '';
+					continue;
+				}
+			}
+		};
+		segment := segment.concat(c);
+	};
+	segments->add(segment);
+	var entries : Dict (String, String) := Dict {};
+	segments->forEach(entry) {
+		entries->put(entry.key(), entry.value());
+	};
+	return entries;
+}
