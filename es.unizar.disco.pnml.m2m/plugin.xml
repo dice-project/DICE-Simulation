@@ -53,5 +53,17 @@
             priority="4"
             scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario">
       </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            builder="es.unizar.disco.pnml.m2m.builder.SequenceDiagram2PnmlResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Interaction"
+            priority="4"
+            scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
+      </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            builder="es.unizar.disco.pnml.m2m.builder.SequenceDiagram2PnmlResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Interaction"
+            priority="4"
+            scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario">
+      </AnalyzableResourceBuilder>
    </extension>
 </plugin>
