@@ -35,9 +35,23 @@ helper UML::Element::getGaStep() : UML::Stereotype {
 	return null;	
 }
 
+helper UML::Element::getGaCommStep() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep"))) { 
+		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep");
+	};
+	return null;	
+}
+
 helper UML::Element::getPaLogicalResource() : UML::Stereotype {
 	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource");
+	};
+	return null;	
+}
+
+helper UML::Element::getPaRunTInstance() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance"))) { 
+		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance");
 	};
 	return null;	
 }

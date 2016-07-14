@@ -13,18 +13,45 @@ modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 transformation ad2pnml(in sd : UML, in vars : TYPES, out res : PNML, out traces : TRACE); 
 
 
+helper validate() {
+	// Validate all ExecutionSpecifications start and end in the same parent InteractionFragment
+	assert fatal (sd.scenario().allSubobjectsOfKind(UML::ExecutionSpecification)->forAll(start.namespace = finish.namespace))
+		with log ("Malformed input model: Start and Finish events for all ExecutionSpecifications must belong to the same namespace");
+
+	// Validate all InteractionFragments belong to a lifeline
+	assert fatal (sd.scenario().allSubobjectsOfKind(UML::InteractionFragment)->forAll(covered->notEmpty()))
+		with log ("Malformed input model: All InteractionFragments must belong to a lifeline");
+	assert fatal (sd.scenario().allSubobjectsOfKind(UML::InteractionFragment)->forAll(covered->notEmpty()))
+		with log ("Malformed input model: All InteractionFragments must belong to a lifeline");
+	
+	// Validate that the interaction starts sending a message
+	var first := sd.scenario().fragment->asOrderedSet()->first().oclAsType(UML::MessageOccurrenceSpecification);
+	assert fatal (first.message.sendEvent = first)
+		with log ("The first fragment of the interaction must be a send message event (MessageOccurrenceSpecification)");
+	
+	// Validate that the interaction finishes receiving a message
+	var last := sd.scenario().fragment->asOrderedSet()->last().oclAsType(UML::MessageOccurrenceSpecification);
+	assert fatal (last.message.receiveEvent = last)
+		with log ("The last fragment of the interaction must be a receive message event (MessageOccurrenceSpecification)");
+	
+	// Validate that the first and last interaction fragment belong to the same lifeline (the "actor"" lifeline)
+	assert fatal (first.getLifeline() = last.getLifeline())
+		with log ("The last message of the Interaction must be received by the lifeline sending the first message");
+}
+
 /**
 	Main method:
-		1.- Create the root elements (PetriNetDoc, PetriNet, Page)
-		2.- Transform ActivityNodes, creating subnets of places and transitions
-		2.- Transform ControlFlows, linking the previously created subnets
-		2.- Complete transformation with the information of the workload in the initial nodes
 */
 main() {
+
+	// Validate that the model is well-formed
+	validate();
+	
 	// Transform top-level elements
 	sd.scenario().map model2doc();
 	
 	// Transform net contents
+	sd.scenario().map interaction2subnet();
 	
 	// Transform deployment
 	
@@ -70,6 +97,331 @@ mapping baseTimeUnit(unit : String) {
 	net.toolspecifics += baseTimeUnitToolInfo(unit);
 }
 
+mapping UML::Interaction::interaction2subnet() {
+	self.map namedElement2transition(null);
+	self.lifeline->map lifeline2subnet();
+	self.message->map message2subnet();
+}
+
+mapping UML::Lifeline::lifeline2subnet() {
+	var fragments := self.getInterestingFragments();
+	
+	// Transform each fragment to its corresponding subnet	
+	fragments->map interactionFragment2subnet(self);
+	
+	// Link each one of the subnets
+	do {
+		var i : Integer := 1;
+		while (i < fragments->size()) {
+			var current := fragments->at(i);
+			var next := fragments->at(i + 1);
+			i := i + 1;
+
+			var trans := current.resolveoneIn(UML::NamedElement::namedElement2transition);
+			var place := next.resolveoneIn(UML::NamedElement::namedElement2place);
+			map arc(trans, place);
+		}
+	};
+	
+	// Create the lifeline's initial transition
+	var initialTransition := object PNML::Transition {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+	};
+	
+	// Connect the initial transition it to the first element subnet
+	var firstPlace := fragments->first().resolveoneIn(UML::NamedElement::namedElement2place);
+	map arc(initialTransition, firstPlace);
+	
+	
+	// Create the lifeline's last place
+	var finalPlace := object PNML::Place {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		name := object PNML::Name {
+			text := self.name + '_last';
+		};
+	};
+	
+	// Connect it to the last element subnet
+	var lastTransition := fragments->last().resolveoneIn(UML::NamedElement::namedElement2transition);
+	map arc(lastTransition, finalPlace);
+	
+
+	// Retrieve the lifeline's last transition
+	var transition : PNML::Transition;
+	
+	if (self.isActor().not()) {
+		// If it's a normal lifeline, retrieve the transition corresponding to the interaction
+		// i.e., the one that synchronizes all the lifelines
+		// Additionally, the initial place has to be marked with the poolSize		
+		var initialPlace := object PNML::Place {
+			containerPage := resolveoneIn(UML::NamedElement::model2page);
+			id := createRandomUniqueId();
+			name := object PNML::Name {
+				text := self.name;
+			};
+		};
+		map arc(initialPlace, initialTransition);
+		assert fatal (self.getPaRunTInstance_poolSize().oclIsUndefined().not()) with log ("Lifeline '" + self.toString() + "' does not define a poolSize");
+		transition := self.interaction.resolveoneIn(UML::NamedElement::namedElement2transition);
+		initialPlace.initialMarking := object PNML::PTMarking {
+			text := self.getPaRunTInstance_poolSize().value();
+		};
+		map arc(transition, initialPlace);
+	} else {
+		// If it's the actor's lifeline, create a transition representing the lifeline
+		// and set the initial workload in the initial place
+		assert warning (self.getPaRunTInstance_poolSize().oclIsUndefined()) with log ("Actor Lifelines should not define a poolSize. Lifeline '" + self.toString() + "' does not respect this restriction");
+		transition := self.map namedElement2transition(self);
+		var pattern := fragments->first().oclAsType(UML::MessageOccurrenceSpecification).message.getGaWorkloadEvent_pattern();
+		if (pattern.oclIsUndefined()) {
+			assert warning (false) with log ("Unparseable workload pattern");
+		} else if (pattern.oclIsKindOf(ClosedPattern)) {
+			var initialPlace := object PNML::Place {
+				containerPage := resolveoneIn(UML::NamedElement::model2page);
+				id := createRandomUniqueId();
+				name := object PNML::Name {
+					text := self.name;
+				};
+				initialMarking := object PNML::PTMarking {
+					var closedPattern := pattern.oclAsType(ClosedPattern);
+					initialTransition.toolspecifics += expTransitionToolInfo(1 / closedPattern.extDelay.value());		
+					initialTransition.toolspecifics += infServerTransitionToolInfo();		
+					text := closedPattern.population_.value();
+				};
+			};
+			map arc(transition, initialPlace);
+			map arc(initialPlace, initialTransition);
+		} else if (pattern.oclIsKindOf(OpenPattern)) {
+			var openPattern := pattern.oclAsType(OpenPattern);
+			assert fatal (openPattern.arrivalRate.oclIsUndefined() xor openPattern.interArrivalTime.oclIsUndefined()) 
+				with log ("Only one 'arrivalRate' xor 'interArrivalTime' should be defined");
+			if (openPattern.arrivalRate.oclIsUndefined().not()) {
+				initialTransition.toolspecifics += expTransitionToolInfo(openPattern.arrivalRate.value());
+				initialTransition.toolspecifics += oneServerTransitionToolInfo();
+			} else if (openPattern.interArrivalTime.oclIsUndefined().not()) {
+				initialTransition.toolspecifics += expTransitionToolInfo(1 / openPattern.interArrivalTime.value());
+				initialTransition.toolspecifics += oneServerTransitionToolInfo();
+			};
+		} else {
+			assert warning (false) with log ("Unknown workload pattern: " + pattern._rawExpression);
+		}
+	};
+	
+	map arc(finalPlace, transition);
+}
+
+mapping UML::InteractionFragment::interactionFragment2subnet(lifeline : UML::Lifeline)  disjuncts
+UML::CombinedFragment::combinedFragment2subnet,
+UML::MessageOccurrenceSpecification::messageOccurrenceSpecification2subnet,
+UML::ExecutionSpecification::executionSpecification2subnet {};
+
+
+mapping UML::CombinedFragment::combinedFragment2subnet(lifeline : UML::Lifeline) disjuncts 
+UML::CombinedFragment::optionalCombinedFragment2subnet {}
+
+	
+mapping UML::CombinedFragment::optionalCombinedFragment2subnet(lifeline : UML::Lifeline)
+when {
+	self.interactionOperator = InteractionOperatorKind::opt
+}{
+	self.operand.fragment->map interactionFragment2subnet(lifeline);
+}
+
+mapping UML::MessageOccurrenceSpecification::messageOccurrenceSpecification2subnet(lifeline : UML::Lifeline) {
+	var place := self.map namedElement2place(lifeline);
+	var transition := self.map namedElement2transition(lifeline);
+	var arc := map arc(place, transition);
+}
+
+mapping UML::ExecutionSpecification::executionSpecification2subnet(lifeline : UML::Lifeline) {
+	assert fatal (lifeline.getFragments()->prev(self) = self.start) with log ("Start event of '"+ self.toString() + "' does not happen just before the ExecutionSpecification");	
+	var place := self.map namedElement2place(lifeline);
+	var transition := self.map executionSpecification2transition(lifeline);
+	var arc := map arc(place, transition);
+	
+}
+
+mapping UML::Message::message2subnet() when {
+	// Ignore messages that are sent and received by the same lifeline
+	if (self.sendEvent.oclIsInvalid().not() and self.receiveEvent.oclIsInvalid().not()) then
+		self.sendEvent.oclAsType(UML::MessageOccurrenceSpecification).getLifeline() <> self.receiveEvent.oclAsType(UML::MessageOccurrenceSpecification).getLifeline()
+	else
+		true
+	endif
+} {
+	assert fatal (self.messageSort <> MessageSort::createMessage) with log ("Unsupported Message type: '" + self.toString() + "'");
+	assert fatal (self.messageSort <> MessageSort::deleteMessage) with log ("Unsupported Message type: '" + self.toString() + "'");
+	assert fatal (self.messageSort <> MessageSort::asynchSignal) with log ("Unsupported Message type: '" + self.toString() + "'");
+	assert warning (self.messageSort = MessageSort::asynchCall) with log ("Unsupported Message type: '" + self.toString() + "', processing it as an asynch message");
+	
+	var startTransition := self.sendEvent.resolveoneIn(UML::NamedElement::namedElement2transition);
+	var endTransition := self.receiveEvent.resolveoneIn(UML::NamedElement::namedElement2transition);
+	var place1 := object PNML::Place {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		name := object PNML::Name {
+			text := self.name + "_inbox";
+		};
+	};
+	var place2 := object PNML::Place {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		name := object PNML::Name {
+			text := self.name + "_outbox";
+		};
+	};
+	var transition := self.map message2transition();
+	
+	map arc(startTransition, place1);
+	map arc(place1, transition);
+	map arc(transition, place2);
+	map arc(place2, endTransition)
+}
+
+	
+mapping UML::NamedElement::namedElement2place(lifeline : UML::Lifeline) : PNML::Place {
+	containerPage := resolveoneIn(UML::NamedElement::model2page);
+	id := createRandomUniqueId();
+	if (self.name.oclIsUndefined().not()) {
+		name := object PNML::Name {
+			text := self.name;
+		};
+	};
+}
+
+mapping UML::NamedElement::namedElement2transition(lifeline : UML::Lifeline) : PNML::Transition {
+	containerPage := resolveoneIn(UML::NamedElement::model2page);
+	id := createRandomUniqueId();
+	if (self.name.oclIsUndefined().not()) {
+		name := object PNML::Name {
+			text := self.name;
+		};
+	};
+}
+
+/**
+	Transform an ExecutionSpecification into a Transition and 
+	creates any additional ToolInfo depending on the InteractionFragment
+	subtype (e.g., ExecutionSpecifications with hostDemand may create 
+	exponential transitions) 
+*/
+mapping UML::ExecutionSpecification::executionSpecification2transition(lifeline : UML::Lifeline) : PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+	toolspecifics += self[ExecutionSpecification].map executionSpecification2toolInfo();
+	if (toolspecifics->notEmpty()) {
+		// This is a timed ExecutionSpecification, there should not be any event between the start and the end
+		// However, some exceptions may apply:
+		// Events for reply messages, which occur at the end of the execution, are declared between the start and the end events.
+		// Self messages (which can be used to specify that the execution is self-requested), may be declared between the start and the end events.
+		do {
+			var current := lifeline.getFragments()->next(self); 
+			while (current <> self.finish and current.oclIsUndefined().not()) {
+				assert fatal (
+					current.oclAsType(UML::MessageOccurrenceSpecification).message.messageSort = MessageSort::reply 
+					or current.oclAsType(UML::MessageOccurrenceSpecification).message.sendEvent.oclAsType(UML::MessageOccurrenceSpecification).covered
+							 = current.oclAsType(UML::MessageOccurrenceSpecification).message.receiveEvent.oclAsType(UML::MessageOccurrenceSpecification).covered)
+					with log ("A timed ExecutionSpecification cannot have events between its start and its finish events '" + self.toString() + "'");
+					current := lifeline.getFragments()->next(current); 
+			};
+		};
+	}
+}
+
+/**
+	Transform a Message into a Transition and creates any additional ToolInfo (e.g., 
+	Messages with hostDemand may create exponential transitions) 
+*/
+mapping UML::Message::message2transition() : PNML::Transition {
+	containerPage := resolveoneIn(UML::NamedElement::model2page);
+	id := createRandomUniqueId();
+	if (self.name.oclIsUndefined().not()) {
+		name := object PNML::Name {
+			text := self.name;
+		};
+	};
+	toolspecifics += self.map message2toolInfo();
+}
+
+/**
+	Transforms an ExecutionSpecification with a hostDemand annotation to a ToolInfo element
+*/
+mapping UML::ExecutionSpecification::executionSpecification2toolInfo() : List ( PNML::ToolInfo ) 
+when {
+		self.getGaStep_hostDemand().oclIsUndefined().not();
+}{
+	var hostDemand := self.getGaStep_hostDemand();
+	result += expTransitionToolInfo( 1 / hostDemand.value());
+	result += infServerTransitionToolInfo();
+}
+
+/**
+	Transforms an Message with and annotation to a ToolInfo element
+*/
+mapping UML::Message::message2toolInfo() : List ( PNML::ToolInfo ) disjuncts
+UML::Message::messageGaStepHostDemand2toolInfo,
+UML::Message::messageGaCommStepHostDemand2toolInfo 
+{};
+  
+/**
+	Transforms a Message with a GaStep.hostDemand annotation to a ToolInfo element
+*/
+mapping UML::Message::messageGaStepHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
+when {
+		self.getGaStep_hostDemand().oclIsUndefined().not();
+}{
+	var hostDemand := self.getGaStep_hostDemand();
+	result += expTransitionToolInfo( 1 / hostDemand.value());
+	result += infServerTransitionToolInfo();
+}
+
+/**
+	Transforms a Message with a GaCommStep.hostDemand annotation to a ToolInfo element
+*/
+mapping UML::Message::messageGaCommStepHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
+when {
+		self.getGaCommStep_hostDemand().oclIsUndefined().not();
+}{
+	var hostDemand := self.getGaCommStep_hostDemand();
+	result += expTransitionToolInfo( 1 / hostDemand.value());
+	result += infServerTransitionToolInfo();
+}
+
+
+
+/**
+	Creates an Arc from 'src' to 'tgt'
+*/
+mapping arc(in src : PNML::Node, in tgt : PNML::Node) : PNML::Arc {
+	containerPage := resolveoneIn(UML::NamedElement::model2page);
+	id := createRandomUniqueId();
+	source := src;
+	target := tgt;
+}
+
+/*******************************************************************************
+  Traceability mappings
+*******************************************************************************/
+
+mapping OclAny::trace(to : OclAny) : TRACE::Trace {
+	init {
+		result := object TRACE::Trace {
+			fromDomainElement := self.eObject();
+			toAnalyzableElement := to.eObject();
+		}
+	}
+}
+
+mapping OclAny::trace(to : OclAny, text : String) : TRACE::Trace {
+	init {
+		result := object TRACE::Trace {
+			fromDomainElement := self.eObject();
+			toAnalyzableElement := to.eObject();
+			rule := text;
+		}
+	}
+}
 
 /*******************************************************************************
   Navigation helpers
@@ -103,6 +455,59 @@ helper TYPES::PrimitiveVariableAssignment::asDict() : Dict(String, Real) {
 
 helper TRACE::set() : TRACE::TraceSet {
 	return self.rootObjects()[TRACE::TraceSet]->asSequence()->first();
+}
+
+helper UML::OccurrenceSpecification::getLifeline() : UML::Lifeline
+{
+	-- As declared in the standard, the 'covered' association end for 
+	-- 'OccurrenceSpecification'' is redefined, and the multiplicity is [1..1]
+	return self.covered->asSequence()->first();
+}
+
+helper UML::Lifeline::getFragments() : OrderedSet( UML::InteractionFragment ) 
+{
+	return self.interaction.fragment->select(covered->includes(self));
+}
+
+/**
+	Return the fragments that are interesting for this lifeline in the order they occur.
+	
+	Interesting fragments are:
+	- Interactions: Such as combined fragments
+	- MessageOccurrenceSpecification: A message is sent or received
+	- ExecutionSpecification: An action or a behavior is executed.
+	
+	Uninteresting fragments are:
+	- ExecutionOcurrenceSpecification: An action or a behavior is started/finished 
+	
+*/
+helper UML::Lifeline::getInterestingFragments() : OrderedSet( UML::InteractionFragment ) 
+{
+	return self.getFragments()[
+	oclIsKindOf(CombinedFragment) or
+	oclIsKindOf(ExecutionSpecification) or 
+	(oclIsKindOf(MessageOccurrenceSpecification) and (oclAsType(MessageOccurrenceSpecification).message.sendEvent.oclAsType(MessageOccurrenceSpecification).covered 
+		<> oclAsType(MessageOccurrenceSpecification).message.receiveEvent.oclAsType(MessageOccurrenceSpecification).covered))];
+}
+
+helper UML::Lifeline::isActor() : Boolean 
+{
+	var first := sd.scenario().fragment->asOrderedSet()->first().oclAsType(UML::MessageOccurrenceSpecification);
+	var last := sd.scenario().fragment->asOrderedSet()->last().oclAsType(UML::MessageOccurrenceSpecification);
+	
+	return first.getLifeline() = self and last.getLifeline() = self;
+}
+
+helper OrderedSet(UML::InteractionFragment)::prev(fragment : UML::InteractionFragment) : UML::InteractionFragment 
+{
+	var current := self->indexOf(fragment);
+	return self->at(current - 1);
+}
+
+helper OrderedSet(UML::InteractionFragment)::next(fragment : UML::InteractionFragment) : UML::InteractionFragment 
+{
+	var current := self->indexOf(fragment);
+	return self->at(current + 1);
 }
 
 /*******************************************************************************
@@ -402,6 +807,20 @@ helper UML::Element::getGaStep_hostDemand() : NFP_Duration {
 			asSequence()->first();
 }
 
+helper UML::Element::getGaCommStep_hostDemand() : NFP_Duration {
+	if (self.getGaCommStep() = null) {
+		return null;
+	};
+	var hostDemandStrings := self.getValue(self.getGaCommStep(), "hostDemand").oclAsType(Collection(String));
+	assert warning (hostDemandStrings->size() = 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected 1. "+
+					"Only the first 'mean' value will be used (if found). " + 
+					"The context element is '" + self.toString() + "'"); 
+	return hostDemandStrings.toNfpDuration()->
+			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
+			asSequence()->first();
+}
+
 helper UML::Element::getGaStep_prob() : NFP_Real {
 	if (self.getGaStep() = null) {
 		return null;
@@ -415,6 +834,14 @@ helper UML::Element::getPaLogicalResource_poolSize() : NFP_Integer {
 		return null;
 	};
 	var prob := self.getValue(self.getPaLogicalResource(), "poolSize").oclAsType(String);
+	return prob.toNfpInteger();
+}
+
+helper UML::Element::getPaRunTInstance_poolSize() : NFP_Integer {
+	if (self.getPaRunTInstance() = null) {
+		return null;
+	};
+	var prob := self.getValue(self.getPaRunTInstance(), "poolSize").oclAsType(String);
 	return prob.toNfpInteger();
 }
 
