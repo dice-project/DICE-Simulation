@@ -7,7 +7,7 @@
        			url="http://org.eclipse.ui.intro/runAction?pluginId=es.unizar.disco.simulation.quickstart&amp;class=es.unizar.disco.simulation.quickstart.actions.OpenPreferencesAction" 
        			id="prefs-link" 
        			style-id="content-link">
-          		<text>Opens the preferences of Eclipse to configure the SSH connection to a GreatSPN installation, whish is a pre-requisite for the DICE Simulation Tools</text>
+          		<text>Opens the preferences of Eclipse to configure the SSH connection to a GreatSPN installation, which is a pre-requisite for the DICE Simulation Tools</text>
        		</link>
        		<link 
        			label="DICE Simulation Examples" 
