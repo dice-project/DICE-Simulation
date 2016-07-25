@@ -32,7 +32,7 @@
             label="DICE Simulation Examples">
       </command>
       <command
-            description="Configure the SSH connection to a GreatSPN installation. Required to used the DICE Simulation Tools"
+            description="Configure the SSH connection to a GreatSPN installation. Required to use the DICE Simulation Tools"
             icon="icons/full/obj16/prefs52_orange.png"
             id="es.unizar.disco.simulation.quickstart.configureSshConnection"
             label="Configure GreatSPN SSH Connection">
