@@ -233,6 +233,8 @@ any resulting litigation.
       <import plugin="es.unizar.disco.core" version="0.3.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.pnml.m2m" version="0.3.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.ssh.ui" version="0.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.intro.universal" version="3.3.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.intro.quicklinks"/>
    </requires>
 
    <plugin
