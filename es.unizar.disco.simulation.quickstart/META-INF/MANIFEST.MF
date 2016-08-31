@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DICE Simulation Tools Quickstart
 Bundle-SymbolicName: es.unizar.disco.simulation.quickstart;singleton:=true
-Bundle-Version: 0.3.0.qualifier
+Bundle-Version: 0.3.2.qualifier
 Bundle-Activator: es.unizar.disco.simulation.quickstart.DiceQuickStartUiPlugin
 Bundle-Vendor: DisCo - Unizar
 Require-Bundle: org.eclipse.ui;bundle-version="3.108.0",
@@ -10,9 +10,11 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.108.0",
  org.eclipse.core.resources;bundle-version="3.11.0",
  org.eclipse.ui.ide;bundle-version="3.12.0",
  org.eclipse.ui.intro;bundle-version="3.5.0",
+ org.eclipse.ui.intro.universal;bundle-version="3.3.0",
  org.apache.commons.io;bundle-version="2.2.0",
  es.unizar.disco.core;bundle-version="0.3.0",
  es.unizar.disco.pnml.m2m;bundle-version="0.3.0",
- es.unizar.disco.ssh.ui;bundle-version="0.3.0"
+ es.unizar.disco.ssh.ui;bundle-version="0.3.0",
+ org.eclipse.ui.intro.quicklinks
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy

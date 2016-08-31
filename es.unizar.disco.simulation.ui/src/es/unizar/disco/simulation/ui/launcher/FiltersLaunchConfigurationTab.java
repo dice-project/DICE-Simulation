@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
+import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.databinding.observable.set.IObservableSet;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
@@ -385,7 +386,8 @@ public class FiltersLaunchConfigurationTab extends AbstractSimulationLaunchConfi
 			return false;
 		}
 		for (DomainMeasureDefinition measureDefinition : simulationDefinition.getMeasuresToCompute()) {
-			if (measureDefinition.getOutputVariable() == null) {
+			String source = measureDefinition.getVslExpressionEntries().get("source");
+			if (source != null && !StringUtils.equals(source, "req") && measureDefinition.getOutputVariable() == null) {
 				setErrorMessage(MessageFormat.format("The Scenario does not declare an Output Variable for the Domain Measure ''{0}''",
 						measureDefinition.getVslExpression()));
 				return false;

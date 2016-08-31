@@ -23,5 +23,42 @@
             configId="org.eclipse.ui.intro.universalConfig">
       </configExtension>
    </extension>
+   <extension
+         point="org.eclipse.ui.intro.quicklinks">
+      <command
+            description="Create a new project with the example files to test the DICE Simulation Tool"
+            icon="icons/full/obj16/wizard52_orange.png"
+            id="es.unizar.disco.simulation.quickstart.openSimulationWizard"
+            label="DICE Simulation Examples">
+      </command>
+      <command
+            description="Configure the SSH connection to a GreatSPN installation. Required to use the DICE Simulation Tools"
+            icon="icons/full/obj16/prefs52_orange.png"
+            id="es.unizar.disco.simulation.quickstart.configureSshConnection"
+            label="Configure GreatSPN SSH Connection">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="es.unizar.disco.simulation.quickstart.configureSshConnection"
+            name="Configure GreatSPN SSH Connection">
+      </command>
+      <command
+            id="es.unizar.disco.simulation.quickstart.openSimulationWizard"
+            name="DICE Simulation Examples">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="es.unizar.disco.simulation.quickstart.handlers.OpenPreferencesHandler"
+            commandId="es.unizar.disco.simulation.quickstart.configureSshConnection">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.quickstart.handlers.OpenWizardHandler"
+            commandId="es.unizar.disco.simulation.quickstart.openSimulationWizard">
+      </handler>
+   </extension>
 
 </plugin>

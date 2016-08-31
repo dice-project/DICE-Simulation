@@ -82,16 +82,14 @@ mapping baseTimeUnit(unit : String) {
 mapping UML::InitialNode::initialNodes2AnalysisType() {
 	var pattern := self.getGaWorkloadEvent_pattern();
 	switch {
+		case (pattern.oclIsUndefined())
+			assert warning (false) with log ("Unparseable workload pattern");
 	 	case (pattern.oclIsTypeOf(ClosedPattern)) 
 			self.map model2closedNet();
 		case (pattern.oclIsTypeOf(OpenPattern)) 
 			self.map model2openNet();
 		else {
-			if (pattern.oclIsUndefined()) {
-				assert warning (false) with log ("Unparseable workload pattern");
-			} else {
-				assert warning (false) with log ("Unknown workload pattern: " + pattern._rawExpression);
-			};
+			assert warning (false) with log ("Unknown workload pattern: " + pattern._rawExpression);
 		};
 	}	
 }
