@@ -16,8 +16,8 @@ transformation ad2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces 
 	Main method:
 		1.- Create the root elements (PetriNetDoc, PetriNet, Page)
 		2.- Transform ActivityNodes, creating subnets of places and transitions
-		2.- Transform ControlFlows, linking the previously created subnets
-		2.- Complete transformation with the information of the workload in the initial nodes
+		3.- Transform ControlFlows, linking the previously created subnets
+		4.- Complete transformation with the transformation of the partition and resources
 */
 main() {
 	// Transform top-level elements
@@ -117,24 +117,32 @@ when {
 			
 			var arc_1 := map arc(temp_trans, place);
 			
-			// Immediate transitions: start in the timed transition and go back the PN model until arriving the immediate transitions  
+			// Get the immediate transitions: start in the timed transition and go back the PN model until arriving the immediate transitions  
 			assert fatal (temp_trans.InArcs->size() = 1) with log ("The temporal transition must have only one input arc. The number of incomming arcs is " + temp_trans.InArcs->size().toString() + " in partition '" + self.toString() + "'");
 			
+			/* Intermediate place between the timed transition and the immediate transitions */
 			var in_arc := temp_trans.InArcs->asSequence()->first();
 			var intermediatePlace := in_arc.source;
 			
+			/* List of immediate transitions */
 			var imm_trans := intermediatePlace.InArcs->asSequence();
 			assert fatal (imm_trans->size() >= 1 ) with log ("Could not find an immediate transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
+			
+			/* For each immediate transition, we create a link to the resource's place */
             imm_trans->forEach(i_trans){
             	var arc_2 := map arc(place, i_trans.source);
+            	self.represents.map trace(i_trans.source, "partitions2resources");
             };
+            self.represents.map trace(temp_trans, "partitions2resources");
 
 		} else if  (node.getStormSpout().oclIsUndefined().not()) {
 			var temp_trans := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
 			assert fatal (temp_trans.oclIsUndefined().not()) with log ("Could not find a temporal transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
 
 			var arc_1 := map arc(temp_trans, place);
-			var arc_2 := map arc(place, temp_trans);			
+			var arc_2 := map arc(place, temp_trans);
+			
+			self.represents.map trace(temp_trans, "partitions2resources");			
 		}
 	};
 	
@@ -164,8 +172,8 @@ mapping UML::ActivityNode::spoutNode2subNet()
 		var arc_1 := map arc(transition, place);
 		var arc_2 := map arc(place, transition);
 		// Add tracing information
-		self.map trace(place, "basicActivityNode2place");
-		self.map trace(transition, "basicActivityNode2transition");
+		self.map trace(place, "spoutNode2subNet");
+		self.map trace(transition, "spoutNode2subNet");
 }
 
 mapping UML::ActivityNode::boltNode2subNet()
@@ -246,31 +254,31 @@ inherits UML::NamedElement::namedElement2transition {
 /**
 	Transform a generic NamedElement into a Transition 
 */
-//mapping UML::ActivityNode::activityNode2immediateTransition() : PNML::Transition
+/*
 mapping UML::NamedElement::activityNode2immediateTransition() : PNML::Transition
 inherits UML::NamedElement::namedElement2transition {
-		//name.text := self.name + "_transition";
-		name.text := self.name.addSuffixNumber();
+		name.text := self.name + "_transition";
+		//name.text := self.name.addSuffixNumber();
 }
-
+*/
 
 /**
 	Transform a generic NamedElement into a Transition 
 */
 
-/*mapping UML::NamedElement::namedElement2immediateTransition() : PNML::Transition
+mapping UML::NamedElement::namedElement2immediateTransition() : PNML::Transition
 inherits UML::NamedElement::namedElement2transition {
-		//name.text := self.name + "_transition";
-		name.text := self.name.addSuffixNumber();
-}*/
+		name.text := self.name + "_transition";
+		//name.text := self.name.addSuffixNumber();
+}
 
 /**
 	Transform a generic ActivityNode into a Transition 
 */
 
-/*mapping UML::ActivityNode::activityNode2immediateTransition() : PNML::Transition
+mapping UML::ActivityNode::activityNode2immediateTransition() : PNML::Transition
 inherits UML::NamedElement::namedElement2immediateTransition {
-}*/
+}
 
 /***********************************************************************/
 
@@ -297,30 +305,8 @@ mapping arc(in src : PNML::Node, in tgt : PNML::Node) : PNML::Arc {
 	target := tgt;
 }
 
+
 /***********************************************************************/
-/**
-	Transform a generic ControlFlow into a Transition 
-*/
-mapping UML::ControlFlow::controlFlow2immediateTransition() : PNML::Transition {
-		containerPage := resolveoneIn(UML::NamedElement::model2page);
-		id := createRandomUniqueId();
-		name := object PNML::Name {
-				text := self.name + "_transition";
-		};
-}
-
-mapping UML::ControlFlow::controlFlow2place(name_in: String) : PNML::Place {
-		containerPage := resolveoneIn(UML::NamedElement::model2page);
-		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
-			name := object PNML::Name {
-				text := name_in + "_Output";
-			};
-		};
-}
-/***********************************************************************/
-
-
 /**
 	Transforms a ControlFlow between two ActivityNodes to different subnets,
 	being the most simple an arc between the subnets corresponding to the
@@ -352,12 +338,15 @@ mapping UML::ControlFlow::finalControlFlow2arc() when {
 	/* Create a new place and immediate transition.
 	TimedTransition -> Place -> ImmTransition */
 	var place := self.map namedElement2place();
-	//var final_trans := self.map namedElement2immediateTransition();
-	var final_trans := self.map activityNode2immediateTransition();
+	var final_trans := self.map namedElement2immediateTransition();
+	//var final_trans := self.map activityNode2immediateTransition();
 	
 	map arc(timed_trans, place);
 	map arc(place, final_trans);
-	
+
+	// Add tracing information
+	self.map trace(place, "finalControlFlow2arc");
+	self.map trace(final_trans, "finalControlFlow2arc");	
 }
 
 /**
@@ -375,13 +364,14 @@ mapping UML::ControlFlow::mergeControlFlow2arc() when {
 	var t_1 := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
     var place := self.map namedElement2place();
 	var arc_1 := map arc(t_1, place);
+	
 	assert fatal (target.outgoing.target->size() = 1) with log('Merges should only have a single outgoing ControlFlow');
 						
 	var bolt := target.outgoing.target->asOrderedSet()->first();
 	
 	/* Create a new immediate transition for each incoming StormStream to the MergeNode */
-	// var trans_bolt := self.map namedElement2immediateTransition();
-	 var trans_bolt := self.map activityNode2immediateTransition();
+	 var trans_bolt := self.map namedElement2immediateTransition();
+	// var trans_bolt := self.map activityNode2immediateTransition();
 
 	var place_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
 	var place_parall := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
@@ -396,6 +386,10 @@ mapping UML::ControlFlow::mergeControlFlow2arc() when {
 	arc_2.inscription := object PNML::PTArcAnnotation {
 		text := self.getStormStreamStep_numTuples().value();
 	};
+	
+	// Add tracing information
+	self.map trace(place, "mergeControlFlow2arc");
+	self.map trace(trans_bolt, "mergeControlFlow2arc");
 }
 
 /**
@@ -416,14 +410,17 @@ mapping UML::ControlFlow::joinControlFlow2arc() when {
 	assert fatal (target.outgoing.target->size() = 1) with log('Joins should only have a single outgoing ControlFlow');
 		
 	var bolt := target.outgoing.target->asOrderedSet()->first();
-	//var trans_bolt := bolt.resolveoneIn(UML::NamedElement::namedElement2immediateTransition);			
-	var trans_bolt := bolt.resolveoneIn(UML::NamedElement::activityNode2immediateTransition);
+	var trans_bolt := bolt.resolveoneIn(UML::NamedElement::namedElement2immediateTransition);			
+	//var trans_bolt := bolt.resolveoneIn(UML::NamedElement::activityNode2immediateTransition);
 	if (trans_bolt.oclIsUndefined()){
 		trans_bolt := bolt.map activityNode2immediateTransition();
 		var place_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
 		var place_parall := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
 		map arc(trans_bolt, place_bolt);
 		map arc(place_parall,trans_bolt);
+		
+		// Add tracing information
+		self.map trace(trans_bolt, "joinControlFlow2arc");
 	};
 	var arc_2 := map arc(place, trans_bolt);
 	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) ) {
@@ -434,10 +431,54 @@ mapping UML::ControlFlow::joinControlFlow2arc() when {
 	arc_2.inscription := object PNML::PTArcAnnotation {
 		text := self.getStormStreamStep_numTuples().value();
 	};
+	
+	// Add tracing information
+	self.map trace(place, "joinControlFlow2arc");
 }
 
-mapping UML::ControlFlow::basicControlFlow2arc() {
+/*mapping UML::ControlFlow::basicControlFlow2arc() {
 
+}*/
+
+mapping UML::ControlFlow::basicControlFlow2arc() when {
+	self.source.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(InitialNode).not() and
+	(self.source.getStormSpout().oclIsUndefined().not() or
+	 self.source.getStormBolt().oclIsUndefined().not()) and
+	self.target.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(ActivityFinalNode).not() and
+	self.source.getStormBolt().oclIsUndefined().not()
+}{
+    var source := self.source;
+	var t_1 := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
+    var place := self.map namedElement2place();
+	var arc_1 := map arc(t_1, place);
+			
+	var bolt := self.target;	
+	var trans_bolt := bolt.resolveoneIn(UML::NamedElement::namedElement2immediateTransition);			
+	//var trans_bolt := bolt.resolveoneIn(UML::NamedElement::activityNode2immediateTransition);
+	if (trans_bolt.oclIsUndefined()){
+		trans_bolt := bolt.map activityNode2immediateTransition();
+		var place_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
+		var place_parall := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
+		map arc(trans_bolt, place_bolt);
+		map arc(place_parall,trans_bolt);
+		
+		// Add tracing information
+		self.map trace(trans_bolt, "joinControlFlow2arc");
+	};
+	var arc_2 := map arc(place, trans_bolt);
+	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) ) {
+		arc_1.inscription := object PNML::PTArcAnnotation {
+			text := bolt.getStormBolt_parallelism().value();
+		};
+	};
+	arc_2.inscription := object PNML::PTArcAnnotation {
+		text := self.getStormStreamStep_numTuples().value();
+	};
+	
+	// Add tracing information
+	self.map trace(place, "joinControlFlow2arc");
 }
 
 /*******************************************************************************
@@ -526,11 +567,6 @@ intermediate class NFP_Duration extends NFP_Real {
 	precision : Real;
 	worst : Real;
 	best : Real;
-}
-
-intermediate class NFP_Frequency extends NFP_Real {
-	unit : String;
-	precision : Real;
 }
 
 /*******************************************************************************
@@ -658,41 +694,6 @@ helper String::toNfpDuration() : NFP_Duration {
 	return res;
 }
 
-/**
-	Helper that parses a VSL tuple containing a NFP_Frequency
-*/
-helper String::toNfpFrequency() : NFP_Frequency {
-	var nfp := self.toNfpReal();
-	var res := object NFP_Frequency {
-		_rawExpression := nfp._rawExpression;
-		value := nfp.value;
-		expr := nfp.expr;
-		statQ := nfp.statQ;
-		source := nfp.source;
-		dir := nfp.dir;
-		mode := nfp.mode;
-		unit := null;
-		precision := null;
-	};
-	if (self.isTuple()) {
-		var entries := self.asTuple();
-		res.unit := entries->get("unit");
-		res.precision := entries->get("precision").toReal();
-	};
-	assert warning (res.unit.oclIsUndefined().not())
-		with log ("Expression '" + self + "' does not define a 'unit', assumming the default base unit (see complete log)");
-	assert warning (res.dir.oclIsUndefined())
-		with log ("Expression '" + self + "' defines a value for the unsupported 'clock' property");
-	assert warning (res.dir.oclIsUndefined())
-		with log ("Expression '" + self + "' defines a value for the unsupported 'precision' property");
-	assert warning (res.dir.oclIsUndefined())
-		with log ("Expression '" + self + "' defines a value for the unsupported 'worst' property");
-	assert warning (res.dir.oclIsUndefined())
-		with log ("Expression '" + self + "' defines a value for the unsupported 'best' property");
-	
-	return res;
-}
-
 helper NFP_Integer::value() : Integer {
 	if (self.value.oclIsUndefined().not()) {
 		return self.value;
@@ -705,32 +706,6 @@ helper NFP_Real::value() : Real {
 		return self.value;
 	};
 	return self.expr.eval(vars.vars()).toReal();
-}
-
-helper NFP_Duration::value() : Real {
-	var value : Real;	
-	if (self.value.oclIsUndefined().not()) {
-		value := self.value;
-	};
-	value := self.expr.eval(vars.vars()).toReal();
-	if (self.unit.oclIsUndefined().not()) {
-		map baseTimeUnit("s");			
-		value := value.convert(self.unit, "s");
-	};
-	return value;
-}
-
-helper NFP_Frequency::value() : Real {
-	var value : Real;	
-	if (self.value.oclIsUndefined().not()) {
-		value := self.value;
-	};
-	value := self.expr.eval(vars.vars()).toReal();
-	if (self.unit.oclIsUndefined().not()) {
-		map baseTimeUnit("s");
-		value := value.convert(self.unit, "Hz");
-	};
-	return value;
 }
 
 /*******************************************************************************
@@ -810,8 +785,8 @@ helper UML::Element::getStormSpout_parallelism() : NFP_Integer {
 					
 	return parallelism.toNfpInteger();
 }
-/******************************************************************/
 
+/******************************************************************/
 helper UML::Element::getStormStreamStep_numTuples() : NFP_Integer {
 	if (self.getStormStreamStep() = null) {
 		return null;
@@ -828,7 +803,6 @@ helper UML::Element::getStormStreamStep_grouping() : DBET::StreamPolicy {
 	if (self.getStormStreamStep() = null) {
 		return null;
 	};
-	//var grouping := (DBET::StreamPolicy) self.getValue(self.getStormStreamStep(), "grouping").oclAsType(StreamPolicy);
 	var grouping := self.getValue(self.getStormStreamStep(), "grouping").oclAsType(DBET::StreamPolicy);
 	assert warning (grouping->size() = 1)
 		with log ("Unexpected number of 'numTuples' tagged values found, expected 1. "+

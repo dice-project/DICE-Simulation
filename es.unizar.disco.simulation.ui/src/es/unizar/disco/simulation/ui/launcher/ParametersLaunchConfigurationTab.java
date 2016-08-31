@@ -199,7 +199,7 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 		handler.saveMaxExecutionTime(configuration);
 	}
 
-	private static final int RIGHT_COL_WIDTH = 40;
+	private static final int RIGHT_COL_WIDTH = 80;
 
 	protected static Label createLabel(Composite parent, String text) {
 		final Label label = new Label(parent, SWT.NONE);
