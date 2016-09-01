@@ -293,7 +293,11 @@ public class GspnSshSimulator implements ISimulator {
 			DefaultConfig defaultConfig = new DefaultConfig();
 			defaultConfig.setKeepAliveProvider(KeepAliveProvider.KEEP_ALIVE);
 			ssh = new SSHClient(defaultConfig);
-			ssh.loadKnownHosts();
+			try {
+				ssh.loadKnownHosts();
+			} catch (IOException e) {
+				DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+			}
 			ssh.addHostKeyVerifier(new NoHostVerifier());
 			ssh.connect(hostProvider.getHost(), hostProvider.getPort());
 			ssh.getConnection().getKeepAlive().setKeepAliveInterval(5); // every
