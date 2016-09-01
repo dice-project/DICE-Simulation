@@ -6,6 +6,11 @@ import java.util.List;
 
 public class CollectionUtils {
 
+	/*
+	 * This class was previously used in 
+	 * /es.unizar.disco.simulation.models/src/es/unizar/disco/simulation/models/definition/impl/CustomSimulationDefinitionImpl.java
+	 * but now has been replaced by a dependency from google Guava
+	 */
 	@SafeVarargs
 	public static <E> Collection<Collection<E>> cartesianProduct(Collection<E> ... collections) {
 		// Convert collections to Lists to safely iterate
