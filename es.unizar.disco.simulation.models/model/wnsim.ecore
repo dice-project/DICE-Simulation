@@ -11,6 +11,7 @@
     <eLiterals name="conf_level" value="5" literal="-c"/>
     <eLiterals name="seed" value="6" literal="-s"/>
     <eLiterals name="start" value="7" literal="-o"/>
+    <eLiterals name="binary_file_path" value="10"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WnsimResult" eSuperTypes="toolresult.ecore#//ToolResult"/>
   <eClassifiers xsi:type="ecore:EClass" name="WnsimElementInfo" abstract="true" eSuperTypes="toolresult.ecore#//AnalyzableElementInfo"/>
