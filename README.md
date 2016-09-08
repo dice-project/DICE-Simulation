@@ -1,5 +1,9 @@
 # DICE-Simulation
-Simulation tool for DICE
+Simulation tool for DICE.
+
+# The Simulation Tool in action
+
+A demonstration video can be found at https://www.youtube.com/watch?v=lZX6IoHgHc0
 
 # Installing the Simulation Tools
 
