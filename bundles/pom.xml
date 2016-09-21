@@ -2,13 +2,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>es.unizar.disco</groupId>
     <artifactId>es.unizar.disco.bundles</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <parent>
         <groupId>es.unizar.disco</groupId>
         <artifactId>es.unizar.disco.root</artifactId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.3.3-SNAPSHOT</version>
     </parent>
 
     <modules>

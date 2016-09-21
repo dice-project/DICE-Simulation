@@ -3,13 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.unizar.disco</groupId>
 	<artifactId>es.unizar.disco.configuration</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.3.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<tycho.version>0.25.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
+		<project.version>0.3.3-SNAPSHOT</project.version>
 	</properties>
 
 	<repositories>
@@ -33,11 +34,17 @@
 			<id>pnml</id>
 			<url>http://pnml.lip6.fr/pnmlframework/updatesite/</url>
 			<layout>p2</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 		<repository>
 			<id>papyrus</id>
 			<url> http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon</url>
 			<layout>p2</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
 		</repository>
 
 
