@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>es.unizar.disco</groupId>
+
 	<artifactId>es.unizar.disco.root</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+
 	<name>Simulation Tool</name>
 	<packaging>pom</packaging>
 
@@ -14,7 +14,76 @@
 		<relativePath>.\releng\es.unizar.disco.configuration</relativePath>
 	</parent>
 
+	<properties>
+		<pnml.version>2.2.11</pnml.version>
+	</properties>
+
 	<modules>
 		<module>bundles</module>
 	</modules>
+
+<!-- 	<repositories>
+		<repository>
+			<id>pnml.framework</id>
+			<url>http://miage11.u-paris10.fr:8081/nexus/content/groups/public/</url>
+
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+	</repositories> -->
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>pnml.plugin</id>
+			<name>Repo for pnml plugin</name>
+			<url>http://pnml.lip6.fr/pnmlframework/updatesite/</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<!-- <dependency>
+			<groupId>fr.lip6.pnml</groupId>
+			<artifactId>fr.lip6.pnml.framework.3rdpartimports</artifactId>
+			<version>${pnml.version}</version>
+		</dependency> -->
+		<dependency>
+			<groupId>fr.lip6.pnml</groupId>
+			<artifactId>fr.lip6.pnml.framework.utils</artifactId>
+			<version>${pnml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.lip6.pnml</groupId>
+			<artifactId>fr.lip6.pnml.framework.coremodel</artifactId>
+			<version>${pnml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.lip6.pnml</groupId>
+			<artifactId>fr.lip6.pnml.framework.ptnet</artifactId>
+			<version>${pnml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.lip6.pnml</groupId>
+			<artifactId>fr.lip6.pnml.framework.symmetricnet</artifactId>
+			<version>${pnml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.lip6.pnml</groupId>
+			<artifactId>fr.lip6.pnml.framework.hlpn</artifactId>
+			<version>${pnml.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.lip6.pnml</groupId>
+			<artifactId>fr.lip6.pnml.framework.pthlpng</artifactId>
+			<version>${pnml.version}</version>
+		</dependency>
+	</dependencies>
 </project>

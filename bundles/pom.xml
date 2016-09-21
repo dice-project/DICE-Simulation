@@ -13,5 +13,18 @@
 
     <modules>
         <module>es.unizar.disco.simulation</module>
+        <module>es.unizar.disco.core</module>
+        <module>es.unizar.disco.pnml.m2m</module>
+        <module>com.hierynomus.sshj</module>
+        <module>es.unizar.disco.core.ui</module>
+        <module>es.unizar.disco.pnextensions</module>
+        <module>es.unizar.disco.pnml.m2t</module>
+        <module>es.unizar.disco.simulation.greatspn.ssh</module>
+        <module>es.unizar.disco.simulation.models</module>
+        <module>es.unizar.disco.simulation.models.edit</module>
+        <module>es.unizar.disco.simulation.quickstart</module>
+        <module>es.unizar.disco.simulation.ui</module>
+        <module>es.unizar.disco.ssh</module>
+        <module>es.unizar.disco.ssh.ui</module>
     </modules>
 </project>

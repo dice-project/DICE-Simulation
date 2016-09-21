@@ -1,68 +1,106 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
- <modelVersion>4.0.0</modelVersion>
- <groupId>es.unizar.disco</groupId>
- <artifactId>es.unizar.disco.configuration</artifactId>
- <version>0.1.0-SNAPSHOT</version>
- <packaging>pom</packaging>
- 
- <properties>
-  <tycho.version>0.25.0</tycho.version>
-  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  <neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
- </properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.unizar.disco</groupId>
+	<artifactId>es.unizar.disco.configuration</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
- <repositories>
-  <repository>
-   <id>neon</id>
-   <url>${neon-repo.url}</url>
-   <layout>p2</layout>
-  </repository>
+	<properties>
+		<tycho.version>0.25.0</tycho.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
+	</properties>
 
- </repositories>
+	<repositories>
+		<repository>
+			<id>neon</id>
+			<url>${neon-repo.url}</url>
+			<layout>p2</layout>
+		</repository>
 
- <build>
-  <plugins>
-   <plugin>
-    <groupId>org.eclipse.tycho</groupId>
-    <artifactId>tycho-maven-plugin</artifactId>
-    <version>${tycho.version}</version>
-    <extensions>true</extensions>
-   </plugin>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 
-   <plugin>
-    <groupId>org.eclipse.tycho</groupId>
-    <artifactId>target-platform-configuration</artifactId>
-    <version>${tycho.version}</version>
-    <configuration>
-     <environments>
-      <environment>
-       <os>linux</os>
-       <ws>gtk</ws>
-       <arch>x86</arch>
-      </environment>
-      <environment>
-       <os>linux</os>
-       <ws>gtk</ws>
-       <arch>x86_64</arch>
-      </environment>
-      <environment>
-       <os>win32</os>
-       <ws>win32</ws>
-       <arch>x86</arch>
-      </environment>
-      <environment>
-       <os>win32</os>
-       <ws>win32</ws>
-       <arch>x86_64</arch>
-      </environment>
-      <environment>
-       <os>macosx</os>
-       <ws>cocoa</ws>
-       <arch>x86_64</arch>
-      </environment>
-     </environments>
-    </configuration>
-   </plugin>
-  </plugins>
- </build>
+		<repository>
+			<id>pnml</id>
+			<url>http://pnml.lip6.fr/pnmlframework/updatesite/</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>papyrus</id>
+			<url> http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon</url>
+			<layout>p2</layout>
+		</repository>
+
+
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
