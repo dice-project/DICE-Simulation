@@ -107,6 +107,21 @@
                </appInfo>
             </annotation>
          </attribute>
+         <attribute name="analyzableProperty">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="PERFORMANCE">
+                  </enumeration>
+                  <enumeration value="RELIABILITY">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
       </complexType>
    </element>
 

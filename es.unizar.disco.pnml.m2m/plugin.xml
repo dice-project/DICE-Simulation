@@ -42,28 +42,39 @@
    <extension
          point="es.unizar.disco.simulation.models.analyzable_resource_builder">
       <AnalyzableResourceBuilder
+            analyzableProperty="PERFORMANCE"
             builder="es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Activity"
             priority="4"
             scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
       </AnalyzableResourceBuilder>
       <AnalyzableResourceBuilder
+            analyzableProperty="PERFORMANCE"
             builder="es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Activity"
             priority="4"
             scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario">
       </AnalyzableResourceBuilder>
       <AnalyzableResourceBuilder
+            analyzableProperty="PERFORMANCE"
             builder="es.unizar.disco.pnml.m2m.builder.SequenceDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Interaction"
             priority="4"
             scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
       </AnalyzableResourceBuilder>
       <AnalyzableResourceBuilder
+            analyzableProperty="PERFORMANCE"
             builder="es.unizar.disco.pnml.m2m.builder.SequenceDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Interaction"
             priority="4"
             scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario">
+      </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            analyzableProperty="RELIABILITY"
+            builder="es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlReliabilityResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Activity"
+            priority="4"
+            scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
       </AnalyzableResourceBuilder>
    </extension>
 </plugin>
