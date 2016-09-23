@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.list.IListChangeListener;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.ListChangeEvent;
@@ -132,16 +133,17 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 		sashGroup.setLayoutData(sashLayoutData);
 		createScenariosGroup(sashGroup);
-		
-		//Differentiate between performance and reliability
-//		createNFPselectionGroup(sashGroup);
-		//TODO: show the minimum set of variables that are of interest for the NFP to calculate
+
+		// Differentiate between performance and reliability
+		createNFPselectionGroup(sashGroup);
+		// TODO: show the minimum set of variables that are of interest for the
+		// NFP to calculate
 		createVariableGroup(sashGroup);
-		sashGroup.setWeights(new int[] { 1, 2 });
+		sashGroup.setWeights(new int[] { 2, 1, 4 });
 
 		setControl(topComposite);
 	}
-	
+
 	private void createNFPselectionGroup(Composite composite) {
 		final Group group = new Group(composite, SWT.SHADOW_ETCHED_IN);
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -151,22 +153,26 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 		final Button perfOption = new Button(group, SWT.RADIO);
 		perfOption.setText("Performance");
-		final Button reliabOption = new Button(group,SWT.RADIO);
+		final Button reliabOption = new Button(group, SWT.RADIO);
 		reliabOption.setText("Reliability");
-		
-		SelectObservableValue selectedButtonObservable = new SelectObservableValue();
-		selectedButtonObservable.addOption(ComputableNFPtype.PERFORMANCE, WidgetProperties.selection().observe(perfOption));
-		selectedButtonObservable.addOption(ComputableNFPtype.RELIABILITY, WidgetProperties.selection().observe(reliabOption));
-		
-		IObservableValue nfpSelection = EMFProperties.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__NFP_TO_COMPUTE).observe(simulationDefinition);
 
-		context.bindValue(selectedButtonObservable, nfpSelection, new UriToStringStrategy(), new StringToUriStrategy());
-		
-		
-		
+		SelectObservableValue selectedButtonObservable = new SelectObservableValue();
+		selectedButtonObservable.addOption(ComputableNFPtype.PERFORMANCE,
+				WidgetProperties.selection().observe(perfOption));
+		selectedButtonObservable.addOption(ComputableNFPtype.RELIABILITY,
+				WidgetProperties.selection().observe(reliabOption));
+
+		IObservableValue nfpSelection = EMFProperties
+				.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__NFP_TO_COMPUTE).observe(simulationDefinition);
+
+		context.bindValue(selectedButtonObservable, nfpSelection, new UpdateValueStrategy() {
+			@Override
+			public Object convert(Object value) {
+				return ComputableNFPtype.get(((String) value).toUpperCase());
+			}
+		}, null);
 
 	}
-	
 
 	private void createModelGroup(Composite topComposite) {
 		final Group group = new Group(topComposite, SWT.NONE);
@@ -196,19 +202,22 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 					dialog.setInitialSelection(file);
 				}
 				if (dialog.open() == Dialog.OK) {
-					inputFileText.setText(UriConverter.toPlatformResourceUri(dialog.getFile().getLocationURI()).toString());
+					inputFileText
+							.setText(UriConverter.toPlatformResourceUri(dialog.getFile().getLocationURI()).toString());
 				}
 			}
 		});
 
 		// @formatter:off
 		IObservableValue inputResourceEmfSource = EMFProperties
-				.value(FeaturePath.fromList(DefinitionPackage.Literals.SIMULATION_DEFINITION__DOMAIN_RESOURCE, DatatypesPackage.Literals.RESOURCE__URI))
+				.value(FeaturePath.fromList(DefinitionPackage.Literals.SIMULATION_DEFINITION__DOMAIN_RESOURCE,
+						DatatypesPackage.Literals.RESOURCE__URI))
 				.observe(simulationDefinition);
 		// @formatter:on
 
 		IObservableValue inputResourceGuiTarget = WidgetProperties.text(SWT.Modify).observe(inputFileText);
-		context.bindValue(inputResourceEmfSource, inputResourceGuiTarget, new UriToStringStrategy(), new StringToUriStrategy());
+		context.bindValue(inputResourceEmfSource, inputResourceGuiTarget, new UriToStringStrategy(),
+				new StringToUriStrategy());
 	}
 
 	private void createScenariosGroup(Composite composite) {
@@ -221,13 +230,16 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		final Composite tableComposite = new Composite(group, SWT.NONE);
 		tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		final TableViewer scenariosViewer = new TableViewer(tableComposite, SWT.BORDER | SWT.FULL_SELECTION | SWT.NO_SCROLL | SWT.V_SCROLL);
+		final TableViewer scenariosViewer = new TableViewer(tableComposite,
+				SWT.BORDER | SWT.FULL_SELECTION | SWT.NO_SCROLL | SWT.V_SCROLL);
 		scenariosViewer.getTable().setLinesVisible(true);
 		scenariosViewer.getTable().setHeaderVisible(false);
 
 		scenariosViewer.setContentProvider(new ObservableListContentProvider());
-		scenariosViewer.setInput(EMFProperties.list(DefinitionPackage.Literals.SIMULATION_DEFINITION__SCENARIOS).observe(simulationDefinition));
-		scenariosViewer.setLabelProvider(new AdapterFactoryLabelProvider(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE)));
+		scenariosViewer.setInput(EMFProperties.list(DefinitionPackage.Literals.SIMULATION_DEFINITION__SCENARIOS)
+				.observe(simulationDefinition));
+		scenariosViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+				new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE)));
 
 		final TableColumn column = new TableColumn(scenariosViewer.getTable(), SWT.NONE);
 
@@ -237,8 +249,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 		// @formatter:off
 		IObservableValue activeScenarioEmfSource = EMFProperties
-				.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__ACTIVE_SCENARIO)
-				.observe(simulationDefinition);
+				.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__ACTIVE_SCENARIO).observe(simulationDefinition);
 		// @formatter:on
 
 		IObservableValue activeScenarioGuiTarget = ViewerProperties.singleSelection().observe(scenariosViewer);
@@ -265,14 +276,18 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			final Composite tableComposite = new Composite(inputGroup, SWT.NONE);
 			tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-			variablesViewer = new TableViewer(tableComposite, SWT.BORDER | SWT.FULL_SELECTION | SWT.NO_SCROLL | SWT.V_SCROLL);
+			variablesViewer = new TableViewer(tableComposite,
+					SWT.BORDER | SWT.FULL_SELECTION | SWT.NO_SCROLL | SWT.V_SCROLL);
 			variablesViewer.getTable().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			variablesViewer.getTable().setLinesVisible(true);
 			variablesViewer.getTable().setHeaderVisible(false);
 
 			variablesViewer.setContentProvider(new ObservableListContentProvider());
-			variablesViewer.setInput(EMFProperties.list(DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES).observe(simulationDefinition));
-			variablesViewer.setLabelProvider(new AdapterFactoryLabelProvider(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE)));
+			variablesViewer
+					.setInput(EMFProperties.list(DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES)
+							.observe(simulationDefinition));
+			variablesViewer.setLabelProvider(new AdapterFactoryLabelProvider(
+					new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE)));
 			variablesViewer.setComparator(new ViewerComparator(new AlphanumComparator()));
 
 			final TableColumn column = new TableColumn(variablesViewer.getTable(), SWT.NONE);
@@ -309,24 +324,27 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			final Composite tableComposite = new Composite(valuesGroup, SWT.NONE);
 			tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-			final TableViewer valuesViewer = new TableViewer(tableComposite, SWT.BORDER | SWT.MULTI | SWT.FULL_SELECTION | SWT.NO_SCROLL | SWT.V_SCROLL);
+			final TableViewer valuesViewer = new TableViewer(tableComposite,
+					SWT.BORDER | SWT.MULTI | SWT.FULL_SELECTION | SWT.NO_SCROLL | SWT.V_SCROLL);
 			valuesViewer.getTable().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			valuesViewer.getTable().setLinesVisible(true);
 			valuesViewer.getTable().setHeaderVisible(false);
 
 			valuesViewer.setContentProvider(new ObservableListContentProvider());
 
-			final IObservableList selectedVariableValuesObservable = EMFProperties.list(DefinitionPackage.Literals.INPUT_VARIABLE__VALUES)
+			final IObservableList selectedVariableValuesObservable = EMFProperties
+					.list(DefinitionPackage.Literals.INPUT_VARIABLE__VALUES)
 					.observeDetail(variablesSelectionObservable);
 			valuesViewer.setInput(selectedVariableValuesObservable);
 
 			final TableViewerColumn valuesViewerColumn = new TableViewerColumn(valuesViewer, SWT.NONE);
-			valuesViewerColumn.setLabelProvider(new DelegatedColumnLabelProvider(
-					new AdapterFactoryLabelProvider(new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE))));
+			valuesViewerColumn.setLabelProvider(new DelegatedColumnLabelProvider(new AdapterFactoryLabelProvider(
+					new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE))));
 			valuesViewerColumn.setEditingSupport(new ValuesEditingSupport(valuesViewer, variablesViewer));
 
-			TableViewerEditor.create(valuesViewer, new DoubleClickActivationStrategy(valuesViewer), ColumnViewerEditor.TABBING_HORIZONTAL
-					| ColumnViewerEditor.TABBING_MOVE_TO_ROW_NEIGHBOR | ColumnViewerEditor.TABBING_VERTICAL | ColumnViewerEditor.KEYBOARD_ACTIVATION);
+			TableViewerEditor.create(valuesViewer, new DoubleClickActivationStrategy(valuesViewer),
+					ColumnViewerEditor.TABBING_HORIZONTAL | ColumnViewerEditor.TABBING_MOVE_TO_ROW_NEIGHBOR
+							| ColumnViewerEditor.TABBING_VERTICAL | ColumnViewerEditor.KEYBOARD_ACTIVATION);
 
 			final TableColumnLayout tableLayout = new TableColumnLayout();
 			tableLayout.setColumnData(valuesViewerColumn.getColumn(), new ColumnWeightData(1));
@@ -340,18 +358,23 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			deleteButton.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_ELCL_REMOVE));
 
 			final Button deleteAllButton = new Button(tableButtonsComposite, SWT.PUSH);
-			deleteAllButton.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_ELCL_REMOVEALL));
+			deleteAllButton
+					.setImage(PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_ELCL_REMOVEALL));
 
 			final Button upButton = new Button(tableButtonsComposite, SWT.PUSH);
-			upButton.setImage(DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_ETOOL16_UP));
+			upButton.setImage(
+					DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_ETOOL16_UP));
 
 			final Button downButton = new Button(tableButtonsComposite, SWT.PUSH);
-			downButton.setImage(DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_ETOOL16_DOWN));
+			downButton.setImage(DiceSimulationUiPlugin.getDefault().getImageRegistry()
+					.get(DiceSimulationUiPlugin.IMG_ETOOL16_DOWN));
 
 			valuesText.addFocusListener(new SwitchDefaultFocusListener(addButton));
 
-			addButton.addSelectionListener(new AddButtonSelectionAdapter(variablesSelectionObservable, variablesViewer, valuesViewer, valuesText));
-			deleteButton.addSelectionListener(new DeleteButtonSelectionAdapter(variablesSelectionObservable, valuesViewer));
+			addButton.addSelectionListener(new AddButtonSelectionAdapter(variablesSelectionObservable, variablesViewer,
+					valuesViewer, valuesText));
+			deleteButton
+					.addSelectionListener(new DeleteButtonSelectionAdapter(variablesSelectionObservable, valuesViewer));
 			deleteAllButton.addSelectionListener(new DeleteAllButtonSelectionAdapter(variablesSelectionObservable));
 			upButton.addSelectionListener(new UpButtonSelectionAdapter(variablesSelectionObservable, valuesViewer));
 			downButton.addSelectionListener(new DownButtonSelectionAdapter(variablesSelectionObservable, valuesViewer));
@@ -374,21 +397,29 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			});
 
 			final ControlDecoration valueTextDecoration = new ControlDecoration(valuesText, SWT.TOP | SWT.LEFT);
-			valueTextDecoration.setImage(FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION).getImage());
-			valueTextDecoration
-					.setDescriptionText("Single numeric values add a single entry\n" + "Space-separated values add multiple entries (e.g. '1 2.3 4.56')\n" //$NON-NLS-1$ //$NON-NLS-2$
-							+ "Three values separated by semicolons between square brackets [lower; limit; increment]\n" //$NON-NLS-1$
-							+ "add a range of values (e.g. '[1; 5; 1]' is equivalent to '1 2 3 4 5')"); //$NON-NLS-1$
+			valueTextDecoration.setImage(FieldDecorationRegistry.getDefault()
+					.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION).getImage());
+			valueTextDecoration.setDescriptionText("Single numeric values add a single entry\n" //$NON-NLS-1$
+					+ "Space-separated values add multiple entries (e.g. '1 2.3 4.56')\n" //$NON-NLS-1$
+					+ "Three values separated by semicolons between square brackets [lower; limit; increment]\n" //$NON-NLS-1$
+					+ "add a range of values (e.g. '[1; 5; 1]' is equivalent to '1 2 3 4 5')"); //$NON-NLS-1$
 			valueTextDecoration.setShowOnlyOnFocus(true);
 
 			final NotNullTobooleanStrategy notNullToBooleanStrategy = new NotNullTobooleanStrategy();
-			context.bindValue(WidgetProperties.enabled().observe(valuesText), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			context.bindValue(WidgetProperties.enabled().observe(valuesViewer.getTable()), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			context.bindValue(WidgetProperties.enabled().observe(addButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			context.bindValue(WidgetProperties.enabled().observe(deleteButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			context.bindValue(WidgetProperties.enabled().observe(deleteAllButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			context.bindValue(WidgetProperties.enabled().observe(upButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
-			context.bindValue(WidgetProperties.enabled().observe(downButton), variablesSelectionObservable, null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(valuesText), variablesSelectionObservable, null,
+					notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(valuesViewer.getTable()), variablesSelectionObservable,
+					null, notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(addButton), variablesSelectionObservable, null,
+					notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(deleteButton), variablesSelectionObservable, null,
+					notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(deleteAllButton), variablesSelectionObservable, null,
+					notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(upButton), variablesSelectionObservable, null,
+					notNullToBooleanStrategy);
+			context.bindValue(WidgetProperties.enabled().observe(downButton), variablesSelectionObservable, null,
+					notNullToBooleanStrategy);
 		}
 
 		sashGroup.setLayoutData(sashLayoutData);
@@ -526,7 +557,8 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 		private final TableViewer masterViewer;
 
-		private AddButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer master, TableViewer detail, Text valuesText) {
+		private AddButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer master,
+				TableViewer detail, Text valuesText) {
 			this.valuesText = valuesText;
 			this.variablesSelectionObservable = variablesSelectionObservable;
 			this.detailsViewer = detail;
@@ -557,8 +589,8 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 					newValues.add(value);
 				}
 			} else {
-				Pattern rangePattern = Pattern
-						.compile("^\\[\\s*(?<start>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<limit>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<increment>-?\\d*(?:\\.\\d+)?)\\s*\\]$"); //$NON-NLS-1$
+				Pattern rangePattern = Pattern.compile(
+						"^\\[\\s*(?<start>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<limit>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<increment>-?\\d*(?:\\.\\d+)?)\\s*\\]$"); //$NON-NLS-1$
 				Matcher rangeMatcher = rangePattern.matcher(text);
 				if (rangeMatcher.matches()) {
 					// We perform the calculations using big decimals to avoid
@@ -567,25 +599,47 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 					BigDecimal limit = new BigDecimal(rangeMatcher.group("limit")); //$NON-NLS-1$
 					BigDecimal increment = new BigDecimal(rangeMatcher.group("increment")); //$NON-NLS-1$
 					// @formatter:off
-					if ((increment.compareTo(BigDecimal.ZERO)) != 0) { // increment != 0
-						// We calculate increment and decrement intervals separately since it's 
+					if ((increment.compareTo(BigDecimal.ZERO)) != 0) { // increment
+																		// != 0
+						// We calculate increment and decrement intervals
+						// separately since it's
 						// easier to implement when the upper limit is inclusive
-						if (limit.subtract(start).compareTo(BigDecimal.ZERO) > 0 && increment.compareTo(BigDecimal.ZERO) > 0) { // limit - start > 0 && increment > 0
+						if (limit.subtract(start).compareTo(BigDecimal.ZERO) > 0
+								&& increment.compareTo(BigDecimal.ZERO) > 0) { // limit
+																				// -
+																				// start
+																				// >
+																				// 0
+																				// &&
+																				// increment
+																				// >
+																				// 0
 							// Incrementing intervals
-							for (BigDecimal number = start; number.compareTo(limit) <= 0; number = number.add(increment)) {
+							for (BigDecimal number = start; number.compareTo(limit) <= 0; number = number
+									.add(increment)) {
 								InputVariableValue value = DefinitionFactory.eINSTANCE.createInputVariableValue();
 								value.setValue(number);
 								newValues.add(value);
 							}
-						} else  if (limit.subtract(start).compareTo(BigDecimal.ZERO) < 0 && increment.compareTo(BigDecimal.ZERO) < 0) { // limit - start < 0 && increment < 0
+						} else if (limit.subtract(start).compareTo(BigDecimal.ZERO) < 0
+								&& increment.compareTo(BigDecimal.ZERO) < 0) { // limit
+																				// -
+																				// start
+																				// <
+																				// 0
+																				// &&
+																				// increment
+																				// <
+																				// 0
 							// Decrementing intervals
-							for (BigDecimal number = start; number.compareTo(limit) >= 0; number = number.add(increment)) {
+							for (BigDecimal number = start; number.compareTo(limit) >= 0; number = number
+									.add(increment)) {
 								InputVariableValue value = DefinitionFactory.eINSTANCE.createInputVariableValue();
 								value.setValue(number);
 								newValues.add(value);
 							}
 						}
-					// @formatter:on
+						// @formatter:on
 					}
 				}
 			}
@@ -622,7 +676,8 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		private final IViewerObservableValue variablesSelectionObservable;
 		private final TableViewer valuesViewer;
 
-		private DeleteButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer valuesViewer) {
+		private DeleteButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable,
+				TableViewer valuesViewer) {
 			this.variablesSelectionObservable = variablesSelectionObservable;
 			this.valuesViewer = valuesViewer;
 		}
@@ -666,7 +721,8 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		private final TableViewer valuesViewer;
 		private final IViewerObservableValue variablesSelectionObservable;
 
-		private UpButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer valuesViewer) {
+		private UpButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable,
+				TableViewer valuesViewer) {
 			this.valuesViewer = valuesViewer;
 			this.variablesSelectionObservable = variablesSelectionObservable;
 		}
@@ -699,7 +755,8 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		private final IViewerObservableValue variablesSelectionObservable;
 		private final TableViewer valuesViewer;
 
-		private DownButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable, TableViewer valuesViewer) {
+		private DownButtonSelectionAdapter(IViewerObservableValue variablesSelectionObservable,
+				TableViewer valuesViewer) {
 			this.variablesSelectionObservable = variablesSelectionObservable;
 			this.valuesViewer = valuesViewer;
 		}
@@ -745,7 +802,8 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 		@Override
 		protected Object getValue(Object element) {
-			return EcoreUtil.convertToString(DatatypesPackage.Literals.NUMBER, ((InputVariableValue) element).getValue());
+			return EcoreUtil.convertToString(DatatypesPackage.Literals.NUMBER,
+					((InputVariableValue) element).getValue());
 		}
 
 		@Override

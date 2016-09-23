@@ -1,3 +1,4 @@
+
 package es.unizar.disco.simulation.tests;
 
 import static org.junit.Assert.*;
