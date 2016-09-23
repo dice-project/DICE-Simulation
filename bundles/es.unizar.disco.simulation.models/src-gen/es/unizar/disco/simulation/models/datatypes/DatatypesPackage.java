@@ -171,6 +171,16 @@ public interface DatatypesPackage extends EPackage {
 	int NON_STANDARD_UNITS = 3;
 
 	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.datatypes.ComputableNFPtype <em>Computable NF Ptype</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.datatypes.ComputableNFPtype
+	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getComputableNFPtype()
+	 * @generated
+	 */
+	int COMPUTABLE_NF_PTYPE = 4;
+
+	/**
 	 * The meta object id for the '<em>URI</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,7 +188,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 4;
+	int URI = 5;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -188,7 +198,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 5;
+	int NUMBER = 6;
 
 	/**
 	 * The meta object id for the '<em>IStatus</em>' data type.
@@ -198,7 +208,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getIStatus()
 	 * @generated
 	 */
-	int ISTATUS = 6;
+	int ISTATUS = 7;
 
 	/**
 	 * The meta object id for the '<em>Collection</em>' data type.
@@ -208,7 +218,7 @@ public interface DatatypesPackage extends EPackage {
 	 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getCollection()
 	 * @generated
 	 */
-	int COLLECTION = 7;
+	int COLLECTION = 8;
 
 
 	/**
@@ -294,6 +304,16 @@ public interface DatatypesPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getNonStandardUnits();
+
+	/**
+	 * Returns the meta object for enum '{@link es.unizar.disco.simulation.models.datatypes.ComputableNFPtype <em>Computable NF Ptype</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Computable NF Ptype</em>'.
+	 * @see es.unizar.disco.simulation.models.datatypes.ComputableNFPtype
+	 * @generated
+	 */
+	EEnum getComputableNFPtype();
 
 	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>URI</em>}'.
@@ -434,6 +454,16 @@ public interface DatatypesPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum NON_STANDARD_UNITS = eINSTANCE.getNonStandardUnits();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.datatypes.ComputableNFPtype <em>Computable NF Ptype</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.datatypes.ComputableNFPtype
+		 * @see es.unizar.disco.simulation.models.datatypes.impl.DatatypesPackageImpl#getComputableNFPtype()
+		 * @generated
+		 */
+		EEnum COMPUTABLE_NF_PTYPE = eINSTANCE.getComputableNFPtype();
 
 		/**
 		 * The meta object literal for the '<em>URI</em>' data type.

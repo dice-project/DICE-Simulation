@@ -2,6 +2,7 @@
  */
 package es.unizar.disco.simulation.models.definition;
 
+import es.unizar.disco.simulation.models.datatypes.ComputableNFPtype;
 import es.unizar.disco.simulation.models.datatypes.Resource;
 
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
@@ -42,6 +43,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getActiveConfigurations <em>Active Configurations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#isAutoSync <em>Auto Sync</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getScenarioStereotypes <em>Scenario Stereotypes</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getNfpToCompute <em>Nfp To Compute</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition()
@@ -371,6 +373,35 @@ public interface SimulationDefinition extends EObject {
 	 * @generated
 	 */
 	EList<String> getScenarioStereotypes();
+
+	/**
+	 * Returns the value of the '<em><b>Nfp To Compute</b></em>' attribute.
+	 * The literals are from the enumeration {@link es.unizar.disco.simulation.models.datatypes.ComputableNFPtype}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nfp To Compute</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nfp To Compute</em>' attribute.
+	 * @see es.unizar.disco.simulation.models.datatypes.ComputableNFPtype
+	 * @see #setNfpToCompute(ComputableNFPtype)
+	 * @see es.unizar.disco.simulation.models.definition.DefinitionPackage#getSimulationDefinition_NfpToCompute()
+	 * @model
+	 * @generated
+	 */
+	ComputableNFPtype getNfpToCompute();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getNfpToCompute <em>Nfp To Compute</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Nfp To Compute</em>' attribute.
+	 * @see es.unizar.disco.simulation.models.datatypes.ComputableNFPtype
+	 * @see #getNfpToCompute()
+	 * @generated
+	 */
+	void setNfpToCompute(ComputableNFPtype value);
 
 	/**
 	 * <!-- begin-user-doc -->

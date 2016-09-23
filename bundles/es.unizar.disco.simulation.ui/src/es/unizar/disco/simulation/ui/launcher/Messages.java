@@ -7,6 +7,7 @@ public class Messages extends NLS {
 	public static String MainLaunchConfigurationTab_browseLabel;
 	public static String MainLaunchConfigurationTab_mainTabTitle;
 	public static String MainLaunchConfigurationTab_modelLabel;
+	public static String MainLaunchConfigurationTab_NFPtoCalculate;
 	public static String SimulationLaunchShortcut_unexpectedArgError;
 	public static String SimulationLaunchShortcut_unknownModeError;
 

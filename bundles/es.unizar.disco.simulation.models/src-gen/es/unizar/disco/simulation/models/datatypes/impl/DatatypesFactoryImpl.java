@@ -80,6 +80,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 				return createSimulationStatusFromString(eDataType, initialValue);
 			case DatatypesPackage.NON_STANDARD_UNITS:
 				return createNonStandardUnitsFromString(eDataType, initialValue);
+			case DatatypesPackage.COMPUTABLE_NF_PTYPE:
+				return createComputableNFPtypeFromString(eDataType, initialValue);
 			case DatatypesPackage.URI:
 				return createURIFromString(eDataType, initialValue);
 			case DatatypesPackage.NUMBER:
@@ -103,6 +105,8 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 				return convertSimulationStatusToString(eDataType, instanceValue);
 			case DatatypesPackage.NON_STANDARD_UNITS:
 				return convertNonStandardUnitsToString(eDataType, instanceValue);
+			case DatatypesPackage.COMPUTABLE_NF_PTYPE:
+				return convertComputableNFPtypeToString(eDataType, instanceValue);
 			case DatatypesPackage.URI:
 				return convertURIToString(eDataType, instanceValue);
 			case DatatypesPackage.NUMBER:
@@ -171,6 +175,26 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 * @generated
 	 */
 	public String convertNonStandardUnitsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComputableNFPtype createComputableNFPtypeFromString(EDataType eDataType, String initialValue) {
+		ComputableNFPtype result = ComputableNFPtype.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertComputableNFPtypeToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -43,4 +43,8 @@
     <eLiterals name="tick" value="2"/>
     <eLiterals name="events_per_tick" value="3"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ComputableNFPtype">
+    <eLiterals name="PERFORMANCE"/>
+    <eLiterals name="RELIABILITY" value="1"/>
+  </eClassifiers>
 </ecore:EPackage>

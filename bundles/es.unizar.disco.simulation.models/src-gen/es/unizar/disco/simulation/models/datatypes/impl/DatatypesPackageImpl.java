@@ -2,6 +2,7 @@
  */
 package es.unizar.disco.simulation.models.datatypes.impl;
 
+import es.unizar.disco.simulation.models.datatypes.ComputableNFPtype;
 import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
 import es.unizar.disco.simulation.models.datatypes.NonStandardUnits;
@@ -83,6 +84,13 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * @generated
 	 */
 	private EEnum nonStandardUnitsEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum computableNFPtypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -273,6 +281,15 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getComputableNFPtype() {
+		return computableNFPtypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getURI() {
 		return uriEDataType;
 	}
@@ -343,6 +360,7 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		// Create enums
 		simulationStatusEEnum = createEEnum(SIMULATION_STATUS);
 		nonStandardUnitsEEnum = createEEnum(NON_STANDARD_UNITS);
+		computableNFPtypeEEnum = createEEnum(COMPUTABLE_NF_PTYPE);
 
 		// Create data types
 		uriEDataType = createEDataType(URI);
@@ -404,6 +422,10 @@ public class DatatypesPackageImpl extends EPackageImpl implements DatatypesPacka
 		addEEnumLiteral(nonStandardUnitsEEnum, NonStandardUnits.PERCENTAGE);
 		addEEnumLiteral(nonStandardUnitsEEnum, NonStandardUnits.TICK);
 		addEEnumLiteral(nonStandardUnitsEEnum, NonStandardUnits.EVENTS_PER_TICK);
+
+		initEEnum(computableNFPtypeEEnum, ComputableNFPtype.class, "ComputableNFPtype");
+		addEEnumLiteral(computableNFPtypeEEnum, ComputableNFPtype.PERFORMANCE);
+		addEEnumLiteral(computableNFPtypeEEnum, ComputableNFPtype.RELIABILITY);
 
 		// Initialize data types
 		initEDataType(uriEDataType, org.eclipse.emf.common.util.URI.class, "URI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

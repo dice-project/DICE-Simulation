@@ -15,46 +15,6 @@
   <foreignModel>wnsim.ecore</foreignModel>
   <genPackages prefix="Datatypes" basePackage="es.unizar.disco.simulation.models"
       disposableProviderFactory="true" ecorePackage="datatypes.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="datatypes.ecore#//Unit">
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/unspecified"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/none"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/s"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/tick"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/ms"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/us"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/min"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/hrs"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/day"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Hz"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KHz"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/MHz"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/GHz"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/rpm"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/W"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mW"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KW"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/bit"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Byte"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KB"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/MB"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/GB"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/b_per_s"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Kb_per_s"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Mb_per_s"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/J"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KJ"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/Wh"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/KWh"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mWh"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/m"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/cm"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mm"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mm2"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/um2"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/g"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/mg"/>
-      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//Unit/kg"/>
-    </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="datatypes.ecore#//SimulationStatus">
       <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/unknown"/>
       <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/running"/>
@@ -62,6 +22,16 @@
       <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/killed"/>
       <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/waiting"/>
       <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//SimulationStatus/failed"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="datatypes.ecore#//NonStandardUnits">
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//NonStandardUnits/unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//NonStandardUnits/percentage"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//NonStandardUnits/tick"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//NonStandardUnits/events_per_tick"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="datatypes.ecore#//ComputableNFPtype">
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//ComputableNFPtype/PERFORMANCE"/>
+      <genEnumLiterals ecoreEnumLiteral="datatypes.ecore#//ComputableNFPtype/RELIABILITY"/>
     </genEnums>
     <genDataTypes ecoreDataType="datatypes.ecore#//URI"/>
     <genDataTypes ecoreDataType="datatypes.ecore#//Number"/>
@@ -99,6 +69,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/possibleConfigurations"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference definition.ecore#//SimulationDefinition/activeConfigurations"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/autoSync"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/scenarioStereotypes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute definition.ecore#//SimulationDefinition/nfpToCompute"/>
       <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/getVariables"/>
       <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/getVariablesMap"/>
       <genOperations ecoreOperation="definition.ecore#//SimulationDefinition/getInputVariablesMap"/>
@@ -177,11 +149,12 @@
       <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference measures.ecore#//DomainMeasure/definition"/>
     </genClasses>
-    <genClasses ecoreClass="measures.ecore#//MeasureConverter">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/to"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measures.ecore#//MeasureConverter/from"/>
-      <genOperations ecoreOperation="measures.ecore#//MeasureConverter/convert">
-        <genParameters ecoreParameter="measures.ecore#//MeasureConverter/convert/info"/>
+    <genClasses image="false" ecoreClass="measures.ecore#//MeasureCalculator">
+      <genOperations ecoreOperation="measures.ecore#//MeasureCalculator/calculate">
+        <genParameters ecoreParameter="measures.ecore#//MeasureCalculator/calculate/domainElement"/>
+        <genParameters ecoreParameter="measures.ecore#//MeasureCalculator/calculate/definition"/>
+        <genParameters ecoreParameter="measures.ecore#//MeasureCalculator/calculate/toolResult"/>
+        <genParameters ecoreParameter="measures.ecore#//MeasureCalculator/calculate/traceSet"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="measures.ecore#//DomainMeasureDefinition">
@@ -239,6 +212,7 @@
       <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/conf_level"/>
       <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/seed"/>
       <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/start"/>
+      <genEnumLiterals ecoreEnumLiteral="wnsim.ecore#//SimulationParameters/binary_file_path"/>
     </genEnums>
     <genClasses ecoreClass="wnsim.ecore#//WnsimResult"/>
     <genClasses image="false" ecoreClass="wnsim.ecore#//WnsimElementInfo"/>

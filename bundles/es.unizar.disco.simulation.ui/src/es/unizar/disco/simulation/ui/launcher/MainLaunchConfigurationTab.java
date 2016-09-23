@@ -14,6 +14,7 @@ import org.eclipse.core.databinding.observable.list.IListChangeListener;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.ListChangeEvent;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.SelectObservableValue;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -78,6 +79,7 @@ import es.unizar.disco.core.collections.AlphanumComparator;
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.dialogs.FileSelectionDialog;
 import es.unizar.disco.simulation.launcher.SimulationDefinitionConfigurationHandler;
+import es.unizar.disco.simulation.models.datatypes.ComputableNFPtype;
 import es.unizar.disco.simulation.models.datatypes.DatatypesPackage;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
@@ -130,11 +132,41 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 
 		sashGroup.setLayoutData(sashLayoutData);
 		createScenariosGroup(sashGroup);
+		
+		//Differentiate between performance and reliability
+//		createNFPselectionGroup(sashGroup);
+		//TODO: show the minimum set of variables that are of interest for the NFP to calculate
 		createVariableGroup(sashGroup);
 		sashGroup.setWeights(new int[] { 1, 2 });
 
 		setControl(topComposite);
 	}
+	
+	private void createNFPselectionGroup(Composite composite) {
+		final Group group = new Group(composite, SWT.SHADOW_ETCHED_IN);
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+
+		group.setLayout(new GridLayout(1, false));
+		group.setText(Messages.MainLaunchConfigurationTab_NFPtoCalculate);
+
+		final Button perfOption = new Button(group, SWT.RADIO);
+		perfOption.setText("Performance");
+		final Button reliabOption = new Button(group,SWT.RADIO);
+		reliabOption.setText("Reliability");
+		
+		SelectObservableValue selectedButtonObservable = new SelectObservableValue();
+		selectedButtonObservable.addOption(ComputableNFPtype.PERFORMANCE, WidgetProperties.selection().observe(perfOption));
+		selectedButtonObservable.addOption(ComputableNFPtype.RELIABILITY, WidgetProperties.selection().observe(reliabOption));
+		
+		IObservableValue nfpSelection = EMFProperties.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__NFP_TO_COMPUTE).observe(simulationDefinition);
+
+		context.bindValue(selectedButtonObservable, nfpSelection, new UriToStringStrategy(), new StringToUriStrategy());
+		
+		
+		
+
+	}
+	
 
 	private void createModelGroup(Composite topComposite) {
 		final Group group = new Group(topComposite, SWT.NONE);
@@ -184,7 +216,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		group.setLayout(new GridLayout(1, false));
-		group.setText("Active scenario");
+		group.setText("Active scenario"); //$NON-NLS-1$
 
 		final Composite tableComposite = new Composite(group, SWT.NONE);
 		tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -228,7 +260,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		{
 			final Group inputGroup = new Group(sashGroup, SWT.NONE);
 			inputGroup.setLayout(new GridLayout(1, true));
-			inputGroup.setText("Variables");
+			inputGroup.setText("Variables"); //$NON-NLS-1$
 
 			final Composite tableComposite = new Composite(inputGroup, SWT.NONE);
 			tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
@@ -266,7 +298,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			GridLayout valuesGroupLayout = new GridLayout(2, false);
 			valuesGroupLayout.verticalSpacing = 0;
 			valuesGroup.setLayout(valuesGroupLayout);
-			valuesGroup.setText("Values");
+			valuesGroup.setText("Values"); //$NON-NLS-1$
 
 			final Text valuesText = new Text(valuesGroup, SWT.BORDER);
 			valuesText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
@@ -344,9 +376,9 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			final ControlDecoration valueTextDecoration = new ControlDecoration(valuesText, SWT.TOP | SWT.LEFT);
 			valueTextDecoration.setImage(FieldDecorationRegistry.getDefault().getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION).getImage());
 			valueTextDecoration
-					.setDescriptionText("Single numeric values add a single entry\n" + "Space-separated values add multiple entries (e.g. '1 2.3 4.56')\n"
-							+ "Three values separated by semicolons between square brackets [lower; limit; increment]\n"
-							+ "add a range of values (e.g. '[1; 5; 1]' is equivalent to '1 2 3 4 5')");
+					.setDescriptionText("Single numeric values add a single entry\n" + "Space-separated values add multiple entries (e.g. '1 2.3 4.56')\n" //$NON-NLS-1$ //$NON-NLS-2$
+							+ "Three values separated by semicolons between square brackets [lower; limit; increment]\n" //$NON-NLS-1$
+							+ "add a range of values (e.g. '[1; 5; 1]' is equivalent to '1 2 3 4 5')"); //$NON-NLS-1$
 			valueTextDecoration.setShowOnlyOnFocus(true);
 
 			final NotNullTobooleanStrategy notNullToBooleanStrategy = new NotNullTobooleanStrategy();
@@ -401,15 +433,15 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 	@Override
 	public boolean isValid(ILaunchConfiguration launchConfig) {
 		if (simulationDefinition.getDomainResource().getUri() == null) {
-			setErrorMessage("A domain UML model must be selected");
+			setErrorMessage("A domain UML model must be selected"); //$NON-NLS-1$
 			return false;
 		}
 		if (simulationDefinition.getScenarios().isEmpty()) {
-			setErrorMessage("The selected model does not declare any Scenarios");
+			setErrorMessage("The selected model does not declare any Scenarios"); //$NON-NLS-1$
 			return false;
 		}
 		if (simulationDefinition.getActiveScenario() == null) {
-			setErrorMessage("An active scenario must be selected");
+			setErrorMessage("An active scenario must be selected"); //$NON-NLS-1$
 			return false;
 		}
 		for (InputVariable inputVariable : simulationDefinition.getInputVariables()) {
@@ -514,10 +546,10 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 			InputVariable variable = (InputVariable) variablesSelectionObservable.getValue();
 			String text = valuesText.getText().trim();
 
-			Pattern listPattern = Pattern.compile("^(-?\\d*(\\.\\d+)?\\s*)+$");
+			Pattern listPattern = Pattern.compile("^(-?\\d*(\\.\\d+)?\\s*)+$"); //$NON-NLS-1$
 			Matcher listMatcher = listPattern.matcher(text);
 			if (listMatcher.matches()) {
-				StringTokenizer tokenizer = new StringTokenizer(text, " ");
+				StringTokenizer tokenizer = new StringTokenizer(text, " "); //$NON-NLS-1$
 				while (tokenizer.hasMoreTokens()) {
 					String token = tokenizer.nextToken();
 					InputVariableValue value = DefinitionFactory.eINSTANCE.createInputVariableValue();
@@ -526,14 +558,14 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 				}
 			} else {
 				Pattern rangePattern = Pattern
-						.compile("^\\[\\s*(?<start>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<limit>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<increment>-?\\d*(?:\\.\\d+)?)\\s*\\]$");
+						.compile("^\\[\\s*(?<start>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<limit>-?\\d*(?:\\.\\d+)?)\\s*;\\s*(?<increment>-?\\d*(?:\\.\\d+)?)\\s*\\]$"); //$NON-NLS-1$
 				Matcher rangeMatcher = rangePattern.matcher(text);
 				if (rangeMatcher.matches()) {
 					// We perform the calculations using big decimals to avoid
 					// rounding issues
-					BigDecimal start = new BigDecimal(rangeMatcher.group("start"));
-					BigDecimal limit = new BigDecimal(rangeMatcher.group("limit"));
-					BigDecimal increment = new BigDecimal(rangeMatcher.group("increment"));
+					BigDecimal start = new BigDecimal(rangeMatcher.group("start")); //$NON-NLS-1$
+					BigDecimal limit = new BigDecimal(rangeMatcher.group("limit")); //$NON-NLS-1$
+					BigDecimal increment = new BigDecimal(rangeMatcher.group("increment")); //$NON-NLS-1$
 					// @formatter:off
 					if ((increment.compareTo(BigDecimal.ZERO)) != 0) { // increment != 0
 						// We calculate increment and decrement intervals separately since it's 
@@ -561,9 +593,9 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 				boolean doit = true;
 				if (newValues.size() > 10) {
 					MessageBox dialog = new MessageBox(getShell(), SWT.ICON_QUESTION | SWT.OK | SWT.CANCEL);
-					dialog.setText("Continue");
+					dialog.setText("Continue"); //$NON-NLS-1$
 					dialog.setMessage(MessageFormat.format(
-							"You are about to add {0} new values. Adding too many variable values may take some time and, in extreme cases, may even crash your IDE.\nAre you sure you want to continue?",
+							"You are about to add {0} new values. Adding too many variable values may take some time and, in extreme cases, may even crash your IDE.\nAre you sure you want to continue?", //$NON-NLS-1$
 							newValues.size()));
 					if (dialog.open() == SWT.CANCEL) {
 						doit = false;
@@ -571,7 +603,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 				}
 				if (doit) {
 					variable.getValues().addAll(newValues);
-					valuesText.setText("");
+					valuesText.setText(""); //$NON-NLS-1$
 					detailsViewer.setSelection(new StructuredSelection(newValues));
 				}
 			}

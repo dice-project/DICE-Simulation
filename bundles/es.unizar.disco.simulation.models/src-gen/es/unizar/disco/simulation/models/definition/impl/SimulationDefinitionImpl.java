@@ -2,6 +2,7 @@
  */
 package es.unizar.disco.simulation.models.definition.impl;
 
+import es.unizar.disco.simulation.models.datatypes.ComputableNFPtype;
 import es.unizar.disco.simulation.models.datatypes.Resource;
 
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
@@ -71,6 +72,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getActiveConfigurations <em>Active Configurations</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#isAutoSync <em>Auto Sync</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getScenarioStereotypes <em>Scenario Stereotypes</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.definition.impl.SimulationDefinitionImpl#getNfpToCompute <em>Nfp To Compute</em>}</li>
  * </ul>
  *
  * @generated
@@ -275,6 +277,26 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * @ordered
 	 */
 	protected EList<String> scenarioStereotypes;
+
+	/**
+	 * The default value of the '{@link #getNfpToCompute() <em>Nfp To Compute</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNfpToCompute()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ComputableNFPtype NFP_TO_COMPUTE_EDEFAULT = ComputableNFPtype.PERFORMANCE;
+
+	/**
+	 * The cached value of the '{@link #getNfpToCompute() <em>Nfp To Compute</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNfpToCompute()
+	 * @generated
+	 * @ordered
+	 */
+	protected ComputableNFPtype nfpToCompute = NFP_TO_COMPUTE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -585,6 +607,27 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ComputableNFPtype getNfpToCompute() {
+		return nfpToCompute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNfpToCompute(ComputableNFPtype newNfpToCompute) {
+		ComputableNFPtype oldNfpToCompute = nfpToCompute;
+		nfpToCompute = newNfpToCompute == null ? NFP_TO_COMPUTE_EDEFAULT : newNfpToCompute;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, DefinitionPackage.SIMULATION_DEFINITION__NFP_TO_COMPUTE, oldNfpToCompute, nfpToCompute));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Collection<Variable> getVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -753,6 +796,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return isAutoSync();
 			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
 				return getScenarioStereotypes();
+			case DefinitionPackage.SIMULATION_DEFINITION__NFP_TO_COMPUTE:
+				return getNfpToCompute();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -823,6 +868,9 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				getScenarioStereotypes().clear();
 				getScenarioStereotypes().addAll((Collection<? extends String>)newValue);
 				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__NFP_TO_COMPUTE:
+				setNfpToCompute((ComputableNFPtype)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -883,6 +931,9 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
 				getScenarioStereotypes().clear();
 				return;
+			case DefinitionPackage.SIMULATION_DEFINITION__NFP_TO_COMPUTE:
+				setNfpToCompute(NFP_TO_COMPUTE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -927,6 +978,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 				return autoSync != AUTO_SYNC_EDEFAULT;
 			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
 				return scenarioStereotypes != null && !scenarioStereotypes.isEmpty();
+			case DefinitionPackage.SIMULATION_DEFINITION__NFP_TO_COMPUTE:
+				return nfpToCompute != NFP_TO_COMPUTE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -983,6 +1036,8 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 		result.append(autoSync);
 		result.append(", scenarioStereotypes: ");
 		result.append(scenarioStereotypes);
+		result.append(", nfpToCompute: ");
+		result.append(nfpToCompute);
 		result.append(')');
 		return result.toString();
 	}
