@@ -19,11 +19,12 @@ import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 
 public class CustomSimulationInvocation extends SimulationInvocationImpl implements SimulationInvocation {
 
-	private static final String EXTENSION_ID = "es.unizar.disco.simulation.models.analyzable_resource_builder";
-	private static final String BUILDER = "builder";
-	private static final String PRIORITY = "priority";
-	private static final String METACLASS = "metaclass";
-	private static final String SCENARIO = "scenario";
+	private static final String EXTENSION_ID = Messages.CustomSimulationInvocation_nameOfExtPoints;
+	private static final String BUILDER = Messages.CustomSimulationInvocation_extPoint_builder;
+	private static final String PRIORITY = Messages.CustomSimulationInvocation_extPoint_priority;
+	private static final String METACLASS = Messages.CustomSimulationInvocation_extPoint_metaclass;
+	private static final String SCENARIO = Messages.CustomSimulationInvocation_extPoint_scenario;
+	private static final String ANALYZABLE_PROPERTY = Messages.CustomSimulationInvocation_extPoint_analyzableProperty;
 
 	@Override
 	public String getIdentifier() {
@@ -48,10 +49,11 @@ public class CustomSimulationInvocation extends SimulationInvocationImpl impleme
 	public IStatus buildAnalyzableModel() {
 		IAnalyzableModelBuilder builder = findAnalyzableResourceBuilder();
 		if (builder == null) {
-			throw new RuntimeException(
-					MessageFormat.format("Unable to build a proper IAnalizableResourceBuilder for ''{0}''", getDefinition().getDomainResource().getUri()));
+			throw new RuntimeException(MessageFormat.format(Messages.CustomSimulationInvocation_builderNotFound,
+					getDefinition().getDomainResource().getUri()));
 		}
-		ModelResult result = builder.createAnalyzableModel((Element) getDefinition().getActiveScenario(), getVariableConfiguration().toPrimitiveAssignments());
+		ModelResult result = builder.createAnalyzableModel((Element) getDefinition().getActiveScenario(),
+				getVariableConfiguration().toPrimitiveAssignments());
 		IStatus status = result.getStatus();
 		if (status.getSeverity() != IStatus.ERROR) {
 			super.getAnalyzableModel().addAll(result.getModel());
@@ -61,7 +63,8 @@ public class CustomSimulationInvocation extends SimulationInvocationImpl impleme
 	}
 
 	private IAnalyzableModelBuilder findAnalyzableResourceBuilder() {
-		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSION_ID);
+		IConfigurationElement[] configElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(EXTENSION_ID);
 		int oldPriority = Integer.MIN_VALUE;
 		IAnalyzableModelBuilder priorityBuilder = null;
 		for (IConfigurationElement configElement : configElements) {
@@ -69,9 +72,13 @@ public class CustomSimulationInvocation extends SimulationInvocationImpl impleme
 			if (priority > oldPriority) {
 				String metaclass = configElement.getAttribute(METACLASS);
 				String stereotypeName = configElement.getAttribute(SCENARIO);
+				String computableNFPofextension = configElement.getAttribute(ANALYZABLE_PROPERTY);
 				Element scenario = (Element) getDefinition().getActiveScenario();
+				String propertyTypeToCompute = getDefinition().getNfpToCompute().toString();
 				Stereotype stereotype = scenario.getApplicableStereotype(stereotypeName);
-				if (StringUtils.equals(metaclass, scenario.eClass().getInstanceTypeName()) && scenario.isStereotypeApplied(stereotype)) {
+				if (StringUtils.equals(metaclass, scenario.eClass().getInstanceTypeName())
+						&& scenario.isStereotypeApplied(stereotype)
+						&& propertyTypeToCompute.equalsIgnoreCase(computableNFPofextension)) {
 					oldPriority = priority;
 					try {
 						priorityBuilder = (IAnalyzableModelBuilder) configElement.createExecutableExtension(BUILDER);

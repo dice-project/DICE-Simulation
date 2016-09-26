@@ -35,6 +35,13 @@ helper UML::Element::getGaStep() : UML::Stereotype {
 	return null;	
 }
 
+helper UML::Element::getDaStep() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DAM::DAM_UML_Extensions::System::Core::DaStep"))) { 
+		return self.getAppliedStereotype("DAM::DAM_UML_Extensions::System::Core::DaStep");
+	};
+	return null;	
+}
+
 helper UML::Element::getGaCommStep() : UML::Stereotype {
 	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep");

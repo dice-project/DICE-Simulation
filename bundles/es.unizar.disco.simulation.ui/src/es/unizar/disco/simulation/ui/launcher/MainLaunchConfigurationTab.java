@@ -152,9 +152,9 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		group.setText(Messages.MainLaunchConfigurationTab_NFPtoCalculate);
 
 		final Button perfOption = new Button(group, SWT.RADIO);
-		perfOption.setText("Performance");
+		perfOption.setText(Messages.MainLaunchConfigurationTab_Performance);
 		final Button reliabOption = new Button(group, SWT.RADIO);
-		reliabOption.setText("Reliability");
+		reliabOption.setText(Messages.MainLaunchConfigurationTab_Reliability);
 
 		SelectObservableValue selectedButtonObservable = new SelectObservableValue();
 		selectedButtonObservable.addOption(ComputableNFPtype.PERFORMANCE,
