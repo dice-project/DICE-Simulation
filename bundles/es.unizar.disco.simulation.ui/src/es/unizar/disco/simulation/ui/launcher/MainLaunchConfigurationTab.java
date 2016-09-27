@@ -104,7 +104,8 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 					|| notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__ACTIVE_SCENARIO
 					|| notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__INPUT_VARIABLES
 					|| notification.getFeature() == DefinitionPackage.Literals.INPUT_VARIABLE__VALUES
-					|| notification.getFeature() == DefinitionPackage.Literals.INPUT_VARIABLE_VALUE__VALUE) {
+					|| notification.getFeature() == DefinitionPackage.Literals.INPUT_VARIABLE_VALUE__VALUE
+					|| notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__NFP_TO_COMPUTE) {
 				if (MainLaunchConfigurationTab.this.isActive()) {
 					updateLaunchConfigurationDialog();
 				}
@@ -165,12 +166,60 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		IObservableValue nfpSelection = EMFProperties
 				.value(DefinitionPackage.Literals.SIMULATION_DEFINITION__NFP_TO_COMPUTE).observe(simulationDefinition);
 
-		context.bindValue(selectedButtonObservable, nfpSelection, new UpdateValueStrategy() {
+		context.bindValue(selectedButtonObservable, nfpSelection,
+				new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE) {
+					@Override
+					public Object convert(Object value) {
+						DiceLogger.logInfo(DiceSimulationUiPlugin.getDefault(),"Current value in the model is: "
+								+ DefinitionPackage.eINSTANCE.getSimulationDefinition_NfpToCompute().toString()
+								+ " and the simulationDefinion from package is " + DefinitionPackage.eINSTANCE.getSimulationDefinition().toString() + 
+								" and the simulationDefinitionVAriable is " + simulationDefinition.toString());
+						return value;
+					}
+				}, new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE) {
+					@Override
+					public Object convert(Object value) {
+						DiceLogger.logInfo(DiceSimulationUiPlugin.getDefault(),"Current value in the model is: "
+								+ DefinitionPackage.eINSTANCE.getSimulationDefinition_NfpToCompute().toString()
+								+ " and the simulationDefinion from package is " + DefinitionPackage.eINSTANCE.getSimulationDefinition().toString() + 
+								" and the simulationDefinitionVAriable is " + simulationDefinition.toString());
+						return value;
+					}
+				});
+/*
+		// TESTS with labels
+		Label labelFromRadio = new Label(group, SWT.NONE);
+		labelFromRadio.setText("                          ");
+		ISWTObservableValue labelFromRadioObservable = WidgetProperties.text().observe(labelFromRadio);
+
+		Label labelFromModel = new Label(group, SWT.NONE);
+		labelFromModel.setText("                                         ");
+		ISWTObservableValue labelFromModelObservable = WidgetProperties.text().observe(labelFromModel);
+
+		context.bindValue(selectedButtonObservable, labelFromRadioObservable,
+				new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE) {
+					@Override
+					public Object convert(Object value) {
+						System.out.println("converting object " + value.toString() + " to 'Selected Option: ...");
+						return "Selected Option: " + ((ComputableNFPtype) value).getLiteral();
+					}
+				}, null);
+
+		context.bindValue(labelFromModelObservable, nfpSelection, new UpdateValueStrategy() {
 			@Override
 			public Object convert(Object value) {
-				return ComputableNFPtype.get(((String) value).toUpperCase());
+				return ComputableNFPtype.get(((String) value));
 			}
-		}, null);
+		}, new UpdateValueStrategy() {
+			@Override
+			public Object convert(Object value) {
+				System.out.println(" Current value in the model for the NFP to compute is:"
+						+ simulationDefinition.getNfpToCompute().toString());
+				return "Selected Option: " + ((ComputableNFPtype) value).getLiteral();
+			}
+		});
+
+*/
 
 	}
 
@@ -459,6 +508,7 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		handler.saveActiveScenario(configuration);
 		handler.saveInputVariables(configuration);
 		handler.saveOutputVariables(configuration);
+		handler.saveNFPtoCompute(configuration);
 	}
 
 	@Override

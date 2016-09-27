@@ -18,6 +18,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import es.unizar.disco.core.collections.Function;
 import es.unizar.disco.core.collections.UnmodifiableTransformedMap;
+import es.unizar.disco.core.logger.DiceLogger;
+import es.unizar.disco.simulation.DiceSimulationPlugin;
+import es.unizar.disco.simulation.models.datatypes.ComputableNFPtype;
 import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.definition.DefinitionFactory;
 import es.unizar.disco.simulation.models.definition.InputVariable;
@@ -47,6 +50,7 @@ public final class SimulationDefinitionConfigurationHandler {
 
 	public static final String SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS = "SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS"; //$NON-NLS-1$
 
+	public static final String SIMULATION_DEFINITION__NFP_TO_COMPUTE = "SIMULATION_DEFINITION__NFP_TO_COMPUTE";
 	private final SimulationDefinition definition;
 
 	private SimulationDefinitionConfigurationHandler(SimulationDefinition definition) {
@@ -61,7 +65,8 @@ public final class SimulationDefinitionConfigurationHandler {
 	}
 
 	public void initializeResourceUri(ILaunchConfiguration configuration) throws CoreException {
-		URI domainResourceUri = URI.createURI(configuration.getAttribute(SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, ""));
+		URI domainResourceUri = URI
+				.createURI(configuration.getAttribute(SIMULATION_DEFINITION__DOMAIN_RESOURCE_URI, ""));
 		if (!domainResourceUri.equals(definition.getDomainResource().getUri())) {
 			definition.getDomainResource().setUri(domainResourceUri);
 		}
@@ -73,7 +78,8 @@ public final class SimulationDefinitionConfigurationHandler {
 	}
 
 	public void initializeInputVariables(ILaunchConfiguration configuration) throws CoreException {
-		Map<String, String> inputVarsInfo = configuration.getAttribute(SIMULATION_DEFINITION__INPUT_VARIABLES, new HashMap<String, String>());
+		Map<String, String> inputVarsInfo = configuration.getAttribute(SIMULATION_DEFINITION__INPUT_VARIABLES,
+				new HashMap<String, String>());
 		for (Entry<String, String> entry : inputVarsInfo.entrySet()) {
 			String varName = entry.getKey();
 			if (definition.getInputVariablesMap().get(varName) == null) {
@@ -86,14 +92,15 @@ public final class SimulationDefinitionConfigurationHandler {
 	}
 
 	public void saveInputVariables(ILaunchConfigurationWorkingCopy configuration) {
-		Map<String, String> inputVarsInfo = new UnmodifiableTransformedMap<String, InputVariable, String>(definition.getInputVariablesMap(),
-				new InputVariableToSerializedValues());
+		Map<String, String> inputVarsInfo = new UnmodifiableTransformedMap<String, InputVariable, String>(
+				definition.getInputVariablesMap(), new InputVariableToSerializedValues());
 		configuration.setAttribute(SIMULATION_DEFINITION__INPUT_VARIABLES, inputVarsInfo);
 
 	}
 
 	public void initializeOutputVariables(ILaunchConfiguration configuration) throws CoreException {
-		Map<String, String> outputVarsInfo = configuration.getAttribute(SIMULATION_DEFINITION__OUTPUT_VARIABLES, new HashMap<String, String>());
+		Map<String, String> outputVarsInfo = configuration.getAttribute(SIMULATION_DEFINITION__OUTPUT_VARIABLES,
+				new HashMap<String, String>());
 		for (Entry<String, String> entry : outputVarsInfo.entrySet()) {
 			String varName = entry.getKey();
 			if (definition.getOutputVariablesMap().get(varName) == null) {
@@ -105,15 +112,16 @@ public final class SimulationDefinitionConfigurationHandler {
 	}
 
 	public void saveOutputVariables(ILaunchConfigurationWorkingCopy configuration) {
-		Map<String, String> outputVarsInfo = new UnmodifiableTransformedMap<String, OutputVariable, String>(definition.getOutputVariablesMap(),
-				new OutputVariableToEmptyString());
+		Map<String, String> outputVarsInfo = new UnmodifiableTransformedMap<String, OutputVariable, String>(
+				definition.getOutputVariablesMap(), new OutputVariableToEmptyString());
 		configuration.setAttribute(SIMULATION_DEFINITION__OUTPUT_VARIABLES, outputVarsInfo);
 
 	}
 
 	public void initializeActiveScenario(ILaunchConfiguration configuration) throws CoreException {
 		URI activeScenarioUri = URI.createURI(configuration.getAttribute(SIMULATION_DEFINITION__ACTIVE_SCENARIO, ""));
-		if (definition.getActiveScenario() == null || EcoreUtil.getURI(definition.getActiveScenario()).equals(activeScenarioUri)) {
+		if (definition.getActiveScenario() == null
+				|| EcoreUtil.getURI(definition.getActiveScenario()).equals(activeScenarioUri)) {
 			for (EObject scenario : definition.getScenarios()) {
 				if (EcoreUtil.getURI(scenario).equals(activeScenarioUri)) {
 					definition.setActiveScenario(scenario);
@@ -123,13 +131,15 @@ public final class SimulationDefinitionConfigurationHandler {
 	}
 
 	public void saveActiveScenario(ILaunchConfigurationWorkingCopy configuration) {
-		String activeScenarioUri = defaultToString(definition.getActiveScenario() != null ? EcoreUtil.getURI(definition.getActiveScenario()) : null);
+		String activeScenarioUri = defaultToString(
+				definition.getActiveScenario() != null ? EcoreUtil.getURI(definition.getActiveScenario()) : null);
 		configuration.setAttribute(SIMULATION_DEFINITION__ACTIVE_SCENARIO, activeScenarioUri);
 
 	}
 
 	public void initializeSelectedMeasures(ILaunchConfiguration configuration) throws CoreException {
-		Set<String> selectedMeasures = configuration.getAttribute(SIMULATION_DEFINITION__MEASURES_TO_COMPUTE, (Set<String>) null);
+		Set<String> selectedMeasures = configuration.getAttribute(SIMULATION_DEFINITION__MEASURES_TO_COMPUTE,
+				(Set<String>) null);
 		if (selectedMeasures != null) {
 			for (DomainMeasureDefinition domainMeasure : definition.getDeclaredMeasures()) {
 				if (selectedMeasures.contains(EcoreUtil.getURI(domainMeasure).toString())) {
@@ -154,7 +164,8 @@ public final class SimulationDefinitionConfigurationHandler {
 	}
 
 	public void initializeActiveConfigurations(ILaunchConfiguration configuration) throws CoreException {
-		Set<String> activeConfigurations = configuration.getAttribute(SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS, (Set<String>) null);
+		Set<String> activeConfigurations = configuration.getAttribute(SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS,
+				(Set<String>) null);
 		if (activeConfigurations != null) {
 			for (VariableConfiguration possibleConfiguration : definition.getPossibleConfigurations()) {
 				if (activeConfigurations.contains(EcoreUtil.getURI(possibleConfiguration).toString())) {
@@ -186,7 +197,8 @@ public final class SimulationDefinitionConfigurationHandler {
 	}
 
 	public void initializeParameters(ILaunchConfiguration configuration) throws CoreException {
-		Map<String, String> parameters = configuration.getAttribute(SIMULATION_DEFINITION__PARAMETERS, new HashMap<String, String>());
+		Map<String, String> parameters = configuration.getAttribute(SIMULATION_DEFINITION__PARAMETERS,
+				new HashMap<String, String>());
 		for (Entry<String, String> entry : parameters.entrySet()) {
 			if (!StringUtils.equals(entry.getValue(), definition.getParameters().get(entry.getKey()))) {
 				definition.getParameters().put(entry.getKey(), entry.getValue());
@@ -209,6 +221,24 @@ public final class SimulationDefinitionConfigurationHandler {
 	public void saveMaxExecutionTime(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(SIMULATION_DEFINITION__MAX_EXECUTION_TIME,
 				EcoreUtil.convertToString(EcorePackage.Literals.EDATE, definition.getMaxExecutionTime()));
+	}
+
+	public void initializeNFPtoCompute(ILaunchConfiguration configuration) throws CoreException {
+		DiceLogger.logInfo(DiceSimulationPlugin.getDefault(),
+				"looking for value of attribute called " + SIMULATION_DEFINITION__NFP_TO_COMPUTE + " with value "
+						+ configuration.getAttribute(SIMULATION_DEFINITION__NFP_TO_COMPUTE,
+								ComputableNFPtype.PERFORMANCE.toString()));
+
+		ComputableNFPtype nfpToCompute = ComputableNFPtype.get(configuration
+				.getAttribute(SIMULATION_DEFINITION__NFP_TO_COMPUTE, ComputableNFPtype.PERFORMANCE.toString()));
+
+		definition.setNfpToCompute(nfpToCompute);
+
+	}
+
+	public void saveNFPtoCompute(ILaunchConfigurationWorkingCopy configuration) {
+		configuration.setAttribute(SIMULATION_DEFINITION__NFP_TO_COMPUTE, definition.getNfpToCompute().toString());
+
 	}
 
 	public void initializeBackend(ILaunchConfiguration configuration, String defaultValue) throws CoreException {
@@ -253,4 +283,5 @@ public final class SimulationDefinitionConfigurationHandler {
 			return "";
 		}
 	}
+
 }

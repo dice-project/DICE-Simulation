@@ -9,7 +9,7 @@ public class PnmlM2mPlugin implements BundleActivator {
 
 	public static final String DPIM_AD2PNML_PERFORMANCE_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dpim-ad2pnml.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
 	
-	public static final String DPIM_AD2PNML_RELIABILITY_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dpim-ad2pnml-relibaility.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
+	public static final String DPIM_AD2PNML_RELIABILITY_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dpim-ad2pnml-reliability.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
 
 	public static final String DPIM_SD2PNML_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dpim-sd2pnml.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
 	

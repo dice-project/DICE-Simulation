@@ -185,6 +185,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 		handler.initializeActiveConfigurations(configuration);
 		handler.initializeParameters(configuration);
 		handler.initializeMaxExecutionTime(configuration);
+		handler.initializeNFPtoCompute(configuration);
 		handler.initializeBackend(configuration, DiceSimulationPlugin.getDefault().getDefaultSimulationBackend());
 
 		// Re-build invocations

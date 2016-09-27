@@ -3,24 +3,13 @@
 package es.unizar.disco.simulation.models.definition.provider;
 
 
-import es.unizar.disco.simulation.models.definition.DefinitionFactory;
-import es.unizar.disco.simulation.models.definition.DefinitionPackage;
-import es.unizar.disco.simulation.models.definition.SimulationDefinition;
-
-import es.unizar.disco.simulation.models.measures.MeasuresFactory;
-
-import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -31,6 +20,12 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import es.unizar.disco.simulation.models.definition.DefinitionFactory;
+import es.unizar.disco.simulation.models.definition.DefinitionPackage;
+import es.unizar.disco.simulation.models.definition.SimulationDefinition;
+import es.unizar.disco.simulation.models.measures.MeasuresFactory;
+import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
 
 /**
  * This is the item provider adapter for a {@link es.unizar.disco.simulation.models.definition.SimulationDefinition} object.
@@ -74,6 +69,7 @@ public class SimulationDefinitionItemProvider
 			addActiveConfigurationsPropertyDescriptor(object);
 			addAutoSyncPropertyDescriptor(object);
 			addScenarioStereotypesPropertyDescriptor(object);
+			addNfpToComputePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -233,6 +229,28 @@ public class SimulationDefinitionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Nfp To Compute feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNfpToComputePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationDefinition_nfpToCompute_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationDefinition_nfpToCompute_feature", "_UI_SimulationDefinition_type"),
+				 DefinitionPackage.Literals.SIMULATION_DEFINITION__NFP_TO_COMPUTE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -312,6 +330,7 @@ public class SimulationDefinitionItemProvider
 			case DefinitionPackage.SIMULATION_DEFINITION__BACKEND:
 			case DefinitionPackage.SIMULATION_DEFINITION__AUTO_SYNC:
 			case DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES:
+			case DefinitionPackage.SIMULATION_DEFINITION__NFP_TO_COMPUTE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS:

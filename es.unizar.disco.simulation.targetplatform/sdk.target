@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="DICE Simulation Tools SDK Target Platform" sequenceNumber="32">
+<?pde version="3.8"?><target includeMode="feature" name="DICE Simulation Tools SDK Target Platform" sequenceNumber="33">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.papyrus.extra.marte.properties.feature.source.feature.group" version="1.2.0.201606080903"/>
@@ -49,6 +49,7 @@
 <unit id="org.junit.source" version="4.12.0.v201504281640"/>
 <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/"/>
 </location>
+<location path="C:\Eclipse\eclipse-SDK-4.6-win32-x86_64\eclipse\dropins" type="Directory"/>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 </target>

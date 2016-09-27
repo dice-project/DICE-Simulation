@@ -3,22 +3,18 @@
 package es.unizar.disco.simulation.models.wnsim.provider;
 
 
-import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
-
-import es.unizar.disco.simulation.models.toolresult.provider.ToolResultItemProvider;
-
-import es.unizar.disco.simulation.models.wnsim.WnsimResult;
-
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+
+import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
+import es.unizar.disco.simulation.models.toolresult.provider.ToolResultItemProvider;
+import es.unizar.disco.simulation.models.wnsim.WnsimResult;
 
 /**
  * This is the item provider adapter for a {@link es.unizar.disco.simulation.models.wnsim.WnsimResult} object.

@@ -56,7 +56,7 @@ public class SimulationInvocationsRegistry {
 
 	public static final IPath REGISTRY_DIRECTORY_LOCATION = BASE_LOCATION.append("invocations");
 
-	private static final File FILES_DIRECTORY = REGISTRY_DIRECTORY_LOCATION.toFile();
+	public static final File FILES_DIRECTORY = REGISTRY_DIRECTORY_LOCATION.toFile();
 	
 	public static final IPath REGISTRY_LOCATION = BASE_LOCATION.append("registry.xmi");
 

@@ -6,3 +6,4 @@ Bundle-Version: 0.3.3.qualifier
 Fragment-Host: es.unizar.disco.simulation;bundle-version="0.3.3"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.junit;bundle-version="4.12.0"
+Import-Package: es.unizar.disco.simulation.models.invocation

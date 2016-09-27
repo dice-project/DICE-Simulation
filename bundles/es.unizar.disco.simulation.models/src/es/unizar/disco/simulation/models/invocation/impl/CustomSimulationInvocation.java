@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Stereotype;
 
+import es.unizar.disco.core.logger.DiceLogger;
+import es.unizar.disco.simulation.models.DiceModelsPlugin;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder.ModelResult;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
@@ -69,6 +71,7 @@ public class CustomSimulationInvocation extends SimulationInvocationImpl impleme
 		IAnalyzableModelBuilder priorityBuilder = null;
 		for (IConfigurationElement configElement : configElements) {
 			int priority = Integer.valueOf(configElement.getAttribute(PRIORITY));
+			DiceLogger.logInfo(DiceModelsPlugin.getDefault(), "Checking whether plugin " + configElement.getAttribute("builder") + "Is the chosen one for the m2m");
 			if (priority > oldPriority) {
 				String metaclass = configElement.getAttribute(METACLASS);
 				String stereotypeName = configElement.getAttribute(SCENARIO);
@@ -80,6 +83,8 @@ public class CustomSimulationInvocation extends SimulationInvocationImpl impleme
 						&& scenario.isStereotypeApplied(stereotype)
 						&& propertyTypeToCompute.equalsIgnoreCase(computableNFPofextension)) {
 					oldPriority = priority;
+					DiceLogger.logInfo(DiceModelsPlugin.getDefault(), configElement.getAttribute("builder") + " is the best builder up to now");
+					
 					try {
 						priorityBuilder = (IAnalyzableModelBuilder) configElement.createExecutableExtension(BUILDER);
 					} catch (CoreException e) {
