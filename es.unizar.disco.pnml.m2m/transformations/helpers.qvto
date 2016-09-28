@@ -81,7 +81,6 @@ helper UML::Element::getPaRunTInstance() : UML::Stereotype {
 	return null;	
 }
 
-
 helper UML::Element::getGaExecHost() : UML::Stereotype {
 	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaExecHost"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaExecHost");
