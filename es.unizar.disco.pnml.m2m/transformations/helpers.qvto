@@ -37,6 +37,13 @@ helper UML::Element::getGaStep() : UML::Stereotype {
 	return null;	
 }
 
+helper UML::Element::getGaCommStep() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep"))) { 
+		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep");
+	};
+	return null;	
+}
+
 helper UML::Element::getPaLogicalResource() : UML::Stereotype {
 	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource");
@@ -63,6 +70,13 @@ helper UML::Element::getStormBolt() : UML::Stereotype {
 helper UML::Element::getStormStreamStep() : UML::Stereotype {
 	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormStreamStep"))) { 
 		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormStreamStep");
+	};
+	return null;	
+}
+
+helper UML::Element::getPaRunTInstance() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance"))) { 
+		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance");
 	};
 	return null;	
 }
