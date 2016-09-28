@@ -23,10 +23,14 @@ main() {
 	// Transform top-level elements
 	ad.scenario().map model2doc();
 	
+	var placeFail := ad.scenario().map failPlace();
+	ad.scenario().map reliabilityCheckSubNet(placeFail);
+	
+	
 	// Transform net contents
 	ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
 	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2arc();
-	
+	/*
 	// Transform deployment
 	ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
 	
@@ -42,7 +46,7 @@ main() {
 	} else {
 		log("Base time unit is 'tick'");
 		log("Base frequency unit is 'events per tick'");
-	}
+	}*/
 }
 
 /**
@@ -290,6 +294,31 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 mapping UML::ActivityNode::activityNode2place() : PNML::Place 
 inherits UML::NamedElement::namedElement2place {
 }
+
+mapping UML::NamedElement::failPlace() : PNML::Place 
+	inherits UML::NamedElement::namedElement2place {
+	
+	name:= object PNML::Name{
+		text := "failedExecution";
+	};
+};
+
+mapping UML::NamedElement::reliabilityCheckSubNet(placeFail: PNML::Place){
+	var placeOK := self.map namedElement2place();
+	 placeOK.initialMarking := object PNML::PTMarking {
+		text := 1;
+	};
+	var transitionNotFailedYet := self.map namedElement2transition();
+	transitionNotFailedYet.toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+	var transitionAlreadyFailed := self.map namedElement2transition();
+	var arc := map arc(placeFail, transitionNotFailedYet);
+	// Add tracing information
+	self.map trace(place, "basicActivityNode2place");
+	self.map trace(transition1, "basicActivityNode2transition");
+}
+	
+
+
 
 /**
 	Transform a generic NamedElement into a Transition 
@@ -781,18 +810,18 @@ helper UML::Element::getGaStep_prob() : NFP_Real {
 	return prob.toNfpReal();
 }
 
+
 helper UML::Element::getDaStep_Failure_Occurrenceprob() : NFP_Real {
 	if (self.getDaStep() = null) {
 		return null;
 	};
 	//TODO: I'm not sure about the 'oclAsType'- Check it
-	var failureInformation := self.getValue(self.getDaStep(), "failure");
-	
-	///In this part.... 
-	.........
-	var Occurrenceprob := (self.getValue(self.getDaStep(), "failure")).oclAsType(String);
-	
-	return prob.toNfpReal();
+	var failureInformation := self.getValue(self.getDaStep(), "failure").oclAsType(String);
+	var failureValue = failureInformation.value();
+	if(failureValue.isTuple()){
+		return failureValue.asTuple()->get("occurenceProb").toNfpReal();
+	};
+	return "1".toNfpReal();
 }
 
 helper UML::Element::getPaLogicalResource_poolSize() : NFP_Integer {

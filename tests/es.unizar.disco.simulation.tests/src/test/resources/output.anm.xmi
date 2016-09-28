@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ptnet:PetriNetDoc xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ptnet="http:///ptnet.ecore">
+  <nets id="__fyJAIWBEea7hpJSOdmQ9w">
+    <pages id="__f3okIWBEea7hpJSOdmQ9w"/>
+    <name text="Scenario"/>
+  </nets>
+</ptnet:PetriNetDoc>

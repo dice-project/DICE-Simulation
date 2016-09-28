@@ -26,7 +26,7 @@ public enum TransitionKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	IMMEDIATE(0, "Immediate", "http://es.unizar.dsico/pnconstants/tkind/immediate"),
+	IMMEDIATE(0, "Immediate", "http://es.unizar.disco/pnconstants/tkind/immediate"),
 
 	/**
 	 * The '<em><b>Exponential</b></em>' literal object.
@@ -36,7 +36,7 @@ public enum TransitionKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	EXPONENTIAL(1, "Exponential", "http://es.unizar.dsico/pnconstants/tkind/exponential"),
+	EXPONENTIAL(1, "Exponential", "http://es.unizar.disco/pnconstants/tkind/exponential"),
 
 	/**
 	 * The '<em><b>Deterministic</b></em>' literal object.
@@ -46,7 +46,15 @@ public enum TransitionKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DETERMINISTIC(2, "Deterministic", "http://es.unizar.dsico/pnconstants/tkind/deterministic");
+	DETERMINISTIC(2, "Deterministic", "http://es.unizar.disco/pnconstants/tkind/deterministic"), /**
+	 * The '<em><b>Inmediate Priority</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #INMEDIATE_PRIORITY_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	INMEDIATE_PRIORITY(3, "InmediatePriority", "http://es.unizar.disco/pnconstants/tkind/immediatepriority");
 
 	/**
 	 * The '<em><b>Immediate</b></em>' literal value.
@@ -57,7 +65,7 @@ public enum TransitionKind implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #IMMEDIATE
-	 * @model name="Immediate" literal="http://es.unizar.dsico/pnconstants/tkind/immediate"
+	 * @model name="Immediate" literal="http://es.unizar.disco/pnconstants/tkind/immediate"
 	 * @generated
 	 * @ordered
 	 */
@@ -72,7 +80,7 @@ public enum TransitionKind implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #EXPONENTIAL
-	 * @model name="Exponential" literal="http://es.unizar.dsico/pnconstants/tkind/exponential"
+	 * @model name="Exponential" literal="http://es.unizar.disco/pnconstants/tkind/exponential"
 	 * @generated
 	 * @ordered
 	 */
@@ -87,11 +95,26 @@ public enum TransitionKind implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #DETERMINISTIC
-	 * @model name="Deterministic" literal="http://es.unizar.dsico/pnconstants/tkind/deterministic"
+	 * @model name="Deterministic" literal="http://es.unizar.disco/pnconstants/tkind/deterministic"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int DETERMINISTIC_VALUE = 2;
+
+	/**
+	 * The '<em><b>Inmediate Priority</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Inmediate Priority</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #INMEDIATE_PRIORITY
+	 * @model name="InmediatePriority" literal="http://es.unizar.disco/pnconstants/tkind/immediatepriority"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INMEDIATE_PRIORITY_VALUE = 3;
 
 	/**
 	 * An array of all the '<em><b>Transition Kind</b></em>' enumerators.
@@ -104,6 +127,7 @@ public enum TransitionKind implements Enumerator {
 			IMMEDIATE,
 			EXPONENTIAL,
 			DETERMINISTIC,
+			INMEDIATE_PRIORITY,
 		};
 
 	/**
@@ -163,6 +187,7 @@ public enum TransitionKind implements Enumerator {
 			case IMMEDIATE_VALUE: return IMMEDIATE;
 			case EXPONENTIAL_VALUE: return EXPONENTIAL;
 			case DETERMINISTIC_VALUE: return DETERMINISTIC;
+			case INMEDIATE_PRIORITY_VALUE: return INMEDIATE_PRIORITY;
 		}
 		return null;
 	}

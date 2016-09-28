@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traces:TraceSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:traces="http://es.unizar.disco/simulation/traces/1.0">
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_oWSIIPDnEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r--BkYTNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2transition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_oWSIIPDnEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r--ooITNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_8xYd4PDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_KO0ITNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2transition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_8xYd4PDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_KO0YTNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_GLmyEPDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_RjkITNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2transition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_GLmyEPDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_RjkYTNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_XXsDkPDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_SKoYTNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2transition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_XXsDkPDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_SxsITNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_wNhfQPDpEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_ZfYYTNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="basicActivityNode2transition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_wNhfQPDpEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_ZfYoTNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="partitions2resources">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_bmnpgPDlEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_jQYITNEeaYY5IXPCZYaw"/>
+  </traces>
+  <traces rule="model2openNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.pnml.m2m/examples/activity-diagram/model.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.anm.xmi#_r_ZfYoTNEeaYY5IXPCZYaw"/>
+  </traces>
+</traces:TraceSet>

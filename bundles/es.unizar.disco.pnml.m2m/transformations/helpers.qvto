@@ -82,6 +82,8 @@ helper expTransitionToolInfo(rate : Real) : PNML::ToolInfo {
 	};	
 }
 
+
+
 /**
 	Creates the ToolInfo that identifies an InfiniteServer timed transition,
 	i.e., CONST::ServerType::InfiniteServer
@@ -118,6 +120,19 @@ helper probTransitionToolInfo(prob: Real) : PNML::ToolInfo {
 		version := CONST::ToolInfoConstants::toolVersion.toString();
 		toolInfoGrammarURI := CONST::TransitionKind::Immediate.toString().createURI();
 		formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::Immediate.toString() + "\">" + prob.toString() + "</value>").createLongString();
+	};
+}
+
+/**
+Creates the ToolInfo that creates priority information for a transition
+i.e., CONST::TransitionKind::ImmediatePriority
+*/
+helper priorityTransitionToolInfo(priority : Integer) : PNML::ToolInfo{
+return object PNML::ToolInfo { 
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::TransitionKind::ImmediatePriority.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::ImmediatePrority.toString() + "\">" + priority.toString() + "</value>").createLongString();
 	};
 }
 

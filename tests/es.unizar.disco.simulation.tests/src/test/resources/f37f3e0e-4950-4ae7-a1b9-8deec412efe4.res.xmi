@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simresult:SimulationResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simresult="http://es.unizar.disco/simulation/simresult/1.0">
+  <invocation href="f37f3e0e-4950-4ae7-a1b9-8deec412efe4.inv.xmi#f37f3e0e-4950-4ae7-a1b9-8deec412efe4"/>
+  <measures value="0.834426684679" unit="Hz">
+    <definition href="e4012c46-f3bb-41fe-99c2-1ffdba8cb4ef.def.xmi#//@declaredMeasures.0"/>
+  </measures>
+</simresult:SimulationResult>
