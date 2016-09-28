@@ -359,6 +359,7 @@ public class WnsimPackageImpl extends EPackageImpl implements WnsimPackage {
 		addEEnumLiteral(simulationParametersEEnum, SimulationParameters.CONF_LEVEL);
 		addEEnumLiteral(simulationParametersEEnum, SimulationParameters.SEED);
 		addEEnumLiteral(simulationParametersEEnum, SimulationParameters.START);
+		addEEnumLiteral(simulationParametersEEnum, SimulationParameters.BINARY_FILE_PATH);
 
 		// Create resource
 		createResource(eNS_URI);

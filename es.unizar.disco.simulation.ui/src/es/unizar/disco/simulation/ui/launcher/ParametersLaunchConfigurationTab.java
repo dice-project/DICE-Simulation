@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.Text;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.core.ui.util.Highlighter;
@@ -170,6 +171,27 @@ public class ParametersLaunchConfigurationTab extends AbstractSimulationLaunchCo
 			context.updateTargets();
 		}
 
+
+		{ // General Group
+
+			final Group group = new Group(topComposite, SWT.NONE);
+			group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
+
+			group.setLayout(new GridLayout(1, false));
+			group.setText("WNSIM File Path");
+
+			final Text binaryPathText = new Text(group, SWT.BORDER);
+			binaryPathText.setText("/usr/local/GreatSPN/bin/WNSIM");
+			binaryPathText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			
+			// @formatter:off
+			IObservableMap observableMap = EMFProperties.map(DefinitionPackage.Literals.SIMULATION_DEFINITION__PARAMETERS).observe(simulationDefinition);
+			
+			IObservableValue binaryPathEmfObservable = Observables.observeMapEntry(observableMap, SimulationParameters.BINARY_FILE_PATH.getLiteral());
+			context.bindValue(binaryPathEmfObservable, WidgetProperties.text().observe(binaryPathText));
+			// @formatter:on
+		}
+		
 		setControl(topComposite);
 	}
 

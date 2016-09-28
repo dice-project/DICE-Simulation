@@ -1530,6 +1530,10 @@
                 <styles xmi:type="notation:FontStyle" xmi:id="_-ESjUSHUEeabNJ8GjyzWvA" fontName="Segoe UI" fontHeight="8"/>
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_-ESjUiHUEeabNJ8GjyzWvA"/>
               </children>
+              <children xmi:type="notation:Node" xmi:id="_YOgIoHBREeaUANcoTtHXOg" type="3010" element="_YNXgMHBREeaUANcoTtHXOg">
+                <styles xmi:type="notation:FontStyle" xmi:id="_YOgIoXBREeaUANcoTtHXOg" fontName="Segoe UI" fontHeight="8"/>
+                <layoutConstraint xmi:type="notation:Location" xmi:id="_YOgIonBREeaUANcoTtHXOg"/>
+              </children>
               <styles xmi:type="notation:SortingStyle" xmi:id="_Ws0Xghd9Eea1l5NBfdX6Zw"/>
               <styles xmi:type="notation:FilteringStyle" xmi:id="_Ws0Xgxd9Eea1l5NBfdX6Zw"/>
             </children>
@@ -1783,6 +1787,14 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']"/>
         </ownedElements>
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_YNXgMHBREeaUANcoTtHXOg" name="binary_file_path" tooltipText="">
+          <target xmi:type="ecore:EEnumLiteral" href="wnsim.ecore#//SimulationParameters/binary_file_path"/>
+          <semanticElements xmi:type="ecore:EEnumLiteral" href="wnsim.ecore#//SimulationParameters/binary_file_path"/>
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_YNYHQHBREeaUANcoTtHXOg" labelAlignment="LEFT">
+            <description xmi:type="style:BundledImageDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']/@style"/>
+          </ownedStyle>
+          <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EEnum']/@subNodeMappings[name='EC%20EEnumLiteral']"/>
+        </ownedElements>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_WsrNkRd9Eea1l5NBfdX6Zw" name="WnsimResult" tooltipText="" outgoingEdges="_auiRwBeDEea1l5NBfdX6Zw" width="12" height="10">
         <target xmi:type="ecore:EClass" href="wnsim.ecore#//WnsimResult"/>
@@ -1930,7 +1942,7 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="__LlLsheFEea1l5NBfdX6Zw" name="unit : Unit = unspecified" tooltipText="">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="__LlLsheFEea1l5NBfdX6Zw" name="unit : EString = unspecified" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="toolresult.ecore#//AnalyzableElementInfo/unit"/>
           <semanticElements xmi:type="ecore:EAttribute" href="toolresult.ecore#//AnalyzableElementInfo/unit"/>
           <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_64V_cReGEea1l5NBfdX6Zw" labelAlignment="LEFT" description="_64V_cBeGEea1l5NBfdX6Zw">
@@ -2119,18 +2131,6 @@
             <endLabelStyleDescription xmi:type="style:EndLabelStyleDescription" xmi:id="_XV9TAkLeEeab-uLTg9qwKQ" labelSize="6" showIcon="false" labelExpression="service:eKeysLabel">
               <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_blue']"/>
             </endLabelStyleDescription>
-          </computedStyleDescriptions>
-          <computedStyleDescriptions xmi:type="style:FlatContainerStyleDescription" xmi:id="_DJYr4ERmEeavk4O1TcVSIQ" arcWidth="8" arcHeight="8" borderSizeComputationExpression="1" tooltipExpression="service:renderTooltip" roundedCorner="true" widthComputationExpression="12" heightComputationExpression="10" backgroundStyle="Liquid">
-            <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-            <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-            <backgroundColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
-            <foregroundColor xmi:type="description:UserFixedColor" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@userColorsPalettes[name='Ecore%20Palette']/@entries[name='EClass']"/>
-          </computedStyleDescriptions>
-          <computedStyleDescriptions xmi:type="style:BundledImageDescription" xmi:id="_DJuDEERmEeavk4O1TcVSIQ" labelExpression="service:render" labelAlignment="LEFT" tooltipExpression="service:renderTooltip" sizeComputationExpression="1">
-            <borderColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-            <labelFormat>bold</labelFormat>
-            <labelColor xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
-            <color xmi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
           </computedStyleDescriptions>
         </data>
       </ownedAnnotationEntries>
@@ -3375,7 +3375,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
       </ownedDiagramElements>
-      <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_15lWwCfqEeav0ZCEEQOTlA" name="DomainMeasure" visible="false" tooltipText="&#xA;ERROR : The feature 'eType' of 'EAttribute{platform:/resource/es.unizar.disco.simulation.models/model/measures.ecore#//DomainMeasure/unit}' contains an unresolved proxy 'EEnum{platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore#//Unit}'&#xA;ERROR : The feature 'eAttributeType' of 'EAttribute{platform:/resource/es.unizar.disco.simulation.models/model/measures.ecore#//DomainMeasure/unit}' contains an unresolved proxy 'EEnum{platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore#//Unit}'&#xA;ERROR : The feature 'eRawType' of 'EGenericType{platform:/resource/es.unizar.disco.simulation.models/model/measures.ecore#//DomainMeasure/unit/@eGenericType}' contains an unresolved proxy 'EEnum{platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore#//Unit}'&#xA;ERROR : The feature 'eClassifier' of 'EGenericType{platform:/resource/es.unizar.disco.simulation.models/model/measures.ecore#//DomainMeasure/unit/@eGenericType}' contains an unresolved proxy 'EEnum{platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore#//Unit}'" width="12" height="10">
+      <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_15lWwCfqEeav0ZCEEQOTlA" name="DomainMeasure" visible="false" tooltipText="" width="12" height="10">
         <target xmi:type="ecore:EClass" href="measures.ecore#//DomainMeasure"/>
         <semanticElements xmi:type="ecore:EClass" href="measures.ecore#//DomainMeasure"/>
         <decorations xmi:type="viewpoint:Decoration" xmi:id="_15xkASfqEeav0ZCEEQOTlA">
@@ -3385,7 +3385,9 @@
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_DJZ6AERmEeavk4O1TcVSIQ" labelColor="239,41,41" description="_DJYr4ERmEeavk4O1TcVSIQ" borderSize="1" borderSizeComputationExpression="1" borderColor="239,41,41" backgroundStyle="Liquid" foregroundColor="255,252,216"/>
+        <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_Ky6tQHBREeaUANcoTtHXOg" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
+          <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
+        </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
         <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_15wV4CfqEeav0ZCEEQOTlA" name="value : Number" visible="false" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="measures.ecore#//DomainMeasure/value"/>
@@ -3395,10 +3397,10 @@
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
         </ownedElements>
-        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_15w88CfqEeav0ZCEEQOTlA" name="unit : Unit = unspecified" visible="false" tooltipText="&#xA;ERROR : The feature 'eType' of 'EAttribute{platform:/resource/es.unizar.disco.simulation.models/model/measures.ecore#//DomainMeasure/unit}' contains an unresolved proxy 'EEnum{platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore#//Unit}'&#xA;ERROR : The feature 'eAttributeType' of 'EAttribute{platform:/resource/es.unizar.disco.simulation.models/model/measures.ecore#//DomainMeasure/unit}' contains an unresolved proxy 'EEnum{platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore#//Unit}'&#xA;ERROR : The feature 'eRawType' of 'EGenericType{platform:/resource/es.unizar.disco.simulation.models/model/measures.ecore#//DomainMeasure/unit/@eGenericType}' contains an unresolved proxy 'EEnum{platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore#//Unit}'&#xA;ERROR : The feature 'eClassifier' of 'EGenericType{platform:/resource/es.unizar.disco.simulation.models/model/measures.ecore#//DomainMeasure/unit/@eGenericType}' contains an unresolved proxy 'EEnum{platform:/resource/es.unizar.disco.simulation.models/model/datatypes.ecore#//Unit}'">
+        <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_15w88CfqEeav0ZCEEQOTlA" name="unit : EString = unspecified" visible="false" tooltipText="">
           <target xmi:type="ecore:EAttribute" href="measures.ecore#//DomainMeasure/unit"/>
           <semanticElements xmi:type="ecore:EAttribute" href="measures.ecore#//DomainMeasure/unit"/>
-          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_DJuqIERmEeavk4O1TcVSIQ" labelColor="239,41,41" labelAlignment="LEFT" description="_DJuDEERmEeavk4O1TcVSIQ" borderColor="239,41,41">
+          <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_KzO2UHBREeaUANcoTtHXOg" labelAlignment="LEFT" description="_wd4P4Bd_Eea1l5NBfdX6Zw">
             <labelFormat>bold</labelFormat>
           </ownedStyle>
           <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>

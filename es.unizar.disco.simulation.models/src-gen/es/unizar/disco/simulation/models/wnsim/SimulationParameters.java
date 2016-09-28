@@ -96,7 +96,15 @@ public enum SimulationParameters implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	START(7, "start", "-o");
+	START(7, "start", "-o"), /**
+	 * The '<em><b>Binary file path</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #BINARY_FILE_PATH_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	BINARY_FILE_PATH(10, "binary_file_path", "binary_file_path");
 
 	/**
 	 * The '<em><b>First tr length</b></em>' literal value.
@@ -219,6 +227,21 @@ public enum SimulationParameters implements Enumerator {
 	public static final int START_VALUE = 7;
 
 	/**
+	 * The '<em><b>Binary file path</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of '<em><b>Binary file path</b></em>' literal object isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @see #BINARY_FILE_PATH
+	 * @model name="binary_file_path"
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FILE_PATH_VALUE = 10;
+
+	/**
 	 * An array of all the '<em><b>Simulation Parameters</b></em>' enumerators.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -234,6 +257,7 @@ public enum SimulationParameters implements Enumerator {
 			CONF_LEVEL,
 			SEED,
 			START,
+			BINARY_FILE_PATH,
 		};
 
 	/**
@@ -298,6 +322,7 @@ public enum SimulationParameters implements Enumerator {
 			case CONF_LEVEL_VALUE: return CONF_LEVEL;
 			case SEED_VALUE: return SEED;
 			case START_VALUE: return START;
+			case BINARY_FILE_PATH_VALUE: return BINARY_FILE_PATH;
 		}
 		return null;
 	}

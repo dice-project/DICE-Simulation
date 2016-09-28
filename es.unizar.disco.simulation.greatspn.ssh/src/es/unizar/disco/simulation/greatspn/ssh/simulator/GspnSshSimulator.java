@@ -48,6 +48,7 @@ import es.unizar.disco.simulation.models.datatypes.NonStandardUnits;
 import es.unizar.disco.simulation.models.toolresult.ToolResult;
 import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.wnsim.PlaceInfo;
+import es.unizar.disco.simulation.models.wnsim.SimulationParameters;
 import es.unizar.disco.simulation.models.wnsim.TransitionInfo;
 import es.unizar.disco.simulation.models.wnsim.WnsimElementInfo;
 import es.unizar.disco.simulation.models.wnsim.WnsimFactory;
@@ -293,7 +294,11 @@ public class GspnSshSimulator implements ISimulator {
 			DefaultConfig defaultConfig = new DefaultConfig();
 			defaultConfig.setKeepAliveProvider(KeepAliveProvider.KEEP_ALIVE);
 			ssh = new SSHClient(defaultConfig);
-			ssh.loadKnownHosts();
+			try {
+				ssh.loadKnownHosts();
+			} catch (IOException e) {
+				DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+			}
 			ssh.addHostKeyVerifier(new NoHostVerifier());
 			ssh.connect(hostProvider.getHost(), hostProvider.getPort());
 			ssh.getConnection().getKeepAlive().setKeepAliveInterval(5); // every
@@ -312,9 +317,19 @@ public class GspnSshSimulator implements ISimulator {
 
 		public void launch(Map<String, String> options) throws IOException {
 			simulationSession = ssh.startSession();
-			StringBuilder builder = new StringBuilder("/usr/local/GreatSPN/bin/WNSIM %s/%s "); //$NON-NLS-1$
+			StringBuilder builder = new StringBuilder(); //$NON-NLS-1$
+			if (options.containsKey(SimulationParameters.BINARY_FILE_PATH.getLiteral())) {
+				builder.append(options.get(SimulationParameters.BINARY_FILE_PATH.getLiteral()));
+			} else {
+				builder.append("/usr/local/GreatSPN/bin/WNSIM");
+			}
+			builder.append(" %s/%s ");
 			for (Entry<String, String> option : options.entrySet()) {
-				builder.append(MessageFormat.format("{0} {1} ", option.getKey(), option.getValue())); //$NON-NLS-1$
+				if (option.getKey().startsWith("-")) {
+					// Include only options that represent a command line parameter
+					// i.e., ignore the BINARY_FILE_PATH option
+					builder.append(MessageFormat.format("{0} {1} ", option.getKey(), option.getValue())); //$NON-NLS-1$
+				}
 			}
 			simulationCommand = simulationSession.exec(String.format(builder.toString(), remoteWorkingDir, identifier));
 
