@@ -30,15 +30,17 @@ main() {
 	// Transform net contents
 	ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
 	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2arc();
-	/*
+	
 	// Transform deployment
 	ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
 	
 	// Transform workload descriptions
 	var initialNodes := ad.scenario().node[UML::InitialNode];
-	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
-	initialNodes[getGaWorkloadEvent().oclIsUndefined().not()] -> map initialNodes2AnalysisType();
 	
+	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
+	
+	initialNodes[getGaWorkloadEvent().oclIsUndefined().not()] -> map initialNodes2AnalysisType();
+	/*
 	// Set time metadata
 	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
 		log("Base time unit is 's'");
@@ -229,6 +231,7 @@ when {
 
 mapping UML::ActivityNode::activityNode2subNet() disjuncts 
 UML::InitialNode::initialNode2subNet,
+UML::ActivityFinalNode::finalNode2Subnet,
 UML::DecisionNode::decisionActivityNode2subNet,
 UML::JoinNode::joinActivityNode2subNet,
 UML::ActivityNode::basicActivityNode2subNet {};
@@ -238,12 +241,23 @@ UML::ActivityNode::basicActivityNode2subNet {};
 */
 mapping UML::ActivityNode::basicActivityNode2subNet() {
 	var place := self.map activityNode2place();
-	var transition1 := self.map activityNode2transition();
-	var transition2 := self.map activityNode2transition();
-	var arc := map arc(place, transition1);
-	// Add tracing information
+	var transitionNotFail := self.map activityFailingNode2transition();
+	var arcNotFail := map arc(place, transitionNotFail);
 	self.map trace(place, "basicActivityNode2place");
-	self.map trace(transition1, "basicActivityNode2transition");
+	
+	if(self.getDaStep_Failure_Occurrenceprob().oclIsUndefined().not()){
+		var transitionFail := self.map activityNode2transition();
+		transitionFail.toolspecifics:= probTransitionToolInfo(self.getDaStep_Failure_Occurrenceprob().value());
+		var arcToFailTransition := map arc(place, transitionFail);
+	
+		var failPlace = resolveoneIn(UML::NamedElement::failPlace, PNML::Place);
+		var arcToFailPlace:= map arc(transitionFail, failPlace);
+		self.map trace(transitionFail, "TransitionOfFailureExecution");
+		
+	};
+
+	
+	
 }
 
 /**
@@ -256,6 +270,29 @@ mapping UML::InitialNode::initialNode2subNet() {
 		var place := self.map activityNode2place();
 		var arc := map arc(place, transition);
 	};
+}
+
+/** Transforms the Final node to the corresponding transtions that check whether the execution 
+has failed along the workflow or not
+*/ 
+
+mapping UML::ActivityFinalNode::finalNode2Subnet(){
+	var enterPlace := self.map namedElement2place();
+	
+	//the part of the failing execution
+	var transitionFailed := self.map namedElement2transition();
+	transitionFailed.toolspecifics +=  priorityTransitionToolInfo(3);
+	
+	var failedPlace := resolveoneIn(UML::NamedElement::namedElement2placeAlreadyFailed, PNML::Place);
+	var arcFromEnterToFailedTransition := map arc(enterPlace, transitionFailed);
+	var arcFromFailedPlaceToFailedTransition := map arc(failedPlace, transitionFailed);
+	var OKplace := resolveoneIn(UML::NamedElement::namedElement2placeNotFailedYet, PNML::Place); 
+	var arcReturnTokenToOK := map arc(transitionFailed, OKplace);
+	
+	//the part where the execution has not failed
+	var transitionNotFailed := self.map namedElement2transition();
+	transitionNotFailed.toolspecifics +=  priorityTransitionToolInfo(2);
+	var arcFromEnterToNotFailedTransition := map arc(enterPlace, transitionNotFailed);
 }
 
 /**
@@ -301,24 +338,45 @@ mapping UML::NamedElement::failPlace() : PNML::Place
 	name:= object PNML::Name{
 		text := "failedExecution";
 	};
+	
+	self.map trace(result, "ScenarioFailureEvent");
 };
 
 mapping UML::NamedElement::reliabilityCheckSubNet(placeFail: PNML::Place){
-	var placeOK := self.map namedElement2place();
-	 placeOK.initialMarking := object PNML::PTMarking {
-		text := 1;
-	};
+	var placeOK := self.map namedElement2placeNotFailedYet();
+	
 	var transitionNotFailedYet := self.map namedElement2transition();
-	transitionNotFailedYet.toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+	transitionNotFailedYet.toolspecifics +=  priorityTransitionToolInfo(3);
+	
 	var transitionAlreadyFailed := self.map namedElement2transition();
-	var arc := map arc(placeFail, transitionNotFailedYet);
+	transitionAlreadyFailed.toolspecifics+= priorityTransitionToolInfo(2);
+	
+	var placeAlreadyFailed := self.map namedElement2placeAlreadyFailed();
+	
+	var arcFromFailToNotFailedYet := map arc(placeFail, transitionNotFailedYet);
+	var arcFromFailToAlreadyFailed := map arc(placeFail, transitionAlreadyFailed);
+	
+	var arcFromPlaceOKToNotFailedYet:= map arc(placeOK, transitionNotFailedYet);
+	
+	var arcFromNotFailedYetToAlreadyFailed:= map arc(transitionNotFailedYet,placeAlreadyFailed);
+	
 	// Add tracing information
-	self.map trace(place, "basicActivityNode2place");
-	self.map trace(transition1, "basicActivityNode2transition");
+	self.map trace(placeOK, "ExecutionHasNotFailed");
+	self.map trace(placeAlreadyFailed, "ExecutionFailed");
+	self.map trace(transitionNotFailedYet, "Transition that fires in the first failure");
 }
 	
+mapping UML::NamedElement::namedElement2placeNotFailedYet() : PNML::Place 
+	inherits UML::NamedElement::namedElement2place {
+	initialMarking := object PNML::PTMarking {
+		text := 1;
+	}
 
+}
 
+mapping UML::NamedElement::namedElement2placeAlreadyFailed() : PNML::Place 
+	inherits UML::NamedElement::namedElement2place {
+}
 
 /**
 	Transform a generic NamedElement into a Transition 
@@ -345,6 +403,29 @@ inherits UML::NamedElement::namedElement2transition {
 }
 
 /**
+	Transform a generic ActivityNode into a Transition and 
+	creates any additional ToolInfo depending on the ActivityNode
+	subtype (e.g., OpaqueActions with probability of failure will create a probabilistic transition) 
+*/
+mapping UML::ActivityNode::activityFailingNode2transition() : PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+	toolspecifics += self[OpaqueAction].map opaqueActionFailureProbability2toolInfo();
+	
+}
+
+
+/**
+	Transformas an OpaqueAction with a failure annotation to a ToolInfo element
+*/
+mapping UML::OpaqueAction::opaqueActionFailureProbability2toolInfo() : List ( PNML::ToolInfo ) 
+when {
+		self.getDaStep_Failure_Occurrenceprob().oclIsUndefined().not();
+}{
+	
+	result += self.map  probabilisticFailure2toolInfo();	
+}
+
+/**
 	Transformas an OpaqueAction with a hostDemand annotation to a ToolInfo element
 */
 mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
@@ -355,6 +436,8 @@ when {
 	result += expTransitionToolInfo( 1 / hostDemand.value());
 	result += infServerTransitionToolInfo();
 }
+
+
 
 /**
 	Creates an Arc from 'src' to 'tgt'
@@ -446,6 +529,19 @@ when {
 		result := probTransitionToolInfo(self.getGaStep_prob().value());
 	}
 }
+
+/**
+	Creates the ToolInfo element with the probability for an action that may fail due to DaStep-> failure-> occurenceProb scpecification
+*/
+mapping UML::OpaqueAction::probabilisticFailure2toolInfo() : PNML::ToolInfo
+when{
+	self.getDaStep_Failure_Occurrenceprob().oclIsUndefined().not();
+}{
+	init{
+		result:= probTransitionToolInfo(1.0 - self.getDaStep_Failure_Occurrenceprob().value());
+	}
+}
+
 
 
 /*******************************************************************************

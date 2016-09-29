@@ -132,7 +132,7 @@ return object PNML::ToolInfo {
 		tool := CONST::ToolInfoConstants::toolName.toString();
 		version := CONST::ToolInfoConstants::toolVersion.toString();
 		toolInfoGrammarURI := CONST::TransitionKind::ImmediatePriority.toString().createURI();
-		formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::ImmediatePrority.toString() + "\">" + priority.toString() + "</value>").createLongString();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::TransitionKind::ImmediatePriority.toString() + "\">" + priority.toString() + "</value>").createLongString();
 	};
 }
 

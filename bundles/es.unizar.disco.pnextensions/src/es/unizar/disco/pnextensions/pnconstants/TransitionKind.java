@@ -47,14 +47,14 @@ public enum TransitionKind implements Enumerator {
 	 * @ordered
 	 */
 	DETERMINISTIC(2, "Deterministic", "http://es.unizar.disco/pnconstants/tkind/deterministic"), /**
-	 * The '<em><b>Inmediate Priority</b></em>' literal object.
+	 * The '<em><b>Immediate Priority</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #INMEDIATE_PRIORITY_VALUE
+	 * @see #IMMEDIATE_PRIORITY_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	INMEDIATE_PRIORITY(3, "InmediatePriority", "http://es.unizar.disco/pnconstants/tkind/immediatepriority");
+	IMMEDIATE_PRIORITY(3, "ImmediatePriority", "http://es.unizar.disco/pnconstants/tkind/immediatepriority");
 
 	/**
 	 * The '<em><b>Immediate</b></em>' literal value.
@@ -102,19 +102,19 @@ public enum TransitionKind implements Enumerator {
 	public static final int DETERMINISTIC_VALUE = 2;
 
 	/**
-	 * The '<em><b>Inmediate Priority</b></em>' literal value.
+	 * The '<em><b>Immediate Priority</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>Inmediate Priority</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Immediate Priority</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #INMEDIATE_PRIORITY
-	 * @model name="InmediatePriority" literal="http://es.unizar.disco/pnconstants/tkind/immediatepriority"
+	 * @see #IMMEDIATE_PRIORITY
+	 * @model name="ImmediatePriority" literal="http://es.unizar.disco/pnconstants/tkind/immediatepriority"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int INMEDIATE_PRIORITY_VALUE = 3;
+	public static final int IMMEDIATE_PRIORITY_VALUE = 3;
 
 	/**
 	 * An array of all the '<em><b>Transition Kind</b></em>' enumerators.
@@ -127,7 +127,7 @@ public enum TransitionKind implements Enumerator {
 			IMMEDIATE,
 			EXPONENTIAL,
 			DETERMINISTIC,
-			INMEDIATE_PRIORITY,
+			IMMEDIATE_PRIORITY,
 		};
 
 	/**
@@ -187,7 +187,7 @@ public enum TransitionKind implements Enumerator {
 			case IMMEDIATE_VALUE: return IMMEDIATE;
 			case EXPONENTIAL_VALUE: return EXPONENTIAL;
 			case DETERMINISTIC_VALUE: return DETERMINISTIC;
-			case INMEDIATE_PRIORITY_VALUE: return INMEDIATE_PRIORITY;
+			case IMMEDIATE_PRIORITY_VALUE: return IMMEDIATE_PRIORITY;
 		}
 		return null;
 	}

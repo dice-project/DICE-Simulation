@@ -13,7 +13,7 @@
       <eLiterals name="Immediate" literal="http://es.unizar.disco/pnconstants/tkind/immediate"/>
       <eLiterals name="Exponential" value="1" literal="http://es.unizar.disco/pnconstants/tkind/exponential"/>
       <eLiterals name="Deterministic" value="2" literal="http://es.unizar.disco/pnconstants/tkind/deterministic"/>
-      <eLiterals name="InmediatePriority" value="3" literal="http://es.unizar.disco/pnconstants/tkind/immediatepriority"/>
+      <eLiterals name="ImmediatePriority" value="3" literal="http://es.unizar.disco/pnconstants/tkind/immediatepriority"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ServerType">
       <eLiterals name="InfiniteServer" literal="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
