@@ -39,8 +39,8 @@ main() {
 	
 	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
 	
-	initialNodes[getGaWorkloadEvent().oclIsUndefined().not()] -> map initialNodes2AnalysisType();
-	/*
+	initialNodes[getGaWorkloadEvent().oclIsUndefined().not()] -> map closeNet();
+	
 	// Set time metadata
 	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
 		log("Base time unit is 's'");
@@ -48,7 +48,7 @@ main() {
 	} else {
 		log("Base time unit is 'tick'");
 		log("Base frequency unit is 'events per tick'");
-	}*/
+	}
 }
 
 /**
@@ -98,6 +98,22 @@ mapping UML::InitialNode::initialNodes2AnalysisType() {
 			assert warning (false) with log ("Unknown workload pattern: " + pattern._rawExpression);
 		};
 	}	
+}
+
+/**
+
+Closes the net for steady state reliability analysis
+
+*/
+mapping UML::InitialNode::closeNet() {
+var place := self.resolveoneIn(UML::ActivityNode::activityNode2place);
+	var closingTransitions := ad.scenario().node[UML::ActivityFinalNode].resolveIn(UML::ActivityNode::activityNode2transition);
+	assert warning (closingTransitions->size() = 2) with log ("Not 2 finishing transitions found. This is problematic for the computation of the probability 
+	of failure. Found " + closingTransitions->size().repr() + " transitions" );
+	closingTransitions->forEach(transition) {
+		map arc(transition, place);
+	};
+	
 }
 
 /**
@@ -473,9 +489,21 @@ mapping UML::ControlFlow::basicControlFlow2arc() {
 	assert warning (self.getGaStep_prob().oclIsUndefined())
 		with log ("Only ControlFlows departing from a DecisionNode should define a probability. " +
 					"Ignoring annotation in the context element '" + self.toString() + "'"); 
-	var transition := self.source.resolveoneIn(UML::ActivityNode::activityNode2transition);
+	
 	var place := self.target.resolveoneIn(UML::ActivityNode::activityNode2place);
-	map arc(transition, place);
+		
+	var prevActivNotFailingTrans := self.source.resolveoneIn(UML::ActivityNode::activityFailingNode2transition);
+	if(prevActivNotFailingTrans.oclIsUndefined().not()){
+		
+		map arc(prevActivNotFailingTrans, place);
+	
+	};
+	var prevActivFailingTrans := self.source.resolveoneIn(UML::ActivityNode::activityNode2transition);
+	if(prevActivFailingTrans.oclIsUndefined().not()){
+			map arc(prevActivFailingTrans, place);
+	
+	};
+	
 }
 
 /**
@@ -504,7 +532,7 @@ mapping UML::ControlFlow::decisionControlFlow2arc() when {
 mapping UML::ControlFlow::joinControlFlow2arc() when {
 	self.target.oclIsKindOf(JoinNode)
 }{
-	var prevNodeTrans := self.source.resolveoneIn(UML::ActivityNode::activityNode2transition);
+	
 	var joinTrans := self.target.resolveoneIn(UML::ActivityNode::activityNode2transition);
 	var place := self.map namedElement2place();
 	
@@ -514,8 +542,20 @@ mapping UML::ControlFlow::joinControlFlow2arc() when {
 		};
 	};
 	
-	map arc(prevNodeTrans, place);
-	map arc(place, joinTrans);
+	var prevActivNotFailingTrans := self.source.resolveoneIn(UML::ActivityNode::activityFailingNode2transition);
+	if(prevActivNotFailingTrans.oclIsUndefined().not()){
+		
+		map arc(prevActivNotFailingTrans, place);
+		map arc(place, joinTrans);
+	
+	};
+	
+	var prevActivFailingTrans := self.source.resolveoneIn(UML::ActivityNode::activityNode2transition);
+	if(prevActivFailingTrans.oclIsUndefined().not()){
+			map arc(prevActivFailingTrans, place);
+		map arc(place, joinTrans);
+	};
+	
 }
 
 /**
