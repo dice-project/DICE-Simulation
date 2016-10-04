@@ -1,7 +1,80 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ptnet:PetriNetDoc xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ptnet="http:///ptnet.ecore">
-  <nets id="__fyJAIWBEea7hpJSOdmQ9w">
-    <pages id="__f3okIWBEea7hpJSOdmQ9w"/>
+<ptnet:PetriNetDoc xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ptnet="http:///ptnet.ecore">
+  <nets id="_zmXZ4Yo1Eeat79FiJzNqzQ">
+    <pages id="_zmcSYIo1Eeat79FiJzNqzQ">
+      <objects xsi:type="ptnet:Place" id="_zmgj0Io1Eeat79FiJzNqzQ" OutArcs="_zmqU0Io1Eeat79FiJzNqzQ">
+        <name text="failedExecution"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_zmjAEIo1Eeat79FiJzNqzQ" InArcs="_zpJBEIo1Eeat79FiJzNqzQ" OutArcs="_zmq74Io1Eeat79FiJzNqzQ">
+        <name text="Scenario"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_zmlcUIo1Eeat79FiJzNqzQ" InArcs="_zmqU0Io1Eeat79FiJzNqzQ _zmq74Io1Eeat79FiJzNqzQ" OutArcs="_zmq74Yo1Eeat79FiJzNqzQ">
+        <name text="Scenario"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediatepriority&quot;>3&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediatepriority"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediatepriority&quot;>2&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediatepriority"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_zmpGsIo1Eeat79FiJzNqzQ" InArcs="_zmq74Yo1Eeat79FiJzNqzQ" OutArcs="_zpIaAYo1Eeat79FiJzNqzQ">
+        <name text="Scenario"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_zmqU0Io1Eeat79FiJzNqzQ" source="_zmgj0Io1Eeat79FiJzNqzQ" target="_zmlcUIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zmq74Io1Eeat79FiJzNqzQ" source="_zmjAEIo1Eeat79FiJzNqzQ" target="_zmlcUIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zmq74Yo1Eeat79FiJzNqzQ" source="_zmlcUIo1Eeat79FiJzNqzQ" target="_zmpGsIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Transition" id="_zmtYIIo1Eeat79FiJzNqzQ" InArcs="_zo_QEYo1Eeat79FiJzNqzQ" OutArcs="_zpZfwIo1Eeat79FiJzNqzQ">
+        <name text="Start"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_zo_QEIo1Eeat79FiJzNqzQ" OutArcs="_zo_QEYo1Eeat79FiJzNqzQ">
+        <name text="Start"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_zo_QEYo1Eeat79FiJzNqzQ" source="_zo_QEIo1Eeat79FiJzNqzQ" target="_zmtYIIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Place" id="_zo_3IIo1Eeat79FiJzNqzQ" InArcs="_zpb8AIo1Eeat79FiJzNqzQ" OutArcs="_zpF9wIo1Eeat79FiJzNqzQ">
+        <name text="A3"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_zo_3IYo1Eeat79FiJzNqzQ" InArcs="_zpF9wIo1Eeat79FiJzNqzQ" OutArcs="_zpgNcYo1Eeat79FiJzNqzQ">
+        <name text="A3"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_zpF9wIo1Eeat79FiJzNqzQ" source="_zo_3IIo1Eeat79FiJzNqzQ" target="_zo_3IYo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Place" id="_zpHL4Io1Eeat79FiJzNqzQ" OutArcs="_zpIaAIo1Eeat79FiJzNqzQ">
+        <name text="End"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_zpHy8Io1Eeat79FiJzNqzQ" InArcs="_zpIaAIo1Eeat79FiJzNqzQ _zpIaAYo1Eeat79FiJzNqzQ" OutArcs="_zpJBEIo1Eeat79FiJzNqzQ">
+        <name text="End"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediatepriority&quot;>3&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediatepriority"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediatepriority&quot;>2&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediatepriority"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_zpIaAIo1Eeat79FiJzNqzQ" source="_zpHL4Io1Eeat79FiJzNqzQ" target="_zpHy8Io1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpIaAYo1Eeat79FiJzNqzQ" source="_zmpGsIo1Eeat79FiJzNqzQ" target="_zpHy8Io1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpJBEIo1Eeat79FiJzNqzQ" source="_zpHy8Io1Eeat79FiJzNqzQ" target="_zmjAEIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Place" id="_zpJoIIo1Eeat79FiJzNqzQ" InArcs="_zpiCoIo1Eeat79FiJzNqzQ" OutArcs="_zpKPMIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Transition" id="_zpJoIYo1Eeat79FiJzNqzQ" InArcs="_zpKPMIo1Eeat79FiJzNqzQ" OutArcs="_zpb8AIo1Eeat79FiJzNqzQ _zpfmYIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpKPMIo1Eeat79FiJzNqzQ" source="_zpJoIIo1Eeat79FiJzNqzQ" target="_zpJoIYo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Place" id="_zpMrcIo1Eeat79FiJzNqzQ" InArcs="_zpfmYIo1Eeat79FiJzNqzQ" OutArcs="_zpPHsIo1Eeat79FiJzNqzQ">
+        <name text="A2"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_zpNSgIo1Eeat79FiJzNqzQ" InArcs="_zpPHsIo1Eeat79FiJzNqzQ" OutArcs="_zpaG0Io1Eeat79FiJzNqzQ">
+        <name text="A2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_zpPHsIo1Eeat79FiJzNqzQ" source="_zpMrcIo1Eeat79FiJzNqzQ" target="_zpNSgIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Place" id="_zpSLAIo1Eeat79FiJzNqzQ" InArcs="_zpZfwIo1Eeat79FiJzNqzQ" OutArcs="_zpV1YIo1Eeat79FiJzNqzQ">
+        <name text="A1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_zpSyEIo1Eeat79FiJzNqzQ" InArcs="_zpV1YIo1Eeat79FiJzNqzQ" OutArcs="_zpiCoIo1Eeat79FiJzNqzQ">
+        <name text="A1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_zpV1YIo1Eeat79FiJzNqzQ" source="_zpSLAIo1Eeat79FiJzNqzQ" target="_zpSyEIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Transition" id="_zpWccIo1Eeat79FiJzNqzQ" InArcs="_zpaG0Yo1Eeat79FiJzNqzQ _zpg0gIo1Eeat79FiJzNqzQ" OutArcs="_zpdxMIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpZfwIo1Eeat79FiJzNqzQ" source="_zmtYIIo1Eeat79FiJzNqzQ" target="_zpSLAIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Place" id="_zpZfwYo1Eeat79FiJzNqzQ" InArcs="_zpaG0Io1Eeat79FiJzNqzQ" OutArcs="_zpaG0Yo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpaG0Io1Eeat79FiJzNqzQ" source="_zpNSgIo1Eeat79FiJzNqzQ" target="_zpZfwYo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpaG0Yo1Eeat79FiJzNqzQ" source="_zpZfwYo1Eeat79FiJzNqzQ" target="_zpWccIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpb8AIo1Eeat79FiJzNqzQ" source="_zpJoIYo1Eeat79FiJzNqzQ" target="_zo_3IIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpdxMIo1Eeat79FiJzNqzQ" source="_zpWccIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpfmYIo1Eeat79FiJzNqzQ" source="_zpJoIYo1Eeat79FiJzNqzQ" target="_zpMrcIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Place" id="_zpgNcIo1Eeat79FiJzNqzQ" InArcs="_zpgNcYo1Eeat79FiJzNqzQ" OutArcs="_zpg0gIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpgNcYo1Eeat79FiJzNqzQ" source="_zo_3IYo1Eeat79FiJzNqzQ" target="_zpgNcIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpg0gIo1Eeat79FiJzNqzQ" source="_zpgNcIo1Eeat79FiJzNqzQ" target="_zpWccIo1Eeat79FiJzNqzQ"/>
+      <objects xsi:type="ptnet:Arc" id="_zpiCoIo1Eeat79FiJzNqzQ" source="_zpSyEIo1Eeat79FiJzNqzQ" target="_zpJoIIo1Eeat79FiJzNqzQ"/>
+    </pages>
     <name text="Scenario"/>
   </nets>
 </ptnet:PetriNetDoc>

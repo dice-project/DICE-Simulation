@@ -1,5 +1,5 @@
 
-package es.unizar.disco.simulation.tests;
+package test.es.unizar.disco.simulation.tests;
 
 import static org.junit.Assert.*;
 
