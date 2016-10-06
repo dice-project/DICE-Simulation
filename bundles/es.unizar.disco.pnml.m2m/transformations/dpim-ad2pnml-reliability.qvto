@@ -8,6 +8,7 @@ modeltype TYPES uses 'http://es.unizar.disco/simulation/datatypes/1.0';
 modeltype TRACE uses 'http://es.unizar.disco/simulation/traces/1.0';
 modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
 modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+modeltype DAM_COMPLEX_DATA_TYPES uses 'http://com.masdes.dam/libraries/Complex_Data_Types/1.0';
 	
 
 transformation ad2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces : TRACE); 
@@ -32,14 +33,14 @@ main() {
 	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2arc();
 	
 	// Transform deployment
-	ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
+	//ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
 	
 	// Transform workload descriptions
 	var initialNodes := ad.scenario().node[UML::InitialNode];
 	
 	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
 	
-	initialNodes[getGaWorkloadEvent().oclIsUndefined().not()] -> map closeNet();
+	initialNodes->asOrderedSet()->first() -> map closeNet();
 	
 	// Set time metadata
 	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
@@ -106,13 +107,18 @@ Closes the net for steady state reliability analysis
 
 */
 mapping UML::InitialNode::closeNet() {
-var place := self.resolveoneIn(UML::ActivityNode::activityNode2place);
-	var closingTransitions := ad.scenario().node[UML::ActivityFinalNode].resolveIn(UML::ActivityNode::activityNode2transition);
-	assert warning (closingTransitions->size() = 2) with log ("Not 2 finishing transitions found. This is problematic for the computation of the probability 
-	of failure. Found " + closingTransitions->size().repr() + " transitions" );
-	closingTransitions->forEach(transition) {
-		map arc(transition, place);
-	};
+	var place := self.resolveoneIn(UML::NamedElement::namedElement2place);
+
+var closingTransitionFromFailed := ad.scenario().node[UML::ActivityFinalNode].resolveoneIn(UML::ActivityFinalNode::finalNodefailed2transition);
+var closingTransitionFromNotFailed := ad.scenario().node[UML::ActivityFinalNode].resolveoneIn(UML::ActivityFinalNode::finalNodeNotFailed2transition);
+	map arc(closingTransitionFromFailed, place);
+	map arc(closingTransitionFromNotFailed, place);
+	
+	//assert warning (closingTransitions->size() = 2) with log ("Not 2 finishing transitions found. This is problematic for the computation of the probability 
+	//of failure. Found " + closingTransitions->size().repr() + " transitions" );
+	//closingTransitions->forEach(transition) {
+	//	map arc(transition, place);
+	//};
 	
 }
 
@@ -282,10 +288,17 @@ mapping UML::ActivityNode::basicActivityNode2subNet() {
 */
 mapping UML::InitialNode::initialNode2subNet() {
 	var transition := self.map activityNode2transition();
-	if (self.getGaWorkloadEvent_pattern().oclIsTypeOf(OpenPattern).not()) {
-		var place := self.map activityNode2place();
-		var arc := map arc(place, transition);
+	transition.toolspecifics += expTransitionToolInfo(1.0);
+	var place := self.map namedElement2place();
+		
+	place.initialMarking := object PNML::PTMarking {
+		text := 1;
 	};
+	if (self.name.oclIsUndefined().not()) {
+		place.name.text:= "Starting Execution";
+	};
+	
+	var arcStartExecution := map arc(place, transition);
 }
 
 /** Transforms the Final node to the corresponding transtions that check whether the execution 
@@ -294,20 +307,26 @@ has failed along the workflow or not
 
 mapping UML::ActivityFinalNode::finalNode2Subnet(){
 	var enterPlace := self.map namedElement2place();
+	if (self.name.oclIsUndefined().not()) {
+	enterPlace.name.text:="EnterCheck";
+	};
 	
 	//the part of the failing execution
-	var transitionFailed := self.map namedElement2transition();
-	transitionFailed.toolspecifics +=  priorityTransitionToolInfo(3);
+	var transitionFailed := self.map finalNodefailed2transition();
+	
 	
 	var failedPlace := resolveoneIn(UML::NamedElement::namedElement2placeAlreadyFailed, PNML::Place);
 	var arcFromEnterToFailedTransition := map arc(enterPlace, transitionFailed);
 	var arcFromFailedPlaceToFailedTransition := map arc(failedPlace, transitionFailed);
-	var OKplace := resolveoneIn(UML::NamedElement::namedElement2placeNotFailedYet, PNML::Place); 
+	var OKplace := resolveoneIn(UML::NamedElement::namedElement2placeNotFailedYet, PNML::Place);
+	
+		assert warning (OKplace.oclIsUndefined().not())
+		with log("Place for successful execution not found while translating the final node");
+
 	var arcReturnTokenToOK := map arc(transitionFailed, OKplace);
 	
 	//the part where the execution has not failed
-	var transitionNotFailed := self.map namedElement2transition();
-	transitionNotFailed.toolspecifics +=  priorityTransitionToolInfo(2);
+	var transitionNotFailed := self.map finalNodeNotFailed2transition();
 	var arcFromEnterToNotFailedTransition := map arc(enterPlace, transitionNotFailed);
 }
 
@@ -335,7 +354,8 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 	containerPage := resolveoneIn(UML::NamedElement::model2page);
 	id := createRandomUniqueId();
 	if (self.name.oclIsUndefined().not()) {
-		name := object PNML::Name {
+	result.name := object PNML::Name {
+			
 			text := self.name;
 		};
 	};
@@ -351,21 +371,35 @@ inherits UML::NamedElement::namedElement2place {
 mapping UML::NamedElement::failPlace() : PNML::Place 
 	inherits UML::NamedElement::namedElement2place {
 	
-	name:= object PNML::Name{
-		text := "failedExecution";
+	if (self.name.oclIsUndefined().not()) {
+		name.text := self.name+"_executionFails";
 	};
 	
 	self.map trace(result, "ScenarioFailureEvent");
 };
 
+/**one of the transitions created in the reliabilityCheckSubNet. The one that fires if the execution has already failed at some moment*/
+mapping UML::NamedElement::checkNetfailed2transition() : PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+	toolspecifics +=  priorityTransitionToolInfo(2);
+}
+
+/***one of the transitions created in the reliabilityCheckSubNet. The one that fires if the execution has not failed yet*/
+mapping UML::NamedElement::checkNetNotFailed2transition() : PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+	toolspecifics +=  priorityTransitionToolInfo(3);
+}
+
+/**Creates the part of the subnet that contros whether the execution has already failed or if it is still a valid execution*/
 mapping UML::NamedElement::reliabilityCheckSubNet(placeFail: PNML::Place){
 	var placeOK := self.map namedElement2placeNotFailedYet();
 	
-	var transitionNotFailedYet := self.map namedElement2transition();
-	transitionNotFailedYet.toolspecifics +=  priorityTransitionToolInfo(3);
+	var transitionNotFailedYet := self.map checkNetNotFailed2transition();
+	if (self.name.oclIsUndefined().not()) {
+		transitionNotFailedYet.name.text := "transitionNotFailedYet";
+	};
 	
-	var transitionAlreadyFailed := self.map namedElement2transition();
-	transitionAlreadyFailed.toolspecifics+= priorityTransitionToolInfo(2);
+	var transitionAlreadyFailed := self.map checkNetfailed2transition();
 	
 	var placeAlreadyFailed := self.map namedElement2placeAlreadyFailed();
 	
@@ -386,12 +420,23 @@ mapping UML::NamedElement::namedElement2placeNotFailedYet() : PNML::Place
 	inherits UML::NamedElement::namedElement2place {
 	initialMarking := object PNML::PTMarking {
 		text := 1;
-	}
+	};
+	if (self.name.oclIsUndefined().not()) {name.text := "NotFailedYetExecution"}
+	else{
+		name:= object PNML::Name { text := "NotFailedYetExecution";};
+	};
+	
 
 }
 
 mapping UML::NamedElement::namedElement2placeAlreadyFailed() : PNML::Place 
 	inherits UML::NamedElement::namedElement2place {
+		
+	if (self.name.oclIsUndefined().not()) {name.text := "AlreadyFailedExecution"}
+	else{
+		name:= object PNML::Name { text := "AlreadyFailedExecution";};
+		};
+	
 }
 
 /**
@@ -401,21 +446,32 @@ mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 	containerPage := resolveoneIn(UML::NamedElement::model2page);
 	id := createRandomUniqueId();
 	if (self.name.oclIsUndefined().not()) {
-		name := object PNML::Name {
-			text := self.name;
+		result.name := object PNML::Name {
+		
+		text := self.name;
 		};
 	};
 }
 
 /**
 	Transform a generic ActivityNode into a Transition and 
-	creates any additional ToolInfo depending on the ActivityNode
-	subtype (e.g., OpaqueActions with hostDemand may create 
-	exponential transitions) 
+	creates 
 */
 mapping UML::ActivityNode::activityNode2transition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
-	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+}
+
+
+/**one of the transitions created in the final node. The one that fires if the execution has failed at some moment*/
+mapping UML::ActivityFinalNode::finalNodefailed2transition() : PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+	toolspecifics +=  priorityTransitionToolInfo(3);
+}
+
+/**one of the transitions created in the final node. The one that fires if the execution has not failed in any moment*/
+mapping UML::ActivityFinalNode::finalNodeNotFailed2transition() : PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+	toolspecifics +=  priorityTransitionToolInfo(2);
 }
 
 /**
@@ -425,6 +481,13 @@ inherits UML::NamedElement::namedElement2transition {
 */
 mapping UML::ActivityNode::activityFailingNode2transition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
+	
+	if (self.name.oclIsUndefined().not()) {result.name.text := "FailingActivity_" + self.name;}
+	else{
+		name:= object PNML::Name { text := "FailingActivity_" + self.name;}
+		
+	;};
+
 	toolspecifics += self[OpaqueAction].map opaqueActionFailureProbability2toolInfo();
 	
 }
@@ -451,6 +514,7 @@ when {
 	var hostDemand := self.getGaStep_hostDemand();
 	result += expTransitionToolInfo( 1 / hostDemand.value());
 	result += infServerTransitionToolInfo();
+	log("Adding host demand and infinite server to element named: " + self.name);
 }
 
 
@@ -490,8 +554,13 @@ mapping UML::ControlFlow::basicControlFlow2arc() {
 		with log ("Only ControlFlows departing from a DecisionNode should define a probability. " +
 					"Ignoring annotation in the context element '" + self.toString() + "'"); 
 	
-	var place := self.target.resolveoneIn(UML::ActivityNode::activityNode2place);
-		
+	//var place := self.target.resolveoneIn(UML::NamedElement::namedElement2place);
+		var place := self.target.resolveone(PNML::Place);
+		var precedentTransitions := self.source.resolve(PNML::Transition);
+		precedentTransitions->forEach(transition) {
+		map arc(transition, place);
+		};
+/*	var place := self.target.resolveoneIn(UML::ActivityNode::activityNode2place);
 	var prevActivNotFailingTrans := self.source.resolveoneIn(UML::ActivityNode::activityFailingNode2transition);
 	if(prevActivNotFailingTrans.oclIsUndefined().not()){
 		
@@ -503,7 +572,7 @@ mapping UML::ControlFlow::basicControlFlow2arc() {
 			map arc(prevActivFailingTrans, place);
 	
 	};
-	
+	*/
 }
 
 /**
@@ -947,17 +1016,15 @@ helper UML::Element::getGaStep_prob() : NFP_Real {
 }
 
 
-helper UML::Element::getDaStep_Failure_Occurrenceprob() : NFP_Real {
+helper UML::NamedElement::getDaStep_Failure_Occurrenceprob() : NFP_Real {
 	if (self.getDaStep() = null) {
+
 		return null;
 	};
 	//TODO: I'm not sure about the 'oclAsType'- Check it
-	var failureInformation := self.getValue(self.getDaStep(), "failure").oclAsType(String);
-	var failureValue = failureInformation.value();
-	if(failureValue.isTuple()){
-		return failureValue.asTuple()->get("occurenceProb").toNfpReal();
-	};
-	return "1".toNfpReal();
+	var firstFailureInformation := self.getValue(self.getDaStep(), "failure").oclAsSet()->flatten()->selectByKind(DAM_COMPLEX_DATA_TYPES::DaFailure)->asSequence()->first();
+	return firstFailureInformation.occurrenceProb->asSequence()->first().toString().toNfpReal();
+
 }
 
 helper UML::Element::getPaLogicalResource_poolSize() : NFP_Integer {

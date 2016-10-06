@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DPIM="http://es.unizar.disco.dice/profiles/DPIM/1.0" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:PAM="http://www.eclipse.org/papyrus/PAM/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DPIM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://www.eclipse.org/papyrus/PAM/1 http://www.eclipse.org/papyrus/MARTE/1#//PAM">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Complex_Data_Types="http://com.masdes.dam/libraries/Complex_Data_Types/1.0" xmlns:Core="http://com.masdes.dam/profiles/Core/1.0" xmlns:DPIM="http://es.unizar.disco.dice/profiles/DPIM/1.0" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:PAM="http://www.eclipse.org/papyrus/PAM/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://com.masdes.dam/profiles/Core/1.0 http://com.masdes.dam/profiles/DAM/1.0#//Core http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://www.eclipse.org/papyrus/PAM/1 http://www.eclipse.org/papyrus/MARTE/1#//PAM">
   <uml:Model xmi:id="_agkHwPDiEeWtuqq0TURTfw" name="Example Activity Diagram">
     <packagedElement xmi:type="uml:Activity" xmi:id="_UWw7IPDmEeWtuqq0TURTfw" name="Scenario" node="_Z24fUPDnEeWtuqq0TURTfw _oWSIIPDnEeWtuqq0TURTfw _GLmyEPDoEeWtuqq0TURTfw _XXsDkPDoEeWtuqq0TURTfw _8xYd4PDoEeWtuqq0TURTfw _ULGWUPDpEeWtuqq0TURTfw _wNhfQPDpEeWtuqq0TURTfw" group="_TeA4wPDnEeWtuqq0TURTfw">
       <ownedComment xmi:type="uml:Comment" xmi:id="_3SWH0PRVEeWjOZc1J1pNnQ" annotatedElement="_Z24fUPDnEeWtuqq0TURTfw">
@@ -80,7 +80,7 @@ source=est)</body>
     </profileApplication>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_D8eRADl2EeaSQIuawXa71A">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_D8h7YDl2EeaSQIuawXa71A" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DPIM/1.0#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_gFr1YOebEeWj7ZPL8JeBTQ"/>
     </profileApplication>
@@ -89,6 +89,12 @@ source=est)</body>
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/MARTE/1#//PAM"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_6c2bkAPMEdyuUt-4qHuVvQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="__PB6UIreEeanptMQm_R30Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__PChYIreEeanptMQm_R30Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://com.masdes.dam/profiles/DAM/1.0#//Core"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DAM_PROFILES/DAM.profile.uml#_DchGAOSiEeKuSu-I2xDxSA"/>
     </profileApplication>
   </uml:Model>
   <GQAM:GaStep xmi:id="_2GmVIPRPEeWjOZc1J1pNnQ" base_NamedElement="_oWSIIPDnEeWtuqq0TURTfw" base_Action="_oWSIIPDnEeWtuqq0TURTfw" blockT="">
@@ -101,16 +107,34 @@ source=est)</body>
     <hostDemand>(expr=$a2,unit=s,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaWorkloadEvent xmi:id="_dXwnYPRQEeWjOZc1J1pNnQ" pattern="open=(arrivalRate=(expr=$rate, unit=Hz, statQ=mean, source=est))" base_NamedElement="_Z24fUPDnEeWtuqq0TURTfw"/>
-  <DPIM:DpimScenario xmi:id="_FD1hsDl2EeaSQIuawXa71A" base_NamedElement="_UWw7IPDmEeWtuqq0TURTfw" base_Behavior="_UWw7IPDmEeWtuqq0TURTfw">
-    <throughput>(expr=$throughput, statQ=mean, source=calc)</throughput>
-  </DPIM:DpimScenario>
   <GQAM:GaAnalysisContext xmi:id="_PJRgoDl2EeaSQIuawXa71A" base_StructuredClassifier="_UWw7IPDmEeWtuqq0TURTfw" base_NamedElement="_UWw7IPDmEeWtuqq0TURTfw">
-    <context>out$throughput</context>
+    <context>out$reliability</context>
     <context>in$rate</context>
     <context>in$a1</context>
     <context>in$a2</context>
     <context>in$a3</context>
     <context>in$threads</context>
+    <context>in$rel1</context>
+    <context>in$rel2</context>
+    <context>in$rel3</context>
   </GQAM:GaAnalysisContext>
   <PAM:PaLogicalResource xmi:id="_mOtb0DyPEeaDlarzRM0iyw" base_Classifier="_bmnpgPDlEeWtuqq0TURTfw" poolSize="$threads"/>
+  <DPIM:DpimScenario xmi:id="_FD1hsDl2EeaSQIuawXa71A" base_NamedElement="_UWw7IPDmEeWtuqq0TURTfw" base_Behavior="_UWw7IPDmEeWtuqq0TURTfw">
+    <reliability>(expr=$reliability, statQ=mean, source=calc)</reliability>
+  </DPIM:DpimScenario>
+  <Core:DaStep xmi:id="_BDe6gIrfEeanptMQm_R30Q" base_NamedElement="_oWSIIPDnEeWtuqq0TURTfw" base_Action="_oWSIIPDnEeWtuqq0TURTfw">
+    <failure xmi:type="Complex_Data_Types:DaFailure" xmi:id="_E1WpoIrfEeanptMQm_R30Q" domain="erratic">
+      <occurrenceProb>(expr=$rel1, statQ=mean, source=est)</occurrenceProb>
+    </failure>
+  </Core:DaStep>
+  <Core:DaStep xmi:id="_doyRkIrgEeanptMQm_R30Q" base_NamedElement="_XXsDkPDoEeWtuqq0TURTfw" base_Action="_XXsDkPDoEeWtuqq0TURTfw">
+    <failure xmi:type="Complex_Data_Types:DaFailure" xmi:id="_j_swUIrgEeanptMQm_R30Q">
+      <occurrenceProb>(expr=$rel2, statQ=mean, source=est)</occurrenceProb>
+    </failure>
+  </Core:DaStep>
+  <Core:DaStep xmi:id="_sNq3UIrgEeanptMQm_R30Q" base_NamedElement="_8xYd4PDoEeWtuqq0TURTfw" base_Action="_8xYd4PDoEeWtuqq0TURTfw">
+    <failure xmi:type="Complex_Data_Types:DaFailure" xmi:id="_tP1e8IrgEeanptMQm_R30Q">
+      <occurrenceProb>(expr=$rel3, statQ=mean, source=est)</occurrenceProb>
+    </failure>
+  </Core:DaStep>
 </xmi:XMI>

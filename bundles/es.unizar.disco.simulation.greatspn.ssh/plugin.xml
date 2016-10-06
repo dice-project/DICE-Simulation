@@ -20,6 +20,9 @@
       <MetricTag
             id="throughput">
       </MetricTag>
+      <MetricTag
+            id="reliability">
+      </MetricTag>
       <Metric
             name="DICE::DICE_UML_Extensions::DPIM::DpimScenario#respT"
             stereotype="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
@@ -151,6 +154,16 @@
          </Calculator>
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DPIM::DpimScenario#reliability"
+            stereotype="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
+            tag="reliability">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ScenarioReliabilityCalculator"
                scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>

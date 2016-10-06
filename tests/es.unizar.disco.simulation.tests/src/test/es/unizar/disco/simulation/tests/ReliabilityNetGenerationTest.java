@@ -9,6 +9,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
@@ -21,8 +22,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.UMLPlugin;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import com.masdes.dam.DAM.DAMPackage;
+
 import org.junit.BeforeClass;
 import org.junit.Before;
 
@@ -38,6 +43,9 @@ import es.unizar.disco.simulation.models.traces.Trace;
 import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.traces.TracesFactory;
 import es.unizar.disco.simulation.registry.SimulationInvocationsRegistry;
+import fr.lip6.move.pnml.ptnet.PetriNetDoc;
+import fr.lip6.move.pnml.ptnet.PnObject;
+import fr.lip6.move.pnml.ptnet.Transition;
 
 public class ReliabilityNetGenerationTest {
 
@@ -51,15 +59,17 @@ public class ReliabilityNetGenerationTest {
 	// final static URI baseUri =
 	// URI.createFileURI(SimulationInvocationsRegistry.FILES_DIRECTORY.getPath());
 	final static URI baseUri = URI.createFileURI(SimulationInvocationsRegistry.FILES_DIRECTORY.getPath());
-	final static String TEST_FILES_UUID = "f37f3e0e-4950-4ae7-a1b9-8deec412efe4";
+	final static String TEST_FILES_UUID = "cfcac620-a901-4526-b631-097bed907210";
 
 	@BeforeClass
 	public static void loadModels() throws IOException, URISyntaxException {
+
+		
 		System.out.println("Loading models from registry");
 		
 		
 		//final URI defURI = URI.createFileURI(Paths.get(ReliabilityNetGenerationTest.class.getResource("e4012c46-f3bb-41fe-99c2-1ffdba8cb4ef" + ".def" + "." + XMIResource.XMI_NS).toURI()).toFile().getAbsolutePath());
-		final URI defURI = URI.createFileURI(Paths.get("src/test/resources/e4012c46-f3bb-41fe-99c2-1ffdba8cb4ef" + ".def" + "." + XMIResource.XMI_NS).toFile().getAbsolutePath());
+		final URI defURI = URI.createFileURI(Paths.get("src/test/resources/cb745d8a-44f7-46de-9167-7ce0e822f048" + ".def" + "." + XMIResource.XMI_NS).toFile().getAbsolutePath());
 		System.out.println("defURI is: " + defURI);
 		
 		final URI invURI = URI.createFileURI(Paths.get("src/test/resources/" + TEST_FILES_UUID + ".inv" + "." + XMIResource.XMI_NS).toFile().getAbsolutePath());
@@ -70,6 +80,9 @@ public class ReliabilityNetGenerationTest {
 		definition = (SimulationDefinition) loadResourceFromUri(defURI);
 
 		invocation = (SimulationInvocation) loadResourceFromUri(invURI);
+
+
+      
 
 	}
 
@@ -109,10 +122,34 @@ public class ReliabilityNetGenerationTest {
 
 		saveAnalyzbleModelResult(result);
 	}
+	
+	@Test
+	public void testNotDoublePriorityToolInfo(){
+		definition = invocation.getDefinition();
+		IAnalyzableModelBuilder builder = new ActivityDiagram2PnmlReliabilityResourceBuilder();
+		
+		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
+				invocation.getVariableConfiguration().toPrimitiveAssignments());
+		
+		PetriNetDoc netresult = (PetriNetDoc) result.getModel().get(0);
+		List<PnObject> listPNelements = netresult.getNets().get(0).getPages().get(0).getObjects();
+		for(PnObject pnelement : listPNelements){
+			Transition transition = null;
+			try{transition= (Transition) pnelement;
+			}catch(ClassCastException e){// nothig to do, it was not a transittion
+				}
+			if(transition!=null){
+				assertFalse("Found a trasition with more than one toolSpecifics, its name is: " + transition.getName().getText() + " and its string representation is " + transition.toString(), 
+						transition.getToolspecifics().size()>1);
+			}
+			
+		}
+		
+	}
 
 	private void saveAnalyzbleModelResult(ModelResult result) throws IOException {
 		
-		final URI producedAAM_URI = URI.createFileURI(Paths.get("src/test/resources/output.anm" + "." + XMIResource.XMI_NS).toFile().getAbsolutePath());
+		final URI producedAAM_URI = URI.createFileURI(Paths.get("target/test/resources/outputPosidonia.anm" + "." + XMIResource.XMI_NS).toFile().getAbsolutePath());
 
 			Resource producedModelResource = getResourceSet().createResource(producedAAM_URI);
 			producedModelResource.getContents().add(result.getModel().get(0));

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="DICE Simulation Tools SDK Target Platform" sequenceNumber="68">
+<?pde version="3.8"?><target includeMode="feature" name="DICE Simulation Tools SDK Target Platform" sequenceNumber="76">
 <locations>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="fr.lip6.pnml.framework.sdk.feature.group" version="2.2.12"/>
@@ -40,7 +40,28 @@
 <unit id="org.eclipse.papyrus.sdk.feature.source.feature.group" version="2.0.1.201609141603"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.acceleo.ui.interpreter.completeocl.feature.group" version="3.6.5.201608301456"/>
+<unit id="org.eclipse.acceleo.ui.capabilities.feature.group" version="3.6.5.201608301456"/>
+<unit id="org.eclipse.acceleo.runtime.source.feature.group" version="3.6.5.201608301456"/>
+<unit id="org.eclipse.acceleo.runtime.feature.group" version="3.6.5.201608301456"/>
+<unit id="org.eclipse.acceleo.sdk.feature.group" version="3.6.5.201608301456"/>
+<unit id="org.eclipse.acceleo.doc.feature.group" version="3.6.5.201608301456"/>
+<unit id="org.eclipse.acceleo.feature.group" version="3.6.5.201608301456"/>
+<unit id="org.eclipse.acceleo.source.feature.group" version="3.6.5.201608301456"/>
+<repository location="http://download.eclipse.org/acceleo/updates/releases/3.6"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.pde.source.feature.group" version="3.12.1.v20160907-1200"/>
+<unit id="org.eclipse.equinox.p2.user.ui.source.feature.group" version="2.2.200.v20160815-1406"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.6"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.egit.feature.group" version="4.4.1.201607150455-r"/>
+<repository location="http://download.eclipse.org/releases/neon"/>
+</location>
+<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.papyrus.infra.core.feature.feature.group" version="2.0.1.201609141603"/>
+<unit id="org.eclipse.papyrus.extra.uml.compare.feature.source.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.uml.feature.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.uml.xtext.integration.feature.source.feature.group" version="1.2.0.201609141603"/>
 <unit id="org.eclipse.papyrus.uml.decoratormodel.feature.feature.group" version="2.0.0.201609141603"/>
@@ -51,8 +72,8 @@
 <unit id="org.eclipse.papyrus.infra.services.feature.source.feature.group" version="2.0.1.201609141603"/>
 <unit id="org.eclipse.papyrus.uml.assistants.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.extra.marte.properties.feature.feature.group" version="1.2.0.201609141604"/>
-<unit id="org.eclipse.papyrus.editor.feature.feature.group" version="1.2.0.201609141603"/>
 <unit id="org.eclipse.papyrus.infra.discovery.feature.feature.group" version="2.0.0.201609141603"/>
+<unit id="org.eclipse.papyrus.editor.feature.feature.group" version="1.2.0.201609141603"/>
 <unit id="org.eclipse.papyrus.extra.marte.feature.source.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.infra.gmfdiag.css.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.infra.widget.feature.feature.group" version="2.0.0.201609141603"/>
@@ -66,6 +87,7 @@
 <unit id="org.eclipse.papyrus.views.modelexplorer.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.infra.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.extra.marte.textedit.feature.feature.group" version="1.2.0.201609141604"/>
+<unit id="org.eclipse.papyrus.extra.feature.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.uml.diagram.css.feature.source.feature.group" version="1.2.0.201609141603"/>
 <unit id="org.eclipse.papyrus.views.properties.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.sdk.feature.source.feature.group" version="2.0.1.201609141603"/>
@@ -73,17 +95,21 @@
 <unit id="org.eclipse.papyrus.uml.nattable.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.infra.emf.feature.feature.group" version="2.0.1.201609141603"/>
 <unit id="org.eclipse.papyrus.infra.feature.feature.group" version="2.0.0.201609141603"/>
+<unit id="org.eclipse.papyrus.uml.alf.extra.feature.source.feature.group" version="0.7.0.201609141604"/>
 <unit id="org.eclipse.papyrus.uml.tools.feature.source.feature.group" version="2.0.1.201609141603"/>
 <unit id="org.eclipse.papyrus.customization.feature.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.doc.feature.source.feature.group" version="1.2.0.201609141603"/>
 <unit id="org.eclipse.papyrus.views.properties.feature.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.sdk.feature.feature.group" version="2.0.1.201609141603"/>
 <unit id="org.eclipse.papyrus.views.references.feature.source.feature.group" version="2.0.0.201609141603"/>
-<unit id="org.eclipse.papyrus.uml.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.doc.feature.feature.group" version="1.2.0.201609141603"/>
+<unit id="org.eclipse.papyrus.uml.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.uml.assistants.feature.feature.group" version="2.0.0.201609141603"/>
+<unit id="org.eclipse.papyrus.uml.alf.extra.feature.feature.group" version="0.7.0.201609141604"/>
+<unit id="org.eclipse.papyrus.extra.feature.source.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.emf.facet.feature.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.views.references.feature.feature.group" version="2.0.0.201609141603"/>
+<unit id="org.eclipse.papyrus.extra.uml.compare.feature.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.emf.facet.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.uml.properties.feature.feature.group" version="2.0.1.201609141603"/>
 <unit id="org.eclipse.papyrus.views.modelexplorer.feature.feature.group" version="2.0.0.201609141603"/>
@@ -99,6 +125,7 @@
 <unit id="org.eclipse.papyrus.infra.services.feature.feature.group" version="2.0.1.201609141603"/>
 <unit id="org.eclipse.papyrus.extra.marte.textedit.feature.source.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.uml.properties.feature.source.feature.group" version="2.0.1.201609141603"/>
+<unit id="org.eclipse.papyrus.layers.feature.source.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.extra.marte.properties.feature.source.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.uml.ui.feature.source.feature.group" version="1.2.0.201609141603"/>
 <unit id="org.eclipse.papyrus.infra.nattable.feature.source.feature.group" version="2.0.1.201609141603"/>
@@ -109,6 +136,7 @@
 <unit id="org.eclipse.papyrus.uml.decoratormodel.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.infra.gmfdiag.feature.source.feature.group" version="2.0.1.201609141603"/>
 <unit id="org.eclipse.papyrus.uml.textedit.feature.source.feature.group" version="1.2.0.201609141603"/>
+<unit id="org.eclipse.papyrus.layers.feature.feature.group" version="1.2.0.201609141604"/>
 <unit id="org.eclipse.papyrus.uml.alf.feature.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.customization.feature.source.feature.group" version="2.0.0.201609141603"/>
 <unit id="org.eclipse.papyrus.uml.diagram.css.feature.feature.group" version="1.2.0.201609141603"/>
@@ -117,39 +145,18 @@
 <repository location="http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon"/>
 </location>
 <location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.acceleo.ui.interpreter.completeocl.feature.group" version="3.6.5.201608301456"/>
-<unit id="org.eclipse.acceleo.ui.capabilities.feature.group" version="3.6.5.201608301456"/>
-<unit id="org.eclipse.acceleo.runtime.source.feature.group" version="3.6.5.201608301456"/>
-<unit id="org.eclipse.acceleo.runtime.feature.group" version="3.6.5.201608301456"/>
-<unit id="org.eclipse.acceleo.sdk.feature.group" version="3.6.5.201608301456"/>
-<unit id="org.eclipse.acceleo.doc.feature.group" version="3.6.5.201608301456"/>
-<unit id="org.eclipse.acceleo.feature.group" version="3.6.5.201608301456"/>
-<unit id="org.eclipse.acceleo.source.feature.group" version="3.6.5.201608301456"/>
-<repository location="http://download.eclipse.org/acceleo/updates/releases/3.6"/>
-</location>
-<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.ecore.xcore.sdk.feature.group" version="1.4.0.v20160526-0606"/>
-<unit id="org.eclipse.gmf.sdk.feature.group" version="3.3.1.201509291144"/>
-<unit id="org.eclipse.gmf.tooling.runtime.feature.group" version="3.3.1.201509291144"/>
-<unit id="org.eclipse.papyrus.sdk.feature.feature.group" version="2.0.1.201609141603"/>
-<unit id="org.eclipse.gmf.feature.group" version="1.10.0.201606071959"/>
-<unit id="org.eclipse.uml2.sdk.feature.group" version="5.2.1.v20160822-0739"/>
-<unit id="org.eclipse.emf.eef.codegen.ecore-feature.feature.group" version="1.5.1.201601141612"/>
-<unit id="org.eclipse.acceleo.feature.group" version="3.6.5.201608301456"/>
-<unit id="org.eclipse.gmf.tooling.feature.group" version="3.3.1.201509291144"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.12.0.v20160526-0356"/>
-<unit id="org.eclipse.emf.facet.sdk.feature.feature.group" version="1.1.0.201603181016"/>
-<unit id="org.eclipse.emf.ecoretools.sdk.feature.group" version="3.1.0.201605311155"/>
-<unit id="org.eclipse.emf.ecp.emfforms.sdk.feature.feature.group" version="1.10.0.20160912-1709"/>
-<unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group" version="3.6.0.v20160606-1156"/>
-<repository location="http://download.eclipse.org/releases/neon"/>
-</location>
-<location includeAllPlatforms="true" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.6.1.M20160907-1200"/>
-<unit id="org.eclipse.platform.sdk" version="4.6.1.M20160907-1200"/>
-<unit id="org.eclipse.equinox.sdk.feature.group" version="3.12.0.v20160829-1338"/>
-<unit id="org.eclipse.sdk.ide" version="4.6.1.M20160907-1200"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.6"/>
+<unit id="org.eclipse.gmf.tests.feature.group" version="2.0.0.v20080114-2222-7I-E8aEDx2WYbWuneG1110"/>
+<unit id="org.eclipse.gmf.examples.feature.group" version="1.0.100.v20070809-0000-7A-_EE9IgKLWLhLs_KKKK"/>
+<unit id="org.eclipse.gmf.feature.group" version="1.0.101.v20080114-2222-7d-EVOEYjiMWaZ4YWeu3dCypkm71"/>
+<unit id="org.eclipse.gmf.source.feature.group" version="1.0.101.v20080114-2222-7d-EVOEYjiMWaZ4YWeu3dCypkm71"/>
+<unit id="org.eclipse.gmf.examples.pde.feature.group" version="1.1.0.v20070809-0000-2-8Y8s733G3I3K13333"/>
+<unit id="org.eclipse.gmf.doc.feature.group" version="1.1.0.v20070809-0000-10-7w3119122503333"/>
+<unit id="org.eclipse.gmf.runtime.thirdparty.feature.group" version="1.0.0.v20070809-0000-7G8D-ED-z0UWCVxojl60L"/>
+<unit id="org.eclipse.gmf.sdk.experimental.feature.group" version="1.1.0.v20080225-0200-618ZBcMAArArFh5CCCC"/>
+<unit id="org.eclipse.gmf.sdk.feature.group" version="2.0.1.v20070921-0000-7f79CSEMnY9yMVlrV-40M7vY1p8w"/>
+<unit id="org.eclipse.gmf.sdk.source.feature.group" version="2.0.1.v20070921-0000"/>
+<unit id="org.eclipse.gmf.runtime.thirdparty.source.feature.group" version="1.0.0.v20070809-0000-7D85-EB7sQRxRjeefxtH"/>
+<repository location="http://download.eclipse.org/modeling/gmp/updates/releases/"/>
 </location>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
