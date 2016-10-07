@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<invocation:SimulationInvocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:invocation="http://es.unizar.disco/simulation/invocation/1.0" identifier="cfcac620-a901-4526-b631-097bed907210" start="2016-10-05T15:20:02.557+0200" end="2016-10-05T15:20:02.608+0200" status="Failed">
+  <traceSet href="cfcac620-a901-4526-b631-097bed907210.trc.xmi#/"/>
+  <definition href="cb745d8a-44f7-46de-9167-7ce0e822f048.def.xmi#cb745d8a-44f7-46de-9167-7ce0e822f048"/>
+  <variableConfiguration href="cb745d8a-44f7-46de-9167-7ce0e822f048.def.xmi#//@possibleConfigurations.0"/>
+  <analyzableModel href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#/0"/>
+  <analyzableModel href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#/1"/>
+  <analyzableModel href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#/2"/>
+  <analyzableModel href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#/3"/>
+  <analyzableModel href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#/4"/>
+  <analyzableModel href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#/5"/>
+  <analyzableModel href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#/6"/>
+  <analyzableModel href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#/7"/>
+</invocation:SimulationInvocation>

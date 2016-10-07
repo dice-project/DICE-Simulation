@@ -139,7 +139,7 @@ public class ReliabilityNetGenerationTest {
 			}catch(ClassCastException e){// nothig to do, it was not a transittion
 				}
 			if(transition!=null){
-				assertFalse("Found a trasition with more than one toolSpecifics, its name is: " + transition.getName().getText() + " and its string representation is " + transition.toString(), 
+				assertFalse("Found a trasition with more than one toolSpecifics, its name is: " + transition.getName() + " and its string representation is " + transition.toString(), 
 						transition.getToolspecifics().size()>1);
 			}
 			

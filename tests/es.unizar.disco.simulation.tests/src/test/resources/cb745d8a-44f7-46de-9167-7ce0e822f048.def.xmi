@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ASCII"?>
+<definition:SimulationDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:definition="http://es.unizar.disco/simulation/definition/1.0" identifier="cb745d8a-44f7-46de-9167-7ce0e822f048" maxExecutionTime="1970-01-01T01:00:00.000+0100" measuresToCompute="//@declaredMeasures.0" backend="es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator" activeConfigurations="//@possibleConfigurations.0" nfpToCompute="RELIABILITY">
+  <invocations href="cfcac620-a901-4526-b631-097bed907210.inv.xmi#cfcac620-a901-4526-b631-097bed907210"/>
+  <parameters key="-M" value="2000"/>
+  <parameters key="-m" value="1000"/>
+  <parameters key="-s" value="31415"/>
+  <parameters key="-t" value="1000"/>
+  <parameters key="binary_file_path" value="/usr/local/GreatSPN/bin/WNSIM"/>
+  <parameters key="-a" value="5"/>
+  <parameters key="-c" value="95"/>
+  <parameters key="-f" value="1000"/>
+  <activeScenario href="modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+  <inputVariables name="threads" assignments="//@possibleConfigurations.0/@assignments.0">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.0"/>
+  </inputVariables>
+  <inputVariables name="rel2" assignments="//@possibleConfigurations.0/@assignments.1">
+    <values value="0.2" assignments="//@possibleConfigurations.0/@assignments.1"/>
+  </inputVariables>
+  <inputVariables name="rel1" assignments="//@possibleConfigurations.0/@assignments.2">
+    <values value="0.1" assignments="//@possibleConfigurations.0/@assignments.2"/>
+  </inputVariables>
+  <inputVariables name="rel3" assignments="//@possibleConfigurations.0/@assignments.3">
+    <values value="0.05" assignments="//@possibleConfigurations.0/@assignments.3"/>
+  </inputVariables>
+  <inputVariables name="a1" assignments="//@possibleConfigurations.0/@assignments.4">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.4"/>
+  </inputVariables>
+  <inputVariables name="a2" assignments="//@possibleConfigurations.0/@assignments.5">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.5"/>
+  </inputVariables>
+  <inputVariables name="a3" assignments="//@possibleConfigurations.0/@assignments.6">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.6"/>
+  </inputVariables>
+  <inputVariables name="rate" assignments="//@possibleConfigurations.0/@assignments.7">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.7"/>
+  </inputVariables>
+  <domainResource uri="modelPoseidoniaReliab.uml"/>
+  <outputVariables name="reliability"/>
+  <declaredMeasures measure="reliability">
+    <measuredElement href="modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+    <vslExpressionEntries key="expr" value="$reliability"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <possibleConfigurations>
+    <assignments value="//@inputVariables.0/@values.0" variable="threads"/>
+    <assignments value="//@inputVariables.1/@values.0" variable="rel2"/>
+    <assignments value="//@inputVariables.2/@values.0" variable="rel1"/>
+    <assignments value="//@inputVariables.3/@values.0" variable="rel3"/>
+    <assignments value="//@inputVariables.4/@values.0" variable="a1"/>
+    <assignments value="//@inputVariables.5/@values.0" variable="a2"/>
+    <assignments value="//@inputVariables.6/@values.0" variable="a3"/>
+    <assignments value="//@inputVariables.7/@values.0" variable="rate"/>
+  </possibleConfigurations>
+  <scenarioStereotypes>DICE::DICE_UML_Extensions::DPIM::DpimScenario</scenarioStereotypes>
+</definition:SimulationDefinition>

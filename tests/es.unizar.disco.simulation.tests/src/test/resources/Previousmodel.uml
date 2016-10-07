@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DPIM="http://es.unizar.disco.dice/profiles/DPIM/1.0" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:PAM="http://www.eclipse.org/papyrus/PAM/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DPIM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://www.eclipse.org/papyrus/PAM/1 http://www.eclipse.org/papyrus/MARTE/1#//PAM">
+  <uml:Model xmi:id="_agkHwPDiEeWtuqq0TURTfw" name="Example Activity Diagram">
+    <packagedElement xmi:type="uml:Activity" xmi:id="_UWw7IPDmEeWtuqq0TURTfw" name="Scenario" node="_Z24fUPDnEeWtuqq0TURTfw _oWSIIPDnEeWtuqq0TURTfw _GLmyEPDoEeWtuqq0TURTfw _XXsDkPDoEeWtuqq0TURTfw _8xYd4PDoEeWtuqq0TURTfw _ULGWUPDpEeWtuqq0TURTfw _wNhfQPDpEeWtuqq0TURTfw" group="_TeA4wPDnEeWtuqq0TURTfw">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_3SWH0PRVEeWjOZc1J1pNnQ" annotatedElement="_Z24fUPDnEeWtuqq0TURTfw">
+        <body>open=&#xD;
+(arrivalRate=&#xD;
+(expr=$rate,&#xD;
+unit=Hz,&#xD;
+statQ=mean,&#xD;
+source=est))</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_TVXMsDyOEeaDlarzRM0iyw" annotatedElement="_UWw7IPDmEeWtuqq0TURTfw">
+        <body>throughput=&#xD;
+(expr=$throughput,&#xD;
+statQ=mean,&#xD;
+source=calc)</body>
+      </ownedComment>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_q4LdIPDnEeWtuqq0TURTfw" target="_oWSIIPDnEeWtuqq0TURTfw" source="_Z24fUPDnEeWtuqq0TURTfw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_TZjaEPDoEeWtuqq0TURTfw" target="_GLmyEPDoEeWtuqq0TURTfw" source="_oWSIIPDnEeWtuqq0TURTfw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_eWYUAPDoEeWtuqq0TURTfw" target="_XXsDkPDoEeWtuqq0TURTfw" source="_GLmyEPDoEeWtuqq0TURTfw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_-UHb8PDoEeWtuqq0TURTfw" target="_8xYd4PDoEeWtuqq0TURTfw" source="_GLmyEPDoEeWtuqq0TURTfw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_dgjp0PDpEeWtuqq0TURTfw" target="_ULGWUPDpEeWtuqq0TURTfw" source="_XXsDkPDoEeWtuqq0TURTfw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_Ea3qMPveEeWClPFAtVY9ng" target="_wNhfQPDpEeWtuqq0TURTfw" source="_ULGWUPDpEeWtuqq0TURTfw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_34caADyMEeaDlarzRM0iyw" target="_ULGWUPDpEeWtuqq0TURTfw" source="_8xYd4PDoEeWtuqq0TURTfw"/>
+      <group xmi:type="uml:ActivityPartition" xmi:id="_TeA4wPDnEeWtuqq0TURTfw" name="Partition Component" node="_GLmyEPDoEeWtuqq0TURTfw _ULGWUPDpEeWtuqq0TURTfw" represents="_bmnpgPDlEeWtuqq0TURTfw">
+        <subpartition xmi:type="uml:ActivityPartition" xmi:id="_fIFTMPDnEeWtuqq0TURTfw" name="Partition A1" node="_oWSIIPDnEeWtuqq0TURTfw" represents="_nQZJAPDlEeWtuqq0TURTfw">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_mdEMwPRVEeWjOZc1J1pNnQ" annotatedElement="_oWSIIPDnEeWtuqq0TURTfw">
+            <body>hostDemand=&#xD;
+(expr=$a1&#xD;
+unit=s,&#xD;
+statQ=mean,&#xD;
+source=est)</body>
+          </ownedComment>
+        </subpartition>
+        <subpartition xmi:type="uml:ActivityPartition" xmi:id="_AHHgEPDoEeWtuqq0TURTfw" name="Partition A2" node="_XXsDkPDoEeWtuqq0TURTfw" represents="_qG4N8PDlEeWtuqq0TURTfw">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_D4nEwPRWEeWjOZc1J1pNnQ" annotatedElement="_XXsDkPDoEeWtuqq0TURTfw">
+            <body>hostDemand=&#xD;
+(expr=$a2,&#xD;
+unit=s,&#xD;
+statQ=mean,&#xD;
+source=est)</body>
+          </ownedComment>
+        </subpartition>
+        <subpartition xmi:type="uml:ActivityPartition" xmi:id="_4P2zcPDoEeWtuqq0TURTfw" name="Partition A3" node="_8xYd4PDoEeWtuqq0TURTfw" represents="_rlQQcPDlEeWtuqq0TURTfw">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_U_fGIPRWEeWjOZc1J1pNnQ" annotatedElement="_8xYd4PDoEeWtuqq0TURTfw">
+            <body>hostDemand=&#xD;
+(expr=$a3,&#xD;
+unit=s,&#xD;
+statQ=mean,&#xD;
+source=est)</body>
+          </ownedComment>
+        </subpartition>
+      </group>
+      <node xmi:type="uml:InitialNode" xmi:id="_Z24fUPDnEeWtuqq0TURTfw" name="Start" outgoing="_q4LdIPDnEeWtuqq0TURTfw"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_oWSIIPDnEeWtuqq0TURTfw" name="A1" incoming="_q4LdIPDnEeWtuqq0TURTfw" outgoing="_TZjaEPDoEeWtuqq0TURTfw" inPartition="_fIFTMPDnEeWtuqq0TURTfw"/>
+      <node xmi:type="uml:ForkNode" xmi:id="_GLmyEPDoEeWtuqq0TURTfw" incoming="_TZjaEPDoEeWtuqq0TURTfw" outgoing="_eWYUAPDoEeWtuqq0TURTfw _-UHb8PDoEeWtuqq0TURTfw" inPartition="_TeA4wPDnEeWtuqq0TURTfw"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_XXsDkPDoEeWtuqq0TURTfw" name="A2" incoming="_eWYUAPDoEeWtuqq0TURTfw" outgoing="_dgjp0PDpEeWtuqq0TURTfw" inPartition="_AHHgEPDoEeWtuqq0TURTfw"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_8xYd4PDoEeWtuqq0TURTfw" name="A3" incoming="_-UHb8PDoEeWtuqq0TURTfw" outgoing="_34caADyMEeaDlarzRM0iyw" inPartition="_4P2zcPDoEeWtuqq0TURTfw"/>
+      <node xmi:type="uml:JoinNode" xmi:id="_ULGWUPDpEeWtuqq0TURTfw" incoming="_dgjp0PDpEeWtuqq0TURTfw _34caADyMEeaDlarzRM0iyw" outgoing="_Ea3qMPveEeWClPFAtVY9ng" inPartition="_TeA4wPDnEeWtuqq0TURTfw"/>
+      <node xmi:type="uml:ActivityFinalNode" xmi:id="_wNhfQPDpEeWtuqq0TURTfw" name="End" incoming="_Ea3qMPveEeWClPFAtVY9ng"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Model" xmi:id="_0AR-wP2YEeW8wrjGqxDBPg" name="PosidoniaDeployment">
+      <packagedElement xmi:type="uml:Node" xmi:id="_Q7bSIPDlEeWtuqq0TURTfw" name="192.0.2.1">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_4mezwPRWEeWjOZc1J1pNnQ" annotatedElement="_bmnpgPDlEeWtuqq0TURTfw">
+          <body>poolSize=$threads</body>
+        </ownedComment>
+        <nestedClassifier xmi:type="uml:Artifact" xmi:id="_bmnpgPDlEeWtuqq0TURTfw" name="Component" fileName="">
+          <nestedArtifact xmi:type="uml:Artifact" xmi:id="_nQZJAPDlEeWtuqq0TURTfw" name="Artifact A1"/>
+          <nestedArtifact xmi:type="uml:Artifact" xmi:id="_qG4N8PDlEeWtuqq0TURTfw" name="Artifact A2"/>
+          <nestedArtifact xmi:type="uml:Artifact" xmi:id="_rlQQcPDlEeWtuqq0TURTfw" name="Artifact A3"/>
+        </nestedClassifier>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_yV8uAPRPEeWjOZc1J1pNnQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_yV9VEPRPEeWjOZc1J1pNnQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/MARTE/1#//GQAM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_4bV20APMEdyuUt-4qHuVvQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_D8eRADl2EeaSQIuawXa71A">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_D8h7YDl2EeaSQIuawXa71A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_gFr1YOebEeWj7ZPL8JeBTQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_lG5fMDyPEeaDlarzRM0iyw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_lG6GQDyPEeaDlarzRM0iyw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/MARTE/1#//PAM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_6c2bkAPMEdyuUt-4qHuVvQ"/>
+    </profileApplication>
+  </uml:Model>
+  <GQAM:GaStep xmi:id="_2GmVIPRPEeWjOZc1J1pNnQ" base_NamedElement="_oWSIIPDnEeWtuqq0TURTfw" base_Action="_oWSIIPDnEeWtuqq0TURTfw" blockT="">
+    <hostDemand>(expr=$a1,unit=s,statQ=mean,source=est)</hostDemand>
+  </GQAM:GaStep>
+  <GQAM:GaStep xmi:id="_3emC0PRPEeWjOZc1J1pNnQ" base_NamedElement="_8xYd4PDoEeWtuqq0TURTfw" base_Action="_8xYd4PDoEeWtuqq0TURTfw" blockT="">
+    <hostDemand>(expr=$a3,unit=s,statQ=mean,source=est)</hostDemand>
+  </GQAM:GaStep>
+  <GQAM:GaStep xmi:id="_5PyToPRPEeWjOZc1J1pNnQ" base_NamedElement="_XXsDkPDoEeWtuqq0TURTfw" base_Action="_XXsDkPDoEeWtuqq0TURTfw">
+    <hostDemand>(expr=$a2,unit=s,statQ=mean,source=est)</hostDemand>
+  </GQAM:GaStep>
+  <GQAM:GaWorkloadEvent xmi:id="_dXwnYPRQEeWjOZc1J1pNnQ" pattern="open=(arrivalRate=(expr=$rate, unit=Hz, statQ=mean, source=est))" base_NamedElement="_Z24fUPDnEeWtuqq0TURTfw"/>
+  <DPIM:DpimScenario xmi:id="_FD1hsDl2EeaSQIuawXa71A" base_NamedElement="_UWw7IPDmEeWtuqq0TURTfw" base_Behavior="_UWw7IPDmEeWtuqq0TURTfw">
+    <throughput>(expr=$throughput, statQ=mean, source=calc)</throughput>
+  </DPIM:DpimScenario>
+  <GQAM:GaAnalysisContext xmi:id="_PJRgoDl2EeaSQIuawXa71A" base_StructuredClassifier="_UWw7IPDmEeWtuqq0TURTfw" base_NamedElement="_UWw7IPDmEeWtuqq0TURTfw">
+    <context>out$throughput</context>
+    <context>in$rate</context>
+    <context>in$a1</context>
+    <context>in$a2</context>
+    <context>in$a3</context>
+    <context>in$threads</context>
+  </GQAM:GaAnalysisContext>
+  <PAM:PaLogicalResource xmi:id="_mOtb0DyPEeaDlarzRM0iyw" base_Classifier="_bmnpgPDlEeWtuqq0TURTfw" poolSize="$threads"/>
+</xmi:XMI>

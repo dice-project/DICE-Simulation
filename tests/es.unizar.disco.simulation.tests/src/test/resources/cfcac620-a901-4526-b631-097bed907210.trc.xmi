@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traces:TraceSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:traces="http://es.unizar.disco/simulation/traces/1.0">
+  <traces rule="ScenarioFailureEvent">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bETnAIr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="ExecutionHasNotFailed">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bEU1IIr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="ExecutionFailed">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bEWqUIr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="Transition that fires in the first failure">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bEU1IYr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_8xYd4PDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bEd_EIr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="TransitionOfFailureExecution">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_8xYd4PDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bElT0Ir-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_oWSIIPDnEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bEvr4Ir-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="TransitionOfFailureExecution">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_oWSIIPDnEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bE1LcIr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_GLmyEPDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bE9uUYr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_XXsDkPDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bFAKkYr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="TransitionOfFailureExecution">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_XXsDkPDoEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bFLJsIr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+  <traces rule="partitions2resources">
+    <fromDomainElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_bmnpgPDlEeWtuqq0TURTfw"/>
+    <toAnalyzableElement href="cfcac620-a901-4526-b631-097bed907210.anm.xmi#_bFc2gIr-EeaDIYQ1B7MzcQ"/>
+  </traces>
+</traces:TraceSet>
