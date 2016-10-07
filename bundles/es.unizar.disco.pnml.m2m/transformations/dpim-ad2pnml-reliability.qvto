@@ -328,6 +328,10 @@ mapping UML::ActivityFinalNode::finalNode2Subnet(){
 	//the part where the execution has not failed
 	var transitionNotFailed := self.map finalNodeNotFailed2transition();
 	var arcFromEnterToNotFailedTransition := map arc(enterPlace, transitionNotFailed);
+	
+	self.map trace(transitionFailed, getFail());
+	self.map trace(transitionNotFailed, getOK());
+	
 }
 
 /**
@@ -466,12 +470,22 @@ inherits UML::NamedElement::namedElement2transition {
 mapping UML::ActivityFinalNode::finalNodefailed2transition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
 	toolspecifics +=  priorityTransitionToolInfo(3);
+	if (self.name.oclIsUndefined().not()) {result.name.text := getFail();}
+	else{
+		name:= object PNML::Name { text := getFail();}
+		
+	;};
 }
 
 /**one of the transitions created in the final node. The one that fires if the execution has not failed in any moment*/
 mapping UML::ActivityFinalNode::finalNodeNotFailed2transition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
 	toolspecifics +=  priorityTransitionToolInfo(2);
+		if (self.name.oclIsUndefined().not()) {result.name.text := getOK();}
+	else{
+		name:= object PNML::Name { text := getOK();}
+		
+	;};
 }
 
 /**

@@ -28,6 +28,10 @@
                   nsURI="http://es.unizar.disco/simulation/datatypes/1.0">
             </metamodel>
          </library>
+         <library
+               class="es.unizar.disco.pnml.m2m.utils.ConstantUtils"
+               name="ConstantUtils">
+         </library>
       </unit>
    </extension>
    <extension
