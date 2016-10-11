@@ -297,7 +297,7 @@ public class GspnSshSimulator implements ISimulator {
 			try {
 				ssh.loadKnownHosts();
 			} catch (IOException e) {
-				DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
+				DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "Unable to load 'known_hosts' file",e);
 			}
 			ssh.addHostKeyVerifier(new NoHostVerifier());
 			ssh.connect(hostProvider.getHost(), hostProvider.getPort());
