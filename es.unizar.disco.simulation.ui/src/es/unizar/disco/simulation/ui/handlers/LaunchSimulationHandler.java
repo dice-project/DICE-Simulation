@@ -10,22 +10,11 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import es.unizar.disco.simulation.ui.launcher.SimulationLaunchShortcut;
 
-/**
- * Our sample handler extends AbstractHandler, an IHandler base class.
- * @see org.eclipse.core.commands.IHandler
- * @see org.eclipse.core.commands.AbstractHandler
- */
 public class LaunchSimulationHandler extends AbstractHandler {
-	/**
-	 * The constructor.
-	 */
+
 	public LaunchSimulationHandler() {
 	}
 
-	/**
-	 * the command has been executed, so extract extract the needed information
-	 * from the application context.
-	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		ILaunchShortcut launchShortcut = new SimulationLaunchShortcut();
