@@ -96,7 +96,9 @@ public enum SimulationParameters implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	START(7, "start", "-o"), /**
+	START(7, "start", "-o"),
+
+	/**
 	 * The '<em><b>Binary file path</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

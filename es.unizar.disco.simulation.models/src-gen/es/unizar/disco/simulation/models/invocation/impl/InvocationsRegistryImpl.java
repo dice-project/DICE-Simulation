@@ -3,18 +3,22 @@
 package es.unizar.disco.simulation.models.invocation.impl;
 
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
+import es.unizar.disco.simulation.models.invocation.InvocationSet;
 import es.unizar.disco.simulation.models.invocation.InvocationsRegistry;
-import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 
 import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,21 +28,21 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.InvocationsRegistryImpl#getInvocations <em>Invocations</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.InvocationsRegistryImpl#getInvocationSets <em>Invocation Sets</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class InvocationsRegistryImpl extends MinimalEObjectImpl.Container implements InvocationsRegistry {
 	/**
-	 * The cached value of the '{@link #getInvocations() <em>Invocations</em>}' reference list.
+	 * The cached value of the '{@link #getInvocationSets() <em>Invocation Sets</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInvocations()
+	 * @see #getInvocationSets()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SimulationInvocation> invocations;
+	protected EList<InvocationSet> invocationSets;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -64,11 +68,25 @@ public class InvocationsRegistryImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<SimulationInvocation> getInvocations() {
-		if (invocations == null) {
-			invocations = new EObjectResolvingEList<SimulationInvocation>(SimulationInvocation.class, this, InvocationPackage.INVOCATIONS_REGISTRY__INVOCATIONS);
+	public EList<InvocationSet> getInvocationSets() {
+		if (invocationSets == null) {
+			invocationSets = new EObjectContainmentEList<InvocationSet>(InvocationSet.class, this, InvocationPackage.INVOCATIONS_REGISTRY__INVOCATION_SETS);
 		}
-		return invocations;
+		return invocationSets;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATION_SETS:
+				return ((InternalEList<?>)getInvocationSets()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -79,8 +97,8 @@ public class InvocationsRegistryImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATIONS:
-				return getInvocations();
+			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATION_SETS:
+				return getInvocationSets();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -94,9 +112,9 @@ public class InvocationsRegistryImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATIONS:
-				getInvocations().clear();
-				getInvocations().addAll((Collection<? extends SimulationInvocation>)newValue);
+			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATION_SETS:
+				getInvocationSets().clear();
+				getInvocationSets().addAll((Collection<? extends InvocationSet>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -110,8 +128,8 @@ public class InvocationsRegistryImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATIONS:
-				getInvocations().clear();
+			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATION_SETS:
+				getInvocationSets().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -125,8 +143,8 @@ public class InvocationsRegistryImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATIONS:
-				return invocations != null && !invocations.isEmpty();
+			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATION_SETS:
+				return invocationSets != null && !invocationSets.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -18,7 +18,7 @@
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">
       <launchConfigurationTypeImage
             configTypeID="es.unizar.disco.simulation.ui.launchConfigurationType"
-            icon="icons/full/obj16/clock.png"
+            icon="icons/full/obj16/clock_running.png"
             id="es.unizar.disco.simulation.ui.launchConfigurationTypeImage">
       </launchConfigurationTypeImage>
    </extension>
@@ -26,7 +26,7 @@
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
             class="es.unizar.disco.simulation.ui.launcher.SimulationLaunchShortcut"
-            icon="icons/full/obj16/clock.png"
+            icon="icons/full/obj16/clock_running.png"
             id="es.unizar.disco.simulation.ui.shortcut"
             label="DICE &amp;Simulation"
             modes="run">
@@ -133,7 +133,7 @@
                mnemonic="D">
             <command
                   commandId="es.unizar.disco.simulation.ui.commands.launchSimulationCommand"
-                  icon="icons/full/obj16/clock.png"
+                  icon="icons/full/obj16/clock_running.png"
                   id="es.unizar.disco.simulation.ui.menus.launchSimulationCommand"
                   mnemonic="S">
                <visibleWhen
@@ -158,7 +158,7 @@
                label="DICE Simulation">
             <command
                   commandId="es.unizar.disco.simulation.ui.commands.launchSimulationCommand"
-                  icon="icons/full/obj16/clock.png"
+                  icon="icons/full/obj16/clock_running.png"
                   id="es.unizar.disco.simulation.ui.toolbars.launchSimulationCommand"
                   tooltip="Launches a new DICE Simulation">
                <visibleWhen

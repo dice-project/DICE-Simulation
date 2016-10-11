@@ -12,6 +12,7 @@ import es.unizar.disco.simulation.models.definition.impl.DefinitionPackageImpl;
 
 import es.unizar.disco.simulation.models.invocation.InvocationFactory;
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
+import es.unizar.disco.simulation.models.invocation.InvocationSet;
 import es.unizar.disco.simulation.models.invocation.InvocationsRegistry;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 
@@ -63,6 +64,13 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * @generated
 	 */
 	private EClass invocationsRegistryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass invocationSetEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -261,6 +269,15 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSimulationInvocation_InvocationSet() {
+		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getSimulationInvocation__BuildAnalyzableModel() {
 		return simulationInvocationEClass.getEOperations().get(0);
 	}
@@ -279,8 +296,71 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInvocationsRegistry_Invocations() {
+	public EReference getInvocationsRegistry_InvocationSets() {
 		return (EReference)invocationsRegistryEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getInvocationSet() {
+		return invocationSetEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInvocationSet_Invocations() {
+		return (EReference)invocationSetEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInvocationSet_Start() {
+		return (EAttribute)invocationSetEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInvocationSet_End() {
+		return (EAttribute)invocationSetEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInvocationSet_Status() {
+		return (EAttribute)invocationSetEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInvocationSet_Definition() {
+		return (EReference)invocationSetEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getInvocationSet_Identifier() {
+		return (EAttribute)invocationSetEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -323,10 +403,19 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__VARIABLE_CONFIGURATION);
 		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__ANALYZABLE_MODEL);
 		createEAttribute(simulationInvocationEClass, SIMULATION_INVOCATION__AUTO_BUILD);
+		createEReference(simulationInvocationEClass, SIMULATION_INVOCATION__INVOCATION_SET);
 		createEOperation(simulationInvocationEClass, SIMULATION_INVOCATION___BUILD_ANALYZABLE_MODEL);
 
 		invocationsRegistryEClass = createEClass(INVOCATIONS_REGISTRY);
-		createEReference(invocationsRegistryEClass, INVOCATIONS_REGISTRY__INVOCATIONS);
+		createEReference(invocationsRegistryEClass, INVOCATIONS_REGISTRY__INVOCATION_SETS);
+
+		invocationSetEClass = createEClass(INVOCATION_SET);
+		createEReference(invocationSetEClass, INVOCATION_SET__INVOCATIONS);
+		createEReference(invocationSetEClass, INVOCATION_SET__DEFINITION);
+		createEAttribute(invocationSetEClass, INVOCATION_SET__IDENTIFIER);
+		createEAttribute(invocationSetEClass, INVOCATION_SET__START);
+		createEAttribute(invocationSetEClass, INVOCATION_SET__END);
+		createEAttribute(invocationSetEClass, INVOCATION_SET__STATUS);
 	}
 
 	/**
@@ -378,11 +467,20 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 		initEReference(getSimulationInvocation_VariableConfiguration(), theDefinitionPackage.getVariableConfiguration(), null, "variableConfiguration", null, 1, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSimulationInvocation_AnalyzableModel(), ecorePackage.getEObject(), null, "analyzableModel", null, 0, -1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSimulationInvocation_AutoBuild(), ecorePackage.getEBoolean(), "autoBuild", "false", 1, 1, SimulationInvocation.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSimulationInvocation_InvocationSet(), this.getInvocationSet(), this.getInvocationSet_Invocations(), "invocationSet", null, 0, 1, SimulationInvocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getSimulationInvocation__BuildAnalyzableModel(), theDatatypesPackage.getIStatus(), "buildAnalyzableModel", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(invocationsRegistryEClass, InvocationsRegistry.class, "InvocationsRegistry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInvocationsRegistry_Invocations(), this.getSimulationInvocation(), null, "invocations", null, 0, -1, InvocationsRegistry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInvocationsRegistry_InvocationSets(), this.getInvocationSet(), null, "invocationSets", null, 0, -1, InvocationsRegistry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(invocationSetEClass, InvocationSet.class, "InvocationSet", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInvocationSet_Invocations(), this.getSimulationInvocation(), this.getSimulationInvocation_InvocationSet(), "invocations", null, 1, -1, InvocationSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInvocationSet_Definition(), theDefinitionPackage.getSimulationDefinition(), null, "definition", null, 1, 1, InvocationSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInvocationSet_Identifier(), ecorePackage.getEString(), "identifier", null, 1, 1, InvocationSet.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInvocationSet_Start(), ecorePackage.getEDate(), "start", null, 0, 1, InvocationSet.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInvocationSet_End(), ecorePackage.getEDate(), "end", null, 0, 1, InvocationSet.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getInvocationSet_Status(), theDatatypesPackage.getSimulationStatus(), "status", null, 0, 1, InvocationSet.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

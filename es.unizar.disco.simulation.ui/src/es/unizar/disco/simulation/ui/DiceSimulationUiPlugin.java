@@ -12,6 +12,7 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 
 	// Image constants
 	public static final String IMG_OBJ16_CLOCK = "IMG_OBJ16_CLOCK"; //$NON-NLS-1$
+	public static final String IMG_OBJ16_CLOCK_RUNNING = "IMG_OBJ16_CLOCK_RUNNING"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_MAIN_TAB = "IMG_OBJ16_MAIN_TAB"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_PARAMS_TAB = "IMG_OBJ16_PARAMS_TAB"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_FILTERS_TAB = "IMG_OBJ16_FILTERS_TAB"; //$NON-NLS-1$
@@ -84,24 +85,25 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	@Override
 	protected void initializeImageRegistry(ImageRegistry reg) {
 		super.initializeImageRegistry(reg);
-		reg.put(IMG_OBJ16_CLOCK, getImageDescriptor("icons/full/obj16/clock.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_MAIN_TAB, getImageDescriptor("icons/full/obj16/main_tab.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_PARAMS_TAB, getImageDescriptor("icons/full/obj16/params_tab.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_FILTERS_TAB, getImageDescriptor("icons/full/obj16/filters_tab.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_ADVANCED_TAB, getImageDescriptor("icons/full/obj16/advanced_tab.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_FAILED, getImageDescriptor("icons/full/obj16/failed.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_FINISHED, getImageDescriptor("icons/full/obj16/finished.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_RUNNING, getImageDescriptor("icons/full/obj16/running.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_WAITING, getImageDescriptor("icons/full/obj16/waiting.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_UNKNOWN, getImageDescriptor("icons/full/obj16/unknown.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_EMF_EDITOR, getImageDescriptor("icons/full/obj16/emf_editor.gif").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_SIMULATION_RESULT, getImageDescriptor("icons/full/obj16/simulation_result.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_OBJ16_SIMULATION_INVOCATION, getImageDescriptor("icons/full/obj16/simulation_invocation.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_ETOOL16_UP, getImageDescriptor("icons/full/etool16/up.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_ETOOL16_DOWN, getImageDescriptor("icons/full/etool16/down.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_ETOOL16_GO_TO_FOLDER, getImageDescriptor("icons/full/etool16/go_to_folder.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_ETOOL16_REFRESH, getImageDescriptor("icons/full/etool16/refresh.png").createImage()); //$NON-NLS-1$
-		reg.put(IMG_ETOOL16_MAKE_VISIBLE, getImageDescriptor("icons/full/etool16/make_visible.gif").createImage()); //$NON-NLS-1$
-		reg.put(IMG_EVIEW16_SIMULATION_REGISTRY, getImageDescriptor("icons/full/eview16/simulation_registry.png").createImage()); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_CLOCK, getImageDescriptor("icons/full/obj16/clock.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_CLOCK_RUNNING, getImageDescriptor("icons/full/obj16/clock_running.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_MAIN_TAB, getImageDescriptor("icons/full/obj16/main_tab.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_PARAMS_TAB, getImageDescriptor("icons/full/obj16/params_tab.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_FILTERS_TAB, getImageDescriptor("icons/full/obj16/filters_tab.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_ADVANCED_TAB, getImageDescriptor("icons/full/obj16/advanced_tab.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_FAILED, getImageDescriptor("icons/full/obj16/failed.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_FINISHED, getImageDescriptor("icons/full/obj16/finished.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_RUNNING, getImageDescriptor("icons/full/obj16/running.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_WAITING, getImageDescriptor("icons/full/obj16/waiting.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_UNKNOWN, getImageDescriptor("icons/full/obj16/unknown.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_EMF_EDITOR, getImageDescriptor("icons/full/obj16/emf_editor.gif")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_SIMULATION_RESULT, getImageDescriptor("icons/full/obj16/simulation_result.png")); //$NON-NLS-1$
+		reg.put(IMG_OBJ16_SIMULATION_INVOCATION, getImageDescriptor("icons/full/obj16/simulation_invocation.png")); //$NON-NLS-1$
+		reg.put(IMG_ETOOL16_UP, getImageDescriptor("icons/full/etool16/up.png")); //$NON-NLS-1$
+		reg.put(IMG_ETOOL16_DOWN, getImageDescriptor("icons/full/etool16/down.png")); //$NON-NLS-1$
+		reg.put(IMG_ETOOL16_GO_TO_FOLDER, getImageDescriptor("icons/full/etool16/go_to_folder.png")); //$NON-NLS-1$
+		reg.put(IMG_ETOOL16_REFRESH, getImageDescriptor("icons/full/etool16/refresh.png")); //$NON-NLS-1$
+		reg.put(IMG_ETOOL16_MAKE_VISIBLE, getImageDescriptor("icons/full/etool16/make_visible.gif")); //$NON-NLS-1$
+		reg.put(IMG_EVIEW16_SIMULATION_REGISTRY, getImageDescriptor("icons/full/eview16/simulation_registry.png")); //$NON-NLS-1$
 	}
 }

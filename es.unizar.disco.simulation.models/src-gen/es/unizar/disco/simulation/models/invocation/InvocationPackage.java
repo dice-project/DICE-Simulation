@@ -167,13 +167,22 @@ public interface InvocationPackage extends EPackage {
 	int SIMULATION_INVOCATION__AUTO_BUILD = 10;
 
 	/**
+	 * The feature id for the '<em><b>Invocation Set</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMULATION_INVOCATION__INVOCATION_SET = 11;
+
+	/**
 	 * The number of structural features of the '<em>Simulation Invocation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMULATION_INVOCATION_FEATURE_COUNT = 11;
+	int SIMULATION_INVOCATION_FEATURE_COUNT = 12;
 
 	/**
 	 * The operation id for the '<em>Build Analyzable Model</em>' operation.
@@ -204,13 +213,13 @@ public interface InvocationPackage extends EPackage {
 	int INVOCATIONS_REGISTRY = 1;
 
 	/**
-	 * The feature id for the '<em><b>Invocations</b></em>' reference list.
+	 * The feature id for the '<em><b>Invocation Sets</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INVOCATIONS_REGISTRY__INVOCATIONS = 0;
+	int INVOCATIONS_REGISTRY__INVOCATION_SETS = 0;
 
 	/**
 	 * The number of structural features of the '<em>Invocations Registry</em>' class.
@@ -229,6 +238,88 @@ public interface InvocationPackage extends EPackage {
 	 * @ordered
 	 */
 	int INVOCATIONS_REGISTRY_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.simulation.models.invocation.impl.InvocationSetImpl <em>Set</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationSetImpl
+	 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl#getInvocationSet()
+	 * @generated
+	 */
+	int INVOCATION_SET = 2;
+
+	/**
+	 * The feature id for the '<em><b>Invocations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_SET__INVOCATIONS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Definition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_SET__DEFINITION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Identifier</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_SET__IDENTIFIER = 2;
+
+	/**
+	 * The feature id for the '<em><b>Start</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_SET__START = 3;
+
+	/**
+	 * The feature id for the '<em><b>End</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_SET__END = 4;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_SET__STATUS = 5;
+
+	/**
+	 * The number of structural features of the '<em>Set</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_SET_FEATURE_COUNT = 6;
+
+	/**
+	 * The number of operations of the '<em>Set</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOCATION_SET_OPERATION_COUNT = 0;
 
 
 	/**
@@ -363,6 +454,17 @@ public interface InvocationPackage extends EPackage {
 	EAttribute getSimulationInvocation_AutoBuild();
 
 	/**
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getInvocationSet <em>Invocation Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Invocation Set</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.SimulationInvocation#getInvocationSet()
+	 * @see #getSimulationInvocation()
+	 * @generated
+	 */
+	EReference getSimulationInvocation_InvocationSet();
+
+	/**
 	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#buildAnalyzableModel() <em>Build Analyzable Model</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -383,15 +485,91 @@ public interface InvocationPackage extends EPackage {
 	EClass getInvocationsRegistry();
 
 	/**
-	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry#getInvocations <em>Invocations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry#getInvocationSets <em>Invocation Sets</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Invocations</em>'.
-	 * @see es.unizar.disco.simulation.models.invocation.InvocationsRegistry#getInvocations()
+	 * @return the meta object for the containment reference list '<em>Invocation Sets</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationsRegistry#getInvocationSets()
 	 * @see #getInvocationsRegistry()
 	 * @generated
 	 */
-	EReference getInvocationsRegistry_Invocations();
+	EReference getInvocationsRegistry_InvocationSets();
+
+	/**
+	 * Returns the meta object for class '{@link es.unizar.disco.simulation.models.invocation.InvocationSet <em>Set</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Set</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationSet
+	 * @generated
+	 */
+	EClass getInvocationSet();
+
+	/**
+	 * Returns the meta object for the reference list '{@link es.unizar.disco.simulation.models.invocation.InvocationSet#getInvocations <em>Invocations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Invocations</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationSet#getInvocations()
+	 * @see #getInvocationSet()
+	 * @generated
+	 */
+	EReference getInvocationSet_Invocations();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.InvocationSet#getStart <em>Start</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Start</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationSet#getStart()
+	 * @see #getInvocationSet()
+	 * @generated
+	 */
+	EAttribute getInvocationSet_Start();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.InvocationSet#getEnd <em>End</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>End</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationSet#getEnd()
+	 * @see #getInvocationSet()
+	 * @generated
+	 */
+	EAttribute getInvocationSet_End();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.InvocationSet#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationSet#getStatus()
+	 * @see #getInvocationSet()
+	 * @generated
+	 */
+	EAttribute getInvocationSet_Status();
+
+	/**
+	 * Returns the meta object for the reference '{@link es.unizar.disco.simulation.models.invocation.InvocationSet#getDefinition <em>Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Definition</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationSet#getDefinition()
+	 * @see #getInvocationSet()
+	 * @generated
+	 */
+	EReference getInvocationSet_Definition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.invocation.InvocationSet#getIdentifier <em>Identifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Identifier</em>'.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationSet#getIdentifier()
+	 * @see #getInvocationSet()
+	 * @generated
+	 */
+	EAttribute getInvocationSet_Identifier();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -515,6 +693,14 @@ public interface InvocationPackage extends EPackage {
 		EAttribute SIMULATION_INVOCATION__AUTO_BUILD = eINSTANCE.getSimulationInvocation_AutoBuild();
 
 		/**
+		 * The meta object literal for the '<em><b>Invocation Set</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SIMULATION_INVOCATION__INVOCATION_SET = eINSTANCE.getSimulationInvocation_InvocationSet();
+
+		/**
 		 * The meta object literal for the '<em><b>Build Analyzable Model</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -533,12 +719,70 @@ public interface InvocationPackage extends EPackage {
 		EClass INVOCATIONS_REGISTRY = eINSTANCE.getInvocationsRegistry();
 
 		/**
+		 * The meta object literal for the '<em><b>Invocation Sets</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INVOCATIONS_REGISTRY__INVOCATION_SETS = eINSTANCE.getInvocationsRegistry_InvocationSets();
+
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.invocation.impl.InvocationSetImpl <em>Set</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationSetImpl
+		 * @see es.unizar.disco.simulation.models.invocation.impl.InvocationPackageImpl#getInvocationSet()
+		 * @generated
+		 */
+		EClass INVOCATION_SET = eINSTANCE.getInvocationSet();
+
+		/**
 		 * The meta object literal for the '<em><b>Invocations</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference INVOCATIONS_REGISTRY__INVOCATIONS = eINSTANCE.getInvocationsRegistry_Invocations();
+		EReference INVOCATION_SET__INVOCATIONS = eINSTANCE.getInvocationSet_Invocations();
+
+		/**
+		 * The meta object literal for the '<em><b>Start</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVOCATION_SET__START = eINSTANCE.getInvocationSet_Start();
+
+		/**
+		 * The meta object literal for the '<em><b>End</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVOCATION_SET__END = eINSTANCE.getInvocationSet_End();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVOCATION_SET__STATUS = eINSTANCE.getInvocationSet_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Definition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INVOCATION_SET__DEFINITION = eINSTANCE.getInvocationSet_Definition();
+
+		/**
+		 * The meta object literal for the '<em><b>Identifier</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute INVOCATION_SET__IDENTIFIER = eINSTANCE.getInvocationSet_Identifier();
 
 	}
 
