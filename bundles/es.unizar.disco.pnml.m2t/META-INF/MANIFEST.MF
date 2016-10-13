@@ -23,4 +23,5 @@ Eclipse-LazyStart: true
 Export-Package: es.unizar.disco.pnml.m2t,
  es.unizar.disco.pnml.m2t.templates.gspn,
  es.unizar.disco.pnml.m2t.utils
+Import-Package: fr.lip6.move.pnml.pnmlcoremodel
 

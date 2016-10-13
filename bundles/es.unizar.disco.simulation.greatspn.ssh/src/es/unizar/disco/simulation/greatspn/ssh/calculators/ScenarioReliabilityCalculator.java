@@ -26,7 +26,7 @@ import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.wnsim.TransitionInfo;
 
 public class ScenarioReliabilityCalculator extends AbstractCalculator implements MeasureCalculator {
- 
+
 	/**
 	 * The result is the proportion of the throughput of the transition without
 	 * fail of the final node (successful executions), divided by the sum of the
@@ -41,7 +41,7 @@ public class ScenarioReliabilityCalculator extends AbstractCalculator implements
 			throw new IllegalArgumentException(MessageFormat
 					.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity'", domainElement));
 		}
- 
+
 		Activity activity = (Activity) domainElement;
 		// @formatter:off
 
@@ -58,14 +58,14 @@ public class ScenarioReliabilityCalculator extends AbstractCalculator implements
 
 			// @formatter:off
 			FinalNode finalNode = finalNodes.get(0);
-			return calculateFromFinalNode(finalNode, toolResult, traceSet, activity, definition);
+			return calculateFromFinalNode(finalNode, toolResult, traceSet, activity, definition, true);
 
 		}
 
 	}
 
 	private DomainMeasure calculateFromFinalNode(FinalNode finalNode, ToolResult toolResult, TraceSet traceSet,
-			Activity activity, DomainMeasureDefinition definition) {
+			Activity activity, DomainMeasureDefinition definition, boolean calculatingReliability) {
 
 		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(finalNode, toolResult, traceSet);
 		List<TransitionInfo> transitionInfos = infos.stream().filter(i -> i instanceof TransitionInfo)
@@ -86,7 +86,13 @@ public class ScenarioReliabilityCalculator extends AbstractCalculator implements
 		Number successfulExecThroughput = findFirstAnalyzableElementInfoOfRule(ConstantUtils.getOK(), traceSet,
 				transitionInfos);
 
-		BigDecimal dividend = new BigDecimal(successfulExecThroughput.doubleValue());
+		BigDecimal dividend;
+		if (calculatingReliability) {
+			dividend = new BigDecimal(successfulExecThroughput.doubleValue());
+		}
+		else{//Calculating unreliability
+			dividend = new BigDecimal(failingThroughput.doubleValue());
+		}
 		BigDecimal divisor = new BigDecimal(failingThroughput.doubleValue() + successfulExecThroughput.doubleValue());
 		System.out.println("Reliability Computation: dividing: " + dividend + " by " + divisor);
 		DiceLogger.logInfo(GspnSshSimulationPlugin.getDefault(),
@@ -116,7 +122,8 @@ public class ScenarioReliabilityCalculator extends AbstractCalculator implements
 				for (TransitionInfo info : transitionInfos) {
 					if (trace.getToAnalyzableElement().equals(info.getAnalyzedElement())) {
 						DiceLogger.logInfo(GspnSshSimulationPlugin.getDefault(),
-								MessageFormat.format("Found Transition id ''{0}'' with throughput ''{1}''", info.getAnalyzedElement().toString(), info.getThroughput().doubleValue()) );
+								MessageFormat.format("Found Transition id ''{0}'' with throughput ''{1}''",
+										info.getAnalyzedElement().toString(), info.getThroughput().doubleValue()));
 						return info.getThroughput();
 					}
 
@@ -125,6 +132,37 @@ public class ScenarioReliabilityCalculator extends AbstractCalculator implements
 		}
 		throw new RuntimeException(
 				MessageFormat.format("Not found any transition created from the transformation rule ''{0}''", rule));
+
+	}
+
+	public DomainMeasure calculateUnreliability(EObject domainElement, DomainMeasureDefinition definition,
+			ToolResult toolResult, TraceSet traceSet) {
+
+		// From other calculators:
+		if (!(domainElement instanceof Activity)) {
+			throw new IllegalArgumentException(MessageFormat
+					.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity'", domainElement));
+		}
+
+		Activity activity = (Activity) domainElement;
+		// @formatter:off
+
+		List<ActivityFinalNode> finalNodes = activity.getOwnedNodes().stream()
+				.filter(n -> n instanceof ActivityFinalNode).map(n -> (ActivityFinalNode) n)
+				.collect(Collectors.toList());
+		// @formatter:on
+
+		if (finalNodes.size() != 1) {
+			throw new RuntimeException(MessageFormat.format(
+					"Unexpected number of 'ActivityFinalNodes' found for ''{0}''. Expected 1, but found ''{1}''",
+					activity, finalNodes.size()));
+		} else {
+
+			// @formatter:off
+			FinalNode finalNode = finalNodes.get(0);
+			return calculateFromFinalNode(finalNode, toolResult, traceSet, activity, definition, false);
+
+		}
 
 	}
 }

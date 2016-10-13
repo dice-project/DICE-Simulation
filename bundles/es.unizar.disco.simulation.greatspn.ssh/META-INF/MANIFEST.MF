@@ -20,3 +20,4 @@ Bundle-ClassPath: .,
  lib/bundles/unit-ri-0.9.jar,
  lib/jars/uom-lib-common-0.9.jar
 Import-Package: es.unizar.disco.pnml.m2m.utils
+Export-Package: es.unizar.disco.simulation.greatspn.ssh.calculators

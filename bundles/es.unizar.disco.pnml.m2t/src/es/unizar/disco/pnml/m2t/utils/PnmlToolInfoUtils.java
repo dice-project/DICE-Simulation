@@ -98,5 +98,15 @@ public class PnmlToolInfoUtils {
 		}
 		return 1f;
 	}
+	
+	public static Integer getTransitionPriority(Transition transition) throws IllegalArgumentException {
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			if (matcher.matches() && TransitionKind.IMMEDIATE_PRIORITY.getLiteral().equals(matcher.group(1))) {
+				return Integer.valueOf(matcher.group(2));
+			}
+		}
+		return 1;
+	}
 
 }

@@ -24,7 +24,7 @@ marks(petriNet)
 
 [template public noObjs(petriNet : PetriNet) post (trim())]
 [comment NOOBJS ::= "f" space NM space NP space NR space NT space NG space "0" space NL space "\n" /]
-f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] 1 0 0
+f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroups(petriNet)/] 0 0
 [/template]
 
 [template public marks(petriNet : PetriNet) post (trim())]
@@ -81,7 +81,13 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] 1 0 0
 
 [template public groups(petriNet : PetriNet) post (trim())]
 [comment GROUPS ::= #(NG){NAME space coords space PRI "\n" } /]
-G1 0.0 0.0 1
+[comment previously it was written 'G1 0.0 0.0 1' /]
+[for (trans : Transition | allTransitions(petriNet))]
+[if priorityToAdd(trans)]
+[addPriority(trans)/]G[getPriorityIdx(trans)/] 0.0 0.0 [getPriority(trans)/]
+[/if]
+[/for]
+
 [/template]
 
 [template public trans(petriNet : PetriNet) post (trim())]
@@ -112,7 +118,7 @@ G1 0.0 0.0 1
 [if (isExponential(trans))]
 [getRate(trans)/]
 [elseif (isImmediate(trans))]
-[getRate(trans)/]
+[getProbability(trans)/]
 [else]
 1.0
 [/if]
@@ -124,7 +130,7 @@ G1 0.0 0.0 1
 [elseif (isOneServer(trans))]
 1
 [else]
-0 [comment 0 (Infinite) by default TODO: Check if this value is ignored for Immediate transitions /]
+1 [comment 1 (for immediate) by default TODO: Check if some times it is exponential with infinite sever but it is not marked /]
 [/if]
 [/template]
 
@@ -134,7 +140,7 @@ G1 0.0 0.0 1
 [elseif (isImmediate(trans))]
 1
 [else]
-1 [comment TODO: For the moment, we suppose it's immediate with group priority 1 /]
+[getPriorityIdx(trans)/]
 [/if]
 [/template]
 
@@ -207,6 +213,25 @@ G1 0.0 0.0 1
 	allTransitions(petriNet)->size()
 /]
 
+[query public countPriorityGroups(petriNet : PetriNet) : Integer = 
+	--Count the number of different priorities in the net
+	invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','countGroups(fr.lip6.move.pnml.ptnet.PetriNet)', Sequence{petriNet})
+/]
+
+[query public  priorityToAdd(trans: Transition) : Boolean =	
+	-- Check whetehr the priority of the transition has not been treated as group yet. 
+invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','priorityNotAdded(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+[query public addPriority(trans : Transition) : OclVoid = 
+	invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','addPriority(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+[query public getPriorityIdx(trans : Transition) : Integer = 
+	invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','getPriorityIndex(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+
 [query public registerPlace(place : Place) : OclVoid = 
 	-- Place index is based on the order they are processed, cannot be tracked via regular templates
 	invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','registerPlace(org.eclipse.emf.ecore.EObject)', Sequence{place})
@@ -225,6 +250,10 @@ G1 0.0 0.0 1
 [query public getProbability(trans : Transition) : Real = 
 	-- ToolInfo-related queries are executed via the global utility methods
 	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getTransitionProbability(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+[query public getPriority(trans : Transition) : Integer = 
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getTransitionPriority(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
 /]
 
 [query public isExponential(trans : Transition) : Boolean =
