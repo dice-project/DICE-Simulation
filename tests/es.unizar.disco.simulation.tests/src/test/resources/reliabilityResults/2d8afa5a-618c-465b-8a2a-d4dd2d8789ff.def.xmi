@@ -9,7 +9,7 @@
   <parameters key="-a" value="5"/>
   <parameters key="-c" value="95"/>
   <parameters key="-f" value="1000"/>
-  <activeScenario href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+  <activeScenario href="../modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
   <inputVariables name="threads" assignments="//@possibleConfigurations.0/@assignments.0">
     <values value="1" assignments="//@possibleConfigurations.0/@assignments.0"/>
   </inputVariables>
@@ -34,10 +34,10 @@
   <inputVariables name="rate" assignments="//@possibleConfigurations.0/@assignments.7">
     <values value="5" assignments="//@possibleConfigurations.0/@assignments.7"/>
   </inputVariables>
-  <domainResource uri="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml"/>
+  <domainResource uri="../modelPoseidoniaReliab.uml"/>
   <outputVariables name="reliability"/>
   <declaredMeasures measure="reliability">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
+    <measuredElement href="../modelPoseidoniaReliab.uml#_UWw7IPDmEeWtuqq0TURTfw"/>
     <vslExpressionEntries key="expr" value="$reliability"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>

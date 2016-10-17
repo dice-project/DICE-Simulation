@@ -22,3 +22,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: DisCo - Unizar
 Bundle-ClassPath: .,
  lib/jars/commons-validator-1.4.0.jar
+Export-Package: es.unizar.disco.ssh.ui;x-friends:="es.unizar.disco.simulation.tests",
+ es.unizar.disco.ssh.ui.preferences;x-friends:="es.unizar.disco.simulation.tests"

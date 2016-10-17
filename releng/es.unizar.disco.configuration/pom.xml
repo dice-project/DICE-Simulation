@@ -30,22 +30,10 @@
 			</snapshots>
 		</repository>
 
-		<repository>
-			<id>pnml</id>
-			<url>http://pnml.lip6.fr/pnmlframework/updatesite/</url>
-			<layout>p2</layout>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>papyrus</id>
-			<url> http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon</url>
-			<layout>p2</layout>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
+		<!-- <repository> <id>pnml</id> <url>http://pnml.lip6.fr/pnmlframework/updatesite/</url> 
+			<layout>p2</layout> <snapshots> <enabled>false</enabled> </snapshots> </repository> 
+			<repository> <id>papyrus</id> <url> http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon</url> 
+			<layout>p2</layout> <snapshots> <enabled>false</enabled> </snapshots> </repository> -->
 
 
 	</repositories>
@@ -79,6 +67,7 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
+
 					<environments>
 						<environment>
 							<os>linux</os>
@@ -106,8 +95,41 @@
 							<arch>x86_64</arch>
 						</environment>
 					</environments>
+					<target>
+						<artifact>
+							<groupId>es.unizar.disco</groupId>
+							<artifactId>es.unizar.disco.simulation.targetplatform</artifactId>
+							<version>0.3.3-SNAPSHOT</version>
+						</artifact>
+					</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>0.25.0</version>
+				<executions>
+					<execution>
+						<id>default-test</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<appArgLine>
+						-eclipse.keyring ${env.USERPROFILE}\.eclipse\org.eclipse.equinox.security\secure_storage -eclipse.password ${basedir}\..\..\tests\es.unizar.disco.simulation.tests\src\test\resources\secure.preferences.properties
+					</appArgLine>
+
+				</configuration>
+			</plugin>
+
+
+
+
+
 		</plugins>
 	</build>
 </project>

@@ -39,7 +39,7 @@ public class ScenarioReliabilityCalculator extends AbstractCalculator implements
 		// From other calculators:
 		if (!(domainElement instanceof Activity)) {
 			throw new IllegalArgumentException(MessageFormat
-					.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity'", domainElement));
+					.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity' but type ''{1}''", domainElement, domainElement.getClass()));
 		}
 
 		Activity activity = (Activity) domainElement;

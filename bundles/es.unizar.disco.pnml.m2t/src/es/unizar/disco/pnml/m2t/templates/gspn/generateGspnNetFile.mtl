@@ -12,7 +12,9 @@ marks(petriNet)
 [places(petriNet)/]
 [groups(petriNet)/]
 [trans(petriNet)/]
-[layers(petriNet)/]
+[comment -- Marks section is not used. Commented to avoid extra blank lines 
+layers(petriNet)
+/]
 [/file]
 [/template]
 
