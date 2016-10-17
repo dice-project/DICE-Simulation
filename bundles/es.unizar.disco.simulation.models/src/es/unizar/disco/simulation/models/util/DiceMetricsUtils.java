@@ -14,6 +14,7 @@ import org.eclipse.uml2.uml.Stereotype;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.simulation.models.DiceModelsPlugin;
+import es.unizar.disco.simulation.models.datatypes.ComputableNFPtype;
 import es.unizar.disco.simulation.models.measures.MeasureCalculator;
 import es.unizar.disco.simulation.models.toolresult.ToolResult;
 
@@ -27,10 +28,12 @@ public class DiceMetricsUtils {
 	private static final String ELEMENT_CALCULATOR = "CALCULATOR";
 
 	private static final String METRIC_TAG_ID = "id";
+	private static final String METRIC_TAG_FAMILY_NFP = "familyNFPproperty";
 
 	private static final String METRIC_NAME = "name";
 	private static final String METRIC_STEREOTYPE = "stereotype";
 	private static final String METRIC_TAG = "tag";
+	private static final String METRIC_ANALYZABLE_PROPERTY = "analyzableProperty";
 
 	private static final String CALCULATOR_SCENARIO = "scenario";
 	private static final String CALCULATOR_TOOL_RESULT = "toolResult";
@@ -51,7 +54,8 @@ public class DiceMetricsUtils {
 	public static Set<Metric> getSupportedMetrics() {
 		if (metrics == null) {
 			metrics = new HashSet<>();
-			IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSION_ID);
+			IConfigurationElement[] configElements = Platform.getExtensionRegistry()
+					.getConfigurationElementsFor(EXTENSION_ID);
 			for (IConfigurationElement configElement : configElements) {
 				if (ELEMENT_METRIC.equals(configElement.getName())) {
 					String stereotype = configElement.getAttribute(METRIC_STEREOTYPE);
@@ -63,18 +67,27 @@ public class DiceMetricsUtils {
 		return Collections.unmodifiableSet(metrics);
 	}
 
-	public static MeasureCalculator getCalculator(Element element, String measure, String scenarioStereotype, Class<? extends ToolResult> clazz) {
-		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSION_ID);
+	public static MeasureCalculator getCalculator(Element element, String measure, String scenarioStereotype,
+			Class<? extends ToolResult> clazz) {
+		IConfigurationElement[] configElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(EXTENSION_ID);
 		for (IConfigurationElement configElement : configElements) {
 			if (ELEMENT_METRIC.equals(configElement.getName())) {
 				try {
-					Stereotype stereotype = element.getApplicableStereotype(configElement.getAttribute(METRIC_STEREOTYPE));
-					if (StringUtils.equals(measure, configElement.getAttribute(METRIC_TAG)) && element.isStereotypeApplied(stereotype)) {
+					Stereotype stereotype = element
+							.getApplicableStereotype(configElement.getAttribute(METRIC_STEREOTYPE));
+					if (StringUtils.equals(measure, configElement.getAttribute(METRIC_TAG))
+							&& element.isStereotypeApplied(stereotype)) {
+
 						for (IConfigurationElement calculatorConfigElement : configElement.getChildren()) {
-							if (StringUtils.equals(scenarioStereotype, calculatorConfigElement.getAttribute(CALCULATOR_SCENARIO))
-									&& Class.forName(calculatorConfigElement.getAttribute(CALCULATOR_TOOL_RESULT)).isAssignableFrom(clazz)) {
-								return (MeasureCalculator) calculatorConfigElement.createExecutableExtension(CALCULATOR_CLASS);
+							if (StringUtils.equals(scenarioStereotype,
+									calculatorConfigElement.getAttribute(CALCULATOR_SCENARIO))
+									&& Class.forName(calculatorConfigElement.getAttribute(CALCULATOR_TOOL_RESULT))
+											.isAssignableFrom(clazz)) {
+								return (MeasureCalculator) calculatorConfigElement
+										.createExecutableExtension(CALCULATOR_CLASS);
 							}
+
 						}
 					}
 				} catch (CoreException | ClassNotFoundException | InvalidRegistryObjectException e) {
@@ -84,5 +97,21 @@ public class DiceMetricsUtils {
 			}
 		}
 		return null;
+	}
+
+	public static boolean metricComputedBelongsToSelectedNFPtypeToCompute(ComputableNFPtype chosenNFPtoCompute,
+			String measureInModel) {
+		IConfigurationElement[] configElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(EXTENSION_ID);
+		for (IConfigurationElement configElement : configElements) {
+			if (ELEMENT_METRIC_TAG.equals(configElement.getName())) {
+				if (measureInModel.equalsIgnoreCase(configElement.getAttribute(METRIC_TAG_ID)) && (chosenNFPtoCompute
+						.getLiteral().equalsIgnoreCase(configElement.getAttribute(METRIC_TAG_FAMILY_NFP)))) {
+					return true;
+				}
+			}
+
+		}
+		return false;
 	}
 }

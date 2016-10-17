@@ -57,6 +57,21 @@
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="familyNFPproperty">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="PERFORMANCE">
+                  </enumeration>
+                  <enumeration value="RELIABILITY">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
       </complexType>
    </element>
 

@@ -243,6 +243,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 			// Look for the first calculator that is able to handle
 			// the measure for the given scenario type
+			if(DiceMetricsUtils.metricComputedBelongsToSelectedNFPtypeToCompute(invocation.getDefinition().getNfpToCompute(), measureDefinition.getMeasure())){
 			MeasureCalculator calculator = null;
 			for (String scenarioName : invocation.getDefinition().getScenarioStereotypes()) {
 				calculator = DiceMetricsUtils.getCalculator((Element) measuredElement, measureDefinition.getMeasure(), scenarioName,
@@ -265,6 +266,7 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 					invocation.getResult().getMeasures().add(domainMeasure);
 				}
 			}
+		}
 		}
 
 		return status;

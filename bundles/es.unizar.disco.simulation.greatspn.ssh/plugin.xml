@@ -12,15 +12,19 @@
    <extension
          point="es.unizar.disco.simulation.models.supported_metrics">
       <MetricTag
+            familyNFPproperty="PERFORMANCE"
             id="respT">
       </MetricTag>
       <MetricTag
+            familyNFPproperty="PERFORMANCE"
             id="utilization">
       </MetricTag>
       <MetricTag
+            familyNFPproperty="PERFORMANCE"
             id="throughput">
       </MetricTag>
       <MetricTag
+            familyNFPproperty="RELIABILITY"
             id="reliability">
       </MetricTag>
       <Metric
