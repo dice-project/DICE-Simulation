@@ -214,4 +214,4 @@ public class DiceSshConnectorUiPlugin extends AbstractUIPlugin {
 			}
 		}
 	}
-}
+}	

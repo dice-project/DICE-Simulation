@@ -15,4 +15,12 @@
         <modules>
                 <module>es.unizar.disco.simulation.tests</module>
         </modules>
+        
+            <build>
+<!--      <resources>
+    	<resource>
+    		<directory>../../bundles/es.unizar.disco.pnml.m2t/src</directory>
+    	</resource>
+    </resources> -->
+    </build>
 </project>

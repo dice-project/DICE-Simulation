@@ -140,9 +140,11 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 [if (isExponential(trans))]
 0
 [elseif (isImmediate(trans))]
-1
-[else]
+[comment Implementation for isImmediate is that everything that is not deterministic or exponential, it is immediate/]
 [getPriorityIdx(trans)/]
+[else]
+[comment for deterministic transitions, 127/]
+127
 [/if]
 [/template]
 
@@ -233,7 +235,6 @@ invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','priorityNotAdded(fr.lip6.
 	invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','getPriorityIndex(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
 /]
 
-
 [query public registerPlace(place : Place) : OclVoid = 
 	-- Place index is based on the order they are processed, cannot be tracked via regular templates
 	invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','registerPlace(org.eclipse.emf.ecore.EObject)', Sequence{place})
@@ -266,6 +267,11 @@ invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','priorityNotAdded(fr.lip6.
 [query public isImmediate(trans : Transition) : Boolean = 
 	-- ToolInfo-related queries are executed via the global utility methods
 	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isImmediate(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+[query public isImmediatePriority(trans : Transition) : Boolean = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isImmediatePriority(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
 /]
 
 [query public isOneServer(trans : Transition) : Boolean = 

@@ -38,7 +38,7 @@ public class PlaceRegistry {
 	}
 
 	private Map<Integer, Integer> groupPriorityRegistry = new HashMap<Integer, Integer>();
-	private int indexToAdd = 1;
+	
 
 	/**
 	 * This method traverses all the transitions in pn and creates an entry in
@@ -79,6 +79,7 @@ public class PlaceRegistry {
 		return ! groupPriorityRegistry.containsKey(PnmlToolInfoUtils.getTransitionPriority(trans));
 	}
 
+	private int indexToAdd = 1;
 	public void addPriority(Transition trans) {
 		groupPriorityRegistry.put(PnmlToolInfoUtils.getTransitionPriority(trans), indexToAdd);
 		indexToAdd++;

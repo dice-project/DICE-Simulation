@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target includeMode="feature" name="DICE Simulation Tools SDK Target Platform" sequenceNumber="32">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.papyrus.extra.marte.properties.feature.source.feature.group" version="1.2.0.201606080903"/>
+<unit id="org.eclipse.papyrus.sdk.feature.source.feature.group" version="2.0.0.201606080854"/>
+<unit id="org.eclipse.papyrus.sdk.feature.feature.group" version="2.0.0.201606080854"/>
+<unit id="org.eclipse.papyrus.extra.marte.properties.feature.feature.group" version="1.2.0.201606080903"/>
+<unit id="org.eclipse.papyrus.extra.marte.textedit.feature.source.feature.group" version="1.2.0.201606080903"/>
+<unit id="org.eclipse.papyrus.extra.marte.feature.source.feature.group" version="1.2.0.201606080903"/>
+<unit id="org.eclipse.papyrus.extra.marte.feature.feature.group" version="1.2.0.201606080903"/>
+<unit id="org.eclipse.papyrus.extra.marte.textedit.feature.feature.group" version="1.2.0.201606080903"/>
+<repository location="http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.0/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="fr.lip6.pnml.framework.sdk.feature.group" version="2.2.12"/>
+<repository location="http://pnml.lip6.fr/pnmlframework/updatesite/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.sdk.ide" version="4.6.0.I20160606-1100"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.6/R-4.6-201606061100/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.12.0.v20160526-0356"/>
+<unit id="org.eclipse.acceleo.feature.group" version="3.6.4.201605040614"/>
+<unit id="org.eclipse.xsd.sdk.feature.group" version="2.12.0.v20160526-0356"/>
+<unit id="org.eclipse.egit.feature.group" version="4.4.0.201606070830-r"/>
+<unit id="org.eclipse.m2m.qvt.oml.sdk.feature.group" version="3.6.0.v20160606-1156"/>
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.2.0.v20160516-0939"/>
+<repository location="http://download.eclipse.org/releases/neon"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="com.abstratt.eclipsegraphviz.feature.feature.group" version="2.2.201606.201606280026"/>
+<repository location="jar:http://repository-textuml.forge.cloudbees.com/snapshot/com/abstratt/mdd/com.abstratt.mdd.oss.repository/2.1/com.abstratt.mdd.oss.repository-2.1.zip!/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="com.google.guava" version="15.0.0.v201403281430"/>
+<unit id="org.apache.commons.io.source" version="2.2.0.v201405211200"/>
+<unit id="org.apache.commons.io" version="2.2.0.v201405211200"/>
+<unit id="com.google.guava.source" version="15.0.0.v201403281430"/>
+<unit id="org.apache.commons.lang3.source" version="3.1.0.v201403281430"/>
+<unit id="org.apache.commons.collections" version="3.2.2.v201511171945"/>
+<unit id="org.apache.commons.lang3" version="3.1.0.v201403281430"/>
+<unit id="org.apache.commons.collections.source" version="3.2.2.v201511171945"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/"/>
+</location>
+</locations>
+<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+</target>

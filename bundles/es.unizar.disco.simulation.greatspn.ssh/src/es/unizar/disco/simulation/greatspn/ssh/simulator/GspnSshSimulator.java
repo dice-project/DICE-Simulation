@@ -332,7 +332,7 @@ public class GspnSshSimulator implements ISimulator {
 				}
 			}
 			simulationCommand = simulationSession.exec(String.format(builder.toString(), remoteWorkingDir, identifier));
-
+			
 			PipedOutputStream stdoutOutputStream = new PipedOutputStream();
 
 			resultBuilder = new ResultBuilder(new PipedInputStream(stdoutOutputStream));
@@ -455,7 +455,7 @@ public class GspnSshSimulator implements ISimulator {
 		}
 
 		File targetDir = GspnSshSimulationPlugin.getDefault().getStateLocation().append(id).toFile();
-
+		
 		if (!targetDir.exists()) {
 			if (!targetDir.mkdirs()) {
 				throw new SimulationException(MessageFormat.format("Unable to create temporaty directory ''{0}''", targetDir));

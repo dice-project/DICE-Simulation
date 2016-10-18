@@ -1,30 +1,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>es.unizar.disco</groupId>
-    <artifactId>es.unizar.disco.bundles</artifactId>
-    <packaging>pom</packaging>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>es.unizar.disco</groupId>
+	<artifactId>es.unizar.disco.bundles</artifactId>
+	<packaging>pom</packaging>
 
-    <parent>
-        <groupId>es.unizar.disco</groupId>
-        <artifactId>es.unizar.disco.root</artifactId>
-        <version>0.3.3-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>es.unizar.disco</groupId>
+		<artifactId>es.unizar.disco.root</artifactId>
+		<version>0.3.3-SNAPSHOT</version>
+	</parent>
 
-    <modules>
-        <module>es.unizar.disco.simulation</module>
-        <module>es.unizar.disco.core</module>
-        <module>es.unizar.disco.pnml.m2m</module>
-        <module>com.hierynomus.sshj</module>
-        <module>es.unizar.disco.core.ui</module>
-        <module>es.unizar.disco.pnextensions</module>
-        <module>es.unizar.disco.pnml.m2t</module>
-        <module>es.unizar.disco.simulation.greatspn.ssh</module>
-        <module>es.unizar.disco.simulation.models</module>
-        <module>es.unizar.disco.simulation.models.edit</module>
-        <module>es.unizar.disco.simulation.quickstart</module>
-        <module>es.unizar.disco.simulation.ui</module>
-        <module>es.unizar.disco.ssh</module>
-        <module>es.unizar.disco.ssh.ui</module>
-    </modules>
+	<modules>
+		<module>es.unizar.disco.simulation</module>
+		<module>es.unizar.disco.core</module>
+		<module>es.unizar.disco.pnml.m2m</module>
+		<module>com.hierynomus.sshj</module>
+		<module>es.unizar.disco.core.ui</module>
+		<module>es.unizar.disco.pnextensions</module>
+		<module>es.unizar.disco.pnml.m2t</module>
+		<module>es.unizar.disco.simulation.greatspn.ssh</module>
+		<module>es.unizar.disco.simulation.models</module>
+		<module>es.unizar.disco.simulation.models.edit</module>
+		<module>es.unizar.disco.simulation.quickstart</module>
+		<module>es.unizar.disco.simulation.ui</module>
+		<module>es.unizar.disco.ssh</module>
+		<module>es.unizar.disco.ssh.ui</module>
+	</modules>
+	
+
 </project>

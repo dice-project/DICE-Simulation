@@ -11,6 +11,7 @@ public class SshUiHostProvider implements IHostProvider {
 
 	@Override
 	public String getHost() {
+		
 		return DiceSshConnectorUiPlugin.getDefault().getPreferenceStore().getString(PreferenceConstants.HOST.toString());
 	}
 

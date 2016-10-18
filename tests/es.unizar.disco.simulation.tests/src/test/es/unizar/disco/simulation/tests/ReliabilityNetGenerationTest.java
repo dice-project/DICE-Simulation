@@ -11,8 +11,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -24,7 +27,9 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
 import org.junit.Test;
 
+import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
 import es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlReliabilityResourceBuilder;
+import es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.ScenarioReliabilityCalculator;
 import es.unizar.disco.simulation.launcher.Messages;
@@ -41,6 +46,7 @@ import es.unizar.disco.simulation.simulators.ISimulator;
 import es.unizar.disco.simulation.simulators.SimulationException;
 import fr.lip6.move.pnml.ptnet.PetriNetDoc;
 import fr.lip6.move.pnml.ptnet.PnObject;
+import fr.lip6.move.pnml.ptnet.ToolInfo;
 import fr.lip6.move.pnml.ptnet.Transition;
 
 public class ReliabilityNetGenerationTest extends AbstractTest{
@@ -96,14 +102,29 @@ public class ReliabilityNetGenerationTest extends AbstractTest{
 											// transittion
 			}
 			if (transition != null) {
+				List<ToolInfo> prioritySpecifics = getToolSpecifics(transition, TransitionKind.IMMEDIATE_PRIORITY.getLiteral());
 				assertFalse(
 						"Found a trasition with more than one toolSpecifics, its name is: " + transition.getName()
 								+ " and its string representation is " + transition.toString(),
-						transition.getToolspecifics().size() > 1);
+						prioritySpecifics.size() > 1);
 			}
 
 		}
 
+	}
+
+	private List<ToolInfo> getToolSpecifics(Transition transition, String matchingProperty) {
+		List<ToolInfo> list = new ArrayList<ToolInfo>();
+		
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(PnmlToolInfoUtils.VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			if (matcher.matches()) {
+				if (TransitionKind.IMMEDIATE_PRIORITY.getLiteral().equals(matcher.group(1))) {
+					list.add(info);
+				}
+			}
+		}
+		return list;
 	}
 
 	@Test

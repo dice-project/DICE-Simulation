@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>es.unizar.disco</groupId>
+    <artifactId>es.unizar.disco.pnml.m2t</artifactId>
+    <packaging>eclipse-plugin</packaging>
+
+
+    <parent>
+        <groupId>es.unizar.disco</groupId>
+        <artifactId>es.unizar.disco.bundles</artifactId>
+        <version>0.3.3-SNAPSHOT</version>
+    </parent>
+    
+   <build>
+        <resources>
+      <resource>
+        <directory>./src/</directory>
+      </resource>
+      <resource>
+        <directory>./bin/</directory>
+        <includes>
+        <include>**/*.emtl</include>
+        </includes>
+      </resource>
+    </resources>
+    </build>
+    
+    </project>

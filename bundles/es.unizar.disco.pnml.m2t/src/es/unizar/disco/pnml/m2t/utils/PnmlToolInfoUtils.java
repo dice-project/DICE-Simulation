@@ -20,7 +20,7 @@ import fr.lip6.move.pnml.ptnet.Transition;
  */
 public class PnmlToolInfoUtils {
 
-	private static final String VALUE_PATTERN = "<value grammar=\"(.+)\">(.+)</value>";
+	public static final String VALUE_PATTERN = "<value grammar=\"(.+)\">(.+)</value>";
 	private static final String SERVER_TYPE_PATTERN = "<value grammar=\"(.+)\"/>";
 
 	public PnmlToolInfoUtils() {
@@ -38,6 +38,18 @@ public class PnmlToolInfoUtils {
 		return false;
 	}
 
+	public static boolean isImmediatePriority(Transition transition) throws IllegalArgumentException {
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			if (matcher.matches()) {
+				if (TransitionKind.IMMEDIATE_PRIORITY.getLiteral().equals(matcher.group(1))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public static boolean isImmediate(Transition transition) throws IllegalArgumentException {
 		Set<String> otherTransitionKinds = new HashSet<>();
 		otherTransitionKinds.add(TransitionKind.EXPONENTIAL.getLiteral());
