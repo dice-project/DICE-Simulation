@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.jface.preference.IPersistentPreferenceStore;
+import org.eclipse.uml2.uml.Model;
 import org.junit.BeforeClass;
 
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
@@ -70,18 +70,24 @@ public abstract class AbstractTest {
 		public static void loadModels() throws IOException, URISyntaxException {
 
 			System.out.println("Loading models from registry");
+			
+			loadModels("cb745d8a-44f7-46de-9167-7ce0e822f048", TEST_FILES_UUID);
 
+		}
+		
+		public static void loadModels(String defmodel, String invmodel) throws IOException{
+			
 			// final URI defURI =
-			// URI.createFileURI(Paths.get(ReliabilityNetGenerationTest.class.getResource("e4012c46-f3bb-41fe-99c2-1ffdba8cb4ef"
-			// + ".def" + "." +
-			// XMIResource.XMI_NS).toURI()).toFile().getAbsolutePath());
+						// URI.createFileURI(Paths.get(ReliabilityNetGenerationTest.class.getResource("e4012c46-f3bb-41fe-99c2-1ffdba8cb4ef"
+						// + ".def" + "." +
+						// XMIResource.XMI_NS).toURI()).toFile().getAbsolutePath());
 			final URI defURI = URI.createFileURI(
-					Paths.get("src/test/resources/cb745d8a-44f7-46de-9167-7ce0e822f048" + ".def" + "." + XMIResource.XMI_NS)
+					Paths.get("src/test/resources/" +defmodel + ".def" + "." + XMIResource.XMI_NS)
 							.toFile().getAbsolutePath());
 			System.out.println("defURI is: " + defURI);
 
 			final URI invURI = URI
-					.createFileURI(Paths.get("src/test/resources/" + TEST_FILES_UUID + ".inv" + "." + XMIResource.XMI_NS)
+					.createFileURI(Paths.get("src/test/resources/" + invmodel + ".inv" + "." + XMIResource.XMI_NS)
 							.toFile().getAbsolutePath());
 			System.out.println("defURI is: " + invURI);
 			// baseUri.appendSegment(TEST_FILES_UUID).appendFileExtension("inv")
@@ -90,9 +96,17 @@ public abstract class AbstractTest {
 			definition = (SimulationDefinition) loadResourceFromUri(defURI);
 
 			invocation = (SimulationInvocation) loadResourceFromUri(invURI);
-
 		}
 
+		public static Model loadUMLModel(String modelpath) throws IOException{
+			final URI modelURI = URI.createFileURI(
+					Paths.get("src/test/resources/" +modelpath + ".uml" )
+							.toFile().getAbsolutePath());
+			System.out.println("umlModelURI is: " + modelURI);
+			return (Model) loadResourceFromUri(modelURI); 
+			
+		}
+		
 		protected static EObject loadResourceFromUri(URI theURI) throws IOException {
 			Resource theResource = getResourceSet().getResource(theURI, true);
 			theResource.load(Collections.EMPTY_MAP);
