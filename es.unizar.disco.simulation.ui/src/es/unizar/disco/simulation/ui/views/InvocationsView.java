@@ -1,62 +1,33 @@
 package es.unizar.disco.simulation.ui.views;
 
-import java.awt.Desktop;
-import java.io.IOException;
-import java.text.MessageFormat;
-import java.util.Collections;
-import java.util.UUID;
-
-import org.apache.commons.lang.StringUtils;
+import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.NotEnabledException;
+import org.eclipse.core.commands.NotHandledException;
+import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.masterdetail.IObservableFactory;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.ui.URIEditorInput;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.action.Action;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.action.IMenuListener;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
-import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.databinding.viewers.ObservableListTreeContentProvider;
 import org.eclipse.jface.databinding.viewers.TreeStructureAdvisor;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.ErrorDialog;
-import org.eclipse.jface.dialogs.IInputValidator;
-import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ColumnViewerToolTipSupport;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ISelectionChangedListener;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -69,15 +40,9 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchActionConstants;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.dialogs.SaveAsDialog;
-import org.eclipse.ui.ide.IDE.SharedImages;
+import org.eclipse.ui.commands.ICommandService;
+import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.progress.IWorkbenchSiteProgressService;
 
@@ -89,38 +54,22 @@ import es.unizar.disco.simulation.models.invocation.InvocationsRegistry;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 import es.unizar.disco.simulation.registry.SimulationInvocationsRegistry;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
-import es.unizar.disco.simulation.ui.editors.RootedReadOnlyEcoreEditor;
 import es.unizar.disco.simulation.ui.launcher.providers.DelegatedColumnLabelProvider;
 
 public class InvocationsView extends ViewPart {
 
+
 	public static final String ID = "es.unizar.disco.simulation.ui.views.InvocationsView";
+
+	private static final String STATE_TOGGLE = "org.eclipse.ui.commands.toggleState";
+
+	private static final String COMMAND_SHOW_VIEW_ON_CHANGE = "es.unizar.disco.simulation.ui.commands.showViewOnChange";
+
+	private static final String COMMAND_OPEN_RESULT = "es.unizar.disco.simulation.ui.commands.openSimulationResult";
 
 	private static final String UNKNOWN = "<Unknown>";
 
-	private volatile boolean visibleOnChange = true;
-
 	private TreeViewer invocationsViewer;
-
-	private Action newViewAction;
-
-	private Action refreshAction;
-
-	private Action makeVisibleAction;
-
-	private Action clearRegistryAction;
-
-	private Action saveRegistryAction;
-
-	private Action linkFolderAsProjectAction;
-
-	private Action openFolderAction;
-
-	private Action openResultAction;
-
-	private Action openInvocationAction;
-
-	private Action exportVariablesAction;
 
 	private EContentAdapter contentAdapter = new EContentAdapter() {
 		public void notifyChanged(final Notification notification) {
@@ -152,7 +101,7 @@ public class InvocationsView extends ViewPart {
 							if (service != null) {
 								service.warnOfContentChange();
 							}
-							if (visibleOnChange) {
+							if (visibleOnChange()) {
 								getSite().getPage().activate(getSite().getPart());
 							}
 						}
@@ -240,11 +189,11 @@ public class InvocationsView extends ViewPart {
 		}
 
 		dummyViewerColumn.getColumn().addListener(SWT.Move, new Listener() {
+			// Although the dummy column cannot be moved, the other columns can.
+			// This Move Listener ensures that if a column is moved to the right
+			// of the dummy column, the position of the dummy column is restored
 			@Override
 			public void handleEvent(Event event) {
-				// Although the dummy column cannot be moved, the other columns can.
-				// This Move Listener ensures that if a column is moved to the right
-				// of the dummy column, the position of the dummy column is restored
 				int[] orders = invocationsViewer.getTree().getColumnOrder();
 				int dummyMovedTo = -1;
 				for (int i = 0; i < orders.length; i++) {
@@ -260,7 +209,7 @@ public class InvocationsView extends ViewPart {
 				}
 			}
 		});
-		
+
 		ColumnViewerToolTipSupport.enableFor(invocationsViewer);
 
 		// @formatter:off
@@ -281,326 +230,33 @@ public class InvocationsView extends ViewPart {
 
 		getSite().setSelectionProvider(invocationsViewer);
 
-		makeActions();
 		hookDoubleClickAction();
 		hookContextMenu();
-		contributeToActionBars();
 	}
 
-	private void contributeToActionBars() {
-		IActionBars bars = getViewSite().getActionBars();
-		fillLocalPullDown(bars.getMenuManager());
-		fillLocalToolBar(bars.getToolBarManager());
+	private boolean visibleOnChange() {
+		ICommandService service = (ICommandService) PlatformUI.getWorkbench().getService(ICommandService.class);
+		Command command = service.getCommand(COMMAND_SHOW_VIEW_ON_CHANGE);
+		return (boolean) command.getState(STATE_TOGGLE).getValue();
 	}
-
-	private void fillLocalPullDown(IMenuManager manager) {
-		manager.add(clearRegistryAction);
-		manager.add(saveRegistryAction);
-		manager.add(openFolderAction);
-		manager.add(linkFolderAsProjectAction);
-		manager.add(new Separator());
-		manager.add(refreshAction);
-		manager.add(new Separator());
-		manager.add(newViewAction);
-	}
-
-	private void fillLocalToolBar(IToolBarManager manager) {
-		manager.add(clearRegistryAction);
-		manager.add(new Separator());
-		manager.add(openFolderAction);
-		manager.add(new Separator());
-		manager.add(makeVisibleAction);
-		manager.add(newViewAction);
-	}
-
-	private void fillContextMenu(IMenuManager manager) {
-		manager.add(openResultAction);
-		manager.add(openInvocationAction);
-		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-		manager.add(exportVariablesAction);
-		// Other plug-ins can contribute there actions here
-		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
-	}
-
-	private void makeActions() {
-		newViewAction = new Action() {
-			public void run() {
-				IWorkbenchPage page = getSite().getPage();
-				try {
-					page.showView(ID, UUID.randomUUID().toString(), IWorkbenchPage.VIEW_ACTIVATE);
-				} catch (PartInitException e) {
-					DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
-				}
-			}
-		};
-		newViewAction.setText("New Invocation Registry View");
-		newViewAction.setToolTipText("Opens a new instance of this view");
-		newViewAction.setImageDescriptor(
-				PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_TOOL_NEW_WIZARD));
-
-		clearRegistryAction = new Action() {
-			public void run() {
-				SimulationInvocationsRegistry.INSTANCE.clear();
-			}
-		};
-		clearRegistryAction.setText("Delete Registry");
-		clearRegistryAction.setToolTipText("Deletes all de entries and files currently shown in this registry");
-		clearRegistryAction.setImageDescriptor(
-				PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ELCL_REMOVEALL));
-
-		saveRegistryAction = new Action() {
-			public void run() {
-				try {
-					SimulationInvocationsRegistry.INSTANCE.save();
-				} catch (IOException e) {
-					ErrorDialog.openError(getSite().getShell(), "Error", "Unable to save registry",
-							new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-				}
-			}
-		};
-		saveRegistryAction.setText("Save Registry");
-		saveRegistryAction.setToolTipText("Writes the changes in the registry on disk");
-		saveRegistryAction.setImageDescriptor(
-				PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ETOOL_SAVE_EDIT));
-
-		linkFolderAsProjectAction = new Action() {
-			public void run() {
-				InputDialog dialog = new InputDialog(getSite().getShell(), "Project name", "Name for the project", null,
-						new IInputValidator() {
-							@Override
-							public String isValid(String newText) {
-								if (StringUtils.isBlank(newText)) {
-									return "Project name cannot be blank";
-								} else if (ResourcesPlugin.getWorkspace().getRoot().getProject("/" + newText)
-										.exists()) {
-									return MessageFormat.format("Project ''{0}'' already exists", "/" + newText);
-								}
-								return null;
-							}
-						});
-				if (dialog.open() == Dialog.OK) {
-					final String projectName = dialog.getValue();
-					Job job = new Job("Create project") {
-						@Override
-						protected IStatus run(IProgressMonitor monitor) {
-							SubMonitor subMonitor = SubMonitor.convert(monitor, "Create project", 4);
-							IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
-							IFolder registry = project
-									.getFolder(SimulationInvocationsRegistry.REGISTRY_DIRECTORY_LOCATION.lastSegment());
-							IFile file = project.getFile(SimulationInvocationsRegistry.REGISTRY_LOCATION.lastSegment());
-							try {
-								project.create(subMonitor.newChild(1));
-								project.open(subMonitor.newChild(1));
-								registry.createLink(SimulationInvocationsRegistry.REGISTRY_DIRECTORY_LOCATION,
-										IResource.NONE, subMonitor.newChild(1));
-								file.createLink(SimulationInvocationsRegistry.REGISTRY_LOCATION, IResource.NONE,
-										subMonitor.newChild(1));
-							} catch (CoreException e) {
-								return new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID,
-										e.getLocalizedMessage(), e);
-							}
-							return Status.OK_STATUS;
-						}
-					};
-					job.schedule();
-					try {
-						job.join();
-					} catch (InterruptedException e) {
-						ErrorDialog.openError(getSite().getShell(), "Error", "Unable to create project", new Status(
-								IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-					}
-					if (!job.getResult().isOK()) {
-						ErrorDialog.openError(getSite().getShell(), "Error", "Unable to create project",
-								job.getResult());
-					}
-				}
-			}
-
-			@Override
-			public boolean isEnabled() {
-				return Desktop.isDesktopSupported();
-			}
-		};
-		linkFolderAsProjectAction.setText("Link Registry in New Project");
-		linkFolderAsProjectAction.setToolTipText("Creates a Project with its contents linked to the registry contents");
-		linkFolderAsProjectAction.setImageDescriptor(
-				PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(SharedImages.IMG_OBJ_PROJECT));
-
-		openFolderAction = new Action() {
-			public void run() {
-				if (Desktop.isDesktopSupported()) {
-					Desktop desktop = Desktop.getDesktop();
-					try {
-						desktop.open(SimulationInvocationsRegistry.BASE_LOCATION.toFile());
-					} catch (IOException e) {
-						ErrorDialog.openError(getSite().getShell(), "Error", "Unable open folder", new Status(
-								IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-					}
-				}
-			}
-
-			@Override
-			public boolean isEnabled() {
-				return Desktop.isDesktopSupported();
-			}
-		};
-		openFolderAction.setText("Open Registry Directory");
-		openFolderAction
-				.setToolTipText("Open the folder containing the registry files in using the system's file browser");
-		openFolderAction.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry()
-				.getDescriptor(DiceSimulationUiPlugin.IMG_ETOOL16_GO_TO_FOLDER));
-
-		refreshAction = new Action() {
-			public void run() {
-				invocationsViewer.refresh(true);
-			}
-		};
-		refreshAction.setText("Refresh Viewer");
-		refreshAction.setToolTipText("Forces a refresh of the viewer's contents");
-		refreshAction.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry()
-				.getDescriptor(DiceSimulationUiPlugin.IMG_ETOOL16_REFRESH));
-
-		makeVisibleAction = new Action() {
-
-			@Override
-			public int getStyle() {
-				return IAction.AS_CHECK_BOX;
-			}
-
-			@Override
-			public void setChecked(boolean checked) {
-				visibleOnChange = !visibleOnChange;
-			}
-
-			@Override
-			public boolean isChecked() {
-				return visibleOnChange;
-			}
-		};
-		makeVisibleAction.setText("Show View on Change");
-		makeVisibleAction.setToolTipText("Show view when contents change");
-		makeVisibleAction.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry()
-				.getDescriptor(DiceSimulationUiPlugin.IMG_ETOOL16_MAKE_VISIBLE));
-
-		openInvocationAction = new Action() {
-			public void run() {
-				IStructuredSelection selection = (IStructuredSelection) invocationsViewer.getSelection();
-				if (selection.getFirstElement() instanceof SimulationInvocation) {
-					SimulationInvocation invocation = (SimulationInvocation) selection.getFirstElement();
-					IWorkbench workbench = PlatformUI.getWorkbench();
-					IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
-					try {
-						SimulationInvocationsRegistry.INSTANCE.save();
-						page.openEditor(new URIEditorInput(EcoreUtil.getURI(invocation)), RootedReadOnlyEcoreEditor.ID);
-					} catch (IOException e) {
-						ErrorDialog.openError(getSite().getShell(), "Error", "Unable to save registry data", new Status(
-								IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-					} catch (PartInitException e) {
-						ErrorDialog.openError(getSite().getShell(), "Error", "Unable open Simulation Invocation",
-								new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(),
-										e));
-					}
-				}
-			}
-		};
-		openInvocationAction.setText("Inspect Simulation Invocation Data");
-		openInvocationAction.setToolTipText("Opens the Simulation invocation in the Ecore Reflective editor");
-		openInvocationAction.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry()
-				.getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_SIMULATION_INVOCATION));
-
-		openResultAction = new Action() {
-			{
-				invocationsViewer.addSelectionChangedListener(new ISelectionChangedListener() {
-					@Override
-					public void selectionChanged(SelectionChangedEvent event) {
-						IStructuredSelection selection = (IStructuredSelection) invocationsViewer.getSelection();
-						if (!selection.isEmpty() && selection.getFirstElement() instanceof SimulationInvocation) {
-							SimulationInvocation invocation = (SimulationInvocation) selection.getFirstElement();
-							if (invocation.getResult() == null) {
-								setEnabled(false);
-							} else {
-								setEnabled(true);
-							}
-						}
-					}
-				});
-			}
-
-			public void run() {
-				IStructuredSelection selection = (IStructuredSelection) invocationsViewer.getSelection();
-				if (selection.getFirstElement() instanceof SimulationInvocation) {
-					SimulationInvocation invocation = (SimulationInvocation) selection.getFirstElement();
-					if (invocation.getResult() == null) {
-						return;
-					}
-					IWorkbench workbench = PlatformUI.getWorkbench();
-					IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
-					try {
-						SimulationInvocationsRegistry.INSTANCE.save();
-						page.openEditor(new URIEditorInput(EcoreUtil.getURI(invocation.getResult())),
-								RootedReadOnlyEcoreEditor.ID);
-					} catch (IOException e) {
-						ErrorDialog.openError(getSite().getShell(), "Error", "Unable to save registry data", new Status(
-								IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
-					} catch (PartInitException e) {
-						ErrorDialog.openError(getSite().getShell(), "Error", "Unable open Simulation Results",
-								new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(),
-										e));
-					}
-				}
-			}
-		};
-		openResultAction.setText("Open Simulation Result");
-		openResultAction.setToolTipText("Opens the Simulation result in the Ecore Reflective editor");
-		openResultAction.setImageDescriptor(DiceSimulationUiPlugin.getDefault().getImageRegistry()
-				.getDescriptor(DiceSimulationUiPlugin.IMG_OBJ16_SIMULATION_RESULT));
-
-		exportVariablesAction = new Action() {
-			public void run() {
-				IStructuredSelection selection = (IStructuredSelection) invocationsViewer.getSelection();
-				if (selection.getFirstElement() instanceof SimulationInvocation) {
-					SimulationInvocation invocation = (SimulationInvocation) selection.getFirstElement();
-					SaveAsDialog dialog = new SaveAsDialog(getSite().getShell());
-					dialog.setBlockOnOpen(true);
-					if (dialog.open() == Window.OK) {
-						IPath path = dialog.getResult();
-						Resource resource = new XMIResourceImpl(URI.createFileURI(path.toFile().toString()));
-						resource.getContents().addAll(
-								EcoreUtil.copyAll(invocation.getVariableConfiguration().toPrimitiveAssignments()));
-						try {
-							resource.save(Collections.emptyMap());
-						} catch (IOException e) {
-							ErrorDialog.openError(getSite().getShell(), "Error", "Error saving variable values",
-									new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(),
-											e));
-						}
-					}
-				}
-			}
-		};
-		exportVariablesAction.setText("Export Invocation Variables...");
-		exportVariablesAction.setToolTipText("Exports the Simulation Invocation Variables to an XMI file");
-		exportVariablesAction.setImageDescriptor(
-				PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_ETOOL_SAVEAS_EDIT));
-
-	}
-
+	
 	private void hookDoubleClickAction() {
 		invocationsViewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
-				openResultAction.run();
+				try {
+					IHandlerService service = (IHandlerService) getSite().getService(IHandlerService.class);
+					service.executeCommand(COMMAND_OPEN_RESULT, null);
+				} catch (ExecutionException | NotDefinedException | NotEnabledException | NotHandledException e) {
+					ErrorDialog.openError(getSite().getShell(), "Error", "Unable to open the Simulation Result",
+							new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e));
+				}
 			}
 		});
 	}
 
 	private void hookContextMenu() {
-		MenuManager manager = new MenuManager("#PopupMenu");
-		manager.setRemoveAllWhenShown(true);
-		manager.addMenuListener(new IMenuListener() {
-			public void menuAboutToShow(IMenuManager manager) {
-				fillContextMenu(manager);
-			}
-		});
+		MenuManager manager = new MenuManager();
+//		manager.setRemoveAllWhenShown(true);
 		Menu menu = manager.createContextMenu(invocationsViewer.getControl());
 		invocationsViewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(manager, invocationsViewer);
@@ -610,6 +266,10 @@ public class InvocationsView extends ViewPart {
 		invocationsViewer.getControl().setFocus();
 	}
 
+	public void refresh() {
+		invocationsViewer.refresh(true);
+	}
+	
 	private class IdColumnLabelProvider extends DelegatedColumnLabelProvider {
 		public IdColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
 			super(delegatedLabelProvider);
@@ -626,6 +286,7 @@ public class InvocationsView extends ViewPart {
 				try {
 					return labelProvider.getText(set.getDefinition().getActiveScenario());
 				} catch (Throwable t) {
+					DiceLogger.logError(DiceSimulationUiPlugin.getDefault(), t);
 				}
 			}
 			return null;
@@ -641,6 +302,7 @@ public class InvocationsView extends ViewPart {
 					InvocationSet set = (InvocationSet) element;
 					return labelProvider.getImage(set.getDefinition().getActiveScenario());
 				} catch (Throwable t) {
+					DiceLogger.logError(DiceSimulationUiPlugin.getDefault(), t);
 				}
 			}
 			return null;
@@ -657,6 +319,7 @@ public class InvocationsView extends ViewPart {
 					return set.getDefinition().getDomainResource().getUri().toString();
 				}
 			} catch (Throwable t) {
+				DiceLogger.logError(DiceSimulationUiPlugin.getDefault(), t);
 			}
 			return null;
 		}
@@ -790,12 +453,12 @@ public class InvocationsView extends ViewPart {
 	}
 
 	private class DummyColumnLabelProvider extends ColumnLabelProvider {
-		
+
 		@Override
 		public String getText(Object element) {
 			return null;
 		}
-		
+
 		@Override
 		public Color getBackground(Object element) {
 			if (element instanceof InvocationSet) {
@@ -805,7 +468,7 @@ public class InvocationsView extends ViewPart {
 		}
 	}
 
-	private static class TreeFactoryImpl implements IObservableFactory<Object, IObservableList<?>> {
+	private class TreeFactoryImpl implements IObservableFactory<Object, IObservableList<?>> {
 		@SuppressWarnings("unchecked")
 		@Override
 		public IObservableList<?> createObservable(Object target) {
@@ -822,7 +485,7 @@ public class InvocationsView extends ViewPart {
 		}
 	}
 
-	private static class TreeStructureAdvisorImpl extends TreeStructureAdvisor {
+	private class TreeStructureAdvisorImpl extends TreeStructureAdvisor {
 		@Override
 		public Object getParent(Object element) {
 			if (element instanceof SimulationInvocation) {

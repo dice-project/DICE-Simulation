@@ -112,7 +112,7 @@
          point="org.eclipse.ui.handlers">
       <handler
             class="es.unizar.disco.simulation.ui.handlers.LaunchSimulationHandler"
-            commandId="es.unizar.disco.simulation.ui.commands.launchSimulationCommand">
+            commandId="es.unizar.disco.simulation.ui.commands.launchSimulation">
          <activeWhen>
             <with
                   variable="activeEditorId">
@@ -121,6 +121,46 @@
                </equals>
             </with>
          </activeWhen>
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.OpenRegistryDirectoryHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.openRegistryDirectory">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.NewViewHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.newInvocationsRegistryView">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.ClearRegistryHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.clearRegistry">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.SaveRegistryHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.saveRegistry">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.LinkFolderAsProjectHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.linkFolderAsProject">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.ShowViewOnChangeHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.showViewOnChange">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.RefreshViewHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.refreshView">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.InspectSimulationDataHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.inspectSimluationData">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.ExportVariablesHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.exportVariables">
+      </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.OpenSimulationResultHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.openSimulationResult">
       </handler>
    </extension>
    <extension
@@ -167,19 +207,219 @@
             </command>
          </toolbar>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:es.unizar.disco.simulation.ui.views.InvocationsView?after=additions">
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.clearRegistry"
+               icon="IMG_ELCL_REMOVEALL"
+               label="Delete Registry"
+               style="push"
+               tooltip="Deletes all de entries and files currently shown in this registry">
+         </command>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.openRegistryDirectory"
+               icon="icons/full/etool16/go_to_folder.png"
+               label="Open Registry Directory"
+               style="push"
+               tooltip="Open the folder containing the registry files in using the system&apos;s file browser">
+         </command>
+         <separator
+               name="es.unizar.disco.simulation.ui.views.toolbar.separator1"
+               visible="true">
+         </separator>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.showViewOnChange"
+               icon="icons/full/etool16/make_visible.gif"
+               label="Show View on Change"
+               style="toggle"
+               tooltip="Show view when contents change">
+         </command>
+         <separator
+               name="es.unizar.disco.simulation.ui.views.toolbar.separator2"
+               visible="true">
+         </separator>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.newInvocationsRegistryView"
+               icon="IMG_TOOL_NEW_WIZARD"
+               label="New Invocations Registry View"
+               style="push"
+               tooltip="Opens a new instance of this view">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:es.unizar.disco.simulation.ui.views.InvocationsView?after=additions">
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.clearRegistry"
+               icon="IMG_ELCL_REMOVEALL"
+               label="Delete Registry"
+               style="push"
+               tooltip="Deletes all de entries and files currently shown in this registry">
+         </command>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.saveRegistry"
+               icon="IMG_ETOOL_SAVE_EDIT"
+               label="Save Registry"
+               style="push"
+               tooltip="Writes the changes in the registry on disk">
+         </command>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.openRegistryDirectory"
+               icon="icons/full/etool16/go_to_folder.png"
+               label="Open Registry Directory"
+               style="push"
+               tooltip="Open the folder containing the registry files in using the system&apos;s file browser">
+         </command>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.linkFolderAsProject"
+               icon="icons/full/obj16/project.png"
+               label="Link Registry in New Project..."
+               style="push"
+               tooltip="Creates a Project with its contents linked to the registry contents">
+         </command>
+         <separator
+               name="es.unizar.disco.simulation.ui.views.pulldown.separator1"
+               visible="true">
+         </separator>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.refreshView"
+               icon="icons/full/etool16/refresh.png"
+               label="Refresh Viewer"
+               style="push"
+               tooltip="Forces a refresh of the viewer&apos;s contents">
+         </command>
+         <separator
+               name="es.unizar.disco.simulation.ui.views.pulldown.separator2"
+               visible="true">
+         </separator>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.newInvocationsRegistryView"
+               icon="IMG_TOOL_NEW_WIZARD"
+               label="New Invocations Registry View"
+               style="push"
+               tooltip="Opens a new instance of this view">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:es.unizar.disco.simulation.ui.views.InvocationsView?after=additions">
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.openSimulationResult"
+               icon="icons/full/obj16/simulation_result.png"
+               label="Open Simulation Result"
+               style="push"
+               tooltip="Opens the Simulation result in the Ecore Reflective editor">
+            <visibleWhen
+                  checkEnabled="false">
+               <iterate>
+                  <instanceof
+                        value="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
+                  </instanceof>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.inspectSimluationData"
+               icon="icons/full/obj16/simulation_invocation.png"
+               label="Inspect Simulation Invocation Data"
+               style="push"
+               tooltip="Opens the Simulation invocation in the Ecore Reflective editor">
+            <visibleWhen
+                  checkEnabled="false">
+               <iterate>
+                  <instanceof
+                        value="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
+                  </instanceof>
+               </iterate>
+            </visibleWhen>
+         </command>
+         <separator
+               name="es.unizar.disco.simulation.ui.views.popup.separator1"
+               visible="true">
+         </separator>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.exportVariables"
+               icon="IMG_ETOOL_SAVEAS_EDIT"
+               label="Export Invocation Variables..."
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <iterate>
+                  <instanceof
+                        value="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
+                  </instanceof>
+               </iterate>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
       <command
             categoryId="es.unizar.disco.simulation.ui.diceSimulationCategory"
             description="Launches a new DICE Simulation"
-            id="es.unizar.disco.simulation.ui.commands.launchSimulationCommand"
+            id="es.unizar.disco.simulation.ui.commands.launchSimulation"
             name="Launch DICE Simulation">
       </command>
       <category
             id="es.unizar.disco.simulation.ui.diceSimulationCategory"
             name="DICE Simulation">
       </category>
+      <command
+            description="Open the folder containing the registry files in using the system&apos;s file browser"
+            id="es.unizar.disco.simulation.ui.commands.openRegistryDirectory"
+            name="Open Registry Directory">
+      </command>
+      <command
+            description="Opens a new instance of the Invocations Registry"
+            id="es.unizar.disco.simulation.ui.commands.newInvocationsRegistryView"
+            name="New Invocations Registry View">
+      </command>
+      <command
+            description="Clears the Invocations Registry"
+            id="es.unizar.disco.simulation.ui.commands.clearRegistry"
+            name="Clear Registry">
+      </command>
+      <command
+            description="Save Registry contents on disk"
+            id="es.unizar.disco.simulation.ui.commands.saveRegistry"
+            name="Save Registry">
+      </command>
+      <command
+            description="Creates a Project with its contents linked to the registry contents"
+            id="es.unizar.disco.simulation.ui.commands.linkFolderAsProject"
+            name="Link Registry in New Project">
+      </command>
+      <command
+            description="Show view when contents change"
+            id="es.unizar.disco.simulation.ui.commands.showViewOnChange"
+            name="Show View on Change">
+         <state
+               class="org.eclipse.ui.handlers.RegistryToggleState:true"
+               id="org.eclipse.ui.commands.toggleState">
+         </state>
+      </command>
+      <command
+            description="Forces a refresh of the viewer&apos;s contents"
+            id="es.unizar.disco.simulation.ui.commands.refreshView"
+            name="Refresh Viewer">
+      </command>
+      <command
+            description="Opens the Simulation invocation in the Ecore Reflective editor"
+            id="es.unizar.disco.simulation.ui.commands.inspectSimluationData"
+            name="Inspect Simulation Invocation Data">
+      </command>
+      <command
+            description="Exports the Simulation Invocation Variables to an XMI file"
+            id="es.unizar.disco.simulation.ui.commands.exportVariables"
+            name="Export Invocation Variables">
+      </command>
+      <command
+            description="Opens the Simulation result in the Ecore Reflective editor"
+            id="es.unizar.disco.simulation.ui.commands.openSimulationResult"
+            name="Open Simulation Result">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
