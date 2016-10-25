@@ -635,6 +635,15 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getVariableConfiguration__FindAssignment__InputVariable() {
+		return variableConfigurationEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public DefinitionFactory getDefinitionFactory() {
 		return (DefinitionFactory)getEFactoryInstance();
 	}
@@ -713,6 +722,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		createEReference(variableConfigurationEClass, VARIABLE_CONFIGURATION__ASSIGNMENTS);
 		createEOperation(variableConfigurationEClass, VARIABLE_CONFIGURATION___IS_EQUIVALENT__VARIABLECONFIGURATION);
 		createEOperation(variableConfigurationEClass, VARIABLE_CONFIGURATION___TO_PRIMITIVE_ASSIGNMENTS);
+		createEOperation(variableConfigurationEClass, VARIABLE_CONFIGURATION___FIND_ASSIGNMENT__INPUTVARIABLE);
 	}
 
 	/**
@@ -843,6 +853,9 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		addEParameter(op, this.getVariableConfiguration(), "config", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getVariableConfiguration__ToPrimitiveAssignments(), theDatatypesPackage.getPrimitiveVariableAssignment(), "toPrimitiveAssignments", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getVariableConfiguration__FindAssignment__InputVariable(), this.getVariableAssignment(), "findAssignment", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getInputVariable(), "variable", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

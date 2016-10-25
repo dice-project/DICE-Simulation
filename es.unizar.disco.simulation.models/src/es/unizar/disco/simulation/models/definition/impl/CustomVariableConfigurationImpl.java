@@ -9,6 +9,7 @@ import org.eclipse.emf.common.util.EList;
 
 import es.unizar.disco.simulation.models.datatypes.DatatypesFactory;
 import es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment;
+import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.definition.VariableAssignment;
 import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 
@@ -41,5 +42,15 @@ public class CustomVariableConfigurationImpl extends VariableConfigurationImpl i
 			assignments.add(primitiveAssignment);
 		}
 		return ECollections.unmodifiableEList(assignments);
+	}
+	
+	@Override
+	public VariableAssignment findAssignment(InputVariable variable) {
+		for (VariableAssignment assignment : getAssignments()) {
+			if (variable.equals(assignment.getVariable())) {
+				return assignment;
+			}
+		}
+		return null;
 	}
 }
