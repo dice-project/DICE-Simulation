@@ -162,6 +162,10 @@
             class="es.unizar.disco.simulation.ui.views.OpenSimulationResultHandler"
             commandId="es.unizar.disco.simulation.ui.commands.openSimulationResult">
       </handler>
+      <handler
+            class="es.unizar.disco.simulation.ui.views.PlotInvocationSetResultHandler"
+            commandId="es.unizar.disco.simulation.ui.commands.openPlotWizard">
+      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -352,6 +356,21 @@
                </iterate>
             </visibleWhen>
          </command>
+         <command
+               commandId="es.unizar.disco.simulation.ui.commands.openPlotWizard"
+               icon="icons/full/obj16/chart.png"
+               label="Plot Results..."
+               style="push"
+               tooltip="Export the results and/or plot them">
+            <visibleWhen
+                  checkEnabled="false">
+               <iterate>
+                  <instanceof
+                        value="es.unizar.disco.simulation.models.invocation.InvocationSet">
+                  </instanceof>
+               </iterate>
+            </visibleWhen>
+         </command>
       </menuContribution>
    </extension>
    <extension
@@ -419,6 +438,11 @@
             description="Opens the Simulation result in the Ecore Reflective editor"
             id="es.unizar.disco.simulation.ui.commands.openSimulationResult"
             name="Open Simulation Result">
+      </command>
+      <command
+            description="Plot the InvocationSet results"
+            id="es.unizar.disco.simulation.ui.commands.openPlotWizard"
+            name="Plot Results">
       </command>
    </extension>
    <extension
