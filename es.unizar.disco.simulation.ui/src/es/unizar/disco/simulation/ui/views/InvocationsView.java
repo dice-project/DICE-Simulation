@@ -1,5 +1,7 @@
 package es.unizar.disco.simulation.ui.views;
 
+import java.text.MessageFormat;
+
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.NotEnabledException;
@@ -284,7 +286,7 @@ public class InvocationsView extends ViewPart {
 				InvocationSet set = (InvocationSet) element;
 				EcoreUtil.resolveAll(set);
 				try {
-					return labelProvider.getText(set.getDefinition().getActiveScenario());
+					return MessageFormat.format("{0} [{1}]", labelProvider.getText(set.getDefinition().getActiveScenario()), set.getIdentifier());
 				} catch (Throwable t) {
 					DiceLogger.logError(DiceSimulationUiPlugin.getDefault(), t);
 				}
