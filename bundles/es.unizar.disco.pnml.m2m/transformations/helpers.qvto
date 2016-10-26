@@ -21,6 +21,8 @@ helper OclAny::eObject() : ECORE::EObject {
   Getters for stereotypes
 *******************************************************************************/
 
+/* GaElements */
+
 helper UML::Element::getGaWorkloadEvent() : UML::Stereotype {
 	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent");
@@ -56,6 +58,29 @@ helper UML::Element::getPaLogicalResource() : UML::Stereotype {
 	return null;	
 }
 
+/* Storm Elements */
+
+helper UML::Element::getStormSpout() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout");
+	};
+	return null;	
+}
+
+helper UML::Element::getStormBolt() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt");
+	};
+	return null;	
+}
+
+helper UML::Element::getStormStreamStep() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormStreamStep"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormStreamStep");
+	};
+	return null;	
+}
+
 helper UML::Element::getPaRunTInstance() : UML::Stereotype {
 	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance");
@@ -63,6 +88,12 @@ helper UML::Element::getPaRunTInstance() : UML::Stereotype {
 	return null;	
 }
 
+helper UML::Element::getGaExecHost() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaExecHost"))) { 
+		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaExecHost");
+	};
+	return null;	
+}
 
 
 /*******************************************************************************

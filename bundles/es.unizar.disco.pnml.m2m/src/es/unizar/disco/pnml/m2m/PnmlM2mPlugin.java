@@ -13,6 +13,8 @@ public class PnmlM2mPlugin implements BundleActivator {
 
 	public static final String DPIM_SD2PNML_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dpim-sd2pnml.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
 	
+	public static final String DTSM_STORM_AD2PNML_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dtsm-storm-ad2pnml.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
+	
 	private static BundleContext context;
 
 	static BundleContext getContext() {

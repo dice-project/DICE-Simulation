@@ -170,10 +170,18 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 [comment LDCOEFFS ::= (#(LDPOP) - 1){ preal "\n" } /]
 [/template]
 
+[template public multiplicity(arc : Arc) post (trim())] 
+[if (arc.inscription.text.oclIsUndefined()._not())]
+[arc.inscription.text/]
+[else]
+1
+[/if]
+[/template]
+
 [template public tiArcs(trans : Transition) post (trim())]
 [comment TIARCS ::= #(TINP){ AMULT space APLACE space APOINTS LEVELS COL "\n" APLIST } /]
 [for (arc : Arc | trans.InArcs)]
-1 [getPlaceIndex(arc.source.oclAsType(Place))/] 0 0
+[multiplicity(arc)/] [getPlaceIndex(arc.source.oclAsType(Place))/] 0 0
 [/for]
 [/template]
 
@@ -185,7 +193,7 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 [template public toArcs(trans : Transition) post (trim())]
 [comment TOARCS ::= #(TOUT){AMULT space APLACE space APOINTS LEVELS COL "\n" APLIST } /]
 [for (arc : Arc | trans.OutArcs)]
-1 [getPlaceIndex(arc.target.oclAsType(Place))/] 0 0
+[multiplicity(arc)/] [getPlaceIndex(arc.target.oclAsType(Place))/] 0 0
 [/for]
 [/template]
 
