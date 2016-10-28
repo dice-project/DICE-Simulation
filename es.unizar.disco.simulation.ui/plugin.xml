@@ -107,6 +107,13 @@
             properties="extension"
             type="org.eclipse.papyrus.infra.onefile.model.IPapyrusElement">
       </propertyTester>
+      <propertyTester
+            class="es.unizar.disco.simulation.ui.tester.InvocationHasResultTester"
+            id="es.unizar.disco.simulation.ui.tester.hasResult"
+            namespace="es.unizar.disco.simulation.ui.tester"
+            properties="hasResult"
+            type="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
+      </propertyTester>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -161,6 +168,39 @@
       <handler
             class="es.unizar.disco.simulation.ui.views.OpenSimulationResultHandler"
             commandId="es.unizar.disco.simulation.ui.commands.openSimulationResult">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate>
+                  <and>
+                     <test
+                           forcePluginActivation="true"
+                           property="es.unizar.disco.simulation.ui.tester.hasResult">
+                     </test>
+                     <instanceof
+                           value="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
+                     </instanceof>
+                  </and>
+               </iterate>
+               <iterate>
+                  <and>
+                     <test
+                           forcePluginActivation="true"
+                           property="es.unizar.disco.simulation.ui.tester.hasResult">
+                     </test>
+                  </and>
+               </iterate>
+               <iterate>
+                  <test
+                        forcePluginActivation="true"
+                        property="es.unizar.disco.simulation.ui.tester.hasResult">
+                  </test>
+               </iterate>
+               <count
+                     value="1">
+               </count>
+            </with>
+         </enabledWhen>
       </handler>
       <handler
             class="es.unizar.disco.simulation.ui.views.PlotInvocationSetResultHandler"
