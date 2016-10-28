@@ -220,7 +220,8 @@ public class PlotData implements Serializable {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		String line = null;
 		while ((line = reader.readLine()) != null) {
-			if (line.startsWith(COMMENT_CHAR)) {
+			if (line.trim().length() == 0) {
+			} else if (line.startsWith(COMMENT_CHAR)) {
 				if (line.startsWith(SIM_ID)) {
 					plotData.id = sanitize(line.replaceFirst(SIM_ID, ""));
 				} else if (line.startsWith(SIM_X_LABEL)) {
@@ -248,6 +249,8 @@ public class PlotData implements Serializable {
 						DiceLogger.logError(DiceSimulationUiPlugin.getDefault(), MessageFormat.format("Unable to parse line in plot data file: ''{0}''", line),
 								e);
 					}
+				} else {
+					DiceLogger.logError(DiceSimulationUiPlugin.getDefault(), MessageFormat.format("Unable to parse line in plot data file: ''{0}''", line));
 				}
 			}
 		}
