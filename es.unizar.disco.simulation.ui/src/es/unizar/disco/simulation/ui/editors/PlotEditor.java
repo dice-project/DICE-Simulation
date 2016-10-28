@@ -38,6 +38,8 @@ import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
@@ -58,6 +60,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
@@ -318,7 +321,8 @@ public class PlotEditor extends MultiPageEditorPart {
 					GeneratedChartState state = generator.build(render.getDisplayServer(), canvas.getChart(), bounds, null);
 					generator.render(render, state);
 				} catch (ChartException e) {
-					DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
+					StatusManager.getManager().handle(new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e),
+							StatusManager.LOG | StatusManager.SHOW);
 				}
 			}
 		}
