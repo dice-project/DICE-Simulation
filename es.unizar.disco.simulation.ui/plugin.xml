@@ -485,6 +485,14 @@
             id="es.unizar.disco.simulation.ui.editors.readonlyEcoreEditor"
             name="Rooted Read Only Ecore Editor">
       </editor>
+      <editor
+            class="es.unizar.disco.simulation.ui.editors.PlotEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            extensions="plot"
+            icon="icons/full/obj16/chart.png"
+            id="es.unizar.disco.simulation.ui.editors.PlotEditor"
+            name="Plot Editor">
+      </editor>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">

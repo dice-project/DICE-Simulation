@@ -41,7 +41,7 @@ public class SelectVariablePage extends WizardPage {
 		Composite top = new Composite(parent, SWT.NONE);
         top.setLayout(new GridLayout());
         
-		TableViewer viewer = new TableViewer(top);
+		TableViewer viewer = new TableViewer(top, SWT.SINGLE);
 		viewer.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
 		
 		ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);

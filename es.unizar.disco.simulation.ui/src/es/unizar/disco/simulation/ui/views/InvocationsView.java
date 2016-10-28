@@ -258,7 +258,6 @@ public class InvocationsView extends ViewPart {
 
 	private void hookContextMenu() {
 		MenuManager manager = new MenuManager();
-//		manager.setRemoveAllWhenShown(true);
 		Menu menu = manager.createContextMenu(invocationsViewer.getControl());
 		invocationsViewer.getControl().setMenu(menu);
 		getSite().registerContextMenu(manager, invocationsViewer);
