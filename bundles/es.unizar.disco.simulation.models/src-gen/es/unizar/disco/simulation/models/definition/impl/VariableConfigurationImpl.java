@@ -5,6 +5,7 @@ package es.unizar.disco.simulation.models.definition.impl;
 import es.unizar.disco.simulation.models.datatypes.PrimitiveVariableAssignment;
 
 import es.unizar.disco.simulation.models.definition.DefinitionPackage;
+import es.unizar.disco.simulation.models.definition.InputVariable;
 import es.unizar.disco.simulation.models.definition.VariableAssignment;
 import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 
@@ -96,6 +97,17 @@ public class VariableConfigurationImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public EList<PrimitiveVariableAssignment> toPrimitiveAssignments() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableAssignment findAssignment(InputVariable variable) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -202,6 +214,8 @@ public class VariableConfigurationImpl extends MinimalEObjectImpl.Container impl
 				return isEquivalent((VariableConfiguration)arguments.get(0));
 			case DefinitionPackage.VARIABLE_CONFIGURATION___TO_PRIMITIVE_ASSIGNMENTS:
 				return toPrimitiveAssignments();
+			case DefinitionPackage.VARIABLE_CONFIGURATION___FIND_ASSIGNMENT__INPUTVARIABLE:
+				return findAssignment((InputVariable)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

@@ -9,6 +9,7 @@ import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.definition.VariableConfiguration;
 
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
+import es.unizar.disco.simulation.models.invocation.InvocationSet;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 
 import es.unizar.disco.simulation.models.simresult.SimresultPackage;
@@ -58,6 +59,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getVariableConfiguration <em>Variable Configuration</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getAnalyzableModel <em>Analyzable Model</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#isAutoBuild <em>Auto Build</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.impl.SimulationInvocationImpl#getInvocationSet <em>Invocation Set</em>}</li>
  * </ul>
  *
  * @generated
@@ -222,6 +224,16 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * @ordered
 	 */
 	protected boolean autoBuild = AUTO_BUILD_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInvocationSet() <em>Invocation Set</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInvocationSet()
+	 * @generated
+	 * @ordered
+	 */
+	protected InvocationSet invocationSet;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -598,6 +610,66 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public InvocationSet getInvocationSet() {
+		if (invocationSet != null && invocationSet.eIsProxy()) {
+			InternalEObject oldInvocationSet = (InternalEObject)invocationSet;
+			invocationSet = (InvocationSet)eResolveProxy(oldInvocationSet);
+			if (invocationSet != oldInvocationSet) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET, oldInvocationSet, invocationSet));
+			}
+		}
+		return invocationSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InvocationSet basicGetInvocationSet() {
+		return invocationSet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInvocationSet(InvocationSet newInvocationSet, NotificationChain msgs) {
+		InvocationSet oldInvocationSet = invocationSet;
+		invocationSet = newInvocationSet;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET, oldInvocationSet, newInvocationSet);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInvocationSet(InvocationSet newInvocationSet) {
+		if (newInvocationSet != invocationSet) {
+			NotificationChain msgs = null;
+			if (invocationSet != null)
+				msgs = ((InternalEObject)invocationSet).eInverseRemove(this, InvocationPackage.INVOCATION_SET__INVOCATIONS, InvocationSet.class, msgs);
+			if (newInvocationSet != null)
+				msgs = ((InternalEObject)newInvocationSet).eInverseAdd(this, InvocationPackage.INVOCATION_SET__INVOCATIONS, InvocationSet.class, msgs);
+			msgs = basicSetInvocationSet(newInvocationSet, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET, newInvocationSet, newInvocationSet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public IStatus buildAnalyzableModel() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -620,6 +692,10 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 				if (result != null)
 					msgs = ((InternalEObject)result).eInverseRemove(this, SimresultPackage.SIMULATION_RESULT__INVOCATION, SimulationResult.class, msgs);
 				return basicSetResult((SimulationResult)otherEnd, msgs);
+			case InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET:
+				if (invocationSet != null)
+					msgs = ((InternalEObject)invocationSet).eInverseRemove(this, InvocationPackage.INVOCATION_SET__INVOCATIONS, InvocationSet.class, msgs);
+				return basicSetInvocationSet((InvocationSet)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -636,6 +712,8 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 				return basicSetDefinition(null, msgs);
 			case InvocationPackage.SIMULATION_INVOCATION__RESULT:
 				return basicSetResult(null, msgs);
+			case InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET:
+				return basicSetInvocationSet(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -675,6 +753,9 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 				return getAnalyzableModel();
 			case InvocationPackage.SIMULATION_INVOCATION__AUTO_BUILD:
 				return isAutoBuild();
+			case InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET:
+				if (resolve) return getInvocationSet();
+				return basicGetInvocationSet();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -722,6 +803,9 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 			case InvocationPackage.SIMULATION_INVOCATION__AUTO_BUILD:
 				setAutoBuild((Boolean)newValue);
 				return;
+			case InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET:
+				setInvocationSet((InvocationSet)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -767,6 +851,9 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 			case InvocationPackage.SIMULATION_INVOCATION__AUTO_BUILD:
 				setAutoBuild(AUTO_BUILD_EDEFAULT);
 				return;
+			case InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET:
+				setInvocationSet((InvocationSet)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -801,6 +888,8 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 				return analyzableModel != null && !analyzableModel.isEmpty();
 			case InvocationPackage.SIMULATION_INVOCATION__AUTO_BUILD:
 				return autoBuild != AUTO_BUILD_EDEFAULT;
+			case InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET:
+				return invocationSet != null;
 		}
 		return super.eIsSet(featureID);
 	}

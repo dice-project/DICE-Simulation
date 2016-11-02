@@ -19,7 +19,7 @@ import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder.ModelResult;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 
-public class CustomSimulationInvocation extends SimulationInvocationImpl implements SimulationInvocation {
+public class CustomSimulationInvocationImpl extends SimulationInvocationImpl implements SimulationInvocation {
 
 	private static final String EXTENSION_ID = Messages.CustomSimulationInvocation_nameOfExtPoints;
 	private static final String BUILDER = Messages.CustomSimulationInvocation_extPoint_builder;

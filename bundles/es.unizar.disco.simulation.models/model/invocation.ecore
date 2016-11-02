@@ -24,9 +24,26 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="autoBuild" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" transient="true"
         defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocationSet" eType="#//InvocationSet"
+        eOpposite="#//InvocationSet/invocations"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InvocationsRegistry">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="invocations" upperBound="-1"
-        eType="#//SimulationInvocation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocationSets" upperBound="-1"
+        eType="#//InvocationSet" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InvocationSet">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocations" lowerBound="1"
+        upperBound="-1" eType="#//SimulationInvocation" eOpposite="#//SimulationInvocation/invocationSet"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="definition" lowerBound="1"
+        eType="ecore:EClass definition.ecore#//SimulationDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="start" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="end" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EEnum datatypes.ecore#//SimulationStatus"
+        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
 </ecore:EPackage>

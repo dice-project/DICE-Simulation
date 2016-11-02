@@ -13,6 +13,36 @@
 	</parent>
 
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jboss.tools.tycho-plugins</groupId>
+				<artifactId>repository-utils</artifactId>
+				<version>0.26.0</version>
+				<executions>
+					<!-- creates index.html and other artifacts -->
+					<execution>
+						<id>generate-facade</id>
+						<phase>package</phase>
+						<goals>
+							<goal>generate-repository-facade</goal>
+						</goals>
+						<configuration>
+							<!-- configuration options for the generated HTML page -->
 
-	
+							<!-- this adds repository references to the update site's content.xml -->
+							<associateSites>
+								<site>http://dice-project.github.io/DICE-Profiles/updates</site>
+								<site>http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon</site>
+								<site>http://pnml.lip6.fr/pnmlframework/updatesite</site>
+								<site>http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/</site>
+							</associateSites>
+
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

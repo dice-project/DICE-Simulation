@@ -59,4 +59,12 @@ public interface VariableConfiguration extends EObject {
 	 */
 	EList<PrimitiveVariableAssignment> toPrimitiveAssignments();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	VariableAssignment findAssignment(InputVariable variable);
+
 } // VariableConfiguration

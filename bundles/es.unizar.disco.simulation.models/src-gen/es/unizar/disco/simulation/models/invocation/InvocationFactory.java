@@ -40,6 +40,15 @@ public interface InvocationFactory extends EFactory {
 	InvocationsRegistry createInvocationsRegistry();
 
 	/**
+	 * Returns a new object of class '<em>Set</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Set</em>'.
+	 * @generated
+	 */
+	InvocationSet createInvocationSet();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

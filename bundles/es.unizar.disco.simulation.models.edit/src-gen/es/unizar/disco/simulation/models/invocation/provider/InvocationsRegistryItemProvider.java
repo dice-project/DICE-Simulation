@@ -3,8 +3,10 @@
 package es.unizar.disco.simulation.models.invocation.provider;
 
 
+import es.unizar.disco.simulation.models.invocation.InvocationFactory;
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 
+import es.unizar.disco.simulation.models.invocation.InvocationsRegistry;
 import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
 
 import java.util.Collection;
@@ -16,7 +18,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -24,6 +25,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
  * This is the item provider adapter for a {@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry} object.
@@ -60,31 +62,8 @@ public class InvocationsRegistryItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addInvocationsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Invocations feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInvocationsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_InvocationsRegistry_invocations_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_InvocationsRegistry_invocations_feature", "_UI_InvocationsRegistry_type"),
-				 InvocationPackage.Literals.INVOCATIONS_REGISTRY__INVOCATIONS,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
 	}
 
 	/**
@@ -99,7 +78,7 @@ public class InvocationsRegistryItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(InvocationPackage.Literals.INVOCATIONS_REGISTRY__INVOCATIONS);
+			childrenFeatures.add(InvocationPackage.Literals.INVOCATIONS_REGISTRY__INVOCATION_SETS);
 		}
 		return childrenFeatures;
 	}
@@ -150,6 +129,12 @@ public class InvocationsRegistryItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(InvocationsRegistry.class)) {
+			case InvocationPackage.INVOCATIONS_REGISTRY__INVOCATION_SETS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -163,6 +148,11 @@ public class InvocationsRegistryItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(InvocationPackage.Literals.INVOCATIONS_REGISTRY__INVOCATION_SETS,
+				 InvocationFactory.eINSTANCE.createInvocationSet()));
 	}
 
 	/**

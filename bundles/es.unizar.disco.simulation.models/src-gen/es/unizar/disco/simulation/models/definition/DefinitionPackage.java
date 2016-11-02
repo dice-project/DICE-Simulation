@@ -660,13 +660,22 @@ public interface DefinitionPackage extends EPackage {
 	int VARIABLE_CONFIGURATION___TO_PRIMITIVE_ASSIGNMENTS = 1;
 
 	/**
+	 * The operation id for the '<em>Find Assignment</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_CONFIGURATION___FIND_ASSIGNMENT__INPUTVARIABLE = 2;
+
+	/**
 	 * The number of operations of the '<em>Variable Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_CONFIGURATION_OPERATION_COUNT = 2;
+	int VARIABLE_CONFIGURATION_OPERATION_COUNT = 3;
 
 
 	/**
@@ -1191,6 +1200,16 @@ public interface DefinitionPackage extends EPackage {
 	EOperation getVariableConfiguration__ToPrimitiveAssignments();
 
 	/**
+	 * Returns the meta object for the '{@link es.unizar.disco.simulation.models.definition.VariableConfiguration#findAssignment(es.unizar.disco.simulation.models.definition.InputVariable) <em>Find Assignment</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Find Assignment</em>' operation.
+	 * @see es.unizar.disco.simulation.models.definition.VariableConfiguration#findAssignment(es.unizar.disco.simulation.models.definition.InputVariable)
+	 * @generated
+	 */
+	EOperation getVariableConfiguration__FindAssignment__InputVariable();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1620,6 +1639,14 @@ public interface DefinitionPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation VARIABLE_CONFIGURATION___TO_PRIMITIVE_ASSIGNMENTS = eINSTANCE.getVariableConfiguration__ToPrimitiveAssignments();
+
+		/**
+		 * The meta object literal for the '<em><b>Find Assignment</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation VARIABLE_CONFIGURATION___FIND_ASSIGNMENT__INPUTVARIABLE = eINSTANCE.getVariableConfiguration__FindAssignment__InputVariable();
 
 	}
 

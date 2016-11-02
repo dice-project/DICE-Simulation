@@ -51,6 +51,22 @@
 				<updatePolicy>never</updatePolicy>
 			</releases>
 		</pluginRepository>
+
+
+
+		<pluginRepository>
+			<id>jboss</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>daily</updatePolicy>
+			</releases>
+		</pluginRepository>
+
+
 	</pluginRepositories>
 
 	<build>
@@ -120,7 +136,10 @@
 				</executions>
 				<configuration>
 					<appArgLine>
-						-eclipse.keyring ${env.USERPROFILE}\.eclipse\org.eclipse.equinox.security\secure_storage -eclipse.password ${basedir}\..\..\tests\es.unizar.disco.simulation.tests\src\test\resources\secure.preferences.properties
+						-eclipse.keyring
+						${env.USERPROFILE}\.eclipse\org.eclipse.equinox.security\secure_storage
+						-eclipse.password
+						${basedir}\..\..\tests\es.unizar.disco.simulation.tests\src\test\resources\secure.preferences.properties
 					</appArgLine>
 
 				</configuration>

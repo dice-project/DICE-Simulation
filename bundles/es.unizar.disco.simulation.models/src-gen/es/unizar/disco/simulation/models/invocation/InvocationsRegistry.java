@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry#getInvocations <em>Invocations</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.InvocationsRegistry#getInvocationSets <em>Invocation Sets</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getInvocationsRegistry()
@@ -24,19 +24,19 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface InvocationsRegistry extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Invocations</b></em>' reference list.
-	 * The list contents are of type {@link es.unizar.disco.simulation.models.invocation.SimulationInvocation}.
+	 * Returns the value of the '<em><b>Invocation Sets</b></em>' containment reference list.
+	 * The list contents are of type {@link es.unizar.disco.simulation.models.invocation.InvocationSet}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Invocations</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Invocation Sets</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Invocations</em>' reference list.
-	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getInvocationsRegistry_Invocations()
-	 * @model
+	 * @return the value of the '<em>Invocation Sets</em>' containment reference list.
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getInvocationsRegistry_InvocationSets()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<SimulationInvocation> getInvocations();
+	EList<InvocationSet> getInvocationSets();
 
 } // InvocationsRegistry

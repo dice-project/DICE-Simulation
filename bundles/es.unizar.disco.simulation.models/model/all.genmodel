@@ -112,6 +112,9 @@
         <genParameters ecoreParameter="definition.ecore#//VariableConfiguration/isEquivalent/config"/>
       </genOperations>
       <genOperations ecoreOperation="definition.ecore#//VariableConfiguration/toPrimitiveAssignments"/>
+      <genOperations ecoreOperation="definition.ecore#//VariableConfiguration/findAssignment">
+        <genParameters ecoreParameter="definition.ecore#//VariableConfiguration/findAssignment/variable"/>
+      </genOperations>
     </genClasses>
   </genPackages>
   <genPackages prefix="Invocation" basePackage="es.unizar.disco.simulation.models"
@@ -134,11 +137,19 @@
       <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/analyzableModel"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//SimulationInvocation/autoBuild"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//SimulationInvocation/invocationSet"/>
       <genOperations ecoreOperation="invocation.ecore#//SimulationInvocation/buildAnalyzableModel"/>
     </genClasses>
     <genClasses ecoreClass="invocation.ecore#//InvocationsRegistry">
-      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference invocation.ecore#//InvocationsRegistry/invocations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference invocation.ecore#//InvocationsRegistry/invocationSets"/>
+    </genClasses>
+    <genClasses ecoreClass="invocation.ecore#//InvocationSet">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//InvocationSet/invocations"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference invocation.ecore#//InvocationSet/definition"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//InvocationSet/identifier"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//InvocationSet/start"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//InvocationSet/end"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute invocation.ecore#//InvocationSet/status"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Measures" basePackage="es.unizar.disco.simulation.models" disposableProviderFactory="true"

@@ -74,6 +74,7 @@ public class SimulationInvocationItemProvider
 			addVariableConfigurationPropertyDescriptor(object);
 			addAnalyzableModelPropertyDescriptor(object);
 			addAutoBuildPropertyDescriptor(object);
+			addInvocationSetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -316,6 +317,28 @@ public class SimulationInvocationItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Invocation Set feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addInvocationSetPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimulationInvocation_invocationSet_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationInvocation_invocationSet_feature", "_UI_SimulationInvocation_type"),
+				 InvocationPackage.Literals.SIMULATION_INVOCATION__INVOCATION_SET,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

@@ -6,6 +6,5 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/bundles/guava-19.0.jar"/>
 	<classpathentry kind="lib" path="lib/jars/commons-collections4-4.1.jar" sourcepath="lib/sources/commons-collections4-4.1.jar"/>
-	<classpathentry kind="var" path="ECLIPSE_HOME"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

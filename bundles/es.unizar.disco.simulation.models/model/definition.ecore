@@ -132,6 +132,9 @@
       <eParameters name="config" eType="#//VariableConfiguration"/>
     </eOperations>
     <eOperations name="toPrimitiveAssignments" upperBound="-1" eType="ecore:EClass datatypes.ecore#//PrimitiveVariableAssignment"/>
+    <eOperations name="findAssignment" eType="#//VariableAssignment">
+      <eParameters name="variable" eType="#//InputVariable"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" lowerBound="1"
         upperBound="-1" eType="#//VariableAssignment" containment="true" eOpposite="#//VariableAssignment/configuration"/>
   </eClassifiers>

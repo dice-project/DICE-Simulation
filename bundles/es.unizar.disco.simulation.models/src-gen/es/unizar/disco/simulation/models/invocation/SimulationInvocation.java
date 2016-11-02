@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getVariableConfiguration <em>Variable Configuration</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getAnalyzableModel <em>Analyzable Model</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#isAutoBuild <em>Auto Build</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getInvocationSet <em>Invocation Set</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation()
@@ -331,6 +332,34 @@ public interface SimulationInvocation extends EObject {
 	 * @generated
 	 */
 	void setAutoBuild(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Invocation Set</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.invocation.InvocationSet#getInvocations <em>Invocations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Invocation Set</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Invocation Set</em>' reference.
+	 * @see #setInvocationSet(InvocationSet)
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_InvocationSet()
+	 * @see es.unizar.disco.simulation.models.invocation.InvocationSet#getInvocations
+	 * @model opposite="invocations"
+	 * @generated
+	 */
+	InvocationSet getInvocationSet();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getInvocationSet <em>Invocation Set</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Invocation Set</em>' reference.
+	 * @see #getInvocationSet()
+	 * @generated
+	 */
+	void setInvocationSet(InvocationSet value);
 
 	/**
 	 * <!-- begin-user-doc -->
