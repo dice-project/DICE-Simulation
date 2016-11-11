@@ -131,25 +131,32 @@ public class MainLaunchConfigurationTab extends AbstractSimulationLaunchConfigur
 		final SashForm sashGroup = new SashForm(topComposite, SWT.VERTICAL | SWT.SMOOTH);
 		GridData sashLayoutData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		sashLayoutData.heightHint = 0;
-
 		sashGroup.setLayoutData(sashLayoutData);
+
+
 		createScenariosGroup(sashGroup);
 
+		Composite topSashcomposite = new Composite(sashGroup, SWT.NONE);
+		topSashcomposite.setLayoutData(new GridData());
+		GridLayout topSashCompositeLayout = new GridLayout();
+		topSashCompositeLayout.marginWidth = 0;
+		topSashCompositeLayout.marginHeight = 0;
+		topSashcomposite.setLayout(topSashCompositeLayout);
 		// Differentiate between performance and reliability
-		createNFPselectionGroup(sashGroup);
+		createNFPselectionGroup(topSashcomposite);
 		// TODO: show the minimum set of variables that are of interest for the
 		// NFP to calculate
-		createVariableGroup(sashGroup);
-		sashGroup.setWeights(new int[] { 2, 1, 4 });
+		createVariableGroup(topSashcomposite);
+		sashGroup.setWeights(new int[] { 2, 3 });
 
 		setControl(topComposite);
 	}
 
 	private void createNFPselectionGroup(Composite composite) {
-		final Group group = new Group(composite, SWT.SHADOW_ETCHED_IN);
-		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		final Group group = new Group(composite, SWT.NONE);
+		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		group.setLayout(new GridLayout(1, false));
+		group.setLayout(new GridLayout());
 		group.setText(Messages.MainLaunchConfigurationTab_NFPtoCalculate);
 
 		final Button perfOption = new Button(group, SWT.RADIO);

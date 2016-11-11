@@ -44,7 +44,7 @@ public class ExportVariablesHandler extends AbstractHandler {
 			dialog.setBlockOnOpen(true);
 			if (dialog.open() == Window.OK) {
 				IPath path = dialog.getResult();
-				URI uri = URI.createFileURI(path.toFile().toString());
+				URI uri = URI.createPlatformResourceURI(path.toString(), true);
 				Resource resource = new XMIResourceImpl(uri);
 				resource.getContents()
 						.addAll(EcoreUtil.copyAll(invocation.getVariableConfiguration().toPrimitiveAssignments()));
