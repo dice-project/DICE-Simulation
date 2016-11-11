@@ -300,14 +300,12 @@ public class GspnSshSimulator implements ISimulator {
 				DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "Unable to load 'known_hosts' file",e);
 			}
 			ssh.addHostKeyVerifier(new NoHostVerifier());
-			System.out.println("trying to connect to host" + hostProvider.getHost() + " and port " + hostProvider.getPort());
 			ssh.connect(hostProvider.getHost(), hostProvider.getPort());
 			ssh.getConnection().getKeepAlive().setKeepAliveInterval(5); // every
 																		// 60sec
 
 			if (authProvider instanceof IUserPasswordAuthProvider) {
 				IUserPasswordAuthProvider userPassProvider = (IUserPasswordAuthProvider) authProvider;
-				System.out.println("trying to connect with user " + userPassProvider.getUser() + " and pass " + userPassProvider.getPassword() );
 				ssh.authPassword(userPassProvider.getUser(), userPassProvider.getPassword());
 			} else if (authProvider instanceof IKeyAuthProvider) {
 				IKeyAuthProvider keyProvider = (IKeyAuthProvider) authProvider;

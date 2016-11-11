@@ -182,20 +182,6 @@
                      </instanceof>
                   </and>
                </iterate>
-               <iterate>
-                  <and>
-                     <test
-                           forcePluginActivation="true"
-                           property="es.unizar.disco.simulation.ui.tester.hasResult">
-                     </test>
-                  </and>
-               </iterate>
-               <iterate>
-                  <test
-                        forcePluginActivation="true"
-                        property="es.unizar.disco.simulation.ui.tester.hasResult">
-                  </test>
-               </iterate>
                <count
                      value="1">
                </count>
