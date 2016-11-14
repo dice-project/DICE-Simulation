@@ -136,10 +136,7 @@
 				</executions>
 				<configuration>
 					<appArgLine>
-						-eclipse.keyring
-						${env.USERPROFILE}\.eclipse\org.eclipse.equinox.security\secure_storage
-						-eclipse.password
-						${basedir}\..\..\tests\es.unizar.disco.simulation.tests\src\test\resources\secure.preferences.properties
+						-eclipse.keyring ${env.USERPROFILE}\.eclipse\org.eclipse.equinox.security\secure_storage -eclipse.password ${basedir}\src\test\resources\secure.preferences.properties
 					</appArgLine>
 
 				</configuration>
