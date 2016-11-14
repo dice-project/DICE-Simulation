@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import es.unizar.disco.pnextensions.pnconstants.ArcKind;
+import es.unizar.disco.pnextensions.pnconstants.Color;
 import es.unizar.disco.pnextensions.pnconstants.ServerType;
 import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
 import fr.lip6.move.pnml.ptnet.ToolInfo;
@@ -15,13 +17,14 @@ import fr.lip6.move.pnml.ptnet.Transition;
  * Utility class used to communicate with {@link ToolInfoUtils} since Acceleo
  * seems to have some problems when dealing with {@link Enumeration}s
  * 
- * @author Abel Gómez <abel.gomez@unizar.es>
+ * @author Abel Gï¿½mez <abel.gomez@unizar.es>
  *
  */
 public class PnmlToolInfoUtils {
 
 	public static final String VALUE_PATTERN = "<value grammar=\"(.+)\">(.+)</value>";
 	private static final String SERVER_TYPE_PATTERN = "<value grammar=\"(.+)\"/>";
+	private static final String ARC_TYPE_PATTERN = "<value grammar=\"(.+)\"/>"; /**/
 
 	public PnmlToolInfoUtils() {
 	}
@@ -121,4 +124,96 @@ public class PnmlToolInfoUtils {
 		return 1;
 	}
 
+	public static boolean isNormalArc(Arc arc) throws IllegalArgumentException {
+		for (ToolInfo info : arc.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(ARC_TYPE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			if (matcher.matches() && ArcKind.NORMAL.getLiteral().equals(matcher.group(1))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isInhibitorArc(Arc arc) throws IllegalArgumentException {
+		for (ToolInfo info : arc.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(ARC_TYPE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			if (matcher.matches() && ArcKind.INHIBITOR.getLiteral().equals(matcher.group(1))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isColorSet(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+		if (matcher.find(1) && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean isColor(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+		if (matcher.find(1) && Color.COLOR.getLiteral().equals(matcher.group(1))) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String getColorSetName(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+		if (matcher.find(1) && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+			return String.valueOf(matcher.group(2));
+		}
+		return null;
+	}
+
+	public Integer getColorSetTypeIndex(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+		if (matcher.find(2) && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+			return Integer.valueOf(matcher.group(2));
+		}
+		return 0;
+	}
+	
+	public String getColorSetType(ToolInfo toolinfo) throws IllegalArgumentException {
+		//return getColorSetTypeIndex()
+		return null;
+	}
+	
+	public String getColorName(ToolInfo toolinfo) throws IllegalArgumentException {
+		return getColorSetNameColor(toolinfo)+getColorNameIndex(toolinfo);
+	}
+	
+	public String getColorNameIndex(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+		if (matcher.find(1) && Color.COLOR.getLiteral().equals(matcher.group(1))) {
+			return String.valueOf(matcher.group(2));
+		}
+		return null;
+	}
+	
+	public String getColorSetNameColor(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+		if (matcher.find(2) && Color.COLOR.getLiteral().equals(matcher.group(1))) {
+			return String.valueOf(matcher.group(2));
+		}
+		return null;
+	}
+	
+	public Integer getnumElementsColor(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
+		if (matcher.find(3) && Color.COLOR.getLiteral().equals(matcher.group(1))) {
+			return Integer.valueOf(matcher.group(2));
+		}
+		return 0;
+	}
+	
 }

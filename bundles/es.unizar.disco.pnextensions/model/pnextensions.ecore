@@ -25,6 +25,14 @@
       <eLiterals name="baseTimeUnit" literal="http://es.unizar.dsico/pnconstants/units/basetimeunit"/>
       <eLiterals name="baseFrequencyUnit" value="1" literal="http://es.unizar.dsico/pnconstants/units/basefrequencyunit"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="Color">
+      <eLiterals name="Color" literal="http://es.unizar.dsico/pnconstants/color/numcolor"/>
+      <eLiterals name="ColorSet" value="1" literal="http://es.unizar.dsico/pnconstants/color/numelementscolor"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="ArcKind">
+      <eLiterals name="Normal" literal="http://es.unizar.dsico/pnconstants/tkind/immediate"/>
+      <eLiterals name="Inhibitor" value="1" literal="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="pnutils" nsURI="http://es.unizar.disco/pnutils/1.0" nsPrefix="pnutils">
     <eClassifiers xsi:type="ecore:EClass" name="PnUtils">
