@@ -146,6 +146,11 @@
                scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
       </Metric>
       <Metric
             name="MARTE::MARTE_AnalysisModel::GQAM::GaCommHost#utilization"
@@ -169,6 +174,66 @@
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.ScenarioReliabilityCalculator"
                scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt#throughput"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt"
+            tag="throughput">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculatorBolt"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt#respT"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt"
+            tag="respT">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActionResponseTimeCalculatorBolt"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt#utilization"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt"
+            tag="utilization">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorBolt"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout#throughput"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"
+            tag="throughput">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculator"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout#respT"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"
+            tag="respT">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActionResponseTimeCalculator"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout#utilization"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"
+            tag="utilization">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
       </Metric>
