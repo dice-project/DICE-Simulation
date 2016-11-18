@@ -77,8 +77,8 @@ public class CustomSimulationInvocationImpl extends SimulationInvocationImpl imp
 				String stereotypeName = configElement.getAttribute(SCENARIO);
 				String computableNFPofextension = configElement.getAttribute(ANALYZABLE_PROPERTY);
 				Element scenario = (Element) getDefinition().getActiveScenario();
-				String propertyTypeToCompute = getDefinition().getNfpToCompute().toString();
-				Stereotype stereotype = scenario.getApplicableStereotype(stereotypeName);
+				String propertyTypeToCompute = getDefinition().getNfpToCompute().toString();				
+				Stereotype stereotype = scenario.getAppliedStereotype(stereotypeName);
 				if (StringUtils.equals(metaclass, scenario.eClass().getInstanceTypeName())
 						&& scenario.isStereotypeApplied(stereotype)
 						&& propertyTypeToCompute.equalsIgnoreCase(computableNFPofextension)) {
