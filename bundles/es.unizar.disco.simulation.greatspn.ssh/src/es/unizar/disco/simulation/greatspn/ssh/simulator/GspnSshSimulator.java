@@ -443,7 +443,7 @@ public class GspnSshSimulator implements ISimulator {
 			throw new SimulationException(new IllegalArgumentException(
 					MessageFormat.format("Unexpected number of model elements, expecting 1 EObject, found {0}", analyzableModel.size())));
 		} else if (!(analyzableModel.get(0) instanceof PetriNetDoc)) {
-			throw new SimulationException(new IllegalArgumentException("Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNetDoc''"));
+			throw new SimulationException(new IllegalArgumentException("Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNetDoc'' but received '" + analyzableModel.get(0).getClass().toString()+"'"));
 		}
 
 		PetriNetDoc petriNetDoc = (PetriNetDoc) analyzableModel.get(0);

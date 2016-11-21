@@ -16,6 +16,7 @@ import org.eclipse.uml2.uml.FinalNode;
 import org.eclipse.uml2.uml.InitialNode;
 import org.eclipse.uml2.uml.util.UMLUtil;
 
+import es.unizar.disco.pnml.m2m.utils.ConstantUtils;
 import es.unizar.disco.simulation.models.datatypes.NonStandardUnits;
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
@@ -43,10 +44,116 @@ public class ActivityResponseTimeCalculator extends AbstractCalculator implement
 		// **Activities with an open pattern**
 		//
 		// Pattern:
+		//		[T_ini]---> (subnet) ----------->[T_end]
+		//			`----->(PlaceConcurrentUsers)---^
+		//respT = mean_number_tokens(PlaceConcurrentUsers)/throughput(T_end)
+		//
+		// **Activities with a closed pattern**
+		//
+		// Pattern:
+		//		[T_Delay]------> (subnet) --->[Tend]
+		//        `----->(PlaceConcurrentUsers)---^
+		//
+		//respT = mean_number_tokens(PlaceConcurrentUsers)/throughput(T_end)
+		// @formatter:off
+		//
+
+		if (!(domainElement instanceof Activity)) {
+			throw new IllegalArgumentException(MessageFormat.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity'", domainElement));
+		}
+		
+		Activity activity = (Activity) domainElement;
+		//get InitialNode. The place that stores the mean number of events (N of little law) is created from the initial node
+		// @formatter:off
+		List<InitialNode> initialNodes = activity.getOwnedNodes()
+				.stream()
+				.filter(n -> n instanceof InitialNode)
+				.map(n -> (InitialNode) n)
+				.collect(Collectors.toList());
+		// @formatter:on
+
+		// Validate there's only one initial node
+		if (initialNodes.size() != 1) {
+			throw new RuntimeException(MessageFormat.format("Unexpected number of 'InitialNodes' found in Activity ''{0}''. Expected 1, but found ''{1}''",
+					domainElement, initialNodes.size()));
+		}
+		
+		//get FinalNodes
+		List<ActivityFinalNode> finalNodes = activity.getOwnedNodes()
+				.stream()
+				.filter(n -> n instanceof ActivityFinalNode)
+				.map(n -> (ActivityFinalNode) n)
+				.collect(Collectors.toList());
+		// @formatter:on
+
+		
+		BigDecimal concurrentUsers = getMeanNumberOfConcurrentUsersFromUnitialNode(initialNodes.get(0), toolResult, traceSet);
+		BigDecimal meanThroughput = getMeanThrougputOfFinalNodes(finalNodes, toolResult, traceSet);
+
+		BigDecimal responseTime = concurrentUsers.divide(meanThroughput, MathContext.DECIMAL64);
+		String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
+
+		DomainMeasure measure = buildMeasure(responseTime, getResultsUnit(finalNodes.get(0),toolResult,traceSet), targetUnit);
+		measure.setDefinition(definition);
+		return measure;
+		
+		/*String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
+
+		DomainMeasure measure = buildMeasure(rawValue, transitionInfo.getUnit(), targetUnit);
+		measure.setDefinition(definition);
+		return measure;*/
+	}
+	
+	private String getResultsUnit(ActivityFinalNode finalNode, ToolResult toolResult, TraceSet traceSet) {
+		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(finalNode, toolResult, traceSet);
+		List<TransitionInfo> transitionInfos = infos
+				.stream()
+				.filter(i -> i instanceof TransitionInfo)
+				.map(i -> (TransitionInfo) i)
+				.collect(Collectors.toList());
+		return transitionInfos.get(0).getUnit();
+	}
+
+	private BigDecimal getMeanThrougputOfFinalNodes(List<ActivityFinalNode> finalNodes, ToolResult toolResult,TraceSet traceSet) {
+
+		BigDecimal throughput = new BigDecimal(0.0);
+		for(FinalNode finalNode : finalNodes){
+		
+			Set<AnalyzableElementInfo> infos = findInfosForDomainElement(finalNode, toolResult, traceSet);
+			List<TransitionInfo> transitionInfos = infos
+					.stream()
+					.filter(i -> i instanceof TransitionInfo)
+					.map(i -> (TransitionInfo) i)
+					.collect(Collectors.toList());
+		
+			for(TransitionInfo transitionInfo : transitionInfos){
+				throughput = throughput.add(new BigDecimal(transitionInfo.getThroughput().doubleValue()));
+			}
+
+		}
+		return throughput;
+	}
+
+	private BigDecimal getMeanNumberOfConcurrentUsersFromUnitialNode(InitialNode initialNode, ToolResult toolResult, TraceSet traceSet) {
+		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(initialNode, toolResult, traceSet);
+		List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
+				.map(i -> (PlaceInfo) i).collect(Collectors.toList());
+
+		return new BigDecimal(findFirstPlaceInfoOfRule(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet,	placesInfos).doubleValue());
+		
+	}
+	
+	public DomainMeasure calculateDeprecated(EObject domainElement, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet) {
+		// @formatter:off
+		//
+		// Activity response time
+		// **Activities with an open pattern**
+		//
+		// Pattern:
 		//		[T_ini]---> (subnet) --->[T_end]
 		//
-		// respT = sum(mean_number_tokens(subnet)) / throughput(T_end)
-		//
+		// Deprecated: respT = sum(mean_number_tokens(subnet)) / throughput(T_end)
+		//respT = mean_number_tokens(PlaceConcurrentUsers)/throughput(T_end)
 		//
 		// **Activities with a closed pattern**
 		//
@@ -54,8 +161,8 @@ public class ActivityResponseTimeCalculator extends AbstractCalculator implement
 		//		[P]---> (subnet) --->[T]
 		//        ^------------------´
 		//
-		// respT = (sum(mean_number_tokens(subnet)) - mean_number_tokens(P)) / throughput(T)
-		//
+		// Deprecated:respT = (sum(mean_number_tokens(subnet)) - mean_number_tokens(P)) / throughput(T)
+		//respT = mean_number_tokens(PlaceConcurrentUsers)/throughput(T_end)
 		// @formatter:off
 		//
 		
