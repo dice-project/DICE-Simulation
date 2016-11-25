@@ -6,5 +6,173 @@
 |256
 %
 |
+[markingDef(petriNet)/]
+[colorSetDef(petriNet)/]
+[colorDef(petriNet)/]
 [/file]
 [/template]
+
+[template public getColorMarking(col : ToolInfo) post (trim())]
+[if getnumElementsColor(col) > 1] 
+<S [getColorName(col)/]>
+[else]
+0
+[/if]
+[/template]
+
+[template public getColorMarkingList(place : Place) post (trim())]
+[for (col : ToolInfo | colorsWithTokens(place)) separator('+')]
+[getColorMarking(col)/]
+[/for]
+[/template]
+
+[template public markingDefLine(place : Place) post (trim())]
+[comment COL ::= "(" NAME space CT space coords space "(@" CT "\n"
+ <fun_def> "\n ))"/]
+( [getPlaceMarkingName(place)/] [ct(place)/] [placeMarkingCoords(place)/] (@ [ct(place)/]
+[getColorMarkingList(place)/]
+))
+[/template]
+
+[template public markingDef(petriNet : PetriNet) post (trim())]
+[comment COLOR ::= COL COLOR | empty /]
+[for (place : Place | allPlacesWithColoredTokens(petriNet)->sortedBy(id)) separator('\n')]
+[markingDefLine(place)/]
+[/for]
+[/template]
+
+[template public colorSetDefLine(petriNet: PetriNet, colorset : ToolInfo) post (trim())]
+[comment COL ::= "(" NAME space CT space coords space "(@" CT "\n"
+ <fun_def> "\n ))"/]
+( [getColorSetName(colorset)/] [ct(colorset)/] [colorSetCoords(colorset)/] (@ [ct(colorset)/]
+[getColorSetType(colorset)/]
+[for (c : ToolInfo | allColorsColorSet(petriNet, colorset)) separator(',')]
+[getColorName(c)/]
+[/for]
+))
+[/template]
+
+[template public colorSetDef(petriNet : PetriNet) post (trim())]
+[comment COLOR ::= COL COLOR | empty /]
+[for (colorset : ToolInfo | allColorSets(petriNet)) separator('\n')]
+[colorSetDefLine(petriNet, colorset)/]
+[/for]
+[/template]
+
+[template public colorDefLine(petriNet: PetriNet, color : ToolInfo) post (trim())]
+[comment COL ::= "(" NAME space CT space coords space "(@" CT "\n"
+ <fun_def> "\n ))"/]
+( [getColorName(color)/] [ct(color)/] [colorSetCoords(color)/] (@ [ct(color)/]
+[getColorSetType(color)/]
+[getColorSetName(color)/] {1-[getnumElementsColor(color)/]}
+))
+[/template]
+
+[template public colorDef(petriNet : PetriNet) post (trim())]
+[comment COLOR ::= COL COLOR | empty /]
+[for (color : ToolInfo | allColors(petriNet))]
+[colorDefLine(petriNet, color)/]
+[/for]
+[/template]
+
+[template public ct(colorset : ToolInfo) post (trim())]
+[comment CT ::= "c" | "f" | "m" /]
+c
+[/template]
+
+[template public ct(place : Place) post (trim())]
+[comment CT ::= "c" | "f" | "m" /]
+m
+[/template]
+
+[template public colorSetCoords(colorset : ToolInfo) post (trim())] 
+0.0 0.0
+[/template]
+
+[template public colorCoords(color : ToolInfo) post (trim())] 
+0.0 0.0
+[/template]
+
+[template public placeMarkingCoords(place : Place) post (trim())]
+0.0 0.0
+[/template]
+
+[query public allPlaces(petriNet : PetriNet) : Collection(Place) = 
+	petriNet.pages.objects->flatten()->selectByKind(Place) 
+/]
+
+[query public allPlacesWithColoredTokens(petriNet : PetriNet) : Collection(Place) = 
+	allPlaces(petriNet)->select(p: Place | hasColoredTokens(p)) 
+/]
+
+[query public hasColoredTokens(place : Place) : Boolean = 
+	colorsWithTokens(place)->size() > 0 
+/]
+
+[query public colorsWithTokens(place : Place) : Collection(ToolInfo) = 
+	allColors(place)->select(col: ToolInfo | getnumElementsColor(col) > 0 ) 
+/]
+
+[query public getPlaceMarkingName(place : Place) : String = 
+	'M_' + place.id 
+/]
+
+[query public getColorSetTypeIndex(colorset : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetTypeIndex(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+/]
+
+[query public getColorSetType(colorset : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetType(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+/]
+
+[query public getColorSetName(colorset : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetName(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+/]
+
+[query public getColorNameIndex(color : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorNameIndex(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public getColorName(color : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorName(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public getColorSetColor(colorset : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+/]
+
+[query public getnumElementsColor(color : ToolInfo) : Integer = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getnumElementsColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public isColor(color: ToolInfo) : Boolean = 
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public isColorSet(colorset: ToolInfo) : Boolean = 
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isColorSet(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+/]
+
+[query public allColors(place : Place) : Collection(ToolInfo) = 
+	place.toolspecifics->select(e: ToolInfo | isColor(e))->flatten()->asSet()
+/]
+
+[query public allColors(petriNet : PetriNet) : Collection(ToolInfo) = 
+	petriNet.toolspecifics->select(e: ToolInfo | isColor(e))->flatten()->asSet()
+/]
+
+[query public allColorSets(petriNet : PetriNet) : Collection(ToolInfo) = 
+	petriNet.toolspecifics->select(e: ToolInfo | isColorSet(e))->flatten()->asSet()
+/]
+
+[query public allColorsColorSet(petriNet : PetriNet, colorset : ToolInfo) : Collection(ToolInfo) = 
+	allColors(petriNet)->
+			 select(e : ToolInfo | getColorSetName(colorset) = getColorSetColor(e))
+/]

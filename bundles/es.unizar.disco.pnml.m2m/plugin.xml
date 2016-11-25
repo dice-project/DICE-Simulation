@@ -112,14 +112,14 @@
             builder="es.unizar.disco.pnml.m2m.builder.HadoopActivityDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Activity"
             priority="4"
-            scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
+            scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario">
       </AnalyzableResourceBuilder>
       <AnalyzableResourceBuilder
             analyzableProperty="PERFORMANCE"
             builder="es.unizar.disco.pnml.m2m.builder.HadoopActivityDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Activity"
             priority="4"
-            scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario">
+            scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
       </AnalyzableResourceBuilder>
    </extension>
 </plugin>

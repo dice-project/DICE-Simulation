@@ -10,6 +10,7 @@ import es.unizar.disco.pnextensions.pnconstants.ArcKind;
 import es.unizar.disco.pnextensions.pnconstants.Color;
 import es.unizar.disco.pnextensions.pnconstants.ServerType;
 import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
+import fr.lip6.move.pnml.ptnet.Arc;
 import fr.lip6.move.pnml.ptnet.ToolInfo;
 import fr.lip6.move.pnml.ptnet.Transition;
 

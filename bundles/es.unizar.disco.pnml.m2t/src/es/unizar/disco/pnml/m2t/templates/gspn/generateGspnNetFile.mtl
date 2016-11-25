@@ -49,6 +49,71 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 [template public marking(place : Place) post (trim())] 
 [if (place.initialMarking.text.oclIsUndefined()._not())]
 [place.initialMarking.text/]
+[elseif (hasColoredTokens(place))]
+-[getPlaceMarkingName(place)/] 
+[else]
+0
+[/if]
+[/template]
+
+[template public colorPlace(place : Place) post (trim())] 
+[for (color : ToolInfo | allColors(place))  separator(',')]
+[getColorName(color)/]
+[/for]
+[/template]
+
+[template public equality(col : ToolInfo) post (trim())]
+[if (getnumElementsColor(col) = 1)] 
+=
+[else]
+<>
+[/if]
+[/template]
+
+[template public colorTransLine(trans : Transition) post (trim())] 
+[for (col : ToolInfo | allColors(trans)) separator(' and ')]
+'('
+d([getIdColorSet(col)/]) [equality(col)/] [getColorName(col)/]
+')'
+[/for]
+[/template]
+
+[template public colorTrans(trans : Transition) post (trim())] 
+[if (hasColors(trans))]
+['['/] [colorTransLine(trans)/] [']'/]
+[/if]
+[/template]
+
+[template public colorArcOrdered(col : ToolInfo) post (trim())]
+[if (getnumElementsColor(col) = 1)] 
+[getIdColorSet(col)/]
+[else]
+![getIdColorSet(col)/]
+[/if]
+[/template]
+
+[template public colorArcUnion(col : ToolInfo) post (trim())] 
+[if (getnumElementsColor(col) = 1)]
+[getIdColorSet(col)/]
+[elseif (getnumElementsColor(col) > 1)]
+S [getColorName(col)/]
+[/if]
+[/template]
+
+[template public colorArcLine(arc : Arc, petriNet : PetriNet) post (trim())] 
+[for (col : ToolInfo | allColors(arc)) separator(',')]
+[if (isArcOrdered(col, petriNet))]
+[colorArcOrdered(col)/]
+[elseif (isArcUnion(col, petriNet))]
+[colorArcUnion(col)/]
+[else]
+[/if]
+[/for]
+[/template]
+
+[template public colorArc(arc : Arc, petriNet : PetriNet) post (trim())] 
+[if (hasColors(arc))]
+<[colorArcLine(arc, petriNet)/]>
 [else]
 0
 [/if]
@@ -79,6 +144,9 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 
 [template public col(place : Place) post (trim())]
 [comment COL ::= empty | coords string /]
+[for (col : ToolInfo | allColors(place)) separator(',')]
+[getColorSetName(col)/]
+[/for]
 [/template]
 
 [template public groups(petriNet : PetriNet) post (trim())]
@@ -98,20 +166,20 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
                          LDCOEFFS TIARCS TOUT TOARCS TINH THARCS } /]
 [for (trans : Transition | allTransitions(petriNet))]
 [if isExponential(trans)]
-[trans.id/] [tRate(trans)/] [tServ(trans)/] [tKind(trans)/] [tInp(trans)/] [tRot(trans)/] [transCoords(trans)/] [labelCoords(trans)/] [labelCoords(trans)/] [levels(trans)/]
-[ldCoeffs(trans)/][if (trans.InArcs->isEmpty()._not()) ][tiArcs(trans)/]
+[trans.id/] [tRate(trans)/] [tServ(trans)/] [tKind(trans)/] [tInp(trans)/] [tRot(trans)/] [transCoords(trans)/] [labelCoords(trans)/] [labelCoords(trans)/] [levels(trans)/] [colorTrans(trans)/]
+[ldCoeffs(trans)/][if (trans.InArcs->isEmpty()._not()) ][tiArcs(trans, petriNet)/]
 [/if][tOut(trans)/]
-[if (trans.OutArcs->isEmpty()._not()) ][toArcs(trans)/]
-[/if][tInh(trans)/][thArcs(trans)/]
+[if (trans.OutArcs->isEmpty()._not()) ][toArcs(trans, petriNet)/]
+[/if][tInh(trans)/][thArcs(trans, petriNet)/]
 [/if]
 [/for]
 [for (trans : Transition | allTransitions(petriNet))]
 [if isExponential(trans)._not()]
-[trans.id/] [tRate(trans)/] [tServ(trans)/] [tKind(trans)/] [tInp(trans)/] [tRot(trans)/] [transCoords(trans)/] [labelCoords(trans)/] [labelCoords(trans)/] [levels(trans)/]
-[ldCoeffs(trans)/][if (trans.InArcs->isEmpty()._not()) ][tiArcs(trans)/]
+[trans.id/] [tRate(trans)/] [tServ(trans)/] [tKind(trans)/] [tInp(trans)/] [tRot(trans)/] [transCoords(trans)/] [labelCoords(trans)/] [labelCoords(trans)/] [levels(trans)/] [colorTrans(trans)/]
+[ldCoeffs(trans)/][if (trans.InArcs->isEmpty()._not()) ][tiArcs(trans, petriNet)/]
 [/if][tOut(trans)/]
-[if (trans.OutArcs->isEmpty()._not()) ][toArcs(trans)/]
-[/if][tInh(trans)/][thArcs(trans)/]
+[if (trans.OutArcs->isEmpty()._not()) ][toArcs(trans, petriNet)/]
+[/if][tInh(trans)/][thArcs(trans, petriNet)/]
 [/if][/for]
 
 [/template]
@@ -178,10 +246,10 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 [/if]
 [/template]
 
-[template public tiArcs(trans : Transition) post (trim())]
+[template public tiArcs(trans : Transition, petriNet : PetriNet) post (trim())]
 [comment TIARCS ::= #(TINP){ AMULT space APLACE space APOINTS LEVELS COL "\n" APLIST } /]
 [for (arc : Arc | trans.InArcs)]
-[multiplicity(arc)/] [getPlaceIndex(arc.source.oclAsType(Place))/] 0 0
+[multiplicity(arc)/] [getPlaceIndex(arc.source.oclAsType(Place))/] 0 [colorArc(arc, petriNet)/]
 [/for]
 [/template]
 
@@ -190,10 +258,10 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 [trans.OutArcs->size()/]
 [/template]
 
-[template public toArcs(trans : Transition) post (trim())]
+[template public toArcs(trans : Transition, petriNet : PetriNet) post (trim())]
 [comment TOARCS ::= #(TOUT){AMULT space APLACE space APOINTS LEVELS COL "\n" APLIST } /]
 [for (arc : Arc | trans.OutArcs)]
-[multiplicity(arc)/] [getPlaceIndex(arc.target.oclAsType(Place))/] 0 0
+[multiplicity(arc)/] [getPlaceIndex(arc.target.oclAsType(Place))/] 0 [colorArc(arc, petriNet)/]
 [/for]
 [/template]
 
@@ -202,16 +270,14 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 [countInhibitorArcTransition(trans)/]
 [/template]
 
-[template public thArcs(trans : Transition) post (trim())]
+[template public thArcs(trans : Transition, petriNet : PetriNet) post (trim())]
 [comment THARCS ::= #(TINH){AMULT space APLACE space APOINTS LEVELS COL "\n" APLIST } /]
 [for (arc : Arc | trans.InArcs)]
 [if isInhibitorArc(arc)] 
-[multiplicity(arc)/] [getPlaceIndex(arc.target.oclAsType(Place))/] 0 0
+[multiplicity(arc)/] [getPlaceIndex(arc.target.oclAsType(Place))/] 0 [colorArc(arc, petriNet)/]
 [/if]
 [/for]
 [/template]
-
-
 
 [template public layers(petriNet : PetriNet) post (trim())]
 [comment LAYERS ::= { NAME "\n" } /* list of Layer names one per layer used in objects */ /]
@@ -219,6 +285,12 @@ f 0 [countPlaces(petriNet)/] 0 [countTransitions(petriNet)/] [countPriorityGroup
 
 [query public allPlaces(petriNet : PetriNet) : Collection(Place) = 
 	petriNet.pages.objects->flatten()->selectByKind(Place) 
+/]
+[query public hasColoredTokens(place : Place) : Boolean = 
+	colorsWithTokens(place)->size() > 0 
+/]
+[query public colorsWithTokens(place : Place) : Collection(ToolInfo) = 
+	allColors(place)->select(col: ToolInfo | getnumElementsColor(col) > 0 ) 
 /]
 [query public allTransitions(petriNet : PetriNet) : Collection(Transition) =
 	petriNet.pages.objects->flatten()->selectByKind(Transition)
@@ -259,6 +331,11 @@ invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','priorityNotAdded(fr.lip6.
 [query public getPlaceIndex(place : Place) : Integer = 
  -- Place index is based on the order they are processed, cannot be tracked via regular templates
  invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','getPlaceIndex(org.eclipse.emf.ecore.EObject)', Sequence{place})
+/]
+
+[query public getArcMultiplicity (arc : Arc) : Integer = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getArcMultiplicity(fr.lip6.move.pnml.ptnet.Arc)', Sequence{arc})
 /]
 
 [query public getRate(trans : Transition) : Real = 
@@ -308,4 +385,90 @@ invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','priorityNotAdded(fr.lip6.
 [query public isInhibitorArc(arc : Arc) : Boolean = 
 	-- ToolInfo-related queries are executed via the global utility methods
 	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isInhibitorArc(fr.lip6.move.pnml.ptnet.Arc)', Sequence{arc})
+/]
+
+[query public isColor(color: ToolInfo) : Boolean = 
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public isColorSet(colorset: ToolInfo) : Boolean = 
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isColorSet(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+/]
+
+[query public allColors(place : Place) : Collection(ToolInfo) = 
+	place.toolspecifics->select(e: ToolInfo | isColor(e))->flatten()->asSet()
+/]
+
+[query public allColors(trans : Transition) : Collection(ToolInfo) = 
+	trans.toolspecifics->select(e: ToolInfo | isColor(e))->flatten()->asSet()
+/]
+
+[query public allColors(arc : Arc) : Collection(ToolInfo) = 
+	arc.toolspecifics->select(e: ToolInfo | isColor(e))->flatten()->asSet()
+/]
+
+[query public allColors(petriNet : PetriNet) : Collection(ToolInfo) = 
+	petriNet.toolspecifics->select(e: ToolInfo | isColor(e))->flatten()->asSet()
+/]
+
+[query public allColorSets(petriNet : PetriNet) : Collection(ToolInfo) = 
+	petriNet.toolspecifics->select(e: ToolInfo | isColorSet(e))->flatten()->asSet()
+/]
+
+[query public hasColors(place : Place) : Boolean = 
+	allColors(place)->size() > 0
+/]
+
+[query public hasColors(trans : Transition) : Boolean = 
+	allColors(trans)->size() > 0
+/]
+
+[query public hasColors(arc : Arc) : Boolean = 
+	allColors(arc)->size() > 0
+/]
+
+[query public getColorSet(color : ToolInfo, petriNet : PetriNet) : ToolInfo = 
+	-- ->asSequence()->first()
+	allColorSets(petriNet)->select(e: ToolInfo | getColorSetName(e) = getColorSetNameColor(color))
+/]
+
+[query public getColorSetType(colorset : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetTypeIndex(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+/]
+
+[query public getColorSetName(colorset : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetName(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+/]
+
+[query public getColorSetNameColor(color : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetNameColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public getColorName(color : ToolInfo) : String = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorName(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public getIdColorSet(color : ToolInfo) : String = 
+	getColorSetNameColor(color).first(1)
+/]
+
+[query public getnumElementsColor(color : ToolInfo) : Integer = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getnumElementsColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public getPlaceMarkingName(place : Place) : Integer = 
+	1000 + getPlaceIndex(place)
+/]
+
+[query public isArcUnion(col : ToolInfo, petriNet : PetriNet) : Boolean = 
+	getColorSetType(getColorSet(col, petriNet)) = 0
+/]
+
+[query public isArcOrdered(col : ToolInfo, petriNet : PetriNet) : Boolean = 
+	getColorSetType(getColorSet(col, petriNet)) = 1
 /]

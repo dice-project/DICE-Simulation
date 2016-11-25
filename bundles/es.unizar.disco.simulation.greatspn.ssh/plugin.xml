@@ -88,6 +88,16 @@
          </Calculator>
       </Metric>
       <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario#respT"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
+            tag="respT">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActivityResponseTimeCalculatorHadoop"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
             name="MARTE::MARTE_AnalysisModel::GQAM::GaStep#respT"
             stereotype="MARTE::MARTE_AnalysisModel::GQAM::GaStep"
             tag="respT">
@@ -164,6 +174,21 @@
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
                scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode#utilization"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"
+            tag="utilization">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
       </Metric>
