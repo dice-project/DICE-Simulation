@@ -36,6 +36,7 @@
 								<site>http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon</site>
 								<site>http://pnml.lip6.fr/pnmlframework/updatesite</site>
 								<site>http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/</site>
+								<site>http://download.eclipse.org/releases/neon</site>
 							</associateSites>
 
 						</configuration>
