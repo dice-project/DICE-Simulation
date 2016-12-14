@@ -367,7 +367,7 @@ mapping UML::InitialNode::initialNode2subNet()
 		};
 		
 		listColoursCounters += counter_color;		
-		self.map initialNode2subNetColor(user_color, counter_color, listExtDelay->at(i));
+		self.map initialNode2subNetColor(user_color, counter_color, listExtDelay->at(i+1));
 		
 		map addColorSet(counter);
 		map addColorList(listColoursCounters);
@@ -1561,9 +1561,25 @@ helper UML::Element::getHadoopOperation_hostDemand() : NFP_Duration {
 		return self.getHadoopMap_hostDemand();	
 	} else if (self.getHadoopReduce().oclIsUndefined().not()){ 
 		return self.getHadoopReduce_hostDemand();
+	} else if (self.getHadoopOperation().oclIsUndefined().not()){ 
+		return self.getHadoopStandard_hostDemand();
 	} else {
 		return null;
 	}
+}
+
+helper UML::Element::getHadoopStandard_hostDemand() : NFP_Duration {
+	if (self.getHadoopOperation() = null) {
+		return null;
+	};
+	var hostDemandStrings := self.getValue(self.getHadoopOperation(), "hostDemand").oclAsType(Collection(String));
+	assert warning (hostDemandStrings->size() = 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected 1. "+
+					"Only the first 'mean' value will be used (if found). " + 
+					"The context element is '" + self.toString() + "'"); 
+	return hostDemandStrings.toNfpDuration()->
+			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
+			asSequence()->first();
 }
 
 helper UML::Element::getHadoopMap_hostDemand() : NFP_Duration {

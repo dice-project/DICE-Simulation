@@ -79,7 +79,7 @@ import net.schmizz.sshj.userauth.password.PasswordUtils;
 import tec.units.ri.unit.Units;
 
 /**
- * @author Abel Gómez <abel.gomez@unizar.es>
+ * @author Abel Gï¿½mez <abel.gomez@unizar.es>
  *
  */
 public class GspnSshSimulator implements ISimulator {

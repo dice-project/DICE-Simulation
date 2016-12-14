@@ -25,6 +25,7 @@ public class PnmlToolInfoUtils {
 
 	public static final String VALUE_PATTERN = "<value grammar=\"(.+)\">(.+)</value>";
 	private static final String SERVER_TYPE_PATTERN = "<value grammar=\"(.+)\"/>";
+	private static final String COLOR_PATTERN = "<value grammar=\"([^>]+)\">([^<]+)</value>";
 	private static final String ARC_TYPE_PATTERN = "<value grammar=\"(.+)\"/>"; /**/
 
 	public PnmlToolInfoUtils() {
@@ -146,7 +147,7 @@ public class PnmlToolInfoUtils {
 	}
 	
 	public static boolean isColorSet(ToolInfo toolinfo) throws IllegalArgumentException {
-		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 		if (matcher.find(1) && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 			return true;
@@ -155,7 +156,7 @@ public class PnmlToolInfoUtils {
 	}
 	
 	public static boolean isColor(ToolInfo toolinfo) throws IllegalArgumentException {
-		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 		if (matcher.find(1) && Color.COLOR.getLiteral().equals(matcher.group(1))) {
 			return true;
@@ -163,8 +164,13 @@ public class PnmlToolInfoUtils {
 		return false;
 	}
 	
+	public static String isColor2(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());		
+		return new Boolean(matcher.find(3)).toString() + new Boolean(Color.COLOR.getLiteral().equals(matcher.group(2))).toString() + matcher.group(1) + " " + matcher.group(2);
+	}
+	
 	public String getColorSetName(ToolInfo toolinfo) throws IllegalArgumentException {
-		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 		if (matcher.find(1) && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 			return String.valueOf(matcher.group(2));
@@ -173,7 +179,7 @@ public class PnmlToolInfoUtils {
 	}
 
 	public Integer getColorSetTypeIndex(ToolInfo toolinfo) throws IllegalArgumentException {
-		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 		if (matcher.find(2) && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 			return Integer.valueOf(matcher.group(2));
@@ -191,30 +197,29 @@ public class PnmlToolInfoUtils {
 	}
 	
 	public String getColorNameIndex(ToolInfo toolinfo) throws IllegalArgumentException {
-		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 		if (matcher.find(1) && Color.COLOR.getLiteral().equals(matcher.group(1))) {
-			return String.valueOf(matcher.group(2));
+			return "31";//return String.valueOf(matcher.group(2));
 		}
-		return null;
+		return "3";
 	}
 	
 	public String getColorSetNameColor(ToolInfo toolinfo) throws IllegalArgumentException {
-		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 		if (matcher.find(2) && Color.COLOR.getLiteral().equals(matcher.group(1))) {
-			return String.valueOf(matcher.group(2));
+			return "21";//return String.valueOf(matcher.group(2));
 		}
-		return null;
+		return "2";
 	}
 	
 	public Integer getnumElementsColor(ToolInfo toolinfo) throws IllegalArgumentException {
-		Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		//if (matcher.matches() && Color.COLORSET.getLiteral().equals(matcher.group(1))) {
 		if (matcher.find(3) && Color.COLOR.getLiteral().equals(matcher.group(1))) {
 			return Integer.valueOf(matcher.group(2));
 		}
 		return 0;
 	}
-	
 }

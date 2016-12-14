@@ -36,6 +36,32 @@
 
 [template public markingDef(petriNet : PetriNet) post (trim())]
 [comment COLOR ::= COL COLOR | empty /]
+[for (place : Place | allPlaces(petriNet)) separator('\n')]
+[for (t: ToolInfo | allColors(place)) separator('')]
+[if isColor(t) = true]
+bu-[isColor2(t)/]
+[else]
+po
+[/if]
+[/for]
+[/for]
+[/template]
+
+[template public markingDef3(petriNet : PetriNet) post (trim())]
+[comment COLOR ::= COL COLOR | empty /]
+[for (place : Place | allPlaces(petriNet)) separator('\n')]
+[for (t: ToolInfo | place.toolspecifics) separator('')]
+[if isColor(t) = true]
+[isColor2(t)/]
+[else]
+po-[isColor2(t)/]
+[/if]
+[/for]
+[/for]
+[/template]
+
+[template public markingDef2(petriNet : PetriNet) post (trim())]
+[comment COLOR ::= COL COLOR | empty /]
 [for (place : Place | allPlacesWithColoredTokens(petriNet)->sortedBy(id)) separator('\n')]
 [markingDefLine(place)/]
 [/for]
@@ -154,6 +180,10 @@ m
 
 [query public isColor(color: ToolInfo) : Boolean = 
 	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
+/]
+
+[query public isColor2(color: ToolInfo) : String = 
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isColor2(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
 /]
 
 [query public isColorSet(colorset: ToolInfo) : Boolean = 
