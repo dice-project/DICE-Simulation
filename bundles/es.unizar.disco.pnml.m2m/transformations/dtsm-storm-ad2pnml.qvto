@@ -136,9 +136,7 @@ when {
 			/* For each immediate transition, we create a link to the resource's place */
             imm_trans->forEach(i_trans){
             	var arc_2 := map arc(place, i_trans.source);
-            	self.represents.map trace(i_trans.source, "partitions2resources");
             };
-            self.represents.map trace(temp_trans, "partitions2resources");
 
 		} else if  (node.getStormSpout().oclIsUndefined().not()) {
 			var temp_trans := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
@@ -146,8 +144,6 @@ when {
 
 			var arc_1 := map arc(temp_trans, place);
 			var arc_2 := map arc(place, temp_trans);
-			
-			self.represents.map trace(temp_trans, "partitions2resources");			
 		}
 	};
 	
@@ -323,22 +319,6 @@ UML::ControlFlow::mergeControlFlow2arc,
 UML::ControlFlow::joinControlFlow2arc,
 UML::ControlFlow::basicControlFlow2arc {};
 
-
-/**
-	Transform the model to an open net using the initial node
-*/
-/*mapping UML::FinalNode::model2openNet() when {
-	self.incoming
-}{
-	var finalTransitions := ad.scenario().node[UML::ActivityFinalNode].resolveIn(UML::NamedElement::namedElement2immediateTransition());
-	assert warning (finalTransitions->size() = 1) with log ("More than one final transition found, this can be problematic to compute the throughput of the system");
-	finalTransitions->forEach(finalTransition) {
-		// Add tracing information
-		ad.scenario().map trace(finalTransition, "model2openNet");
-	};
-	
-}*/
-
 /**
 	Transforms a ControlFlow between a generic ActivityNode and an ActivityFinalNode.
 	The ControlFlow is transformed into an immediate transition connecting to the
@@ -459,10 +439,6 @@ mapping UML::ControlFlow::joinControlFlow2arc() when {
 	self.map trace(place, "joinControlFlow2arc");
 }
 
-/*mapping UML::ControlFlow::basicControlFlow2arc() {
-
-}*/
-
 mapping UML::ControlFlow::basicControlFlow2arc() when {
 	self.source.oclIsKindOf(ActivityNode) and
 	self.target.oclIsKindOf(InitialNode).not() and
@@ -470,7 +446,7 @@ mapping UML::ControlFlow::basicControlFlow2arc() when {
 	 self.source.getStormBolt().oclIsUndefined().not()) and
 	self.target.oclIsKindOf(ActivityNode) and
 	self.target.oclIsKindOf(ActivityFinalNode).not() and
-	self.source.getStormBolt().oclIsUndefined().not()
+	self.target.getStormBolt().oclIsUndefined().not()
 }{
     var source := self.source;
 	var t_1 := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
@@ -488,7 +464,7 @@ mapping UML::ControlFlow::basicControlFlow2arc() when {
 		map arc(place_parall,trans_bolt);
 		
 		// Add tracing information
-		self.map trace(trans_bolt, "joinControlFlow2arc");
+		self.map trace(trans_bolt, "basicControlFlow2arc");
 	};
 	var arc_2 := map arc(place, trans_bolt);
 	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) ) {
@@ -501,7 +477,37 @@ mapping UML::ControlFlow::basicControlFlow2arc() when {
 	};
 	
 	// Add tracing information
-	self.map trace(place, "joinControlFlow2arc");
+	self.map trace(place, "basicControlFlow2arc");
+}
+
+/*******************************************************************************
+  Stream grouping transformations
+*******************************************************************************/
+
+mapping UML::ControlFlow::shuffle_all_grouping(inout arc_1 : Arc, inout arc_2: Arc, in parallelism : Integer) {
+
+if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) ) {
+		arc_1.inscription := object PNML::PTArcAnnotation {
+//			text := bolt.getStormBolt_parallelism().value();
+			text := parallelism;
+		};
+	};
+	arc_2.inscription := object PNML::PTArcAnnotation {
+		text := self.getStormStreamStep_numTuples().value();
+	};
+}
+
+mapping UML::ControlFlow::field_grouping(inout arc_1 : Arc, inout arc_2: Arc, in parallelism : Integer) {
+
+if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
+		arc_1.inscription := object PNML::PTArcAnnotation {
+//			text := bolt.getStormBolt_parallelism().value();
+			text := parallelism;
+		};
+	};
+	arc_2.inscription := object PNML::PTArcAnnotation {
+		text := self.getStormStreamStep_numTuples().value();
+	};
 }
 
 /*******************************************************************************
