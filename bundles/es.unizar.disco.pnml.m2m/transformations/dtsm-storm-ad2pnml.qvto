@@ -470,7 +470,7 @@ mapping UML::ControlFlow::basicControlFlow2arc() when {
 	 self.source.getStormBolt().oclIsUndefined().not()) and
 	self.target.oclIsKindOf(ActivityNode) and
 	self.target.oclIsKindOf(ActivityFinalNode).not() and
-	self.source.getStormBolt().oclIsUndefined().not()
+	self.target.getStormBolt().oclIsUndefined().not()
 }{
     var source := self.source;
 	var t_1 := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
