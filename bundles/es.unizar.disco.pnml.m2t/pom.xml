@@ -9,7 +9,7 @@
     <parent>
         <groupId>es.unizar.disco</groupId>
         <artifactId>es.unizar.disco.bundles</artifactId>
-        <version>0.3.4-SNAPSHOT</version>
+        <version>0.3.5-SNAPSHOT</version>
     </parent>
     
    <build>
