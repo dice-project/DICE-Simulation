@@ -6,6 +6,5 @@
 	<classpathentry kind="lib" path="lib/bundles/unit-api-0.9.jar" sourcepath="lib/sources/unit-api-0.9.jar"/>
 	<classpathentry kind="lib" path="lib/bundles/unit-ri-0.9.jar" sourcepath="lib/sources/unit-ri-0.9.jar"/>
 	<classpathentry kind="lib" path="lib/jars/uom-lib-common-0.9.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/es.unizar.disco.pnml.m2m"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -21,7 +21,6 @@ import es.unizar.disco.simulation.models.measures.MeasureCalculator;
 import es.unizar.disco.simulation.models.measures.MeasuresFactory;
 import es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo;
 import es.unizar.disco.simulation.models.toolresult.ToolResult;
-import es.unizar.disco.simulation.models.traces.Trace;
 import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.wnsim.TransitionInfo;
 
@@ -81,9 +80,9 @@ public class ScenarioReliabilityCalculator extends AbstractCalculator implements
 		}
 
 		// get the transition that represents the failed executions
-		Number failingThroughput = findFirstAnalyzableElementInfoOfRule(ConstantUtils.getFail(), traceSet,
+		Number failingThroughput = findFirstTransitionInfoOfRule(ConstantUtils.getFail(), traceSet,
 				transitionInfos);
-		Number successfulExecThroughput = findFirstAnalyzableElementInfoOfRule(ConstantUtils.getOK(), traceSet,
+		Number successfulExecThroughput = findFirstTransitionInfoOfRule(ConstantUtils.getOK(), traceSet,
 				transitionInfos);
 
 		BigDecimal dividend;
@@ -114,26 +113,7 @@ public class ScenarioReliabilityCalculator extends AbstractCalculator implements
 		return measure;
 	}
 
-	private Number findFirstAnalyzableElementInfoOfRule(String rule, TraceSet traceSet,
-			List<TransitionInfo> transitionInfos) {
 
-		for (Trace trace : traceSet.getTraces()) {
-			if (rule.equals(trace.getRule())) {
-				for (TransitionInfo info : transitionInfos) {
-					if (trace.getToAnalyzableElement().equals(info.getAnalyzedElement())) {
-						DiceLogger.logInfo(GspnSshSimulationPlugin.getDefault(),
-								MessageFormat.format("Found Transition id ''{0}'' with throughput ''{1}''",
-										info.getAnalyzedElement().toString(), info.getThroughput().doubleValue()));
-						return info.getThroughput();
-					}
-
-				}
-			}
-		}
-		throw new RuntimeException(
-				MessageFormat.format("Not found any transition created from the transformation rule ''{0}''", rule));
-
-	}
 
 	public DomainMeasure calculateUnreliability(EObject domainElement, DomainMeasureDefinition definition,
 			ToolResult toolResult, TraceSet traceSet) {
