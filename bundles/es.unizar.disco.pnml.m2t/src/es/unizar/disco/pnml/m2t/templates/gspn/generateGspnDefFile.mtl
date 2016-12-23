@@ -13,7 +13,7 @@
 [/template]
 
 [template public getColorMarking(col : ToolInfo) post (trim())]
-[if getnumElementsColor(col) > 1] 
+[if getnumElementsColor(col) >= 1] 
 <S [getColorName(col)/]>
 [else]
 0
@@ -21,9 +21,7 @@
 [/template]
 
 [template public getColorMarkingList(place : Place) post (trim())]
-[for (col : ToolInfo | colorsWithTokens(place)) separator('+')]
-[getColorMarking(col)/]
-[/for]
+[for (col : ToolInfo | colorsWithTokens(place)) separator('+')][getColorMarking(col)/][/for]
 [/template]
 
 [template public markingDefLine(place : Place) post (trim())]
@@ -36,45 +34,24 @@
 
 [template public markingDef(petriNet : PetriNet) post (trim())]
 [comment COLOR ::= COL COLOR | empty /]
-[for (place : Place | allPlaces(petriNet)) separator('\n')]
-[for (t: ToolInfo | allColors(place)) separator('')]
-[if isColor(t) = true]
-bu-[isColor2(t)/]
-[else]
-po
-[/if]
-[/for]
-[/for]
-[/template]
-
-[template public markingDef3(petriNet : PetriNet) post (trim())]
-[comment COLOR ::= COL COLOR | empty /]
-[for (place : Place | allPlaces(petriNet)) separator('\n')]
-[for (t: ToolInfo | place.toolspecifics) separator('')]
-[if isColor(t) = true]
-[isColor2(t)/]
-[else]
-po-[isColor2(t)/]
-[/if]
-[/for]
-[/for]
-[/template]
-
-[template public markingDef2(petriNet : PetriNet) post (trim())]
-[comment COLOR ::= COL COLOR | empty /]
 [for (place : Place | allPlacesWithColoredTokens(petriNet)->sortedBy(id)) separator('\n')]
 [markingDefLine(place)/]
 [/for]
+[/template]
+
+[template public colorSetDefLine2(petriNet: PetriNet, colorset : ToolInfo) post (trim())]
+[comment COL ::= "(" NAME space CT space coords space "(@" CT "\n"
+ <fun_def> "\n ))"/]
+( [getColorSetName(colorset)/] [ct(colorset)/] [colorSetCoords(colorset)/] (@ [ct(colorset)/]
+[getColorSetTypeText(petriNet, colorset)/] [for (c : ToolInfo | allColorsColorSet(petriNet, colorset)) separator(',')][getColorName(c)/][/for]
+))
 [/template]
 
 [template public colorSetDefLine(petriNet: PetriNet, colorset : ToolInfo) post (trim())]
 [comment COL ::= "(" NAME space CT space coords space "(@" CT "\n"
  <fun_def> "\n ))"/]
 ( [getColorSetName(colorset)/] [ct(colorset)/] [colorSetCoords(colorset)/] (@ [ct(colorset)/]
-[getColorSetType(colorset)/]
-[for (c : ToolInfo | allColorsColorSet(petriNet, colorset)) separator(',')]
-[getColorName(c)/]
-[/for]
+[getColorSetTypeText(petriNet, colorset)/] [for (c : ToolInfo | allColorsColorSet(petriNet, colorset)) separator(',')][getColorName(c)/][/for]
 ))
 [/template]
 
@@ -89,8 +66,7 @@ po-[isColor2(t)/]
 [comment COL ::= "(" NAME space CT space coords space "(@" CT "\n"
  <fun_def> "\n ))"/]
 ( [getColorName(color)/] [ct(color)/] [colorSetCoords(color)/] (@ [ct(color)/]
-[getColorSetType(color)/]
-[getColorSetName(color)/] {1-[getnumElementsColor(color)/]}
+[getIdColorSet(color)/] {1-[getnumElementsColor(color)/]}
 ))
 [/template]
 
@@ -123,6 +99,13 @@ m
 0.0 0.0
 [/template]
 
+[template public getColorSetTypeText(petriNet : PetriNet, colorset : ToolInfo) post (trim())]
+[if isArcUnion(colorset)] u 
+[elseif isArcOrdered(colorset)] o 
+[else] ;;;[getColorSetType(colorset).toString()/];;;
+[/if]
+[/template]
+
 [query public allPlaces(petriNet : PetriNet) : Collection(Place) = 
 	petriNet.pages.objects->flatten()->selectByKind(Place) 
 /]
@@ -148,9 +131,9 @@ m
 	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetTypeIndex(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
 /]
 
-[query public getColorSetType(colorset : ToolInfo) : String = 
+[query public getColorSetType(colorset : ToolInfo) : Integer = 
 	-- ToolInfo-related queries are executed via the global utility methods
-	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetType(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetTypeIndex(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
 /]
 
 [query public getColorSetName(colorset : ToolInfo) : String = 
@@ -168,9 +151,9 @@ m
 	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorName(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
 /]
 
-[query public getColorSetColor(colorset : ToolInfo) : String = 
+[query public getColorSetNameColor(colorset : ToolInfo) : String = 
 	-- ToolInfo-related queries are executed via the global utility methods
-	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getColorSetNameColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{colorset})
 /]
 
 [query public getnumElementsColor(color : ToolInfo) : Integer = 
@@ -180,10 +163,6 @@ m
 
 [query public isColor(color: ToolInfo) : Boolean = 
 	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isColor(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
-/]
-
-[query public isColor2(color: ToolInfo) : String = 
-	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isColor2(fr.lip6.move.pnml.ptnet.ToolInfo)', Sequence{color})
 /]
 
 [query public isColorSet(colorset: ToolInfo) : Boolean = 
@@ -198,11 +177,28 @@ m
 	petriNet.toolspecifics->select(e: ToolInfo | isColor(e))->flatten()->asSet()
 /]
 
-[query public allColorSets(petriNet : PetriNet) : Collection(ToolInfo) = 
+[query public allColorSets(petriNet : PetriNet) : Set(ToolInfo) = 
 	petriNet.toolspecifics->select(e: ToolInfo | isColorSet(e))->flatten()->asSet()
 /]
 
 [query public allColorsColorSet(petriNet : PetriNet, colorset : ToolInfo) : Collection(ToolInfo) = 
 	allColors(petriNet)->
-			 select(e : ToolInfo | getColorSetName(colorset) = getColorSetColor(e))
+			 select(e : ToolInfo | getColorSetName(colorset) = getColorSetNameColor(e))
+/]
+
+[query public getColorSet(color : ToolInfo, petriNet : PetriNet) : ToolInfo = 
+	-- 
+	allColorSets(petriNet)->select(e: ToolInfo | getColorSetName(e) = getColorSetNameColor(color))->asSequence()->first()
+/]
+
+[query public isArcUnion(colorset : ToolInfo) : Boolean = 
+	getColorSetType(colorset) = 0
+/]
+
+[query public isArcOrdered(colorset : ToolInfo) : Boolean = 
+	getColorSetType(colorset) = 1
+/]
+
+[query public getIdColorSet(color : ToolInfo) : String = 
+	getColorSetNameColor(color).first(1)
 /]
