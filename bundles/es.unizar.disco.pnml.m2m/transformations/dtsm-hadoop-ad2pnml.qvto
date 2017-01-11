@@ -103,19 +103,9 @@ mapping addColor(color : Colour) {
 	net.toolspecifics += colorToolInfo(color);
 }
 
-mapping addColorSet_2(color : ColourSet) {
-	var page := resolveoneIn(UML::NamedElement::model2page, PNML::Page);
-	page.toolspecifics += colorSetToolInfo(color);
-}
-
 /**
 	Adds the metadata for a new color on the PNML file
 */
-mapping addColor_2(color : Colour) {
-	var page := resolveoneIn(UML::NamedElement::model2page, PNML::Page);
-	page.toolspecifics += colorToolInfo(color);
-}
-
 mapping addColorList(color : List (Colour) ) {
 	color->forEach(col){
 		map addColor(col);
@@ -178,7 +168,6 @@ when {
 
 	/* Add an arc between the new resource place and the timed transition */
 	var arc_1 := map arc(trans_exec, place_resource, arc_resource_color);
-	/***************/
 	/* Omit the following color trans_resource_color */
 	/*trans_exec.toolspecifics += colorToolInfo(trans_resource_color);*/
 	/* Or add also trans_resource_color_2 */ 
@@ -202,33 +191,40 @@ when {
 	var place_post := trans_get_resource.OutArcs->asSequence()->first().target;
 	place_post.toolspecifics += colorToolInfo(place_resource_color);
 	
-	/* By default, the Petri net of user color 'a' will take resources of type 'a'*/
-	var arc_2 := map arc(place_resource, trans_get_resource, arc_resource_color);
-	trans_get_resource.toolspecifics += colorToolInfo(trans_resource_color);
-	trans_get_resource.toolspecifics += priorityTransitionToolInfo(2);
-		
-	/* Add a second 'getting_resource' transition. This transition will take 
-	resources of color 'b' only when those resources are idle and all the
-	resources of color 'a' are working.  */
-	
-	var trans_get_resource_2 := node.map activityNode2immTransResCol(node_color);
-	trans_get_resource_2.toolspecifics += colorToolInfo(trans_resource_color_2);
-	trans_get_resource_2.toolspecifics += priorityTransitionToolInfo(1);
-	
-	/* place_post of immTransRes == place_prec of timedTransCol */
-	var arc_3 := map arc(place_resource, trans_get_resource_2, arc_resource_color);
-	var arc_4 := map arc(place_pred, trans_get_resource_2);
-	var arc_5 := map arc(trans_get_resource_2, place_post);
-		
-	/* Add more colors to the arcs */
-	/* They will have the same color as the in-out arcs of trans_get_resource */
+	/* Initial in-out arcs of trans_get_resource */
 	var arc_6 := trans_get_resource.InArcs->asSequence()->first();
 	var arc_7 := trans_get_resource.OutArcs->asSequence()->first();
 	arc_7.toolspecifics += colorToolInfo(arc_resource_color);
 	
-	arc_4.toolspecifics += arc_6.toolspecifics.clone();
-	arc_5.toolspecifics += arc_7.toolspecifics.clone();
+	/* By default, the Petri net of user color 'a' will take resources of type 'a'*/
+	var arc_2 := map arc(place_resource, trans_get_resource, arc_resource_color);
+	trans_get_resource.toolspecifics += colorToolInfo(trans_resource_color);
 	
+	var num_colors= trans_exec_list->size()/2;
+	if (num_colors > 1){	
+		trans_get_resource.toolspecifics += priorityTransitionToolInfo(2);
+			
+		/* Add a second 'getting_resource' transition. This transition will take 
+		resources of color 'b' only when those resources are idle and all the
+		resources of color 'a' are working.  */
+		
+		var trans_get_resource_2 := node.map activityNode2immTransResCol(node_color);
+		trans_get_resource_2.toolspecifics += colorToolInfo(trans_resource_color_2);
+		trans_get_resource_2.toolspecifics += priorityTransitionToolInfo(1);
+		
+		/* place_post of immTransRes == place_prec of timedTransCol */
+		var arc_3 := map arc(place_resource, trans_get_resource_2, arc_resource_color);
+		var arc_4 := map arc(place_pred, trans_get_resource_2);
+		var arc_5 := map arc(trans_get_resource_2, place_post);
+			
+		/* Add more colors to the arcs to the new immediate transition
+		with low priority */
+		/* The new arcs will have the same color as the initial in-out
+		arcs of trans_get_resource */
+		//arc_7.toolspecifics += colorToolInfo(arc_resource_color);
+		arc_4.toolspecifics += arc_6.toolspecifics.clone();
+		arc_5.toolspecifics += arc_7.toolspecifics.clone();
+	}
 }
 
 mapping UML::ActivityPartition::partitions2resources() 
@@ -252,7 +248,7 @@ when {
 	var model_name := model.name;
 	
 	var resources := object ColourSet {
-		colorset_id := "Resources_" + model_name;
+		colorset_id := getResName(model_name);
 		type :=  0; /*u*/ /*u, o*/
 	};
 
@@ -363,7 +359,6 @@ mapping UML::InitialNode::initialNode2subNet()
 		
 		var listColoursCounters := new List (Colour) ();
 		var counter := object ColourSet {
-			//colorset_id := users.colorset_id + "_id_" + i.toString();
 			colorset_id := getIdName(user_color);
 			type :=  1; /*o*/ /*u, o*/
 		};
@@ -405,6 +400,7 @@ mapping UML::InitialNode::initialNode2subNetColor(in user_color : Colour, in cou
 	var place_id := self.map activityNode2placeCol(place_color_counter);
 	
 	place_color_user_gen.numElements := 0;
+	place_color_user_gen_2.numElements := 0;
 	place_color_counter.numElements := 0;
 	
 	var place_gen := self.map activityNode2placeGenCol(place_color_user_gen);
@@ -525,16 +521,24 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 		/* Restriction of the kind of colors/colorset that can
 		go throught a transition */
 		
-		var trans_map_color := object Colour{
+		var trans_map_color_1 := object Colour{
 			color_id := map_color.color_id;
 			colorset_id := map_color.colorset_id;
 			numElements := 1;
 		};
 
-		var trans_generate := self.map activityNode2immTransGenCol(trans_map_color);
-		var trans_get_resource := self.map activityNode2immTransResCol(trans_map_color);
-		var trans_exec := self.map activityNode2timedTransitionCol(trans_map_color);
-		var trans_join := self.map activityNode2immTransJoinCol(trans_map_color);
+		var trans_map_color_2 := object Colour{
+			color_id := map_color.color_id;
+			colorset_id := map_color.colorset_id;
+			numElements := map_color.numElements;
+		};
+		
+		//var trans_generate := self.map activityNode2immTransGenCol(trans_map_color_1);
+		var trans_generate := self.map activityNode2immTransGenCol(trans_map_color_2);
+		var trans_get_resource := self.map activityNode2immTransResCol(trans_map_color_1);
+		var trans_exec := self.map activityNode2timedTransitionCol(trans_map_color_1);
+		//var trans_join := self.map activityNode2immTransJoinCol(trans_map_color_1);
+		var trans_join := self.map activityNode2immTransJoinCol(trans_map_color_2);
 		
 		var arc_user_color := object Colour{
 			color_id := map_color.color_id;
@@ -542,7 +546,8 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 			numElements := 1;
 		};
 		
-		var arc_0 := map arc(place_gen, trans_generate, arc_user_color);
+		//var arc_0 := map arc(place_gen, trans_generate, arc_user_color);
+		var arc_0 := map arc(place_gen, trans_generate);
 		var arc_1 := map arc(trans_generate, place_wait, arc_user_color);
 		var arc_2 := map arc(place_wait, trans_get_resource, arc_user_color);
 		var arc_3 := map arc(trans_get_resource, place_exec, arc_user_color);
@@ -568,6 +573,18 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 			numElements := map_color.numElements;
 		};
 		
+		/*var arc_counter_color := object Colour{
+			color_id := 0;
+			colorset_id := counter.colorset_id;****
+			numElements := 1;
+		};
+		arc_0.toolspecifics += colorToolInfo(arc_counter_color);
+		*/
+		
+		assert warning (place_gen.InArcs->size() = 1) with log ("A single incomming arc required before the place '" + place_gen.name.toString() + "', obtained " + place_gen.InArcs->size().toString());
+		var arc_pred := place_gen.InArcs->asSequence()->first();
+		
+		arc_0.toolspecifics := arc_pred.toolspecifics.clone();
 		arc_1.toolspecifics += colorToolInfo(arc_map_color_2);
 		arc_2.toolspecifics += colorToolInfo(arc_map_color_1);
 		arc_3.toolspecifics += colorToolInfo(arc_map_color_1);
@@ -662,18 +679,24 @@ mapping UML::ActivityNode::reduceNode2subNetColor(in red_color: Colour)
 		go throught a transition */
 		//var trans_color := red_color;
 		//trans_color.numElements := 1;
-		var trans_red_color := object Colour{
+		var trans_red_color_1 := object Colour{
 			color_id := red_color.color_id;
 			colorset_id := red_color.colorset_id;
 			numElements := 1;
 		};
 
+		var trans_red_color_2 := object Colour{
+			color_id := red_color.color_id;
+			colorset_id := red_color.colorset_id;
+			numElements := 2;
+		};
+		
 		/* Get the <<trans_join>> of the Mapping phase and link it to the
 		Reducing phase */ 
 		
-		var trans_get_resource := self.map activityNode2immTransResCol(trans_red_color);				
-		var trans_exec := self.map activityNode2timedTransitionCol(trans_red_color);
-		var trans_join_red := self.map activityNode2immTransJoinCol(trans_red_color);
+		var trans_get_resource := self.map activityNode2immTransResCol(trans_red_color_1);				
+		var trans_exec := self.map activityNode2timedTransitionCol(trans_red_color_1);
+		var trans_join_red := self.map activityNode2immTransJoinCol(trans_red_color_2);
 		
 		/* trans_get_resource.toolspecifics += colorToolInfo(trans_color); */
 		
@@ -734,8 +757,7 @@ mapping UML::FinalNode::model2closedNet() {
 		/* Get the <<trans_join>> of the Reduce phase */
 		// Get the UML::ActivityNode::Reducer
 		assert warning (self.incoming->asOrderedSet()->size() = 1) with log ("More than one reducing phase found");
-		var red_phase := self.incoming->asOrderedSet()->first().source; 
-		var trans_join_red := red_phase.resolveoneIn(UML::ActivityNode::activityNode2immTransJoinCol);
+		var red_phase := self.incoming->asOrderedSet()->first().source;
 		
 		/* Get the <<initial_state>> of the Initial_node. 
 		Close the net between the Reducer and the Initial_node */
@@ -764,9 +786,7 @@ mapping UML::FinalNode::model2closedNet() {
 			self.map model2closedNetColor(user_color);			
 			i := i + 1;
 		};
-			
 }
-
 
 mapping UML::FinalNode::model2closedNetColor(in user_color: Colour) {
 		/* Get the <<trans_join>> of the Reduce phase */
@@ -776,77 +796,44 @@ mapping UML::FinalNode::model2closedNetColor(in user_color: Colour) {
 		
 		/* Get the <<initial_state>> of the Initial_node. 
 		Close the net between the Reducer and the Initial_node */
+		
 		// Get the UML::ActivityNode::Mapper
 		assert fatal (red_phase.incoming->asOrderedSet()->size() = 1) with log ("More than one mapping phase found");
 		var map_phase := red_phase.incoming->asOrderedSet()->first().source;
 		
 		assert fatal (red_phase.incoming->asOrderedSet()->size() = 1) with log ("More than one initial node found");
 		var initial_node := map_phase.incoming->asOrderedSet()->first().source;
-			
-		/*******************************************/
-		/* Link the map and the reduce phases */
-		/* The color number colour.color_id of the colorset <Reducer> is assigned to the
-		same color number of the colorset <User> */
-		var associated_user_color := object Colour{
-				color_id := user_color.color_id;
-				colorset_id := initial_node.name;
-				numElements := 0;
-		};
-		
-		/* The color number colour.color_id of the colorset <Reducer> is assigned to the
-		same color number of the colorset <Mapper> */
-		var associated_map_color := object Colour{
-				color_id := user_color.color_id;
-				colorset_id := map_phase.name;
-				numElements := 1;
-		};
 
-		var associated_red_color := object Colour{
+		var trans_red_color := object Colour{
 				color_id := user_color.color_id;
 				colorset_id := red_phase.name;
-				numElements := 0;
+				numElements := 2;
 		};
-		
-		var trans_join_map_list := map_phase.resolveIn(UML::ActivityNode::activityNode2immTransJoinCol);
-		var trans_join_map := findTransByColor(associated_map_color, trans_join_map_list);
-		
-		var place_wait_red_list := red_phase.resolveIn(UML::ActivityNode::activityNode2placeWaitCol);
-		var place_wait_red := findPlaceByColor(associated_red_color, place_wait_red_list);
 
-
-		var listNumElemColor := red_phase.getHadoopOperation_nTasks();
-		var arc_color := associated_red_color;
-		arc_color.numElements := listNumElemColor->asSequence()->at(user_color.color_id + 1).value(); 
-		
-		var arc_0 := map arc(trans_join_map, place_wait_red, associated_user_color);
-		arc_0.toolspecifics += colorToolInfo(arc_color);
-		self.map trace(trans_join_map, "redNode2subNet");
-		/*******************************************/
-
- 		associated_red_color.numElements := 1;
 		var trans_join_red_list := red_phase.resolveIn(UML::ActivityNode::activityNode2immTransJoinCol);
-		var trans_join_red := findTransByColor(associated_red_color, trans_join_red_list);
+		var trans_join_red := findTransByColor(trans_red_color, trans_join_red_list);
 		
 		var initial_place_list := initial_node.resolveIn(UML::ActivityNode::activityNode2placeCol); 		
 		var initial_place := findPlaceByColor(user_color, initial_place_list);
 		
 		/* Create a place and a transition for linking the trans_join_end
 		 with the initial_place */
-		var place_end := self.map activityNode2placeCol(user_color);
-		var trans_end := self.map activityNode2transitionCol(user_color);
+		var place_color_end := user_color.clone();
+		place_color_end.numElements := 0;
 		
-		//place_end.toolspecifics += initial_place.toolspecifics;
+		var trans_color_end := user_color.clone();
+		trans_color_end.numElements := 1;
 		
-		var arc_1 := map arc(trans_join_red, place_end, user_color);
-		var arc_2 := map arc(place_end, trans_end, user_color);
-		var arc_3 := map arc(trans_end, initial_place, user_color);
+		var arc_color_end := user_color.clone();
+		arc_color_end.numElements := 1;
 		
-		/* arc colors are identical to the outgoing arc of the initial node*/
-		/*var arc_color := initial_place.OutArcs->asList()->first().toolspecifics;
-		arc_1.toolspecifics += arc_color;
-		arc_2.toolspecifics += arc_color;
-		arc_3.toolspecifics += arc_color;*/
+		var place_end := self.map activityNode2placeCol(place_color_end);
+		var trans_end := self.map activityNode2transitionCol(trans_color_end);
 		
+		var arc_1 := map arc(trans_join_red, place_end, arc_color_end);
+		var arc_2 := map arc(place_end, trans_end, arc_color_end);
+		var arc_3 := map arc(trans_end, initial_place, arc_color_end);
+				
 		// Add tracing information
 		self.map trace(place_end, "model2closedNet");
 		self.map trace(trans_end, "model2closedNet");		
@@ -1257,6 +1244,93 @@ mapping UML::ControlFlow::initialControlFlow2arcCol(in user_color : Colour, in m
 	};
 	
 	var place_user_id_color := object Colour{
+		//color_id := user_color.color_id;
+		color_id := 0;
+		colorset_id := getIdName(user_color);
+		numElements := user_color.numElements;
+	};
+	
+	var arc_id_color := object Colour{
+		color_id := user_color.color_id;
+		colorset_id := getIdName(user_color);
+		numElements := 1;
+	};
+	
+	var arc_id_color_next := object Colour{
+		color_id := user_color.color_id;
+		colorset_id := getIdName(user_color);
+		numElements := 0;
+	};
+	
+	var trans_map_color := map_color.clone();
+	
+	var place_reduce_color := object Colour{
+		color_id := reduce_color.color_id;
+		colorset_id := reduce_color.colorset_id;
+		numElements := 0;
+	};
+	
+	
+	var trans_join_maps_list := map_phase.resolveIn(UML::ActivityNode::activityNode2immTransJoinCol);
+	var trans_gen_maps_list := map_phase.resolveIn(UML::ActivityNode::activityNode2immTransGenCol);
+	var place_wait_red_list := red_phase.resolveIn(UML::ActivityNode::activityNode2placeWaitCol);
+	
+	var trans_join_maps := findTransByColor(trans_map_color, trans_join_maps_list);	
+	var trans_gen_maps := findTransByColor(trans_map_color, trans_gen_maps_list);
+	var place_wait_red := findPlaceByColor(place_reduce_color, place_wait_red_list);
+
+	//var place_red_running := self.map controlFlow2placeRedCol(reduce_color);
+	var place_red_running := self.map controlFlow2placeRedCol(place_user_color);
+	var place_ids2  := self.map controlFlow2placeIdCol(place_user_id_color);
+	
+	//var trans_start_next := self.map controlFlow2immediateTransition();
+	var trans_start_next := self.map controlFlow2immediateTransitionCol(user_color);
+
+	/*var arc_red_color := reduce_color.clone();
+	var arc_user_color := user_color.clone();*/
+	var arc_red_color := reduce_color;
+	var arc_user_color := user_color;
+	arc_user_color.numElements := 1;
+	
+	var arc_0 := map arc(trans_join_maps, place_red_running, arc_user_color);
+	var arc_1 := map arc(trans_join_maps, place_wait_red, arc_user_color);//
+	var arc_2 := map arc(place_red_running, trans_start_next, arc_user_color);
+	var arc_3 := map arc(trans_start_next, place_ids2, arc_id_color_next); /* !i */
+	var arc_4 := map arc(trans_gen_maps, place_ids2, arc_id_color);
+	var arc_5 := map arc(place_ids2, trans_start_next, arc_id_color);
+	var arc_6 := map arc(place_ids2, trans_gen_maps, arc_id_color);
+	var arc_7 := map arc(place_wait_red, trans_start_next, arc_user_color);
+	
+	arc_1.toolspecifics += colorToolInfo(arc_red_color);//
+	arc_7.toolspecifics += colorToolInfo(arc_red_color);
+	arc_7.toolspecifics += inhibitorArcToolInfo();
+	
+	// Add tracing information
+	self.map trace(place_red_running, "initialControlFlow2arc");
+	self.map trace(place_ids2, "initialControlFlow2arc");
+	self.map trace(trans_start_next, "initialControlFlow2arc");	
+}
+
+mapping UML::ControlFlow::initialControlFlow2arcCol2(in user_color : Colour, in map_color : Colour, in reduce_color : Colour, in scheduler : DBET::Scheduling) when {
+	(self.source.oclIsKindOf(InitialNode)) and
+	(scheduler = (DBET::Scheduling::capacity) )
+}{
+	
+	var map_phase := self.target;
+	assert fatal (map_phase.oclIsKindOf(ActivityNode) and map_phase.getHadoopOperation().oclIsUndefined().not()) 
+	with log('Initial node should be followed by a HadoopOperation');
+	
+	assert fatal (map_phase.outgoing.target->size() = 1) with log('Map should be followed by a single Reduce');	
+	var red_phase := map_phase.outgoing.target->asOrderedSet()->first();
+	
+	
+	var place_user_color := object Colour{
+		color_id := user_color.color_id;
+		colorset_id := user_color.colorset_id;
+		numElements := 0;
+	};
+	
+	var place_user_id_color := object Colour{
 		color_id := user_color.color_id;
 		colorset_id := getIdName(user_color);
 		numElements := user_color.numElements;
@@ -1274,13 +1348,13 @@ mapping UML::ControlFlow::initialControlFlow2arcCol(in user_color : Colour, in m
 		numElements := 0;
 	};
 	
-	var associated_map_color := object Colour{
+	var trans_map_color := object Colour{
 		color_id := map_color.color_id;
 		colorset_id := map_color.colorset_id;
 		numElements := 1;
 	};
 	
-	var associated_reduce_color := object Colour{
+	var place_reduce_color := object Colour{
 		color_id := reduce_color.color_id;
 		colorset_id := reduce_color.colorset_id;
 		numElements := 0;
@@ -1291,9 +1365,9 @@ mapping UML::ControlFlow::initialControlFlow2arcCol(in user_color : Colour, in m
 	var trans_gen_maps_list := map_phase.resolveIn(UML::ActivityNode::activityNode2immTransGenCol);
 	var place_wait_red_list := red_phase.resolveIn(UML::ActivityNode::activityNode2placeWaitCol);
 	
-	var trans_join_maps := findTransByColor(associated_map_color, trans_join_maps_list);	
-	var trans_gen_maps := findTransByColor(associated_map_color, trans_gen_maps_list);
-	var place_wait_red := findPlaceByColor(associated_reduce_color, place_wait_red_list);
+	var trans_join_maps := findTransByColor(trans_map_color, trans_join_maps_list);	
+	var trans_gen_maps := findTransByColor(trans_map_color, trans_gen_maps_list);
+	var place_wait_red := findPlaceByColor(place_reduce_color, place_wait_red_list);
 
 	//var place_red_running := self.map controlFlow2placeRedCol(reduce_color);
 	var place_red_running := self.map controlFlow2placeRedCol(place_user_color);
@@ -1811,16 +1885,6 @@ helper findPlaceByColor(color : Colour, place_list: List(PNML::Place) ) : PNML::
 	The colorset is composed of a set of colors 
 */
 
-helper colorSetToolInfo_2(colorset : ColourSet) : PNML::ToolInfo {
-	return object PNML::ToolInfo { 
-		tool := CONST::ToolInfoConstants::toolName.toString();
-		version := CONST::ToolInfoConstants::toolVersion.toString();
-		toolInfoGrammarURI := CONST::Color::ColorSet.toString().createURI();
-		formattedXMLBuffer := ("<value grammar=\"" + CONST::Color::ColorSet.toString() + "\">" + colorset.colorset_id + "</value>" + 
-							   "<value grammar=\"" + CONST::Color::ColorSet.toString() + "\">" + colorset.type.toString() + "</value>").createLongString();
-	};		
-}
-
 helper colorSetToolInfo(colorset : ColourSet) : PNML::ToolInfo {
 	return object PNML::ToolInfo { 
 		tool := CONST::ToolInfoConstants::toolName.toString();
@@ -1840,17 +1904,6 @@ helper colorSet2String(colorset : ColourSet) : LongString {
 	arc, place or transition 
 */
 
-helper colorToolInfo_2(color : Colour) : PNML::ToolInfo {
-	return object PNML::ToolInfo { 
-		tool := CONST::ToolInfoConstants::toolName.toString();
-		version := CONST::ToolInfoConstants::toolVersion.toString();
-		toolInfoGrammarURI := CONST::Color::Color.toString().createURI();
-		formattedXMLBuffer := ("<value grammar=\"" + CONST::Color::Color.toString() + "\">" + color.color_id.toString() + "</value>" + 
-							   "<value grammar=\"" + CONST::Color::Color.toString() + "\">" + color.colorset_id + "</value>" + 
-							   "<value grammar=\"" + CONST::Color::Color.toString() + "\">" + color.numElements.toString() + "</value>").createLongString();
-	};		
-}
-
 helper colorToolInfo(color : Colour) : PNML::ToolInfo {
 	return object PNML::ToolInfo { 
 		tool := CONST::ToolInfoConstants::toolName.toString();
@@ -1867,5 +1920,10 @@ helper color2String(color : Colour) : LongString {
 }
 
 helper getIdName(color : Colour ) : String {
- 	return color.colorset_id + "_id_" + color.color_id.toString();
+ 	//return color.colorset_id + "_id_" + color.color_id.toString();
+ 	return "id_" + color.color_id.toString() + "_" + color.colorset_id ;
+}
+
+helper getResName(model_name : String ) : String {
+ 	return "Resources_" + model_name; 
 }

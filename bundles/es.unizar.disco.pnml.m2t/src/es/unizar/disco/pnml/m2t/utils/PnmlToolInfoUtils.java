@@ -195,11 +195,13 @@ public class PnmlToolInfoUtils {
 	
 	public String getColorNameIndex(ToolInfo toolinfo) throws IllegalArgumentException {
 		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		int a = Character.getNumericValue('a');
 		boolean find = matcher.find();
 		if (find && Color.COLOR.getLiteral().equals(matcher.group(1))) {
-			return String.valueOf(matcher.group(2)); //"31";
+			//return String.valueOf(matcher.group(2));
+			return String.valueOf(Character.forDigit(a+Integer.parseInt(matcher.group(2)), 36));
 		}
-		return null; //"3";
+		return null;
 	}
 	
 	public String getColorSetNameColor(ToolInfo toolinfo) throws IllegalArgumentException {
