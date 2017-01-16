@@ -35,8 +35,6 @@ main() {
 	var scheduler := ad.scenario().getHadoopWorkflow_scheduler();
 	
 	// Transform net contents
-	/*ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
-	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2arc(scheduler);*/
 	ad.scenario().node[UML::InitialNode] -> map initialNode2subNet();
 	ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
 	ad.scenario().node[UML::FinalNode] -> map model2closedNet();
@@ -200,7 +198,9 @@ when {
 	var arc_2 := map arc(place_resource, trans_get_resource, arc_resource_color);
 	trans_get_resource.toolspecifics += colorToolInfo(trans_resource_color);
 	
-	var num_colors= trans_exec_list->size()/2;
+	/* A Petri net representing a MapReduce has a timed transition for mapping
+	and another timed transition for reducing (2) */
+	var num_colors = trans_exec_list->size()/2;
 	if (num_colors > 1){	
 		trans_get_resource.toolspecifics += priorityTransitionToolInfo(2);
 			
@@ -221,7 +221,6 @@ when {
 		with low priority */
 		/* The new arcs will have the same color as the initial in-out
 		arcs of trans_get_resource */
-		//arc_7.toolspecifics += colorToolInfo(arc_resource_color);
 		arc_4.toolspecifics += arc_6.toolspecifics.clone();
 		arc_5.toolspecifics += arc_7.toolspecifics.clone();
 	}
@@ -501,8 +500,6 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 		//assert warning (place_gen_list_2->size() = 1) with log ("More than one generateMaps candidates for the Map phase");
  		 
 		/* Creation of the subnet */
-		//var place_map_color := map_color;
-		//place_map_color.numElements := 0;
 		var place_map_color := object Colour{
 			color_id := map_color.color_id;
 			colorset_id := map_color.colorset_id;
@@ -573,17 +570,10 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 			numElements := map_color.numElements;
 		};
 		
-		/*var arc_counter_color := object Colour{
-			color_id := 0;
-			colorset_id := counter.colorset_id;****
-			numElements := 1;
-		};
-		arc_0.toolspecifics += colorToolInfo(arc_counter_color);
-		*/
-		
 		assert warning (place_gen.InArcs->size() = 1) with log ("A single incomming arc required before the place '" + place_gen.name.toString() + "', obtained " + place_gen.InArcs->size().toString());
 		var arc_pred := place_gen.InArcs->asSequence()->first();
 		
+		/* Copy the labelling of the precedent arc: <map,fifo_index> */
 		arc_0.toolspecifics := arc_pred.toolspecifics.clone();
 		arc_1.toolspecifics += colorToolInfo(arc_map_color_2);
 		arc_2.toolspecifics += colorToolInfo(arc_map_color_1);
@@ -659,8 +649,6 @@ mapping UML::ActivityNode::reduceNode2subNetColor(in red_color: Colour)
 		};
 		
 		/* Creation of the subnet */
-		//var place_red_color := red_color;
-		//place_red_color.numElements := 0;
 		var place_red_color := object Colour{
 				color_id := red_color.color_id;
 				colorset_id := red_color.colorset_id;
@@ -677,8 +665,6 @@ mapping UML::ActivityNode::reduceNode2subNetColor(in red_color: Colour)
 		
 		/* Restriction of the kind of colors that can
 		go throught a transition */
-		//var trans_color := red_color;
-		//trans_color.numElements := 1;
 		var trans_red_color_1 := object Colour{
 			color_id := red_color.color_id;
 			colorset_id := red_color.colorset_id;
@@ -731,7 +717,7 @@ mapping UML::ActivityNode::reduceNode2subNetColor(in red_color: Colour)
 			numElements := red_color.numElements;
 		};
 		
-//		arc_1.toolspecifics += colorToolInfo(arc_red_color_2);
+		//arc_1.toolspecifics += colorToolInfo(arc_red_color_2);
 		arc_2.toolspecifics += colorToolInfo(arc_red_color_1);
 		arc_3.toolspecifics += colorToolInfo(arc_red_color_1);
 		arc_4.toolspecifics += colorToolInfo(arc_red_color_1);
@@ -743,7 +729,7 @@ mapping UML::ActivityNode::reduceNode2subNetColor(in red_color: Colour)
 		self.map trace(place_exec, "redNode2subNet");
 		self.map trace(place_done, "redNode2subNet");
 		
-//		self.map trace(trans_join_map, "redNode2subNet");
+		//self.map trace(trans_join_map, "redNode2subNet");
 		self.map trace(trans_get_resource, "redNode2subNet");
 		self.map trace(trans_exec, "redNode2subNet");
 		self.map trace(trans_join_red, "redNode2subNet");
@@ -768,8 +754,7 @@ mapping UML::FinalNode::model2closedNet() {
 		assert warning (red_phase.incoming->asOrderedSet()->size() = 1) with log ("More than one initial node found");
 		var initial_node := map_phase.incoming->asOrderedSet()->first().source;
 		
-		var i := 0;
-					
+		var i := 0;					
 		var listNumElemColor := initial_node.getHadoopWorkloadEvent_hadoopPopulation();
 		listNumElemColor->forEach(numElemColor){
 			
@@ -858,13 +843,6 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 		};
 }
 
-mapping UML::NamedElement::namedElement2placeCol_2(in colour: Colour) : PNML::Place {
-init {
-		result := self.map namedElement2place (); 
-}
-		toolspecifics += colorToolInfo(colour);
-}
-
 mapping UML::NamedElement::namedElement2placeCol(in colour: Colour) : PNML::Place {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
@@ -902,26 +880,6 @@ inherits UML::NamedElement::namedElement2placeCol {
 		 name.text := name.text + "_Id";
 		 name.text := name.text + "_" + colour.colorset_id + "_" + colour.color_id.toString();
 }
-
-/*************************************************/
-/*mapping UML::ControlFlow::controlFlow2placeRedCol(in colour: Colour, in i: Integer) : PNML::Place {
-init {
-		result := map UML::NamedElement::namedElement2placeCol(colour);
-}
-		 name.text := name.text + "_Red";
-		 name.text := name.text + "_" + colour.colorset_id + "_" + colour.color_id.toString();
-}*/
-
-/**
-	Transform a generic ControlFlow into a Place representing 
-	the Id (used for controlling the scheduling) 
-*/
-
-/*mapping UML::ControlFlow::controlFlow2placeIdCol(in colour: Colour, in i: Integer) : PNML::Place 
-inherits UML::NamedElement::namedElement2placeCol {
-		 name.text := name.text + "_Id";
-		 name.text := name.text + "_" + colour.colorset_id + "_" + colour.color_id.toString();
-}*/
 
 /*************************************************/
 /**
@@ -1140,15 +1098,6 @@ mapping arc(in src : PNML::Node, in tgt : PNML::Node) : PNML::Arc {
 /**
 	Creates an Arc from 'src' to 'tgt' using colour restriction
 */
-/*mapping arc(in src : PNML::Node, in tgt : PNML::Node, in colour : List (Colour) ) : PNML::Arc {
-init {
-	result := map arc(src, tgt);
-}
-	var colourSet := colour->asOrderedSet();
-	colourSet->forEach(col){
-		result.toolspecifics += result[OpaqueAction].map color2toolInfo(col);
-	};
-}*/
 
 mapping arc(in src : PNML::Node, in tgt : PNML::Node, in colour : Colour ) : PNML::Arc {
 init {
@@ -1195,7 +1144,6 @@ mapping UML::ControlFlow::initialControlFlow2arc(in scheduler : DBET::Scheduling
 	listNumElemUser->forEach(numElemUser){
 		var user_color := object Colour{
 			color_id := 0;
-			//colorset_id := map_phase.name;
 			colorset_id := initial_node.name;
 			numElements := 1;
 		};
@@ -1218,12 +1166,10 @@ mapping UML::ControlFlow::initialControlFlow2arc(in scheduler : DBET::Scheduling
 		reduce_color.color_id := i;
 		reduce_color.numElements := listNumElemRed->at(i+1).value();
 		self.map initialControlFlow2arcCol(user_color, map_color, reduce_color, scheduler);
-		//self.map initialControlFlow2arcCol(user_color, map_color, reduce_color, scheduler, i);
 		i := i + 1;
 	};
 }
 
-//mapping UML::ControlFlow::initialControlFlow2arcCol(in user_color : Colour, in map_color : Colour, in reduce_color : Colour, in scheduler : DBET::Scheduling, in i : Integer) when {
 mapping UML::ControlFlow::initialControlFlow2arcCol(in user_color : Colour, in map_color : Colour, in reduce_color : Colour, in scheduler : DBET::Scheduling) when {
 	(self.source.oclIsKindOf(InitialNode)) and
 	(scheduler = (DBET::Scheduling::capacity) )
@@ -1279,11 +1225,9 @@ mapping UML::ControlFlow::initialControlFlow2arcCol(in user_color : Colour, in m
 	var trans_gen_maps := findTransByColor(trans_map_color, trans_gen_maps_list);
 	var place_wait_red := findPlaceByColor(place_reduce_color, place_wait_red_list);
 
-	//var place_red_running := self.map controlFlow2placeRedCol(reduce_color);
 	var place_red_running := self.map controlFlow2placeRedCol(place_user_color);
 	var place_ids2  := self.map controlFlow2placeIdCol(place_user_id_color);
 	
-	//var trans_start_next := self.map controlFlow2immediateTransition();
 	var trans_start_next := self.map controlFlow2immediateTransitionCol(user_color);
 
 	/*var arc_red_color := reduce_color.clone();
@@ -1293,7 +1237,7 @@ mapping UML::ControlFlow::initialControlFlow2arcCol(in user_color : Colour, in m
 	arc_user_color.numElements := 1;
 	
 	var arc_0 := map arc(trans_join_maps, place_red_running, arc_user_color);
-	var arc_1 := map arc(trans_join_maps, place_wait_red, arc_user_color);//
+	var arc_1 := map arc(trans_join_maps, place_wait_red, arc_user_color);
 	var arc_2 := map arc(place_red_running, trans_start_next, arc_user_color);
 	var arc_3 := map arc(trans_start_next, place_ids2, arc_id_color_next); /* !i */
 	var arc_4 := map arc(trans_gen_maps, place_ids2, arc_id_color);
@@ -1301,95 +1245,7 @@ mapping UML::ControlFlow::initialControlFlow2arcCol(in user_color : Colour, in m
 	var arc_6 := map arc(place_ids2, trans_gen_maps, arc_id_color);
 	var arc_7 := map arc(place_wait_red, trans_start_next, arc_user_color);
 	
-	arc_1.toolspecifics += colorToolInfo(arc_red_color);//
-	arc_7.toolspecifics += colorToolInfo(arc_red_color);
-	arc_7.toolspecifics += inhibitorArcToolInfo();
-	
-	// Add tracing information
-	self.map trace(place_red_running, "initialControlFlow2arc");
-	self.map trace(place_ids2, "initialControlFlow2arc");
-	self.map trace(trans_start_next, "initialControlFlow2arc");	
-}
-
-mapping UML::ControlFlow::initialControlFlow2arcCol2(in user_color : Colour, in map_color : Colour, in reduce_color : Colour, in scheduler : DBET::Scheduling) when {
-	(self.source.oclIsKindOf(InitialNode)) and
-	(scheduler = (DBET::Scheduling::capacity) )
-}{
-	
-	var map_phase := self.target;
-	assert fatal (map_phase.oclIsKindOf(ActivityNode) and map_phase.getHadoopOperation().oclIsUndefined().not()) 
-	with log('Initial node should be followed by a HadoopOperation');
-	
-	assert fatal (map_phase.outgoing.target->size() = 1) with log('Map should be followed by a single Reduce');	
-	var red_phase := map_phase.outgoing.target->asOrderedSet()->first();
-	
-	
-	var place_user_color := object Colour{
-		color_id := user_color.color_id;
-		colorset_id := user_color.colorset_id;
-		numElements := 0;
-	};
-	
-	var place_user_id_color := object Colour{
-		color_id := user_color.color_id;
-		colorset_id := getIdName(user_color);
-		numElements := user_color.numElements;
-	};
-	
-	var arc_id_color := object Colour{
-		color_id := user_color.color_id;
-		colorset_id := getIdName(user_color);
-		numElements := 1;
-	};
-	
-	var arc_id_color_next := object Colour{
-		color_id := user_color.color_id;
-		colorset_id := getIdName(user_color);
-		numElements := 0;
-	};
-	
-	var trans_map_color := object Colour{
-		color_id := map_color.color_id;
-		colorset_id := map_color.colorset_id;
-		numElements := 1;
-	};
-	
-	var place_reduce_color := object Colour{
-		color_id := reduce_color.color_id;
-		colorset_id := reduce_color.colorset_id;
-		numElements := 0;
-	};
-	
-	
-	var trans_join_maps_list := map_phase.resolveIn(UML::ActivityNode::activityNode2immTransJoinCol);
-	var trans_gen_maps_list := map_phase.resolveIn(UML::ActivityNode::activityNode2immTransGenCol);
-	var place_wait_red_list := red_phase.resolveIn(UML::ActivityNode::activityNode2placeWaitCol);
-	
-	var trans_join_maps := findTransByColor(trans_map_color, trans_join_maps_list);	
-	var trans_gen_maps := findTransByColor(trans_map_color, trans_gen_maps_list);
-	var place_wait_red := findPlaceByColor(place_reduce_color, place_wait_red_list);
-
-	//var place_red_running := self.map controlFlow2placeRedCol(reduce_color);
-	var place_red_running := self.map controlFlow2placeRedCol(place_user_color);
-	var place_ids2  := self.map controlFlow2placeIdCol(place_user_id_color);
-	
-	//var trans_start_next := self.map controlFlow2immediateTransition();
-	var trans_start_next := self.map controlFlow2immediateTransitionCol(user_color);
-
-	/*var arc_red_color := reduce_color.clone();
-	var arc_user_color := user_color.clone();*/
-	var arc_red_color := reduce_color;
-	var arc_user_color := user_color;
-	arc_user_color.numElements := 1;
-	
-	var arc_1 := map arc(trans_join_maps, place_red_running, arc_user_color);
-	var arc_2 := map arc(place_red_running, trans_start_next, arc_user_color);
-	var arc_3 := map arc(trans_start_next, place_ids2, arc_id_color_next); /* !i */
-	var arc_4 := map arc(trans_gen_maps, place_ids2, arc_id_color);
-	var arc_5 := map arc(place_ids2, trans_start_next, arc_id_color);
-	var arc_6 := map arc(place_ids2, trans_gen_maps, arc_id_color);
-	var arc_7 := map arc(place_wait_red, trans_start_next, arc_user_color);
-	
+	arc_1.toolspecifics += colorToolInfo(arc_red_color);
 	arc_7.toolspecifics += colorToolInfo(arc_red_color);
 	arc_7.toolspecifics += inhibitorArcToolInfo();
 	
@@ -1709,7 +1565,6 @@ helper UML::Element::getHadoopReduce_hostDemand() : NFP_Duration {
 
 /******************************************************************/
 helper UML::Element::getHadoopOperation_nTasks() : List (NFP_Integer) {
-//helper UML::Element::getHadoopOperation_nTasks() : List (Integer) { 
 	if (self.getHadoopMap().oclIsUndefined().not()){
 		return self.getHadoopMap_nTasks();	
 	} else if (self.getHadoopReduce().oclIsUndefined().not()){ 
@@ -1728,7 +1583,6 @@ helper UML::Element::getHadoopStandard_nTasks() : List (NFP_Integer) {
 	assert warning (nTaskStrings->size() >= 1)
 		with log ("Unexpected number of 'nTasks' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
-	//var nTaskList := nTaskStrings->asSequence()->first().tokenize("[,]");
 	var nTaskList := nTaskStrings->asSequence();
 	var res = new List(NFP_Integer)() ;
 	nTaskList->forEach(nTask){
@@ -1738,7 +1592,6 @@ helper UML::Element::getHadoopStandard_nTasks() : List (NFP_Integer) {
 }
 
 helper UML::Element::getHadoopMap_nTasks() : List (NFP_Integer) {
-//helper UML::Element::getHadoopMap_nTasks() : List (Integer) { 
 	if (self.getHadoopMap() = null) {
 		return null;
 	};
@@ -1746,7 +1599,6 @@ helper UML::Element::getHadoopMap_nTasks() : List (NFP_Integer) {
 	assert warning (nTaskStrings->size() >= 1)
 		with log ("Unexpected number of 'nTasks' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
-	//var nTaskList := nTaskStrings->asSequence()->first().tokenize("[,]");
 	var nTaskList := nTaskStrings->asSequence();
 	var res = new List(NFP_Integer)() ;
 	nTaskList->forEach(nTask){
@@ -1756,7 +1608,6 @@ helper UML::Element::getHadoopMap_nTasks() : List (NFP_Integer) {
 }
 
 helper UML::Element::getHadoopReduce_nTasks() : List (NFP_Integer) {
-//helper UML::Element::getHadoopReduce_nTasks() : List (Integer) {
 	if (self.getHadoopMap() = null) {
 		return null;
 	};
@@ -1764,7 +1615,6 @@ helper UML::Element::getHadoopReduce_nTasks() : List (NFP_Integer) {
 	assert warning (nTaskStrings->size() >= 1)
 		with log ("Unexpected number of 'nTasks' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
-	//var nTaskList := nTaskStrings->asSequence()->first().tokenize("[,]");
 	var nTaskList := nTaskStrings->asSequence();
 	var res = new List(NFP_Integer)();
 	nTaskList->forEach(nTask){
@@ -1795,7 +1645,6 @@ helper UML::Element::getHadoopComputationNode_nCores() : List(NFP_Integer) {
 	assert warning (nCoresString->size() >= 1)
 		with log ("Unexpected number of 'nCores' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
-	//var nCoresList := nCoresString->asSequence()->first().tokenize("[,]");
 	var nCoresList := nCoresString->asSequence();
 	var res = new List(NFP_Integer)() ;
 	nCoresList->forEach(ncore){
@@ -1813,7 +1662,6 @@ helper UML::Element::getHadoopWorkloadEvent_hadoopPopulation() : List(NFP_Intege
 	assert warning (populationStrings->size() >= 1)
 		with log ("Unexpected number of 'hadoopPopulation' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
-	//var populationList := populationStrings->asSequence()->first().tokenize("[,]");
 	var populationList := populationStrings->asSequence();
 	var res = new List(NFP_Integer)() ;
 	populationList->forEach(pop){
@@ -1831,7 +1679,6 @@ helper UML::Element::getHadoopWorkloadEvent_hadoopExtDelay() : List(NFP_Integer)
 	assert warning (extDelayStrings->size() >= 1)
 		with log ("Unexpected number of 'hadoopExtDelay' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
-	//var extDelayList := extDelayStrings->asSequence()->first().tokenize("[,]");
 	var extDelayList := extDelayStrings->asSequence();
 	var res = new List(NFP_Integer)() ;
 	extDelayList->forEach(extDelay){
@@ -1849,11 +1696,9 @@ helper UML::Element::getHadoopWorkloadEvent_hadoopExtDelay() : List(NFP_Integer)
 */
 
 helper findTransByColor(color : Colour, trans_list: List(PNML::Transition) ) : PNML::Transition {
-		//var toolinfo = colorToolInfo(color);
 		trans_list->forEach(t){
 			var toolinfo_list := t.toolspecifics;
 			toolinfo_list->forEach (t_info){
-		 		//if (t_info.formattedXMLBuffer.toString() = toolinfo.formattedXMLBuffer.toString()){
 		 		if (t_info.formattedXMLBuffer.toString() = color2String(color).toString()){
 		 			return t;
 		 		}
@@ -1867,11 +1712,9 @@ helper findTransByColor(color : Colour, trans_list: List(PNML::Transition) ) : P
 */
 	
 helper findPlaceByColor(color : Colour, place_list: List(PNML::Place) ) : PNML::Place {
-		//var toolinfo = colorToolInfo(color);
 		place_list->forEach(p){
 			var toolinfo_list := p.toolspecifics;
 			toolinfo_list->forEach (t_info){
-		 		//if (t_info.formattedXMLBuffer.toString() = toolinfo.formattedXMLBuffer.toString()){
 		 		if (t_info.formattedXMLBuffer.toString() = color2String(color).toString()){
 		 			return p;
 		 		}

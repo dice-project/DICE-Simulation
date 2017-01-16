@@ -193,6 +193,16 @@ public class PnmlToolInfoUtils {
 		return getColorSetNameColor(toolinfo)+getColorNameIndex(toolinfo);
 	}
 	
+	
+	public String getColorNameValue(ToolInfo toolinfo) throws IllegalArgumentException {
+		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
+		boolean find = matcher.find();
+		if (find && Color.COLOR.getLiteral().equals(matcher.group(1))) {
+			return String.valueOf(matcher.group(2));
+		}
+		return null;
+	}
+	
 	public String getColorNameIndex(ToolInfo toolinfo) throws IllegalArgumentException {
 		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		int a = Character.getNumericValue('a');
@@ -215,7 +225,7 @@ public class PnmlToolInfoUtils {
 		return null; //"2"
 	}
 	
-	public Integer getnumElementsColor(ToolInfo toolinfo) throws IllegalArgumentException {
+	public static Integer getnumElementsColor(ToolInfo toolinfo) throws IllegalArgumentException {
 		Matcher matcher = Pattern.compile(COLOR_PATTERN).matcher(toolinfo.getFormattedXMLBuffer());
 		matcher.find();
 		matcher.find();

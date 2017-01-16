@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 import javax.measure.Unit;
 
+import org.apache.commons.lang.StringUtils;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Activity;
 import org.eclipse.uml2.uml.ActivityFinalNode;
@@ -39,34 +41,30 @@ import tec.units.ri.format.SimpleUnitFormat.Flavor;
 import tec.units.ri.unit.Units;
 
 public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator implements MeasureCalculator {
-
-/******/
-	class MyFunctionWithState {
-	    private int myVar = 0;
-	    public int call() {
-	      myVar++;
-	      return myVar;
-	    }
-	 }
     
-	private MyFunctionWithState func = new MyFunctionWithState();
-/******/
-    
+	private static final String HADOOP_SCENARIO = "DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario";
+	private static final String HADOOP_RESPT = "respT";
+	
 	private static final String HADOOP_WORKLOAD_EVENT = "DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopWorkloadEvent";
 	private static final String HADOOP_POPULATION = "hadoopPopulation";
 
+	private boolean contains(Object respT_expr, String respT_name){
+		boolean isPresent = false;
+		if (respT_expr instanceof String && StringUtils.isNotBlank((String) respT_expr)) {
+			String[] elem = StringUtils.split((String) respT_expr, ",()=");
+			for (String elem_val : elem) {
+				isPresent = isPresent || elem_val.equals(respT_name); 
+				if (isPresent) break;
+			}
+		}
+		return isPresent;
+	}
+	
 	@Override
 	public DomainMeasure calculate(EObject domainElement, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet) {
 		// @formatter:off
 		//
 		// Activity response time
-		// **Activities with an open pattern**
-		//
-		// Pattern:
-		//		[T_ini]---> (subnet) --->[T_end]
-		//
-		// respT = sum(mean_number_tokens(subnet)) / throughput(T_end)
-		//
 		//
 		// **Activities with a closed pattern**
 		//
@@ -84,6 +82,31 @@ public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator imp
 		}
 		
 		Activity activity = (Activity) domainElement;
+		
+		/**/
+		Object respT_expr_list = UMLUtil.getTaggedValue(activity, HADOOP_SCENARIO, HADOOP_RESPT);
+		String respT_name = definition.getVslExpressionEntries().get("expr") != null ? definition.getVslExpressionEntries().get("expr") : null;
+		
+		/* A MapReduce diagram in UML can have several types of users (i.e., colors).
+		 * For instance, [respT1, respT2, respT3] represents the 'response time' for 
+		 * three different kind of users. */
+		/* In case of having several users, we must decide which 'response time' we
+		 * have to calculate. */
+		int index = 0;
+		int num_colors = 1;
+		/* respT_expr_list = [respT1, respT2, respT3] */
+		/* respT_expr = respTi = (expr=$RTi, statQ=mean, source=calc)
+		 * respT_name = $RTi */
+		if ( (respT_expr_list != null) &&
+			 (respT_expr_list instanceof EList<?>))  {
+			num_colors = ((EList<?>) respT_expr_list).size();
+			for (Object respT_expr : (EList<?>) respT_expr_list) {
+				if (contains(respT_expr,respT_name)) break;
+				index++;
+			}
+		}
+		/**/
+		
 		// @formatter:off
 		List<InitialNode> initialNodes = activity.getOwnedNodes()
 				.stream()
@@ -100,16 +123,16 @@ public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator imp
 
 		// Validate it defines a pattern
 		InitialNode initialNode = initialNodes.get(0);
-		String hadoopPopulation = (String) UMLUtil.getTaggedValue(initialNode, HADOOP_WORKLOAD_EVENT, HADOOP_POPULATION);
+		//String hadoopPopulation = (String) UMLUtil.getTaggedValue(initialNode, HADOOP_WORKLOAD_EVENT, HADOOP_POPULATION);
+		Object hadoopPopulation = UMLUtil.getTaggedValue(initialNode, HADOOP_WORKLOAD_EVENT, HADOOP_POPULATION);
 		if (hadoopPopulation == null) {
 			throw new RuntimeException(
-					MessageFormat.format("InitialNode ''{0}'' in Activity ''{1}'' does not define a valid workload", initialNode, domainElement));
+					MessageFormat.format("InitialNode ''{0}'' in Activity ''{1}'' does not define a valid workload, obtained the following pattern ''{2}''", initialNode, domainElement, hadoopPopulation));
 		}
-				
-		return calculateClosed(activity, definition, toolResult, traceSet);
+		return calculateClosed(activity, definition, toolResult, traceSet, index, num_colors);
 	}
 
-	private DomainMeasure calculateClosed(Activity activity, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet) {
+	private DomainMeasure calculateClosed(Activity activity, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet, int index, int num_colors) {
 		// Pattern:
 		// [P]---> (subnet) --->[T]
 		// ^------------------�
@@ -147,17 +170,18 @@ public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator imp
 					.collect(Collectors.toList());
 			// @formatter:on
 			
-			/**/
-			int index = func.call();
-			/**/
-			
-			if (placeInfos.size() < index) {
+			/*
+			 * int num_colors = func.call();
+			 * int index = num_colors-1;
+			 */
+						
+			if (placeInfos.size() < num_colors) {
 				throw new RuntimeException(MessageFormat.format("Unexpected number of 'PlaceInfos' found for ''{0}''. Expected at least ''{1}'', but found ''{2}''",
-						initialNode, index, placeInfos.size()));
+						initialNode, num_colors, placeInfos.size()));
 			}
-			if (transitionInfos.size() < index) {
+			if (transitionInfos.size() < num_colors) {
 				throw new RuntimeException(MessageFormat.format("Unexpected number of 'TransitionInfos' found for ''{0}''. Expected at least ''{1}'', but found ''{2}''",
-						finalNode, index, transitionInfos.size()));
+						finalNode, num_colors, transitionInfos.size()));
 			}
 			
 			// COMMENT:
@@ -170,21 +194,30 @@ public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator imp
 			//
 			//
 			
-			long sum = 0;
-			for (PlaceInfo info : toolResult.getInfos().stream().filter(i -> i instanceof PlaceInfo).map(i -> (PlaceInfo) i).collect(Collectors.toList())) {
+			double sum = 0.0;
+			/*for (PlaceInfo info : toolResult.getInfos().stream().filter(i -> i instanceof PlaceInfo).map(i -> (PlaceInfo) i).collect(Collectors.toList())) {
 				Place p = (Place) info.getAnalyzedElement();
 				if (hasColor (p, index)) {
 					sum += info.getMeanNumberOfTokens().longValue();
 				}
-			}
+			}*/
 			
 			//PlaceInfo placeInfo = placeInfos.get(0);
 			//TransitionInfo transitionInfo = transitionInfos.get(0);
-
+			
 			PlaceInfo placeInfo = getPlaceInfoByColor (placeInfos, index);
 			TransitionInfo transitionInfo = getTransitionInfoByColor (transitionInfos, index);
 			
-			BigDecimal dividend = new BigDecimal(sum - placeInfo.getValue().longValue());
+			Place p = (Place) placeInfo.getAnalyzedElement();
+			sum = getInitialMarkingColor(p, index);
+			
+			//
+			double tempres = placeInfo.getValue().doubleValue();
+			//
+			
+			//Error de precision!
+			//BigDecimal dividend = new BigDecimal(sum - placeInfo.getValue().longValue());
+			BigDecimal dividend = new BigDecimal(sum - placeInfo.getValue().doubleValue());
 			BigDecimal divisor = new BigDecimal(transitionInfo.getThroughput().toString());
 
 			BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
@@ -196,6 +229,20 @@ public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator imp
 		}
 	}
 
+	private double getInitialMarkingColor (Place place, int index){				
+		PnmlToolInfoUtils converter = new PnmlToolInfoUtils();
+		Iterator<ToolInfo> itr = place.getToolspecifics().iterator();
+		while (itr.hasNext()){
+			ToolInfo t = (ToolInfo) itr.next();	
+			if (PnmlToolInfoUtils.isColor(t) &&
+			   (Integer.valueOf(converter.getColorNameValue(t)) == index) ){
+				double val = PnmlToolInfoUtils.getnumElementsColor(t).doubleValue();
+				return val;
+			}
+		}
+		return 0.0;
+	}
+	
 	private boolean hasColor (Transition trans, int index){
 		boolean hasCol = false;
 		PnmlToolInfoUtils converter = new PnmlToolInfoUtils();
@@ -204,7 +251,7 @@ public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator imp
 			ToolInfo t = (ToolInfo) itr.next();	
 			if (PnmlToolInfoUtils.isColor(t)){
 				hasCol = hasCol || 
-						(Integer.valueOf(converter.getColorNameIndex(t)) == index); 
+						(Integer.valueOf(converter.getColorNameValue(t)) == index); 
 				if (hasCol) break;
 			}
 		}
@@ -219,7 +266,7 @@ public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator imp
 			ToolInfo t = (ToolInfo) itr.next();	
 			if (PnmlToolInfoUtils.isColor(t)){
 				hasCol = hasCol || 
-						(Integer.valueOf(converter.getColorNameIndex(t)) == index); 
+						(Integer.valueOf(converter.getColorNameValue(t)) == index); 
 				if (hasCol) break;
 			}
 		}
