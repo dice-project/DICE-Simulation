@@ -220,9 +220,9 @@ public class PnmlToolInfoUtils {
 		boolean find = matcher.find();
 		//matcher.find(2)
 		if (find && Color.COLOR.getLiteral().equals(matcher.group(1))) {
-			return String.valueOf(matcher.group(2));//"21";
+			return String.valueOf(matcher.group(2));
 		}
-		return null; //"2"
+		return null;
 	}
 	
 	public static Integer getnumElementsColor(ToolInfo toolinfo) throws IllegalArgumentException {

@@ -110,7 +110,7 @@ mapping addColorList(color : List (Colour) ) {
 	}
 }
 
-mapping UML::ActivityPartition::partitions2resourcesCol(in resource_colourset : ColourSet, in place_resource : PNML::Place, in index : Integer) 
+mapping UML::ActivityPartition::partitions2resourcesCol(in resource_colourset : ColourSet, in place_resource : PNML::Place, in index : Integer, in num_colors : Integer) 
 when {
 	self.represents.owner.getHadoopComputationNode().oclIsUndefined().not();
 }{
@@ -198,9 +198,6 @@ when {
 	var arc_2 := map arc(place_resource, trans_get_resource, arc_resource_color);
 	trans_get_resource.toolspecifics += colorToolInfo(trans_resource_color);
 	
-	/* A Petri net representing a MapReduce has a timed transition for mapping
-	and another timed transition for reducing (2) */
-	var num_colors = trans_exec_list->size()/2;
 	if (num_colors > 1){	
 		trans_get_resource.toolspecifics += priorityTransitionToolInfo(2);
 			
@@ -241,8 +238,6 @@ when {
 	assert fatal (node.getHadoopOperation().oclIsUndefined().not()) with log ("Processing a node '" + node.toString() + "' in partition '" + self.toString() + "'");
 	
 	/* Get a global unique name for avoid collision and replications */
-	//var model := ad.objectsOfKind(UML::Model)->asList()->first();
-	//var model_name := model.name;
 	var model := ad.objectsOfKind(UML::InitialNode)->asList()->first();
 	var model_name := model.name;
 	
@@ -305,7 +300,7 @@ when {
 	var i := 0;
 	var listnCores := self.represents.owner.getHadoopComputationNode_nCores();
 	listnCores->forEach(core){
-		self.map partitions2resourcesCol(resources, place_resource, i);
+		self.map partitions2resourcesCol(resources, place_resource, i, listnCores->size());
 		i := i + 1;			
 	};
 }
@@ -423,11 +418,8 @@ mapping UML::InitialNode::initialNode2subNetColor(in user_color : Colour, in cou
 	arc_2.toolspecifics += colorToolInfo(arc_counter_color);
 	
 	/* Add info about the <i>, <!i>*/
-	//var arc_3 := map arc(trans_think, place_id, arc_counter_color);
 	var arc_3 := map arc(trans_think, place_id, arc_counter_color_next);
 	var arc_4 := map arc(place_id, trans_think, arc_counter_color);
-	/*arc_3.toolspecifics += colorToolInfo(arc_user_color);
-	arc_4.toolspecifics += colorToolInfo(arc_user_color);*/
 		
 	assert fatal (user_color.numElements <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + user_color.numElements.toString() + "'");
 	assert fatal (counter_color.numElements <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + counter_color.numElements.toString() + "'");
@@ -530,11 +522,9 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 			numElements := map_color.numElements;
 		};
 		
-		//var trans_generate := self.map activityNode2immTransGenCol(trans_map_color_1);
 		var trans_generate := self.map activityNode2immTransGenCol(trans_map_color_2);
 		var trans_get_resource := self.map activityNode2immTransResCol(trans_map_color_1);
 		var trans_exec := self.map activityNode2timedTransitionCol(trans_map_color_1);
-		//var trans_join := self.map activityNode2immTransJoinCol(trans_map_color_1);
 		var trans_join := self.map activityNode2immTransJoinCol(trans_map_color_2);
 		
 		var arc_user_color := object Colour{

@@ -22,14 +22,6 @@
 [/if]
 [/template]
 
-[template public getColorMarking2(col : ToolInfo) post (trim())]
-[if getnumElementsColor(col) >= 1] 
-<S [getColorName(col)/]>
-[else]
-0
-[/if]
-[/template]
-
 [template public getColorMarkingList(place : Place, petriNet : PetriNet) post (trim())]
 [for (col : ToolInfo | colorsWithTokens(place)) separator('+')][getColorMarking(col,petriNet)/][/for]
 [/template]
@@ -47,14 +39,6 @@
 [for (place : Place | allPlacesWithColoredTokens(petriNet)->sortedBy(id)) separator('\n')]
 [markingDefLine(place, petriNet)/]
 [/for]
-[/template]
-
-[template public colorSetDefLine2(petriNet: PetriNet, colorset : ToolInfo) post (trim())]
-[comment COL ::= "(" NAME space CT space coords space "(@" CT "\n"
- <fun_def> "\n ))"/]
-([getColorSetName(colorset)/] [ct(colorset)/] [colorSetCoords(colorset)/] (@[ct(colorset)/]
-[getColorSetTypeText(petriNet, colorset)/] [for (c : ToolInfo | allColorsColorSet(petriNet, colorset)) separator(',')][getColorName(c)/][/for]
-))
 [/template]
 
 [template public colorSetDefLine(petriNet: PetriNet, colorset : ToolInfo) post (trim())]
