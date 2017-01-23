@@ -232,13 +232,6 @@ mapping UML::ControlFlow::controlFlow2place(in number: Integer) : PNML::Place {
 		};
 }
 
-mapping UML::ControlFlow::controlFlow2place2(in number: Integer) : PNML::Place 
-{
-init {
-		result := self.map namedElement2place (); 
-}
-}
-
 /**
 	Transform a generic ActivityNode into a Place 
 */
@@ -300,11 +293,7 @@ inherits UML::NamedElement::namedElement2immediateTransition {
 	Transform a generic ControlFlow into a Transition 
 */
 
-mapping UML::ControlFlow::controlFlow2immediateTransition_2() : PNML::Transition
-inherits UML::NamedElement::namedElement2immediateTransition {
-}
-
-mapping UML::ControlFlow::controlFlow2immediateTransition() : PNML::Transition {
+mapping UML::ControlFlow::controlFlow2immediateTransition2() : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
 		if (self.name.oclIsUndefined().not()) {
@@ -314,13 +303,20 @@ mapping UML::ControlFlow::controlFlow2immediateTransition() : PNML::Transition {
 		};
 }
 
+mapping UML::ControlFlow::controlFlow2immediateTransitionNum(in number: Integer) : PNML::Transition {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		if (self.name.oclIsUndefined().not()) {
+			name := object PNML::Name {
+				text := self.name;
+			};
+		};
+}
+
+
 /**
 	Transform a generic ControlFlow into a Transition 
 */
-
-mapping UML::ControlFlow::controlFlow2timedTransition_2() : PNML::Transition
-inherits UML::NamedElement::namedElement2immediateTransition {
-}
 
 mapping UML::ControlFlow::controlFlow2timedTransition() : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
@@ -332,6 +328,15 @@ mapping UML::ControlFlow::controlFlow2timedTransition() : PNML::Transition {
 		};
 }
 
+mapping UML::ControlFlow::controlFlow2timedTransitionNum(in number: Integer) : PNML::Transition {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		if (self.name.oclIsUndefined().not()) {
+			name := object PNML::Name {
+				text := self.name;
+			};
+		};
+}
 		
 /***********************************************************************/
 
@@ -387,7 +392,7 @@ mapping UML::ControlFlow::finalControlFlow2arc() when {
 		
 	/* Create a new place and immediate transition.
 	TimedTransition -> Place -> ImmTransition */
-	var final_trans := self.map controlFlow2immediateTransition();
+	var final_trans := self.map controlFlow2immediateTransitionNum(1);
 	var place := self.map controlFlow2place(1);
 	
 	/*var timed_trans := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);*/
@@ -430,7 +435,7 @@ mapping UML::ControlFlow::mergeControlFlow2arc() when {
 	var bolt := target.outgoing.target->asOrderedSet()->first();
 	
 	/* Create a new immediate transition for each incoming StormStream to the MergeNode */
-	var trans_in_bolt := self.map controlFlow2immediateTransition();
+	var trans_in_bolt := self.map controlFlow2immediateTransitionNum(1);
 	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
 	
 	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
@@ -447,8 +452,12 @@ mapping UML::ControlFlow::mergeControlFlow2arc() when {
 		self.map all_grouping(list_timed_trans, parallelism);
 	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
 		/* Check what happens if all the incomming ControlFlows of the MergeNode
-		have the same global_grouping */
-		self.map global_grouping(bolt);
+		have the same global_grouping ************ */
+		assert fatal (bolt.integrity_global_grouping())
+			with log ("More than one incoming StormStreamStep with global grouping policy for the Activity node '" + bolt.name + "'");
+		self.map global_grouping(bolt);		
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
+		self.map field_grouping(bolt);
 	};
 	
 	self.map common_grouping(arc_1);
@@ -537,7 +546,7 @@ mapping UML::ControlFlow::basicControlFlow2arc() when {
 		map arc(trans_exec, place_buffer);
 	};
 	
-	var trans_in_bolt := self.map controlFlow2immediateTransition();
+	var trans_in_bolt := self.map controlFlow2immediateTransitionNum(1);
 	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
 	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
 	
@@ -590,10 +599,10 @@ mapping UML::ControlFlow::global_grouping(in node : UML::ActivityNode) {
 	var temp_trans := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
 	var place_parallel_node := node.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
 	
-	var temp_trans_global := self.map controlFlow2timedTransition();
+	var temp_trans_global := self.map controlFlow2timedTransitionNum(1);
 	temp_trans_global.toolspecifics := temp_trans.toolspecifics.clone();
 	
-	var imm_trans_global := self.resolveoneIn (UML::ControlFlow::controlFlow2immediateTransition);
+	var imm_trans_global := self.resolveoneIn (UML::ControlFlow::controlFlow2immediateTransitionNum);
 	var place_work_global := self.map controlFlow2place(2);
 	var place_resource_global := self.map controlFlow2place(3);
 	place_resource_global.initialMarking := object PNML::PTMarking {
@@ -608,6 +617,78 @@ mapping UML::ControlFlow::global_grouping(in node : UML::ActivityNode) {
 	
 	map arc(temp_trans_global, place_parallel_node);
 	map arc(place_parallel_node, imm_trans_global);		
+}
+
+mapping UML::ControlFlow::field_grouping(in node : UML::ActivityNode) {
+	var place_parallel_node := node.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
+	var temp_trans := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
+		
+	var numFields := self.getStormStreamStep_numFields();
+	var probFieldList := self.getStormStreamStep_probFields();
+	var i := numFields;
+	var c := 2;
+	
+	/* Create a independent processing pipeline for each field value */
+	/* case i = 1 */
+	var probField := probFieldList->first();
+	
+	var temp_trans_i := self.map controlFlow2timedTransitionNum(i);
+	temp_trans_i.toolspecifics := temp_trans.toolspecifics.clone();
+	var imm_trans_i := self.resolveoneIn (UML::ControlFlow::controlFlow2immediateTransitionNum); //
+	imm_trans_i.toolspecifics:= probTransitionToolInfo(probField.value());
+	
+	
+	var place_work_i := self.map controlFlow2place(c);
+	var place_resource_i := self.map controlFlow2place(c+1);
+	c := c + 2;
+	
+	/* The available threads are shared proportionally by each field value */
+	var weight := (place_parallel_node.initialMarking.text -
+				  (place_parallel_node.initialMarking.text / numFields).floor() * (numFields - 1)); 
+	
+	place_resource_i.initialMarking := object PNML::PTMarking {
+			text := weight;
+	};
+	
+	map arc(imm_trans_i, place_work_i);
+	map arc(place_work_i, temp_trans_i);
+	
+	map arc(temp_trans_i, place_resource_i);
+	map arc(place_resource_i, imm_trans_i);
+	
+	map arc(temp_trans_i, place_parallel_node);
+	map arc(place_parallel_node, imm_trans_i);
+
+	/* case i > 1 */
+	while (i > 0){
+		i := i - 1;
+		/* Create a independent processing pipeline for each field value */
+		temp_trans_i := self.map controlFlow2timedTransitionNum(i);
+		temp_trans_i.toolspecifics := temp_trans.toolspecifics.clone();
+		imm_trans_i := self.map controlFlow2immediateTransitionNum(i); //
+		
+		probField := probFieldList->at(numFields - i + 1);
+		imm_trans_i.toolspecifics:= probTransitionToolInfo(probField.value());
+		
+		place_work_i := self.map controlFlow2place(c);
+		place_resource_i := self.map controlFlow2place(c+1);
+		c := c + 2;
+		
+		/* The available threads are shared proportionally by each field value */
+		weight := (place_parallel_node.initialMarking.text / numFields).floor(); //
+		place_resource_i.initialMarking := object PNML::PTMarking {
+				text := weight;
+		};
+		
+		map arc(imm_trans_i, place_work_i);
+		map arc(place_work_i, temp_trans_i);
+		
+		map arc(temp_trans_i, place_resource_i);
+		map arc(place_resource_i, imm_trans_i);
+		
+		map arc(temp_trans_i, place_parallel_node);
+		map arc(place_parallel_node, imm_trans_i);
+	};
 }
 
 /*******************************************************************************
@@ -934,12 +1015,57 @@ helper UML::Element::getStormStreamStep_grouping() : DBET::StreamPolicy {
 	};
 	var grouping := self.getValue(self.getStormStreamStep(), "grouping").oclAsType(DBET::StreamPolicy);
 	assert warning (grouping->size() = 1)
-		with log ("Unexpected number of 'numTuples' tagged values found, expected 1. "+
+		with log ("Unexpected number of 'grouping' tagged values found, expected 1. "+
 					"The context element is '" + self.toString() + "'");
 					
 	return grouping;
 }
 
+helper UML::Element::getStormStreamStep_numFields() : Natural {
+	if (self.getStormStreamStep() = null) {
+		return null;
+	};
+	var probFields := self.getValue(self.getStormStreamStep(), "prob").oclAsType(String);
+	assert warning (probFields->size() >= 1)
+		with log ("Unexpected number of 'prob' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'");
+
+	var probFieldsList := probFields->asSequence();
+	var res = new List(NFP_Real)() ;
+	probFieldsList->forEach(probF){
+		res += probF.toNfpReal();
+	};
+
+	return probFields->size();
+}
+
+//helper UML::Element::getStormStreamStep_probFields() : List(NFP_Real) {
+helper UML::Element::getStormStreamStep_probFields() : List(Real) {
+	var probFields := self.getValue(self.getStormStreamStep(), "prob").oclAsType(String);
+	assert warning (probFields->size() >= 1)
+		with log ("Unexpected number of 'prob' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'");
+	
+	var total_value := 0.0; 
+	var probFieldsList := probFields->asSequence();
+	//var res = new List(NFP_Real)() ;
+	var res = new List(Real)() ;
+	
+	/* Compute the summation of all probabilities */
+	probFieldsList->forEach(probF){
+		total_value := total_value + probF.toReal(); 
+	};
+
+	/* Normalize the probabilities */
+	probFieldsList->forEach(probF){
+		//res += (probF.toReal()/total_value).toNfpReal();
+		res += probF.toReal()/total_value; 
+	};
+	
+	return res;
+}
+
+/******************************************************************/
 helper UML::Element::getGaExecHost_resMult() : NFP_Integer {
 	if (self.getGaExecHost() = null) {
 		return null;
@@ -959,4 +1085,18 @@ helper UML::ActivityNode::getTimedTrans_Node() : List(PNML::Transition) {
 	};
 	
 	return listTimedTrans;
+}
+
+/******************************************************************/
+helper UML::ActivityNode::integrity_global_grouping() : Boolean {
+	if (self.getStormBolt() = null) {
+		return null;
+	};
+	var listInArcs := self.incoming;
+	var num_global_arcs := 0;
+	listInArcs->forEach(arc){
+		if (arc.getStormStreamStep_grouping().=(DBET::StreamPolicy::global))
+			num_global_arcs := num_global_arcs + 1;
+	};
+	return (num_global_arcs <= 1);
 }
