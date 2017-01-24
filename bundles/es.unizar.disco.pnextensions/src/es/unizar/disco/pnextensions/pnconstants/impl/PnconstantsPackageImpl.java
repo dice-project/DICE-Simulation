@@ -8,6 +8,8 @@ import es.unizar.disco.pnextensions.pnconstants.PnconstantsPackage;
 import es.unizar.disco.pnextensions.pnconstants.ServerType;
 import es.unizar.disco.pnextensions.pnconstants.ToolInfoConstants;
 import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
+import es.unizar.disco.pnextensions.pnconstants.Color;
+import es.unizar.disco.pnextensions.pnconstants.ArcKind;
 
 import es.unizar.disco.pnextensions.pnutils.PnutilsPackage;
 
@@ -53,6 +55,19 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 	 */
 	private EEnum baseUnitsConstantsEEnum = null;
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum colorEEnum = null;
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum arcKindEEnum = null;
+	
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
@@ -160,6 +175,24 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getColor() {
+		return colorEEnum;
+	}
+	
+		/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getArcKind() {
+		return arcKindEEnum;
+	}
+	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public PnconstantsFactory getPnconstantsFactory() {
 		return (PnconstantsFactory)getEFactoryInstance();
 	}
@@ -187,6 +220,8 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 		transitionKindEEnum = createEEnum(TRANSITION_KIND);
 		serverTypeEEnum = createEEnum(SERVER_TYPE);
 		baseUnitsConstantsEEnum = createEEnum(BASE_UNITS_CONSTANTS);
+		colorEEnum = createEEnum(COLOR);
+		arcKindEEnum = createEEnum(ARC_KIND);
 	}
 
 	/**
@@ -233,7 +268,15 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 		initEEnum(baseUnitsConstantsEEnum, BaseUnitsConstants.class, "BaseUnitsConstants");
 		addEEnumLiteral(baseUnitsConstantsEEnum, BaseUnitsConstants.BASE_TIME_UNIT);
 		addEEnumLiteral(baseUnitsConstantsEEnum, BaseUnitsConstants.BASE_FREQUENCY_UNIT);
+		
+		initEEnum(colorEEnum, Color.class, "Color");
+		addEEnumLiteral(colorEEnum, Color.COLOR);
+		addEEnumLiteral(colorEEnum, Color.COLORSET);
 
+		initEEnum(arcKindEEnum, ArcKind.class, "ArcKind");
+		addEEnumLiteral(arcKindEEnum, ArcKind.NORMAL);
+		addEEnumLiteral(arcKindEEnum, ArcKind.INHIBITOR);
+		
 		// Create resource
 		createResource(eNS_URI);
 	}

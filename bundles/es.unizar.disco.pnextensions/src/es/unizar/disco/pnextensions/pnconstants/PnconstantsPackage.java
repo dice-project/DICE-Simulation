@@ -95,7 +95,26 @@ public interface PnconstantsPackage extends EPackage {
 	 */
 	int BASE_UNITS_CONSTANTS = 3;
 
-
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.pnextensions.pnconstants.Color <em>Color</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.pnextensions.pnconstants.Color
+	 * @see es.unizar.disco.pnextensions.pnconstants.impl.PnconstantsPackageImpl#getColor()
+	 * @generated
+	 */
+	int COLOR = 4;
+	
+	/**
+	 * The meta object id for the '{@link es.unizar.disco.pnextensions.pnconstants.ArcKind <em>Arc Kind</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see es.unizar.disco.pnextensions.pnconstants.ArcKind
+	 * @see es.unizar.disco.pnextensions.pnconstants.impl.PnconstantsPackageImpl#getArcKind()
+	 * @generated
+	 */
+	int ARC_KIND = 5;
+	
 	/**
 	 * Returns the meta object for enum '{@link es.unizar.disco.pnextensions.pnconstants.ToolInfoConstants <em>Tool Info Constants</em>}'.
 	 * <!-- begin-user-doc -->
@@ -136,6 +155,26 @@ public interface PnconstantsPackage extends EPackage {
 	 */
 	EEnum getBaseUnitsConstants();
 
+	/**
+	 * Returns the meta object for enum '{@link es.unizar.disco.pnextensions.pnconstants.Color <em>Color</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Color</em>'.
+	 * @see es.unizar.disco.pnextensions.pnconstants.Color
+	 * @generated
+	 */
+	EEnum getColor();
+	
+	/**
+	 * Returns the meta object for enum '{@link es.unizar.disco.pnextensions.pnconstants.ArcKind <em>Arc Kind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Arc Kind</em>'.
+	 * @see es.unizar.disco.pnextensions.pnconstants.ArcKind
+	 * @generated
+	 */
+	EEnum getArcKind();
+	
 	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
@@ -198,6 +237,28 @@ public interface PnconstantsPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum BASE_UNITS_CONSTANTS = eINSTANCE.getBaseUnitsConstants();
+		
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants <em>Color</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.pnextensions.pnconstants.Color
+		 * @see es.unizar.disco.pnextensions.pnconstants.impl.PnconstantsPackageImpl#getColor()
+		 * @generated
+		 */
+		EEnum COLOR = eINSTANCE.getColor();
+
+		
+		/**
+		 * The meta object literal for the '{@link es.unizar.disco.pnextensions.pnconstants.ArcKind <em>Arc Kind</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see es.unizar.disco.pnextensions.pnconstants.ArcKind
+		 * @see es.unizar.disco.pnextensions.pnconstants.impl.PnconstantsPackageImpl#getArcKind()
+		 * @generated
+		 */
+		EEnum ARC_KIND = eINSTANCE.getArcKind();
+
 
 	}
 

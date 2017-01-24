@@ -78,6 +78,10 @@ public class PnconstantsFactoryImpl extends EFactoryImpl implements PnconstantsF
 				return createServerTypeFromString(eDataType, initialValue);
 			case PnconstantsPackage.BASE_UNITS_CONSTANTS:
 				return createBaseUnitsConstantsFromString(eDataType, initialValue);
+			case PnconstantsPackage.COLOR:
+				return createColorFromString(eDataType, initialValue);
+			case PnconstantsPackage.ARC_KIND:
+				return createArcKindFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -99,6 +103,10 @@ public class PnconstantsFactoryImpl extends EFactoryImpl implements PnconstantsF
 				return convertServerTypeToString(eDataType, instanceValue);
 			case PnconstantsPackage.BASE_UNITS_CONSTANTS:
 				return convertBaseUnitsConstantsToString(eDataType, instanceValue);
+			case PnconstantsPackage.COLOR:
+				return convertColorToString(eDataType, instanceValue);
+			case PnconstantsPackage.ARC_KIND:
+				return convertArcKindToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -175,6 +183,46 @@ public class PnconstantsFactoryImpl extends EFactoryImpl implements PnconstantsF
 		return result;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Color createColorFromString(EDataType eDataType, String initialValue) {
+		Color result = Color.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertColorToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ArcKind createArcKindFromString(EDataType eDataType, String initialValue) {
+		ArcKind result = ArcKind.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertArcKindToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

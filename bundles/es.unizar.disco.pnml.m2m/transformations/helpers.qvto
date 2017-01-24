@@ -102,10 +102,80 @@ helper UML::Element::getGaExecHost() : UML::Stereotype {
 	return null;	
 }
 
+/* Hadoop Elements */
+
+helper UML::Element::getHadoopOperation() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopOperation"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopOperation");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopMap() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopMap"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopMap");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopReduce() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopReduce"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopReduce");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopWorkloadEvent() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopWorkloadEvent"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopWorkloadEvent");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopComputationNode() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopScenario() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario");
+	};
+	return null;	
+}
 
 /*******************************************************************************
   ToolInfo utilities
 *******************************************************************************/
+/**
+	Creates the ToolInfo that identifies an inhibitor arcs,
+	i.e., CONST::ArcKind::Inhibitor 
+*/
+helper inhibitorArcToolInfo() : PNML::ToolInfo {
+	return object PNML::ToolInfo { 
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::ArcKind::Inhibitor.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::ArcKind::Inhibitor.toString() + "\"/>").createLongString();
+	};	
+}
+
+/**
+	Creates the ToolInfo that identifies an inhibitor arcs,
+	i.e., CONST::ArcKind::Inhibitor 
+*/
+helper normalArcToolInfo() : PNML::ToolInfo {
+	return object PNML::ToolInfo { 
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::ArcKind::Inhibitor.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::ArcKind::Normal.toString() + "\"/>").createLongString();
+	};	
+}
+
+/********************/
 
 /**
 	Creates the ToolInfo that identifies an exponential timed transition,
