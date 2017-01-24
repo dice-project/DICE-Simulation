@@ -1055,9 +1055,10 @@ inherits UML::NamedElement::namedElement2transitionCol {
 	subtype (e.g., OpaqueActions with hostDemand may create 
 	exponential transitions) 
 */
+
 mapping UML::ActivityNode::activityNode2timedTransitionCol(in c : Colour) : PNML::Transition 
 inherits UML::NamedElement::namedElement2transitionCol {
-	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo(c.color_id);
 }
 
 /***********************************************************************/
@@ -1066,11 +1067,11 @@ inherits UML::NamedElement::namedElement2transitionCol {
 	Transforms an OpaqueAction with a hostDemand annotation to a ToolInfo element
 */
 
-mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
+mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo(in index : Integer) : List ( PNML::ToolInfo ) 
 when {
-		self.getHadoopOperation_hostDemand().oclIsUndefined().not();
+		self.getHadoopOperation_hostDemand(index).oclIsUndefined().not();
 }{
-	var hostDemand := self.getHadoopOperation_hostDemand();
+	var hostDemand := self.getHadoopOperation_hostDemand(index);
 	result += expTransitionToolInfo( 1 / hostDemand.value());
 	result += infServerTransitionToolInfo();
 }
@@ -1499,56 +1500,68 @@ helper NFP_Real::value() : Real {
   Getters for tagged values
 ******************************************************************************/
 
-helper UML::Element::getHadoopOperation_hostDemand() : NFP_Duration {
+helper UML::Element::getHadoopOperation_hostDemand(in index : Integer) : NFP_Duration {
 	if (self.getHadoopMap().oclIsUndefined().not()){
-		return self.getHadoopMap_hostDemand();	
+		return self.getHadoopMap_hostDemand(index+1);	
 	} else if (self.getHadoopReduce().oclIsUndefined().not()){ 
-		return self.getHadoopReduce_hostDemand();
+		return self.getHadoopReduce_hostDemand(index+1);
 	} else if (self.getHadoopOperation().oclIsUndefined().not()){ 
-		return self.getHadoopStandard_hostDemand();
+		return self.getHadoopStandard_hostDemand(index+1);
 	} else {
 		return null;
 	}
 }
 
-helper UML::Element::getHadoopStandard_hostDemand() : NFP_Duration {
+helper UML::Element::getHadoopStandard_hostDemand(in index : Integer) : NFP_Duration {
 	if (self.getHadoopOperation() = null) {
 		return null;
 	};
 	var hostDemandStrings := self.getValue(self.getHadoopOperation(), "hostDemand").oclAsType(Collection(String));
-	assert warning (hostDemandStrings->size() = 1)
-		with log ("Unexpected number of 'hostDemand' tagged values found, expected 1. "+
-					"Only the first 'mean' value will be used (if found). " + 
-					"The context element is '" + self.toString() + "'"); 
-	return hostDemandStrings.toNfpDuration()->
+	assert warning (hostDemandStrings->size() >= 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected >= 1. "+
+					"The first 'mean' value will be used by default (if only a hostDemand is found). " + 
+					"The context element is '" + self.toString() + "'");
+	var hostDemandTime := hostDemandStrings->asSequence()->first();
+	if (index <= hostDemandStrings->size()){
+			hostDemandTime := hostDemandStrings->asSequence()->at(index);	
+	};
+	return hostDemandTime.toNfpDuration()->
 			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
 			asSequence()->first();
 }
 
-helper UML::Element::getHadoopMap_hostDemand() : NFP_Duration {
+helper UML::Element::getHadoopMap_hostDemand(in index : Integer) : NFP_Duration {
 	if (self.getHadoopMap() = null) {
 		return null;
 	};
 	var hostDemandStrings := self.getValue(self.getHadoopMap(), "hostDemand").oclAsType(Collection(String));
-	assert warning (hostDemandStrings->size() = 1)
-		with log ("Unexpected number of 'hostDemand' tagged values found, expected 1. "+
-					"Only the first 'mean' value will be used (if found). " + 
-					"The context element is '" + self.toString() + "'"); 
-	return hostDemandStrings.toNfpDuration()->
+	assert warning (hostDemandStrings->size() >= 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected >= 1. "+
+					"The first 'mean' value will be used by default (if only a hostDemand is found). " + 
+					"The context element is '" + self.toString() + "'");
+	var hostDemandTime := hostDemandStrings->asSequence()->first();
+	if (index <= hostDemandStrings->size()){
+			hostDemandTime := hostDemandStrings->asSequence()->at(index);	
+	};
+	return hostDemandTime.toNfpDuration()->
 			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
 			asSequence()->first();
 }
 
-helper UML::Element::getHadoopReduce_hostDemand() : NFP_Duration {
+helper UML::Element::getHadoopReduce_hostDemand(in index : Integer) : NFP_Duration {
 	if (self.getHadoopReduce() = null) {
 		return null;
 	};
 	var hostDemandStrings := self.getValue(self.getHadoopReduce(), "hostDemand").oclAsType(Collection(String));
-	assert warning (hostDemandStrings->size() = 1)
-		with log ("Unexpected number of 'hostDemand' tagged values found, expected 1. "+
-					"Only the first 'mean' value will be used (if found). " + 
-					"The context element is '" + self.toString() + "'"); 
-	return hostDemandStrings.toNfpDuration()->
+	assert warning (hostDemandStrings->size() >= 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected >= 1. "+
+					"The first 'mean' value will be used by default (if only a hostDemand is found). " + 
+					"The context element is '" + self.toString() + "'");
+	var hostDemandTime := hostDemandStrings->asSequence()->first();
+	if (index <= hostDemandStrings->size()){
+			hostDemandTime := hostDemandStrings->asSequence()->at(index);	
+	};
+	return hostDemandTime.toNfpDuration()->
 			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
 			asSequence()->first();
 }

@@ -36,9 +36,7 @@
 
 [template public markingDef(petriNet : PetriNet) post (trim())]
 [comment COLOR ::= COL COLOR | empty /]
-[for (place : Place | allPlacesWithColoredTokens(petriNet)->sortedBy(id)) separator('\n')]
-[markingDefLine(place, petriNet)/]
-[/for]
+[for (place : Place | allPlacesWithColoredTokens(petriNet)->sortedBy(id)) separator('\n')][markingDefLine(place, petriNet)/][/for]
 [/template]
 
 [template public colorSetDefLine(petriNet: PetriNet, colorset : ToolInfo) post (trim())]
