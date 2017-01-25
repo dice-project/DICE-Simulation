@@ -117,8 +117,9 @@ public class UtilizationCalculatorHadoop extends AbstractCalculator implements M
 			ToolInfo t = (ToolInfo) itr.next();	
 			if (PnmlToolInfoUtils.isColor(t) &&
 			   (Integer.valueOf(converter.getColorNameValue(t)) == index) ){
-				double val = PnmlToolInfoUtils.getnumElementsColor(t).doubleValue();
-				return val;
+				return PnmlToolInfoUtils.getnumElementsColor(t).doubleValue();
+				/*double val = PnmlToolInfoUtils.getnumElementsColor(t).doubleValue();
+				return val;*/
 			}
 		}
 		return 0.0;
