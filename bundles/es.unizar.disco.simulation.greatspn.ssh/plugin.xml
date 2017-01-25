@@ -161,6 +161,11 @@
                scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.TotalUtilizationCalculatorHadoop"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
       </Metric>
       <Metric
             name="MARTE::MARTE_AnalysisModel::GQAM::GaExecHost#utilization"
@@ -179,6 +184,11 @@
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
                scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.TotalUtilizationCalculatorHadoop"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
       </Metric>
