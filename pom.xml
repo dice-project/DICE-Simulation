@@ -7,16 +7,18 @@
 	<name>Simulation Tool</name>
 	<packaging>pom</packaging>
 
-	<parent>
-		<groupId>es.unizar.disco</groupId>
-		<artifactId>es.unizar.disco.configuration</artifactId>
-		<version>0.3.5-SNAPSHOT</version>
-		<relativePath>.\releng\es.unizar.disco.configuration</relativePath>
-	</parent>
-
 	<properties>
 		<pnml.version>2.2.11</pnml.version>
 	</properties>
+
+	<parent>
+		<groupId>es.unizar.disco</groupId>
+		<artifactId>es.unizar.disco.configuration</artifactId>
+		<version>0.4.0-SNAPSHOT</version>
+		<relativePath>.\releng\es.unizar.disco.configuration</relativePath>
+	</parent>
+
+
 
 	<modules>
 		<module>es.unizar.disco.simulation.targetplatform</module>
@@ -90,5 +92,6 @@
 
 
 	</dependencies>
-	
+
+
 </project>
