@@ -25,8 +25,10 @@ main() {
 	
 	// Transform net contents
 	ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
-	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2arc();
-	
+	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2arcGlobalField();
+	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2tarcAllShuffle();
+	ad.scenario().node[UML::FinalNode] -> map finalNode();
+		
 	// Transform deployment
     ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
 
@@ -121,11 +123,10 @@ when {
 			//assert fatal (temp_trans.oclIsUndefined().not()) with log ("Could not find a temporal transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
 			var list_temp_trans := node.getTimedTrans_Node();
 			assert fatal (list_temp_trans->size() >= 1) with log ("Could not find a temporal transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
-			list_temp_trans->forEach(temp_trans){
-				var arc_1 := map arc(temp_trans, place);
-				
+			list_temp_trans->forEach(temp_trans){			
 				// Get the immediate transitions: start in the timed transition and go back the PN model until arriving the immediate transitions  
-				assert fatal (temp_trans.InArcs->size() = 1) with log ("The temporal transition must have only one input arc. The number of incomming arcs is " + temp_trans.InArcs->size().toString() + " in partition '" + self.toString() + "'");
+				//assert fatal (temp_trans.InArcs->size() = 1) with log ("The temporal transition must have only one input arc. The number of incomming arcs is " + temp_trans.InArcs->size().toString() + " in partition '" + self.toString() + "'");
+				assert warning (temp_trans.InArcs->size() = 1) with log ("The temporal transition '" + temp_trans.toString()+ "'' must have only one input arc. The number of incomming arcs is " + temp_trans.InArcs->size().toString() + " in partition '" + self.toString() + "'");
 				
 				/* Intermediate place between the timed transition and the immediate transitions */
 				var in_arc := temp_trans.InArcs->asSequence()->first();
@@ -133,12 +134,14 @@ when {
 				
 				/* List of immediate transitions */
 				var imm_trans := intermediatePlace.InArcs->asSequence();
-				assert fatal (imm_trans->size() >= 1 ) with log ("Could not find an immediate transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
-				
-				/* For each immediate transition, we create a link to the resource's place */
-	            imm_trans->forEach(i_trans){
-	            	var arc_2 := map arc(place, i_trans.source);
-	            };
+				assert warning (imm_trans->size() >= 1 ) with log ("Could not find an immediate transition preceding the timed transition '" + temp_trans.toString() + "'' in the node '" + node.toString() + "' of partition '" + self.toString() + "'");
+				if (imm_trans->size() >= 1 ){
+					/* For each immediate transition, we create a link to the resource's place */
+		            imm_trans->forEach(i_trans){
+		            	map arc(place, i_trans.source);
+		            };
+		            map arc(temp_trans, place);	
+				}
             };
 		} else if  (node.getStormSpout().oclIsUndefined().not()) {
 			//var temp_trans := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
@@ -220,6 +223,19 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 }
 
 /**
+	Transform a generic ControlFlow into a buffer Place 
+*/
+mapping UML::ControlFlow::controlFlow2placeBuffer() : PNML::Place {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		if (self.name.oclIsUndefined().not()) {
+			name := object PNML::Name {
+				text := self.name;
+			};
+		};
+}
+
+/**
 	Transform a generic ControlFlow into a Place 
 */
 mapping UML::ControlFlow::controlFlow2place(in number: Integer) : PNML::Place {
@@ -239,6 +255,12 @@ mapping UML::ActivityNode::activityNode2place() : PNML::Place
 inherits UML::NamedElement::namedElement2place {
 }
 
+
+mapping UML::ActivityNode::activityNode2placeGlobal() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_global";
+}
+
 /**
 	Transform a generic ActivityNode into a Place controlling the parallelism of the Bolt 
 */
@@ -247,6 +269,14 @@ inherits UML::NamedElement::namedElement2place {
 			name.text := name.text + "_parallelism";
 }
 
+/**
+	Transform a generic ActivityNode into a Place controlling the parallelism of the Bolt 
+	for 'global' groupings
+*/
+mapping UML::ActivityNode::activityNode2placeParallelismGlobal() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_parallelism_global";
+}
 /*************************************************/
 /**
 	Transform a generic NamedElement into a Transition 
@@ -278,7 +308,18 @@ inherits UML::NamedElement::namedElement2transition {
 */
 mapping UML::ActivityNode::activityNode2timedTransition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
-	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+	//toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo(1);
+}
+
+/**
+	Transform a generic ActivityNode into a timed Transition.
+	Required for 'global' grouping 
+*/
+mapping UML::ActivityNode::activityNode2timedTransitionGlobal() : PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+	//toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo(2);
 }
 
 /**
@@ -293,7 +334,7 @@ inherits UML::NamedElement::namedElement2immediateTransition {
 	Transform a generic ControlFlow into a Transition 
 */
 
-mapping UML::ControlFlow::controlFlow2immediateTransition2() : PNML::Transition {
+mapping UML::ControlFlow::controlFlow2immediateTransition() : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
 		if (self.name.oclIsUndefined().not()) {
@@ -328,7 +369,7 @@ mapping UML::ControlFlow::controlFlow2timedTransition() : PNML::Transition {
 		};
 }
 
-mapping UML::ControlFlow::controlFlow2timedTransitionNum(in number: Integer) : PNML::Transition {
+mapping UML::ControlFlow::controlFlow2timedTransitionNum2(in number: Integer) : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
 		if (self.name.oclIsUndefined().not()) {
@@ -337,14 +378,39 @@ mapping UML::ControlFlow::controlFlow2timedTransitionNum(in number: Integer) : P
 			};
 		};
 }
+
+mapping UML::ControlFlow::controlFlow2timedTransitionNum(in number: Integer, in node: UML::ActivityNode) : PNML::Transition
+{
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		if (self.name.oclIsUndefined().not()) {
+			name := object PNML::Name {
+				text := self.name;
+			};
+		};
 		
+		toolspecifics += node[OpaqueAction].map opaqueActionHostDemand2toolInfo(number);
+}
+		
+		
+		
+	
 /***********************************************************************/
 
 /**
 	Transforms an OpaqueAction with a hostDemand annotation to a ToolInfo element
 */
 
-mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
+mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo2() : List ( PNML::ToolInfo ) 
+when {
+		self.getStorm_hostDemand().oclIsUndefined().not();
+}{
+	var hostDemand := self.getStorm_hostDemand();
+	result += expTransitionToolInfo( 1 / hostDemand.value());
+	result += infServerTransitionToolInfo();
+}
+
+mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo(in index : Integer) : List ( PNML::ToolInfo ) 
 when {
 		self.getStorm_hostDemand().oclIsUndefined().not();
 }{
@@ -370,11 +436,10 @@ mapping arc(in src : PNML::Node, in tgt : PNML::Node) : PNML::Arc {
 	being the most simple an arc between the subnets corresponding to the
 	ActivityNodes contected by the ControlFlow 
 */
-mapping UML::ControlFlow::controlFlow2arc() disjuncts 
-UML::ControlFlow::finalControlFlow2arc,
-UML::ControlFlow::mergeControlFlow2arc,
-UML::ControlFlow::joinControlFlow2arc,
-UML::ControlFlow::basicControlFlow2arc {};
+mapping UML::ControlFlow::controlFlow2arcGlobalField() disjuncts 
+UML::ControlFlow::basicControlFlow2arcGlobalField, 
+UML::ControlFlow::mergeControlFlow2arcGlobalField,
+UML::ControlFlow::joinControlFlow2arcGlobalField {};
 
 /**
 	Transforms a ControlFlow between a generic ActivityNode and an ActivityFinalNode.
@@ -382,32 +447,38 @@ UML::ControlFlow::basicControlFlow2arc {};
 	place representing the output buffer of the previous bolt
 */
 
-mapping UML::ControlFlow::finalControlFlow2arc() when {
-	self.target.oclIsKindOf(ActivityFinalNode)
+mapping UML::ControlFlow::basicControlFlow2arcGlobalField() when {
+	self.source.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(InitialNode).not() and
+	(self.source.getStormSpout().oclIsUndefined().not() or
+	 self.source.getStormBolt().oclIsUndefined().not()) and
+	self.target.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(ActivityFinalNode).not() and
+	self.target.getStormBolt().oclIsUndefined().not()
 }{
-	var source := self.source;
-	var target := self.target;
-	assert fatal (source.oclIsKindOf(ActivityNode) and source.getStormBolt().oclIsUndefined().not()) 
-	with log('Final node should be preceded by a StormBolt');
-		
-	/* Create a new place and immediate transition.
-	TimedTransition -> Place -> ImmTransition */
-	var final_trans := self.map controlFlow2immediateTransitionNum(1);
-	var place := self.map controlFlow2place(1);
+    var source := self.source;
+	var bolt := self.target;
 	
-	/*var timed_trans := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);*/
-	var list_temp_trans := source.getTimedTrans_Node();
-	assert fatal (list_temp_trans->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
-	list_temp_trans->forEach(temp_trans){			
-		map arc(temp_trans, place);
-		map arc(place, final_trans);
+	//var place_buffer := self.map controlFlow2place(1);
+	var place_buffer := self.map controlFlow2placeBuffer();
+	var list_trans_exec := source.getTimedTrans_Node();
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	list_trans_exec->forEach(trans_exec){	
+		map arc(trans_exec, place_buffer);
 	};
-
+			
+	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
+		/* Check what happens if all the incomming ControlFlows of the MergeNode
+		have the same global_grouping */
+		/*assert fatal (self.integrity_global_grouping())
+			with log ("More than one incoming StormStreamStep with global grouping policy for the Control node '" + self.name + "'"); */
+		self.map global_grouping(bolt);	
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
+		self.map field_grouping(bolt);
+	};
+	
 	// Add tracing information
-	self.map trace(place, "finalControlFlow2arc");
-	self.map trace(final_trans, "finalControlFlow2arc");
-
-	ad.scenario().map trace(final_trans, "model2openNet");	
+	self.map trace(place_buffer, "basicControlFlow2arc");
 }
 
 /**
@@ -415,8 +486,7 @@ mapping UML::ControlFlow::finalControlFlow2arc() when {
 	The ControlFlow is transformed into a single place, and several immediate
 	transitions for each incoming ControlFlow
 */
-
-mapping UML::ControlFlow::mergeControlFlow2arc() when {
+mapping UML::ControlFlow::mergeControlFlow2arcGlobalField() when {
 	self.getStormStreamStep().oclIsUndefined().not() and
 	self.target.oclIsKindOf(MergeNode)
 }{
@@ -424,47 +494,28 @@ mapping UML::ControlFlow::mergeControlFlow2arc() when {
 	var target := self.target;
 	assert fatal (target.outgoing.target->size() = 1) with log('Merges should only have a single outgoing ControlFlow');
 	
-	var place_buffer := self.map controlFlow2place(1);
-	//var trans_exec := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
+	var bolt := target.outgoing.target->asOrderedSet()->first();
+
+	//var place_buffer := self.map controlFlow2place(1);
+	var place_buffer := self.map controlFlow2placeBuffer();
 	var list_trans_exec := source.getTimedTrans_Node();
 	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
 	list_trans_exec->forEach(trans_exec){	
 		map arc(trans_exec, place_buffer);
 	};
-						
-	var bolt := target.outgoing.target->asOrderedSet()->first();
 	
-	/* Create a new immediate transition for each incoming StormStream to the MergeNode */
-	var trans_in_bolt := self.map controlFlow2immediateTransitionNum(1);
-	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
-	
-	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
-	
-	var arc_1 := map arc(place_buffer, trans_in_bolt);
-	var arc_2 := map arc(place_parall_bolt,trans_in_bolt);
-	
-	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::shuffle) ) {
-		map arc(trans_in_bolt, place_working_bolt);
-	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
-		map arc(trans_in_bolt, place_working_bolt);
-		var list_timed_trans := source.getTimedTrans_Node();
-		var parallelism := bolt.getStormBolt_parallelism().value();
-		self.map all_grouping(list_timed_trans, parallelism);
-	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
+	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
 		/* Check what happens if all the incomming ControlFlows of the MergeNode
-		have the same global_grouping ************ */
-		assert fatal (bolt.integrity_global_grouping())
-			with log ("More than one incoming StormStreamStep with global grouping policy for the Activity node '" + bolt.name + "'");
-		self.map global_grouping(bolt);		
+		have the same global_grouping */
+		/*assert fatal (self.integrity_global_grouping())
+			with log ("More than one incoming StormStreamStep with global grouping policy for the Control node '" + self.name + "'");*/	    
+		self.map global_grouping(bolt);	
 	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
 		self.map field_grouping(bolt);
 	};
 	
-	self.map common_grouping(arc_1);
-	
 	// Add tracing information
 	self.map trace(place_buffer, "mergeControlFlow2arc");
-	self.map trace(trans_in_bolt, "mergeControlFlow2arc");
 }
 
 /**
@@ -473,58 +524,90 @@ mapping UML::ControlFlow::mergeControlFlow2arc() when {
 	we need to create a Place for each incoming ControlFlow to enable the
 	synchronization of the different execution flows
 */
-mapping UML::ControlFlow::joinControlFlow2arc() when {
+mapping UML::ControlFlow::joinControlFlow2arcGlobalField() when {
 	self.getStormStreamStep().oclIsUndefined().not() and
 	self.target.oclIsKindOf(JoinNode)
 }{
 	var source := self.source;
-	var target := self.target;
-	assert fatal (target.outgoing.target->size() = 1) with log('Joins should only have a single outgoing ControlFlow');
+	var join_node := self.target;
+	assert fatal (join_node.outgoing.target->size() = 1) with log('Joins should only have a single outgoing ControlFlow');
 	
-	var place_buffer := self.map controlFlow2place(1);
-	//var trans_exec := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
+	var bolt := join_node.outgoing.target->asOrderedSet()->first();
+		
+	//var place_buffer := self.map controlFlow2place(1);
+	var place_buffer := self.map controlFlow2placeBuffer();
+	var list_trans_exec := source.getTimedTrans_Node();
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	list_trans_exec->forEach(trans_exec){	
+		map arc(trans_exec, place_buffer);
+	};
+
+	/* In a JoinNode, the bolt must receive all the tuples synchronously.
+	- 'Shuffle' and 'all' groupings guarantee that a bolts' thread receives
+	at least a tuple from each source.
+	- 'Global' and 'Field' grouping are not compatible with JoinNodes:
+	   they do not guarantee that the sources produce tokens for all the
+	   bolts' thread.
+	 */
+	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
+		//self.map global_grouping_sync(bolt);
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
+		//self.map field_grouping_sync(bolt, join_node);
+	};
+	
+	// Add tracing information
+	self.map trace(place_buffer, "joinControlFlow2arc");
+}
+
+/*******************************************************************************
+  Final node transformation
+*******************************************************************************/
+
+mapping UML::ControlFlow::controlFlow2tarcAllShuffle() disjuncts 
+UML::ControlFlow::basicControlFlow2arcAllShuffle, 
+UML::ControlFlow::mergeControlFlow2arcAllShuffle,
+UML::ControlFlow::joinControlFlow2arcAllShuffle {};
+
+/*UML::ControlFlow::basicControlFlow2arc, 
+UML::ControlFlow::mergeControlFlow2arc,
+UML::ControlFlow::joinControlFlow2arc,
+UML::ControlFlow::finalControlFlow2arc {};*/
+/**
+	Transforms a ControlFlow between a generic ActivityNode and an ActivityFinalNode.
+	The ControlFlow is transformed into an immediate transition connecting to the
+	place representing the output buffer of the previous bolt
+*/
+mapping UML::ControlFlow::basicControlFlow2arcAllShuffle() when {
+	self.source.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(InitialNode).not() and
+	(self.source.getStormSpout().oclIsUndefined().not() or
+	 self.source.getStormBolt().oclIsUndefined().not()) and
+	self.target.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(ActivityFinalNode).not() and
+	self.target.getStormBolt().oclIsUndefined().not()
+}{
+    var source := self.source;
+	var bolt := self.target;
+	
+	//var place_buffer := self.map controlFlow2place(1);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
+	
 	var list_trans_exec := source.getTimedTrans_Node();
 	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
 	list_trans_exec->forEach(trans_exec){	
 		map arc(trans_exec, place_buffer);
 	};
 			
-	var join_node := self.target;		
-	var bolt := target.outgoing.target->asOrderedSet()->first();
-	
-	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
-	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
-		
-	var trans_in_bolt := join_node.resolveoneIn(UML::ActivityNode::activityNode2immediateTransition);
-	if (trans_in_bolt.oclIsUndefined()){
-		trans_in_bolt := join_node.map activityNode2immediateTransition();
-		map arc(trans_in_bolt, place_working_bolt);
-		map arc(place_parall_bolt,trans_in_bolt);
-		
-		// Add tracing information
-		self.map trace(trans_in_bolt, "joinControlFlow2arc");
-	};
-	
-	var arc_1 := map arc(place_buffer, trans_in_bolt);
-		
 	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::shuffle) ) {
-		map arc(trans_in_bolt, place_working_bolt);
+		self.map shuffle_grouping_async(bolt);
 	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
-		map arc(trans_in_bolt, place_working_bolt);
-		var list_timed_trans := source.getTimedTrans_Node();
-		var parallelism := bolt.getStormBolt_parallelism().value();
-		self.map all_grouping(list_timed_trans, parallelism);
-	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
-		/* Check what happens if all the incomming ControlFlows of the JoinNode
-		have the same global_grouping */
-		self.map global_grouping(bolt);
+		self.map all_grouping_async(bolt, list_trans_exec);
 	};
-	
-	self.map common_grouping(arc_1);
 	
 	// Add tracing information
-	self.map trace(place_buffer, "joinControlFlow2arc");
+	//self.map trace(place_buffer, "basicControlFlow2arc");
 }
+
 
 mapping UML::ControlFlow::basicControlFlow2arc() when {
 	self.source.oclIsKindOf(ActivityNode) and
@@ -539,156 +622,481 @@ mapping UML::ControlFlow::basicControlFlow2arc() when {
 	var bolt := self.target;
 	
 	var place_buffer := self.map controlFlow2place(1);
-	//var trans_exec := source.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
+	var list_trans_exec := source.getTimedTrans_Node();
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	list_trans_exec->forEach(trans_exec){	
+		map arc(trans_exec, place_buffer);
+	};
+			
+	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::shuffle) ) {
+		self.map shuffle_grouping_async(bolt);
+	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
+		self.map all_grouping_async(bolt, list_trans_exec);
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
+		/* Check what happens if all the incomming ControlFlows of the MergeNode
+		have the same global_grouping */
+		/*assert fatal (self.integrity_global_grouping())
+			with log ("More than one incoming StormStreamStep with global grouping policy for the Control node '" + self.name + "'"); */
+		self.map global_grouping(bolt);	
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
+		self.map field_grouping(bolt);
+	};
+	
+	// Add tracing information
+	self.map trace(place_buffer, "basicControlFlow2arc");
+}
+
+/**
+	Transforms a ControlFlow between two generic ActivityNode and a MergeNode.
+	The ControlFlow is transformed into a single place, and several immediate
+	transitions for each incoming ControlFlow
+*/
+mapping UML::ControlFlow::mergeControlFlow2arcAllShuffle() when {
+	self.getStormStreamStep().oclIsUndefined().not() and
+	self.target.oclIsKindOf(MergeNode)
+}{
+	var source := self.source;
+	var target := self.target;
+	assert fatal (target.outgoing.target->size() = 1) with log('Merges should only have a single outgoing ControlFlow');
+	
+	var bolt := target.outgoing.target->asOrderedSet()->first();
+
+	//var place_buffer := self.map controlFlow2place(1);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
 	var list_trans_exec := source.getTimedTrans_Node();
 	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
 	list_trans_exec->forEach(trans_exec){	
 		map arc(trans_exec, place_buffer);
 	};
 	
-	var trans_in_bolt := self.map controlFlow2immediateTransitionNum(1);
-	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
-	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
-	
-	var arc_1 := map arc(place_buffer, trans_in_bolt);
-	var arc_2 := map arc(place_parall_bolt, trans_in_bolt);
-	
 	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::shuffle) ) {
-		map arc(trans_in_bolt, place_working_bolt);
+		self.map shuffle_grouping_async(bolt);
 	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
-		map arc(trans_in_bolt, place_working_bolt);
-		var list_timed_trans := source.getTimedTrans_Node();
-		var parallelism := bolt.getStormBolt_parallelism().value();
-		self.map all_grouping(list_timed_trans, parallelism);
-	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
-		/* Check what happens if all the incomming ControlFlows of a Bolt
-		have the same global_grouping */
-		self.map global_grouping(bolt);
+		self.map all_grouping_async(bolt, list_trans_exec);
 	};
 	
-	self.map common_grouping(arc_1);
+	// Add tracing information
+	//self.map trace(place_buffer, "mergeControlFlow2arc");
+}
+
+mapping UML::ControlFlow::mergeControlFlow2arc() when {
+	self.getStormStreamStep().oclIsUndefined().not() and
+	self.target.oclIsKindOf(MergeNode)
+}{
+	var source := self.source;
+	var target := self.target;
+	assert fatal (target.outgoing.target->size() = 1) with log('Merges should only have a single outgoing ControlFlow');
+	
+	var bolt := target.outgoing.target->asOrderedSet()->first();
+
+	var place_buffer := self.map controlFlow2place(1);
+	var list_trans_exec := source.getTimedTrans_Node();
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	list_trans_exec->forEach(trans_exec){	
+		map arc(trans_exec, place_buffer);
+	};
+	
+	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::shuffle) ) {
+		self.map shuffle_grouping_async(bolt);
+	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
+		self.map all_grouping_async(bolt, list_trans_exec);
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
+		/* Check what happens if all the incomming ControlFlows of the MergeNode
+		have the same global_grouping */
+		assert fatal (self.integrity_global_grouping())
+			with log ("More than one incoming StormStreamStep with global grouping policy for the Control node '" + self.name + "'");	    
+		self.map global_grouping(bolt);	
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
+		self.map field_grouping(bolt);
+	};
 	
 	// Add tracing information
-	self.map trace(place_buffer, "basicControlFlow2arc");
-	self.map trace(trans_in_bolt, "basicControlFlow2arc");
+	self.map trace(place_buffer, "mergeControlFlow2arc");
+}
+
+/**
+	Transforms a ControlFlow between a generic ActivityNode and a Join.
+	The Join has been previously transformed as a single transition, and now
+	we need to create a Place for each incoming ControlFlow to enable the
+	synchronization of the different execution flows
+*/
+mapping UML::ControlFlow::joinControlFlow2arcAllShuffle() when {
+	self.getStormStreamStep().oclIsUndefined().not() and
+	self.target.oclIsKindOf(JoinNode)
+}{
+	var source := self.source;
+	var join_node := self.target;
+	assert fatal (join_node.outgoing.target->size() = 1) with log('Joins should only have a single outgoing ControlFlow');
+	
+	var bolt := join_node.outgoing.target->asOrderedSet()->first();
+		
+	//var place_buffer := self.map controlFlow2place(1);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
+	var list_trans_exec := source.getTimedTrans_Node();
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	list_trans_exec->forEach(trans_exec){	
+		map arc(trans_exec, place_buffer);
+	};
+
+	/* In a JoinNode, the bolt must receive all the tuples synchronously.
+	- 'Shuffle' and 'all' groupings guarantee that a bolts' thread receives
+	at least a tuple from each source.
+	- 'Global' and 'Field' grouping are not compatible with JoinNodes:
+	   they do not guarantee that the sources produce tokens for all the
+	   bolts' thread.
+	 */
+	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::shuffle) ) {
+		self.map shuffle_grouping_sync(bolt, join_node);
+	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
+		self.map all_grouping_sync(bolt, list_trans_exec, join_node);
+	};
+	
+	// Add tracing information
+	//self.map trace(place_buffer, "joinControlFlow2arc");
+}
+
+mapping UML::ControlFlow::joinControlFlow2arc() when {
+	self.getStormStreamStep().oclIsUndefined().not() and
+	self.target.oclIsKindOf(JoinNode)
+}{
+	var source := self.source;
+	var join_node := self.target;
+	assert fatal (join_node.outgoing.target->size() = 1) with log('Joins should only have a single outgoing ControlFlow');
+	
+	var bolt := join_node.outgoing.target->asOrderedSet()->first();
+		
+	var place_buffer := self.map controlFlow2place(1);
+	var list_trans_exec := source.getTimedTrans_Node();
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	list_trans_exec->forEach(trans_exec){	
+		map arc(trans_exec, place_buffer);
+	};
+
+	/* In a JoinNode, the bolt must receive all the tuples synchronously.
+	- 'Shuffle' and 'all' groupings guarantee that a bolts' thread receives
+	at least a tuple from each source.
+	- 'Global' and 'Field' grouping are not compatible with JoinNodes:
+	   they do not guarantee that the sources produce tokens for all the
+	   bolts' thread.
+	 */
+	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::shuffle) ) {
+		self.map shuffle_grouping_sync(bolt, join_node);
+	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
+		self.map all_grouping_sync(bolt, list_trans_exec, join_node);
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
+		//self.map global_grouping_sync(bolt);
+	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
+		//self.map field_grouping_sync(bolt, join_node);
+	};
+	
+	// Add tracing information
+	self.map trace(place_buffer, "joinControlFlow2arc");
+}
+
+mapping UML::ControlFlow::finalControlFlow2arc() when {
+	self.target.oclIsKindOf(ActivityFinalNode)
+}{
+	var source := self.source;
+	var target := self.target;
+	assert fatal (source.oclIsKindOf(ActivityNode) and source.getStormBolt().oclIsUndefined().not()) 
+	with log('Final node should be preceded by a StormBolt');
+		
+	/* Create a new place and immediate transition.
+	TimedTransition -> Place -> ImmTransition */
+	var final_trans := self.map controlFlow2immediateTransitionNum(1);
+	var place := self.map controlFlow2place(1);
+	
+	var list_temp_trans := source.getTimedTrans_Node();
+	assert fatal (list_temp_trans->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	list_temp_trans->forEach(temp_trans){			
+		map arc(temp_trans, place);
+		//map arc(place, final_trans);
+	};
+	map arc(place, final_trans);
+
+	// Add tracing information
+	self.map trace(place, "finalControlFlow2arc");
+	self.map trace(final_trans, "finalControlFlow2arc");
+
+	//ad.scenario().map trace(final_trans, "model2openNet");	
 }
 
 /*******************************************************************************
   Stream grouping transformations
 *******************************************************************************/
 
-mapping UML::ControlFlow::common_grouping(inout arc: Arc) {
-	arc.inscription := object PNML::PTArcAnnotation {
+mapping UML::ControlFlow::shuffle_grouping_async(in bolt : UML::ActivityNode) {
+	/* Create a new immediate transition for each incoming StormStream */
+	//var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2place);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);	
+	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
+	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
+
+	var trans_in_bolt := self.map controlFlow2immediateTransitionNum(1);
+
+	var arc_1 := map arc(place_buffer, trans_in_bolt);
+	var arc_2 := map arc(place_parall_bolt,trans_in_bolt);
+    var arc_3 := map arc(trans_in_bolt, place_working_bolt);
+	
+	arc_1.inscription := object PNML::PTArcAnnotation {
 		text := self.getStormStreamStep_numTuples().value();
 	};
-
+	
+	self.map trace(trans_in_bolt, "shuffleGrouping");	
 }
 
-mapping UML::ControlFlow::all_grouping(inout trans_list : List(PNML::Transition), in parallelism : Integer) {
- trans_list->forEach(trans){
-	var arc_list := trans.OutArcs->asSequence();
-	arc_list->forEach(arc_1){
-		arc_1.inscription := object PNML::PTArcAnnotation {
+mapping UML::ControlFlow::shuffle_grouping_sync(in bolt : UML::ActivityNode, in join_node : UML::ActivityNode)  when {
+	self.oclIsKindOf(JoinNode)
+}{	
+	/* Create a single common immediate transition for all the incoming StormStreams to the JoinNode */
+	//var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2place);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
+	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
+	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
+	
+	var trans_in_bolt := join_node.resolveoneIn(UML::ActivityNode::activityNode2immediateTransition);
+	if (trans_in_bolt.oclIsUndefined()){
+		trans_in_bolt := join_node.map activityNode2immediateTransition();
+		map arc(place_parall_bolt,trans_in_bolt);
+		map arc(trans_in_bolt, place_working_bolt);
+				
+		// Add tracing information
+		self.map trace(trans_in_bolt, "shuffleGrouping");
+	};
+		
+	var arc_1 := map arc(place_buffer, trans_in_bolt);	
+	arc_1.inscription := object PNML::PTArcAnnotation {
+		text := self.getStormStreamStep_numTuples().value();
+	};
+}
+
+mapping UML::ControlFlow::all_grouping_async(in bolt : UML::ActivityNode, inout list_trans_exec2 : List(PNML::Transition)) {
+	/* Create a new immediate transition for each incoming StormStream */
+	//var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2place);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
+	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
+	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
+
+	var trans_in_bolt := self.map controlFlow2immediateTransitionNum(1);
+	
+	var arc_1 := map arc(place_buffer, trans_in_bolt);
+	var arc_2 := map arc(place_parall_bolt,trans_in_bolt);
+    var arc_3 := map arc(trans_in_bolt, place_working_bolt);
+    
+	arc_1.inscription := object PNML::PTArcAnnotation {
+		text := self.getStormStreamStep_numTuples().value();
+	};
+    	
+	var parallelism := bolt.getStormBolt_parallelism().value();
+	var arc_list := place_buffer.InArcs->asSequence(); /********/
+	arc_list->forEach(arc){
+	arc.inscription := object PNML::PTArcAnnotation {
 			text := parallelism;
 		};	
 	};
- };
+
+	/*list_trans_exec->forEach(trans){
+		var arc_list := trans.OutArcs->asSequence();
+		arc_list->forEach(arc){
+		arc.inscription := object PNML::PTArcAnnotation {
+				text := parallelism;
+			};	
+		};
+ 	};*/
+ 	
+ 	
+	self.map trace(trans_in_bolt, "allGrouping");	
 }
 
-mapping UML::ControlFlow::global_grouping(in node : UML::ActivityNode) {
-	var temp_trans := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
-	var place_parallel_node := node.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
+mapping UML::ControlFlow::all_grouping_sync(in bolt : UML::ActivityNode, inout list_trans_exec : List(PNML::Transition), in join_node : UML::ActivityNode)  when {
+	self.oclIsKindOf(JoinNode)
+}{
+	/* Create a single common immediate transition for all the incoming StormStreams to the JoinNode */
+	//var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2place);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
+	var place_working_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2place);
+	var place_parall_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
 	
-	var temp_trans_global := self.map controlFlow2timedTransitionNum(1);
-	temp_trans_global.toolspecifics := temp_trans.toolspecifics.clone();
-	
-	var imm_trans_global := self.resolveoneIn (UML::ControlFlow::controlFlow2immediateTransitionNum);
-	var place_work_global := self.map controlFlow2place(2);
-	var place_resource_global := self.map controlFlow2place(3);
-	place_resource_global.initialMarking := object PNML::PTMarking {
-			text := 1;
+	var trans_in_bolt := join_node.resolveoneIn(UML::ActivityNode::activityNode2immediateTransition);
+	if (trans_in_bolt.oclIsUndefined()){
+		trans_in_bolt := join_node.map activityNode2immediateTransition();
+		map arc(trans_in_bolt, place_working_bolt);
+		map arc(place_parall_bolt,trans_in_bolt);
+		
+		// Add tracing information
+		self.map trace(trans_in_bolt, "allGrouping");
+	};
+		
+	var arc_1 := map arc(place_buffer, trans_in_bolt);	
+	arc_1.inscription := object PNML::PTArcAnnotation {
+		text := self.getStormStreamStep_numTuples().value();
+	};
+		
+	var parallelism := bolt.getStormBolt_parallelism().value();
+	var arc_list := place_buffer.InArcs->asSequence(); /********/
+	arc_list->forEach(arc){
+	arc.inscription := object PNML::PTArcAnnotation {
+			text := parallelism;
+		};	
+	};
+		
+	/*list_trans_exec->forEach(trans){
+		var arc_list := trans.OutArcs->asSequence();
+		arc_list->forEach(arc){
+		arc.inscription := object PNML::PTArcAnnotation {
+				text := parallelism;
+			};	
+		};
+ 	};	*/
+}
+
+mapping UML::ControlFlow::global_grouping(in bolt : UML::ActivityNode) {
+	//var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2place);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
+	var place_parallel_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
+	//var temp_trans := bolt.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
+
+	/* All StormStreams having the 'Global' grouping share the same bolt thread_id */
+	var temp_trans_global := bolt.resolveoneIn(UML::ActivityNode::activityNode2timedTransitionGlobal);
+	if (temp_trans_global.oclIsUndefined()){
+		temp_trans_global := bolt.map activityNode2timedTransitionGlobal();
+		//temp_trans_global.toolspecifics := temp_trans.toolspecifics.clone();
+		
+		var trans_in_bolt := self.map controlFlow2immediateTransitionNum(1);
+		var place_work_global := bolt.map activityNode2placeGlobal();
+		var place_resource_global := bolt.map activityNode2placeParallelismGlobal();
+		place_resource_global.initialMarking := object PNML::PTMarking {
+				text := 1;
+		};
+		
+		map arc(trans_in_bolt, place_work_global);
+		map arc(place_work_global, temp_trans_global);
+		
+		map arc(temp_trans_global, place_resource_global);
+		map arc(place_resource_global, trans_in_bolt);
+		
+		map arc(temp_trans_global, place_parallel_bolt);
+		map arc(place_parallel_bolt, trans_in_bolt);
+			
+		self.map trace(trans_in_bolt, "globalGrouping");
+		self.map trace(temp_trans_global, "globalGrouping");
+		self.map trace(place_work_global, "globalGrouping");
+		self.map trace(place_resource_global, "globalGrouping");
 	};
 	
-	map arc(imm_trans_global, place_work_global);
-	map arc(place_work_global, temp_trans_global);
-	
-	map arc(temp_trans_global, place_resource_global);
-	map arc(place_resource_global, imm_trans_global);
-	
-	map arc(temp_trans_global, place_parallel_node);
-	map arc(place_parallel_node, imm_trans_global);		
+	var place_resource_global := bolt.resolveoneIn (UML::ActivityNode::activityNode2placeParallelismGlobal);
+	var trans_in_bolt := place_resource_global.OutArcs->asSequence()->first().target;
+		
+	var arc_1 := map arc(place_buffer, trans_in_bolt);
+	arc_1.inscription := object PNML::PTArcAnnotation {
+		text := self.getStormStreamStep_numTuples().value();
+	};
 }
 
-mapping UML::ControlFlow::field_grouping(in node : UML::ActivityNode) {
-	var place_parallel_node := node.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
-	var temp_trans := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
+mapping UML::ControlFlow::field_grouping(in bolt : UML::ActivityNode) {
+	//var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2place);
+	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
+	var place_parallel_bolt := bolt.resolveoneIn(UML::ActivityNode::activityNode2placeParallelism);
+	var temp_trans := bolt.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
 		
 	var numFields := self.getStormStreamStep_numFields();
 	var probFieldList := self.getStormStreamStep_probFields();
+	var numThreads := bolt.getStorm_parallelism();
 	var i := numFields;
-	var c := 2;
-	
-	/* Create a independent processing pipeline for each field value */
-	/* case i = 1 */
-	var probField := probFieldList->first();
-	
-	var temp_trans_i := self.map controlFlow2timedTransitionNum(i);
-	temp_trans_i.toolspecifics := temp_trans.toolspecifics.clone();
-	var imm_trans_i := self.resolveoneIn (UML::ControlFlow::controlFlow2immediateTransitionNum); //
-	imm_trans_i.toolspecifics:= probTransitionToolInfo(probField.value());
-	
-	
-	var place_work_i := self.map controlFlow2place(c);
-	var place_resource_i := self.map controlFlow2place(c+1);
-	c := c + 2;
-	
-	/* The available threads are shared proportionally by each field value */
-	var weight := (place_parallel_node.initialMarking.text -
-				  (place_parallel_node.initialMarking.text / numFields).floor() * (numFields - 1)); 
-	
-	place_resource_i.initialMarking := object PNML::PTMarking {
-			text := weight;
-	};
-	
-	map arc(imm_trans_i, place_work_i);
-	map arc(place_work_i, temp_trans_i);
-	
-	map arc(temp_trans_i, place_resource_i);
-	map arc(place_resource_i, imm_trans_i);
-	
-	map arc(temp_trans_i, place_parallel_node);
-	map arc(place_parallel_node, imm_trans_i);
+	var c := 1;
 
-	/* case i > 1 */
+	/* At maximum, there will be as many pipelines as the number of Bolt's threads */
+	assert warning (numFields <= numThreads.value()) with log ("There are defined more probFields (" + numFields.toString() + ") than Task's threads (" + numThreads.value().toString() + ")");
+	if (numFields > numThreads.value() ){
+		numFields := numThreads.value();
+		probFieldList := self.normalize(numFields);
+	};
+
+	/* The available threads are shared proportionally by each field value */
+	var res_per_pipeline := (place_parallel_bolt.initialMarking.text / numFields).floor();
+	var weight := self.getStormStreamStep_numTuples().value();
 	while (i > 0){
-		i := i - 1;
 		/* Create a independent processing pipeline for each field value */
-		temp_trans_i := self.map controlFlow2timedTransitionNum(i);
-		temp_trans_i.toolspecifics := temp_trans.toolspecifics.clone();
-		imm_trans_i := self.map controlFlow2immediateTransitionNum(i); //
 		
-		probField := probFieldList->at(numFields - i + 1);
-		imm_trans_i.toolspecifics:= probTransitionToolInfo(probField.value());
+		/*var temp_trans_i := self.map controlFlow2timedTransitionNum(i);
+		temp_trans_i.toolspecifics := temp_trans.toolspecifics.clone();*/
+		var temp_trans_i := self.map controlFlow2timedTransitionNum(i, bolt);
 		
-		place_work_i := self.map controlFlow2place(c);
-		place_resource_i := self.map controlFlow2place(c+1);
+		var trans_in_i := self.map controlFlow2immediateTransitionNum(i);
+		
+		var probField := probFieldList->at(numFields - i + 1);
+		//trans_in_i.toolspecifics:= probTransitionToolInfo(probField.value());
+		trans_in_i.toolspecifics:= probTransitionToolInfo(probField);
+		
+		var place_work_i := self.map controlFlow2place(c);
+		var place_resource_i := self.map controlFlow2place(c+1);
 		c := c + 2;
 		
-		/* The available threads are shared proportionally by each field value */
-		weight := (place_parallel_node.initialMarking.text / numFields).floor(); //
-		place_resource_i.initialMarking := object PNML::PTMarking {
-				text := weight;
+		/* The last pipeline uses the remaining threads
+		and tuples */
+		if (i = 1){
+			res_per_pipeline := (place_parallel_bolt.initialMarking.text -
+								(place_parallel_bolt.initialMarking.text / numFields).floor() * (numFields - 1));
+			/*weight := (self.getStormStreamStep_numTuples().value() -
+					  (self.getStormStreamStep_numTuples().value() / numFields).floor() * (numFields - 1));*/
 		};
 		
-		map arc(imm_trans_i, place_work_i);
+		place_resource_i.initialMarking := object PNML::PTMarking {
+				text := res_per_pipeline;
+		};
+		
+		var arc_1 := map arc(place_buffer, trans_in_i);
+		arc_1.inscription := object PNML::PTArcAnnotation {
+			text := weight.toString().toInteger();
+		};
+		
+		map arc(trans_in_i, place_work_i);
 		map arc(place_work_i, temp_trans_i);
 		
 		map arc(temp_trans_i, place_resource_i);
-		map arc(place_resource_i, imm_trans_i);
+		map arc(place_resource_i, trans_in_i);
 		
-		map arc(temp_trans_i, place_parallel_node);
-		map arc(place_parallel_node, imm_trans_i);
+		map arc(temp_trans_i, place_parallel_bolt);
+		map arc(place_parallel_bolt, trans_in_i);
+		
+		i := i - 1;
+		
+		self.map trace(trans_in_i, "fieldGrouping");
+		self.map trace(temp_trans_i, "fieldGrouping");
+		self.map trace(place_work_i, "fieldGrouping");
+		self.map trace(place_resource_i, "fieldGrouping");
+	};	
+}
+
+/*******************************************************************************
+  Final node transformation
+*******************************************************************************/
+
+mapping UML::FinalNode::finalNode() {
+	var source_list := self.incoming->asSequence();
+	var source := source_list->first().source;
+	//assert fatal (source.oclIsKindOf(ActivityNode) and source.getStormBolt().oclIsUndefined().not()) 
+	assert fatal ((source_list->size() = 1) and 
+				   source.oclIsKindOf(ActivityNode) and
+				   source.getStormBolt().oclIsUndefined().not())
+	with log('Final node should be preceded by a StormBolt');
+		
+	/* Create a new place and immediate transition.
+	TimedTransition -> Place -> ImmTransition */
+	var final_trans := self.map activityNode2immediateTransition();
+	var place := self.map activityNode2place();
+	
+	var list_temp_trans := source.getTimedTrans_Node();
+	assert fatal (list_temp_trans->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	list_temp_trans->forEach(temp_trans){			
+		map arc(temp_trans, place);
+		//map arc(place, final_trans);
 	};
+	map arc(place, final_trans);
+
+	// Add tracing information
+	self.map trace(place, "finalNode");
+	self.map trace(final_trans, "finalNode");
 }
 
 /*******************************************************************************
@@ -1025,7 +1433,9 @@ helper UML::Element::getStormStreamStep_numFields() : Natural {
 	if (self.getStormStreamStep() = null) {
 		return null;
 	};
-	var probFields := self.getValue(self.getStormStreamStep(), "prob").oclAsType(String);
+	//var probFields := self.getValue(self.getStormStreamStep(), "prob").oclAsType(String);
+	//var probFields := self.getValue(self.getStormStreamStep(), "probFields").oclAsType(String);
+	var probFields := self.getValue(self.getStormStreamStep(), "probFields").oclAsType(Collection(String));
 	assert warning (probFields->size() >= 1)
 		with log ("Unexpected number of 'prob' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'");
@@ -1041,7 +1451,9 @@ helper UML::Element::getStormStreamStep_numFields() : Natural {
 
 //helper UML::Element::getStormStreamStep_probFields() : List(NFP_Real) {
 helper UML::Element::getStormStreamStep_probFields() : List(Real) {
-	var probFields := self.getValue(self.getStormStreamStep(), "prob").oclAsType(String);
+	//var probFields := self.getValue(self.getStormStreamStep(), "prob").oclAsType(String);
+	//var probFields := self.getValue(self.getStormStreamStep(), "probFields").oclAsType(String);
+	var probFields := self.getValue(self.getStormStreamStep(), "probFields").oclAsType(Collection(String));
 	assert warning (probFields->size() >= 1)
 		with log ("Unexpected number of 'prob' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'");
@@ -1053,13 +1465,41 @@ helper UML::Element::getStormStreamStep_probFields() : List(Real) {
 	
 	/* Compute the summation of all probabilities */
 	probFieldsList->forEach(probF){
-		total_value := total_value + probF.toReal(); 
+		//total_value := total_value + probF.toReal(); 
+		total_value := total_value + probF.toNfpReal().value();
 	};
 
 	/* Normalize the probabilities */
 	probFieldsList->forEach(probF){
 		//res += (probF.toReal()/total_value).toNfpReal();
-		res += probF.toReal()/total_value; 
+		//res += probF.toReal()/total_value;
+		res += probF.toNfpReal().value()/total_value;
+	};
+	
+	return res;
+}
+
+helper UML::Element::normalize(in numElements: Integer) : List(Real) {
+	var probFields := self.getValue(self.getStormStreamStep(), "probFields").oclAsType(Collection(String));
+	
+	var total_value := 0.0; 
+	var probFieldsList := probFields->asSequence();
+	var res = new List(Real)() ;
+	
+	/* Compute the summation of all probabilities */
+	var i := numElements;
+	while (i > 0){
+		var probF := probFieldsList->at(i);
+		total_value := total_value + probF.toReal();
+		i := i - 1;
+	};
+
+	/* Normalize the probabilities */
+	i := numElements;
+	while (i > 0){
+		var probF := probFieldsList->at(i);
+		res += probF.toReal()/total_value;
+		i := i - 1; 
 	};
 	
 	return res;
@@ -1088,10 +1528,21 @@ helper UML::ActivityNode::getTimedTrans_Node() : List(PNML::Transition) {
 }
 
 /******************************************************************/
+helper UML::ControlFlow::integrity_global_grouping() : Boolean {
+	var listInArcs := self.target.incoming;
+	var num_global_arcs := 0;
+	listInArcs->forEach(arc){
+		if (arc.getStormStreamStep_grouping().=(DBET::StreamPolicy::global))
+			num_global_arcs := num_global_arcs + 1;
+	};
+	return (num_global_arcs <= 1);
+}
+	
 helper UML::ActivityNode::integrity_global_grouping() : Boolean {
 	if (self.getStormBolt() = null) {
 		return null;
 	};
+	
 	var listInArcs := self.incoming;
 	var num_global_arcs := 0;
 	listInArcs->forEach(arc){
