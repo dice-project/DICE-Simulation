@@ -81,7 +81,7 @@ public class ReliabilityNetGenerationTest extends AbstractTest{
 		assertNotNull("The first element in the list of translated models was null", result.getModel().get(0));
 		assertTrue("The generated net did not contain the expected information", resultIsMeaningful(result));
 
-		saveAnalyzbleModelResult(result);
+		saveAnalyzbleModelResult(result, "target/test/resources/outputPosidonia.anm" + "." + XMIResource.XMI_NS);
 	}
 
 	@Test
@@ -142,6 +142,11 @@ public class ReliabilityNetGenerationTest extends AbstractTest{
 				sum.getValue().doubleValue() < 1.05);
 
 	}
+	
+/*	public void testSuccessAndFilureProbabilitySumOneFindingExecutorsAutonomously(){
+		invocation.setToolResult(simulator.getToolResult());
+		invocationStatus.merge(buildResult(invocation));
+	}*/
 
 	private DomainMeasure launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
@@ -237,17 +242,6 @@ public class ReliabilityNetGenerationTest extends AbstractTest{
 	}
 	
 
-	private void saveAnalyzbleModelResult(ModelResult result) throws IOException {
-
-		final URI producedAAM_URI = URI
-				.createFileURI(Paths.get("target/test/resources/outputPosidonia.anm" + "." + XMIResource.XMI_NS)
-						.toFile().getAbsolutePath());
-
-		Resource producedModelResource = getResourceSet().createResource(producedAAM_URI);
-		producedModelResource.getContents().add(result.getModel().get(0));
-		producedModelResource.save(Collections.EMPTY_MAP);
-
-	}
 
 	private boolean resultIsMeaningful(ModelResult result) {
 

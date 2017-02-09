@@ -6,12 +6,11 @@
   <groupId>es.unizar.disco</groupId>
   <artifactId>es.unizar.disco.simulation.targetplatform</artifactId>
   
-  <version>0.3.3-SNAPSHOT</version>
   
       <parent>
         <groupId>es.unizar.disco</groupId>
         <artifactId>es.unizar.disco.root</artifactId>
-        <version>0.3.3-SNAPSHOT</version>
+        <version>0.3.5-SNAPSHOT</version>
     </parent>
   
   <packaging>eclipse-target-definition</packaging>

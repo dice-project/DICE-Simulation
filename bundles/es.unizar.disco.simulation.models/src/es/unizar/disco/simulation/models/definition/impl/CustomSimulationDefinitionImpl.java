@@ -243,7 +243,7 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 			// Save which of the supported scenarios has the newActiveScenario applied
 			Element element = (Element) newActiveScenario;
 			for (String scenarioName : DiceStereotypesUtils.getScenariosStereotypes()) {
-				Stereotype scenarioStereotype = element.getApplicableStereotype(scenarioName);
+				Stereotype scenarioStereotype = element.getAppliedStereotype(scenarioName);
 				if (element.isStereotypeApplied(scenarioStereotype)) {
 					getScenarioStereotypes().add(scenarioName);
 				}
@@ -281,7 +281,7 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 			if (eObject instanceof Element) {
 				Element element = (Element) eObject;
 				for (String scenarioName : DiceStereotypesUtils.getScenariosStereotypes()) {
-					Stereotype scenarioStereotype = element.getApplicableStereotype(scenarioName);
+					Stereotype scenarioStereotype = element.getAppliedStereotype(scenarioName);
 					if (element.isStereotypeApplied(scenarioStereotype)) {
 						scenarios.add(eObject);
 					}

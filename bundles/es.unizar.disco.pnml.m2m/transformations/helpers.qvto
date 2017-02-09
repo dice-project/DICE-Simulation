@@ -24,35 +24,42 @@ helper OclAny::eObject() : ECORE::EObject {
 /* GaElements */
 
 helper UML::Element::getGaWorkloadEvent() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaWorkloadEvent");
 	};
 	return null;	
 }
 
 helper UML::Element::getGaStep() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaStep");
 	};
 	return null;	
 }
 
-helper UML::Element::getDaStep() : UML::Stereotype {
+/*helper UML::Element::getDaStep() : UML::Stereotype {
 	if (self.isStereotypeApplied(self.getApplicableStereotype("DAM::DAM_UML_Extensions::System::Core::DaStep"))) { 
+		return self.getAppliedStereotype("DAM::DAM_UML_Extensions::System::Core::DaStep");
+	};
+	return null;	
+}*/
+
+helper UML::Element::getDaStep() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getAppliedStereotype("DAM::DAM_UML_Extensions::System::Core::DaStep"))) { 
 		return self.getAppliedStereotype("DAM::DAM_UML_Extensions::System::Core::DaStep");
 	};
 	return null;	
 }
 
 helper UML::Element::getGaCommStep() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaCommStep");
 	};
 	return null;	
 }
 
 helper UML::Element::getPaLogicalResource() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaLogicalResource");
 	};
 	return null;	
@@ -61,44 +68,114 @@ helper UML::Element::getPaLogicalResource() : UML::Stereotype {
 /* Storm Elements */
 
 helper UML::Element::getStormSpout() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"))) { 
 		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout");
 	};
 	return null;	
 }
 
 helper UML::Element::getStormBolt() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt"))) { 
 		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt");
 	};
 	return null;	
 }
 
 helper UML::Element::getStormStreamStep() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormStreamStep"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormStreamStep"))) { 
 		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormStreamStep");
 	};
 	return null;	
 }
 
 helper UML::Element::getPaRunTInstance() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance");
 	};
 	return null;	
 }
 
 helper UML::Element::getGaExecHost() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaExecHost"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaExecHost"))) { 
 		return self.getAppliedStereotype("MARTE::MARTE_AnalysisModel::GQAM::GaExecHost");
 	};
 	return null;	
 }
 
+/* Hadoop Elements */
+
+helper UML::Element::getHadoopOperation() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopOperation"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopOperation");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopMap() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopMap"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopMap");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopReduce() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopReduce"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopReduce");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopWorkloadEvent() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopWorkloadEvent"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopWorkloadEvent");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopComputationNode() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode");
+	};
+	return null;	
+}
+
+helper UML::Element::getHadoopScenario() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario");
+	};
+	return null;	
+}
 
 /*******************************************************************************
   ToolInfo utilities
 *******************************************************************************/
+/**
+	Creates the ToolInfo that identifies an inhibitor arcs,
+	i.e., CONST::ArcKind::Inhibitor 
+*/
+helper inhibitorArcToolInfo() : PNML::ToolInfo {
+	return object PNML::ToolInfo { 
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::ArcKind::Inhibitor.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::ArcKind::Inhibitor.toString() + "\"/>").createLongString();
+	};	
+}
+
+/**
+	Creates the ToolInfo that identifies an inhibitor arcs,
+	i.e., CONST::ArcKind::Inhibitor 
+*/
+helper normalArcToolInfo() : PNML::ToolInfo {
+	return object PNML::ToolInfo { 
+		tool := CONST::ToolInfoConstants::toolName.toString();
+		version := CONST::ToolInfoConstants::toolVersion.toString();
+		toolInfoGrammarURI := CONST::ArcKind::Inhibitor.toString().createURI();
+		formattedXMLBuffer := ("<value grammar=\"" + CONST::ArcKind::Normal.toString() + "\"/>").createLongString();
+	};	
+}
+
+/********************/
 
 /**
 	Creates the ToolInfo that identifies an exponential timed transition,

@@ -45,6 +45,9 @@
       <Scenario
             stereotypeName="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology">
       </Scenario>
+      <Scenario
+            stereotypeName="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario">
+      </Scenario>
    </extension>
    <extension
          point="es.unizar.disco.simulation.models.analyzable_resource_builder">
@@ -100,6 +103,20 @@
       <AnalyzableResourceBuilder
             analyzableProperty="PERFORMANCE"
             builder="es.unizar.disco.pnml.m2m.builder.StormActivityDiagram2PnmlResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Activity"
+            priority="4"
+            scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
+      </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            analyzableProperty="PERFORMANCE"
+            builder="es.unizar.disco.pnml.m2m.builder.HadoopActivityDiagram2PnmlResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Activity"
+            priority="4"
+            scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario">
+      </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            analyzableProperty="PERFORMANCE"
+            builder="es.unizar.disco.pnml.m2m.builder.HadoopActivityDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Activity"
             priority="4"
             scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">

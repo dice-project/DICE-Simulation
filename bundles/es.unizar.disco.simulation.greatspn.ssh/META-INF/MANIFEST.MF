@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: GreatSPN-Through-SSH Simulator
 Bundle-SymbolicName: es.unizar.disco.simulation.greatspn.ssh;singleton:=true
-Bundle-Version: 0.3.3.qualifier
+Bundle-Version: 0.3.5.qualifier
 Bundle-Activator: es.unizar.disco.simulation.greatspn.ssh.GspnSshSimulationPlugin
 Bundle-Vendor: DisCo - Unizar
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
  es.unizar.disco.simulation;bundle-version="0.3.0",
  es.unizar.disco.pnml.m2t;bundle-version="0.3.0",
  es.unizar.disco.pnextensions;bundle-version="0.3.0",
- es.unizar.disco.pnml.m2m;bundle-version="0.3.3"
+ es.unizar.disco.pnml.m2m;bundle-version="0.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,

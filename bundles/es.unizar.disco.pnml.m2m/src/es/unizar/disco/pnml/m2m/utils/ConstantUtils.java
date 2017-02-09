@@ -7,7 +7,19 @@ public class ConstantUtils {
 
 	public final static String TRANSITION_FAIL_TRACE = "FAIL";
 	public final static String TRANSITION_OK_TRACE = "OK";
+	public final static String PLACE_CONCURRENT_USERS_TRACE ="NumberOfConcurrentUsers";
+	public final static String USERS = "Users";
 	
+	@Operation
+	public static String getUsers() {
+		return USERS;
+	}
+
+	@Operation
+	public static String getPlaceConcurrentUsersTrace() {
+		return PLACE_CONCURRENT_USERS_TRACE;
+	}
+
 	@Operation
 	public static String getFail() {
 		return TRANSITION_FAIL_TRACE;

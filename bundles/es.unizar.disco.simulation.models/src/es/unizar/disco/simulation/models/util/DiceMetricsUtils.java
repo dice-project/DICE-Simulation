@@ -75,7 +75,7 @@ public class DiceMetricsUtils {
 			if (ELEMENT_METRIC.equals(configElement.getName())) {
 				try {
 					Stereotype stereotype = element
-							.getApplicableStereotype(configElement.getAttribute(METRIC_STEREOTYPE));
+							.getAppliedStereotype(configElement.getAttribute(METRIC_STEREOTYPE));
 					if (StringUtils.equals(measure, configElement.getAttribute(METRIC_TAG))
 							&& element.isStereotypeApplied(stereotype)) {
 
