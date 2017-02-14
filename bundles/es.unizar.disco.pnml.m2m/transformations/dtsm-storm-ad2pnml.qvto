@@ -212,6 +212,10 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 			name := object PNML::Name {
 				text := self.name;
 			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
+			};
 		};
 }
 
@@ -225,6 +229,10 @@ mapping UML::ControlFlow::controlFlow2placeBuffer() : PNML::Place {
 			name := object PNML::Name {
 				text := self.name;
 			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
+			};
 		};
 }
 
@@ -237,6 +245,10 @@ mapping UML::ControlFlow::controlFlow2place(in number: Integer) : PNML::Place {
 		if (self.name.oclIsUndefined().not()) {
 			name := object PNML::Name {
 				text := self.name;
+			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
 			};
 		};
 }
@@ -280,6 +292,10 @@ mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 		if (self.name.oclIsUndefined().not()) {
 			name := object PNML::Name {
 				text := self.name;
+			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
 			};
 		};
 }
@@ -334,6 +350,10 @@ mapping UML::ControlFlow::controlFlow2immediateTransitionNum(in number: Integer)
 			name := object PNML::Name {
 				text := self.name;
 			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
+			};
 		};
 }
 
@@ -349,6 +369,10 @@ mapping UML::ControlFlow::controlFlow2timedTransition() : PNML::Transition {
 			name := object PNML::Name {
 				text := self.name;
 			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
+			};
 		};
 }
 
@@ -359,6 +383,10 @@ mapping UML::ControlFlow::controlFlow2timedTransitionNum(in number: Integer, in 
 		if (self.name.oclIsUndefined().not()) {
 			name := object PNML::Name {
 				text := self.name;
+			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
 			};
 		};
 		
@@ -1240,7 +1268,7 @@ helper UML::Element::getStormStreamStep_probFields() : List(Real) {
 	
 	/* Compute the summation of all probabilities */
 	probFieldsList->forEach(probF){
-		//total_value := total_value + probF.toReal(); 
+		//total_value := total_value + probF.toReal();
 		total_value := total_value + probF.toNfpReal().value();
 	};
 
