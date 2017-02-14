@@ -883,9 +883,6 @@ inherits UML::NamedElement::namedElement2place {
 /**
 	Transform a generic ActivityNode into a Place 
 */
-mapping UML::ActivityNode::activityNode2place() : PNML::Place 
-inherits UML::NamedElement::namedElement2place {
-}
 
 mapping UML::ActivityNode::activityNode2placeCol(in colour: Colour) : PNML::Place
 inherits UML::NamedElement::namedElement2placeCol {
@@ -940,15 +937,6 @@ inherits UML::NamedElement::namedElement2placeCol {
 /**
 	Transform a generic NamedElement into a Transition 
 */
-mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
-		containerPage := resolveoneIn(UML::NamedElement::model2page);
-		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
-			name := object PNML::Name {
-				text := self.name;
-			};
-		};
-}
 
 mapping UML::NamedElement::namedElement2transitionCol(in colour : Colour) : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
@@ -957,6 +945,10 @@ mapping UML::NamedElement::namedElement2transitionCol(in colour : Colour) : PNML
 			name := object PNML::Name {
 				text := self.name;
 			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
+			};
 		};
 		toolspecifics += colorToolInfo(colour);
 }
@@ -964,11 +956,6 @@ mapping UML::NamedElement::namedElement2transitionCol(in colour : Colour) : PNML
 /**
 	Transform a generic NamedElement into a Transition 
 */
-
-mapping UML::NamedElement::namedElement2immediateTransition() : PNML::Transition
-inherits UML::NamedElement::namedElement2transition {
-		name.text := self.name + "_trans";
-}
 
 mapping UML::NamedElement::namedElement2immediateTransitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2transitionCol{
@@ -980,28 +967,18 @@ inherits UML::NamedElement::namedElement2transitionCol{
 	Transform a generic ControlFlow into a Transition 
 */
 
-mapping UML::ControlFlow::controlFlow2immediateTransition() : PNML::Transition
-inherits UML::NamedElement::namedElement2immediateTransition {
-			name.text := self.name + "_trans";
-}
-
 mapping UML::ControlFlow::controlFlow2immediateTransitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2immediateTransitionCol {
-			name.text := self.name + "_trans";
+			//name.text := self.name + "_trans";
 }
 
 /**
 	Transform a generic ActivityNode into a Transition 
 */
 
-mapping UML::ActivityNode::activityNode2immediateTransition() : PNML::Transition
-inherits UML::NamedElement::namedElement2immediateTransition {
-			name.text := self.name + "_trans";
-}
-
 mapping UML::ActivityNode::activityNode2immediateTransitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2immediateTransitionCol {
-			name.text := self.name + "_trans";
+			//name.text := self.name + "_trans";
 }
 
 /**
