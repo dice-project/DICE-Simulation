@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:datatypes="http://es.unizar.disco/simulation/datatypes/1.0">
+  <datatypes:PrimitiveVariableAssignment variable="$n0" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$n1" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$n2" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$n3" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$n4" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$nS1" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$nS2" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$nS3" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$nS4" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$nS5" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$nS6" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$sp_1" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$sp_2" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$b_1" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$b_2" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$b_3" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$c1" value="1"/>
+  <datatypes:PrimitiveVariableAssignment variable="$c2" value="1"/>
+</xmi:XMI>
