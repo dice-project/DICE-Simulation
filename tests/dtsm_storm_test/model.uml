@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Storm="http://es.unizar.disco.dice/profiles/DTSM/Storm/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://es.unizar.disco.dice/profiles/DTSM/Storm/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Storm">
+  <uml:Model xmi:id="_fhCHcBXCEeaO9pVQNhbfJw" name="Example Activity Diagram">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_fjtA8BXCEeaO9pVQNhbfJw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_fhMfgBXCEeaO9pVQNhbfJw" name="Topology" node="_LNmCcBXNEeaO9pVQNhbfJw _M66f4BXNEeaO9pVQNhbfJw _lloGIBXNEeaO9pVQNhbfJw _INX9QBXOEeaO9pVQNhbfJw _VDniQDnxEeaBQNKHvmh8mQ _svru8DnxEeaBQNKHvmh8mQ _w_mtgDPGEeax3OqdhCztQw _TEcG0DOxEeax3OqdhCztQw _Ll1YwBXMEeaO9pVQNhbfJw _CRMkoBXMEeaO9pVQNhbfJw _Jw8CwBXDEeaO9pVQNhbfJw" group="_UD_Q0BXMEeaO9pVQNhbfJw _jbq2oGqpEeadLpmgngveUw">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_XzbEAIlcEeai5cR0zDah1g" annotatedElement="_fhMfgBXCEeaO9pVQNhbfJw">
+        <body>{utilization= (expr=$use, statQ=mean, source=calc)}
+</body>
+      </ownedComment>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_BP6fEBXSEeaO9pVQNhbfJw" target="_INX9QBXOEeaO9pVQNhbfJw" source="_lloGIBXNEeaO9pVQNhbfJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_Mj_54DMHEea2HMc_AU99vQ" target="_TEcG0DOxEeax3OqdhCztQw" source="_Ll1YwBXMEeaO9pVQNhbfJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_eVT-IDOxEeax3OqdhCztQw" target="_TEcG0DOxEeax3OqdhCztQw" source="_CRMkoBXMEeaO9pVQNhbfJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_sSKuADPGEeax3OqdhCztQw" target="_Ll1YwBXMEeaO9pVQNhbfJw" source="_Jw8CwBXDEeaO9pVQNhbfJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_9_cBADPGEeax3OqdhCztQw" target="_CRMkoBXMEeaO9pVQNhbfJw" source="_w_mtgDPGEeax3OqdhCztQw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_gMBaEDnxEeaBQNKHvmh8mQ" target="_VDniQDnxEeaBQNKHvmh8mQ" source="_LNmCcBXNEeaO9pVQNhbfJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_grhZgDnxEeaBQNKHvmh8mQ" target="_VDniQDnxEeaBQNKHvmh8mQ" source="_M66f4BXNEeaO9pVQNhbfJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_hKzWgDnxEeaBQNKHvmh8mQ" target="_lloGIBXNEeaO9pVQNhbfJw" source="_VDniQDnxEeaBQNKHvmh8mQ"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_uM6h8DnxEeaBQNKHvmh8mQ" target="_svru8DnxEeaBQNKHvmh8mQ" source="_CRMkoBXMEeaO9pVQNhbfJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_utQ18DnxEeaBQNKHvmh8mQ" target="_svru8DnxEeaBQNKHvmh8mQ" source="_Ll1YwBXMEeaO9pVQNhbfJw"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_vrTLgDnxEeaBQNKHvmh8mQ" target="_M66f4BXNEeaO9pVQNhbfJw" source="_svru8DnxEeaBQNKHvmh8mQ"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_89cTIEmsEeaMP7A3SRCLqg" target="_LNmCcBXNEeaO9pVQNhbfJw" source="_TEcG0DOxEeax3OqdhCztQw"/>
+      <group xmi:type="uml:ActivityPartition" xmi:id="_UD_Q0BXMEeaO9pVQNhbfJw" name="Partition1" node="_LNmCcBXNEeaO9pVQNhbfJw _CRMkoBXMEeaO9pVQNhbfJw" represents="_vdKrYB3CEeaAOqN-CPM2wA">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_iuYhwDn0EeaBQNKHvmh8mQ" annotatedElement="_UD_Q0BXMEeaO9pVQNhbfJw _eVT-IDOxEeax3OqdhCztQw">
+          <body>{numTuples=$nS3,
+grouping=shuffle}</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_hT65cDn1EeaBQNKHvmh8mQ" annotatedElement="_uM6h8DnxEeaBQNKHvmh8mQ">
+          <body>{numTuples=$nS1,
+grouping=shuffle}</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_yOuPoD0UEea5BfFPxb1f8A" annotatedElement="_CRMkoBXMEeaO9pVQNhbfJw">
+          <body>{parallelism=$n0,
+hostDemand=
+(expr=$sp_1,
+unit=ms,statQ=mean,
+source=est)}</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_Cano8D01EeadLIR15eC1oQ" annotatedElement="_eVT-IDOxEeax3OqdhCztQw">
+          <body>{numTuples=$nS6,
+grouping=all}</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_SrxjQD01EeadLIR15eC1oQ" annotatedElement="_Mj_54DMHEea2HMc_AU99vQ">
+          <body>{numTuples=$nS5,
+grouping=all}</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_aGb-AD01EeadLIR15eC1oQ" annotatedElement="_LNmCcBXNEeaO9pVQNhbfJw">
+          <body>{parallelism=$n4;
+hostDemand=
+(expr=$b_1,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+        </ownedComment>
+      </group>
+      <group xmi:type="uml:ActivityPartition" xmi:id="_jbq2oGqpEeadLpmgngveUw" name="Partition2" node="_Ll1YwBXMEeaO9pVQNhbfJw _M66f4BXNEeaO9pVQNhbfJw _lloGIBXNEeaO9pVQNhbfJw _svru8DnxEeaBQNKHvmh8mQ _VDniQDnxEeaBQNKHvmh8mQ" represents="_4W9h0TxnEea0n4gfxAdogA">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_KCTEAB3QEeazlIZjpSDHBw" annotatedElement="_Ll1YwBXMEeaO9pVQNhbfJw">
+          <body>{parallelism=$n1,
+hostDemand=
+(expr=$sp_2,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_dm324B3QEeazlIZjpSDHBw" annotatedElement="_M66f4BXNEeaO9pVQNhbfJw">
+          <body>{parallelism=$n2;
+hostDemand=
+(expr=$b_2,
+unit=ms,
+statQ=mean,
+source=est)}
+</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_AngGkDn1EeaBQNKHvmh8mQ" annotatedElement="_UD_Q0BXMEeaO9pVQNhbfJw">
+          <body>{numTuples=$nS4
+grouping=shuffle}</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_gpCwcDn1EeaBQNKHvmh8mQ" annotatedElement="_utQ18DnxEeaBQNKHvmh8mQ">
+          <body>{numTuples=$nS2,
+grouping=shuffle}</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_sxTZsB3QEeazlIZjpSDHBw" annotatedElement="_lloGIBXNEeaO9pVQNhbfJw">
+          <body>{parallelism=$n3,
+hostDemand=
+(expr=$b_3,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+        </ownedComment>
+      </group>
+      <node xmi:type="uml:InitialNode" xmi:id="_Jw8CwBXDEeaO9pVQNhbfJw" outgoing="_sSKuADPGEeax3OqdhCztQw">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_lqSk0BarEeamROHAZguY-Q" annotatedElement="_Jw8CwBXDEeaO9pVQNhbfJw">
+          <body>workload</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_tnPkkBa8EeamROHAZguY-Q" annotatedElement="_Jw8CwBXDEeaO9pVQNhbfJw">
+          <body>{open, workload}
+</body>
+        </ownedComment>
+      </node>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_CRMkoBXMEeaO9pVQNhbfJw" name="spout_1" incoming="_9_cBADPGEeax3OqdhCztQw" outgoing="_eVT-IDOxEeax3OqdhCztQw _uM6h8DnxEeaBQNKHvmh8mQ" inPartition="_UD_Q0BXMEeaO9pVQNhbfJw"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_Ll1YwBXMEeaO9pVQNhbfJw" name="spout_2" incoming="_sSKuADPGEeax3OqdhCztQw" outgoing="_Mj_54DMHEea2HMc_AU99vQ _utQ18DnxEeaBQNKHvmh8mQ" inPartition="_jbq2oGqpEeadLpmgngveUw"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_LNmCcBXNEeaO9pVQNhbfJw" name="bolt_1" incoming="_89cTIEmsEeaMP7A3SRCLqg" outgoing="_gMBaEDnxEeaBQNKHvmh8mQ" inPartition="_UD_Q0BXMEeaO9pVQNhbfJw"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_M66f4BXNEeaO9pVQNhbfJw" name="bolt_2" incoming="_vrTLgDnxEeaBQNKHvmh8mQ" outgoing="_grhZgDnxEeaBQNKHvmh8mQ" inPartition="_jbq2oGqpEeadLpmgngveUw"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_lloGIBXNEeaO9pVQNhbfJw" name="bolt_3" incoming="_hKzWgDnxEeaBQNKHvmh8mQ" outgoing="_BP6fEBXSEeaO9pVQNhbfJw" inPartition="_jbq2oGqpEeadLpmgngveUw"/>
+      <node xmi:type="uml:ActivityFinalNode" xmi:id="_INX9QBXOEeaO9pVQNhbfJw" name="Final" incoming="_BP6fEBXSEeaO9pVQNhbfJw"/>
+      <node xmi:type="uml:JoinNode" xmi:id="_TEcG0DOxEeax3OqdhCztQw" name="BJ1" incoming="_Mj_54DMHEea2HMc_AU99vQ _eVT-IDOxEeax3OqdhCztQw" outgoing="_89cTIEmsEeaMP7A3SRCLqg" isCombineDuplicate="false"/>
+      <node xmi:type="uml:InitialNode" xmi:id="_w_mtgDPGEeax3OqdhCztQw" outgoing="_9_cBADPGEeax3OqdhCztQw">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_1fUUUD0tEeadLIR15eC1oQ" annotatedElement="_w_mtgDPGEeax3OqdhCztQw">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_-qpbcD0tEeadLIR15eC1oQ" annotatedElement="_1fUUUD0tEeadLIR15eC1oQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Alq9sD0uEeadLIR15eC1oQ" annotatedElement="_-qpbcD0tEeadLIR15eC1oQ">
+              <body></body>
+            </ownedComment>
+            <body></body>
+          </ownedComment>
+          <body></body>
+        </ownedComment>
+      </node>
+      <node xmi:type="uml:MergeNode" xmi:id="_VDniQDnxEeaBQNKHvmh8mQ" name="BM2" incoming="_gMBaEDnxEeaBQNKHvmh8mQ _grhZgDnxEeaBQNKHvmh8mQ" outgoing="_hKzWgDnxEeaBQNKHvmh8mQ" inPartition="_jbq2oGqpEeadLpmgngveUw"/>
+      <node xmi:type="uml:MergeNode" xmi:id="_svru8DnxEeaBQNKHvmh8mQ" name="BM1" incoming="_uM6h8DnxEeaBQNKHvmh8mQ _utQ18DnxEeaBQNKHvmh8mQ" outgoing="_vrTLgDnxEeaBQNKHvmh8mQ" inPartition="_jbq2oGqpEeadLpmgngveUw"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_vdKrYB3CEeaAOqN-CPM2wA" name="Core_1">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_wQ7O0DxnEea0n4gfxAdogA" annotatedElement="_vdKrYB3CEeaAOqN-CPM2wA">
+        <body>resMult=(expr=$c1)</body>
+      </ownedComment>
+      <nestedClassifier xmi:type="uml:Artifact" xmi:id="_u6bKsB3CEeaAOqN-CPM2wA" name="spout_1" fileName=""/>
+      <nestedClassifier xmi:type="uml:Artifact" xmi:id="_4W9h0jxnEea0n4gfxAdogA" name="bolt_1" fileName=""/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Device" xmi:id="_4W9h0TxnEea0n4gfxAdogA" name="Core_2">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_4W9h0DxnEea0n4gfxAdogA" annotatedElement="_4W9h0TxnEea0n4gfxAdogA">
+        <body>resMult=(expr=$c2)</body>
+      </ownedComment>
+      <nestedClassifier xmi:type="uml:Artifact" xmi:id="_5bYWwDxoEea0n4gfxAdogA" name="spout_2" fileName=""/>
+      <nestedClassifier xmi:type="uml:Artifact" xmi:id="__PdOMDxoEea0n4gfxAdogA" name="bolt_3" fileName=""/>
+      <nestedClassifier xmi:type="uml:Artifact" xmi:id="_6RPnwDxoEea0n4gfxAdogA" name="bolt_2" fileName=""/>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_OFoPcBXhEeaO9pVQNhbfJw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_OFpdkBXhEeaO9pVQNhbfJw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/MARTE/1#//GQAM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_4bV20APMEdyuUt-4qHuVvQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_OFqrsBXhEeaO9pVQNhbfJw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_OFqrsRXhEeaO9pVQNhbfJw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/MARTE/1#//PAM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_6c2bkAPMEdyuUt-4qHuVvQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_Qyd5kDlWEea0z7HcqJPIGQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QyfHsDlWEea0z7HcqJPIGQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_MPXosOePEeWj7ZPL8JeBTQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_QygV0DlWEea0z7HcqJPIGQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QygV0TlWEea0z7HcqJPIGQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_gFr1YOebEeWj7ZPL8JeBTQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_Qyg84DlWEea0z7HcqJPIGQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Qyg84TlWEea0z7HcqJPIGQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//Storm"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_E-ctACpwEeaibdPncpUwfA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_Qyhj8DlWEea0z7HcqJPIGQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Qyhj8TlWEea0z7HcqJPIGQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//Hadoop"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_lhjuYC5LEeaF_sH3mLTVKg"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_KHqZADlXEea0z7HcqJPIGQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_KHrnIDlXEea0z7HcqJPIGQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Ecore.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Storm:StormBolt xmi:id="_kTu5wDlWEea0z7HcqJPIGQ" base_NamedElement="_lloGIBXNEeaO9pVQNhbfJw" base_Action="_lloGIBXNEeaO9pVQNhbfJw" parallelism="$n3" sigma="">
+    <hostDemand>(expr=$b_3, unit=ms, statQ=mean, source=est)</hostDemand>
+    <throughput></throughput>
+    <respT></respT>
+    <utilization></utilization>
+  </Storm:StormBolt>
+  <Storm:StormBolt xmi:id="_JiHcsDnrEeaBQNKHvmh8mQ" base_NamedElement="_LNmCcBXNEeaO9pVQNhbfJw" base_Action="_LNmCcBXNEeaO9pVQNhbfJw" parallelism="$n4">
+    <hostDemand>(expr=$b_1,unit=ms,statQ=mean,source=est)</hostDemand>
+  </Storm:StormBolt>
+  <Storm:StormBolt xmi:id="_NOfn0DnrEeaBQNKHvmh8mQ" base_NamedElement="_M66f4BXNEeaO9pVQNhbfJw" base_Action="_M66f4BXNEeaO9pVQNhbfJw" parallelism="$n2">
+    <hostDemand>(expr=$b_2,unit=ms,statQ=mean,source=est)</hostDemand>
+  </Storm:StormBolt>
+  <Storm:StormSpout xmi:id="_UPvdADnrEeaBQNKHvmh8mQ" base_NamedElement="_CRMkoBXMEeaO9pVQNhbfJw" base_Action="_CRMkoBXMEeaO9pVQNhbfJw" targetTech="storm" parallelism="$n0">
+    <hostDemand>(expr=$sp_1,unit=ms,statQ=mean,source=est)</hostDemand>
+  </Storm:StormSpout>
+  <Storm:StormSpout xmi:id="_cPorwDnrEeaBQNKHvmh8mQ" base_NamedElement="_Ll1YwBXMEeaO9pVQNhbfJw" base_Action="_Ll1YwBXMEeaO9pVQNhbfJw" parallelism="$n1">
+    <hostDemand>(expr=$sp_2,unit=ms,statQ=mean,source=est)</hostDemand>
+    <throughput>(expr=$throughput2, statQ=mean, source=calc)</throughput>
+    <respT>(expr=$resp2, statQ=mean, source=calc)</respT>
+  </Storm:StormSpout>
+  <Storm:StormStreamStep xmi:id="_suQoEDnwEeaBQNKHvmh8mQ" base_NamedElement="_eVT-IDOxEeax3OqdhCztQw" numTuples="$nS6"/>
+  <Storm:StormStreamStep xmi:id="_xN8fcDnwEeaBQNKHvmh8mQ" base_NamedElement="_Mj_54DMHEea2HMc_AU99vQ" numTuples="$nS5"/>
+  <Storm:StormStreamStep xmi:id="_yowbIDnxEeaBQNKHvmh8mQ" base_NamedElement="_uM6h8DnxEeaBQNKHvmh8mQ" numTuples="$nS1" grouping="shuffle"/>
+  <Storm:StormStreamStep xmi:id="_ChvGADnyEeaBQNKHvmh8mQ" base_NamedElement="_utQ18DnxEeaBQNKHvmh8mQ" numTuples="$nS2" grouping="shuffle"/>
+  <Storm:StormStreamStep xmi:id="_gnTV8DnzEeaBQNKHvmh8mQ" base_NamedElement="_gMBaEDnxEeaBQNKHvmh8mQ" numTuples="$nS3" grouping="shuffle"/>
+  <Storm:StormStreamStep xmi:id="_kJKTIDnzEeaBQNKHvmh8mQ" base_NamedElement="_grhZgDnxEeaBQNKHvmh8mQ" numTuples="$nS4" grouping="shuffle"/>
+  <Storm:StormSpout xmi:id="_Zb9z0DxoEea0n4gfxAdogA" base_NamedElement="_u6bKsB3CEeaAOqN-CPM2wA" base_Classifier="_u6bKsB3CEeaAOqN-CPM2wA"/>
+  <Storm:StormBolt xmi:id="_cXeisDxoEea0n4gfxAdogA" base_NamedElement="_4W9h0jxnEea0n4gfxAdogA" base_Classifier="_4W9h0jxnEea0n4gfxAdogA"/>
+  <Storm:StormBolt xmi:id="_KPXRUDxpEea0n4gfxAdogA" base_NamedElement="__PdOMDxoEea0n4gfxAdogA" base_Classifier="__PdOMDxoEea0n4gfxAdogA"/>
+  <Storm:StormSpout xmi:id="_N5SlYDxpEea0n4gfxAdogA" base_NamedElement="_5bYWwDxoEea0n4gfxAdogA" base_Classifier="_5bYWwDxoEea0n4gfxAdogA"/>
+  <Storm:StormSpout xmi:id="_8MoR8D0OEea5BfFPxb1f8A" base_NamedElement="_6RPnwDxoEea0n4gfxAdogA" base_Classifier="_6RPnwDxoEea0n4gfxAdogA"/>
+  <GQAM:GaExecHost xmi:id="_HVSzAD0QEea5BfFPxb1f8A" resMult="(expr=$c1)" base_Classifier="_vdKrYB3CEeaAOqN-CPM2wA" schedPolicy="RoundRobin">
+    <utilization> (expr=$use, statQ=mean, source=calc)</utilization>
+  </GQAM:GaExecHost>
+  <GQAM:GaExecHost xmi:id="_osC8UD0QEea5BfFPxb1f8A" resMult="(expr=$c2)" base_Classifier="_4W9h0TxnEea0n4gfxAdogA">
+    <utilization> (expr=$use2, statQ=mean, source=calc)</utilization>
+  </GQAM:GaExecHost>
+  <GQAM:GaAnalysisContext xmi:id="_I0HA4H_sEea4le-Wr80mRQ" base_StructuredClassifier="_fhMfgBXCEeaO9pVQNhbfJw" base_NamedElement="_fhMfgBXCEeaO9pVQNhbfJw">
+    <context>in$n0</context>
+    <context>in$n1</context>
+    <context>in$n2</context>
+    <context>in$n3</context>
+    <context>in$n4</context>
+    <context>in$nS1</context>
+    <context>in$nS2</context>
+    <context>in$nS3</context>
+    <context>in$nS4</context>
+    <context>in$nS5</context>
+    <context>in$nS6</context>
+    <context>in$sp_1</context>
+    <context>in$sp_2</context>
+    <context>in$b_1</context>
+    <context>in$b_2</context>
+    <context>in$b_3</context>
+    <context>in$c1</context>
+    <context>in$c2</context>
+    <context>out$throughput</context>
+    <context>out$use</context>
+    <context>out$throughput2</context>
+    <context>out$use2</context>
+    <context>out$resp2</context>
+  </GQAM:GaAnalysisContext>
+  <Storm:StormScenarioTopology xmi:id="_CuA7YGquEeaht-ghhLWJ8w" base_NamedElement="_fhMfgBXCEeaO9pVQNhbfJw" usedResources="_HVSzAD0QEea5BfFPxb1f8A _osC8UD0QEea5BfFPxb1f8A" base_Behavior="_fhMfgBXCEeaO9pVQNhbfJw" base_Class="_fhMfgBXCEeaO9pVQNhbfJw">
+    <throughput>(expr=$throughput, statQ=mean, source=calc)</throughput>
+  </Storm:StormScenarioTopology>
+</xmi:XMI>
