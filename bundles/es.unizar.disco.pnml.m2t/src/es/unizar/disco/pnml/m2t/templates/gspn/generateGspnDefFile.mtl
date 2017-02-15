@@ -49,7 +49,7 @@
 
 [template public colorSetDef(petriNet : PetriNet) post (trim())]
 [comment COLOR ::= COL COLOR | empty /]
-[for (colorset : ToolInfo | allColorSets(petriNet)) separator('\n')]
+[for (colorset : ToolInfo | allColorSets(petriNet))]
 [colorSetDefLine(petriNet, colorset)/]
 [/for]
 [/template]
