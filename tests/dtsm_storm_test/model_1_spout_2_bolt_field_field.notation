@@ -515,9 +515,4 @@
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ektgqORsEeaMmL06d2O8_g"/>
     </edges>
   </notation:Diagram>
-  <notation:Diagram xmi:id="_359uIORrEeaMmL06d2O8_g" type="PapyrusUMLActivityDiagram" measurementUnit="Pixel">
-    <styles xmi:type="notation:StringValueStyle" xmi:id="_359uIeRrEeaMmL06d2O8_g" name="diagram_compatibility_version" stringValue="1.2.0"/>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_359uIuRrEeaMmL06d2O8_g"/>
-    <element xmi:type="uml:OpaqueAction" href="model_1_spout_2_bolt_field_field.uml#_0_YMUORrEeaMmL06d2O8_g"/>
-  </notation:Diagram>
 </xmi:XMI>

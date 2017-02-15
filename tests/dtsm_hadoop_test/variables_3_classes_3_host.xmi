@@ -17,7 +17,7 @@
   <datatypes:PrimitiveVariableAssignment variable="$mapT3" value="3"/>
   <datatypes:PrimitiveVariableAssignment variable="$redT1" value="1"/>
   <datatypes:PrimitiveVariableAssignment variable="$redT2" value="3"/>
-  <datatypes:PrimitiveVariableAssignment variable="$redT3" value="2"/>
+  <datatypes:PrimitiveVariableAssignment variable="$redT3" value="4"/>
   <datatypes:PrimitiveVariableAssignment variable="$nP1" value="1"/>
   <datatypes:PrimitiveVariableAssignment variable="$nP2" value="2"/>
   <datatypes:PrimitiveVariableAssignment variable="$nP3" value="3"/>

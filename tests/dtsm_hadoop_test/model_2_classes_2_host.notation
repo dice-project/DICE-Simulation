@@ -484,14 +484,4 @@
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_jQz70TlkEeaE4deiM0Jlvg" id="(0.5161290322580645,0.0)"/>
     </edges>
   </notation:Diagram>
-  <notation:Diagram xmi:id="_LJHVcEjuEeauxYB8KYKtGg" type="PapyrusUMLActivityDiagram" measurementUnit="Pixel">
-    <styles xmi:type="notation:StringValueStyle" xmi:id="_LJHVcUjuEeauxYB8KYKtGg" name="diagram_compatibility_version" stringValue="1.2.0"/>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_LJHVckjuEeauxYB8KYKtGg"/>
-    <element xmi:type="uml:OpaqueAction" href="model_2_classes_2_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
-  </notation:Diagram>
-  <notation:Diagram xmi:id="_ptsE8KytEeaaULyQf1qYkA" type="PapyrusUMLActivityDiagram" measurementUnit="Pixel">
-    <styles xmi:type="notation:StringValueStyle" xmi:id="_ptsE8aytEeaaULyQf1qYkA" name="diagram_compatibility_version" stringValue="1.2.0"/>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_ptsE8qytEeaaULyQf1qYkA"/>
-    <element xmi:type="uml:InitialNode" href="model_2_classes_2_host.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
-  </notation:Diagram>
 </xmi:XMI>
