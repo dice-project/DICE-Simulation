@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:traces="http://es.unizar.disco/simulation/traces/1.0">
+  <traces:Trace rule="basicActivityNode2place">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_LNmCcBXNEeaO9pVQNhbfJw"/>
+    <toAnalyzableElement href="result.xmi#_K8MF4PLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_LNmCcBXNEeaO9pVQNhbfJw"/>
+    <toAnalyzableElement href="result.xmi#_K8Ms8PLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_LNmCcBXNEeaO9pVQNhbfJw"/>
+    <toAnalyzableElement href="result.xmi#_K82NMPLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="spoutNode2subNet">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_CRMkoBXMEeaO9pVQNhbfJw"/>
+    <toAnalyzableElement href="result.xmi#_K9RD8PLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="spoutNode2subNet">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_CRMkoBXMEeaO9pVQNhbfJw"/>
+    <toAnalyzableElement href="result.xmi#_K9H6APLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="basicControlFlow2arc">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_QjYuMLrbEeaDBsV1rRktkA"/>
+    <toAnalyzableElement href="result.xmi#_K9UHQPLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="allGrouping">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_QjYuMLrbEeaDBsV1rRktkA"/>
+    <toAnalyzableElement href="result.xmi#_K9Y_wPLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="finalNode">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_OSm-YLrbEeaDBsV1rRktkA"/>
+    <toAnalyzableElement href="result.xmi#_K9g7kfLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="finalNode">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_OSm-YLrbEeaDBsV1rRktkA"/>
+    <toAnalyzableElement href="result.xmi#_K9g7kPLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+  <traces:Trace rule="partitions2resources">
+    <fromDomainElement href="model_1_spout_1_bolt_all.uml#_vdKrYB3CEeaAOqN-CPM2wA"/>
+    <toAnalyzableElement href="result.xmi#_K-CgAPLmEeaVgLVoPV8x6g"/>
+  </traces:Trace>
+</xmi:XMI>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Hadoop="http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Hadoop">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Hadoop="http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0" xmlns:PAM="http://www.eclipse.org/papyrus/PAM/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Hadoop http://www.eclipse.org/papyrus/PAM/1 http://www.eclipse.org/papyrus/MARTE/1#//PAM">
   <uml:Model xmi:id="_RSOiQDlXEeaE4deiM0Jlvg" name="RootElement">
     <ownedComment xmi:type="uml:Comment" xmi:id="_ep4M8DlkEeaE4deiM0Jlvg" annotatedElement="_LGzO4DlkEeaE4deiM0Jlvg">
       <body>{nCores=[$nP1,$nP2]}</body>
@@ -188,6 +188,7 @@ respT=(expr=$RT,statQ=mean,source=calc)}</body>
     <context>out$T2</context>
     <context>out$U1</context>
     <context>out$U2</context>
+    <context>out$U</context>
   </GQAM:GaAnalysisContext>
   <Hadoop:HadoopScenario xmi:id="_gsi7MDlXEeaE4deiM0Jlvg" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" usedResources="_S0M_cDlkEeaE4deiM0Jlvg" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg">
     <throughput>(expr=$T1,statQ=mean,source=calc)</throughput>
@@ -197,4 +198,5 @@ respT=(expr=$RT,statQ=mean,source=calc)}</body>
     <utilization>(expr=$U1,statQ=mean,source=calc)</utilization>
     <utilization>(expr=$U2,statQ=mean,source=calc)</utilization>
   </Hadoop:HadoopScenario>
+  <PAM:PaLogicalResource xmi:id="_MhklsPOeEeaOttILUzPFzQ" base_Classifier="_LGzO4DlkEeaE4deiM0Jlvg" utilization="(expr=$U,statQ=mean,source=calc)"/>
 </xmi:XMI>

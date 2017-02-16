@@ -180,7 +180,7 @@ respT=(expr=$RT,statQ=mean,source=calc)}</body>
   <Hadoop:HadoopScenario xmi:id="_gsi7MDlXEeaE4deiM0Jlvg" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" usedResources="_S0M_cDlkEeaE4deiM0Jlvg" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg">
     <throughput>(expr=$T,unit=s,statQ=mean,source=calc)</throughput>
     <respT>(expr=$RT,unit=s,statQ=mean,source=calc)</respT>
-    <utilization>(expr=$U,statQ=mean,source=calc)</utilization>
+    <utilization>(expr=$U1,statQ=mean,source=calc)</utilization>
   </Hadoop:HadoopScenario>
-  <PAM:PaLogicalResource xmi:id="_qIYjcO7FEeauF5sWoAnq3Q" base_Classifier="_LGzO4DlkEeaE4deiM0Jlvg" utilization="(expr=$U1,statQ=mean,source=calc)"/>
+  <PAM:PaLogicalResource xmi:id="_qIYjcO7FEeauF5sWoAnq3Q" base_Classifier="_LGzO4DlkEeaE4deiM0Jlvg" utilization="(expr=$U,statQ=mean,source=calc)"/>
 </xmi:XMI>

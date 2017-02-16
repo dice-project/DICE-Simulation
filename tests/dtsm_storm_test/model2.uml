@@ -242,18 +242,33 @@ grouping=shuffle}</body>
   </uml:Model>
   <Storm:StormBolt xmi:id="_kTu5wDlWEea0z7HcqJPIGQ" base_NamedElement="_lloGIBXNEeaO9pVQNhbfJw" base_Action="_lloGIBXNEeaO9pVQNhbfJw" parallelism="$n4" sigma="">
     <hostDemand>(expr=$b2_3, unit=ms, statQ=mean, source=est)</hostDemand>
+    <throughput>(expr=$thru3, statQ=mean, source=calc)</throughput>
+    <respT>(expr=$resT3,unit=ms,statQ=mean,source=calc)</respT>
+    <utilization> (expr=$use3, statQ=mean, source=calc)</utilization>
   </Storm:StormBolt>
   <Storm:StormBolt xmi:id="_JiHcsDnrEeaBQNKHvmh8mQ" base_NamedElement="_LNmCcBXNEeaO9pVQNhbfJw" base_Action="_LNmCcBXNEeaO9pVQNhbfJw" parallelism="$n2">
     <hostDemand>(expr=$b1_1,unit=ms,statQ=mean,source=est)</hostDemand>
+    <throughput>(expr=$thru, statQ=mean, source=calc)</throughput>
+    <respT>(expr=$resT,unit=ms,statQ=mean,source=calc)</respT>
+    <utilization> (expr=$use, statQ=mean, source=calc)</utilization>
   </Storm:StormBolt>
   <Storm:StormBolt xmi:id="_NOfn0DnrEeaBQNKHvmh8mQ" base_NamedElement="_M66f4BXNEeaO9pVQNhbfJw" base_Action="_M66f4BXNEeaO9pVQNhbfJw" parallelism="$n3">
     <hostDemand>(expr=$b2_1,unit=ms,statQ=mean,source=est)</hostDemand>
+    <throughput>(expr=$thru2, statQ=mean, source=calc)</throughput>
+    <respT>(expr=$resT2,unit=ms,statQ=mean,source=calc)</respT>
+    <utilization> (expr=$use2, statQ=mean, source=calc)</utilization>
   </Storm:StormBolt>
   <Storm:StormSpout xmi:id="_UPvdADnrEeaBQNKHvmh8mQ" base_NamedElement="_CRMkoBXMEeaO9pVQNhbfJw" base_Action="_CRMkoBXMEeaO9pVQNhbfJw" targetTech="storm" parallelism="$n0">
     <hostDemand>(expr=$sp_1,unit=ms,statQ=mean,source=est)</hostDemand>
+    <throughput>(expr=$thru00, statQ=mean, source=calc)</throughput>
+    <respT>(expr=$resT00,unit=ms,statQ=mean,source=calc)</respT>
+    <utilization> (expr=$use00, statQ=mean, source=calc)</utilization>
   </Storm:StormSpout>
   <Storm:StormSpout xmi:id="_cPorwDnrEeaBQNKHvmh8mQ" base_NamedElement="_Ll1YwBXMEeaO9pVQNhbfJw" base_Action="_Ll1YwBXMEeaO9pVQNhbfJw" parallelism="$n1">
     <hostDemand>(expr=$sp_2,unit=ms,statQ=mean,source=est)</hostDemand>
+    <throughput>(expr=$thru01, statQ=mean, source=calc)</throughput>
+    <respT>(expr=$resT01,unit=ms,statQ=mean,source=calc)</respT>
+    <utilization> (expr=$use01, statQ=mean, source=calc)</utilization>
   </Storm:StormSpout>
   <Storm:StormStreamStep xmi:id="_suQoEDnwEeaBQNKHvmh8mQ" base_NamedElement="_eVT-IDOxEeax3OqdhCztQw" numTuples="$nS0" grouping="shuffle"/>
   <Storm:StormStreamStep xmi:id="_xN8fcDnwEeaBQNKHvmh8mQ" base_NamedElement="_Mj_54DMHEea2HMc_AU99vQ" numTuples="$nS1" grouping="shuffle"/>
@@ -261,14 +276,24 @@ grouping=shuffle}</body>
   <Storm:StormBolt xmi:id="_cXeisDxoEea0n4gfxAdogA" base_NamedElement="_4W9h0jxnEea0n4gfxAdogA" base_Classifier="_4W9h0jxnEea0n4gfxAdogA"/>
   <Storm:StormBolt xmi:id="_KPXRUDxpEea0n4gfxAdogA" base_NamedElement="__PdOMDxoEea0n4gfxAdogA" base_Classifier="__PdOMDxoEea0n4gfxAdogA"/>
   <Storm:StormSpout xmi:id="_N5SlYDxpEea0n4gfxAdogA" base_NamedElement="_5bYWwDxoEea0n4gfxAdogA" base_Classifier="_5bYWwDxoEea0n4gfxAdogA"/>
-  <GQAM:GaExecHost xmi:id="_HVSzAD0QEea5BfFPxb1f8A" resMult="(expr=$c1)" base_Classifier="_vdKrYB3CEeaAOqN-CPM2wA" schedPolicy="RoundRobin"/>
-  <GQAM:GaExecHost xmi:id="_osC8UD0QEea5BfFPxb1f8A" resMult="(expr=$c2)" base_Classifier="_4W9h0TxnEea0n4gfxAdogA"/>
+  <GQAM:GaExecHost xmi:id="_HVSzAD0QEea5BfFPxb1f8A" resMult="(expr=$c1)" base_Classifier="_vdKrYB3CEeaAOqN-CPM2wA" schedPolicy="RoundRobin">
+    <utilization> (expr=$use6, statQ=mean, source=calc)</utilization>
+  </GQAM:GaExecHost>
+  <GQAM:GaExecHost xmi:id="_osC8UD0QEea5BfFPxb1f8A" resMult="(expr=$c2)" base_Classifier="_4W9h0TxnEea0n4gfxAdogA">
+    <utilization> (expr=$use7, statQ=mean, source=calc)</utilization>
+  </GQAM:GaExecHost>
   <Storm:StormScenarioTopology xmi:id="_CuA7YGquEeaht-ghhLWJ8w" base_NamedElement="_fhMfgBXCEeaO9pVQNhbfJw" base_Behavior="_fhMfgBXCEeaO9pVQNhbfJw" base_Class="_fhMfgBXCEeaO9pVQNhbfJw"/>
   <Storm:StormBolt xmi:id="_Q1CfEG9REeaND6qpEoUfSQ" base_NamedElement="_Iq8LcG9REeaND6qpEoUfSQ" base_Action="_Iq8LcG9REeaND6qpEoUfSQ" parallelism="$n5">
     <hostDemand>(expr=$b2_2,unit=ms,statQ=mean,source=est)</hostDemand>
+    <throughput>(expr=$thru4, statQ=mean, source=calc)</throughput>
+    <respT>(expr=$resT4,unit=ms,statQ=mean,source=calc)</respT>
+    <utilization> (expr=$use4, statQ=mean, source=calc)</utilization>
   </Storm:StormBolt>
   <Storm:StormBolt xmi:id="_TEDUUG9REeaND6qpEoUfSQ" base_NamedElement="_NAsDsG9REeaND6qpEoUfSQ" base_Action="_NAsDsG9REeaND6qpEoUfSQ" parallelism="$n6">
     <hostDemand>(expr=$b2_4,unit=ms,statQ=mean,source=est)</hostDemand>
+    <throughput>(expr=$thru5, statQ=mean, source=calc)</throughput>
+    <respT>(expr=$resT5,unit=ms,statQ=mean,source=calc)</respT>
+    <utilization> (expr=$use5, statQ=mean, source=calc)</utilization>
   </Storm:StormBolt>
   <Storm:StormStreamStep xmi:id="_clq_EG9SEeaND6qpEoUfSQ" base_NamedElement="_r5kcYG9REeaND6qpEoUfSQ" numTuples="$nS2"/>
   <Storm:StormStreamStep xmi:id="_eQ2ugG9SEeaND6qpEoUfSQ" base_NamedElement="_seThIG9REeaND6qpEoUfSQ" numTuples="$nS3"/>
@@ -304,6 +329,29 @@ grouping=shuffle}</body>
     <context>in$b2_4</context>
     <context>in$c1</context>
     <context>in$c2</context>
-    <context>out$throughput</context>
+    <context>out$use2</context>
+    <context>out$use</context>
+    <context>out$use3</context>
+    <context>out$use4</context>
+    <context>out$use5</context>
+    <context>out$use6</context>
+    <context>out$use7</context>
+    <context>out$thru</context>
+    <context>out$thru2</context>
+    <context>out$thru3</context>
+    <context>out$thru4</context>
+    <context>out$thru5</context>
+    <context>out$thru00</context>
+    <context>out$thru01</context>
+    <context>out$resT00</context>
+    <context>out$resT01</context>
+    <context>out$resT</context>
+    <context>out$resT1</context>
+    <context>out$resT2</context>
+    <context>out$resT3</context>
+    <context>out$resT4</context>
+    <context>out$resT5</context>
+    <context>out$use00</context>
+    <context>out$use01</context>
   </GQAM:GaAnalysisContext>
 </xmi:XMI>

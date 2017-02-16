@@ -1141,19 +1141,4 @@
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wPSV8YlcEeai5cR0zDah1g" id="(0.07162284678150499,0.0)"/>
     </edges>
   </notation:Diagram>
-  <notation:Diagram xmi:id="_JnY44GqsEeaht-ghhLWJ8w" type="PapyrusUMLActivityDiagram" measurementUnit="Pixel">
-    <styles xmi:type="notation:StringValueStyle" xmi:id="_JnY44WqsEeaht-ghhLWJ8w" name="diagram_compatibility_version" stringValue="1.2.0"/>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_JnY44mqsEeaht-ghhLWJ8w"/>
-    <element xmi:type="uml:ActivityPartition" href="model.uml#_jbq2oGqpEeadLpmgngveUw"/>
-  </notation:Diagram>
-  <notation:Diagram xmi:id="_Nay5EGqsEeaht-ghhLWJ8w" type="PapyrusUMLActivityDiagram" measurementUnit="Pixel">
-    <styles xmi:type="notation:StringValueStyle" xmi:id="_Nay5EWqsEeaht-ghhLWJ8w" name="diagram_compatibility_version" stringValue="1.2.0"/>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_Nay5EmqsEeaht-ghhLWJ8w"/>
-    <element xmi:type="uml:ActivityPartition" href="model.uml#_UD_Q0BXMEeaO9pVQNhbfJw"/>
-  </notation:Diagram>
-  <notation:Diagram xmi:id="_xXJREKvmEeaQ89E5RJevLA" type="PapyrusUMLActivityDiagram" measurementUnit="Pixel">
-    <styles xmi:type="notation:StringValueStyle" xmi:id="_xXJREavmEeaQ89E5RJevLA" name="diagram_compatibility_version" stringValue="1.2.0"/>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_xXJREqvmEeaQ89E5RJevLA"/>
-    <element xmi:type="uml:OpaqueAction" href="model.uml#_lloGIBXNEeaO9pVQNhbfJw"/>
-  </notation:Diagram>
 </xmi:XMI>
