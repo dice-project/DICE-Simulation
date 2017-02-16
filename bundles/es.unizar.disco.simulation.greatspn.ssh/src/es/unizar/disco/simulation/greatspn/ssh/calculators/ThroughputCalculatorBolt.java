@@ -1,5 +1,6 @@
 package es.unizar.disco.simulation.greatspn.ssh.calculators;
 
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +15,11 @@ import es.unizar.disco.simulation.models.measures.MeasuresFactory;
 import es.unizar.disco.simulation.models.toolresult.AnalyzableElementInfo;
 import es.unizar.disco.simulation.models.toolresult.ToolResult;
 import es.unizar.disco.simulation.models.traces.TraceSet;
+import es.unizar.disco.simulation.models.wnsim.PlaceInfo;
 import es.unizar.disco.simulation.models.wnsim.TransitionInfo;
+import fr.lip6.move.pnml.ptnet.Arc;
+import fr.lip6.move.pnml.ptnet.Place;
+import fr.lip6.move.pnml.ptnet.Transition;
 
 public class ThroughputCalculatorBolt extends AbstractCalculator implements MeasureCalculator {
 
@@ -35,28 +40,67 @@ public class ThroughputCalculatorBolt extends AbstractCalculator implements Meas
 
 		// @formatter:off
 		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(domainElement, toolResult, traceSet);
-		List<TransitionInfo> transitionInfos = infos
+		
+		List<PlaceInfo> placeInfos = infos
 				.stream()
-				.filter(i -> i instanceof TransitionInfo)
-				.map(i -> (TransitionInfo) i)
+				.filter(i -> i instanceof PlaceInfo)
+				.map(i -> (PlaceInfo) i)
 				.collect(Collectors.toList());
 		// @formatter:on
 
-		if (transitionInfos.size() != 1) {
-			throw new RuntimeException(MessageFormat.format("Unexpected number of 'TransitionInfos' found for ''{0}''. Expected 1, but found ''{1}''", domainElement, transitionInfos.size()));
+		if (placeInfos.size() != 2) {
+			throw new RuntimeException(MessageFormat.format("Unexpected number of 'PlaceInfos' found for ''{0}''. Expected 2, but found ''{1}''", domainElement,
+					placeInfos.size()));
 		} else {
-			TransitionInfo transitionInfo = transitionInfos.get(0);
+			PlaceInfo placeInfo = placeInfos.get(0);
+			Place place = (Place) placeInfo.getAnalyzedElement();
+			
+			/* Get the place that is initialized with the parallelism (tokens) */ 
+			for (PlaceInfo pInfo : placeInfos) {
+				Place p = (Place) pInfo.getAnalyzedElement();
+				if (p.getInitialMarking() != null){
+					placeInfo = pInfo;
+					place = p;
+				}
+			}
+			
+			/* Get all the timed transitions corresponding to the Spout/Bolt */
+			/* All the timed transitions have an arc going to the place 
+			 * initialized with the parallelism (tokens) */
+			List<Arc> inArcs = place.getInArcs();
+			
+			String targetUnit = definition.getVslExpressionEntries().get("unit");
+			
 			DomainMeasure measure = MeasuresFactory.eINSTANCE.createDomainMeasure();
 			measure.setDefinition(definition);
-			try {
-				// Try to convert
-				String targetUnit = definition.getVslExpressionEntries().get("unit");
-				measure.setUnit(targetUnit);
-				measure.setValue(convert(transitionInfo.getValue(), transitionInfo.getUnit().toString(), targetUnit));
-			} catch (Throwable t) {
-				// If anything fails, use the base unit
-				measure.setUnit(transitionInfo.getUnit());
-				measure.setValue(transitionInfo.getValue());
+			measure.setUnit(targetUnit);
+			measure.setValue(BigDecimal.ZERO);
+			
+			/* At least, we need one timed transition for computing the throughput */
+			if (inArcs.size() >= 1){
+				String transitionUnit = null;
+				BigDecimal mean = new BigDecimal("0.0");
+				for (Arc arc : inArcs){
+					Transition tr = (Transition) arc.getSource();
+					//AnalyzableElementInfo transitionInfo = findAnalyzableElementInfo(tr, toolResult);
+					TransitionInfo transitionInfo = (TransitionInfo) findAnalyzableElementInfo(tr, toolResult);
+					transitionUnit =  transitionInfo.getUnit().toString();
+					//BigDecimal thru = new BigDecimal(transitionInfo.getThroughput().toString());
+					BigDecimal thru = new BigDecimal(transitionInfo.getValue().toString());
+					mean = mean.add(thru);
+				}
+				mean.divide(new BigDecimal(inArcs.size()));
+				
+				try {
+					// Try to convert
+					// Unit of the last transition
+					measure.setUnit(targetUnit);
+					measure.setValue(convert(mean, transitionUnit, targetUnit));
+				} catch (Throwable t) {
+					// If anything fails, use the base unit
+					measure.setUnit(transitionUnit);
+					measure.setValue(mean);
+				}
 			}
 			return measure;
 		}

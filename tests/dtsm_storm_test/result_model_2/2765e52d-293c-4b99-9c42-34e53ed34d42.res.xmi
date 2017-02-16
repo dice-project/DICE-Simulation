@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simresult:SimulationResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simresult="http://es.unizar.disco/simulation/simresult/1.0">
+  <invocation href="2765e52d-293c-4b99-9c42-34e53ed34d42.inv.xmi#2765e52d-293c-4b99-9c42-34e53ed34d42"/>
+  <measures value="2.004239144034689">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.0"/>
+  </measures>
+  <measures value="9.102482744500" unit="percentage">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.1"/>
+  </measures>
+  <measures value="0.181619562868" unit="events_per_tick">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.2"/>
+  </measures>
+  <measures value="2.987598006001217">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.3"/>
+  </measures>
+  <measures value="13.561642485600" unit="percentage">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.4"/>
+  </measures>
+  <measures value="0.226890582286" unit="events_per_tick">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.5"/>
+  </measures>
+  <measures value="4.964065555026717">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.6"/>
+  </measures>
+  <measures value="18.0470793106666700" unit="percentage">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.7"/>
+  </measures>
+  <measures value="0.218167678589" unit="events_per_tick">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.8"/>
+  </measures>
+  <measures value="0" unit="percentage">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.9"/>
+  </measures>
+  <measures value="5.505964221467535">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.10"/>
+  </measures>
+  <measures value="0.544863693139" unit="events_per_tick">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.11"/>
+  </measures>
+  <measures value="0" unit="percentage">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.12"/>
+  </measures>
+  <measures value="2.452606820537407">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.13"/>
+  </measures>
+  <measures value="0.815458875533" unit="events_per_tick">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.14"/>
+  </measures>
+  <measures value="4.035565591597619">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.15"/>
+  </measures>
+  <measures value="3.97402083571428600" unit="percentage">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.16"/>
+  </measures>
+  <measures value="0.0690575720706" unit="events_per_tick">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.17"/>
+  </measures>
+  <measures value="5.960506132348172">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.18"/>
+  </measures>
+  <measures value="3.9181125477500" unit="percentage">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.19"/>
+  </measures>
+  <measures value="0.0526677214632" unit="events_per_tick">
+    <definition href="d9b82a71-4d8b-48dc-9224-1733d92a8c79.def.xmi#//@declaredMeasures.20"/>
+  </measures>
+</simresult:SimulationResult>
