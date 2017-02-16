@@ -684,7 +684,7 @@ mapping UML::ControlFlow::shuffle_grouping_async(in bolt : UML::ActivityNode) {
 }
 
 mapping UML::ControlFlow::shuffle_grouping_sync(in bolt : UML::ActivityNode, in join_node : UML::ActivityNode)  when {
-	self.oclIsKindOf(JoinNode)
+	join_node.oclIsKindOf(JoinNode)
 }{	
 	/* Create a single common immediate transition for all the incoming StormStreams to the JoinNode */
 	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
@@ -736,7 +736,7 @@ mapping UML::ControlFlow::all_grouping_async(in bolt : UML::ActivityNode, inout 
 }
 
 mapping UML::ControlFlow::all_grouping_sync(in bolt : UML::ActivityNode, inout list_trans_exec : List(PNML::Transition), in join_node : UML::ActivityNode)  when {
-	self.oclIsKindOf(JoinNode)
+	join_node.oclIsKindOf(JoinNode)
 }{
 	/* Create a single common immediate transition for all the incoming StormStreams to the JoinNode */
 	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
