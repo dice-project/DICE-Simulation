@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traces:TraceSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:traces="http://es.unizar.disco/simulation/traces/1.0">
+  <traces rule="initialNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ycxQPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="initialNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ycxQfQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="initialNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ycxQvQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="initialNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ycxQ_QoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ygboPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ygbofQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ygbovQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yhCsPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yhCsfQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ykGAPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7MPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7MfQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7MvQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7M_QoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7NPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ymiQPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yo-gPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="model2closedNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_1va4EDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yqzsPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="model2closedNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_1va4EDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yrawPQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="initialControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_zfomwDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ytP8PQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="initialControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_zfomwDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ytP8fQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="initialControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_zfomwDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yt3APQoEeaV18QUFUAtgg"/>
+  </traces>
+  <traces rule="partitions2resources">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_hadoop_test/model_1_class_1_host.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yvsMPQoEeaV18QUFUAtgg"/>
+  </traces>
+</traces:TraceSet>

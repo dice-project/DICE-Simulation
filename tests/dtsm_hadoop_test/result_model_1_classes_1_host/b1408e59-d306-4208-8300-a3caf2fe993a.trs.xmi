@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ASCII"?>
+<wnsim:WnsimResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wnsim="http://es.unizar.disco/simulation/tool/wnsim/1.0" timestamp="2017-02-16T10:19:00.457+0100">
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.139169854474">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ycxQ_QoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.138135785216</confidenceInterval>
+    <confidenceInterval>0.140217628485</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.417268268265">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yhCsfQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.414306788389</confidenceInterval>
+    <confidenceInterval>0.420263931933</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.417325719493">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ymiQPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.414296892081</confidenceInterval>
+    <confidenceInterval>0.420388540341</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.417095914582">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yhCsPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.414059037588</confidenceInterval>
+    <confidenceInterval>0.420164662202</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.139192834965">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ykGAPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.138183554085</confidenceInterval>
+    <confidenceInterval>0.140213826748</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.139031971527">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7M_QoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.138033931626</confidenceInterval>
+    <confidenceInterval>0.140040599616</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.417429131704">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7NPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.414439886481</confidenceInterval>
+    <confidenceInterval>0.420452499835</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.139043461773">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yo-gPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.138037845386</confidenceInterval>
+    <confidenceInterval>0.140059410239</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.139100913001">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yrawPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.138088264846</confidenceInterval>
+    <confidenceInterval>0.140125332966</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:TransitionInfo" unit="events_per_tick" throughput="0.138986010545">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yt3APQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.137980284728</confidenceInterval>
+    <confidenceInterval>0.140002349526</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="0.414844218113">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ycxQPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.408246540086</confidenceInterval>
+    <confidenceInterval>0.421487993445</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="1">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ycxQfQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>1</confidenceInterval>
+    <confidenceInterval>1</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="1">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ytP8fQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>1</confidenceInterval>
+    <confidenceInterval>1</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="1.08356269897">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yvsMPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>1.07047914306</confidenceInterval>
+    <confidenceInterval>1.0966021808</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="1.58617348498">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ycxQvQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>1.57324751046</confidenceInterval>
+    <confidenceInterval>1.59905345641</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="0.0345366765519">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ygboPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.0328143664051</confidenceInterval>
+    <confidenceInterval>0.0362630231606</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="1.66876442409">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ygbofQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>1.65384715487</confidenceInterval>
+    <confidenceInterval>1.68368756964</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="1.39537782007">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ygbovQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>1.37723680566</confidenceInterval>
+    <confidenceInterval>1.41350377016</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="0.601546552808">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7MPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.594305775044</confidenceInterval>
+    <confidenceInterval>0.608794327973</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="1.24767287694">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7MfQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>1.2419629245</confidenceInterval>
+    <confidenceInterval>1.25342102714</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="1.04904854026">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yl7MvQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>1.04090304426</confidenceInterval>
+    <confidenceInterval>1.05715371001</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="0">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8yqzsPQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0</confidenceInterval>
+    <confidenceInterval>0</confidenceInterval>
+  </infos>
+  <infos xsi:type="wnsim:PlaceInfo" meanNumberOfTokens="0.0308798890822">
+    <analyzedElement href="b1408e59-d306-4208-8300-a3caf2fe993a.anm.xmi#_8ytP8PQoEeaV18QUFUAtgg"/>
+    <confidenceInterval>0.0294546356152</confidenceInterval>
+    <confidenceInterval>0.0323074029722</confidenceInterval>
+  </infos>
+</wnsim:WnsimResult>
