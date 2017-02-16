@@ -376,7 +376,13 @@ public class ActivityResponseTimeCalculatorHadoop extends AbstractCalculator imp
 			BigDecimal dividend = new BigDecimal(initialMarking - meanMarking);
 			BigDecimal divisor = new BigDecimal(transitionInfo.getThroughput().toString());
 
-			BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			//BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			BigDecimal rawValue;
+			if (divisor.compareTo(BigDecimal.ZERO) == 0){
+				rawValue = BigDecimal.ZERO;
+			} else {
+				rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			}
 			String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
 
 			DomainMeasure measure = buildMeasure(rawValue, transitionInfo.getUnit(), targetUnit);

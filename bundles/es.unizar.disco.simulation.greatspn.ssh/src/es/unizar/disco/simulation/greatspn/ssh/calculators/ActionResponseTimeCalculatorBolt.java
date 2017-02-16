@@ -79,7 +79,13 @@ public class ActionResponseTimeCalculatorBolt extends AbstractCalculator impleme
 
 			DomainMeasure measure = MeasuresFactory.eINSTANCE.createDomainMeasure();
 			measure.setDefinition(definition);
-			BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			//BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			BigDecimal rawValue;
+			if (divisor.compareTo(BigDecimal.ZERO) == 0){
+				rawValue = BigDecimal.ZERO;
+			} else {
+				rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			}
 			
 			try {
 				// Try to convert
