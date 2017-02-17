@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traces:TraceSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:traces="http://es.unizar.disco/simulation/traces/1.0">
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_-yHrMLiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yFxvIPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_-yHrMLiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yFxvIfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_-yHrMLiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yFy9QPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_1pxxMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF2noPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_1pxxMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF2nofUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_1pxxMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF3OsPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_OihMYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF6SAPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_OihMYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF6SAfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_OihMYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF65EPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_UrlcYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF9VUPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_UrlcYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF9VUfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_UrlcYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yF98YPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="spoutNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_Kz3l0LiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGCN0PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="spoutNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_Kz3l0LiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGAYofUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_qRoNMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGDb8fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_qRoNMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGDb8vUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_qRoNMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGEDAPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_9NqO0LiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGGfQfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_9NqO0LiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGGfQvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_9NqO0LiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGHGUPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_RSWFILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGKJoPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_RSWFILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGKJofUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_RSWFILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGKwsPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_FIF5ULibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGNM8fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_FIF5ULibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGNM8vUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_FIF5ULibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGN0APUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_JAOBcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGPpMvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_JAOBcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGQQQPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_JAOBcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGQQQfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_TNnpkLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGSsgvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_TNnpkLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGSsg_UYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_TNnpkLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGTTkPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_t3aoILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGWW4vUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_t3aoILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGWW4_UYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_t3aoILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGW98PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_wdMXkLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGaBQPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_wdMXkLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGaBQfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_wdMXkLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGaoUPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_UpC7MLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGdEkPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_UpC7MLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGdEkfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_UpC7MLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGdroPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_59PxgLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGgH4PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_59PxgLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGgH4fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_59PxgLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGgu8PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGsVIPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGpR0PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGsVIfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGsVIvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGvYcPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGs8MfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGvYcfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGv_gPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGybwPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGv_iPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGzC0PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGzC0fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yG0Q8PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGzp4PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yG0Q8fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yG0Q8vUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yGikIvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHAeMPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yG_QEPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHAeMfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHAeMvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yG1fEPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHKPMPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHIaAPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHKPMfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHKPMvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHNSgPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHK2R_UYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHN5kPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHN5kfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHQ84PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHOgoPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHQ84fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHQ84vUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHSLAPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHRj8PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHSyEPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHSyEfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHBFQPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_eDuQcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHTZIPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_uPfUcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHUAMPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_u3nEYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHUAMvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHbU8PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHZfwPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHbU8fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHbU8vUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHdKIPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHb8AvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHdxMPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHdxMfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHfmYPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHdxOfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHfmYfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHfmYvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHg0gPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHgNd_UYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHg0gfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHg0gvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHUnQPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHj30PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHiCpfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHj30fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHj30vUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHhblvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_wC_SYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHlF8PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_vf068LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHltAPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_f4dkgLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHltA_UYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8kOeALieEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHmUEfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHowUPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHm7I_UYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHowUfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHowUvUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHm7IPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_lsRiAPT7Eeadx-pgmpmuHQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHp-cPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_eDuQcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHrzoPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_uPfUcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHtBwPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_u3nEYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHto0PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_wC_SYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHwFEfUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_vf068LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHx6QPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_f4dkgLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yHzvcPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_8kOeALieEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yH09kPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_lsRiAPT7Eeadx-pgmpmuHQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yH2LsPUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_GSAx8LifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yH4A4fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_GSAx8LifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yH4A4PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_EEyscLifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yH4n8fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_EEyscLifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yH4n8PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_IVYX4LifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yH4n9fUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_IVYX4LifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yH4n9PUYEeamq6lfhyjRrw"/>
+  </traces>
+  <traces rule="partitions2resources">
+    <fromDomainElement href="platform:/resource/es.unizar.disco/tests/dtsm_storm_test/atc2.uml#_2U8UcLiiEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="f787bf36-31a6-42f4-8076-081a33bcd7a1.anm.xmi#_yIEOIPUYEeamq6lfhyjRrw"/>
+  </traces>
+</traces:TraceSet>
