@@ -159,7 +159,7 @@ public class ActivityResponseTimeCalculator extends AbstractCalculator implement
 		//
 		// Pattern:
 		//		[P]---> (subnet) --->[T]
-		//        ^------------------´
+		//        ^------------------ï¿½
 		//
 		// Deprecated:respT = (sum(mean_number_tokens(subnet)) - mean_number_tokens(P)) / throughput(T)
 		//respT = mean_number_tokens(PlaceConcurrentUsers)/throughput(T_end)
@@ -259,7 +259,14 @@ public class ActivityResponseTimeCalculator extends AbstractCalculator implement
 			BigDecimal dividend = new BigDecimal(sum);
 			BigDecimal divisor = new BigDecimal(transitionInfo.getThroughput().toString());
 
-			BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			//BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			BigDecimal rawValue;
+			if (divisor.compareTo(BigDecimal.ZERO) == 0){
+				rawValue = BigDecimal.ZERO;
+			} else {
+				rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			}
+			
 			String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
 
 			DomainMeasure measure = buildMeasure(rawValue, transitionInfo.getUnit(), targetUnit);
@@ -271,7 +278,7 @@ public class ActivityResponseTimeCalculator extends AbstractCalculator implement
 	private DomainMeasure calculateClosed(Activity activity, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet) {
 		// Pattern:
 		// [P]---> (subnet) --->[T]
-		// ^------------------´
+		// ^------------------ï¿½
 		//
 		// respT = (sum(mean_number_tokens(subnet)) - mean_number_tokens(P)) /
 		// throughput(T)

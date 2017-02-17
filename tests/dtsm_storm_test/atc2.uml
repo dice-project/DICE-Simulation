@@ -10,7 +10,6 @@
       <edge xmi:type="uml:ControlFlow" xmi:id="_c18OsLibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ" target="_Kz3l0LiaEea8eaFayFZqBQ" source="_0ZQZ8LiZEea8eaFayFZqBQ"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_eDuQcLibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ" target="_9NqO0LiZEea8eaFayFZqBQ" source="_Kz3l0LiaEea8eaFayFZqBQ"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_f4dkgLibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ" target="_-yHrMLiZEea8eaFayFZqBQ" source="_9NqO0LiZEea8eaFayFZqBQ"/>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_hVj0oLibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ" target="_RSWFILiaEea8eaFayFZqBQ" source="_-yHrMLiZEea8eaFayFZqBQ"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_uPfUcLibEea8eaFayFZqBQ" target="_UrlcYLibEea8eaFayFZqBQ" source="_TNnpkLibEea8eaFayFZqBQ"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_u3nEYLibEea8eaFayFZqBQ" target="_59PxgLiaEea8eaFayFZqBQ" source="_1pxxMLiaEea8eaFayFZqBQ"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_vf068LibEea8eaFayFZqBQ" target="_1pxxMLiaEea8eaFayFZqBQ" source="_wdMXkLiaEea8eaFayFZqBQ"/>
@@ -25,12 +24,13 @@
       <edge xmi:type="uml:ControlFlow" xmi:id="_Q32IMLifEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ" target="_EEyscLifEea8eaFayFZqBQ" source="_UpC7MLiaEea8eaFayFZqBQ"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_SejAQLifEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ" target="_GSAx8LifEea8eaFayFZqBQ" source="_59PxgLiaEea8eaFayFZqBQ"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_TTmY8LifEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ" target="_IVYX4LifEea8eaFayFZqBQ" source="_UrlcYLibEea8eaFayFZqBQ"/>
-      <group xmi:type="uml:ActivityPartition" xmi:id="_p9Tz8LijEea8eaFayFZqBQ" name="Partition" node="_UrlcYLibEea8eaFayFZqBQ _TNnpkLibEea8eaFayFZqBQ _OihMYLibEea8eaFayFZqBQ _JAOBcLibEea8eaFayFZqBQ _FIF5ULibEea8eaFayFZqBQ _qRoNMLiaEea8eaFayFZqBQ _t3aoILiaEea8eaFayFZqBQ _wdMXkLiaEea8eaFayFZqBQ _1pxxMLiaEea8eaFayFZqBQ _59PxgLiaEea8eaFayFZqBQ _UpC7MLiaEea8eaFayFZqBQ _RSWFILiaEea8eaFayFZqBQ _-yHrMLiZEea8eaFayFZqBQ _9NqO0LiZEea8eaFayFZqBQ _Kz3l0LiaEea8eaFayFZqBQ" represents="_2U8UcLiiEea8eaFayFZqBQ" edge="_eDuQcLibEea8eaFayFZqBQ _c18OsLibEea8eaFayFZqBQ _f4dkgLibEea8eaFayFZqBQ _hVj0oLibEea8eaFayFZqBQ _8kOeALieEea8eaFayFZqBQ _Q32IMLifEea8eaFayFZqBQ _TTmY8LifEea8eaFayFZqBQ _SejAQLifEea8eaFayFZqBQ"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_lsRiAPT7Eeadx-pgmpmuHQ" target="_RSWFILiaEea8eaFayFZqBQ" source="_-yHrMLiZEea8eaFayFZqBQ"/>
+      <group xmi:type="uml:ActivityPartition" xmi:id="_p9Tz8LijEea8eaFayFZqBQ" name="Partition" node="_UrlcYLibEea8eaFayFZqBQ _TNnpkLibEea8eaFayFZqBQ _OihMYLibEea8eaFayFZqBQ _JAOBcLibEea8eaFayFZqBQ _FIF5ULibEea8eaFayFZqBQ _qRoNMLiaEea8eaFayFZqBQ _t3aoILiaEea8eaFayFZqBQ _wdMXkLiaEea8eaFayFZqBQ _1pxxMLiaEea8eaFayFZqBQ _59PxgLiaEea8eaFayFZqBQ _UpC7MLiaEea8eaFayFZqBQ _RSWFILiaEea8eaFayFZqBQ _-yHrMLiZEea8eaFayFZqBQ _9NqO0LiZEea8eaFayFZqBQ _Kz3l0LiaEea8eaFayFZqBQ" represents="_2U8UcLiiEea8eaFayFZqBQ" edge="_eDuQcLibEea8eaFayFZqBQ _c18OsLibEea8eaFayFZqBQ _f4dkgLibEea8eaFayFZqBQ _8kOeALieEea8eaFayFZqBQ _Q32IMLifEea8eaFayFZqBQ _TTmY8LifEea8eaFayFZqBQ _SejAQLifEea8eaFayFZqBQ"/>
       <node xmi:type="uml:InitialNode" xmi:id="_0ZQZ8LiZEea8eaFayFZqBQ" name="Start" outgoing="_c18OsLibEea8eaFayFZqBQ"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_9NqO0LiZEea8eaFayFZqBQ" name="EntityExtraction" incoming="_eDuQcLibEea8eaFayFZqBQ" outgoing="_f4dkgLibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
-      <node xmi:type="uml:OpaqueAction" xmi:id="_-yHrMLiZEea8eaFayFZqBQ" name="MinhashExtraction" incoming="_f4dkgLibEea8eaFayFZqBQ" outgoing="_hVj0oLibEea8eaFayFZqBQ _8kOeALieEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_-yHrMLiZEea8eaFayFZqBQ" name="MinhashExtraction" incoming="_f4dkgLibEea8eaFayFZqBQ" outgoing="_8kOeALieEea8eaFayFZqBQ _lsRiAPT7Eeadx-pgmpmuHQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_Kz3l0LiaEea8eaFayFZqBQ" name="TwitterSample" incoming="_c18OsLibEea8eaFayFZqBQ" outgoing="_eDuQcLibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
-      <node xmi:type="uml:OpaqueAction" xmi:id="_RSWFILiaEea8eaFayFZqBQ" name="TermsExtraction" incoming="_hVj0oLibEea8eaFayFZqBQ" outgoing="_39H3YLibEea8eaFayFZqBQ _8fuf4LibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_RSWFILiaEea8eaFayFZqBQ" name="TermsExtraction" incoming="_lsRiAPT7Eeadx-pgmpmuHQ" outgoing="_39H3YLibEea8eaFayFZqBQ _8fuf4LibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_UpC7MLiaEea8eaFayFZqBQ" name="SolrUpdater" incoming="_8kOeALieEea8eaFayFZqBQ" outgoing="_Q32IMLifEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_qRoNMLiaEea8eaFayFZqBQ" name="TermsRollingCounter" incoming="_39H3YLibEea8eaFayFZqBQ" outgoing="_05z3YLibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_t3aoILiaEea8eaFayFZqBQ" name="IntermediateRanker" incoming="_05z3YLibEea8eaFayFZqBQ" outgoing="_ygJ4YLibEea8eaFayFZqBQ" inPartition="_p9Tz8LijEea8eaFayFZqBQ"/>
@@ -270,7 +270,7 @@
     <hostDemand>(expr=$s1,unit=ms,statQ=mean,source=est)</hostDemand>
     <utilization>(expr=$u1,statQ=mean,source=calc)</utilization>
   </Storm:StormSpout>
-  <Storm:StormBolt xmi:id="_U01-sLieEea8eaFayFZqBQ" base_NamedElement="_RSWFILiaEea8eaFayFZqBQ" base_Action="_RSWFILiaEea8eaFayFZqBQ" parallelism="$p4">
+  <Storm:StormBolt xmi:id="_U01-sLieEea8eaFayFZqBQ" base_NamedElement="_RSWFILiaEea8eaFayFZqBQ" base_Action="_RSWFILiaEea8eaFayFZqBQ" parallelism="$p4" sigma="$sigma1">
     <hostDemand>(expr=$b3,unit=ms,statQ=mean,source=est)</hostDemand>
     <utilization>(expr=$u5,statQ=mean,source=calc)</utilization>
   </Storm:StormBolt>
@@ -322,7 +322,6 @@
     <context>in$t1</context>
     <context>in$t2</context>
     <context>in$t3</context>
-    <context>in$t4</context>
     <context>in$t5</context>
     <context>in$t6</context>
     <context>in$t7</context>
@@ -357,6 +356,7 @@
     <context>out$u13</context>
     <context>out$u14</context>
     <context>out$u15</context>
+    <context>in$sigma1</context>
   </GQAM:GaAnalysisContext>
   <Storm:StormBolt xmi:id="_qzF-sLieEea8eaFayFZqBQ" base_NamedElement="_wdMXkLiaEea8eaFayFZqBQ" base_Action="_wdMXkLiaEea8eaFayFZqBQ" parallelism="$p8">
     <hostDemand>(expr=$b7,unit=ms,statQ=mean,source=est)</hostDemand>
@@ -395,7 +395,6 @@
   <Storm:StormStreamStep xmi:id="_MJqsYLigEea8eaFayFZqBQ" base_NamedElement="_eDuQcLibEea8eaFayFZqBQ" numTuples="$t1" grouping="shuffle"/>
   <Storm:StormStreamStep xmi:id="_OgYsILigEea8eaFayFZqBQ" base_NamedElement="_f4dkgLibEea8eaFayFZqBQ" numTuples="$t2" grouping="shuffle"/>
   <Storm:StormStreamStep xmi:id="_RPhL4LigEea8eaFayFZqBQ" base_NamedElement="_8kOeALieEea8eaFayFZqBQ" numTuples="$t3" grouping="shuffle"/>
-  <Storm:StormStreamStep xmi:id="_S5UbQLigEea8eaFayFZqBQ" base_NamedElement="_hVj0oLibEea8eaFayFZqBQ" numTuples="$t4" grouping="shuffle"/>
   <Storm:StormStreamStep xmi:id="_V9QtYLigEea8eaFayFZqBQ" base_NamedElement="_8fuf4LibEea8eaFayFZqBQ" numTuples="$t5" grouping="field">
     <probFields>$prob1</probFields>
     <probFields>2.0*$prob1</probFields>
@@ -429,4 +428,5 @@
   <GQAM:GaExecHost xmi:id="_93RdcLiiEea8eaFayFZqBQ" resMult="$c1" base_Classifier="_2U8UcLiiEea8eaFayFZqBQ">
     <utilization>(expr=$util,statQ=mean,source=calc)</utilization>
   </GQAM:GaExecHost>
+  <Storm:StormStreamStep xmi:id="_nej_APT7Eeadx-pgmpmuHQ" base_NamedElement="_lsRiAPT7Eeadx-pgmpmuHQ" grouping="shuffle"/>
 </xmi:XMI>

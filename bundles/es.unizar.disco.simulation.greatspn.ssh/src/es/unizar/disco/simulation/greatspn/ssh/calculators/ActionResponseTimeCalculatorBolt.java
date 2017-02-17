@@ -21,13 +21,50 @@ import es.unizar.disco.simulation.models.toolresult.ToolResult;
 import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.wnsim.PlaceInfo;
 import es.unizar.disco.simulation.models.wnsim.TransitionInfo;
+import fr.lip6.move.pnml.ptnet.Arc;
 import fr.lip6.move.pnml.ptnet.Place;
+import fr.lip6.move.pnml.ptnet.Transition;
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat.Flavor;
 import tec.units.ri.unit.Units;
 
 public class ActionResponseTimeCalculatorBolt extends AbstractCalculator implements MeasureCalculator {
 
+	public BigDecimal calculateMeanThru(Place place, ToolResult toolResult) {
+		// @formatter:off
+		//
+		// Throughput is directly obtained from a TransitionInfo corresponding
+		// to the input domain element
+		//
+		// Pattern:
+		//		--->[T]--->
+		// 		
+		// throughput = throughput(T)
+		//
+		// @formatter:on
+		//
+
+		// @formatter:off
+			
+		BigDecimal mean = new BigDecimal("0.0");
+		/* Get all the timed transitions corresponding to the Spout/Bolt */
+		/* All the timed transitions have an arc going to the place 
+		 * initialized with the parallelism (tokens) */
+		List<Arc> inArcs = place.getInArcs();
+		
+		/* At least, we need one timed transition for computing the throughput */
+		if (inArcs.size() >= 1){			
+			for (Arc arc : inArcs){
+				Transition tr = (Transition) arc.getSource();
+				TransitionInfo transitionInfo = (TransitionInfo) findAnalyzableElementInfo(tr, toolResult);
+				BigDecimal thru = new BigDecimal(transitionInfo.getValue().toString());
+				mean = mean.add(thru);
+			}
+			mean.divide(new BigDecimal(inArcs.size()));
+		}
+		return mean;
+	}
+	
 	@Override
 	public DomainMeasure calculate(EObject domainElement, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet) {
 		// @formatter:off
@@ -75,11 +112,21 @@ public class ActionResponseTimeCalculatorBolt extends AbstractCalculator impleme
 			}
 			
 			BigDecimal dividend = new BigDecimal(placeInfo.getMeanNumberOfTokens().toString());
-			BigDecimal divisor = new BigDecimal(transitionInfo.getThroughput().toString());
+			//BigDecimal divisor = new BigDecimal(transitionInfo.getThroughput().toString());
+			BigDecimal divisor = calculateMeanThru((Place) placeInfo.getAnalyzedElement(), toolResult);
 
+			
+			
+			
 			DomainMeasure measure = MeasuresFactory.eINSTANCE.createDomainMeasure();
 			measure.setDefinition(definition);
-			BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			//BigDecimal rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			BigDecimal rawValue;
+			if (divisor.compareTo(BigDecimal.ZERO) == 0){
+				rawValue = BigDecimal.ZERO;
+			} else {
+				rawValue = dividend.divide(divisor, MathContext.DECIMAL64);
+			}
 			
 			try {
 				// Try to convert

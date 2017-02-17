@@ -28,6 +28,8 @@ main() {
 	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2arcGlobalField();
 	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2tarcAllShuffle();
 	ad.scenario().node[UML::FinalNode] -> map finalNode();
+	//ad.scenario().edge[UML::ControlFlow] -> map controlFlow2tarcNumTuples();
+	ad.scenario().node[UML::ActivityNode] -> map activityNode2tarcNumTuples();
 		
 	// Transform deployment
     ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
@@ -660,6 +662,38 @@ mapping UML::ControlFlow::joinControlFlow2arcAllShuffle() when {
 	//self.map trace(place_buffer, "joinControlFlow2arc");
 }
 
+/**
+	Add 'weight' tokens to the outgoing arc of the timed transition of the Petri net
+	associated to the ActivityNode 
+*/
+
+mapping UML::ActivityNode::activityNode2tarcNumTuples() when {
+	 self.getStormBolt().oclIsUndefined().not()
+}{
+	var bolt := self;
+	var weight := getStormBolt_outTuples(bolt).value();
+	var list_trans_exec := bolt.getTimedTrans_Node();
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + bolt.toString() + "' in partition '" + self.toString() + "'");
+	
+	list_trans_exec->forEach(temp_trans){		
+		temp_trans.OutArcs->forEach(out_arc){
+			var place := out_arc.target.oclAsType(Place);
+			/* Update the weight in the arcs that are not pointing to a resources place */
+			if (place.initialMarking.oclIsUndefined()){
+				if (out_arc.inscription.oclIsUndefined().not()){
+					out_arc.inscription.text := (out_arc.inscription.text * weight).round();  
+				} else{
+					out_arc.inscription := object PNML::PTArcAnnotation {
+						text := weight.round();
+					};
+					/**/
+					var t1 := 1;
+				};
+			}
+		}
+	};
+}
+
 /*******************************************************************************
   Stream grouping transformations
 *******************************************************************************/
@@ -677,14 +711,15 @@ mapping UML::ControlFlow::shuffle_grouping_async(in bolt : UML::ActivityNode) {
     var arc_3 := map arc(trans_in_bolt, place_working_bolt);
 	
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		text := self.getStormStreamStep_numTuples().value();
+		//text := self.getStormStreamStep_numTuples().value();
+		text := getStormBolt_inTuples(self, bolt).value();
 	};
 	
 	self.map trace(trans_in_bolt, "shuffleGrouping");	
 }
 
 mapping UML::ControlFlow::shuffle_grouping_sync(in bolt : UML::ActivityNode, in join_node : UML::ActivityNode)  when {
-	self.oclIsKindOf(JoinNode)
+	join_node.oclIsKindOf(JoinNode)
 }{	
 	/* Create a single common immediate transition for all the incoming StormStreams to the JoinNode */
 	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
@@ -703,7 +738,8 @@ mapping UML::ControlFlow::shuffle_grouping_sync(in bolt : UML::ActivityNode, in 
 		
 	var arc_1 := map arc(place_buffer, trans_in_bolt);	
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		text := self.getStormStreamStep_numTuples().value();
+		//text := self.getStormStreamStep_numTuples().value();
+		text := getStormBolt_inTuples(self, bolt).value();
 	};
 }
 
@@ -720,7 +756,8 @@ mapping UML::ControlFlow::all_grouping_async(in bolt : UML::ActivityNode, inout 
     var arc_3 := map arc(trans_in_bolt, place_working_bolt);
     
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		text := self.getStormStreamStep_numTuples().value();
+		//text := self.getStormStreamStep_numTuples().value();
+		text := getStormBolt_inTuples(self, bolt).value();
 	};
     	
 	var parallelism := bolt.getStormBolt_parallelism().value();
@@ -736,7 +773,7 @@ mapping UML::ControlFlow::all_grouping_async(in bolt : UML::ActivityNode, inout 
 }
 
 mapping UML::ControlFlow::all_grouping_sync(in bolt : UML::ActivityNode, inout list_trans_exec : List(PNML::Transition), in join_node : UML::ActivityNode)  when {
-	self.oclIsKindOf(JoinNode)
+	join_node.oclIsKindOf(JoinNode)
 }{
 	/* Create a single common immediate transition for all the incoming StormStreams to the JoinNode */
 	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
@@ -755,7 +792,8 @@ mapping UML::ControlFlow::all_grouping_sync(in bolt : UML::ActivityNode, inout l
 		
 	var arc_1 := map arc(place_buffer, trans_in_bolt);	
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		text := self.getStormStreamStep_numTuples().value();
+		//text := self.getStormStreamStep_numTuples().value();
+		text := getStormBolt_inTuples(self, bolt).value();
 	};
 		
 	var parallelism := bolt.getStormBolt_parallelism().value();
@@ -804,7 +842,8 @@ mapping UML::ControlFlow::global_grouping(in bolt : UML::ActivityNode) {
 		
 	var arc_1 := map arc(place_buffer, trans_in_bolt);
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		text := self.getStormStreamStep_numTuples().value();
+		//text := self.getStormStreamStep_numTuples().value();
+		text := getStormBolt_inTuples(self, bolt).value();
 	};
 }
 
@@ -827,8 +866,9 @@ mapping UML::ControlFlow::field_grouping(in bolt : UML::ActivityNode) {
 
 	/* The available threads are shared proportionally by each field value */
 	var res_per_pipeline := (place_parallel_bolt.initialMarking.text / numFields).floor();
-	assert fatal (res_per_pipeline > 0) with log ("Not enough resources (" + res_per_pipeline.toString() + ") for all the probFields paths (" + numFields.toString() + ")");
-	var weight := self.getStormStreamStep_numTuples().value();
+	assert warning (res_per_pipeline > 0) with log ("Not enough resources (" + res_per_pipeline.toString() + ") for all the probFields paths (" + numFields.toString() + ")");
+	//var weight := self.getStormStreamStep_numTuples().value();
+	var weight := getStormBolt_inTuples(self, bolt).value();
 	var i := numFields;	
 	while (i > 0){
 		/* Create a independent processing pipeline for each field value */
@@ -1214,6 +1254,89 @@ helper UML::Element::getStormSpout_parallelism() : NFP_Integer {
 }
 
 /******************************************************************/
+helper UML::Element::getStormBolt_sigma() : NFP_Real {
+	if (self.getStormBolt() = null) {
+		return null;
+	};
+	var sigma := self.getValue(self.getStormBolt(), "sigma").oclAsType(String);
+	assert warning (sigma->size() = 1)
+		with log ("Unexpected number of 'sigma' tagged values found, expected 1. "+
+					"The context element is '" + self.toString() + "'"); 
+					
+	return sigma.toNfpReal();
+}
+
+/******************************************************************/
+helper UML::Element::getStormBolt_sigma_inTuples() : NFP_Integer {
+	if (self.getStormBolt() = null) {
+		return null;
+	};
+	var inTuples := (1.0 / self.getStormBolt_sigma().value().round()).toString(); 
+					
+	return inTuples.toNfpInteger();
+}
+
+helper UML::Element::getStormBolt_sigma_outTuples() : NFP_Integer {
+	if (self.getStormBolt() = null) {
+		return null;
+	};
+	var outTuples := self.getStormBolt_sigma().value().round().toString(); 
+					
+	return outTuples.toNfpInteger();
+}
+
+/******************************************************************/
+helper getStormBolt_inTuples(in stream : UML::ControlFlow, in bolt : UML::ActivityNode) : NFP_Integer {
+	var inTuples := "1";
+	
+	/**/
+	var stream_numTuples := stream.getStormStreamStep_numTuples();
+	var bolt_numTuples := bolt.getStormBolt_sigma_inTuples();
+	/**/
+	if ((stream_numTuples != null) and
+		stream_numTuples.oclIsUndefined().not()) {
+		return stream.getStormStreamStep_numTuples();
+	} else if ((bolt_numTuples != null) and
+				bolt_numTuples.oclIsUndefined().not() and
+				(bolt_numTuples.value() > 1) ) {
+				return bolt_numTuples;
+	};	
+	return inTuples.toNfpInteger();
+}
+
+helper getStormBolt_inTuples2(in stream : UML::ControlFlow, in bolt : UML::ActivityNode) : NFP_Integer {
+	var inTuples := "1";
+	
+	if (stream.getStormStreamStep() != null) {
+		inTuples := stream.getStormStreamStep_numTuples().value().toString();
+	} else if (bolt.getStormStreamStep() != null) {
+		var real_value := 1.0 / bolt.getStormBolt_sigma().value();
+		if (real_value.round() > 1) {
+			inTuples := (real_value.round()).toString();
+		}
+	};	
+	return inTuples.toNfpInteger();
+}
+
+helper getStormBolt_outTuples_int(in bolt : UML::ActivityNode) : NFP_Integer {
+	var outTuples := "1";
+	
+	if (bolt.getStormBolt_sigma() != null) {
+		outTuples := (bolt.getStormBolt_sigma().value().round()).toString();
+	};				
+	return outTuples.toNfpInteger();
+}
+
+helper getStormBolt_outTuples(in bolt : UML::ActivityNode) : NFP_Real {
+	var outTuples := "1.0";
+	
+	if (bolt.getStormBolt_sigma() != null) {
+		outTuples := bolt.getStormBolt_sigma().value().toString();
+	};
+	return outTuples.toNfpReal();
+}
+
+/******************************************************************/
 helper UML::Element::getStormStreamStep_numTuples() : NFP_Integer {
 	if (self.getStormStreamStep() = null) {
 		return null;
@@ -1226,6 +1349,7 @@ helper UML::Element::getStormStreamStep_numTuples() : NFP_Integer {
 	return numTuples.toNfpInteger();
 }
 
+/******************************************************************/
 helper UML::Element::getStormStreamStep_grouping() : DBET::StreamPolicy {
 	if (self.getStormStreamStep() = null) {
 		return null;
@@ -1238,6 +1362,7 @@ helper UML::Element::getStormStreamStep_grouping() : DBET::StreamPolicy {
 	return grouping;
 }
 
+/******************************************************************/
 helper UML::Element::getStormStreamStep_numFields() : Natural {
 	if (self.getStormStreamStep() = null) {
 		return null;
@@ -1256,6 +1381,7 @@ helper UML::Element::getStormStreamStep_numFields() : Natural {
 	return probFields->size();
 }
 
+/******************************************************************/
 helper UML::Element::getStormStreamStep_probFields() : List(Real) {
 	var probFields := self.getValue(self.getStormStreamStep(), "probFields").oclAsType(Collection(String));
 	assert warning (probFields->size() >= 1)
