@@ -686,8 +686,6 @@ mapping UML::ActivityNode::activityNode2tarcNumTuples() when {
 					out_arc.inscription := object PNML::PTArcAnnotation {
 						text := weight.round();
 					};
-					/**/
-					var t1 := 1;
 				};
 			}
 		}
@@ -872,7 +870,7 @@ mapping UML::ControlFlow::field_grouping(in bolt : UML::ActivityNode) {
 	var i := numFields;	
 	while (i > 0){
 		/* Create a independent processing pipeline for each field value */
-		var temp_trans_i := self.map controlFlow2timedTransitionNum(i, bolt);
+		var temp_trans_i := self.map controlFlow2timedTransitionNum(i+1, bolt);
 		
 		var trans_in_i := self.map controlFlow2immediateTransitionNum(i);
 		
@@ -1259,6 +1257,11 @@ helper UML::Element::getStormBolt_sigma() : NFP_Real {
 		return null;
 	};
 	var sigma := self.getValue(self.getStormBolt(), "sigma").oclAsType(String);
+	
+	if (sigma = ""){
+		return null;
+	};
+	
 	assert warning (sigma->size() = 1)
 		with log ("Unexpected number of 'sigma' tagged values found, expected 1. "+
 					"The context element is '" + self.toString() + "'"); 
@@ -1294,7 +1297,8 @@ helper getStormBolt_inTuples(in stream : UML::ControlFlow, in bolt : UML::Activi
 	var bolt_numTuples := bolt.getStormBolt_sigma_inTuples();
 	/**/
 	if ((stream_numTuples != null) and
-		stream_numTuples.oclIsUndefined().not()) {
+		stream_numTuples.oclIsUndefined().not() and
+		(stream_numTuples.value() > 0) ) {
 		return stream.getStormStreamStep_numTuples();
 	} else if ((bolt_numTuples != null) and
 				bolt_numTuples.oclIsUndefined().not() and
@@ -1342,6 +1346,10 @@ helper UML::Element::getStormStreamStep_numTuples() : NFP_Integer {
 		return null;
 	};
 	var numTuples := self.getValue(self.getStormStreamStep(), "numTuples").oclAsType(String);
+	if (numTuples = ""){
+		return null;
+	};
+	
 	assert warning (numTuples->size() = 1)
 		with log ("Unexpected number of 'numTuples' tagged values found, expected 1. "+
 					"The context element is '" + self.toString() + "'"); 
