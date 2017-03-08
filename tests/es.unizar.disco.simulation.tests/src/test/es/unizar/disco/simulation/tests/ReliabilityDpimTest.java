@@ -49,7 +49,7 @@ import fr.lip6.move.pnml.ptnet.PnObject;
 import fr.lip6.move.pnml.ptnet.ToolInfo;
 import fr.lip6.move.pnml.ptnet.Transition;
 
-public class ReliabilityNetGenerationTest extends AbstractTest{
+public class ReliabilityDpimTest extends AbstractTest{
 
 	
 

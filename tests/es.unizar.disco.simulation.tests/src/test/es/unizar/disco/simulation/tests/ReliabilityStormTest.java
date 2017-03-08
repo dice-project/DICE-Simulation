@@ -25,11 +25,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Model;
+import org.junit.Before;
 import org.junit.Test;
 
+import es.unizar.disco.core.logger.DiceLogger;
+import es.unizar.disco.dice.DTSM.Storm.StormZookeeper;
 import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
 import es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlReliabilityResourceBuilder;
+import es.unizar.disco.pnml.m2m.builder.StormScenario2PnmlReliabilityResourceBuilder;
 import es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils;
+import es.unizar.disco.simulation.DiceSimulationPlugin;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.ScenarioReliabilityCalculator;
 import es.unizar.disco.simulation.launcher.Messages;
@@ -49,28 +55,41 @@ import fr.lip6.move.pnml.ptnet.PnObject;
 import fr.lip6.move.pnml.ptnet.ToolInfo;
 import fr.lip6.move.pnml.ptnet.Transition;
 
-public class ReliabilityStormTest extends AbstractTest{
+public class ReliabilityStormTest extends AbstractTest {
 
-	
+	final static String DEFINITION_FILENAME = "";
+	final static String INVOCATION_FILENAME = "";
+	final static String UML_FILENAME = "wikistatsStorm";
 
-	
+	// @Before
+	public void loadParticularModels() throws IOException {
+		loadModels(DEFINITION_FILENAME, INVOCATION_FILENAME);
+
+	}
 
 	@Test
+	public void testLoadProfiledModel() throws IOException {
+
+		Model model = loadUMLModel(UML_FILENAME);
+		int sessionTimeout = 30000;
+		
+	
+		assertTrue("The " + UML_FILENAME + " model does not contain zookeeper stereotype", contains(model.getPackagedElements(),"StormZookeeper"));
+		Element zookeeperElement = getStereotypedElement(model.getPackagedElements(),"StormZookeeper");
+//				model.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormZookeeper") != null);
+		assertTrue("The StormZookeeper stereotype does not contatin contain session timeout of " + sessionTimeout,
+				((Integer) zookeeperElement.getValue(zookeeperElement.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormZookeeper"), "sessionTimeout")).intValue()==sessionTimeout);
+	}
+	
+	
+	@Test
+
+	// @Test
 	public void testCreationNet() throws IOException {
 		// writing over the initial "definition"
 		definition = invocation.getDefinition();
-		IAnalyzableModelBuilder builder = new ActivityDiagram2PnmlReliabilityResourceBuilder();
+		IAnalyzableModelBuilder builder = new StormScenario2PnmlReliabilityResourceBuilder();
 
-		/*
-		 * System.out.println("definiton to raw string: " +
-		 * invocation.getDefinition().toString());
-		 * System.out.println("identifier of definition: " +
-		 * invocation.getDefinition().getIdentifier());
-		 * System.out.println("string of active scenario: " +
-		 * invocation.getDefinition().getActiveScenario().toString() +
-		 * " and isEproxy returns " +
-		 * invocation.getDefinition().getActiveScenario().eIsProxy() );
-		 */
 		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
 				invocation.getVariableConfiguration().toPrimitiveAssignments());
 
@@ -84,7 +103,7 @@ public class ReliabilityStormTest extends AbstractTest{
 		saveAnalyzbleModelResult(result, "target/test/resources/outputPosidonia.anm" + "." + XMIResource.XMI_NS);
 	}
 
-	@Test
+	// @Test
 	public void testNotDoublePriorityToolInfo() {
 		definition = invocation.getDefinition();
 		IAnalyzableModelBuilder builder = new ActivityDiagram2PnmlReliabilityResourceBuilder();
@@ -102,7 +121,8 @@ public class ReliabilityStormTest extends AbstractTest{
 											// transittion
 			}
 			if (transition != null) {
-				List<ToolInfo> prioritySpecifics = getToolSpecifics(transition, TransitionKind.IMMEDIATE_PRIORITY.getLiteral());
+				List<ToolInfo> prioritySpecifics = getToolSpecifics(transition,
+						TransitionKind.IMMEDIATE_PRIORITY.getLiteral());
 				assertFalse(
 						"Found a trasition with more than one toolSpecifics, its name is: " + transition.getName()
 								+ " and its string representation is " + transition.toString(),
@@ -115,7 +135,7 @@ public class ReliabilityStormTest extends AbstractTest{
 
 	private List<ToolInfo> getToolSpecifics(Transition transition, String matchingProperty) {
 		List<ToolInfo> list = new ArrayList<ToolInfo>();
-		
+
 		for (ToolInfo info : transition.getToolspecifics()) {
 			Matcher matcher = Pattern.compile(PnmlToolInfoUtils.VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
 			if (matcher.matches()) {
@@ -142,11 +162,13 @@ public class ReliabilityStormTest extends AbstractTest{
 				sum.getValue().doubleValue() < 1.05);
 
 	}
-	
-/*	public void testSuccessAndFilureProbabilitySumOneFindingExecutorsAutonomously(){
-		invocation.setToolResult(simulator.getToolResult());
-		invocationStatus.merge(buildResult(invocation));
-	}*/
+
+	/*
+	 * public void
+	 * testSuccessAndFilureProbabilitySumOneFindingExecutorsAutonomously(){
+	 * invocation.setToolResult(simulator.getToolResult());
+	 * invocationStatus.merge(buildResult(invocation)); }
+	 */
 
 	private DomainMeasure launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
@@ -167,14 +189,19 @@ public class ReliabilityStormTest extends AbstractTest{
 			Process simulationProcess = simulator.simulate(invocation.getIdentifier(), invocation.getAnalyzableModel(),
 					invocation.getTraceSet(), definition.getParameters().map(), new NullProgressMonitor());
 			// @formatter:on
-			
+
 			System.out.println("Reliability test. Simulate call executed, now entering in the waitFor");
-			/*IProcess runtimeProcess = DebugPlugin.newProcess(launch, simulationProcess,
-					MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, invocation.getIdentifier()), null);
-			runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
-			runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, definition.getParameters().toString());
-*/			
-			//readOutputs(simulationProcess);
+			/*
+			 * IProcess runtimeProcess = DebugPlugin.newProcess(launch,
+			 * simulationProcess, MessageFormat.format(Messages.
+			 * SimulationLaunchConfigurationDelegate_simulationName,
+			 * invocation.getIdentifier()), null);
+			 * runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP,
+			 * Calendar.getInstance().getTime().toString());
+			 * runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT,
+			 * definition.getParameters().toString());
+			 */
+			// readOutputs(simulationProcess);
 			readOutputsThreads(simulationProcess);
 			simulationProcess.waitFor();
 			System.out.println("Wait for passed!");
@@ -189,59 +216,47 @@ public class ReliabilityStormTest extends AbstractTest{
 	}
 
 	private void readOutputsThreads(Process simulationProcess) {
-		 Thread errorThread = new Thread(){
-			 
-			 @Override
-			 public void run()
-			    {
-			        try
-			        {
-			            InputStreamReader isr = new InputStreamReader(simulationProcess.getErrorStream());
-			            BufferedReader br = new BufferedReader(isr);
-			            String line=null;
-			           
-			            while ( (line = br.readLine()) != null)
-			              System.out.println(line);    
-			            } catch (IOException ioe)
-			              {
-			                ioe.printStackTrace();  
-			              }
-			    }
-			 
-			 
-		 };
-		 
-		 
-		 errorThread.start();
-		 Thread stdoutThread = new Thread(){
-			 @Override
-			 public void run()
-			    {
-			        try
-			        {
-			            InputStreamReader isr = new InputStreamReader(simulationProcess.getInputStream());
-			            BufferedReader br = new BufferedReader(isr);
-			            String line=null;
-			            String previousLine=null;
-			            while ( (line = br.readLine()) != null){
-			            	  previousLine=line;// do nothing  System.out.println(line);    
-			            }
-			            System.out.println("LastLine of simulation: " + previousLine);
-			        	} catch (IOException ioe)
-			              {
-			                ioe.printStackTrace();  
-			              }
-			    }
-		 };
-		 
-		 
-		 
-		 stdoutThread.start();
+		Thread errorThread = new Thread() {
 
-		
+			@Override
+			public void run() {
+				try {
+					InputStreamReader isr = new InputStreamReader(simulationProcess.getErrorStream());
+					BufferedReader br = new BufferedReader(isr);
+					String line = null;
+
+					while ((line = br.readLine()) != null)
+						System.out.println(line);
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+				}
+			}
+
+		};
+
+		errorThread.start();
+		Thread stdoutThread = new Thread() {
+			@Override
+			public void run() {
+				try {
+					InputStreamReader isr = new InputStreamReader(simulationProcess.getInputStream());
+					BufferedReader br = new BufferedReader(isr);
+					String line = null;
+					String previousLine = null;
+					while ((line = br.readLine()) != null) {
+						previousLine = line;// do nothing
+											// System.out.println(line);
+					}
+					System.out.println("LastLine of simulation: " + previousLine);
+				} catch (IOException ioe) {
+					ioe.printStackTrace();
+				}
+			}
+		};
+
+		stdoutThread.start();
+
 	}
-	
-
 
 	private boolean resultIsMeaningful(ModelResult result) {
 
@@ -268,16 +283,18 @@ public class ReliabilityStormTest extends AbstractTest{
 		invocation.setResult(SimresultFactory.eINSTANCE.createSimulationResult());
 		ScenarioReliabilityCalculator calculator = new ScenarioReliabilityCalculator();
 		DomainMeasureDefinition measureDefinition = invocation.getDefinition().getMeasuresToCompute().get(0);
-		for(int i=0; i<invocation.getDefinition().getMeasuresToCompute().size();i++){
+		for (int i = 0; i < invocation.getDefinition().getMeasuresToCompute().size(); i++) {
 			DomainMeasureDefinition measureDefinitioni = invocation.getDefinition().getMeasuresToCompute().get(i);
-			System.out.println("Measure definition: " + i + "  " + measureDefinitioni.getMeasure() + 
-					" to string:" + measureDefinitioni.toString() + " its measured element: " + measureDefinition.getMeasuredElement().toString());
-			System.out.println("Trying to cast to Element and to print the getClass and the toString: " + 
-					((Element) measureDefinition.getMeasuredElement()).getClass() + "     To String      " +  
-					((Element) measureDefinition.getMeasuredElement()).toString());
-			
+			System.out.println("Measure definition: " + i + "  " + measureDefinitioni.getMeasure() + " to string:"
+					+ measureDefinitioni.toString() + " its measured element: "
+					+ measureDefinition.getMeasuredElement().toString());
+			System.out.println("Trying to cast to Element and to print the getClass and the toString: "
+					+ ((Element) measureDefinition.getMeasuredElement()).getClass() + "     To String      "
+					+ ((Element) measureDefinition.getMeasuredElement()).toString());
+
 		}
-		assertTrue("Measures to compute contains more than one element", invocation.getDefinition().getMeasuresToCompute().size()==1);
+		assertTrue("Measures to compute contains more than one element",
+				invocation.getDefinition().getMeasuresToCompute().size() == 1);
 
 		EObject measuredElement = measureDefinition.getMeasuredElement();
 
@@ -286,61 +303,60 @@ public class ReliabilityStormTest extends AbstractTest{
 
 		DomainMeasure reliab = calculator.calculate(measuredElement, measureDefinition, invocation.getToolResult(),
 				invocation.getTraceSet());
-				
-						DomainMeasure unreliab = calculator.calculateUnreliability(measuredElement, measureDefinition,
+
+		DomainMeasure unreliab = calculator.calculateUnreliability(measuredElement, measureDefinition,
 				invocation.getToolResult(), invocation.getTraceSet());
 		DomainMeasure sum = MeasuresFactory.eINSTANCE.createDomainMeasure();
 		sum.setValue(reliab.getValue().doubleValue() + unreliab.getValue().doubleValue());
 		return sum;
-		
-		
-		/*MultiStatus status = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
-		System.out.println("Test CalculateREsults step1");
-		invocation.setResult(SimresultFactory.eINSTANCE.createSimulationResult());
-		System.out.println("Test CalculateREsults step2");
-		for (DomainMeasureDefinition measureDefinition : invocation.getDefinition().getMeasuresToCompute()) {
-			EObject measuredElement = measureDefinition.getMeasuredElement();
-			System.out.println("Test CalculateREsults step3");
 
-			// Look for the first calculator that is able to handle
-			// the measure for the given scenario type
-			MeasureCalculator calculator = null;
-			for (String scenarioName : invocation.getDefinition().getScenarioStereotypes()) {
-				System.out.println("Test CalculateREsults step4");
-				calculator = DiceMetricsUtils.getCalculator((Element) measuredElement, measureDefinition.getMeasure(), scenarioName,
-						invocation.getToolResult().getClass());
-				System.out.println("Test CalculateREsults step5");
-				if (calculator != null) {
-					break;
-				}
-				System.out.println("Test CalculateREsults step6");
-			}
-
-			if (calculator == null) {
-				status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
-						MessageFormat.format("Unable to find a ''{0}'' calculator for ''{1}'' ", measureDefinition.getMeasure(), measuredElement)));
-			} else {
-				System.out.println("Test CalculateREsults step7");
-				DomainMeasure domainMeasure = calculator.calculate(measuredElement, measureDefinition, invocation.getToolResult(), invocation.getTraceSet());
-				System.out.println("Test CalculateREsults step8");
-				if (domainMeasure == null) {
-					System.out.println("Test CalculateREsults step9");
-					status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
-							MessageFormat.format("Unable to calculate measure ''{0}'' for ''{1}'' ", measureDefinition.getMeasure(), measuredElement)));
-					System.out.println("Test CalculateREsults step10");
-				} else {
-					System.out.println("Test CalculateREsults step11");
-					domainMeasure.setDefinition(measureDefinition);
-					System.out.println("Test CalculateREsults step12");
-					invocation.getResult().getMeasures().add(domainMeasure);
-					System.out.println("Test CalculateREsults step13");
-				}
-				
-			}
-		}
-		
-		return invocation.getResult().getMeasures().get(0);
-		*/
+		/*
+		 * MultiStatus status = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID,
+		 * 0, null, null); System.out.println("Test CalculateREsults step1");
+		 * invocation.setResult(SimresultFactory.eINSTANCE.
+		 * createSimulationResult());
+		 * System.out.println("Test CalculateREsults step2"); for
+		 * (DomainMeasureDefinition measureDefinition :
+		 * invocation.getDefinition().getMeasuresToCompute()) { EObject
+		 * measuredElement = measureDefinition.getMeasuredElement();
+		 * System.out.println("Test CalculateREsults step3");
+		 * 
+		 * // Look for the first calculator that is able to handle // the
+		 * measure for the given scenario type MeasureCalculator calculator =
+		 * null; for (String scenarioName :
+		 * invocation.getDefinition().getScenarioStereotypes()) {
+		 * System.out.println("Test CalculateREsults step4"); calculator =
+		 * DiceMetricsUtils.getCalculator((Element) measuredElement,
+		 * measureDefinition.getMeasure(), scenarioName,
+		 * invocation.getToolResult().getClass());
+		 * System.out.println("Test CalculateREsults step5"); if (calculator !=
+		 * null) { break; } System.out.println("Test CalculateREsults step6"); }
+		 * 
+		 * if (calculator == null) { status.merge(new Status(IStatus.ERROR,
+		 * DiceSimulationPlugin.PLUGIN_ID, MessageFormat.
+		 * format("Unable to find a ''{0}'' calculator for ''{1}'' ",
+		 * measureDefinition.getMeasure(), measuredElement))); } else {
+		 * System.out.println("Test CalculateREsults step7"); DomainMeasure
+		 * domainMeasure = calculator.calculate(measuredElement,
+		 * measureDefinition, invocation.getToolResult(),
+		 * invocation.getTraceSet());
+		 * System.out.println("Test CalculateREsults step8"); if (domainMeasure
+		 * == null) { System.out.println("Test CalculateREsults step9");
+		 * status.merge(new Status(IStatus.ERROR,
+		 * DiceSimulationPlugin.PLUGIN_ID, MessageFormat.
+		 * format("Unable to calculate measure ''{0}'' for ''{1}'' ",
+		 * measureDefinition.getMeasure(), measuredElement)));
+		 * System.out.println("Test CalculateREsults step10"); } else {
+		 * System.out.println("Test CalculateREsults step11");
+		 * domainMeasure.setDefinition(measureDefinition);
+		 * System.out.println("Test CalculateREsults step12");
+		 * invocation.getResult().getMeasures().add(domainMeasure);
+		 * System.out.println("Test CalculateREsults step13"); }
+		 * 
+		 * } }
+		 * 
+		 * return invocation.getResult().getMeasures().get(0);
+		 */
 
 	}
 
