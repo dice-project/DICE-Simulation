@@ -822,7 +822,8 @@ mapping UML::FinalNode::model2closedNetColor(in user_color: Colour) {
 mapping UML::NamedElement::namedElement2place() : PNML::Place {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+			self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -836,7 +837,8 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 mapping UML::NamedElement::namedElement2placeCol(in colour: Colour) : PNML::Place {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+			self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -856,7 +858,8 @@ mapping UML::NamedElement::namedElement2placeCol(in colour: Colour) : PNML::Plac
 
 mapping UML::ControlFlow::controlFlow2placeRedCol(in colour: Colour) : PNML::Place 
 inherits UML::NamedElement::namedElement2placeCol {
-		 name.text := name.text + "_Red";
+		 //name.text := name.text + "_Red";
+		 name.text := "Red";
 		 name.text := name.text + "_" + colour.colorset_id + "_" + colour.color_id.toString();
 }
 
@@ -867,7 +870,8 @@ inherits UML::NamedElement::namedElement2placeCol {
 
 mapping UML::ControlFlow::controlFlow2placeIdCol(in colour: Colour) : PNML::Place 
 inherits UML::NamedElement::namedElement2placeCol {
-		 name.text := name.text + "_Id";
+		 //name.text := name.text + "_Id";
+		 name.text := "Id";
 		 name.text := name.text + "_" + colour.colorset_id + "_" + colour.color_id.toString();
 }
 
@@ -941,7 +945,8 @@ inherits UML::NamedElement::namedElement2placeCol {
 mapping UML::NamedElement::namedElement2transitionCol(in colour : Colour) : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+			self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -959,7 +964,7 @@ mapping UML::NamedElement::namedElement2transitionCol(in colour : Colour) : PNML
 
 mapping UML::NamedElement::namedElement2immediateTransitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2transitionCol{
-		name.text := self.name + "_trans";
+		//name.text := name.text + "_trans";
 }
 
 /***********************************************************************/
@@ -969,7 +974,7 @@ inherits UML::NamedElement::namedElement2transitionCol{
 
 mapping UML::ControlFlow::controlFlow2immediateTransitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2immediateTransitionCol {
-			//name.text := self.name + "_trans";
+			name.text := name.text + "_trans";
 }
 
 /**
@@ -978,7 +983,7 @@ inherits UML::NamedElement::namedElement2immediateTransitionCol {
 
 mapping UML::ActivityNode::activityNode2immediateTransitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2immediateTransitionCol {
-			//name.text := self.name + "_trans";
+			name.text := name.text + "_place";
 }
 
 /**
@@ -1022,8 +1027,10 @@ inherits UML::ActivityNode::activityNode2immediateTransitionCol {
 	exponential transitions) 
 */
 
-mapping UML::ActivityNode::activityNode2transitionCol(in c : Colour) : PNML::Transition
+mapping UML::ActivityNode::activityNode2transitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2transitionCol {
+			name.text := name.text + "_trans";
+			name.text := name.text + "_" + colour.colorset_id + "_" + colour.color_id.toString();
 }
 
 /**
@@ -1033,9 +1040,11 @@ inherits UML::NamedElement::namedElement2transitionCol {
 	exponential transitions) 
 */
 
-mapping UML::ActivityNode::activityNode2timedTransitionCol(in c : Colour) : PNML::Transition 
+mapping UML::ActivityNode::activityNode2timedTransitionCol(in colour : Colour) : PNML::Transition 
 inherits UML::NamedElement::namedElement2transitionCol {
-	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo(c.color_id);
+	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo(colour.color_id);
+	name.text := name.text + "_trans";
+	name.text := name.text + "_" + colour.colorset_id + "_" + colour.color_id.toString();
 }
 
 /***********************************************************************/
