@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -146,16 +147,26 @@ public class GspnSshSimulator implements ISimulator {
 					boolean error = false;
 					try {
 						// @formatter:off
-						if (!reader.readLine().trim().isEmpty()) error = true;
-						if (!reader.readLine().trim().isEmpty()) error = true;
-						if (!reader.readLine().matches(REX_SEPARATOR)) error = true;
-						if (!reader.readLine().equals(STR_HEADER_1)) error = true;
-						if (!reader.readLine().matches(REX_SEPARATOR)) error = true;
-						if (!reader.readLine().trim().isEmpty()) error = true;
-						if (!reader.readLine().equals(STR_HEADER_2)) error = true;
-						if (!reader.readLine().equals(STR_HEADER_3)) error = true;
-						if (!reader.readLine().matches(REX_SEPARATOR)) error = true;
-						if (!reader.readLine().trim().isEmpty()) error = true; 
+						if (!reader.readLine().trim().isEmpty())
+							error = true;
+						if (!reader.readLine().trim().isEmpty())
+							error = true;
+						if (!reader.readLine().matches(REX_SEPARATOR))
+							error = true;
+						if (!reader.readLine().equals(STR_HEADER_1))
+							error = true;
+						if (!reader.readLine().matches(REX_SEPARATOR))
+							error = true;
+						if (!reader.readLine().trim().isEmpty())
+							error = true;
+						if (!reader.readLine().equals(STR_HEADER_2))
+							error = true;
+						if (!reader.readLine().equals(STR_HEADER_3))
+							error = true;
+						if (!reader.readLine().matches(REX_SEPARATOR))
+							error = true;
+						if (!reader.readLine().trim().isEmpty())
+							error = true;
 						// @formatter:on
 					} catch (NullPointerException e) {
 						error = true;
@@ -193,8 +204,18 @@ public class GspnSshSimulator implements ISimulator {
 							info = WnsimFactory.eINSTANCE.createTransitionInfo();
 							currentResult.getInfos().add(info);
 							info.setAnalyzedElement(findEObject(id));
-							info.getConfidenceInterval().add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, lower));
-							info.getConfidenceInterval().add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, upper));
+							//It should be a number, but the exponent is accepted after an 'E' but not 'e'
+							if (lower != null) {
+								lower = lower.toUpperCase(Locale.ROOT);
+							}
+							//It should be a number, but the exponent is accepted after an 'E' but not 'e'
+							if (upper != null) {
+								upper = upper.toUpperCase(Locale.ROOT);
+							}
+							info.getConfidenceInterval()
+									.add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, lower));
+							info.getConfidenceInterval()
+									.add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, upper));
 							continue;
 						} else if ((matcher = placePattern.matcher(line.trim())).matches()) {
 							String id = matcher.group("place");
@@ -203,15 +224,31 @@ public class GspnSshSimulator implements ISimulator {
 							info = WnsimFactory.eINSTANCE.createPlaceInfo();
 							currentResult.getInfos().add(info);
 							info.setAnalyzedElement(findEObject(id));
-							info.getConfidenceInterval().add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, lower));
-							info.getConfidenceInterval().add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, upper));
+							//It should be a number, but the exponent is accepted after an 'E' but not 'e'
+							if (lower != null) {
+								lower = lower.toUpperCase(Locale.ROOT);
+							}
+							//It should be a number, but the exponent is accepted after an 'E' but not 'e'
+							if (upper != null) {
+								upper = upper.toUpperCase(Locale.ROOT);
+							}
+							info.getConfidenceInterval()
+									.add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, lower));
+							info.getConfidenceInterval()
+									.add((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, upper));
 							continue;
 						} else if ((matcher = valuePattern.matcher(line.trim())).matches()) {
 							String value = matcher.group("value");
+							//It should be a number, but the exponent is accepted after an 'E' but not 'e'
+							if (value != null) {
+								value = value.toUpperCase(Locale.ROOT);
+							}
 							if (info instanceof PlaceInfo) {
-								((PlaceInfo) info).setMeanNumberOfTokens((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
+								((PlaceInfo) info).setMeanNumberOfTokens(
+										(Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
 							} else if (info instanceof TransitionInfo) {
-								((TransitionInfo) info).setThroughput((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
+								((TransitionInfo) info).setThroughput(
+										(Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
 								((TransitionInfo) info).setUnit(getBaseFrequencyUnit());
 							} else {
 								throw new RuntimeException("Expected PlaceInfo or TransitionInfo");
@@ -235,7 +272,8 @@ public class GspnSshSimulator implements ISimulator {
 						} else if (line.startsWith(STS_DEAD_MARKING)) {
 							throw new RuntimeException(line);
 						} else {
-							DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "Unmatched line while processing WNSIM output: " + line);
+							DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(),
+									"Unmatched line while processing WNSIM output: " + line);
 						}
 					}
 					latestResult = currentResult;
@@ -297,7 +335,7 @@ public class GspnSshSimulator implements ISimulator {
 			try {
 				ssh.loadKnownHosts();
 			} catch (IOException e) {
-				DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "Unable to load 'known_hosts' file",e);
+				DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "Unable to load 'known_hosts' file", e);
 			}
 			ssh.addHostKeyVerifier(new NoHostVerifier());
 			ssh.connect(hostProvider.getHost(), hostProvider.getPort());
@@ -310,14 +348,15 @@ public class GspnSshSimulator implements ISimulator {
 			} else if (authProvider instanceof IKeyAuthProvider) {
 				IKeyAuthProvider keyProvider = (IKeyAuthProvider) authProvider;
 				KeyProvider keys = ssh.loadKeys(keyProvider.getPrivateKey(), null,
-						!StringUtils.isEmpty(keyProvider.getPassphrase()) ? PasswordUtils.createOneOff(keyProvider.getPassphrase().toCharArray()) : null);
+						!StringUtils.isEmpty(keyProvider.getPassphrase())
+								? PasswordUtils.createOneOff(keyProvider.getPassphrase().toCharArray()) : null);
 				ssh.authPublickey(keyProvider.getUser(), keys);
 			}
 		}
 
 		public void launch(Map<String, String> options) throws IOException {
 			simulationSession = ssh.startSession();
-			StringBuilder builder = new StringBuilder(); //$NON-NLS-1$
+			StringBuilder builder = new StringBuilder(); // $NON-NLS-1$
 			if (options.containsKey(SimulationParameters.BINARY_FILE_PATH.getLiteral())) {
 				builder.append(options.get(SimulationParameters.BINARY_FILE_PATH.getLiteral()));
 			} else {
@@ -326,13 +365,14 @@ public class GspnSshSimulator implements ISimulator {
 			builder.append(" %s/%s ");
 			for (Entry<String, String> option : options.entrySet()) {
 				if (option.getKey().startsWith("-")) {
-					// Include only options that represent a command line parameter
+					// Include only options that represent a command line
+					// parameter
 					// i.e., ignore the BINARY_FILE_PATH option
 					builder.append(MessageFormat.format("{0} {1} ", option.getKey(), option.getValue())); //$NON-NLS-1$
 				}
 			}
 			simulationCommand = simulationSession.exec(String.format(builder.toString(), remoteWorkingDir, identifier));
-			
+
 			PipedOutputStream stdoutOutputStream = new PipedOutputStream();
 
 			resultBuilder = new ResultBuilder(new PipedInputStream(stdoutOutputStream));
@@ -353,16 +393,20 @@ public class GspnSshSimulator implements ISimulator {
 						resultBuilder.join();
 						channel.join();
 						try (Session catSession = ssh.startSession();
-								Command catCommand = catSession.exec(String.format("cat %s/%s.simres", remoteWorkingDir, identifier)) //$NON-NLS-1$
+								Command catCommand = catSession
+										.exec(String.format("cat %s/%s.simres", remoteWorkingDir, identifier)) //$NON-NLS-1$
 						) {
 							catCommand.join();
 							rawResults = IOUtils.readFully(catCommand.getInputStream()).toByteArray();
 							finished = true;
-							exitValue = simulationCommand.getExitStatus() != null ? simulationCommand.getExitStatus() : RET_CODE_UNKNOWN_ERROR;
+							exitValue = simulationCommand.getExitStatus() != null ? simulationCommand.getExitStatus()
+									: RET_CODE_UNKNOWN_ERROR;
 						}
 					} catch (ConnectionException e) {
 						DiceLogger.logError(GspnSshSimulationPlugin.getDefault(),
-								MessageFormat.format(Messages.GspnSshSimulator_connClosedError, ssh.getRemoteHostname(), ssh.getRemotePort()), e);
+								MessageFormat.format(Messages.GspnSshSimulator_connClosedError, ssh.getRemoteHostname(),
+										ssh.getRemotePort()),
+								e);
 					} catch (InterruptedException e) {
 						DiceLogger.logException(GspnSshSimulationPlugin.getDefault(), e);
 					} catch (IOException e) {
@@ -434,31 +478,36 @@ public class GspnSshSimulator implements ISimulator {
 	private GspnProcess gspnProcess;
 
 	@Override
-	public Process simulate(String id, List<EObject> analyzableModel, TraceSet traces, Map<String, String> options, IProgressMonitor monitor)
-			throws SimulationException {
+	public Process simulate(String id, List<EObject> analyzableModel, TraceSet traces, Map<String, String> options,
+			IProgressMonitor monitor) throws SimulationException {
 
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 
 		if (analyzableModel.size() != 1) {
-			throw new SimulationException(new IllegalArgumentException(
-					MessageFormat.format("Unexpected number of model elements, expecting 1 EObject, found {0}", analyzableModel.size())));
+			throw new SimulationException(new IllegalArgumentException(MessageFormat.format(
+					"Unexpected number of model elements, expecting 1 EObject, found {0}", analyzableModel.size())));
 		} else if (!(analyzableModel.get(0) instanceof PetriNetDoc)) {
-			throw new SimulationException(new IllegalArgumentException("Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNetDoc'' but received '" + analyzableModel.get(0).getClass().toString()+"'"));
+			throw new SimulationException(new IllegalArgumentException(
+					"Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNetDoc'' but received '"
+							+ analyzableModel.get(0).getClass().toString() + "'"));
 		}
 
 		PetriNetDoc petriNetDoc = (PetriNetDoc) analyzableModel.get(0);
 		if (petriNetDoc.getNets().size() != 1) {
 			throw new SimulationException(new IllegalArgumentException(
-					MessageFormat.format("Unexpected number of model elements, expecting 1 EObject, found {0}", petriNetDoc.getNets().size())));
+					MessageFormat.format("Unexpected number of model elements, expecting 1 EObject, found {0}",
+							petriNetDoc.getNets().size())));
 		} else if (!(petriNetDoc.getNets().get(0) instanceof PetriNet)) {
-			throw new SimulationException(new IllegalArgumentException("Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNet''"));
+			throw new SimulationException(new IllegalArgumentException(
+					"Unexpected analyzable model type, expecting ''fr.lip6.move.pnml.ptnet.PetriNet''"));
 		}
 
 		File targetDir = GspnSshSimulationPlugin.getDefault().getStateLocation().append(id).toFile();
-		
+
 		if (!targetDir.exists()) {
 			if (!targetDir.mkdirs()) {
-				throw new SimulationException(MessageFormat.format("Unable to create temporaty directory ''{0}''", targetDir));
+				throw new SimulationException(
+						MessageFormat.format("Unable to create temporaty directory ''{0}''", targetDir));
 			}
 		}
 
@@ -484,11 +533,13 @@ public class GspnSshSimulator implements ISimulator {
 					throw new SimulationException(Messages.GspnSshSimulator_providerNotFoundError);
 				}
 
-				hostProvider = (IHostProvider) configElement.createExecutableExtension(SshConnectionProviderConstants.HOST_PROVIDER_ATTR);
+				hostProvider = (IHostProvider) configElement
+						.createExecutableExtension(SshConnectionProviderConstants.HOST_PROVIDER_ATTR);
 				for (IConfigurationElement child : configElement.getChildren()) {
 					// Try to connect using each one of the authentication
 					// provider as they are declared
-					IAuthProvider childAuthProvider = (IAuthProvider) child.createExecutableExtension(SshConnectionProviderConstants.AUTH_PROVIDER_ATTR);
+					IAuthProvider childAuthProvider = (IAuthProvider) child
+							.createExecutableExtension(SshConnectionProviderConstants.AUTH_PROVIDER_ATTR);
 					if (childAuthProvider.isEnabled()) {
 						authProvider = childAuthProvider;
 						break;
@@ -503,13 +554,15 @@ public class GspnSshSimulator implements ISimulator {
 				throw new SimulationException(Messages.GspnSshSimulator_connInfoNotFoundError, e);
 			} catch (IOException e) {
 				throw new SimulationException(MessageFormat.format(Messages.GspnSshSimulator_unableEstablishConnError,
-						authProvider != null ? authProvider.getUser() : null, hostProvider.getHost(), hostProvider.getPort()), e);
+						authProvider != null ? authProvider.getUser() : null, hostProvider.getHost(),
+						hostProvider.getPort()), e);
 			}
 
 			try {
 				gspnProcess.initialize(inputFiles);
 			} catch (IOException e) {
-				throw new SimulationException(MessageFormat.format(Messages.GspnSshSimulator_unableSetupFilesError, Arrays.asList(inputFiles)), e);
+				throw new SimulationException(MessageFormat.format(Messages.GspnSshSimulator_unableSetupFilesError,
+						Arrays.asList(inputFiles)), e);
 			}
 
 			gspnProcess.launch(options);
@@ -549,12 +602,14 @@ public class GspnSshSimulator implements ISimulator {
 	}
 
 	private IConfigurationElement getConnectionProvider() throws SimulationException {
-		IConfigurationElement[] configElements = Platform.getExtensionRegistry().getConfigurationElementsFor(SshConnectionProviderConstants.EXTENSION_ID);
+		IConfigurationElement[] configElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(SshConnectionProviderConstants.EXTENSION_ID);
 
 		int currentPriority = -1;
 		IConfigurationElement prioritaryElement = null;
 		for (IConfigurationElement configElement : configElements) {
-			int elementPriority = Integer.valueOf(configElement.getAttribute(SshConnectionProviderConstants.PRIORITY_ATTR));
+			int elementPriority = Integer
+					.valueOf(configElement.getAttribute(SshConnectionProviderConstants.PRIORITY_ATTR));
 			if (elementPriority > currentPriority) {
 				currentPriority = elementPriority;
 				prioritaryElement = configElement;
@@ -563,12 +618,14 @@ public class GspnSshSimulator implements ISimulator {
 		return prioritaryElement;
 	}
 
-	private static File[] generateGspnFiles(PetriNet model, File targetDir, IProgressMonitor monitor) throws IOException {
+	private static File[] generateGspnFiles(PetriNet model, File targetDir, IProgressMonitor monitor)
+			throws IOException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
 		GenerateGspn gspnGenerator = new GenerateGspn(model, targetDir, new ArrayList<EObject>());
 		AcceleoPreferences.switchForceDeactivationNotifications(true);
 		gspnGenerator.doGenerate(BasicMonitor.toMonitor(subMonitor.newChild(1)));
-		return new File[] { targetDir.toPath().resolve(model.getId() + ".net").toFile(), targetDir.toPath().resolve(model.getId() + ".def").toFile() };
+		return new File[] { targetDir.toPath().resolve(model.getId() + ".net").toFile(),
+				targetDir.toPath().resolve(model.getId() + ".def").toFile() };
 	}
 
 	private static final String VALUE_PATTERN = "<value grammar=\"(.+)\">(.+)</value>";
