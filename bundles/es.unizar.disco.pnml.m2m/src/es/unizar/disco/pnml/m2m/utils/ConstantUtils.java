@@ -9,6 +9,7 @@ public class ConstantUtils {
 	public final static String TRANSITION_OK_TRACE = "OK";
 	public final static String PLACE_CONCURRENT_USERS_TRACE ="NumberOfConcurrentUsers";
 	public final static String USERS = "Users";
+	public final static String ALL_RESOURCES_FAILED = "AllResourcesFailed";
 	
 	@Operation
 	public static String getUsers() {
@@ -28,6 +29,11 @@ public class ConstantUtils {
 	@Operation
 	public static String getOK() {
 		return TRANSITION_OK_TRACE;
+	}
+	
+	@Operation
+	public static String getTransitionAllFailedTrace() {
+		return ALL_RESOURCES_FAILED;
 	}
 	
 }
