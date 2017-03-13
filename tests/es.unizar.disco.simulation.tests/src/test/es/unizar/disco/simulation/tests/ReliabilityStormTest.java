@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,17 +13,16 @@ import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
@@ -37,6 +37,7 @@ import es.unizar.disco.pnml.m2m.builder.StormScenario2PnmlReliabilityResourceBui
 import es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils;
 import es.unizar.disco.simulation.DiceSimulationPlugin;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
+import es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorStorm;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.ScenarioReliabilityCalculator;
 import es.unizar.disco.simulation.launcher.Messages;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder;
@@ -50,18 +51,20 @@ import es.unizar.disco.simulation.models.measures.MeasuresFactory;
 import es.unizar.disco.simulation.models.simresult.SimresultFactory;
 import es.unizar.disco.simulation.simulators.ISimulator;
 import es.unizar.disco.simulation.simulators.SimulationException;
+import fr.lip6.move.pnml.ptnet.PetriNet;
 import fr.lip6.move.pnml.ptnet.PetriNetDoc;
 import fr.lip6.move.pnml.ptnet.PnObject;
 import fr.lip6.move.pnml.ptnet.ToolInfo;
 import fr.lip6.move.pnml.ptnet.Transition;
+import fr.lip6.move.pnml.ptnet.Place;
 
 public class ReliabilityStormTest extends AbstractTest {
 
-	final static String DEFINITION_FILENAME = "";
-	final static String INVOCATION_FILENAME = "";
+	final static String DEFINITION_FILENAME = "93a71370-1141-4764-aa8e-bb6611def309";
+	final static String INVOCATION_FILENAME = "c1bf507a-d629-4b5d-86ee-9dc82f0f0ac6";
 	final static String UML_FILENAME = "wikistatsStorm";
 
-	// @Before
+	@Before
 	public void loadParticularModels() throws IOException {
 		loadModels(DEFINITION_FILENAME, INVOCATION_FILENAME);
 
@@ -83,15 +86,15 @@ public class ReliabilityStormTest extends AbstractTest {
 	
 	
 	@Test
-
-	// @Test
 	public void testCreationNet() throws IOException {
 		// writing over the initial "definition"
 		definition = invocation.getDefinition();
 		IAnalyzableModelBuilder builder = new StormScenario2PnmlReliabilityResourceBuilder();
 
+		System.out.println("Creating net of active scenario: " + invocation.getDefinition().getActiveScenario());
 		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
 				invocation.getVariableConfiguration().toPrimitiveAssignments());
+
 
 		IStatus status = result.getStatus();
 		assertNotEquals("Status of translation was ERROR", IStatus.ERROR, status.getSeverity());
@@ -100,38 +103,10 @@ public class ReliabilityStormTest extends AbstractTest {
 		assertNotNull("The first element in the list of translated models was null", result.getModel().get(0));
 		assertTrue("The generated net did not contain the expected information", resultIsMeaningful(result));
 
-		saveAnalyzbleModelResult(result, "target/test/resources/outputPosidonia.anm" + "." + XMIResource.XMI_NS);
+		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
 	}
 
-	// @Test
-	public void testNotDoublePriorityToolInfo() {
-		definition = invocation.getDefinition();
-		IAnalyzableModelBuilder builder = new ActivityDiagram2PnmlReliabilityResourceBuilder();
-
-		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
-				invocation.getVariableConfiguration().toPrimitiveAssignments());
-
-		PetriNetDoc netresult = (PetriNetDoc) result.getModel().get(0);
-		List<PnObject> listPNelements = netresult.getNets().get(0).getPages().get(0).getObjects();
-		for (PnObject pnelement : listPNelements) {
-			Transition transition = null;
-			try {
-				transition = (Transition) pnelement;
-			} catch (ClassCastException e) {// nothig to do, it was not a
-											// transittion
-			}
-			if (transition != null) {
-				List<ToolInfo> prioritySpecifics = getToolSpecifics(transition,
-						TransitionKind.IMMEDIATE_PRIORITY.getLiteral());
-				assertFalse(
-						"Found a trasition with more than one toolSpecifics, its name is: " + transition.getName()
-								+ " and its string representation is " + transition.toString(),
-						prioritySpecifics.size() > 1);
-			}
-
-		}
-
-	}
+	
 
 	private List<ToolInfo> getToolSpecifics(Transition transition, String matchingProperty) {
 		List<ToolInfo> list = new ArrayList<ToolInfo>();
@@ -148,27 +123,19 @@ public class ReliabilityStormTest extends AbstractTest {
 	}
 
 	@Test
-	public void testSucccesAndFailureProbabilitySumOne()
+	public void testResults()
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
-		SimulationDefinition fullExecutionDefinition = (SimulationDefinition) loadResourceFromUri(
-				URI.createFileURI(Paths.get("src/test/resources/reliabilityResults/2d8afa5a-618c-465b-8a2a-d4dd2d8789ff"
-						+ ".def" + "." + XMIResource.XMI_NS).toFile().getAbsolutePath()));
-		DomainMeasure sum = launchAnalysis(fullExecutionDefinition);
-		assertTrue("The sum of Reliability and Unreliability is null", sum != null);
-		assertTrue("The sum of Reliability and Unreliability is less than 0.95. Concretely: "
-				+ sum.getValue().doubleValue(), sum.getValue().doubleValue() > 0.95);
-		assertTrue("The sum of Reliability and Unreliability is null. Concretely: " + sum.getValue().doubleValue(),
-				sum.getValue().doubleValue() < 1.05);
+		//There are 3 resources with MTTF each of 10h. The result should be a MTTF of around 18.33h . Accepted between 18 and 18.5h
+		
+		SimulationDefinition fullExecutionDefinition = definition;
+		DomainMeasure mttf = launchAnalysis(fullExecutionDefinition);
+		assertTrue("The MTTF is null", mttf!=null);
+		assertTrue("The MTTF is below 18h with value " + mttf.getValue().doubleValue()/3600.0 , mttf.getValue().doubleValue()>(18.0*3600.0));
+		assertTrue("The MTTF is above 18.5h with value " + mttf.getValue().doubleValue()/3600.0 , mttf.getValue().doubleValue()<(18.5*3600.0));
 
 	}
 
-	/*
-	 * public void
-	 * testSuccessAndFilureProbabilitySumOneFindingExecutorsAutonomously(){
-	 * invocation.setToolResult(simulator.getToolResult());
-	 * invocationStatus.merge(buildResult(invocation)); }
-	 */
 
 	private DomainMeasure launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
@@ -264,24 +231,38 @@ public class ReliabilityStormTest extends AbstractTest {
 		// .createFileURI(Paths.get("src/test/resources/" + TEST_FILES_UUID +
 		// ".anm" + "." + XMIResource.XMI_NS)
 		// .toFile().getAbsolutePath());
-		EObject producedAnalyzableModel = result.getModel().get(0);
+		PetriNetDoc producedAnalyzableModel = (PetriNetDoc)  result.getModel().get(0);
 		System.out.println("produced model= " + producedAnalyzableModel.toString());
-		/*-TraceSet traceSet = TracesFactory.eINSTANCE.createTraceSet();
-			for (EObject trace : traces.getContents()) {
-				traceSet.getTraces().add((Trace) trace);
-			}
-				if (status.getSeverity() != IStatus.ERROR) {
-				super.getAnalyzableModel().addAll(result.getModel());
-				super.setTraceSet(result.getTraceSet());
-			}
-		*/
+		PetriNet pn = producedAnalyzableModel.getNets().get(0);
+		List<PnObject> pnobjects = pn.getPages().get(0).getObjects();
+		//There should be 
+		
+		//2 places and 2 transitions
+		int numplaces = pnobjects.stream()
+		.filter(n -> n instanceof Place) 
+		.map(n -> (Place) n)
+		.collect(Collectors.toList())
+		.size();
+		assertEquals("Number of places found was " + numplaces, 2,  numplaces);
+		
+		int numtransitions = pnobjects.stream()
+				.filter(n -> n instanceof Transition) 
+				.map(n -> (Transition) n)
+				.collect(Collectors.toList())
+				.size();
+				assertEquals("Number of transitions found was " + numtransitions, 2,  numtransitions);
+		
+		//one of the places should contain as many tokens as resource multiplicity
+				//TODO
+		//one of the transitions should be timed with rate the inverse of the MTTF
+				//TODO
 		return true;
 	}
 
 	private DomainMeasure calculateResults(SimulationInvocation invocation) {
 
 		invocation.setResult(SimresultFactory.eINSTANCE.createSimulationResult());
-		ScenarioReliabilityCalculator calculator = new ScenarioReliabilityCalculator();
+		ReliabilityMTTFCalculatorStorm calculator = new ReliabilityMTTFCalculatorStorm();
 		DomainMeasureDefinition measureDefinition = invocation.getDefinition().getMeasuresToCompute().get(0);
 		for (int i = 0; i < invocation.getDefinition().getMeasuresToCompute().size(); i++) {
 			DomainMeasureDefinition measureDefinitioni = invocation.getDefinition().getMeasuresToCompute().get(i);
@@ -301,14 +282,10 @@ public class ReliabilityStormTest extends AbstractTest {
 		// Look for the first calculator that is able to handle
 		// the measure for the given scenario type
 
-		DomainMeasure reliab = calculator.calculate(measuredElement, measureDefinition, invocation.getToolResult(),
+		DomainMeasure mttf = calculator.calculate(measuredElement, measureDefinition, invocation.getToolResult(),
 				invocation.getTraceSet());
 
-		DomainMeasure unreliab = calculator.calculateUnreliability(measuredElement, measureDefinition,
-				invocation.getToolResult(), invocation.getTraceSet());
-		DomainMeasure sum = MeasuresFactory.eINSTANCE.createDomainMeasure();
-		sum.setValue(reliab.getValue().doubleValue() + unreliab.getValue().doubleValue());
-		return sum;
+		return mttf;
 
 		/*
 		 * MultiStatus status = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID,

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<definition:SimulationDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:definition="http://es.unizar.disco/simulation/definition/1.0" identifier="93a71370-1141-4764-aa8e-bb6611def309" maxExecutionTime="1970-01-01T01:00:00.000+0100" measuresToCompute="//@declaredMeasures.0" backend="es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator" activeConfigurations="//@possibleConfigurations.0" nfpToCompute="RELIABILITY">
+  <invocations href="c1bf507a-d629-4b5d-86ee-9dc82f0f0ac6.inv.xmi#c1bf507a-d629-4b5d-86ee-9dc82f0f0ac6"/>
+  <parameters key="-M" value="2000"/>
+  <parameters key="-m" value="1000"/>
+  <parameters key="-s" value="31415"/>
+  <parameters key="-t" value="1000"/>
+  <parameters key="binary_file_path" value="/usr/local/GreatSPN/bin/WNSIM"/>
+  <parameters key="-a" value="5"/>
+  <parameters key="-c" value="95"/>
+  <parameters key="-f" value="1000"/>
+  <activeScenario href="wikistatsStorm.uml#_JU3TALrQEea9a9xTRmpT8g"/>
+  <inputVariables name="zookeeperResMult" assignments="//@possibleConfigurations.0/@assignments.0">
+    <values value="4" assignments="//@possibleConfigurations.0/@assignments.0"/>
+  </inputVariables>
+  <inputVariables name="c1" assignments="//@possibleConfigurations.0/@assignments.1">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.1"/>
+  </inputVariables>
+  <domainResource uri="wikistatsStorm.uml"/>
+  <outputVariables name="utilization"/>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="wikistatsStorm.uml#_8nEE4OJGEeaAL8m_PtOKUg"/>
+    <vslExpressionEntries key="expr" value="$utilization"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <possibleConfigurations>
+    <assignments value="//@inputVariables.0/@values.0" variable="zookeeperResMult"/>
+    <assignments value="//@inputVariables.1/@values.0" variable="c1"/>
+  </possibleConfigurations>
+  <scenarioStereotypes>DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology</scenarioStereotypes>
+</definition:SimulationDefinition>

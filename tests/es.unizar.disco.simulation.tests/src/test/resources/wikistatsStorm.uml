@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:DPIM="http://es.unizar.disco.dice/profiles/DPIM/1.0" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Hadoop="http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0" xmlns:PAM="http://www.eclipse.org/papyrus/PAM/1" xmlns:Storm="http://es.unizar.disco.dice/profiles/DTSM/Storm/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM http://es.unizar.disco.dice/profiles/DPIM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Hadoop http://www.eclipse.org/papyrus/PAM/1 http://www.eclipse.org/papyrus/MARTE/1#//PAM http://es.unizar.disco.dice/profiles/DTSM/Storm/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Storm">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Complex_Data_Types="http://com.masdes.dam/libraries/Complex_Data_Types/1.0" xmlns:Core="http://com.masdes.dam/profiles/Core/1.0" xmlns:DDSM="http://es.unizar.disco.dice/profiles/DDSM/1.0" xmlns:DPIM="http://es.unizar.disco.dice/profiles/DPIM/1.0" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Hadoop="http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0" xmlns:PAM="http://www.eclipse.org/papyrus/PAM/1" xmlns:Storm="http://es.unizar.disco.dice/profiles/DTSM/Storm/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://com.masdes.dam/profiles/Core/1.0 http://com.masdes.dam/profiles/DAM/1.0#//Core http://es.unizar.disco.dice/profiles/DDSM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM http://es.unizar.disco.dice/profiles/DPIM/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://es.unizar.disco.dice/profiles/DTSM/Hadoop/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Hadoop http://www.eclipse.org/papyrus/PAM/1 http://www.eclipse.org/papyrus/MARTE/1#//PAM http://es.unizar.disco.dice/profiles/DTSM/Storm/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Storm">
   <uml:Model xmi:id="_HNAe8LZMEeaUv6b48c781A" name="RootElement">
     <packagedElement xmi:type="uml:Device" xmi:id="_WY4Z8LZREeaUv6b48c781A" name="VMsCluster1">
       <nestedNode xmi:type="uml:Node" xmi:id="_rLXKYLZREeaUv6b48c781A" name="Zookeeper"/>
@@ -380,6 +380,18 @@
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_MPXosOePEeWj7ZPL8JeBTQ"/>
     </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_L5KesASxEeeQmIP0wj_3hQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_L5NiAASxEeeQmIP0wj_3hQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://com.masdes.dam/profiles/DAM/1.0#//Core"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DAM_PROFILES/DAM.profile.uml#_DchGAOSiEeKuSu-I2xDxSA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_L5UPsASxEeeQmIP0wj_3hQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_L5U2wASxEeeQmIP0wj_3hQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://com.masdes.dam/profiles/DAM/1.0#//Redundancy"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://DAM_PROFILES/DAM.profile.uml#_9t6vAOSiEeKuSu-I2xDxSA"/>
+    </profileApplication>
   </uml:Model>
   <DDSM:DdsmBigDataJob xmi:id="_EYrHYLZSEeaUv6b48c781A" base_Artifact="_6RCwELZREeaUv6b48c781A"/>
   <Storm:StormApplication xmi:id="_7iBl0LcMEeafVIer1DLqBA" base_Classifier="_PEcGgLZSEeaUv6b48c781A"/>
@@ -400,9 +412,9 @@
   </Storm:StormBolt>
   <Storm:StormStreamStep xmi:id="_3mLY0LrREea9a9xTRmpT8g" base_NamedElement="_1uISELrREea9a9xTRmpT8g" numTuples="1"/>
   <GQAM:GaAnalysisContext xmi:id="_lgc2AOJDEeaAL8m_PtOKUg" base_StructuredClassifier="_JU3TALrQEea9a9xTRmpT8g" base_NamedElement="_JU3TALrQEea9a9xTRmpT8g">
+    <context>out$reliability</context>
+    <context>in$Dummy</context>
     <context>out$utilization</context>
-    <context>in$c1</context>
-    <context>in$zookeeperResMult</context>
   </GQAM:GaAnalysisContext>
   <Storm:StormBolt xmi:id="_o0NI8OJHEeaAL8m_PtOKUg" base_NamedElement="_8nEE4OJGEeaAL8m_PtOKUg" base_Action="_8nEE4OJGEeaAL8m_PtOKUg" parallelism="4" d="4" alpha="5" sigma="6" minRebootTime="34" maxRebootTime="55">
     <hostDemand>45</hostDemand>
@@ -467,6 +479,10 @@
   </Hadoop:HadoopOperation>
   <PAM:PaLogicalResource xmi:id="_wPKRMO-FEeaUKbOklq617g" base_Classifier="_WY4Z8LZREeaUv6b48c781A"/>
   <Storm:StormZookeeper xmi:id="_sVrYMP5tEeaHbsmfhnL4Zg" sessionTimeout="30000" base_Classifier="_rLXKYLZREeaUv6b48c781A"/>
-  <GQAM:GaExecHost xmi:id="_fr6l4P5uEeaHbsmfhnL4Zg" resMult="$zookeeperResMult" base_Classifier="_rLXKYLZREeaUv6b48c781A"/>
   <DDSM:DdsmZookeeperCluster xmi:id="_3-IgsP57EeaV6ZmU0FMtwA" base_Node="_rLXKYLZREeaUv6b48c781A"/>
+  <Core:DaComponent xmi:id="_P2oZ0ASxEeeQmIP0wj_3hQ" resMult="3" base_Classifier="_rLXKYLZREeaUv6b48c781A">
+    <failure xmi:type="Complex_Data_Types:DaFailure" xmi:id="_WeRcMASxEeeQmIP0wj_3hQ">
+      <MTTF>(expr=10.0,unit=h,source=est)</MTTF>
+    </failure>
+  </Core:DaComponent>
 </xmi:XMI>

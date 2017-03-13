@@ -19,4 +19,10 @@ Files:
 4621530c-a96c-4db8-adbe-ba22ab68d40a.res.xmi
 4621530c-a96c-4db8-adbe-ba22ab68d40a.trc.xmi
 4621530c-a96c-4db8-adbe-ba22ab68d40a.trs.xmi
-are used for the reliability analysis tests
+are used for the reliability analysis DPIM tests
+
+
+Files
+c1bf507a-d629-4b5d-86ee-9dc82f0f0ac6.inv.xmi
+93a71370-1141-4764-aa8e-bb6611def309.def.xmi
+are used for the reliability DTSM Storm tests
