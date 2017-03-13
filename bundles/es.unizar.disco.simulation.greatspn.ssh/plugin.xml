@@ -27,6 +27,10 @@
             familyNFPproperty="RELIABILITY"
             id="reliability">
       </MetricTag>
+      <MetricTag
+            familyNFPproperty="RELIABILITY"
+            id="failure">
+      </MetricTag>
       <Metric
             name="DICE::DICE_UML_Extensions::DPIM::DpimScenario#respT"
             stereotype="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
@@ -273,6 +277,16 @@
             tag="utilization">
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology#failure"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+            tag="failure">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorStorm"
                scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>

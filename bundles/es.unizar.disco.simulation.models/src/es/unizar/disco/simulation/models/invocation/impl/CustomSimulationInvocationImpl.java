@@ -86,8 +86,10 @@ public class CustomSimulationInvocationImpl extends SimulationInvocationImpl imp
 					DiceLogger.logInfo(DiceModelsPlugin.getDefault(), configElement.getAttribute("builder") + " is the best builder up to now");
 					
 					try {
+						DiceLogger.logInfo(DiceModelsPlugin.getDefault(), "Creating an excecutable extension of " + configElement.getAttribute(BUILDER));
 						priorityBuilder = (IAnalyzableModelBuilder) configElement.createExecutableExtension(BUILDER);
 					} catch (CoreException e) {
+						DiceLogger.logInfo(DiceModelsPlugin.getDefault(), "The creation of excecutable extension of " + configElement.getAttribute(BUILDER) + " throws a CoreException");
 						throw new RuntimeException(e);
 					}
 				}

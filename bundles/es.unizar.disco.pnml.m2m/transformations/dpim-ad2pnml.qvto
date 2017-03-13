@@ -164,7 +164,10 @@ mapping UML::ActivityPartition::devices2resources() when {
 	self.represents.getPaLogicalResource_poolSize().oclIsUndefined().not();
 } {
 	
+
+	
 	if (self.represents.oclIsKindOf(UML::Artifact)){
+		
 		
 		if (self.represents.oclAsType(UML::Artifact).resolveIn(UML::NamedElement::resource2place)->isEmpty()){
 			var poolSize := self.represents.getPaLogicalResource_poolSize();
@@ -178,7 +181,7 @@ mapping UML::ActivityPartition::devices2resources() when {
 		
 	};
 	
-	if(self.represents.oclAsType(UML::Node)){
+	if(self.represents.oclIsKindOf(UML::Node)){
 	
 		if (self.represents.oclAsType(UML::Node).resolveIn(UML::NamedElement::resource2place)->isEmpty()){
 			var poolSize := self.represents.getPaLogicalResource_poolSize();
@@ -194,6 +197,7 @@ mapping UML::ActivityPartition::devices2resources() when {
 	
 	};
 	
+
 	
 	
 
@@ -288,7 +292,7 @@ when {
 		var placeNotResource := originalSourceTrans.OutArcs->asSequence()->first().target.oclAsType(PNML::Place);
 		var arc := originalSourceTrans.OutArcs->asSequence()->first();
 		originalSourceTrans.OutArcs->forEach(outarc){
-			if((outarc.target.invresolveone().oclIsKindOf(UML::Artifact) or outarc.target.invresolveone().oclIsKindOf(UML::Node)).not()){
+			if((outarc.target.invresolveone().oclIsKindOf(UML::Artifact) or outarc.target.invresolveone().oclIsKindOf(UML::Node) or outarc.target.invresolveone().oclIsKindOf(UML::Device)).not()){
 				placeNotResource := outarc.target.oclAsType(PNML::Place);
 				arc := outarc;
 			}; 

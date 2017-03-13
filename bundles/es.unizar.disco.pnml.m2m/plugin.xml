@@ -121,5 +121,12 @@
             priority="4"
             scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
       </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            analyzableProperty="RELIABILITY"
+            builder="es.unizar.disco.pnml.m2m.builder.StormScenario2PnmlReliabilityResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Activity"
+            priority="4"
+            scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology">
+      </AnalyzableResourceBuilder>
    </extension>
 </plugin>

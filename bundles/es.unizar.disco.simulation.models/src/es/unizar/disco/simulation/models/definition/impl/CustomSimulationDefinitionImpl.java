@@ -39,6 +39,7 @@ import org.eclipse.uml2.uml.Stereotype;
 import org.eclipse.uml2.uml.util.UMLUtil;
 
 import com.google.common.collect.Lists;
+import com.masdes.dam.Complex_Data_Types.DaFailure;
 
 import es.unizar.disco.core.collections.DerivedMap;
 import es.unizar.disco.core.collections.Function;
@@ -438,6 +439,11 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 							for (Object obj : (EList<?>) value) {
 								if (obj instanceof String && StringUtils.isNotBlank((String) obj)) {
 									newDefinitions.add(createDomainMeasureDefinition(element, taggedValueName, (String) obj));
+								}
+								else{//Treat the case of DaFailure, which is not defined as a string
+									if(obj instanceof DaFailure){
+										newDefinitions.add(createDomainMeasureDefinition(element, taggedValueName, ((DaFailure) obj).getMTTF().get(0)));
+									}									
 								}
 							}
 						} else if (value instanceof String && StringUtils.isNotBlank((String) value)) {
