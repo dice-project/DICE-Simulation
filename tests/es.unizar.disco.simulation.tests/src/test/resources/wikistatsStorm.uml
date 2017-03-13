@@ -403,6 +403,10 @@
   <Storm:StormBolt xmi:id="_BZBOYLcNEeafVIer1DLqBA" base_NamedElement="_x1EYULcMEeafVIer1DLqBA" base_Classifier="_x1EYULcMEeafVIer1DLqBA"/>
   <Storm:StormScenarioTopology xmi:id="_rZTzULrREea9a9xTRmpT8g" base_NamedElement="_JU3TALrQEea9a9xTRmpT8g" usedResources="_z92vwOoPEeakp7y5t6-Yaw" base_Behavior="_JU3TALrQEea9a9xTRmpT8g" base_Class="_JU3TALrQEea9a9xTRmpT8g">
     <utilization>3.2</utilization>
+    <reliability>(expr=$reliability, statQ=mean, source=calc)</reliability>
+    <failure xmi:type="Complex_Data_Types:DaFailure" xmi:id="_cfKNEAfREeeood0n7L7vpg">
+      <MTTF>(expr=$mttf, unit=h, statQ=mean, source=calc)</MTTF>
+    </failure>
   </Storm:StormScenarioTopology>
   <Storm:StormSpout xmi:id="_tx2YALrREea9a9xTRmpT8g" base_NamedElement="_aMF5YLrREea9a9xTRmpT8g" base_Action="_aMF5YLrREea9a9xTRmpT8g" parallelism="2&#xA;" avgEmitRate="3.5&#xA;">
     <hostDemand>3.1</hostDemand>
@@ -415,6 +419,7 @@
     <context>out$reliability</context>
     <context>in$Dummy</context>
     <context>out$utilization</context>
+    <context>out$mttf</context>
   </GQAM:GaAnalysisContext>
   <Storm:StormBolt xmi:id="_o0NI8OJHEeaAL8m_PtOKUg" base_NamedElement="_8nEE4OJGEeaAL8m_PtOKUg" base_Action="_8nEE4OJGEeaAL8m_PtOKUg" parallelism="4" d="4" alpha="5" sigma="6" minRebootTime="34" maxRebootTime="55">
     <hostDemand>45</hostDemand>

@@ -23,6 +23,8 @@ are used for the reliability analysis DPIM tests
 
 
 Files
-c1bf507a-d629-4b5d-86ee-9dc82f0f0ac6.inv.xmi
-93a71370-1141-4764-aa8e-bb6611def309.def.xmi
+#c1bf507a-d629-4b5d-86ee-9dc82f0f0ac6.inv.xmi
+#93a71370-1141-4764-aa8e-bb6611def309.def.xmi
+6a008097-ebcb-42bf-99ca-05ecd190c14b.inv.xmi
+165d07a2-a8a0-4359-83c6-822b40f479cc.def.xmi
 are used for the reliability DTSM Storm tests

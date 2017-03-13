@@ -10,18 +10,13 @@ import static org.junit.Assert.assertEquals;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Paths;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
@@ -29,16 +24,10 @@ import org.eclipse.uml2.uml.Model;
 import org.junit.Before;
 import org.junit.Test;
 
-import es.unizar.disco.core.logger.DiceLogger;
-import es.unizar.disco.dice.DTSM.Storm.StormZookeeper;
-import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
-import es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlReliabilityResourceBuilder;
+
 import es.unizar.disco.pnml.m2m.builder.StormScenario2PnmlReliabilityResourceBuilder;
-import es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils;
-import es.unizar.disco.simulation.DiceSimulationPlugin;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorStorm;
-import es.unizar.disco.simulation.greatspn.ssh.calculators.ScenarioReliabilityCalculator;
 import es.unizar.disco.simulation.launcher.Messages;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder.ModelResult;
@@ -47,21 +36,20 @@ import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
-import es.unizar.disco.simulation.models.measures.MeasuresFactory;
 import es.unizar.disco.simulation.models.simresult.SimresultFactory;
 import es.unizar.disco.simulation.simulators.ISimulator;
 import es.unizar.disco.simulation.simulators.SimulationException;
 import fr.lip6.move.pnml.ptnet.PetriNet;
 import fr.lip6.move.pnml.ptnet.PetriNetDoc;
 import fr.lip6.move.pnml.ptnet.PnObject;
-import fr.lip6.move.pnml.ptnet.ToolInfo;
 import fr.lip6.move.pnml.ptnet.Transition;
 import fr.lip6.move.pnml.ptnet.Place;
 
 public class ReliabilityStormTest extends AbstractTest {
 
-	final static String DEFINITION_FILENAME = "93a71370-1141-4764-aa8e-bb6611def309";
-	final static String INVOCATION_FILENAME = "c1bf507a-d629-4b5d-86ee-9dc82f0f0ac6";
+	final static String DEFINITION_FILENAME = "165d07a2-a8a0-4359-83c6-822b40f479cc";
+	final static String INVOCATION_FILENAME = "6a008097-ebcb-42bf-99ca-05ecd190c14b";
+
 	final static String UML_FILENAME = "wikistatsStorm";
 
 	@Before
@@ -108,19 +96,6 @@ public class ReliabilityStormTest extends AbstractTest {
 
 	
 
-	private List<ToolInfo> getToolSpecifics(Transition transition, String matchingProperty) {
-		List<ToolInfo> list = new ArrayList<ToolInfo>();
-
-		for (ToolInfo info : transition.getToolspecifics()) {
-			Matcher matcher = Pattern.compile(PnmlToolInfoUtils.VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
-			if (matcher.matches()) {
-				if (TransitionKind.IMMEDIATE_PRIORITY.getLiteral().equals(matcher.group(1))) {
-					list.add(info);
-				}
-			}
-		}
-		return list;
-	}
 
 	@Test
 	public void testResults()
@@ -128,11 +103,22 @@ public class ReliabilityStormTest extends AbstractTest {
 
 		//There are 3 resources with MTTF each of 10h. The result should be a MTTF of around 18.33h . Accepted between 18 and 18.5h
 		
+		//Compute results:
+		
 		SimulationDefinition fullExecutionDefinition = definition;
+		IAnalyzableModelBuilder builder = new StormScenario2PnmlReliabilityResourceBuilder();
+
+		System.out.println("Creating net of active scenario: " + invocation.getDefinition().getActiveScenario());
+		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
+				invocation.getVariableConfiguration().toPrimitiveAssignments());
+		
+		invocation.getAnalyzableModel().set(0, result.getModel().get(0));
+		invocation.setTraceSet(result.getTraceSet());
+		
 		DomainMeasure mttf = launchAnalysis(fullExecutionDefinition);
 		assertTrue("The MTTF is null", mttf!=null);
-		assertTrue("The MTTF is below 18h with value " + mttf.getValue().doubleValue()/3600.0 , mttf.getValue().doubleValue()>(18.0*3600.0));
-		assertTrue("The MTTF is above 18.5h with value " + mttf.getValue().doubleValue()/3600.0 , mttf.getValue().doubleValue()<(18.5*3600.0));
+		assertTrue("The MTTF is below 18h with value " + mttf.getValue().doubleValue(), mttf.getValue().doubleValue()>(18.0));
+		assertTrue("The MTTF is above 18.5h with value " + mttf.getValue().doubleValue(), mttf.getValue().doubleValue()<(18.5));
 
 	}
 
