@@ -10,7 +10,7 @@
       <parent>
         <groupId>es.unizar.disco</groupId>
         <artifactId>es.unizar.disco.root</artifactId>
-        <version>0.5.0-SNAPSHOT</version>
+        <version>0.5.1-SNAPSHOT</version>
     </parent>
   
   <packaging>eclipse-target-definition</packaging>
