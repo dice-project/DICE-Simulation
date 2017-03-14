@@ -28,16 +28,10 @@ main() {
 	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2arcGlobalField();
 	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2tarcAllShuffle();
 	ad.scenario().node[UML::FinalNode] -> map finalNode();
-	//ad.scenario().edge[UML::ControlFlow] -> map controlFlow2tarcNumTuples();
 	ad.scenario().node[UML::ActivityNode] -> map activityNode2tarcNumTuples();
 		
 	// Transform deployment
     ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
-
-	// Transform workload descriptions
-	/* var finalNodes := ad.scenario().node[UML::FinalNode];
-	assert fatal (finalNodes->size() = 1) with log ("Only Activities with a single Final Node are supported"); */
-	/*finalNodes[getGaWorkloadEvent().oclIsUndefined().not()] -> map initialNodes2AnalysisType(); */
 	
 	// Set time metadata
 	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
@@ -210,7 +204,8 @@ mapping UML::ActivityNode::boltNode2subNet()
 mapping UML::NamedElement::namedElement2place() : PNML::Place {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -227,7 +222,8 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 mapping UML::ControlFlow::controlFlow2placeBuffer() : PNML::Place {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -244,7 +240,8 @@ mapping UML::ControlFlow::controlFlow2placeBuffer() : PNML::Place {
 mapping UML::ControlFlow::controlFlow2place(in number: Integer) : PNML::Place {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -291,7 +288,8 @@ inherits UML::NamedElement::namedElement2place {
 mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -319,7 +317,6 @@ inherits UML::NamedElement::namedElement2transition {
 */
 mapping UML::ActivityNode::activityNode2timedTransition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
-	//toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
 	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo(1);
 }
 
@@ -329,7 +326,6 @@ inherits UML::NamedElement::namedElement2transition {
 */
 mapping UML::ActivityNode::activityNode2timedTransitionGlobal() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
-	//toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
 	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo(2);
 }
 
@@ -348,7 +344,8 @@ inherits UML::NamedElement::namedElement2immediateTransition {
 mapping UML::ControlFlow::controlFlow2immediateTransitionNum(in number: Integer) : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -367,7 +364,8 @@ mapping UML::ControlFlow::controlFlow2immediateTransitionNum(in number: Integer)
 mapping UML::ControlFlow::controlFlow2timedTransition() : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -382,7 +380,8 @@ mapping UML::ControlFlow::controlFlow2timedTransitionNum(in number: Integer, in 
 {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -585,9 +584,6 @@ mapping UML::ControlFlow::basicControlFlow2arcAllShuffle() when {
 	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
 		self.map all_grouping_async(bolt, list_trans_exec);
 	};
-	
-	// Add tracing information
-	//self.map trace(place_buffer, "basicControlFlow2arc");
 }
 
 /**
@@ -607,7 +603,7 @@ mapping UML::ControlFlow::mergeControlFlow2arcAllShuffle() when {
 
 	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
 	var list_trans_exec := source.getTimedTrans_Node();
-	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' for the ControlFlow '" + self.toString() + "'");
 	list_trans_exec->forEach(trans_exec){	
 		map arc(trans_exec, place_buffer);
 	};
@@ -617,9 +613,6 @@ mapping UML::ControlFlow::mergeControlFlow2arcAllShuffle() when {
 	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
 		self.map all_grouping_async(bolt, list_trans_exec);
 	};
-	
-	// Add tracing information
-	//self.map trace(place_buffer, "mergeControlFlow2arc");
 }
 
 /**
@@ -640,7 +633,7 @@ mapping UML::ControlFlow::joinControlFlow2arcAllShuffle() when {
 		
 	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
 	var list_trans_exec := source.getTimedTrans_Node();
-	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' for the ControlFlow '" + self.toString() + "'");
 	list_trans_exec->forEach(trans_exec){	
 		map arc(trans_exec, place_buffer);
 	};
@@ -657,9 +650,6 @@ mapping UML::ControlFlow::joinControlFlow2arcAllShuffle() when {
 	} else if ((self.getStormStreamStep_grouping().=(DBET::StreamPolicy::all) )) {
 		self.map all_grouping_sync(bolt, list_trans_exec, join_node);
 	};
-	
-	// Add tracing information
-	//self.map trace(place_buffer, "joinControlFlow2arc");
 }
 
 /**
@@ -673,7 +663,7 @@ mapping UML::ActivityNode::activityNode2tarcNumTuples() when {
 	var bolt := self;
 	var weight := getStormBolt_outTuples(bolt).value();
 	var list_trans_exec := bolt.getTimedTrans_Node();
-	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + bolt.toString() + "' in partition '" + self.toString() + "'");
+	assert fatal (list_trans_exec->size() >= 1) with log ("Could not find a temporal transition in the node '" + bolt.toString() + "'");
 	
 	list_trans_exec->forEach(temp_trans){		
 		temp_trans.OutArcs->forEach(out_arc){
@@ -686,8 +676,6 @@ mapping UML::ActivityNode::activityNode2tarcNumTuples() when {
 					out_arc.inscription := object PNML::PTArcAnnotation {
 						text := weight.round();
 					};
-					/**/
-					var t1 := 1;
 				};
 			}
 		}
@@ -711,7 +699,6 @@ mapping UML::ControlFlow::shuffle_grouping_async(in bolt : UML::ActivityNode) {
     var arc_3 := map arc(trans_in_bolt, place_working_bolt);
 	
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		//text := self.getStormStreamStep_numTuples().value();
 		text := getStormBolt_inTuples(self, bolt).value();
 	};
 	
@@ -738,7 +725,6 @@ mapping UML::ControlFlow::shuffle_grouping_sync(in bolt : UML::ActivityNode, in 
 		
 	var arc_1 := map arc(place_buffer, trans_in_bolt);	
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		//text := self.getStormStreamStep_numTuples().value();
 		text := getStormBolt_inTuples(self, bolt).value();
 	};
 }
@@ -756,7 +742,6 @@ mapping UML::ControlFlow::all_grouping_async(in bolt : UML::ActivityNode, inout 
     var arc_3 := map arc(trans_in_bolt, place_working_bolt);
     
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		//text := self.getStormStreamStep_numTuples().value();
 		text := getStormBolt_inTuples(self, bolt).value();
 	};
     	
@@ -792,7 +777,6 @@ mapping UML::ControlFlow::all_grouping_sync(in bolt : UML::ActivityNode, inout l
 		
 	var arc_1 := map arc(place_buffer, trans_in_bolt);	
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		//text := self.getStormStreamStep_numTuples().value();
 		text := getStormBolt_inTuples(self, bolt).value();
 	};
 		
@@ -842,7 +826,6 @@ mapping UML::ControlFlow::global_grouping(in bolt : UML::ActivityNode) {
 		
 	var arc_1 := map arc(place_buffer, trans_in_bolt);
 	arc_1.inscription := object PNML::PTArcAnnotation {
-		//text := self.getStormStreamStep_numTuples().value();
 		text := getStormBolt_inTuples(self, bolt).value();
 	};
 }
@@ -867,12 +850,11 @@ mapping UML::ControlFlow::field_grouping(in bolt : UML::ActivityNode) {
 	/* The available threads are shared proportionally by each field value */
 	var res_per_pipeline := (place_parallel_bolt.initialMarking.text / numFields).floor();
 	assert warning (res_per_pipeline > 0) with log ("Not enough resources (" + res_per_pipeline.toString() + ") for all the probFields paths (" + numFields.toString() + ")");
-	//var weight := self.getStormStreamStep_numTuples().value();
 	var weight := getStormBolt_inTuples(self, bolt).value();
 	var i := numFields;	
 	while (i > 0){
 		/* Create a independent processing pipeline for each field value */
-		var temp_trans_i := self.map controlFlow2timedTransitionNum(i, bolt);
+		var temp_trans_i := self.map controlFlow2timedTransitionNum(i+1, bolt);
 		
 		var trans_in_i := self.map controlFlow2immediateTransitionNum(i);
 		
@@ -883,8 +865,7 @@ mapping UML::ControlFlow::field_grouping(in bolt : UML::ActivityNode) {
 		var place_resource_i := self.map controlFlow2place(c+1);
 		c := c + 2;
 		
-		/* The last pipeline uses the remaining threads
-		and tuples */
+		/* The last pipeline uses the remaining threads	and tuples */
 		if (i = 1){
 			res_per_pipeline := (place_parallel_bolt.initialMarking.text -
 								(place_parallel_bolt.initialMarking.text / numFields).floor() * (numFields - 1));
@@ -925,7 +906,6 @@ mapping UML::ControlFlow::field_grouping(in bolt : UML::ActivityNode) {
 mapping UML::FinalNode::finalNode() {
 	var source_list := self.incoming->asSequence();
 	var source := source_list->first().source;
-	//assert fatal (source.oclIsKindOf(ActivityNode) and source.getStormBolt().oclIsUndefined().not()) 
 	assert fatal ((source_list->size() = 1) and 
 				   source.oclIsKindOf(ActivityNode) and
 				   source.getStormBolt().oclIsUndefined().not())
@@ -937,7 +917,7 @@ mapping UML::FinalNode::finalNode() {
 	var place := self.map activityNode2place();
 	
 	var list_temp_trans := source.getTimedTrans_Node();
-	assert fatal (list_temp_trans->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "' in partition '" + self.toString() + "'");
+	assert fatal (list_temp_trans->size() >= 1) with log ("Could not find a temporal transition in the node '" + source.toString() + "'");
 	list_temp_trans->forEach(temp_trans){			
 		map arc(temp_trans, place);
 	};
@@ -1259,6 +1239,11 @@ helper UML::Element::getStormBolt_sigma() : NFP_Real {
 		return null;
 	};
 	var sigma := self.getValue(self.getStormBolt(), "sigma").oclAsType(String);
+	
+	if (sigma = ""){
+		return null;
+	};
+	
 	assert warning (sigma->size() = 1)
 		with log ("Unexpected number of 'sigma' tagged values found, expected 1. "+
 					"The context element is '" + self.toString() + "'"); 
@@ -1294,7 +1279,8 @@ helper getStormBolt_inTuples(in stream : UML::ControlFlow, in bolt : UML::Activi
 	var bolt_numTuples := bolt.getStormBolt_sigma_inTuples();
 	/**/
 	if ((stream_numTuples != null) and
-		stream_numTuples.oclIsUndefined().not()) {
+		stream_numTuples.oclIsUndefined().not() and
+		(stream_numTuples.value() > 0) ) {
 		return stream.getStormStreamStep_numTuples();
 	} else if ((bolt_numTuples != null) and
 				bolt_numTuples.oclIsUndefined().not() and
@@ -1342,6 +1328,10 @@ helper UML::Element::getStormStreamStep_numTuples() : NFP_Integer {
 		return null;
 	};
 	var numTuples := self.getValue(self.getStormStreamStep(), "numTuples").oclAsType(String);
+	if (numTuples = ""){
+		return null;
+	};
+	
 	assert warning (numTuples->size() = 1)
 		with log ("Unexpected number of 'numTuples' tagged values found, expected 1. "+
 					"The context element is '" + self.toString() + "'"); 
@@ -1394,7 +1384,6 @@ helper UML::Element::getStormStreamStep_probFields() : List(Real) {
 	
 	/* Compute the summation of all probabilities */
 	probFieldsList->forEach(probF){
-		//total_value := total_value + probF.toReal();
 		total_value := total_value + probF.toNfpReal().value();
 	};
 
@@ -1417,7 +1406,6 @@ helper UML::Element::normalize(in numElements: Integer) : List(Real) {
 	var i := numElements;
 	while (i > 0){
 		var probF := probFieldsList->at(i);
-		//total_value := total_value + probF.toReal();
 		total_value := total_value + probF.toNfpReal().value();
 		i := i - 1;
 	};
