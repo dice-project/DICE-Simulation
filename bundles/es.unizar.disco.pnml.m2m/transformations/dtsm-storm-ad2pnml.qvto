@@ -478,10 +478,11 @@ mapping UML::ControlFlow::mergeControlFlow2arcGlobalField() when {
 	self.target.oclIsKindOf(MergeNode)
 }{
 	var source := self.source;
-	var target := self.target;
-	assert fatal (target.outgoing.target->size() = 1) with log('Merges should only have a single outgoing ControlFlow');
+	var merge_node := self.target;
+	assert fatal (merge_node.outgoing->asOrderedSet()->size() = 1) with log("Merge '" + merge_node.toString() + "' should only have a single outgoing ControlFlow");
 	
-	var bolt := target.outgoing.target->asOrderedSet()->first();
+	//var bolt := merge_node.outgoing.target->asOrderedSet()->first();
+	var bolt := merge_node.outgoing->asOrderedSet()->first().target;
 
 	var place_buffer := self.map controlFlow2placeBuffer();
 	var list_trans_exec := source.getTimedTrans_Node();
@@ -514,7 +515,7 @@ mapping UML::ControlFlow::joinControlFlow2arcGlobalField() when {
 }{
 	var source := self.source;
 	var join_node := self.target;
-	assert fatal (join_node.outgoing->size() = 1) with log("Join '" + join_node.toString() + "' should only have a single outgoing ControlFlow");
+	assert fatal (join_node.outgoing->asOrderedSet()->size() = 1) with log("Join '" + join_node.toString() + "' should only have a single outgoing ControlFlow");
 	
 	//var bolt := join_node.outgoing.target->asOrderedSet()->first();
 	var bolt := join_node.outgoing->asOrderedSet()->first().target;
@@ -597,10 +598,11 @@ mapping UML::ControlFlow::mergeControlFlow2arcAllShuffle() when {
 	self.target.oclIsKindOf(MergeNode)
 }{
 	var source := self.source;
-	var target := self.target;
-	assert fatal (target.outgoing.target->size() = 1) with log('Merges should only have a single outgoing ControlFlow');
+	var merge_node := self.target;
+	assert fatal (merge_node.outgoing->asOrderedSet()->size() = 1) with log("Merge '" + merge_node.toString() + "' should only have a single outgoing ControlFlow");
 	
-	var bolt := target.outgoing.target->asOrderedSet()->first();
+	//var bolt := merge_node.outgoing.target->asOrderedSet()->first();
+	var bolt := merge_node.outgoing->asOrderedSet()->first().target;
 
 	var place_buffer := self.resolveoneIn(UML::ControlFlow::controlFlow2placeBuffer);
 	var list_trans_exec := source.getTimedTrans_Node();
@@ -628,7 +630,7 @@ mapping UML::ControlFlow::joinControlFlow2arcAllShuffle() when {
 }{
 	var source := self.source;
 	var join_node := self.target;
-	assert fatal (join_node.outgoing->size() = 1) with log("Join '" + join_node.toString() + "' should only have a single outgoing ControlFlow");
+	assert fatal (join_node.outgoing->asOrderedSet()->size() = 1) with log("Join '" + join_node.toString() + "' should only have a single outgoing ControlFlow");
 	
 	//var bolt := join_node.outgoing.target->asOrderedSet()->first();
 	var bolt := join_node.outgoing->asOrderedSet()->first().target;	
