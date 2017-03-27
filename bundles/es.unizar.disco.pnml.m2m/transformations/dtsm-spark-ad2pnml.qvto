@@ -34,8 +34,8 @@ main() {
 	ad.scenario().node[UML::InitialNode] -> map initialNode2subNet();
 	ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
 	
-	//ad.scenario().node[UML::ForkNode] -> map forkNode2subNet();
-	//ad.scenario().node[UML::JoinNode] -> map joinNode2subNet();
+	ad.scenario().node[UML::ForkNode] -> map forkNode2subNet();
+	ad.scenario().node[UML::JoinNode] -> map joinNode2subNet();
 	
 	//ad.scenario().node[UML::DecisionNode] -> map decisionNode2subNet();
 	//ad.scenario().node[UML::MergeNode] -> map mergeNode2subNet();
@@ -44,6 +44,7 @@ main() {
 	ad.scenario().node[UML::FinalNode] -> map model2closedNet();
 	
 	// Transform deployment
+	ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition]->asSet() -> map devices2resources();
     ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
 
 	// Set time metadata
@@ -86,27 +87,20 @@ mapping baseTimeUnit(unit : String) {
 	net.toolspecifics += baseTimeUnitToolInfo(unit);
 }
 
+/*************************************************/
+/**
+	Transforms the Deployment Diagram to a resources place
+*/
+
 mapping UML::ActivityPartition::partitions2resources() 
 when {
-	self.represents.owner.getSparkComputationNode().oclIsUndefined().not();
+	self.represents.owner.getSparkNode().oclIsUndefined().not()
 }{
 	var containedNodes := ad.objectsOfKind(UML::ActivityNode)->select(node : ActivityNode | self->intersection(node.inPartition)->notEmpty());
 	assert fatal (containedNodes->size() >= 1) with log ("At least a node must be present in partition '" + self.toString() + "'");
 	
-	/* Create resource place */
-	var place_resource := self.map activityPartition2placeRes();
-	var nCoresNode := self.represents.owner.getSparkComputationNode_nCores();
-	var nCoresWorkload := ad.scenario().getSparkScenario_nAssignedCores();
-	
-	var core := nCoresWorkload;
-	if (nCoresNode.value() < nCoresWorkload.value()){
-		core := nCoresWorkload;	
-	}; 
-	
-	place_resource.initialMarking := object PNML::PTMarking {
-			text := core.value();
-	};
-		
+	//var place_resource := self.represents.oclAsType(UML::Artifact).resolveoneIn(UML::NamedElement::devices2resources);
+	var place_resource := self.represents.owner.resolveone(PNML::Place);
 	
 	// For each partition, we need to modify the subnet that was previously 
 	// generated. We add an intermediate place and a set of arcs connecting
@@ -121,7 +115,9 @@ when {
 	containedNodes->forEach(node) {	
 		assert warning (node.getSparkOperation().oclIsUndefined().not())
 		with log ("Processing a node '" + node.toString() + "' in partition '" + self.toString() + "'");
-		if (node.getSparkOperation().oclIsUndefined().not()){
+		//if (node.getSparkOperation().oclIsUndefined().not()){
+		if ( (node.getSparkMap().oclIsUndefined().not() or
+			  node.getSparkReduce().oclIsUndefined().not()) ){
 			// Get the timed transition 
 			var trans_exec := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
 			assert fatal (trans_exec.oclIsUndefined().not() ) with log ("Could not find a temporal transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
@@ -144,6 +140,42 @@ when {
 	self.represents.owner.map trace(place_resource, "partitions2resources");
 }
 
+/*************************************************/
+mapping UML::ActivityPartition::devices2resources() when {
+	self.represents.owner.getSparkNode_nCores().oclIsUndefined().not();
+} {
+	/* Create resource place */
+
+	var nCoresWorkload := ad.scenario().getSparkScenario_nAssignedCores();
+	var nCoresNode := self.represents.owner.getSparkNode_nCores();
+	var core := nCoresWorkload;
+	if (nCoresNode.value() < nCoresWorkload.value()){
+		core := nCoresWorkload;	
+	};
+		
+	if (self.represents.owner.oclIsKindOf(UML::Artifact)){		
+		if (self.represents.owner.oclAsType(UML::Artifact).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
+
+			var place := self.represents.owner.oclAsType(UML::Artifact).map device2placeRes();
+			place.initialMarking := object PNML::PTMarking {
+				text := core.value();
+			};
+		};
+	};
+	//if(self.represents.owner.oclAsType(UML::Node)){
+	if(self.represents.owner.oclIsKindOf(UML::Node)){	
+			
+		if (self.represents.owner.oclAsType(UML::Node).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
+	
+			var place := self.represents.owner.oclAsType(UML::Node).map device2placeRes();
+			place.initialMarking := object PNML::PTMarking {
+				text := core.value();
+			};
+		};
+	};
+}
+
+/*************************************************/
 /**
 	Transforms an InitialNode into a pair of [place]-->[transition] if the workload pattern
 	is undefined or closed, and only a single [transition] if the workload pattern is open
@@ -331,10 +363,73 @@ mapping UML::FinalNode::model2closedNet() {
 	self.map trace(trans_end, "model2closedNet");
 }
 
+ /*************************************************/
+/**
+	Transform a generic ForkNode into a subnet:
+... -> (source) place_output -> (target) trans_gen -> ...
+						|-----> (target) trans_gen -> ...
+*/
 
+mapping UML::ForkNode::forkNode2subNet() 
+	when { 
+		self.incoming->isEmpty().not() and
+		self.outgoing->isEmpty().not()
+		 } { 
+
+	assert warning (self.incoming->size() = 1)
+	with log ("Fork node '" + self.name.toString() + "' must have a single input ControlFlow");
+	
+	assert warning (self.outgoing->size() >= 1)
+	with log ("Fork node '" + self.name.toString() + "' must have one or more output ControlFlow");
+	
+	var source := self.incoming->asSequence()->first().source;
+	var place_in_output := source.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
+	
+	var trans_gen := self.map activityNode2immTransGen();
+	map arc(place_in_output, trans_gen);
+	
+	// Add tracing information
+	self.map trace(trans_gen, "forkNode2subNet");
+}
+
+ /*************************************************/
+/**
+	Transform a generic JoinNode into a subnet:
+... -> (source) place_output -> (joinnode) trans_gen -> (joinnode) place_output -> ...
+... -> (source) place_output -|
+*/
+
+mapping UML::JoinNode::joinNode2subNet() 
+	when { 
+		self.incoming->isEmpty().not() and
+		self.outgoing->isEmpty().not()
+		 } {
+
+	assert warning (self.incoming->size() >= 1)
+	with log ("Join node '" + self.name.toString() + "' must have one or more output ControlFlow");
+	
+	assert warning (self.outgoing->size() = 1)
+	with log ("Join node '" + self.name.toString() + "' must have a single output ControlFlow");
+	
+	var trans_gen := self.map activityNode2immTransGen();
+	var place_output := self.map activityNode2placeOutput();	
+	map arc(trans_gen, place_output);	
+	
+	/*var source_list := self.incoming->asSequence();
+	source_list->forEach (source){
+		var place_in_output := source.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
+		map arc(place_in_output, trans_gen);
+	}*/
+	
+	// Add tracing information
+	self.map trace(trans_gen, "joinNode2subNet");
+	self.map trace(place_output, "joinNode2subNet");
+}
+			
 /*************************************************/
 mapping UML::ControlFlow::controlFlow2tarc() disjuncts 
-UML::ControlFlow::basicControlFlow2arc {};
+UML::ControlFlow::basicControlFlow2arc,
+UML::ControlFlow::forkControlFlow2arc {};
 
 /**
 	Transforms a ControlFlow between two ActivityNodes.
@@ -348,6 +443,7 @@ mapping UML::ControlFlow::basicControlFlow2arc() when {
 	self.target.oclIsKindOf(ActivityNode) and
 	self.target.oclIsKindOf(InitialNode).not() and
 	self.target.oclIsKindOf(FinalNode).not()*/
+	self.source.oclIsKindOf(ForkNode).not() and
 	self.target.oclIsKindOf(ActivityNode) and
 	self.target.oclIsKindOf(InitialNode).not() and
 	self.target.oclIsKindOf(FinalNode).not()
@@ -358,6 +454,27 @@ mapping UML::ControlFlow::basicControlFlow2arc() when {
 	var place_output := source.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
 	var trans_gen := target.resolveoneIn(UML::ActivityNode::activityNode2immTransGen);
 	map arc(place_output, trans_gen);
+}
+
+mapping UML::ControlFlow::forkControlFlow2arc() when {
+	self.source.oclIsKindOf(ForkNode) and
+	self.target.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(InitialNode).not() and
+	self.target.oclIsKindOf(FinalNode).not()
+}{
+    var source := self.source;
+	var target := self.target;
+	
+	var trans_gen_source := source.resolveoneIn(UML::ActivityNode::activityNode2immTransGen);
+	var trans_gen_target := target.resolveoneIn(UML::ActivityNode::activityNode2immTransGen);
+	
+	var place_output := self.map controlFlow2placeOutput();
+
+	map arc(trans_gen_source, place_output);	 
+	map arc(place_output, trans_gen_target);
+	
+	// Add tracing information
+	self.map trace(place_output, "forkControlFlow2arc");
 }
 
 /*************************************************/
@@ -387,6 +504,13 @@ mapping UML::ActivityPartition::activityPartition2placeRes() : PNML::Place
 inherits UML::NamedElement::namedElement2place {
 			name.text := name.text + "_Res";
 }
+
+//mapping UML::Device::device2placeRes() : PNML::Place 
+mapping UML::NamedElement::device2placeRes() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Res";
+}
+
 
 /**
 	Transform a generic ActivityNode into a Place 
@@ -455,6 +579,10 @@ inherits UML::NamedElement::namedElement2place {
 			name.text := name.text + "_Output";
 }
 
+mapping UML::ControlFlow::controlFlow2placeOutput() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Output";
+}
 /***********************************************************************/
 /**
 	Transform a generic NamedElement into a Transition 
@@ -902,11 +1030,11 @@ helper UML::Element::getSparkReduce_nTasks() : NFP_Integer {
 }
 
 /******************************************************************/
-helper UML::Element::getSparkComputationNode_nCores() : NFP_Integer {
-	if (self.getSparkComputationNode() = null) {
+helper UML::Element::getSparkNode_nCores() : NFP_Integer {
+	if (self.getSparkNode() = null) {
 		return null;
 	};
-	var nCores := self.getValue(self.getSparkComputationNode(), "nCores").oclAsType(String);
+	var nCores := self.getValue(self.getSparkNode(), "nCores").oclAsType(String);
 	return nCores.toNfpInteger();
 }
 

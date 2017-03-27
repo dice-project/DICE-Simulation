@@ -197,9 +197,9 @@ helper UML::Element::getSparkWorkloadEvent() : UML::Stereotype {
 	return null;	
 }
 
-helper UML::Element::getSparkComputationNode() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkComputationNode"))) { 
-		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkComputationNode");
+helper UML::Element::getSparkNode() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode");
 	};
 	return null;	
 }
