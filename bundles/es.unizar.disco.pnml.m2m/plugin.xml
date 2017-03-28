@@ -48,6 +48,9 @@
       <Scenario
             stereotypeName="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario">
       </Scenario>
+      <Scenario
+            stereotypeName="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario">
+      </Scenario>
    </extension>
    <extension
          point="es.unizar.disco.simulation.models.analyzable_resource_builder">
@@ -134,6 +137,20 @@
             metaclass="org.eclipse.uml2.uml.Activity"
             priority="4"
             scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology">
+      </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            analyzableProperty="PERFORMANCE"
+            builder="es.unizar.disco.pnml.m2m.builder.SparkActivityDiagram2PnmlResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Activity"
+            priority="4"
+            scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario">
+      </AnalyzableResourceBuilder>
+      <AnalyzableResourceBuilder
+            analyzableProperty="PERFORMANCE"
+            builder="es.unizar.disco.pnml.m2m.builder.HadoopActivityDiagram2PnmlResourceBuilder"
+            metaclass="org.eclipse.uml2.uml.Activity"
+            priority="4"
+            scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario">
       </AnalyzableResourceBuilder>
    </extension>
 </plugin>

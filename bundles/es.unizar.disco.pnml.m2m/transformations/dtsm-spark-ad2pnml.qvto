@@ -205,7 +205,8 @@ mapping UML::InitialNode::initialNode2subNet()
 	var arc_2 := map arc(trans_think, place_output);
 
 	// Add tracing information
-	self.map trace(place_start, "initialNode2subNet");
+	//self.map trace(place_start, "initialNode2subNet");
+	self.map trace(place_start, getPlaceConcurrentUsersTrace());
 	self.map trace(place_output, "initialNode2subNet");
 	self.map trace(trans_think, "initialNode2subNet");
 }
@@ -360,7 +361,8 @@ mapping UML::FinalNode::model2closedNet() {
 	var arc_2 := map arc(trans_end, initial_place);	
 			
 	// Add tracing information
-	self.map trace(trans_end, "model2closedNet");
+	self.map trace(trans_end, "model2closedNet");//
+	ad.scenario().map trace(trans_end, "model2closedNet");
 }
 
  /*************************************************/

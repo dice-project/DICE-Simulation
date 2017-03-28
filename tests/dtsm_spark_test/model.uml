@@ -157,7 +157,7 @@ sparkExtDelay=[$th1]}</body>
   <Spark:SparkReduce xmi:id="_zhtKwAMzEeec2YL9FlAkDw" base_NamedElement="_vVW-sDlXEeaE4deiM0Jlvg" base_Action="_vVW-sDlXEeaE4deiM0Jlvg">
     <hostDemand>(expr=$redT,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkReduce>
-  <Spark:SparkScenario xmi:id="_0_4Y8AMzEeec2YL9FlAkDw" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem">
+  <Spark:SparkScenario xmi:id="_0_4Y8AMzEeec2YL9FlAkDw" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" usedResources="_6kBW8AMzEeec2YL9FlAkDw" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem">
     <throughput>(expr=$T,unit=s,statQ=mean,source=calc)</throughput>
     <respT>(expr=$RT,unit=s,statQ=mean,source=calc)</respT>
   </Spark:SparkScenario>
