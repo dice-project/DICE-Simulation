@@ -1159,6 +1159,19 @@ helper NFP_Real::value() : Real {
 	return self.expr.eval(vars.vars()).toReal();
 }
 
+helper NFP_Duration::value() : Real {
+	var value : Real;	
+	if (self.value.oclIsUndefined().not()) {
+		value := self.value;
+	};
+	value := self.expr.eval(vars.vars()).toReal();
+	if (self.unit.oclIsUndefined().not()) {
+		map baseTimeUnit("s");			
+		value := value.convert(self.unit, "s");
+	};
+	return value;
+}
+
 /*******************************************************************************
   Getters for tagged values
 ******************************************************************************/
