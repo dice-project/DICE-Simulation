@@ -9,11 +9,17 @@
       variable="$th1"
       value="1"/>
   <datatypes:PrimitiveVariableAssignment
-      variable="$mapT"
-      value="1"/>
+      variable="$map1T"
+      value="11"/>
   <datatypes:PrimitiveVariableAssignment
-      variable="$redT"
-      value="1"/>
+      variable="$map2T"
+      value="12"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$groupT"
+      value="6"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$countT"
+      value="7"/>
   <datatypes:PrimitiveVariableAssignment
       variable="$nP1"
       value="20"/>
@@ -22,7 +28,7 @@
       value="20"/>
   <datatypes:PrimitiveVariableAssignment
       variable="$nAssignedCores"
-      value="20"/>
+      value="6"/>
   <datatypes:PrimitiveVariableAssignment
       variable="$nAssignedMemory"
       value="15"/>

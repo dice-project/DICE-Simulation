@@ -113,7 +113,9 @@ when {
 	//  v            v
 	// [Resources-Place]
 	containedNodes->forEach(node) {	
-		assert warning (node.getSparkOperation().oclIsUndefined().not())
+		//assert warning (node.getSparkOperation().oclIsUndefined().not())
+		assert warning (node.getSparkMap().oclIsUndefined().not() or
+			  			node.getSparkReduce().oclIsUndefined().not())
 		with log ("Processing a node '" + node.toString() + "' in partition '" + self.toString() + "'");
 		//if (node.getSparkOperation().oclIsUndefined().not()){
 		if ( (node.getSparkMap().oclIsUndefined().not() or
@@ -128,7 +130,6 @@ when {
 			assert warning (trans_get_resource.InArcs->size() = 1) with log ("A single place required before the transition '" + trans_get_resource.name.toString() + "', obtained " + trans_get_resource.InArcs->size().toString());
 			assert warning (trans_get_resource.OutArcs->size() = 1) with log ("A single place required after the transition '" + trans_get_resource.name.toString() + "', obtained " + trans_get_resource.OutArcs->size().toString());
 			
-				
 			/* Add an arc between the new resource place and the timed transition */
 			/* Add an arc between the resource transition and the new resource place */
 			var arc_1 := map arc(trans_exec, place_resource);
@@ -925,6 +926,19 @@ helper NFP_Real::value() : Real {
 	return self.expr.eval(vars.vars()).toReal();
 }
 
+helper NFP_Duration::value() : Real {
+	var value : Real;	
+	if (self.value.oclIsUndefined().not()) {
+		value := self.value;
+	};
+	value := self.expr.eval(vars.vars()).toReal();
+	if (self.unit.oclIsUndefined().not()) {
+		map baseTimeUnit("s");			
+		value := value.convert(self.unit, "s");
+	};
+	return value;
+}
+
 /*******************************************************************************
   Getters for tagged values
 ******************************************************************************/
@@ -1088,7 +1102,7 @@ helper UML::Element::getSparkWorkloadEvent_sparkPopulation() : NFP_Integer {
 	return pop.toNfpInteger();
 }
 
-helper UML::Element::getSparkWorkloadEvent_sparkExtDelay() : NFP_Integer {
+helper UML::Element::getSparkWorkloadEvent_sparkExtDelay() : NFP_Duration {
 	if (self.getSparkWorkloadEvent() = null) {
 		return null;
 	};
@@ -1097,7 +1111,10 @@ helper UML::Element::getSparkWorkloadEvent_sparkExtDelay() : NFP_Integer {
 	assert warning (extDelay->size() >= 1)
 		with log ("Unexpected number of 'sparkExtDelay' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
-	return extDelay.toNfpInteger();
+	//return extDelay.toNfpDuration();
+	return extDelay.toNfpDuration()->
+			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
+			asSequence()->first();
 }
 
 /*******************************************************************************

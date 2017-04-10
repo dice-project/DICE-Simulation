@@ -335,7 +335,7 @@
             stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
             tag="respT">
          <Calculator
-               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActivityResponseTimeCalculator"
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActivityResponseTimeCalculatorSpark"
                scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
