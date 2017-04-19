@@ -93,7 +93,7 @@
       <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_6c2bkAPMEdyuUt-4qHuVvQ"/>
     </profileApplication>
   </uml:Model>
-  <Spark:SparkReduce xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA">
+  <Spark:SparkReduce xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" OpType="Action">
     <hostDemand>(expr=$countT,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkReduce>
   <Spark:SparkMap xmi:id="_ezllIBfoEeePpehjS1zFvA" base_NamedElement="_TVg_UBfoEeePpehjS1zFvA" base_Action="_TVg_UBfoEeePpehjS1zFvA">
