@@ -24,13 +24,31 @@ main() {
 	ad.scenario().map model2doc();
 	
 	// Transform workload descriptions
+	//var initialNodes := ad.scenario().node[UML::InitialNode];
+	//assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
+	
 	var initialNodes := ad.scenario().node[UML::InitialNode];
-	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
+	assert fatal (initialNodes->size() >= 1) with log ("Only Activities with one or more Initial Nodes are supported");
+	
+	/* TODO */
+	/* 1- Arco (ida-vuelta) entre Cores y timed transition $th del initialNode2subNet 
+	   2- Definir nTask dentro del SparkOperation en perfil Spark
+	   3- Asignar valor nTask cuando sea distinto del proporcionado por defecto en el sparkPopulation
+	   4- Asignar SparkWorkloadEvent a activity node repartition en UML Prime? 
+	   5- Asignar nodo inicial, transicion inicial inmediata y transicion final inmediata a nivel de modelo */
+	
 	
 	/* Spark Scheduler */
 	//var scheduler := ad.scenario().getSparkScenario_scheduler();
 	
 	// Transform net contents
+	
+	ad.scenario()-> map activityDiagram2subnet();
+	
+	//
+	ad.scenario().node[UML::FinalNode] -> inferNumTasks();	
+	//
+	
 	ad.scenario().node[UML::InitialNode] -> map initialNode2subNet();
 	ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
 	
@@ -47,6 +65,9 @@ main() {
 	ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition]->asSet() -> map devices2resources();
     ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
 
+	// Transform scenario
+	//ad-> map initial();
+	
 	// Set time metadata
 	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
 		log("Base time unit is 's'");
@@ -178,11 +199,74 @@ mapping UML::ActivityPartition::devices2resources() when {
 
 /*************************************************/
 /**
+	Transforms an Activity into a pair of [place]-->[transition] ... Subnet ... 
+	                                         ^                               |
+	                                         |--- [transition]<--[place] ---<
+*/
+
+mapping UML::Activity::activityDiagram2subnet() {
+
+	var delay := self.getSparkWorkloadEvent_sparkExtDelay();
+	/* var numElem := self.getSparkWorkloadEvent_sparkPopulation();
+	assert fatal (numElem.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numElem.value().toString() + "'"); */
+		
+	var place_start := self.map activityDiagram2placeStart();
+	//var place_end := self.map activityDiagram2placeEnd();
+
+	place_start.initialMarking := object PNML::PTMarking {
+			text := 1;
+	};
+	
+	//activityDiagram2immediateTransition
+	var trans_start := self.map activityDiagram2immTransStart();
+	var trans_end := self.map activityDiagram2immTransEnd();
+	
+	var arc_1 := map arc(place_start, trans_start);
+	//var arc_2 := map arc(place_end, trans_end);
+	var arc_3 := map arc(trans_end, place_start);
+
+	// Add tracing information
+	//self.map trace(place_start, "initialNode2subNet");
+	self.map trace(place_start, getPlaceConcurrentUsersTrace());
+	//self.map trace(place_end, "activityDiagram2subNet");
+	self.map trace(trans_start, "activityDiagram2subNet");
+	self.map trace(trans_end, "activityDiagram2subNet");
+}
+
+/*************************************************/
+/**
 	Transforms an InitialNode into a pair of [place]-->[transition] if the workload pattern
-	is undefined or closed, and only a single [transition] if the workload pattern is open
+	is undefined or closed
 */
 
 mapping UML::InitialNode::initialNode2subNet() 
+	when { self.getSparkWorkloadEvent().oclIsUndefined().not() } {
+
+	var delay := self.getSparkWorkloadEvent_sparkExtDelay();
+	/* var numElem := self.getSparkWorkloadEvent_sparkPopulation();
+	assert fatal (numElem.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numElem.value().toString() + "'"); */
+
+	var activity = ad.scenario();
+	var activity_trans_start := activity.resolveoneIn(UML::Activity::activityDiagram2immTransStart);
+
+	var place_start := self.map activityNode2placeStart();
+	var place_output := self.map activityNode2placeOutput();
+	
+	var trans_think := self.map activityNode2immediateTransition();
+	trans_think.toolspecifics += expTransitionToolInfo(1 / delay.value());
+	trans_think.toolspecifics += infServerTransitionToolInfo();
+	
+	var arc_0 := map arc(activity_trans_start, place_start);
+	var arc_1 := map arc(place_start, trans_think);
+	var arc_2 := map arc(trans_think, place_output);
+
+	// Add tracing information
+	self.map trace(place_start, "initialNode2subNet");
+	self.map trace(place_output, "initialNode2subNet");
+	self.map trace(trans_think, "initialNode2subNet");
+}
+
+mapping UML::InitialNode::initialNode2subNet2() 
 	when { self.getSparkWorkloadEvent().oclIsUndefined().not() } {
 
 	var delay := self.getSparkWorkloadEvent_sparkExtDelay();
@@ -224,13 +308,12 @@ UML::ActivityNode::reduceNode2subNet {};
 
 mapping UML::ActivityNode::mapNode2subNet()
 	when { (self.getSparkMap().oclIsUndefined().not()) and
-			(self.incoming->isEmpty().not()) and
-			(getInitialNode().getSparkWorkloadEvent().oclIsUndefined().not()) } { 
-	
+			(self.incoming->isEmpty().not())/* and
+			(self.getInitialNode().getSparkWorkloadEvent().oclIsUndefined().not())*/ } {
+
 		/* Number of parallel tasks a Map is divided into */
-		//var numTasks := getInitialNode().getNumTasks();
-		var numTasks := getInitialNode().getSparkWorkloadEvent_sparkPopulation();
-		assert fatal (numTasks.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numTasks.value().toString() + "'");
+		var numTasks:= self.numTasks;
+		assert fatal (numTasks.value() <= 32767) with log ("Population must be an integer value under 32767 in '" + self.toString() + "', error in expression '" + numTasks.toString() + "'");
 		
 		/* Creation of the subnet */
 		//var place_gen := self.map activityNode2placeGen();
@@ -280,13 +363,15 @@ mapping UML::ActivityNode::mapNode2subNet()
 
 mapping UML::ActivityNode::reduceNode2subNet()
 	when { (self.getSparkReduce().oclIsUndefined().not()) and
-			(self.incoming->isEmpty().not()) and
-			(getInitialNode().getSparkWorkloadEvent().oclIsUndefined().not()) } {  
-	
-		/* Number of parallel tasks a Reduce is divided into */
-		//var numTasks := getInitialNode().getNumTasks();
-		var numTasks := getInitialNode().getSparkWorkloadEvent_sparkPopulation();
-		assert fatal (numTasks.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numTasks.value().toString() + "'");
+			(self.incoming->isEmpty().not())/* and
+			(self.getInitialNode().getSparkWorkloadEvent().oclIsUndefined().not())*/ } {  
+			//(getInitialNode().getSparkWorkloadEvent().oclIsUndefined().not()) } {
+				
+		var redType := self.getReduceType();
+		 
+		 /* Number of parallel tasks a Reduce is divided into */
+		var numTasks:= self.numTasks;		
+		assert fatal (numTasks.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numTasks.toString() + "'");
 		
 		/* Creation of the subnet */
 		//var place_gen := self.map activityNode2placeGen();
@@ -345,8 +430,26 @@ mapping UML::FinalNode::model2closedNet() {
 	assert fatal (source_list->size() = 1)
 	with log('A final node only accepts a single incoming ControlFlow arc');
 		
+	/* Close the net of the UML::Activity */
+	var activity = ad.scenario();
+	var activity_trans_end := activity.resolveoneIn(UML::Activity::activityDiagram2immTransEnd);
+
+	var source := source_list->first().source;
+	var red_phase := source;
+	var place_output_red := red_phase.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
+
+	var arc := map arc(place_output_red, activity_trans_end);	
+}
+	
+mapping UML::FinalNode::model2closedNet2() {
+	
+	var source_list := self.incoming->asSequence();
+	assert fatal (source_list->size() = 1)
+	with log('A final node only accepts a single incoming ControlFlow arc');
+		
 	/* Close the net between the FinalNode and the InitialNode */
-	var initial_node := getInitialNode(); 
+	//var initial_node := getInitialNode(); 
+	var initial_node := self.getInitialNode();
 	var initial_place := initial_node.resolveoneIn(UML::ActivityNode::activityNode2placeStart);
 
 	var source := source_list->first().source;
@@ -514,7 +617,26 @@ inherits UML::NamedElement::namedElement2place {
 			name.text := name.text + "_Res";
 }
 
+/*************************************************/
+/**
+	Transform a generic ActivityNode into a Place 
+*/
 
+mapping UML::Activity::activityDiagram2place() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+}
+
+/**
+	Transform a generic ActivityNode into a Place representing the initial node
+*/
+
+mapping UML::Activity::activityDiagram2placeStart() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+	name.text := name.text + "_Start";
+}
+
+
+/*************************************************/
 /**
 	Transform a generic ActivityNode into a Place 
 */
@@ -614,6 +736,34 @@ inherits UML::NamedElement::namedElement2transition{
 		name.text := self.name + "_trans";
 }
 
+/***********************************************************************/
+/**
+	Transform a generic ActivityNode into a Transition 
+*/
+
+mapping UML::Activity::activityDiagram2immediateTransition() : PNML::Transition
+inherits UML::NamedElement::namedElement2immediateTransition {
+}
+
+/**
+	Transform a generic ActivityNode into a Transition
+	representing the start of the DAG 
+*/
+
+mapping UML::Activity::activityDiagram2immTransStart() : PNML::Transition
+inherits UML::Activity::activityDiagram2immediateTransition {
+				name.text := name.text + "_Start";
+}
+
+/**
+	Transform a generic Activity into a Transition
+	representing the end of the DAG 
+*/
+
+mapping UML::Activity::activityDiagram2immTransEnd() : PNML::Transition
+inherits UML::Activity::activityDiagram2immediateTransition {
+				name.text := name.text + "_End";
+}
 
 /***********************************************************************/
 /**
@@ -1001,6 +1151,131 @@ helper UML::Element::getSparkReduce_hostDemand() : NFP_Duration {
 }
 
 /******************************************************************/
+helper UML::Element::getMapType() : DBET::SparkMap {
+	if (self.getSparkMap() = null) {
+		return null;
+	};
+	var mapType := self.getValue(self.getSparkMap(), "MapType").oclAsType(DBET::SparkMap);
+	assert warning (mapType->size() = 1)
+		with log ("Unexpected number of 'MapType' tagged values found, expected 1. "+
+					"The context element is '" + self.toString() + "'");
+					
+	return mapType;
+}
+
+helper UML::Element::getReduceType() : DBET::SparkReduce {
+	if (self.getSparkReduce() = null) {
+		return null;
+	};
+	var reduceType := self.getValue(self.getSparkReduce(), "ReduceType").oclAsType(DBET::SparkReduce);
+	assert warning (reduceType->size() = 1)
+		with log ("Unexpected number of 'ReduceType' tagged values found, expected 1. "+
+					"The context element is '" + self.toString() + "'");
+					
+	return reduceType;
+}
+
+/******************************************************************/
+/*helper UML::Element::requires_input_Shuffle() : Boolean {
+
+	var requires := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		requires := self.isSetOperation() or
+				    self.isByKeyOperation();
+	}
+	else if (self.getSparkReduce().oclIsUndefined().not()){
+		//// TODO
+	};
+	
+	return requires;
+}
+
+helper UML::Element::requires_nTasks() : Boolean {
+
+	var requires := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		requires := self.isSetOperation() or
+				    self.isByKeyOperation();
+	}
+	else if (self.getSparkReduce().oclIsUndefined().not()){
+		//// TODO
+	};
+	
+	return requires;
+}*/
+
+/******************************************************************/
+query isSetOperation(in mapType : DBET::SparkMap) : Boolean {
+	return (mapType = DBET::SparkMap::RDDSetOperation) or 
+		   (mapType = DBET::SparkMap::Union) or 
+		   (mapType = DBET::SparkMap::Intersection) or 
+		   (mapType = DBET::SparkMap::Substraction) or 
+		   (mapType = DBET::SparkMap::Distinct) or 
+		   (mapType = DBET::SparkMap::Cartesian) ;
+}
+
+query isByKeyOperation(in mapType : DBET::SparkMap) : Boolean {
+	return (mapType = DBET::SparkMap::ByKey);
+}
+
+query isByKeyOperation(in redType : DBET::SparkReduce) : Boolean {
+	return (redType = DBET::SparkReduce::CountByKey);
+}
+
+query isJoinOperation(in mapType : DBET::SparkMap) : Boolean {
+	return (mapType = DBET::SparkMap::Join);
+}
+
+query isRepartitionOperation(in mapType : DBET::SparkMap) : Boolean {
+	return (mapType = DBET::SparkMap::Repartition);
+}
+
+/******************************************************************/
+helper UML::Element::isSetOperation() : Boolean {
+	var setOperation := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		setOperation := isSetOperation(mapType);
+	}/* else 	if (self.getSparkReduce().oclIsUndefined().not()) {
+		var redType := self.getReduceType(); 
+		setOperation := isSetOperation(redType);
+	}*/;	
+	return setOperation;
+}
+
+helper UML::Element::isByKeyOperation() : Boolean {
+	var setOperation := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		setOperation := isByKeyOperation(mapType);
+	} else if (self.getSparkReduce().oclIsUndefined().not()) {
+		var redType := self.getReduceType(); 
+		setOperation := isByKeyOperation(redType);
+	};	
+	return setOperation;
+}
+
+helper UML::Element::isJoinOperation() : Boolean {
+	var setOperation := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		setOperation := isJoinOperation(mapType);
+	};	
+	return setOperation;
+}
+
+helper UML::Element::isRepartitionOperation() : Boolean {
+	var setOperation := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		setOperation := isRepartitionOperation(mapType);
+	};	
+	return setOperation;
+}
+
+/******************************************************************/
 helper UML::Element::getSparkOperation_nTasks() : NFP_Integer {
 	if (self.getSparkMap().oclIsUndefined().not()){
 		return self.getSparkMap_nTasks();	
@@ -1009,16 +1284,17 @@ helper UML::Element::getSparkOperation_nTasks() : NFP_Integer {
 	} else if (self.getSparkOperation().oclIsUndefined().not()){ 
 		return self.getSparkStandard_nTasks();
 	} else {
-		return null; ///////////////
+		return null; //
 	}
 }
+
 helper UML::Element::getSparkStandard_nTasks() : NFP_Integer { 
 	if (self.getSparkOperation() = null) {
 		return null;
 	};
-	var nTasks := self.getValue(self.getSparkOperation(), "nTasks").oclAsType(String);
+	var nTasks := self.getValue(self.getSparkOperation(), "numTasks").oclAsType(String);
 	assert warning (nTasks->size() >= 1)
-		with log ("Unexpected number of 'nTasks' tagged values found, expected >= 1. "+
+		with log ("Unexpected number of 'numTasks' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
 	return nTasks.toNfpInteger();
 }
@@ -1027,9 +1303,9 @@ helper UML::Element::getSparkMap_nTasks() : NFP_Integer {
 	if (self.getSparkMap() = null) {
 		return null;
 	};
-	var nTasks := self.getValue(self.getSparkMap(), "nTask").oclAsType(String);
+	var nTasks := self.getValue(self.getSparkMap(), "numTasks").oclAsType(String);
 	assert warning (nTasks->size() >= 1)
-		with log ("Unexpected number of 'nTasks' tagged values found, expected >= 1. "+
+		with log ("Unexpected number of 'numTasks' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
 	return nTasks.toNfpInteger();
 }
@@ -1038,9 +1314,9 @@ helper UML::Element::getSparkReduce_nTasks() : NFP_Integer {
 	if (self.getSparkReduce() = null) {
 		return null;
 	};
-	var nTasks := self.getValue(self.getSparkReduce(), "nTask").oclAsType(String);
+	var nTasks := self.getValue(self.getSparkReduce(), "numTasks").oclAsType(String);
 	assert warning (nTasks->size() = 1)
-		with log ("Unexpected number of 'nTasks' tagged values found, expected >= 1. "+
+		with log ("Unexpected number of 'numTasks' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
 	return nTasks.toNfpInteger();
 }
@@ -1090,6 +1366,18 @@ helper UML::Element::getSparkScenario_nAssignedMemory() : NFP_Integer {
 	return assignMem.toNfpInteger();
 }
 
+helper UML::Element::getSparkScenario_sparkDefaultParallelism() : NFP_Integer {
+	if (self.getSparkScenario() = null) {
+		return null;
+	};
+	var par := self.getValue(self.getSparkScenario(), "sparkDefaultParallelism").oclAsType(String);
+	
+	assert warning (par->size() >= 1)
+		with log ("Unexpected number of 'sparkDefaultParallelism' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'"); 
+	return par.toNfpInteger();
+}
+
 helper UML::Element::getSparkWorkloadEvent_sparkPopulation() : NFP_Integer {
 	if (self.getSparkWorkloadEvent() = null) {
 		return null;
@@ -1121,23 +1409,120 @@ helper UML::Element::getSparkWorkloadEvent_sparkExtDelay() : NFP_Duration {
   ToolInfo utilities
 *******************************************************************************/
 
+
+/******************************************************************/
+query max(in a : Integer, b : Integer) : Integer {
+	if (a > b){
+	   return a;
+	};
+	return b;
+}
+
+/**
+	Infer the number of tasks according to the parent RDD
+*/
+
+//intermediate property UML::ActivityNode::numTasks : Integer;
+intermediate property UML::ActivityNode::numTasks : NFP_Integer;
+
+/*TODO: Corregir Integer vs NFP_integer en intermediate property numTasks y en
+funcion inferNumTasks */
+helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
+//helper UML::ActivityNode::inferNumTasks() : Integer {	
+//mapping UML::ActivityNode::inferNumTasks() : NFP_Integer { /***/
+	self.numTasks := "1".toNfpInteger();
+	if (self.oclIsKindOf(InitialNode)) {
+		//self.numTasks := self.oclAsType(InitialNode).getSparkWorkloadEvent_sparkPopulation().value();
+		self.numTasks := self.oclAsType(InitialNode).getSparkWorkloadEvent_sparkPopulation();
+	} else if(self.oclIsKindOf(ActivityNode)){	
+		//var defaultParallelism = self.oclAsType(InitialNode).getSparkWorkloadEvent_sparkDefaultParallelism().value();
+		var defaultParallelism = ad.scenario().getSparkScenario_sparkDefaultParallelism().value();
+		assert fatal (defaultParallelism != null) with log ("Cannot read defaultParallelism attribute from " + self.toString() + ".");
+		
+		//var prevTasks := new Set(Integer)();
+		var prevTasks := new Set(NFP_Integer)();
+		self.incoming->forEach(in_arc){
+			prevTasks += in_arc.source.inferNumTasks();
+			//prevTasks += in_arc.source.map inferNumTasks();
+		};
+				
+		var mapType = self.oclAsType(ActivityNode).getMapType();
+		var redType = self.oclAsType(ActivityNode).getReduceType();
+			
+		var explicitTasks := self.oclAsType(ActivityNode).getSparkOperation_nTasks();
+
+		//var numTasks := explicitTasks.value();
+		//self.numTasks := explicitTasks.value();
+		self.numTasks := prevTasks->asOrderedSet()->first(); ////
+		
+		if (explicitTasks = null){			
+			if (self.oclAsType(ActivityNode).isByKeyOperation()){
+				assert warning (self.incoming->size() = 1) with log ("Activity Nodes reprepresenting ByKey operations work over a single RDD");
+				//self.numTasks := prevTasks->asOrderedSet()->first();
+				self.numTasks := prevTasks->asOrderedSet()->first();
+			};
+			
+			if (self.oclAsType(ActivityNode).isSetOperation()){
+				assert warning (self.incoming->size() <= 2) with log ("Activity Nodes reprepresenting set operations need two RDD");
+				var totalTasks := 1;
+				if (mapType = DBET::SparkMap::Union){			
+					prevTasks->forEach(prevNumTasks){
+						//totalTasks := totalTasks + prevNumTasks - 1;
+						totalTasks := totalTasks + prevNumTasks.value() - 1;
+					}
+				} else if (mapType = DBET::SparkMap::Cartesian){
+					prevTasks->forEach(prevNumTasks){
+						//totalTasks := totalTasks * prevNumTasks;
+						totalTasks := totalTasks * prevNumTasks.value();
+					}
+				}  else if (mapType = DBET::SparkMap::Intersection){
+					prevTasks->forEach(prevNumTasks){
+						//totalTasks := max(totalTasks, prevNumTasks);
+						totalTasks := max(totalTasks, prevNumTasks.value());
+						totalTasks := max(totalTasks, defaultParallelism);
+					}
+				//} else if (mapType = DBET::SparkMap::Substraction){
+				} else {
+					assert warning (explicitTasks != null) with log ("Cannot infer the number of numTasks. Activity Node with Spark operation" + mapType.toString() + " requires an explicit number of numTasks.");
+				};
+				self.numTasks := totalTasks.toString().toNfpInteger();
+			}
+		};
+		
+		if (self.oclAsType(ActivityNode).isJoinOperation() or
+			self.oclAsType(ActivityNode).isRepartitionOperation()){
+			assert warning (explicitTasks != null) with log ("Cannot infer the number of numTasks. Activity Node with Spark operation" + mapType.toString() + " requires an explicit number of numTasks");
+		};
+	};
+	return self.numTasks;
+	//return self.numTasks.toString().toNfpInteger();
+}
+
+/**
+	Get the initial node of the current activity node
+*/
+
+helper UML::ActivityNode::getInitialNode() : UML::InitialNode {
+	if (self.oclIsKindOf(InitialNode)) {
+		return self.oclAsType(InitialNode);
+	}
+	else {
+		var initialNodes := new Set(UML::InitialNode)();
+		self.incoming->forEach(in_arc){
+			initialNodes += in_arc.source.getInitialNode();
+		};
+		assert fatal (initialNodes->size() = 1) with log ("Only Activity Nodes with a single Initial Node are supported");
+		return initialNodes->asOrderedSet()->first();
+	};
+	return null;
+}
+
 /**
 	Get the initial node of the activity diagram
 */
 
-helper getInitialNode() : UML::InitialNode {
+helper getInitialNode2() : UML::InitialNode {
 	var initialNodes := ad.scenario().node[UML::InitialNode];
 	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
 	return initialNodes->asOrderedSet()->first();
-}
-
-/**
-	Get the final nodes of the activity diagram
-*/
-
-//helper getFinalNodes() : Set(UML::InitialNode) {
-helper getFinalNodes() : Set(UML::ActivityNode) {
-	var finalNodes := ad.scenario().node[UML::FinalNode];
-	assert fatal (finalNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
-	return finalNodes;
 }

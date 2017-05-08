@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Spark="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Spark">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Spark="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM">
   <uml:Model xmi:id="_pmY9MBfkEeePpehjS1zFvA" name="RootElement">
     <packagedElement xmi:type="uml:Activity" xmi:id="_puxdIBfkEeePpehjS1zFvA" name="Activity1" node="_FexHYBfnEeePpehjS1zFvA _2w2sABfnEeePpehjS1zFvA _N5vTIBfoEeePpehjS1zFvA _QOIXoBfoEeePpehjS1zFvA _TVg_UBfoEeePpehjS1zFvA _G3HdkBfrEeePpehjS1zFvA _2np6kCUKEeeGiOkBV7ej3g _2nqhoCUKEeeGiOkBV7ej3g" group="_c3AZIBfnEeePpehjS1zFvA _n_4yEBfnEeePpehjS1zFvA">
       <edge xmi:type="uml:ControlFlow" xmi:id="_on8bIBfoEeePpehjS1zFvA" target="_N5vTIBfoEeePpehjS1zFvA" source="_FexHYBfnEeePpehjS1zFvA"/>
@@ -26,19 +26,19 @@
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_y849EBflEeePpehjS1zFvA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_y9FKUBflEeePpehjS1zFvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//Spark"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_uVw8sPjzEeaT8NXWw3z-XA"/>
     </profileApplication>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_CrzF8BfmEeePpehjS1zFvA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Cr7o0BfmEeePpehjS1zFvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DPIM/1.0#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_gFr1YOebEeWj7ZPL8JeBTQ"/>
     </profileApplication>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_Cr8P4BfmEeePpehjS1zFvA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Cr828BfmEeePpehjS1zFvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DDSM/1.0#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
     </profileApplication>
@@ -106,7 +106,7 @@
   <Spark:SparkMap xmi:id="_hJdQUBfoEeePpehjS1zFvA" base_NamedElement="_N5vTIBfoEeePpehjS1zFvA" base_Action="_N5vTIBfoEeePpehjS1zFvA">
     <hostDemand>(expr=$map1T,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkMap>
-  <Spark:SparkMap xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA">
+  <Spark:SparkMap xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$defaultParallelism" RDD="$nC1" MapType="Repartition">
     <hostDemand>(expr=$repartitionT,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkMap>
   <Spark:SparkNode xmi:id="_8W8VUBfoEeePpehjS1zFvA" base_Classifier="_UIF9sBfmEeePpehjS1zFvA" base_NamedElement="_UIF9sBfmEeePpehjS1zFvA" nCores="$nP1" Memory="$nM1">
@@ -128,8 +128,10 @@
     <context>$nC2</context>
     <context>$th2</context>
     <context>$repartitionT</context>
+    <context>$flatmapT</context>
+    <context>$defaultParallelism</context>
   </GQAM:GaAnalysisContext>
-  <Spark:SparkScenario xmi:id="_1rOrQBfoEeePpehjS1zFvA" base_NamedElement="_puxdIBfkEeePpehjS1zFvA" usedResources="_8W8VUBfoEeePpehjS1zFvA" base_Behavior="_puxdIBfkEeePpehjS1zFvA" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem">
+  <Spark:SparkScenario xmi:id="_1rOrQBfoEeePpehjS1zFvA" base_NamedElement="_puxdIBfkEeePpehjS1zFvA" base_Behavior="_puxdIBfkEeePpehjS1zFvA" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
     <throughput>(expr=$T,statQ=mean,source=calc)</throughput>
     <respT>(expr=$RT,statQ=mean,source=calc,unit=ms)</respT>
   </Spark:SparkScenario>
