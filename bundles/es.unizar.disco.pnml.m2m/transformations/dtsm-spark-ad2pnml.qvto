@@ -24,25 +24,14 @@ main() {
 	ad.scenario().map model2doc();
 	
 	// Transform workload descriptions
-	//var initialNodes := ad.scenario().node[UML::InitialNode];
-	//assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
-	
 	var initialNodes := ad.scenario().node[UML::InitialNode];
 	assert fatal (initialNodes->size() >= 1) with log ("Only Activities with one or more Initial Nodes are supported");
-	
-	/* TODO */
-	/* 1- Arco (ida-vuelta) entre Cores y timed transition $th del initialNode2subNet 
-	   2- Definir nTask dentro del SparkOperation en perfil Spark
-	   3- Asignar valor nTask cuando sea distinto del proporcionado por defecto en el sparkPopulation
-	   4- Asignar SparkWorkloadEvent a activity node repartition en UML Prime? 
-	   5- Asignar nodo inicial, transicion inicial inmediata y transicion final inmediata a nivel de modelo */
-	
+	//assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
 	
 	/* Spark Scheduler */
 	//var scheduler := ad.scenario().getSparkScenario_scheduler();
 	
-	// Transform net contents
-	
+	// Transform net contents	
 	ad.scenario()-> map activityDiagram2subnet();
 	
 	//
@@ -62,6 +51,7 @@ main() {
 	ad.scenario().node[UML::FinalNode] -> map model2closedNet();
 	
 	// Transform deployment
+	ad.scenario()->map assignedCores2resources();
 	ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition]->asSet() -> map devices2resources();
     ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
 
@@ -122,7 +112,9 @@ when {
 	
 	//var place_resource := self.represents.oclAsType(UML::Artifact).resolveoneIn(UML::NamedElement::devices2resources);
 	var place_resource := self.represents.owner.resolveone(PNML::Place);
-	
+	var place_workload := ad.scenario().resolveoneIn(UML::NamedElement::assignedCores2placeRes);
+	//var place_workload := ad.scenario().resolveoneIn(UML::Activity::assignedCores2resources);
+		
 	// For each partition, we need to modify the subnet that was previously 
 	// generated. We add an intermediate place and a set of arcs connecting
 	// to the immediate/timed transitions of the subnet. For instance,
@@ -155,21 +147,77 @@ when {
 			/* Add an arc between the resource transition and the new resource place */
 			var arc_1 := map arc(trans_exec, place_resource);
 			var arc_2 := map arc(place_resource, trans_get_resource);
+			
+			var arc_3 := map arc(trans_exec, place_workload);
+			var arc_4 := map arc(place_workload, trans_get_resource);
 		}
 	};
 	
 	// Add tracing information
-	self.represents.owner.map trace(place_resource, "partitions2resources");
+	//self.represents.owner.map trace(place_resource, "partitions2resources");
 }
 
 /*************************************************/
+mapping UML::Activity::assignedCores2resources() when {
+	self.getSparkScenario().oclIsUndefined().not();
+} {
+	/* Create AssignedCores place*/
+	var nCoresWorkload := self.getSparkScenario_nAssignedCores();
+	var place_workload := self.map assignedCores2placeRes();
+	place_workload.initialMarking := object PNML::PTMarking {
+		text := nCoresWorkload.value();
+	};	
+	// Add tracing information
+	self.map trace(place_workload, "assignedCores2resources");
+}
+	
+/*************************************************/
 mapping UML::ActivityPartition::devices2resources() when {
+	self.represents.owner.getSparkNode_nCores().oclIsUndefined().not() or
+	self.represents.getGaExecHost().oclIsUndefined().not();
+} {	
+	/* Create device place */
+	var nCoresNodeValue := 1;
+	if (self.represents.owner.getSparkNode_nCores().oclIsUndefined().not()){
+		nCoresNodeValue := self.represents.owner.getSparkNode_nCores().value();	
+	} else {
+		nCoresNodeValue := self.represents.getGaExecHost_resMult().value();
+	};
+		
+	if (self.represents.owner.oclIsKindOf(UML::Artifact)){		
+		if (self.represents.owner.oclAsType(UML::Artifact).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
+
+			var place_resource := self.represents.owner.oclAsType(UML::Artifact).map device2placeRes();
+			place_resource.initialMarking := object PNML::PTMarking {
+				text := nCoresNodeValue;
+			};
+			
+			self.represents.owner.map trace(place_resource, "devices2resources");
+		};
+	};
+	
+	if(self.represents.owner.oclIsKindOf(UML::Node)){	
+			
+		if (self.represents.owner.oclAsType(UML::Node).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
+	
+			var place_resource := self.represents.owner.oclAsType(UML::Node).map device2placeRes();
+			place_resource.initialMarking := object PNML::PTMarking {
+				text := nCoresNodeValue;
+			};
+			
+			self.represents.owner.map trace(place_resource, "devices2resources");
+		};
+	};
+}
+
+mapping UML::ActivityPartition::devices2resources2() when {
 	self.represents.owner.getSparkNode_nCores().oclIsUndefined().not();
 } {
 	/* Create resource place */
 
 	var nCoresWorkload := ad.scenario().getSparkScenario_nAssignedCores();
 	var nCoresNode := self.represents.owner.getSparkNode_nCores();
+	
 	var core := nCoresWorkload;
 	if (nCoresNode.value() < nCoresWorkload.value()){
 		core := nCoresWorkload;	
@@ -184,7 +232,7 @@ mapping UML::ActivityPartition::devices2resources() when {
 			};
 		};
 	};
-	//if(self.represents.owner.oclAsType(UML::Node)){
+	
 	if(self.represents.owner.oclIsKindOf(UML::Node)){	
 			
 		if (self.represents.owner.oclAsType(UML::Node).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
@@ -616,6 +664,12 @@ mapping UML::NamedElement::device2placeRes() : PNML::Place
 inherits UML::NamedElement::namedElement2place {
 			name.text := name.text + "_Res";
 }
+
+mapping UML::NamedElement::assignedCores2placeRes() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_AssignedCores";
+}
+
 
 /*************************************************/
 /**
@@ -1322,6 +1376,14 @@ helper UML::Element::getSparkReduce_nTasks() : NFP_Integer {
 }
 
 /******************************************************************/
+helper UML::Element::getGaExecHost_resMult() : NFP_Integer {
+	if (self.getGaExecHost() = null) {
+		return null;
+	};
+	var prob := self.getValue(self.getGaExecHost(), "resMult").oclAsType(String);
+	return prob.toNfpInteger();
+}
+/******************************************************************/	
 helper UML::Element::getSparkNode_nCores() : NFP_Integer {
 	if (self.getSparkNode() = null) {
 		return null;

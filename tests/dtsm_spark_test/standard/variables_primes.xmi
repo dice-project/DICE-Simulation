@@ -37,7 +37,7 @@
       value="20"/>
   <datatypes:PrimitiveVariableAssignment
       variable="$nAssignedCores"
-      value="20"/>
+      value="17"/>
   <datatypes:PrimitiveVariableAssignment
       variable="$nAssignedMemory"
       value="15"/>
