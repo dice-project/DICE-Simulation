@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
 		<project.version>0.5.1-SNAPSHOT</project.version>
-		<p2StatsURL>https://github.com/dice-project/DICE-Simulation/releases/download/v0.1.0/dummy</p2StatsURL>
+		<p2StatsURL>http://github.com/dice-project/DICE-Simulation/releases/download/v0.1.0</p2StatsURL>
 		<statsTrackedArtifacts>es.unizar.disco.simulation.feature,es.unizar.disco.simulation.greatspn.feature,es.unizar.disco.simulation.quickstart.feature,es.unizar.disco.simulation.ui.feature,es.unizar.disco.ssh.feature,es.unizar.disco.ssh.ui.feature</statsTrackedArtifacts>
 	</properties>
 
