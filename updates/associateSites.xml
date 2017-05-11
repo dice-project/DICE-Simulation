@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	associateSitesURL="http://dice-project.github.io/DICE-Simulation/updates/associateSites.xml" 
+-->
+<associateSites>
+	<associateSite url="http://dice-project.github.io/DICE-Profiles/updates" label="DICE Profiles"/>
+	<associateSite url="http://download.eclipse.org/modeling/mdt/papyrus/updates/releases/neon" label="Papyrus"/>
+	<associateSite url="http://pnml.lip6.fr/pnmlframework/updatesite" label="PNML Framework"/>
+	<associateSite url="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository/" label="Orbit Libraries"/>
+</associateSites>
