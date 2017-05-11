@@ -497,9 +497,9 @@ inherits UML::NamedElement::namedElement2transition {
 mapping UML::ActivityNode::activityFailingNode2transition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
 	
-	if (self.name.oclIsUndefined().not()) {result.name.text := "FailingActivity_" + self.name;}
+	if (self.name.oclIsUndefined().not()) {result.name.text := "SucceedingActivity_" + self.name;}
 	else{
-		name:= object PNML::Name { text := "FailingActivity_" + self.name;}
+		name:= object PNML::Name { text := "SucceedingActivity_";}
 		
 	;};
 
@@ -571,6 +571,7 @@ mapping UML::ControlFlow::basicControlFlow2arc() {
 	
 	//var place := self.target.resolveoneIn(UML::NamedElement::namedElement2place);
 		var place := self.target.resolveone(PNML::Place);
+		log("Place in basicControlFlow2Arc is: " + place.id + " name of source is: " + self.source.name);
 		var precedentTransitions := self.source.resolve(PNML::Transition);
 		precedentTransitions->forEach(transition) {
 		map arc(transition, place);
@@ -600,6 +601,11 @@ mapping UML::ControlFlow::decisionControlFlow2arc() when {
 }{
 	var decisionPlace := self.source.resolveoneIn(UML::ActivityNode::activityNode2place);
 	var nextNodePlace := self.target.resolveoneIn(UML::ActivityNode::activityNode2place);
+	
+	//when the DecisionNode links to the final node, the place has not been created with UML::ActivityNode::activityNode2place
+	if(self.target.oclIsKindOf(ActivityFinalNode)){
+		nextNodePlace := self.target.resolveone(PNML::Place);
+	};
 	var transition := self.map namedElement2transition();
 	transition.toolspecifics += self.map probabilisticControlFlow2toolInfo();
 	
