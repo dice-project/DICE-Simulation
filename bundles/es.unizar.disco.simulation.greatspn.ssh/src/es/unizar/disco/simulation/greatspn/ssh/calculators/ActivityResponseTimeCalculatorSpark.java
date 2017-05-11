@@ -11,9 +11,6 @@ import javax.measure.Unit;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Activity;
-import org.eclipse.uml2.uml.ActivityFinalNode;
-import org.eclipse.uml2.uml.FinalNode;
-import org.eclipse.uml2.uml.InitialNode;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.pnml.m2m.utils.ConstantUtils;
@@ -56,81 +53,56 @@ public class ActivityResponseTimeCalculatorSpark extends AbstractCalculator impl
 			throw new IllegalArgumentException(MessageFormat.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity'", domainElement));
 		}
 		
-		Activity activity = (Activity) domainElement;
-		//get InitialNode. The place that stores the mean number of events (N of little law) is created from the initial node
 		// @formatter:off
-		List<InitialNode> initialNodes = activity.getOwnedNodes()
+		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(domainElement, toolResult, traceSet);
+		List<PlaceInfo> placeInfos = infos
 				.stream()
-				.filter(n -> n instanceof InitialNode)
-				.map(n -> (InitialNode) n)
+				.filter(i -> i instanceof PlaceInfo)
+				.map(i -> (PlaceInfo) i)
 				.collect(Collectors.toList());
-		// @formatter:on
-
-		// Validate there's only one initial node
-		if (initialNodes.size() != 1) {
-			throw new RuntimeException(MessageFormat.format("Unexpected number of 'InitialNodes' found in Activity ''{0}''. Expected 1, but found ''{1}''",
-					domainElement, initialNodes.size()));
-		}
-		
-		//get FinalNodes
-		List<ActivityFinalNode> finalNodes = activity.getOwnedNodes()
-				.stream()
-				.filter(n -> n instanceof ActivityFinalNode)
-				.map(n -> (ActivityFinalNode) n)
-				.collect(Collectors.toList());
-		// @formatter:on
-
-		
-		//BigDecimal concurrentUsers = getMeanNumberOfConcurrentUsersFromInitialNode(initialNodes.get(0), toolResult, traceSet);
-		BigDecimal concurrentUsers = getInitialNumberOfConcurrentUsersFromInitialNode(initialNodes.get(0), toolResult, traceSet);
-		BigDecimal meanThroughput = getMeanThrougputOfFinalNodes(finalNodes, toolResult, traceSet);
-
-		BigDecimal responseTime = concurrentUsers.divide(meanThroughput, MathContext.DECIMAL64);
-		String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
-
-		DomainMeasure measure = buildMeasure(responseTime, getResultsUnit(finalNodes.get(0),toolResult,traceSet), targetUnit);
-		measure.setDefinition(definition);
-		return measure;
-		
-		/*String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
-
-		DomainMeasure measure = buildMeasure(rawValue, transitionInfo.getUnit(), targetUnit);
-		measure.setDefinition(definition);
-		return measure;*/
-	}
-	
-	private String getResultsUnit(ActivityFinalNode finalNode, ToolResult toolResult, TraceSet traceSet) {
-		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(finalNode, toolResult, traceSet);
 		List<TransitionInfo> transitionInfos = infos
 				.stream()
 				.filter(i -> i instanceof TransitionInfo)
 				.map(i -> (TransitionInfo) i)
 				.collect(Collectors.toList());
+		// @formatter:on
+		
+		BigDecimal concurrentUsers = getInitialNumberOfConcurrentUsersFromActivity(placeInfos, toolResult, traceSet);
+		BigDecimal meanThroughput = getMeanThrougputOfActivity(transitionInfos, toolResult, traceSet);
+
+		BigDecimal responseTime = concurrentUsers.divide(meanThroughput, MathContext.DECIMAL64);
+		String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
+
+		DomainMeasure measure = buildMeasure(responseTime, getResultsUnit(transitionInfos,toolResult,traceSet), targetUnit);
+		measure.setDefinition(definition);
+		return measure;
+	}
+	
+	private String getResultsUnit(List<TransitionInfo> transitionInfos, ToolResult toolResult, TraceSet traceSet) {
 		return transitionInfos.get(0).getUnit();
 	}
 
-	private BigDecimal getMeanThrougputOfFinalNodes(List<ActivityFinalNode> finalNodes, ToolResult toolResult,TraceSet traceSet) {
+	protected TransitionInfo findFirstTransitionInfoOfRuleTransitionInfo(String rule, TraceSet traceSet, List<TransitionInfo> transitionInfos) {
 
-		BigDecimal throughput = new BigDecimal(0.0);
-		for(FinalNode finalNode : finalNodes){
-		
-			Set<AnalyzableElementInfo> infos = findInfosForDomainElement(finalNode, toolResult, traceSet);
-			List<TransitionInfo> transitionInfos = infos
-					.stream()
-					.filter(i -> i instanceof TransitionInfo)
-					.map(i -> (TransitionInfo) i)
-					.collect(Collectors.toList());
-		
-			for(TransitionInfo transitionInfo : transitionInfos){
-				throughput = throughput.add(new BigDecimal(transitionInfo.getThroughput().doubleValue()));
+		for (Trace trace : traceSet.getTraces()) {
+			if (rule.equals(trace.getRule())) {
+				for (TransitionInfo info : transitionInfos) {
+					if (trace.getToAnalyzableElement().equals(info.getAnalyzedElement())) {
+						DiceLogger.logInfo(GspnSshSimulationPlugin.getDefault(),
+								MessageFormat.format("Found Transition id ''{0}'' with througput ''{1}''",
+										info.getAnalyzedElement().toString(), info.getThroughput().doubleValue()));
+						return info;
+					}
+
+				}
 			}
-
 		}
-		return throughput;
+		throw new RuntimeException(
+				MessageFormat.format("Not found any Place created from the transformation rule ''{0}''", rule));
+
 	}
 	
-	protected PlaceInfo findFirstPlaceInfoOfRulePlaceInfo(String rule, TraceSet traceSet,
-			List<PlaceInfo> placeInfos) {
+	protected PlaceInfo findFirstPlaceInfoOfRulePlaceInfo(String rule, TraceSet traceSet, List<PlaceInfo> placeInfos) {
 
 		for (Trace trace : traceSet.getTraces()) {
 			if (rule.equals(trace.getRule())) {
@@ -149,22 +121,16 @@ public class ActivityResponseTimeCalculatorSpark extends AbstractCalculator impl
 				MessageFormat.format("Not found any Place created from the transformation rule ''{0}''", rule));
 
 	}
-	
-	private BigDecimal getMeanNumberOfConcurrentUsersFromInitialNode(InitialNode initialNode, ToolResult toolResult, TraceSet traceSet) {
-		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(initialNode, toolResult, traceSet);
-		List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
-				.map(i -> (PlaceInfo) i).collect(Collectors.toList());
 
-		return new BigDecimal(findFirstPlaceInfoOfRule(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet,	placesInfos).doubleValue());
+	private BigDecimal getMeanThrougputOfActivity(List<TransitionInfo> transitionInfos, ToolResult toolResult,TraceSet traceSet) {
+		TransitionInfo transitionInfo = findFirstTransitionInfoOfRuleTransitionInfo(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet, transitionInfos);
 		
+		BigDecimal throughput = new BigDecimal(0.0);
+		throughput = throughput.add(new BigDecimal(transitionInfo.getThroughput().doubleValue()));
+		return throughput;
 	}
 	
-	private BigDecimal getInitialNumberOfConcurrentUsersFromInitialNode(InitialNode initialNode, ToolResult toolResult, TraceSet traceSet) {
-		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(initialNode, toolResult, traceSet);
-		List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
-				.map(i -> (PlaceInfo) i).collect(Collectors.toList());
-		
-		
+	private BigDecimal getInitialNumberOfConcurrentUsersFromActivity(List<PlaceInfo> placesInfos, ToolResult toolResult, TraceSet traceSet) {		
 		PlaceInfo placeInfo = findFirstPlaceInfoOfRulePlaceInfo(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet, placesInfos);
 		Place place = (Place) placeInfo.getAnalyzedElement();		
 		BigDecimal initialMarking = new BigDecimal(place.getInitialMarking().getText());

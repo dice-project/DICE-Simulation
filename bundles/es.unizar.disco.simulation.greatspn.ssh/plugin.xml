@@ -325,7 +325,7 @@
             stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
             tag="throughput">
          <Calculator
-               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculator"
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculatorSpark"
                scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
@@ -336,6 +336,16 @@
             tag="respT">
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActivityResponseTimeCalculatorSpark"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario#utilization"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+            tag="utilization">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorSparkScenario"
                scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>

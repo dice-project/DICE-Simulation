@@ -130,13 +130,15 @@
     <context>$repartitionT</context>
     <context>$flatmapT</context>
     <context>$defaultParallelism</context>
+    <context>out$USpark</context>
   </GQAM:GaAnalysisContext>
-  <Spark:SparkScenario xmi:id="_1rOrQBfoEeePpehjS1zFvA" base_NamedElement="_puxdIBfkEeePpehjS1zFvA" base_Behavior="_puxdIBfkEeePpehjS1zFvA" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
+  <Spark:SparkScenario xmi:id="_1rOrQBfoEeePpehjS1zFvA" base_NamedElement="_puxdIBfkEeePpehjS1zFvA" usedResources="_8W8VUBfoEeePpehjS1zFvA" base_Behavior="_puxdIBfkEeePpehjS1zFvA" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
     <throughput>(expr=$T,statQ=mean,source=calc)</throughput>
     <respT>(expr=$RT,statQ=mean,source=calc,unit=ms)</respT>
+    <utilization>(expr=$USpark,statQ=mean,source=calc)</utilization>
   </Spark:SparkScenario>
-  <Spark:SparkWorkloadEvent xmi:id="_6RLtQBfpEeePpehjS1zFvA" base_NamedElement="_FexHYBfnEeePpehjS1zFvA" sparkPopulation="$nC1" sparkExtDelay="$th1"/>
-  <Spark:SparkWorkloadEvent xmi:id="_2nsW0CUKEeeGiOkBV7ej3g" base_NamedElement="_2nqhoCUKEeeGiOkBV7ej3g" sparkPopulation="$nC2" sparkExtDelay="$th2"/>
+  <Spark:SparkWorkloadEvent xmi:id="_6RLtQBfpEeePpehjS1zFvA" base_NamedElement="_FexHYBfnEeePpehjS1zFvA" sparkPopulation="$nC1" sparkExtDelay="(expr=$th1,unit=ms,statQ=mean,source=est)"/>
+  <Spark:SparkWorkloadEvent xmi:id="_2nsW0CUKEeeGiOkBV7ej3g" base_NamedElement="_2nqhoCUKEeeGiOkBV7ej3g" sparkPopulation="$nC2" sparkExtDelay="(expr=$th2,unit=ms,statQ=mean,source=est)"/>
   <Spark:SparkMap xmi:id="_20CJsCUKEeeGiOkBV7ej3g" base_NamedElement="_2np6kCUKEeeGiOkBV7ej3g" base_Action="_2np6kCUKEeeGiOkBV7ej3g">
     <hostDemand>(expr=$map2T,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkMap>

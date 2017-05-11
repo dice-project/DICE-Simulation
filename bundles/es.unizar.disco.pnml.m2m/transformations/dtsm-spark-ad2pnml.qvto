@@ -31,6 +31,10 @@ main() {
 	/* Spark Scheduler */
 	//var scheduler := ad.scenario().getSparkScenario_scheduler();
 	
+	
+	/* TODO */
+	/* Test respT calculator
+	   Test utilization scenario calculator */
 	// Transform net contents	
 	ad.scenario()-> map activityDiagram2subnet();
 	
@@ -168,7 +172,8 @@ mapping UML::Activity::assignedCores2resources() when {
 		text := nCoresWorkload.value();
 	};	
 	// Add tracing information
-	self.map trace(place_workload, "assignedCores2resources");
+	//self.map trace(place_workload, "assignedCores2resources");
+	self.map trace(place_workload, getUsers());
 }
 	
 /*************************************************/
@@ -278,7 +283,8 @@ mapping UML::Activity::activityDiagram2subnet() {
 	self.map trace(place_start, getPlaceConcurrentUsersTrace());
 	//self.map trace(place_end, "activityDiagram2subNet");
 	self.map trace(trans_start, "activityDiagram2subNet");
-	self.map trace(trans_end, "activityDiagram2subNet");
+	//self.map trace(trans_end, "activityDiagram2subNet");
+	self.map trace(trans_end, getPlaceConcurrentUsersTrace());
 }
 
 /*************************************************/
@@ -1514,8 +1520,8 @@ helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
 		var explicitTasks := self.oclAsType(ActivityNode).getSparkOperation_nTasks();
 
 		//var numTasks := explicitTasks.value();
-		//self.numTasks := explicitTasks.value();
-		self.numTasks := prevTasks->asOrderedSet()->first(); ////
+		//self.numTasks := explicitTasks;
+		self.numTasks := prevTasks->asOrderedSet()->first();
 		
 		if (explicitTasks = null){			
 			if (self.oclAsType(ActivityNode).isByKeyOperation()){
@@ -1549,6 +1555,8 @@ helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
 				};
 				self.numTasks := totalTasks.toString().toNfpInteger();
 			}
+		} else {
+			self.numTasks := explicitTasks;
 		};
 		
 		if (self.oclAsType(ActivityNode).isJoinOperation() or
