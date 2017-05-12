@@ -6,20 +6,6 @@
 nMemory=[$nM1]}</body>
     </ownedComment>
     <packagedElement xmi:type="uml:Activity" xmi:id="_WuYo8DlXEeaE4deiM0Jlvg" name="SparkApplication" node="_p15FUDlXEeaE4deiM0Jlvg _uZmhEDlXEeaE4deiM0Jlvg _vVW-sDlXEeaE4deiM0Jlvg _1va4EDlXEeaE4deiM0Jlvg _hR0qUBLTEeeGS6KWmiB_xw _mTi3wBLTEeeGS6KWmiB_xw _HsfkABLVEeeGS6KWmiB_xw _JUh40BLVEeeGS6KWmiB_xw" group="_VYd2gDllEeaE4deiM0Jlvg _qYQqMDllEeaE4deiM0Jlvg">
-      <ownedComment xmi:type="uml:Comment" xmi:id="_3y5HgDleEeaE4deiM0Jlvg">
-        <body>&lt;&lt;GaAnalysisContext>>
-{contextParams=[$nC1,$th1,$mapT,$redT,$nP1,$nM1,$nAssignedCores,$nAssignedMem,out$RT,out$T,out$U]}
-&lt;&lt;SparkScenario>>
-{jobSchedule=capacity;
-nAssignedCores=$nAssignedCores;
-nAssignedMemory=$nAssignedMem;
-respT=(expr=$RT,statQ=mean,source=calc);
-throughput=(expr=$T,unit=s,statQ=mean,source=calc)}</body>
-      </ownedComment>
-      <ownedComment xmi:type="uml:Comment" xmi:id="_ol2_0DliEeaE4deiM0Jlvg" annotatedElement="_p15FUDlXEeaE4deiM0Jlvg">
-        <body>{sparkPopulation=[$nC1];
-sparkExtDelay=[$th1]}</body>
-      </ownedComment>
       <edge xmi:type="uml:ControlFlow" xmi:id="_zfomwDlXEeaE4deiM0Jlvg" target="_uZmhEDlXEeaE4deiM0Jlvg" source="_p15FUDlXEeaE4deiM0Jlvg"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_0K38IDlXEeaE4deiM0Jlvg" target="_vVW-sDlXEeaE4deiM0Jlvg" source="_JUh40BLVEeeGS6KWmiB_xw"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_23ONoDlXEeaE4deiM0Jlvg" target="_1va4EDlXEeaE4deiM0Jlvg" source="_vVW-sDlXEeaE4deiM0Jlvg"/>
@@ -28,16 +14,8 @@ sparkExtDelay=[$th1]}</body>
       <edge xmi:type="uml:ControlFlow" xmi:id="_Y93lMBLVEeeGS6KWmiB_xw" target="_mTi3wBLTEeeGS6KWmiB_xw" source="_HsfkABLVEeeGS6KWmiB_xw"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_atGHIBLVEeeGS6KWmiB_xw" target="_JUh40BLVEeeGS6KWmiB_xw" source="_hR0qUBLTEeeGS6KWmiB_xw"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_b2YDYBLVEeeGS6KWmiB_xw" target="_JUh40BLVEeeGS6KWmiB_xw" source="_mTi3wBLTEeeGS6KWmiB_xw"/>
-      <group xmi:type="uml:ActivityPartition" xmi:id="_VYd2gDllEeaE4deiM0Jlvg" name="Action" node="_vVW-sDlXEeaE4deiM0Jlvg _JUh40BLVEeeGS6KWmiB_xw" represents="_EPQdYDlmEeaE4deiM0Jlvg">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_XVttsDliEeaE4deiM0Jlvg" annotatedElement="_vVW-sDlXEeaE4deiM0Jlvg">
-          <body>{hostDemand=[(expr=$redT,unit=ms,statQ=mean,source=est)] }</body>
-        </ownedComment>
-      </group>
-      <group xmi:type="uml:ActivityPartition" xmi:id="_qYQqMDllEeaE4deiM0Jlvg" name="Transformation" node="_uZmhEDlXEeaE4deiM0Jlvg _hR0qUBLTEeeGS6KWmiB_xw _mTi3wBLTEeeGS6KWmiB_xw _HsfkABLVEeeGS6KWmiB_xw" represents="_DTxskDlmEeaE4deiM0Jlvg">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_EWHQIDliEeaE4deiM0Jlvg" annotatedElement="_uZmhEDlXEeaE4deiM0Jlvg">
-          <body>{hostDemand=[(expr=$mapT,unit=ms,statQ=mean,source=est)]}</body>
-        </ownedComment>
-      </group>
+      <group xmi:type="uml:ActivityPartition" xmi:id="_VYd2gDllEeaE4deiM0Jlvg" name="Action" node="_vVW-sDlXEeaE4deiM0Jlvg _JUh40BLVEeeGS6KWmiB_xw" represents="_EPQdYDlmEeaE4deiM0Jlvg"/>
+      <group xmi:type="uml:ActivityPartition" xmi:id="_qYQqMDllEeaE4deiM0Jlvg" name="Transformation" node="_uZmhEDlXEeaE4deiM0Jlvg _hR0qUBLTEeeGS6KWmiB_xw _mTi3wBLTEeeGS6KWmiB_xw _HsfkABLVEeeGS6KWmiB_xw" represents="_DTxskDlmEeaE4deiM0Jlvg"/>
       <node xmi:type="uml:InitialNode" xmi:id="_p15FUDlXEeaE4deiM0Jlvg" name="start" outgoing="_zfomwDlXEeaE4deiM0Jlvg"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_uZmhEDlXEeaE4deiM0Jlvg" name="mapping" incoming="_zfomwDlXEeaE4deiM0Jlvg" outgoing="_Xkv2IBLVEeeGS6KWmiB_xw" inPartition="_qYQqMDllEeaE4deiM0Jlvg"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_vVW-sDlXEeaE4deiM0Jlvg" name="reducing" incoming="_0K38IDlXEeaE4deiM0Jlvg" outgoing="_23ONoDlXEeaE4deiM0Jlvg" inPartition="_VYd2gDllEeaE4deiM0Jlvg"/>
@@ -163,11 +141,11 @@ sparkExtDelay=[$th1]}</body>
     <context>out$USpark</context>
     <context>$defaultParallelism</context>
   </GQAM:GaAnalysisContext>
-  <Spark:SparkWorkloadEvent xmi:id="_xAw4AAMzEeec2YL9FlAkDw" pattern="" base_NamedElement="_p15FUDlXEeaE4deiM0Jlvg" sparkPopulation="$nC1" sparkExtDelay="$th1"/>
+  <Spark:SparkWorkloadEvent xmi:id="_xAw4AAMzEeec2YL9FlAkDw" pattern="" base_NamedElement="_p15FUDlXEeaE4deiM0Jlvg" sparkPopulation="$nC1" sparkExtDelay="(expr=$th1,unit=ms,statQ=mean,source=est)"/>
   <Spark:SparkReduce xmi:id="_zhtKwAMzEeec2YL9FlAkDw" base_NamedElement="_vVW-sDlXEeaE4deiM0Jlvg" base_Action="_vVW-sDlXEeaE4deiM0Jlvg" OpType="Action">
     <hostDemand>(expr=$redT,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkReduce>
-  <Spark:SparkScenario xmi:id="_0_4Y8AMzEeec2YL9FlAkDw" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
+  <Spark:SparkScenario xmi:id="_0_4Y8AMzEeec2YL9FlAkDw" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" usedResources="_6kBW8AMzEeec2YL9FlAkDw" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
     <throughput>(expr=$T,unit=s,statQ=mean,source=calc)</throughput>
     <respT>(expr=$RT,unit=s,statQ=mean,source=calc)</respT>
     <utilization>(expr=$USpark,unit=s,statQ=mean,source=calc)</utilization>
