@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Spark="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Spark">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Spark="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM">
   <uml:Model xmi:id="_RSOiQDlXEeaE4deiM0Jlvg" name="RootElement">
     <ownedComment xmi:type="uml:Comment" xmi:id="_ep4M8DlkEeaE4deiM0Jlvg" annotatedElement="_LGzO4DlkEeaE4deiM0Jlvg">
       <body>{nCores=[$nP1];
 nMemory=[$nM1]}</body>
     </ownedComment>
-    <packagedElement xmi:type="uml:Activity" xmi:id="_WuYo8DlXEeaE4deiM0Jlvg" name="MRprocess" node="_p15FUDlXEeaE4deiM0Jlvg _uZmhEDlXEeaE4deiM0Jlvg _vVW-sDlXEeaE4deiM0Jlvg _1va4EDlXEeaE4deiM0Jlvg _hR0qUBLTEeeGS6KWmiB_xw _mTi3wBLTEeeGS6KWmiB_xw _HsfkABLVEeeGS6KWmiB_xw _JUh40BLVEeeGS6KWmiB_xw" group="_VYd2gDllEeaE4deiM0Jlvg _qYQqMDllEeaE4deiM0Jlvg">
+    <packagedElement xmi:type="uml:Activity" xmi:id="_WuYo8DlXEeaE4deiM0Jlvg" name="SparkApplication" node="_p15FUDlXEeaE4deiM0Jlvg _uZmhEDlXEeaE4deiM0Jlvg _vVW-sDlXEeaE4deiM0Jlvg _1va4EDlXEeaE4deiM0Jlvg _hR0qUBLTEeeGS6KWmiB_xw _mTi3wBLTEeeGS6KWmiB_xw _HsfkABLVEeeGS6KWmiB_xw _JUh40BLVEeeGS6KWmiB_xw" group="_VYd2gDllEeaE4deiM0Jlvg _qYQqMDllEeaE4deiM0Jlvg">
       <ownedComment xmi:type="uml:Comment" xmi:id="_3y5HgDleEeaE4deiM0Jlvg">
         <body>&lt;&lt;GaAnalysisContext>>
 {contextParams=[$nC1,$th1,$mapT,$redT,$nP1,$nM1,$nAssignedCores,$nAssignedMem,out$RT,out$T,out$U]}
@@ -53,7 +53,7 @@ sparkExtDelay=[$th1]}</body>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_csWcMDlXEeaE4deiM0Jlvg">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_csY4cDlXEeaE4deiM0Jlvg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DPIM/1.0#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_gFr1YOebEeWj7ZPL8JeBTQ"/>
     </profileApplication>
@@ -143,7 +143,7 @@ sparkExtDelay=[$th1]}</body>
     </profileApplication>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tlENMAMzEeec2YL9FlAkDw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tlK64AMzEeec2YL9FlAkDw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//Spark"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0#/"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_uVw8sPjzEeaT8NXWw3z-XA"/>
     </profileApplication>
@@ -159,19 +159,21 @@ sparkExtDelay=[$th1]}</body>
     <context>$nAssignedMem</context>
     <context>out$RT</context>
     <context>out$T</context>
-    <context>out$U</context>
-    <context>out$U1</context>
+    <context>out$UNode</context>
+    <context>out$USpark</context>
+    <context>$defaultParallelism</context>
   </GQAM:GaAnalysisContext>
-  <Spark:SparkWorkloadEvent xmi:id="_xAw4AAMzEeec2YL9FlAkDw" base_NamedElement="_p15FUDlXEeaE4deiM0Jlvg" sparkPopulation="$nC1" sparkExtDelay="$th1"/>
+  <Spark:SparkWorkloadEvent xmi:id="_xAw4AAMzEeec2YL9FlAkDw" pattern="" base_NamedElement="_p15FUDlXEeaE4deiM0Jlvg" sparkPopulation="$nC1" sparkExtDelay="$th1"/>
   <Spark:SparkReduce xmi:id="_zhtKwAMzEeec2YL9FlAkDw" base_NamedElement="_vVW-sDlXEeaE4deiM0Jlvg" base_Action="_vVW-sDlXEeaE4deiM0Jlvg" OpType="Action">
     <hostDemand>(expr=$redT,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkReduce>
-  <Spark:SparkScenario xmi:id="_0_4Y8AMzEeec2YL9FlAkDw" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" usedResources="_6kBW8AMzEeec2YL9FlAkDw" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem">
+  <Spark:SparkScenario xmi:id="_0_4Y8AMzEeec2YL9FlAkDw" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
     <throughput>(expr=$T,unit=s,statQ=mean,source=calc)</throughput>
     <respT>(expr=$RT,unit=s,statQ=mean,source=calc)</respT>
+    <utilization>(expr=$USpark,unit=s,statQ=mean,source=calc)</utilization>
   </Spark:SparkScenario>
-  <Spark:SparkNode xmi:id="_6kBW8AMzEeec2YL9FlAkDw" base_Classifier="_LGzO4DlkEeaE4deiM0Jlvg" nCores="$nP1" Memory="$nM1">
-    <utilization>(expr=$U,statQ=mean,source=calc)</utilization>
+  <Spark:SparkNode xmi:id="_6kBW8AMzEeec2YL9FlAkDw" base_Classifier="_LGzO4DlkEeaE4deiM0Jlvg" base_NamedElement="_LGzO4DlkEeaE4deiM0Jlvg" nCores="$nP1" Memory="$nM1">
+    <utilization>(expr=$UNode,statQ=mean,source=calc)</utilization>
   </Spark:SparkNode>
   <Spark:SparkMap xmi:id="_aNzKoANAEeeSnsiFmFrbqA" base_NamedElement="_uZmhEDlXEeaE4deiM0Jlvg" base_Action="_uZmhEDlXEeaE4deiM0Jlvg">
     <hostDemand>(expr=$mapT,unit=ms,statQ=mean,source=est)</hostDemand>

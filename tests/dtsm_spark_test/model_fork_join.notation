@@ -282,10 +282,6 @@
         <element xmi:type="uml:Activity" href="model_fork_join.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_XJsE8TlXEeaE4deiM0Jlvg"/>
       </children>
-      <children xmi:type="notation:BasicCompartment" xmi:id="_gjKNgBLTEeeGS6KWmiB_xw" type="compartment_shape_display">
-        <styles xmi:type="notation:TitleStyle" xmi:id="_gjKNgRLTEeeGS6KWmiB_xw"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gjKNghLTEeeGS6KWmiB_xw"/>
-      </children>
       <children xmi:type="notation:BasicCompartment" xmi:id="_gjQUIBLTEeeGS6KWmiB_xw" type="StereotypeCompartment">
         <styles xmi:type="notation:TitleStyle" xmi:id="_gjQUIRLTEeeGS6KWmiB_xw"/>
         <styles xmi:type="notation:StringValueStyle" xmi:id="_gjQUIhLTEeeGS6KWmiB_xw" name="stereotype" stringValue="MARTE::MARTE_AnalysisModel::GQAM::GaAnalysisContext"/>

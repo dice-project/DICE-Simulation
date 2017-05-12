@@ -1493,25 +1493,24 @@ query max(in a : Integer, b : Integer) : Integer {
 //intermediate property UML::ActivityNode::numTasks : Integer;
 intermediate property UML::ActivityNode::numTasks : NFP_Integer;
 
-/*TODO: Corregir Integer vs NFP_integer en intermediate property numTasks y en
-funcion inferNumTasks */
 helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
-//helper UML::ActivityNode::inferNumTasks() : Integer {	
-//mapping UML::ActivityNode::inferNumTasks() : NFP_Integer { /***/
 	self.numTasks := "1".toNfpInteger();
 	if (self.oclIsKindOf(InitialNode)) {
-		//self.numTasks := self.oclAsType(InitialNode).getSparkWorkloadEvent_sparkPopulation().value();
 		self.numTasks := self.oclAsType(InitialNode).getSparkWorkloadEvent_sparkPopulation();
-	} else if(self.oclIsKindOf(ActivityNode)){	
-		//var defaultParallelism = self.oclAsType(InitialNode).getSparkWorkloadEvent_sparkDefaultParallelism().value();
-		var defaultParallelism = ad.scenario().getSparkScenario_sparkDefaultParallelism().value();
-		assert fatal (defaultParallelism != null) with log ("Cannot read defaultParallelism attribute from " + self.toString() + ".");
-		
-		//var prevTasks := new Set(Integer)();
+	} else if (self.oclIsKindOf(ForkNode) or
+		       self.oclIsKindOf(JoinNode)){	
 		var prevTasks := new Set(NFP_Integer)();
 		self.incoming->forEach(in_arc){
 			prevTasks += in_arc.source.inferNumTasks();
-			//prevTasks += in_arc.source.map inferNumTasks();
+		};
+		self.numTasks := prevTasks->asOrderedSet()->first();
+	} else if(self.oclIsKindOf(ActivityNode)){	
+		var defaultParallelism = ad.scenario().getSparkScenario_sparkDefaultParallelism().value();
+		assert fatal (defaultParallelism != null) with log ("Cannot read defaultParallelism attribute from " + self.toString() + ".");
+		
+		var prevTasks := new Set(NFP_Integer)();
+		self.incoming->forEach(in_arc){
+			prevTasks += in_arc.source.inferNumTasks();
 		};
 				
 		var mapType = self.oclAsType(ActivityNode).getMapType();
@@ -1519,14 +1518,11 @@ helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
 			
 		var explicitTasks := self.oclAsType(ActivityNode).getSparkOperation_nTasks();
 
-		//var numTasks := explicitTasks.value();
-		//self.numTasks := explicitTasks;
 		self.numTasks := prevTasks->asOrderedSet()->first();
 		
 		if (explicitTasks = null){			
 			if (self.oclAsType(ActivityNode).isByKeyOperation()){
 				assert warning (self.incoming->size() = 1) with log ("Activity Nodes reprepresenting ByKey operations work over a single RDD");
-				//self.numTasks := prevTasks->asOrderedSet()->first();
 				self.numTasks := prevTasks->asOrderedSet()->first();
 			};
 			
@@ -1535,17 +1531,14 @@ helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
 				var totalTasks := 1;
 				if (mapType = DBET::SparkMap::Union){			
 					prevTasks->forEach(prevNumTasks){
-						//totalTasks := totalTasks + prevNumTasks - 1;
 						totalTasks := totalTasks + prevNumTasks.value() - 1;
 					}
 				} else if (mapType = DBET::SparkMap::Cartesian){
 					prevTasks->forEach(prevNumTasks){
-						//totalTasks := totalTasks * prevNumTasks;
 						totalTasks := totalTasks * prevNumTasks.value();
 					}
 				}  else if (mapType = DBET::SparkMap::Intersection){
 					prevTasks->forEach(prevNumTasks){
-						//totalTasks := max(totalTasks, prevNumTasks);
 						totalTasks := max(totalTasks, prevNumTasks.value());
 						totalTasks := max(totalTasks, defaultParallelism);
 					}

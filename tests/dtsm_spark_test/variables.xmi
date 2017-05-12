@@ -26,4 +26,7 @@
   <datatypes:PrimitiveVariableAssignment
       variable="$nAssignedMemory"
       value="15"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$defaultParallelism"
+      value="15"/>
 </xmi:XMI>
