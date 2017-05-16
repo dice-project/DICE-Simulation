@@ -19,6 +19,8 @@ public class PnmlM2mPlugin implements BundleActivator {
 	
 	public static final String DTSM_STORM_AD2PNML_RELIABILITY_TRANSFORMATION_URI = "platform:/plugin/" + PLUGIN_ID + "/transformations/dtsm-storm-ad2pnml-reliability.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
 	
+	public static final String DTSM_HADOOP_AD2PNML_RELIABILITY_TRANSFORMATION_URI= "platform:/plugin/" + PLUGIN_ID + "/transformations/dtsm-hadoop-ad2pnml-reliability.qvto"; //$NON-NLS-1$ //$NON-NLS-2$
+	
 	
 	private static BundleContext context;
 
