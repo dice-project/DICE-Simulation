@@ -110,8 +110,8 @@ mapping UML::NamedElement::closeNet(){
 mapping UML::Node::virtualMachineFailure2subnet()
 when {self.getDaComponent().oclIsUndefined().not();}
 {
-	log ("virtualMachineFailure2subnet is being called with element String " + self.toString());
-	log ("virtualMachineFailure2subnet is being called with element Repr " + self.repr());
+	//log ("virtualMachineFailure2subnet is being called with element String " + self.toString());
+	//log ("virtualMachineFailure2subnet is being called with element Repr " + self.repr());
 	
 	var resMult := 1;
 	if(self.getDaComponent_resMult().oclIsUndefined().not()){
@@ -128,7 +128,7 @@ when {self.getDaComponent().oclIsUndefined().not();}
 	place.initialMarking := object PNML::PTMarking {
 		text := resMult;
 	};
-	log ("Created Place allVMsOK with marking " + place.initialMarking.text.toString() + " and repr of place " + place.repr());
+	//log ("Created Place allVMsOK with marking " + place.initialMarking.text.toString() + " and repr of place " + place.repr());
 	
 	var transition := self.map namedElement2transition();
 	transition.toolspecifics += expTransitionToolInfo(1.0/mttf);
@@ -137,8 +137,8 @@ when {self.getDaComponent().oclIsUndefined().not();}
 	map arc(place, transition);
 	
 	var placeFailed := self.map namedElement2placeVMsKO();
-	log ("Created Place allVMsKO with marking (hopefully undefined): "); 
-	log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
+	//log ("Created Place allVMsKO with marking (hopefully undefined): "); 
+	//log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
 	
 	map arc(transition, placeFailed);
 	}
@@ -148,8 +148,8 @@ mapping UML::Node::spotVMexpulsion2subnet()
 when {self.getHadoopComputationNode().oclIsUndefined().not();}
 {
 	
-log ("spotVMexpulsion2subnet is being called with element String " + self.toString());
-	log ("spotVMexpulsion2subnet is being called with element Repr " + self.repr());
+//log ("spotVMexpulsion2subnet is being called with element String " + self.toString());
+//	log ("spotVMexpulsion2subnet is being called with element Repr " + self.repr());
 	
 	
 	var mttf:=1.0;
@@ -170,14 +170,14 @@ log ("spotVMexpulsion2subnet is being called with element String " + self.toStri
 		text := 1;
 	};
 	self.map trace(place, getPlaceNotExpelled());
-	log ("Created Place not expulsed yet with marking " + place.initialMarking.text.toString() + " and repr of place " + place.repr());
+	//log ("Created Place not expulsed yet with marking " + place.initialMarking.text.toString() + " and repr of place " + place.repr());
 	
 	
 	//transition to fail
 	var transition := self.map namedElement2transitionExpulsion();
 	transition.toolspecifics += expTransitionToolInfo(1.0/mttf);
 	transition.toolspecifics += infServerTransitionToolInfo();
-	log ("Created transition for expulsion with repr " + transition.repr());
+	//log ("Created transition for expulsion with repr " + transition.repr());
 	
 	
 	//arc from initial to transition to fail
@@ -186,8 +186,8 @@ log ("spotVMexpulsion2subnet is being called with element String " + self.toStri
 	//place failed
 	var placeFailed := self.map blackout2place();
 	self.map trace(placeFailed, getPlaceAllExpelled());
-		log ("Created Place AllExpulsed with marking (hopefully undefined): "); 
-	log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
+	//	log ("Created Place AllExpulsed with marking (hopefully undefined): "); 
+	//log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
 	
 	//arc from transition to fail to place failed
 	map arc(transition, placeFailed);
@@ -196,7 +196,7 @@ log ("spotVMexpulsion2subnet is being called with element String " + self.toStri
 	var transitionRepair := self.map namedElement2transitionRepairExpulsion();
 	transitionRepair.toolspecifics += expTransitionToolInfo(1.0/mttr);
 	transitionRepair.toolspecifics += infServerTransitionToolInfo();
-	log ("Created transition for repair with repr " + transitionRepair.repr());
+	//log ("Created transition for repair with repr " + transitionRepair.repr());
 
 	
 	//arc from place failed to transition to repair

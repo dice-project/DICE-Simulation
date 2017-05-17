@@ -24,7 +24,7 @@ import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat.Flavor;
 import tec.units.ri.unit.Units;
 
-public class ReliabilityMTTFCalculatorStorm extends AbstractCalculator implements MeasureCalculator {
+public class AvailabilityCalculatorHadoop extends AbstractCalculator implements MeasureCalculator {
 
 	/**
 	 * The result is the proportion of the throughput of the transition without
@@ -44,13 +44,13 @@ public class ReliabilityMTTFCalculatorStorm extends AbstractCalculator implement
 		//get from trace the trasition information of the closing transition
 		for (Trace trace : traceSet.getTraces()) {
 			//the trace of interest
-			if(ConstantUtils.getTransitionAllFailedTrace().equalsIgnoreCase(trace.getRule())){
+			if(ConstantUtils.getPlaceNotExpelled().equalsIgnoreCase(trace.getRule())){
 				//look for the result in toolResult
 				for (AnalyzableElementInfo info : toolResult.getInfos()) {
 					if(trace.getToAnalyzableElement().equals(info.getAnalyzedElement())){
-						BigDecimal measuredecimal = new BigDecimal(1.0/info.getValue().doubleValue());
-						String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
-
+						BigDecimal measuredecimal = new BigDecimal(info.getValue().doubleValue()*100.0);
+						//String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
+						String targetUnit = "%";
 						DomainMeasure measure = buildMeasure(measuredecimal, info.getUnit(), targetUnit);
 						measure.setDefinition(definition);
 						return measure;
@@ -70,18 +70,19 @@ public class ReliabilityMTTFCalculatorStorm extends AbstractCalculator implement
 		try {
 			// Try to convert
 
-			Unit<?> fromUnit = SimpleUnitFormat.getInstance(Flavor.ASCII).parse(sourceInversedUnit).inverse();
 			Unit<?> toUnit = SimpleUnitFormat.getInstance(Flavor.ASCII).parse(targetUnit);
 			measure.setUnit(toUnit.toString());
-			measure.setValue(fromUnit.getConverterToAny(toUnit).convert(rawValue));
+			measure.setValue(rawValue);
 		} catch (Throwable t) {
 			try {
+				DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "There was an exception with the common unit management (%). Acting as default");
 				// If this fails, use the base unit
 				Unit<?> fromUnit = SimpleUnitFormat.getInstance(Flavor.ASCII).parse(sourceInversedUnit).inverse();
-				measure.setUnit(Units.SECOND.toString());
+				measure.setUnit("%");
 				measure.setValue(fromUnit.getConverterToAny(Units.SECOND).convert(rawValue));
 			} catch (Throwable t2) {
 				// If everything fails, don't use any unit
+				DiceLogger.logWarning(GspnSshSimulationPlugin.getDefault(), "There has been trown a Second Exception with the unit PERCENTAGE management");
 				measure.setUnit(NonStandardUnits.UNSPECIFIED.getLiteral());
 				measure.setValue(rawValue);
 			}

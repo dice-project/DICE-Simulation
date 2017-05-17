@@ -31,6 +31,10 @@
             familyNFPproperty="RELIABILITY"
             id="failure">
       </MetricTag>
+      <MetricTag
+            familyNFPproperty="RELIABILITY"
+            id="ssAvail">
+      </MetricTag>
       <Metric
             name="DICE::DICE_UML_Extensions::DPIM::DpimScenario#respT"
             stereotype="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
@@ -117,6 +121,26 @@
             tag="utilization">
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorHadoop"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario#failure"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
+            tag="failure">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorHadoop"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario#ssAvail"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
+            tag="ssAvail">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.AvailabilityCalculatorHadoop"
                scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>

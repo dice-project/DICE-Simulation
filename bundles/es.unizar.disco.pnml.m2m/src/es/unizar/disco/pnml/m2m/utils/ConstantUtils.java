@@ -5,13 +5,13 @@ import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 
 public class ConstantUtils {
 
-	public final static String TRANSITION_FAIL_TRACE = "FAIL";
-	public final static String TRANSITION_OK_TRACE = "OK";
-	public final static String PLACE_CONCURRENT_USERS_TRACE ="NumberOfConcurrentUsers";
-	public final static String USERS = "Users";
-	public final static String ALL_RESOURCES_FAILED = "AllResourcesFailed";
-	public final static String ALL_RESOURCES_EXPELLED = "ResourcesExpelled";
-	public final static String ALL_RESOURCES_NOT_EXPELLED = "ResourcesNotExpelled";
+	private final static String TRANSITION_FAIL_TRACE = "FAIL";
+	private final static String TRANSITION_OK_TRACE = "OK";
+	private final static String PLACE_CONCURRENT_USERS_TRACE ="NumberOfConcurrentUsers";
+	private final static String USERS = "Users";
+	private final static String ALL_RESOURCES_FAILED = "AllResourcesFailed";
+	private final static String ALL_RESOURCES_EXPELLED = "ResourcesExpelled";
+	private final static String ALL_RESOURCES_NOT_EXPELLED = "ResourcesNotExpelled";
 	
 	
 	@Operation
@@ -46,7 +46,7 @@ public class ConstantUtils {
 	
 	@Operation
 	public static String getPlaceNotExpelled() {
-		return ALL_RESOURCES_EXPELLED;
+		return ALL_RESOURCES_NOT_EXPELLED;
 	}
 	
 }
