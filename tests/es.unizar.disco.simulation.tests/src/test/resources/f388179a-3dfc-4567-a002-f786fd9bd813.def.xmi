@@ -9,7 +9,7 @@
   <parameters key="-a" value="5"/>
   <parameters key="-c" value="95"/>
   <parameters key="-f" value="1000"/>
-  <activeScenario href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+  <activeScenario href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
   <inputVariables name="redT3" assignments="//@possibleConfigurations.0/@assignments.0">
     <values value="1" assignments="//@possibleConfigurations.0/@assignments.0"/>
   </inputVariables>
@@ -73,7 +73,7 @@
   <inputVariables name="th2" assignments="//@possibleConfigurations.0/@assignments.20">
     <values value="1" assignments="//@possibleConfigurations.0/@assignments.20"/>
   </inputVariables>
-  <domainResource uri="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml"/>
+  <domainResource uri="reliabilityHadoop.uml"/>
   <outputVariables name="mttf"/>
   <outputVariables name="availability"/>
   <outputVariables name="RT1"/>
@@ -87,76 +87,76 @@
   <outputVariables name="U3"/>
   <outputVariables name="T3"/>
   <declaredMeasures measure="utilization">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$U1"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="utilization">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$U2"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="utilization">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$U3"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="ssAvail">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$availability"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="respT">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$RT1"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
     <vslExpressionEntries key="unit" value="ms"/>
   </declaredMeasures>
   <declaredMeasures measure="respT">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$RT2"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
     <vslExpressionEntries key="unit" value="ms"/>
   </declaredMeasures>
   <declaredMeasures measure="respT">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$RT3"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
     <vslExpressionEntries key="unit" value="ms"/>
   </declaredMeasures>
   <declaredMeasures measure="throughput">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$T1"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="throughput">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$T2"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="throughput">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$T3"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="failure">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$mttf"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="utilization">
-    <measuredElement href="platform:/resource/modelForReliabilityTest/HadoopReliability/reliabilityHadoop.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
+    <measuredElement href="reliabilityHadoop.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$U"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>

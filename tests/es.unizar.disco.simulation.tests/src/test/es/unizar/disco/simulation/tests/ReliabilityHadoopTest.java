@@ -28,9 +28,9 @@ import com.masdes.dam.Complex_Data_Types.DaFailure;
 import com.masdes.dam.Complex_Data_Types.DaRepair;
 
 import es.unizar.disco.pnml.m2m.builder.HadoopScenario2PnmlReliabilityResourceBuilder;
-import es.unizar.disco.pnml.m2m.builder.StormScenario2PnmlReliabilityResourceBuilder;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
-import es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorStorm;
+import es.unizar.disco.simulation.greatspn.ssh.calculators.AvailabilityCalculatorHadoop;
+import es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorHadoop;
 import es.unizar.disco.simulation.launcher.Messages;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder.ModelResult;
@@ -55,6 +55,10 @@ public class ReliabilityHadoopTest extends AbstractTest {
 
 	final static String UML_FILENAME = "reliabilibyHadoop";
 
+
+	private final String FAILURE = "failure";
+	private final String SSAVAIL = "ssAvail";
+	
 	@Before
 	public void loadParticularModels() throws IOException {
 		loadModels(DEFINITION_FILENAME, INVOCATION_FILENAME);
@@ -69,14 +73,13 @@ public class ReliabilityHadoopTest extends AbstractTest {
 	
 		assertTrue("The " + UML_FILENAME + " model does not contain zookeeper stereotype", contains(model.getPackagedElements(),"HadoopComputationNode"));
 		Element computNode = getStereotypedElement(model.getPackagedElements(),"HadoopComputationNode");
-//				model.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Storm::StormZookeeper") != null);
 		assertTrue("The HadoopComputationNode stereotype does not contatin  information about blackout ",
 				(((DaFailure)computNode.getValue(computNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"), "failure")).getMTTF().get(0)!=null));
 		assertTrue("The HadoopComputationNode stereotype does not contatin  informationabout blackout recovering", 
 				(((DaRepair)computNode.getValue(computNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"), "repair")).getMTTR().get(0)!=null));
 	}
 	
-/*
+
 	@Test
 	public void testCreationNet() throws IOException {
 		// writing over the initial "definition"
@@ -93,19 +96,20 @@ public class ReliabilityHadoopTest extends AbstractTest {
 		assertNotNull("The translated model in result was null", result.getModel());
 		assertFalse("The result had a list of translated models, but its size was 0", result.getModel().size() == 0);
 		assertNotNull("The first element in the list of translated models was null", result.getModel().get(0));
-		assertTrue("The generated net did not contain the expected information", resultIsMeaningful(result));
+		assertTrue("The generated net did not contain the expected structure information", resultIsMeaningful(result));
 
 		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
 	}
 
-	*/
+	
 
-/*
+
 	@Test
 	public void testResults()
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
-		//There are 3 resources with MTTF each of 10h. The result should be a MTTF of around 18.33h . Accepted between 18 and 18.5h
+		//FOR MTTF: There are 2 resources with MTTF each of 1h. The result should be a MTTF of around 1.5h . Accepted between 1.2 and 1.8h
+		//FOR AVAILABILITY: 2h time to be expulsed. 180s to repair. 97.5% . We accept between 95% and 99%
 		
 		//Compute results:
 		
@@ -119,17 +123,24 @@ public class ReliabilityHadoopTest extends AbstractTest {
 		invocation.getAnalyzableModel().set(0, result.getModel().get(0));
 		invocation.setTraceSet(result.getTraceSet());
 		
-		DomainMeasure mttf = launchAnalysis(fullExecutionDefinition);
+		DomainMeasure[] measures = launchAnalysis(fullExecutionDefinition);
+		DomainMeasure mttf= measures[0];
+		
 		assertTrue("The MTTF is null", mttf!=null);
-		assertTrue("The MTTF is below 18h with value " + mttf.getValue().doubleValue(), mttf.getValue().doubleValue()>(18.0));
-		assertTrue("The MTTF is above 18.5h with value " + mttf.getValue().doubleValue(), mttf.getValue().doubleValue()<(18.5));
+		assertTrue("The MTTF is below 1.2h with value " + mttf.getValue().doubleValue(), mttf.getValue().doubleValue()>(1.2*3600.0));
+		assertTrue("The MTTF is above 1.8h with value " + mttf.getValue().doubleValue(), mttf.getValue().doubleValue()<(1.8*3600));
+		
+		DomainMeasure availability =measures[1];
+		assertTrue("The availability is null", availability!=null);
+		assertTrue("The availability is below 95% with value" + availability.getValue().doubleValue(), availability.getValue().doubleValue()>95);
+		assertTrue("The availability is above 99% with value" + availability.getValue().doubleValue(), availability.getValue().doubleValue()<99);
 
 	}
 
-*/
+
 	
-	/*
-	private DomainMeasure launchAnalysis(SimulationDefinition definition)
+	
+	private DomainMeasure[] launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
 		SimulationInvocation invocation = definition.getInvocations().get(0);
@@ -156,13 +167,15 @@ public class ReliabilityHadoopTest extends AbstractTest {
 			System.out.println("Wait for passed!");
 			if (simulator.getToolResult() != null) {
 				invocation.setToolResult(simulator.getToolResult());
-				return calculateResults(invocation);
+				return new DomainMeasure[] {calculateResultsMTTF(invocation), calculateResultsAvailability(invocation)};
+				
 			}
 		} finally {
 
 		}
 		return null;
 	}
+
 
 	private void readOutputsThreads(Process simulationProcess) {
 		Thread errorThread = new Thread() {
@@ -209,42 +222,43 @@ public class ReliabilityHadoopTest extends AbstractTest {
 
 	private boolean resultIsMeaningful(ModelResult result) {
 
-		// final URI anmURI = URI
-		// .createFileURI(Paths.get("src/test/resources/" + TEST_FILES_UUID +
-		// ".anm" + "." + XMIResource.XMI_NS)
-		// .toFile().getAbsolutePath());
+
 		PetriNetDoc producedAnalyzableModel = (PetriNetDoc)  result.getModel().get(0);
 		System.out.println("produced model= " + producedAnalyzableModel.toString());
 		PetriNet pn = producedAnalyzableModel.getNets().get(0);
 		List<PnObject> pnobjects = pn.getPages().get(0).getObjects();
 		//There should be 
 		
-		//2 places and 2 transitions
+		//4 places and 4 transitions
 		int numplaces = pnobjects.stream()
 		.filter(n -> n instanceof Place) 
 		.map(n -> (Place) n)
 		.collect(Collectors.toList())
 		.size();
-		assertEquals("Number of places found was " + numplaces, 2,  numplaces);
+		assertEquals("Number of places found was " + numplaces, 4,  numplaces);
 		
 		int numtransitions = pnobjects.stream()
 				.filter(n -> n instanceof Transition) 
 				.map(n -> (Transition) n)
 				.collect(Collectors.toList())
 				.size();
-				assertEquals("Number of transitions found was " + numtransitions, 2,  numtransitions);
+				assertEquals("Number of transitions found was " + numtransitions, 4,  numtransitions);
 		
 		//one of the places should contain as many tokens as resource multiplicity
+				//TODO
+		//one of the places should contain one token
+				//TODO
+		//two of the places shouldn't contain any token
 				//TODO
 		//one of the transitions should be timed with rate the inverse of the MTTF
 				//TODO
 		return true;
 	}
 
-	private DomainMeasure calculateResults(SimulationInvocation invocation) {
+	private DomainMeasure calculateResultsMTTF(SimulationInvocation invocation) {
 
 		invocation.setResult(SimresultFactory.eINSTANCE.createSimulationResult());
-		ReliabilityMTTFCalculatorStorm calculator = new ReliabilityMTTFCalculatorStorm();
+		ReliabilityMTTFCalculatorHadoop calculator = new ReliabilityMTTFCalculatorHadoop();
 		DomainMeasureDefinition measureDefinition = invocation.getDefinition().getMeasuresToCompute().get(0);
 		for (int i = 0; i < invocation.getDefinition().getMeasuresToCompute().size(); i++) {
 			DomainMeasureDefinition measureDefinitioni = invocation.getDefinition().getMeasuresToCompute().get(i);
@@ -254,10 +268,15 @@ public class ReliabilityHadoopTest extends AbstractTest {
 			System.out.println("Trying to cast to Element and to print the getClass and the toString: "
 					+ ((Element) measureDefinition.getMeasuredElement()).getClass() + "     To String      "
 					+ ((Element) measureDefinition.getMeasuredElement()).toString());
+			
+			if(FAILURE.equalsIgnoreCase(measureDefinitioni.getMeasure())){
+				measureDefinition = measureDefinitioni;
+			}
+			
 
 		}
-		assertTrue("Measures to compute contains more than one element",
-				invocation.getDefinition().getMeasuresToCompute().size() == 1);
+		assertTrue("Measures to compute contains something different from two elements",
+				invocation.getDefinition().getMeasuresToCompute().size() == 2);
 
 		EObject measuredElement = measureDefinition.getMeasuredElement();
 
@@ -271,5 +290,39 @@ public class ReliabilityHadoopTest extends AbstractTest {
 
 		
 	}
-*/
+	
+
+	private DomainMeasure calculateResultsAvailability(SimulationInvocation invocation) {
+		invocation.setResult(SimresultFactory.eINSTANCE.createSimulationResult());
+		AvailabilityCalculatorHadoop calculator = new AvailabilityCalculatorHadoop();
+		DomainMeasureDefinition measureDefinition = invocation.getDefinition().getMeasuresToCompute().get(0);
+		for (int i = 0; i < invocation.getDefinition().getMeasuresToCompute().size(); i++) {
+			DomainMeasureDefinition measureDefinitioni = invocation.getDefinition().getMeasuresToCompute().get(i);
+			System.out.println("Measure definition: " + i + "  " + measureDefinitioni.getMeasure() + " to string:"
+					+ measureDefinitioni.toString() + " its measured element: "
+					+ measureDefinition.getMeasuredElement().toString());
+			System.out.println("Trying to cast to Element and to print the getClass and the toString: "
+					+ ((Element) measureDefinition.getMeasuredElement()).getClass() + "     To String      "
+					+ ((Element) measureDefinition.getMeasuredElement()).toString());
+			
+			if(SSAVAIL.equalsIgnoreCase(measureDefinitioni.getMeasure())){
+				measureDefinition = measureDefinitioni;
+			}
+			
+
+		}
+		assertTrue("Measures to compute contains something different from two elements",
+				invocation.getDefinition().getMeasuresToCompute().size() == 2);
+
+		EObject measuredElement = measureDefinition.getMeasuredElement();
+
+		// Look for the first calculator that is able to handle
+		// the measure for the given scenario type
+
+		DomainMeasure availability = calculator.calculate(measuredElement, measureDefinition, invocation.getToolResult(),
+				invocation.getTraceSet());
+
+		return availability;
+	}
+
 }
