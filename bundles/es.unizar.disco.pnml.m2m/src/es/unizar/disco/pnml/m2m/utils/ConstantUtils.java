@@ -10,6 +10,9 @@ public class ConstantUtils {
 	public final static String PLACE_CONCURRENT_USERS_TRACE ="NumberOfConcurrentUsers";
 	public final static String USERS = "Users";
 	public final static String ALL_RESOURCES_FAILED = "AllResourcesFailed";
+	public final static String ALL_RESOURCES_EXPELLED = "ResourcesExpelled";
+	public final static String ALL_RESOURCES_NOT_EXPELLED = "ResourcesNotExpelled";
+	
 	
 	@Operation
 	public static String getUsers() {
@@ -34,6 +37,16 @@ public class ConstantUtils {
 	@Operation
 	public static String getTransitionAllFailedTrace() {
 		return ALL_RESOURCES_FAILED;
+	}
+	
+	@Operation
+	public static String getPlaceAllExpelled() {
+		return ALL_RESOURCES_EXPELLED;
+	}
+	
+	@Operation
+	public static String getPlaceNotExpelled() {
+		return ALL_RESOURCES_EXPELLED;
 	}
 	
 }

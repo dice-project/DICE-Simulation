@@ -28,7 +28,7 @@ main() {
 	
 	ad.nodes()->flatten()[Node] -> map node2subnet();
 	
-	assert fatal (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found Zookeeper in this Storm Topology");
+	assert fatal (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found HadoopComputationNodes well defined in this Storm Topology");
 		
 	
 	//If not MTTR (if MTTR is possible in this system it will require to extend the transformation)
@@ -80,14 +80,14 @@ mapping baseTimeUnit(unit : String) {
 
 mapping UML::Node::node2subnet() {
 
-self->closure(nestedNode) ->including(self) -> map zookeeper2subnet();
+self->closure(nestedNode) ->including(self) -> map hadoopComputationNode2subnet();
 
 
 }
 
 mapping UML::NamedElement::closeNet(){
-	var lastPlace := resolveone(p:Place | p.initialMarking.oclIsUndefined());
-	var resourcePlace := resolveone(p:Place | p.initialMarking.oclIsUndefined().not());
+	var lastPlace := resolveoneIn(UML::Node::namedElement2placeVMsKO, p:Place | p.initialMarking.oclIsUndefined());
+	var resourcePlace := resolveoneIn(UML::Node::namedElement2placeVMs, p:Place | p.initialMarking.oclIsUndefined().not());
 	log("ID of last Place is : " + lastPlace.id);
 	log("ID of resourcePlace is: " + resourcePlace.id + " with num initial tokens " + resourcePlace.initialMarking.text.toString());
 	
@@ -106,12 +106,12 @@ mapping UML::NamedElement::closeNet(){
 	ad.scenario().map trace(closeTransition, getTransitionAllFailedTrace());
 }
 	
-mapping UML::Node::zookeeper2subnet() 
-when {self.getStormZookeeper().oclIsUndefined().not();
 	
-}{
-	log ("zookeeper2palces is being called with element String " + self.toString());
-	log ("zookeeper2palces is being called with element Repr " + self.repr());
+mapping UML::Node::virtualMachineFailure2subnet()
+when {self.getDaComponent().oclIsUndefined().not();}
+{
+	log ("virtualMachineFailure2subnet is being called with element String " + self.toString());
+	log ("virtualMachineFailure2subnet is being called with element Repr " + self.repr());
 	
 	var resMult := 1;
 	if(self.getDaComponent_resMult().oclIsUndefined().not()){
@@ -124,10 +124,11 @@ when {self.getStormZookeeper().oclIsUndefined().not();
 		log("Value of MTTF of node " + self.name + "is: " + mttf.toString());
 	};
 
-	var place := self.map namedElement2place();
+	var place := self.map namedElement2placeVMs();
 	place.initialMarking := object PNML::PTMarking {
 		text := resMult;
 	};
+	log ("Created Place allVMsOK with marking " + place.initialMarking.text.toString() + " and repr of place " + place.repr());
 	
 	var transition := self.map namedElement2transition();
 	transition.toolspecifics += expTransitionToolInfo(1.0/mttf);
@@ -135,9 +136,87 @@ when {self.getStormZookeeper().oclIsUndefined().not();
 	
 	map arc(place, transition);
 	
-	var placeFailed := self.map nodeFailed2place();
+	var placeFailed := self.map namedElement2placeVMsKO();
+	log ("Created Place allVMsKO with marking (hopefully undefined): "); 
+	log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
 	
 	map arc(transition, placeFailed);
+	}
+	
+	
+mapping UML::Node::spotVMexpulsion2subnet()
+when {self.getHadoopComputationNode().oclIsUndefined().not();}
+{
+	
+log ("spotVMexpulsion2subnet is being called with element String " + self.toString());
+	log ("spotVMexpulsion2subnet is being called with element Repr " + self.repr());
+	
+	
+	var mttf:=1.0;
+	if(self.getHadoopComputationNode_Failure_MTTF().oclIsUndefined().not()){
+		mttf := self.getHadoopComputationNode_Failure_MTTF().value();
+		log("Value of MTTF of node " + self.name + "is: " + mttf.toString());
+	};
+
+	var mttr:=1.0;
+	if(self.getHadoopComputationNode_Repair_MTTR().oclIsUndefined().not()){
+		mttr := self.getHadoopComputationNode_Repair_MTTR().value();
+		log("Value of MTTR of node " + self.name + "is: " + mttr.toString());
+	};
+	
+	//initial place 
+	var place := self.map notBlackout2place();
+	place.initialMarking := object PNML::PTMarking {
+		text := 1;
+	};
+	self.map trace(place, getPlaceNotExpelled());
+	log ("Created Place not expulsed yet with marking " + place.initialMarking.text.toString() + " and repr of place " + place.repr());
+	
+	
+	//transition to fail
+	var transition := self.map namedElement2transitionExpulsion();
+	transition.toolspecifics += expTransitionToolInfo(1.0/mttf);
+	transition.toolspecifics += infServerTransitionToolInfo();
+	log ("Created transition for expulsion with repr " + transition.repr());
+	
+	
+	//arc from initial to transition to fail
+	map arc(place, transition);
+	
+	//place failed
+	var placeFailed := self.map blackout2place();
+	self.map trace(placeFailed, getPlaceAllExpelled());
+		log ("Created Place AllExpulsed with marking (hopefully undefined): "); 
+	log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
+	
+	//arc from transition to fail to place failed
+	map arc(transition, placeFailed);
+
+	//trasition to repair
+	var transitionRepair := self.map namedElement2transitionRepairExpulsion();
+	transitionRepair.toolspecifics += expTransitionToolInfo(1.0/mttr);
+	transitionRepair.toolspecifics += infServerTransitionToolInfo();
+	log ("Created transition for repair with repr " + transitionRepair.repr());
+
+	
+	//arc from place failed to transition to repair
+	map arc(placeFailed, transitionRepair);
+	
+	//arc from repaired to initial
+	map arc(transitionRepair, place);
+
+
+	}
+
+	
+mapping UML::Node::hadoopComputationNode2subnet() 
+when {self.getHadoopComputationNode().oclIsUndefined().not();
+	
+}{
+	
+	self.map virtualMachineFailure2subnet();
+	self.map spotVMexpulsion2subnet();
+	
 }
 
 
@@ -160,12 +239,25 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 }
 
 
-mapping UML::Node::nodeFailed2place() : PNML::Place 
+mapping UML::Node::blackout2place() : PNML::Place 
 inherits UML::NamedElement::namedElement2place {
 }
 
+mapping UML::Node::notBlackout2place() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+}
 
+mapping UML::Node::namedElement2placeVMs() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+	
+	result.name.text := result.name.text.toString() + "_plaveVMs"
+}
 
+mapping UML::Node::namedElement2placeVMsKO() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+	
+	result.name.text := result.name.text.toString() + "_placeVMsKO"
+}
 
 mapping UML::NamedElement::namedElement2placeAlreadyFailed() : PNML::Place 
 	inherits UML::NamedElement::namedElement2place {
@@ -192,6 +284,13 @@ mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 }
 
 
+mapping UML::NamedElement::namedElement2transitionExpulsion(): PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+}
+
+mapping UML::NamedElement::namedElement2transitionRepairExpulsion(): PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+}
 
 /**
 	Creates an Arc from 'src' to 'tgt'
@@ -619,4 +718,23 @@ helper UML::Node::getDaComponent_Failure_MTTF() : NFP_Duration {
 
 	var failureInformation := self.getValue(self.getDaComponent(),"failure").oclAsSet()->flatten()->selectByKind(DAM_COMPLEX_DATA_TYPES::DaFailure)->asSequence()->first();
 	return failureInformation.MTTF->asSequence()->first().toString().toNfpDuration();
+}
+
+helper UML::Node::getHadoopComputationNode_Failure_MTTF() : NFP_Duration {
+	if(self.getHadoopComputationNode()=null){
+		return null;
+	};
+	
+	var failureInformation := self.getValue(self.getHadoopComputationNode(),"failure").oclAsSet()->flatten()->selectByKind(DAM_COMPLEX_DATA_TYPES::DaFailure)->asSequence()->first();
+	return failureInformation.MTTF->asSequence()->first().toString().toNfpDuration();
+
+}
+
+helper UML::Node::getHadoopComputationNode_Repair_MTTR() : NFP_Duration {
+	if(self.getHadoopComputationNode()=null){
+		return null;
+	};
+	
+	var repairInformation := self.getValue(self.getHadoopComputationNode(),"repair").oclAsSet()->flatten()->selectByKind(DAM_COMPLEX_DATA_TYPES::DaRepair)->asSequence()->first();
+	return repairInformation.MTTR->asSequence()->first().toString().toNfpDuration();
 }
