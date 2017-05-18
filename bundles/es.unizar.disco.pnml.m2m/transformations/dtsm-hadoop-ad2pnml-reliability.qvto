@@ -28,7 +28,7 @@ main() {
 	
 	ad.nodes()->flatten()[Node] -> map node2subnet();
 	
-	assert fatal (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found HadoopComputationNodes well defined in this Storm Topology");
+	assert fatal (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found HadoopComputationNodes well defined in this Topology");
 		
 	
 	//If not MTTR (if MTTR is possible in this system it will require to extend the transformation)
@@ -186,7 +186,7 @@ when {self.getHadoopComputationNode().oclIsUndefined().not();}
 	//place failed
 	var placeFailed := self.map blackout2place();
 	self.map trace(placeFailed, getPlaceAllExpelled());
-	//	log ("Created Place AllExpulsed with marking (hopefully undefined): "); 
+	//log ("Created Place AllExpulsed with marking (hopefully undefined): "); 
 	//log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
 	
 	//arc from transition to fail to place failed
@@ -215,7 +215,11 @@ when {self.getHadoopComputationNode().oclIsUndefined().not();
 }{
 	
 	self.map virtualMachineFailure2subnet();
+	assert warning (resolve(PNML::Place)->size()>1) with log ("there were not created at least 2 places for the VM failures. Created " + resolve(p:Place)->size().toString());
+	assert warning (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found any place with initial marking after VM failure transformation");
 	self.map spotVMexpulsion2subnet();
+	assert warning (resolve(p:Place)->size()>3) with log ("there were not created at least 4 places for the VM failures and expulsion. Created " + resolve(p:Place)->size().toString());
+	assert warning (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found any place with initial marking after VM failure and expulsion transformations");
 	
 }
 

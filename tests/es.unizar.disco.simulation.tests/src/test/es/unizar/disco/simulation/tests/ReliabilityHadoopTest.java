@@ -53,7 +53,7 @@ public class ReliabilityHadoopTest extends AbstractTest {
 	final static String DEFINITION_FILENAME = "f388179a-3dfc-4567-a002-f786fd9bd813";
 	final static String INVOCATION_FILENAME = "9261cd96-6ea6-4e44-b003-253fe8d4cbb7";
 
-	final static String UML_FILENAME = "reliabilibyHadoop";
+	final static String UML_FILENAME = "reliabilityHadoop";
 
 
 	private final String FAILURE = "failure";
@@ -74,9 +74,9 @@ public class ReliabilityHadoopTest extends AbstractTest {
 		assertTrue("The " + UML_FILENAME + " model does not contain zookeeper stereotype", contains(model.getPackagedElements(),"HadoopComputationNode"));
 		Element computNode = getStereotypedElement(model.getPackagedElements(),"HadoopComputationNode");
 		assertTrue("The HadoopComputationNode stereotype does not contatin  information about blackout ",
-				(((DaFailure)computNode.getValue(computNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"), "failure")).getMTTF().get(0)!=null));
+				(((List<DaFailure>)computNode.getValue(computNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"), "failure")).get(0).getMTTF().get(0)!=null));
 		assertTrue("The HadoopComputationNode stereotype does not contatin  informationabout blackout recovering", 
-				(((DaRepair)computNode.getValue(computNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"), "repair")).getMTTR().get(0)!=null));
+				(((List<DaRepair>)computNode.getValue(computNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"), "repair")).get(0).getMTTR().get(0)!=null));
 	}
 	
 
@@ -90,15 +90,16 @@ public class ReliabilityHadoopTest extends AbstractTest {
 		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
 				invocation.getVariableConfiguration().toPrimitiveAssignments());
 
-
 		IStatus status = result.getStatus();
-		assertNotEquals("Status of translation was ERROR", IStatus.ERROR, status.getSeverity());
+		System.out.println("STatus of translation was: " + status.getSeverity() + "   " + status.getMessage() );
+		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
+		assertNotEquals("Status of translation was ERROR with message " + status.getMessage(), IStatus.ERROR, status.getSeverity());
 		assertNotNull("The translated model in result was null", result.getModel());
 		assertFalse("The result had a list of translated models, but its size was 0", result.getModel().size() == 0);
 		assertNotNull("The first element in the list of translated models was null", result.getModel().get(0));
 		assertTrue("The generated net did not contain the expected structure information", resultIsMeaningful(result));
 
-		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
+		
 	}
 
 	
