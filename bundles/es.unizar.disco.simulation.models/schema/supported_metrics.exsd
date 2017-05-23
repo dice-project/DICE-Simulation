@@ -122,7 +122,7 @@
          <attribute name="toolResult" type="string" use="required">
             <annotation>
                <documentation>
-                  ToolResult kind that this Calculator is hable to process.
+                  ToolResult kind that this Calculator is able to process.
                </documentation>
                <appInfo>
                   <meta.attribute kind="java" basedOn=":es.unizar.disco.simulation.models.toolresult.ToolResult"/>

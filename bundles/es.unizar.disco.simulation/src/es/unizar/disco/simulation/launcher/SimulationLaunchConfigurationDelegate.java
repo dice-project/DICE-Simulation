@@ -52,10 +52,12 @@ import es.unizar.disco.simulation.simulators.SimulationException;
 public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
 	@Override
-	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
+	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
+			throws CoreException {
 
 		// Create submonitor with unknown worked
-		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.SimulationLaunchConfigurationDelegate_simulatingTaskTilte, IProgressMonitor.UNKNOWN);
+		SubMonitor subMonitor = SubMonitor.convert(monitor,
+				Messages.SimulationLaunchConfigurationDelegate_simulatingTaskTilte, IProgressMonitor.UNKNOWN);
 
 		final SimulationDefinition definition = reifySimulationDefinition(configuration);
 
@@ -65,8 +67,8 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				MessageFormat.format("Simulation ''{0}'' finished with errors", definition.getIdentifier()), null);
 
 		try {
-			controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID,
-					MessageFormat.format("Validating analizable model for simulation definition ''{0}''...", definition.getIdentifier())));
+			controllingProcess.log(new Status(IStatus.INFO, DiceSimulationPlugin.PLUGIN_ID, MessageFormat.format(
+					"Validating analizable model for simulation definition ''{0}''...", definition.getIdentifier())));
 
 			IStatus validateStatus = validateAnalyzableModel(definition);
 
@@ -80,7 +82,6 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 			// Set the remaining ticks
 			subMonitor.setWorkRemaining(definition.getInvocations().size());
 
-
 			for (int i = 0; i < definition.getInvocations().size(); i++) {
 
 				SimulationInvocation invocation = definition.getInvocations().get(i);
@@ -93,7 +94,8 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				try {
 					final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
 
-					subMonitor.subTask(MessageFormat.format("Launching Simulation {0} out of {1}", i + 1, definition.getInvocations().size()));
+					subMonitor.subTask(MessageFormat.format("Launching Simulation {0} out of {1}", i + 1,
+							definition.getInvocations().size()));
 
 					invocation.setStart(Calendar.getInstance().getTime());
 
@@ -102,29 +104,32 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 					}
 
 					if (simulator == null) {
-						throw new SimulationException(
-								MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError, definition.getBackend()));
+						throw new SimulationException(MessageFormat.format(
+								Messages.SimulationLaunchConfigurationDelegate_simulatorNotFoundError,
+								definition.getBackend()));
 					}
 					invocation.setStatus(SimulationStatus.RUNNING);
 
-				// @formatter:off
-				Process simulationProcess = simulator.simulate(
-						invocation.getIdentifier(),
-						invocation.getAnalyzableModel(),
-						invocation.getTraceSet(),
-						definition.getParameters().map(),
-						subMonitor.newChild(1));
-				// @formatter:on
+					// @formatter:off
+					Process simulationProcess = simulator.simulate(invocation.getIdentifier(),
+							invocation.getAnalyzableModel(), invocation.getTraceSet(), definition.getParameters().map(),
+							subMonitor.newChild(1));
+					// @formatter:on
 
 					IProcess runtimeProcess = DebugPlugin.newProcess(launch, simulationProcess,
-							MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, invocation.getIdentifier()), null);
-					runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP, Calendar.getInstance().getTime().toString());
+							MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName,
+									invocation.getIdentifier()),
+							null);
+					runtimeProcess.setAttribute(DebugPlugin.ATTR_LAUNCH_TIMESTAMP,
+							Calendar.getInstance().getTime().toString());
 					runtimeProcess.setAttribute(DebugPlugin.ATTR_ENVIRONMENT, definition.getParameters().toString());
 
-				// @formatter:off
-				ZonedDateTime universalTime = OffsetDateTime.ofInstant(definition.getMaxExecutionTime().toInstant(), ZoneOffset.systemDefault()).atZoneSimilarLocal(ZoneOffset.UTC);
-				registerKillHook(invocation, simulationProcess, universalTime.toInstant().toEpochMilli());
-				// @formatter:on
+					// @formatter:off
+					ZonedDateTime universalTime = OffsetDateTime
+							.ofInstant(definition.getMaxExecutionTime().toInstant(), ZoneOffset.systemDefault())
+							.atZoneSimilarLocal(ZoneOffset.UTC);
+					registerKillHook(invocation, simulationProcess, universalTime.toInstant().toEpochMilli());
+					// @formatter:on
 
 					simulationProcess.waitFor();
 					if (simulationProcess.exitValue() != 0) {
@@ -132,8 +137,9 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 							invocation.setStatus(SimulationStatus.KILLED);
 						}
 						invocationStatus.add(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
-								MessageFormat.format("Simulation process for invocation ''{0}'' exited with error ''{1}''", invocation.getIdentifier(),
-										simulationProcess.exitValue())));
+								MessageFormat.format(
+										"Simulation process for invocation ''{0}'' exited with error ''{1}''",
+										invocation.getIdentifier(), simulationProcess.exitValue())));
 					}
 					if (simulator.getToolResult() != null) {
 						invocation.setToolResult(simulator.getToolResult());
@@ -142,7 +148,8 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				} catch (InterruptedException e) {
 					invocation.setStatus(SimulationStatus.KILLED);
 				} catch (Throwable t) {
-					invocationStatus.add(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, t.getLocalizedMessage(), t));
+					invocationStatus
+							.add(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID, t.getLocalizedMessage(), t));
 				} finally {
 					invocation.setEnd(Calendar.getInstance().getTime());
 					globalStatus.merge(invocationStatus);
@@ -176,7 +183,8 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 		simulationDefinition.setAutoSync(true);
 
-		SimulationDefinitionConfigurationHandler handler = SimulationDefinitionConfigurationHandler.create(simulationDefinition);
+		SimulationDefinitionConfigurationHandler handler = SimulationDefinitionConfigurationHandler
+				.create(simulationDefinition);
 		handler.initializeResourceUri(configuration);
 		handler.initializeInputVariables(configuration);
 		handler.initializeOutputVariables(configuration);
@@ -243,30 +251,34 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 			// Look for the first calculator that is able to handle
 			// the measure for the given scenario type
-			if(DiceMetricsUtils.metricComputedBelongsToSelectedNFPtypeToCompute(invocation.getDefinition().getNfpToCompute(), measureDefinition.getMeasure())){
-			MeasureCalculator calculator = null;
-			for (String scenarioName : invocation.getDefinition().getScenarioStereotypes()) {
-				calculator = DiceMetricsUtils.getCalculator((Element) measuredElement, measureDefinition.getMeasure(), scenarioName,
-						invocation.getToolResult().getClass());
-				if (calculator != null) {
-					break;
+			if (DiceMetricsUtils.metricComputedBelongsToSelectedNFPtypeToCompute(
+					invocation.getDefinition().getNfpToCompute(), measureDefinition.getMeasure())) {
+				MeasureCalculator calculator = null;
+				for (String scenarioName : invocation.getDefinition().getScenarioStereotypes()) {
+					calculator = DiceMetricsUtils.getCalculator((Element) measuredElement,
+							measureDefinition.getMeasure(), scenarioName, invocation.getToolResult().getClass());
+					if (calculator != null) {
+						break;
+					}
 				}
-			}
 
-			if (calculator == null) {
-				status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
-						MessageFormat.format("Unable to find a ''{0}'' calculator for ''{1}'' ", measureDefinition.getMeasure(), measuredElement)));
-			} else {
-				DomainMeasure domainMeasure = calculator.calculate(measuredElement, measureDefinition, invocation.getToolResult(), invocation.getTraceSet());
-				if (domainMeasure == null) {
+				if (calculator == null) {
 					status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
-							MessageFormat.format("Unable to calculate measure ''{0}'' for ''{1}'' ", measureDefinition.getMeasure(), measuredElement)));
+							MessageFormat.format("Unable to find a ''{0}'' calculator for ''{1}'' ",
+									measureDefinition.getMeasure(), measuredElement)));
 				} else {
-					domainMeasure.setDefinition(measureDefinition);
-					invocation.getResult().getMeasures().add(domainMeasure);
+					DomainMeasure domainMeasure = calculator.calculate(measuredElement, measureDefinition,
+							invocation.getToolResult(), invocation.getTraceSet());
+					if (domainMeasure == null) {
+						status.merge(new Status(IStatus.ERROR, DiceSimulationPlugin.PLUGIN_ID,
+								MessageFormat.format("Unable to calculate measure ''{0}'' for ''{1}'' ",
+										measureDefinition.getMeasure(), measuredElement)));
+					} else {
+						domainMeasure.setDefinition(measureDefinition);
+						invocation.getResult().getMeasures().add(domainMeasure);
+					}
 				}
 			}
-		}
 		}
 
 		return status;

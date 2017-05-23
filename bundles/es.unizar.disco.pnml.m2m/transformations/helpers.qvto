@@ -147,7 +147,7 @@ helper UML::Element::getHadoopWorkloadEvent() : UML::Stereotype {
 }
 
 helper UML::Element::getHadoopComputationNode() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"))) { 
 		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode");
 	};
 	return null;	

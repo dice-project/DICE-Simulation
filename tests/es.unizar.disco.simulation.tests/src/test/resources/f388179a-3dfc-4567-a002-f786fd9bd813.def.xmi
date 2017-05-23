@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="ASCII"?>
+<definition:SimulationDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:definition="http://es.unizar.disco/simulation/definition/1.0" identifier="f388179a-3dfc-4567-a002-f786fd9bd813" maxExecutionTime="1970-01-01T01:00:00.000+0100" measuresToCompute="//@declaredMeasures.3 //@declaredMeasures.10" backend="es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator" activeConfigurations="//@possibleConfigurations.0" nfpToCompute="RELIABILITY">
+  <invocations href="9261cd96-6ea6-4e44-b003-253fe8d4cbb7.inv.xmi#9261cd96-6ea6-4e44-b003-253fe8d4cbb7"/>
+  <parameters key="-M" value="2000"/>
+  <parameters key="-m" value="1000"/>
+  <parameters key="-s" value="31415"/>
+  <parameters key="-t" value="1000"/>
+  <parameters key="binary_file_path" value="/usr/local/GreatSPN/bin/WNSIM"/>
+  <parameters key="-a" value="5"/>
+  <parameters key="-c" value="95"/>
+  <parameters key="-f" value="1000"/>
+  <activeScenario href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+  <inputVariables name="redT3" assignments="//@possibleConfigurations.0/@assignments.0">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.0"/>
+  </inputVariables>
+  <inputVariables name="nR1" assignments="//@possibleConfigurations.0/@assignments.1">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.1"/>
+  </inputVariables>
+  <inputVariables name="nP1" assignments="//@possibleConfigurations.0/@assignments.2">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.2"/>
+  </inputVariables>
+  <inputVariables name="nR3" assignments="//@possibleConfigurations.0/@assignments.3">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.3"/>
+  </inputVariables>
+  <inputVariables name="nR2" assignments="//@possibleConfigurations.0/@assignments.4">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.4"/>
+  </inputVariables>
+  <inputVariables name="nP3" assignments="//@possibleConfigurations.0/@assignments.5">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.5"/>
+  </inputVariables>
+  <inputVariables name="nP2" assignments="//@possibleConfigurations.0/@assignments.6">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.6"/>
+  </inputVariables>
+  <inputVariables name="mapT1" assignments="//@possibleConfigurations.0/@assignments.7">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.7"/>
+  </inputVariables>
+  <inputVariables name="mapT3" assignments="//@possibleConfigurations.0/@assignments.8">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.8"/>
+  </inputVariables>
+  <inputVariables name="mapT2" assignments="//@possibleConfigurations.0/@assignments.9">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.9"/>
+  </inputVariables>
+  <inputVariables name="redT2" assignments="//@possibleConfigurations.0/@assignments.10">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.10"/>
+  </inputVariables>
+  <inputVariables name="redT1" assignments="//@possibleConfigurations.0/@assignments.11">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.11"/>
+  </inputVariables>
+  <inputVariables name="nM2" assignments="//@possibleConfigurations.0/@assignments.12">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.12"/>
+  </inputVariables>
+  <inputVariables name="nM1" assignments="//@possibleConfigurations.0/@assignments.13">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.13"/>
+  </inputVariables>
+  <inputVariables name="nM3" assignments="//@possibleConfigurations.0/@assignments.14">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.14"/>
+  </inputVariables>
+  <inputVariables name="nC2" assignments="//@possibleConfigurations.0/@assignments.15">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.15"/>
+  </inputVariables>
+  <inputVariables name="th1" assignments="//@possibleConfigurations.0/@assignments.16">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.16"/>
+  </inputVariables>
+  <inputVariables name="nC1" assignments="//@possibleConfigurations.0/@assignments.17">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.17"/>
+  </inputVariables>
+  <inputVariables name="th3" assignments="//@possibleConfigurations.0/@assignments.18">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.18"/>
+  </inputVariables>
+  <inputVariables name="nC3" assignments="//@possibleConfigurations.0/@assignments.19">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.19"/>
+  </inputVariables>
+  <inputVariables name="th2" assignments="//@possibleConfigurations.0/@assignments.20">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.20"/>
+  </inputVariables>
+  <domainResource uri="reliabilityHadoop.uml"/>
+  <outputVariables name="mttf"/>
+  <outputVariables name="availability"/>
+  <outputVariables name="RT1"/>
+  <outputVariables name="RT3"/>
+  <outputVariables name="RT2"/>
+  <outputVariables name="U"/>
+  <outputVariables name="U1"/>
+  <outputVariables name="T1"/>
+  <outputVariables name="U2"/>
+  <outputVariables name="T2"/>
+  <outputVariables name="U3"/>
+  <outputVariables name="T3"/>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$U1"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$U2"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$U3"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="ssAvail">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$availability"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="respT">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$RT1"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="ms"/>
+  </declaredMeasures>
+  <declaredMeasures measure="respT">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$RT2"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="ms"/>
+  </declaredMeasures>
+  <declaredMeasures measure="respT">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$RT3"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="ms"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$T1"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$T2"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$T3"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="failure">
+    <measuredElement href="reliabilityHadoop.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$mttf"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="reliabilityHadoop.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$U"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <possibleConfigurations>
+    <assignments value="//@inputVariables.0/@values.0" variable="redT3"/>
+    <assignments value="//@inputVariables.1/@values.0" variable="nR1"/>
+    <assignments value="//@inputVariables.2/@values.0" variable="nP1"/>
+    <assignments value="//@inputVariables.3/@values.0" variable="nR3"/>
+    <assignments value="//@inputVariables.4/@values.0" variable="nR2"/>
+    <assignments value="//@inputVariables.5/@values.0" variable="nP3"/>
+    <assignments value="//@inputVariables.6/@values.0" variable="nP2"/>
+    <assignments value="//@inputVariables.7/@values.0" variable="mapT1"/>
+    <assignments value="//@inputVariables.8/@values.0" variable="mapT3"/>
+    <assignments value="//@inputVariables.9/@values.0" variable="mapT2"/>
+    <assignments value="//@inputVariables.10/@values.0" variable="redT2"/>
+    <assignments value="//@inputVariables.11/@values.0" variable="redT1"/>
+    <assignments value="//@inputVariables.12/@values.0" variable="nM2"/>
+    <assignments value="//@inputVariables.13/@values.0" variable="nM1"/>
+    <assignments value="//@inputVariables.14/@values.0" variable="nM3"/>
+    <assignments value="//@inputVariables.15/@values.0" variable="nC2"/>
+    <assignments value="//@inputVariables.16/@values.0" variable="th1"/>
+    <assignments value="//@inputVariables.17/@values.0" variable="nC1"/>
+    <assignments value="//@inputVariables.18/@values.0" variable="th3"/>
+    <assignments value="//@inputVariables.19/@values.0" variable="nC3"/>
+    <assignments value="//@inputVariables.20/@values.0" variable="th2"/>
+  </possibleConfigurations>
+  <scenarioStereotypes>DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario</scenarioStereotypes>
+</definition:SimulationDefinition>

@@ -28,3 +28,9 @@ Files
 6a008097-ebcb-42bf-99ca-05ecd190c14b.inv.xmi
 165d07a2-a8a0-4359-83c6-822b40f479cc.def.xmi
 are used for the reliability DTSM Storm tests
+
+Files
+9261cd96-6ea6-4e44-b003-253fe8d4cbb7.inv.xmi
+f388179a-3dfc-4567-a002-f786fd9bd813.def.xmi
+reliabilityHadoop.uml
+are used for teh reliability DTSM Hadoop tests
