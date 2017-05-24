@@ -147,10 +147,10 @@
       </AnalyzableResourceBuilder>
       <AnalyzableResourceBuilder
             analyzableProperty="PERFORMANCE"
-            builder="es.unizar.disco.pnml.m2m.builder.HadoopActivityDiagram2PnmlResourceBuilder"
+            builder="es.unizar.disco.pnml.m2m.builder.SparkActivityDiagram2PnmlResourceBuilder"
             metaclass="org.eclipse.uml2.uml.Activity"
             priority="4"
-            scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario">
+            scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario">
       </AnalyzableResourceBuilder>
    </extension>
 </plugin>
