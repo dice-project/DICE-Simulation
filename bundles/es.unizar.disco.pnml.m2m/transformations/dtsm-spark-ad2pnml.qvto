@@ -258,30 +258,19 @@ mapping UML::ActivityPartition::devices2resources2() when {
 */
 
 mapping UML::Activity::activityDiagram2subnet() {
-
-	var delay := self.getSparkWorkloadEvent_sparkExtDelay();
-	/* var numElem := self.getSparkWorkloadEvent_sparkPopulation();
-	assert fatal (numElem.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numElem.value().toString() + "'"); */
-		
 	var place_start := self.map activityDiagram2placeStart();
-	//var place_end := self.map activityDiagram2placeEnd();
-
 	place_start.initialMarking := object PNML::PTMarking {
 			text := 1;
 	};
 	
-	//activityDiagram2immediateTransition
 	var trans_start := self.map activityDiagram2immTransStart();
 	var trans_end := self.map activityDiagram2immTransEnd();
 	
 	var arc_1 := map arc(place_start, trans_start);
-	//var arc_2 := map arc(place_end, trans_end);
 	var arc_3 := map arc(trans_end, place_start);
 
 	// Add tracing information
-	//self.map trace(place_start, "initialNode2subNet");
 	self.map trace(place_start, getPlaceConcurrentUsersTrace());
-	//self.map trace(place_end, "activityDiagram2subNet");
 	self.map trace(trans_start, "activityDiagram2subNet");
 	//self.map trace(trans_end, "activityDiagram2subNet");
 	self.map trace(trans_end, getPlaceConcurrentUsersTrace());
@@ -320,36 +309,6 @@ mapping UML::InitialNode::initialNode2subNet()
 	self.map trace(trans_think, "initialNode2subNet");
 }
 
-mapping UML::InitialNode::initialNode2subNet2() 
-	when { self.getSparkWorkloadEvent().oclIsUndefined().not() } {
-
-	var delay := self.getSparkWorkloadEvent_sparkExtDelay();
-	/* var numElem := self.getSparkWorkloadEvent_sparkPopulation();
-	assert fatal (numElem.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numElem.value().toString() + "'"); */
-		
-	var place_start := self.map activityNode2placeStart();
-	var place_output := self.map activityNode2placeOutput();
-
-	/***/
-	place_start.initialMarking := object PNML::PTMarking {
-			text := 1;
-	};
-	/***/
-	
-	var trans_think := self.map activityNode2immediateTransition();
-	trans_think.toolspecifics += expTransitionToolInfo(1 / delay.value());
-	trans_think.toolspecifics += infServerTransitionToolInfo();
-	
-	var arc_1 := map arc(place_start, trans_think);
-	var arc_2 := map arc(trans_think, place_output);
-
-	// Add tracing information
-	//self.map trace(place_start, "initialNode2subNet");
-	self.map trace(place_start, getPlaceConcurrentUsersTrace());
-	self.map trace(place_output, "initialNode2subNet");
-	self.map trace(trans_think, "initialNode2subNet");
-}
-
 mapping UML::ActivityNode::activityNode2subNet() disjuncts 
 UML::ActivityNode::mapNode2subNet,
 UML::ActivityNode::reduceNode2subNet {};
@@ -362,8 +321,7 @@ UML::ActivityNode::reduceNode2subNet {};
 
 mapping UML::ActivityNode::mapNode2subNet()
 	when { (self.getSparkMap().oclIsUndefined().not()) and
-			(self.incoming->isEmpty().not())/* and
-			(self.getInitialNode().getSparkWorkloadEvent().oclIsUndefined().not())*/ } {
+			(self.incoming->isEmpty().not()) } {
 
 		/* Number of parallel tasks a Map is divided into */
 		var numTasks:= self.numTasks;
@@ -396,8 +354,7 @@ mapping UML::ActivityNode::mapNode2subNet()
 		
 		/* The arcs connecting the trans_generate -> place_wait
 								   place_done -> trans_join
-		create/consume as many tokens in the place_wait as the
-		 maximum number of available tokens of color <<Map>>  */
+		consume all the tokens */
 		/*arc_1.inscription := arc_map_numTasks;
 		arc_6.inscription := arc_map_numTasks;*/
 		arc_1.inscription := arc_map_numTasks;
@@ -417,9 +374,7 @@ mapping UML::ActivityNode::mapNode2subNet()
 
 mapping UML::ActivityNode::reduceNode2subNet()
 	when { (self.getSparkReduce().oclIsUndefined().not()) and
-			(self.incoming->isEmpty().not())/* and
-			(self.getInitialNode().getSparkWorkloadEvent().oclIsUndefined().not())*/ } {  
-			//(getInitialNode().getSparkWorkloadEvent().oclIsUndefined().not()) } {
+			(self.incoming->isEmpty().not()) } { 
 				
 		var redType := self.getReduceType();
 		 
@@ -454,8 +409,7 @@ mapping UML::ActivityNode::reduceNode2subNet()
 		
 		/* The arcs connecting the trans_generate -> place_wait
 								   place_done -> trans_join
-		create/consume as many tokens in the place_wait as the
-		 maximum number of available tokens of color <<Map>>  */
+		consume all the tokens */
 		/*arc_1.inscription := arc_red_numTasks;
 		arc_6.inscription := arc_red_numTasks;*/
 		arc_1.inscription := arc_red_numTasks;
@@ -493,34 +447,6 @@ mapping UML::FinalNode::model2closedNet() {
 	var place_output_red := red_phase.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
 
 	var arc := map arc(place_output_red, activity_trans_end);	
-}
-	
-mapping UML::FinalNode::model2closedNet2() {
-	
-	var source_list := self.incoming->asSequence();
-	assert fatal (source_list->size() = 1)
-	with log('A final node only accepts a single incoming ControlFlow arc');
-		
-	/* Close the net between the FinalNode and the InitialNode */
-	//var initial_node := getInitialNode(); 
-	var initial_node := self.getInitialNode();
-	var initial_place := initial_node.resolveoneIn(UML::ActivityNode::activityNode2placeStart);
-
-	var source := source_list->first().source;
-	//var red_phase_list;
-	var red_phase := source;
-	var place_output_red := red_phase.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
-				
-	/* Create an immediate transition between the last place_output and the initial_place
-	TimedTransition -> Place -> ImmTransition */
-	var trans_end := self.map activityNode2immediateTransition();
-
-	var arc_1 := map arc(place_output_red, trans_end);
-	var arc_2 := map arc(trans_end, initial_place);	
-			
-	// Add tracing information
-	self.map trace(trans_end, "model2closedNet");//
-	ad.scenario().map trace(trans_end, "model2closedNet");
 }
 
  /*************************************************/
@@ -573,13 +499,7 @@ mapping UML::JoinNode::joinNode2subNet()
 	
 	var trans_gen := self.map activityNode2immTransGen();
 	var place_output := self.map activityNode2placeOutput();	
-	map arc(trans_gen, place_output);	
-	
-	/*var source_list := self.incoming->asSequence();
-	source_list->forEach (source){
-		var place_in_output := source.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
-		map arc(place_in_output, trans_gen);
-	}*/
+	map arc(trans_gen, place_output);
 	
 	// Add tracing information
 	self.map trace(trans_gen, "joinNode2subNet");
@@ -597,12 +517,6 @@ UML::ControlFlow::forkControlFlow2arc {};
 	place representing the output buffer of the previous bolt
 */
 mapping UML::ControlFlow::basicControlFlow2arc() when {
-	/*self.source.oclIsKindOf(ActivityNode) and
-	(self.source.getSparkMap().oclIsUndefined().not() or
-	 self.source.getSparkReduce().oclIsUndefined().not()) and
-	self.target.oclIsKindOf(ActivityNode) and
-	self.target.oclIsKindOf(InitialNode).not() and
-	self.target.oclIsKindOf(FinalNode).not()*/
 	self.source.oclIsKindOf(ForkNode).not() and
 	self.target.oclIsKindOf(ActivityNode) and
 	self.target.oclIsKindOf(InitialNode).not() and
@@ -1236,37 +1150,6 @@ helper UML::Element::getReduceType() : DBET::SparkReduce {
 }
 
 /******************************************************************/
-/*helper UML::Element::requires_input_Shuffle() : Boolean {
-
-	var requires := false;
-	if (self.getSparkMap().oclIsUndefined().not()) {
-		var mapType := self.getMapType(); 
-		requires := self.isSetOperation() or
-				    self.isByKeyOperation();
-	}
-	else if (self.getSparkReduce().oclIsUndefined().not()){
-		//// TODO
-	};
-	
-	return requires;
-}
-
-helper UML::Element::requires_nTasks() : Boolean {
-
-	var requires := false;
-	if (self.getSparkMap().oclIsUndefined().not()) {
-		var mapType := self.getMapType(); 
-		requires := self.isSetOperation() or
-				    self.isByKeyOperation();
-	}
-	else if (self.getSparkReduce().oclIsUndefined().not()){
-		//// TODO
-	};
-	
-	return requires;
-}*/
-
-/******************************************************************/
 query isSetOperation(in mapType : DBET::SparkMap) : Boolean {
 	return (mapType = DBET::SparkMap::RDDSetOperation) or 
 		   (mapType = DBET::SparkMap::Union) or 
@@ -1301,7 +1184,7 @@ helper UML::Element::isSetOperation() : Boolean {
 	}/* else 	if (self.getSparkReduce().oclIsUndefined().not()) {
 		var redType := self.getReduceType(); 
 		setOperation := isSetOperation(redType);
-	}*/;	
+	}*/;
 	return setOperation;
 }
 
@@ -1467,7 +1350,6 @@ helper UML::Element::getSparkWorkloadEvent_sparkExtDelay() : NFP_Duration {
 	assert warning (extDelay->size() >= 1)
 		with log ("Unexpected number of 'sparkExtDelay' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
-	//return extDelay.toNfpDuration();
 	return extDelay.toNfpDuration()->
 			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
 			asSequence()->first();
