@@ -444,7 +444,7 @@
             <styles xmi:type="notation:TitleStyle" xmi:id="_UEHMoRXMEeaO9pVQNhbfJw"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UEHMohXMEeaO9pVQNhbfJw"/>
           </children>
-          <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_UEEJURXMEeaO9pVQNhbfJw" diagramLink="_Nay5EGqsEeaht-ghhLWJ8w"/>
+          <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_UEEJURXMEeaO9pVQNhbfJw"/>
           <element xmi:type="uml:ActivityPartition" href="model.uml#_UD_Q0BXMEeaO9pVQNhbfJw"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_UEEJUhXMEeaO9pVQNhbfJw" x="118" y="-38" width="813" height="375"/>
         </children>
@@ -532,7 +532,7 @@
               <children xmi:type="notation:DecorationNode" xmi:id="_llxQFBXNEeaO9pVQNhbfJw" type="OpaqueAction_FloatingNameLabel">
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_llxQFRXNEeaO9pVQNhbfJw" y="5"/>
               </children>
-              <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_llxQERXNEeaO9pVQNhbfJw" diagramLink="_xXJREKvmEeaQ89E5RJevLA"/>
+              <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_llxQERXNEeaO9pVQNhbfJw"/>
               <element xmi:type="uml:OpaqueAction" href="model.uml#_lloGIBXNEeaO9pVQNhbfJw"/>
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_llxQEhXNEeaO9pVQNhbfJw" x="725" y="15" width="91"/>
             </children>
@@ -566,7 +566,7 @@
             </children>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jcLM92qpEeadLpmgngveUw"/>
           </children>
-          <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_jcLM8WqpEeadLpmgngveUw" diagramLink="_JnY44GqsEeaht-ghhLWJ8w"/>
+          <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_jcLM8WqpEeadLpmgngveUw"/>
           <element xmi:type="uml:ActivityPartition" href="model.uml#_jbq2oGqpEeadLpmgngveUw"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jcLM8mqpEeadLpmgngveUw" x="118" y="348" width="871" height="247"/>
         </children>

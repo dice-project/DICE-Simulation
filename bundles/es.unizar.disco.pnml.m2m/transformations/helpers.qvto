@@ -160,6 +160,58 @@ helper UML::Element::getHadoopScenario() : UML::Stereotype {
 	return null;	
 }
 
+/* Spark Elements */
+
+helper UML::Element::getSparkOperation() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkOperation"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkOperation");
+	};
+	return null;	
+}
+
+helper UML::Element::getSparkMap() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkMap"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkMap");
+	};
+	return null;	
+}
+
+helper UML::Element::getSparkReduce() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkReduce"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkReduce");
+	};
+	return null;	
+}
+
+helper UML::Element::getSparkForEach() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkForEach"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkForEach");
+	};
+	return null;	
+}
+
+helper UML::Element::getSparkWorkloadEvent() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkWorkloadEvent"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkWorkloadEvent");
+	};
+	return null;	
+}
+
+helper UML::Element::getSparkNode() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode");
+	};
+	return null;	
+}
+
+helper UML::Element::getSparkScenario() : UML::Stereotype {
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario");
+	};
+	return null;	
+}
+
+
 /*******************************************************************************
   ToolInfo utilities
 *******************************************************************************/

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:datatypes="http://es.unizar.disco/simulation/datatypes/1.0">
+  <datatypes:PrimitiveVariableAssignment
+      variable="$nC1"
+      value="100"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$th1"
+      value="1"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$map1T"
+      value="11"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$map2T"
+      value="12"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$groupT"
+      value="6"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$countT"
+      value="7"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$nP1"
+      value="20"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$nM1"
+      value="20"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$nAssignedCores"
+      value="6"/>
+  <datatypes:PrimitiveVariableAssignment
+      variable="$nAssignedMemory"
+      value="15"/>
+</xmi:XMI>

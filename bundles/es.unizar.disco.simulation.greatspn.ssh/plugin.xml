@@ -215,6 +215,11 @@
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
          <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+         <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.TotalUtilizationCalculatorHadoop"
                scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
@@ -312,6 +317,46 @@
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorStorm"
                scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario#throughput"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+            tag="throughput">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculatorSpark"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario#respT"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+            tag="respT">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActivityResponseTimeCalculatorSpark"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario#utilization"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+            tag="utilization">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorSparkScenario"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode#utilization"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode"
+            tag="utilization">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
       </Metric>

@@ -1,0 +1,1473 @@
+import es.unizar.disco.pnml.utils.PnmlDiceUtils;
+
+import helpers;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
+modeltype PNML uses 'http:///ptnet.ecore';
+modeltype TYPES uses 'http://es.unizar.disco/simulation/datatypes/1.0';
+modeltype TRACE uses 'http://es.unizar.disco/simulation/traces/1.0';
+modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+modeltype DBET uses 'http://es.unizar.disco.dice/libraries/Basic_Enumeration_Types/1.0';	
+
+transformation ad2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces : TRACE); 
+
+/**
+	Main method:
+		1.- Create the root elements (PetriNetDoc, PetriNet, Page)
+		2.- Transform ActivityNodes, creating subnets of places and transitions
+		3.- Transform ControlFlows, linking the previously created subnets
+		4.- Complete transformation with the transformation of the partition and resources
+*/
+main() {
+	// Transform top-level elements
+	ad.scenario().map model2doc();
+	
+	// Transform workload descriptions
+	var initialNodes := ad.scenario().node[UML::InitialNode];
+	assert fatal (initialNodes->size() >= 1) with log ("Only Activities with one or more Initial Nodes are supported");
+	//assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
+	
+	/* Spark Scheduler */
+	//var scheduler := ad.scenario().getSparkScenario_scheduler();
+	
+	
+	/* TODO */
+	/* Test respT calculator
+	   Test utilization scenario calculator */
+	// Transform net contents	
+	ad.scenario()-> map activityDiagram2subnet();
+	
+	//
+	ad.scenario().node[UML::FinalNode] -> inferNumTasks();	
+	//
+	
+	ad.scenario().node[UML::InitialNode] -> map initialNode2subNet();
+	ad.scenario().node[UML::ActivityNode] -> map activityNode2subNet();
+	
+	ad.scenario().node[UML::ForkNode] -> map forkNode2subNet();
+	ad.scenario().node[UML::JoinNode] -> map joinNode2subNet();
+	
+	//ad.scenario().node[UML::DecisionNode] -> map decisionNode2subNet();
+	//ad.scenario().node[UML::MergeNode] -> map mergeNode2subNet();
+	
+	ad.scenario().edge[UML::ControlFlow] -> map controlFlow2tarc();	
+	ad.scenario().node[UML::FinalNode] -> map model2closedNet();
+	
+	// Transform deployment
+	ad.scenario()->map assignedCores2resources();
+	ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition]->asSet() -> map devices2resources();
+    ad->objectsOfType(ActivityPartition)->flatten()[ActivityPartition] -> map partitions2resources();
+
+	// Transform scenario
+	//ad-> map initial();
+	
+	// Set time metadata
+	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
+		log("Base time unit is 's'");
+		log("Base frequency unit is 'Hz'");
+	} else {
+		log("Base time unit is 'tick'");
+		log("Base frequency unit is 'events per tick'");
+	}
+}
+
+/**
+	Create the PetriNetDoc and the PetriNet
+*/
+mapping UML::NamedElement::model2doc() : PNML::PetriNetDoc {
+	nets := self.map model2net();
+}
+
+mapping UML::NamedElement::model2net() : PNML::PetriNet {
+	id := createRandomUniqueId();
+	name := object PNML::Name {
+		text := self.name;
+	};
+	pages := self.map model2page();
+}
+
+/**
+	Create the page
+*/
+mapping UML::NamedElement::model2page() : PNML::Page {
+	id := createRandomUniqueId();
+}
+
+/**
+	Sets the metadata for the base time unit on the PNML file
+*/
+mapping baseTimeUnit(unit : String) {
+	var net := resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet);
+	net.toolspecifics += baseTimeUnitToolInfo(unit);
+}
+
+/*************************************************/
+/**
+	Transforms the Deployment Diagram to a resources place
+*/
+
+mapping UML::ActivityPartition::partitions2resources() 
+when {
+	self.represents.owner.getSparkNode().oclIsUndefined().not()
+}{
+	var containedNodes := ad.objectsOfKind(UML::ActivityNode)->select(node : ActivityNode | self->intersection(node.inPartition)->notEmpty());
+	assert fatal (containedNodes->size() >= 1) with log ("At least a node must be present in partition '" + self.toString() + "'");
+	
+	//var place_resource := self.represents.oclAsType(UML::Artifact).resolveoneIn(UML::NamedElement::devices2resources);
+	var place_resource := self.represents.owner.resolveone(PNML::Place);
+	var place_workload := ad.scenario().resolveoneIn(UML::NamedElement::assignedCores2placeRes);
+	//var place_workload := ad.scenario().resolveoneIn(UML::Activity::assignedCores2resources);
+		
+	// For each partition, we need to modify the subnet that was previously 
+	// generated. We add an intermediate place and a set of arcs connecting
+	// to the immediate/timed transitions of the subnet. For instance,
+	// [T]-->[P']-->[T']
+	// is transformed into:
+	// [T]-->[P']-->[T']
+	//  ^            ^
+	//  |            |
+	//  v            v
+	// [Resources-Place]
+	containedNodes->forEach(node) {	
+		//assert warning (node.getSparkOperation().oclIsUndefined().not())
+		assert warning (node.getSparkMap().oclIsUndefined().not() or
+			  			node.getSparkReduce().oclIsUndefined().not())
+		with log ("Processing a node '" + node.toString() + "' in partition '" + self.toString() + "'");
+		//if (node.getSparkOperation().oclIsUndefined().not()){
+		if ( (node.getSparkMap().oclIsUndefined().not() or
+			  node.getSparkReduce().oclIsUndefined().not()) ){
+			// Get the timed transition 
+			var trans_exec := node.resolveoneIn(UML::ActivityNode::activityNode2timedTransition);
+			assert fatal (trans_exec.oclIsUndefined().not() ) with log ("Could not find a temporal transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
+
+			// Get the resource transition
+			var trans_get_resource := node.resolveoneIn(UML::ActivityNode::activityNode2immTransRes);
+			assert fatal (trans_get_resource.oclIsUndefined().not()) with log ("Could not find a immediate transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
+			assert warning (trans_get_resource.InArcs->size() = 1) with log ("A single place required before the transition '" + trans_get_resource.name.toString() + "', obtained " + trans_get_resource.InArcs->size().toString());
+			assert warning (trans_get_resource.OutArcs->size() = 1) with log ("A single place required after the transition '" + trans_get_resource.name.toString() + "', obtained " + trans_get_resource.OutArcs->size().toString());
+			
+			/* Add an arc between the new resource place and the timed transition */
+			/* Add an arc between the resource transition and the new resource place */
+			var arc_1 := map arc(trans_exec, place_resource);
+			var arc_2 := map arc(place_resource, trans_get_resource);
+			
+			var arc_3 := map arc(trans_exec, place_workload);
+			var arc_4 := map arc(place_workload, trans_get_resource);
+		}
+	};
+	
+	// Add tracing information
+	//self.represents.owner.map trace(place_resource, "partitions2resources");
+}
+
+/*************************************************/
+mapping UML::Activity::assignedCores2resources() when {
+	self.getSparkScenario().oclIsUndefined().not();
+} {
+	/* Create AssignedCores place*/
+	var nCoresWorkload := self.getSparkScenario_nAssignedCores();
+	var place_workload := self.map assignedCores2placeRes();
+	place_workload.initialMarking := object PNML::PTMarking {
+		text := nCoresWorkload.value();
+	};	
+	// Add tracing information
+	//self.map trace(place_workload, "assignedCores2resources");
+	self.map trace(place_workload, getUsers());
+}
+	
+/*************************************************/
+mapping UML::ActivityPartition::devices2resources() when {
+	self.represents.owner.getSparkNode_nCores().oclIsUndefined().not() or
+	self.represents.getGaExecHost().oclIsUndefined().not();
+} {	
+	/* Create device place */
+	var nCoresNodeValue := 1;
+	if (self.represents.owner.getSparkNode_nCores().oclIsUndefined().not()){
+		nCoresNodeValue := self.represents.owner.getSparkNode_nCores().value();	
+	} else {
+		nCoresNodeValue := self.represents.getGaExecHost_resMult().value();
+	};
+		
+	if (self.represents.owner.oclIsKindOf(UML::Artifact)){		
+		if (self.represents.owner.oclAsType(UML::Artifact).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
+
+			var place_resource := self.represents.owner.oclAsType(UML::Artifact).map device2placeRes();
+			place_resource.initialMarking := object PNML::PTMarking {
+				text := nCoresNodeValue;
+			};
+			
+			self.represents.owner.map trace(place_resource, "devices2resources");
+		};
+	};
+	
+	if(self.represents.owner.oclIsKindOf(UML::Node)){	
+			
+		if (self.represents.owner.oclAsType(UML::Node).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
+	
+			var place_resource := self.represents.owner.oclAsType(UML::Node).map device2placeRes();
+			place_resource.initialMarking := object PNML::PTMarking {
+				text := nCoresNodeValue;
+			};
+			
+			self.represents.owner.map trace(place_resource, "devices2resources");
+		};
+	};
+}
+
+mapping UML::ActivityPartition::devices2resources2() when {
+	self.represents.owner.getSparkNode_nCores().oclIsUndefined().not();
+} {
+	/* Create resource place */
+
+	var nCoresWorkload := ad.scenario().getSparkScenario_nAssignedCores();
+	var nCoresNode := self.represents.owner.getSparkNode_nCores();
+	
+	var core := nCoresWorkload;
+	if (nCoresNode.value() < nCoresWorkload.value()){
+		core := nCoresWorkload;	
+	};
+		
+	if (self.represents.owner.oclIsKindOf(UML::Artifact)){		
+		if (self.represents.owner.oclAsType(UML::Artifact).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
+
+			var place := self.represents.owner.oclAsType(UML::Artifact).map device2placeRes();
+			place.initialMarking := object PNML::PTMarking {
+				text := core.value();
+			};
+		};
+	};
+	
+	if(self.represents.owner.oclIsKindOf(UML::Node)){	
+			
+		if (self.represents.owner.oclAsType(UML::Node).resolveIn(UML::NamedElement::device2placeRes)->isEmpty()){
+	
+			var place := self.represents.owner.oclAsType(UML::Node).map device2placeRes();
+			place.initialMarking := object PNML::PTMarking {
+				text := core.value();
+			};
+		};
+	};
+}
+
+/*************************************************/
+/**
+	Transforms an Activity into a pair of [place]-->[transition] ... Subnet ... 
+	                                         ^                               |
+	                                         |--- [transition]<--[place] ---<
+*/
+
+mapping UML::Activity::activityDiagram2subnet() {
+	var place_start := self.map activityDiagram2placeStart();
+	place_start.initialMarking := object PNML::PTMarking {
+			text := 1;
+	};
+	
+	var trans_start := self.map activityDiagram2immTransStart();
+	var trans_end := self.map activityDiagram2immTransEnd();
+	
+	var arc_1 := map arc(place_start, trans_start);
+	var arc_3 := map arc(trans_end, place_start);
+
+	// Add tracing information
+	self.map trace(place_start, getPlaceConcurrentUsersTrace());
+	self.map trace(trans_start, "activityDiagram2subNet");
+	//self.map trace(trans_end, "activityDiagram2subNet");
+	self.map trace(trans_end, getPlaceConcurrentUsersTrace());
+}
+
+/*************************************************/
+/**
+	Transforms an InitialNode into a pair of [place]-->[transition] if the workload pattern
+	is undefined or closed
+*/
+
+mapping UML::InitialNode::initialNode2subNet() 
+	when { self.getSparkWorkloadEvent().oclIsUndefined().not() } {
+
+	var delay := self.getSparkWorkloadEvent_sparkExtDelay();
+	/* var numElem := self.getSparkWorkloadEvent_sparkPopulation();
+	assert fatal (numElem.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numElem.value().toString() + "'"); */
+
+	var activity = ad.scenario();
+	var activity_trans_start := activity.resolveoneIn(UML::Activity::activityDiagram2immTransStart);
+
+	var place_start := self.map activityNode2placeStart();
+	var place_output := self.map activityNode2placeOutput();
+	
+	var trans_think := self.map activityNode2immediateTransition();
+	trans_think.toolspecifics += expTransitionToolInfo(1 / delay.value());
+	trans_think.toolspecifics += infServerTransitionToolInfo();
+	
+	var arc_0 := map arc(activity_trans_start, place_start);
+	var arc_1 := map arc(place_start, trans_think);
+	var arc_2 := map arc(trans_think, place_output);
+
+	// Add tracing information
+	self.map trace(place_start, "initialNode2subNet");
+	self.map trace(place_output, "initialNode2subNet");
+	self.map trace(trans_think, "initialNode2subNet");
+}
+
+mapping UML::ActivityNode::activityNode2subNet() disjuncts 
+UML::ActivityNode::mapNode2subNet,
+UML::ActivityNode::reduceNode2subNet {};
+
+/**
+	Transform a generic ActivityNode into the subnets:
+	map: [t]->[p]->[t]->[p]->[t]->[p]->[t]
+	reduce: [p]->[t]->[p]->[t]->[p]->[t]
+*/
+
+mapping UML::ActivityNode::mapNode2subNet()
+	when { (self.getSparkMap().oclIsUndefined().not()) and
+			(self.incoming->isEmpty().not()) } {
+
+		/* Number of parallel tasks a Map is divided into */
+		var numTasks:= self.numTasks;
+		assert fatal (numTasks.value() <= 32767) with log ("Population must be an integer value under 32767 in '" + self.toString() + "', error in expression '" + numTasks.toString() + "'");
+		
+		/* Creation of the subnet */
+		//var place_gen := self.map activityNode2placeGen();
+		var place_wait := self.map activityNode2placeWait();
+		var place_exec := self.map activityNode2placeExec();
+		var place_done := self.map activityNode2placeDone();
+		var place_output := self.map activityNode2placeOutput();
+		
+		//var trans_generate := self.map activityNode2immTransGen();
+		var trans_gen := self.map activityNode2immTransGen();
+		var trans_get_resource := self.map activityNode2immTransRes();
+		var trans_exec := self.map activityNode2timedTransition();
+		var trans_join := self.map activityNode2immTransJoin();
+	
+		var arc_1 := map arc(trans_gen, place_wait);
+		var arc_2 := map arc(place_wait, trans_get_resource);
+		var arc_3 := map arc(trans_get_resource, place_exec);
+		var arc_4 := map arc(place_exec, trans_exec);
+		var arc_5 := map arc(trans_exec, place_done);
+		var arc_6 := map arc(place_done, trans_join);
+		var arc_7 := map arc(trans_join, place_output);
+		
+		var arc_map_numTasks := object PNML::PTArcAnnotation {
+			text := numTasks.value();
+		};
+		
+		/* The arcs connecting the trans_generate -> place_wait
+								   place_done -> trans_join
+		consume all the tokens */
+		/*arc_1.inscription := arc_map_numTasks;
+		arc_6.inscription := arc_map_numTasks;*/
+		arc_1.inscription := arc_map_numTasks;
+		arc_6.inscription := arc_1.inscription.clone();
+		
+		// Add tracing information
+		self.map trace(place_wait, "mapNode2subNet");
+		self.map trace(place_exec, "mapNode2subNet");
+		self.map trace(place_done, "mapNode2subNet");
+		self.map trace(place_output, "mapNode2subNet");
+		
+		self.map trace(trans_gen, "mapNode2subNet");
+		self.map trace(trans_get_resource, "mapNode2subNet");
+		self.map trace(trans_exec, "mapNode2subNet");
+		self.map trace(trans_join, "mapNode2subNet");
+}
+
+mapping UML::ActivityNode::reduceNode2subNet()
+	when { (self.getSparkReduce().oclIsUndefined().not()) and
+			(self.incoming->isEmpty().not()) } { 
+				
+		var redType := self.getReduceType();
+		 
+		 /* Number of parallel tasks a Reduce is divided into */
+		var numTasks:= self.numTasks;		
+		assert fatal (numTasks.value() <= 32767) with log ("Population must be an integer value under 32767, error in expression '" + numTasks.toString() + "'");
+		
+		/* Creation of the subnet */
+		//var place_gen := self.map activityNode2placeGen();
+		var place_wait := self.map activityNode2placeWait();
+		var place_exec := self.map activityNode2placeExec();
+		var place_done := self.map activityNode2placeDone();
+		var place_output := self.map activityNode2placeOutput();
+		
+		//var trans_generate := self.map activityNode2immTransGen();
+		var trans_gen := self.map activityNode2immTransGen();
+		var trans_get_resource := self.map activityNode2immTransRes();
+		var trans_exec := self.map activityNode2timedTransition();
+		var trans_join := self.map activityNode2immTransJoin();
+	
+		var arc_1 := map arc(trans_gen, place_wait);
+		var arc_2 := map arc(place_wait, trans_get_resource);
+		var arc_3 := map arc(trans_get_resource, place_exec);
+		var arc_4 := map arc(place_exec, trans_exec);
+		var arc_5 := map arc(trans_exec, place_done);
+		var arc_6 := map arc(place_done, trans_join);
+		var arc_7 := map arc(trans_join, place_output);
+		
+		var arc_red_numTasks := object PNML::PTArcAnnotation {
+			text := numTasks.value();
+		};
+		
+		/* The arcs connecting the trans_generate -> place_wait
+								   place_done -> trans_join
+		consume all the tokens */
+		/*arc_1.inscription := arc_red_numTasks;
+		arc_6.inscription := arc_red_numTasks;*/
+		arc_1.inscription := arc_red_numTasks;
+		arc_6.inscription := arc_1.inscription.clone();
+		
+		// Add tracing information
+		self.map trace(place_wait, "redNode2subNet");
+		self.map trace(place_exec, "redNode2subNet");
+		self.map trace(place_done, "redNode2subNet");
+		self.map trace(place_output, "redNode2subNet");
+		
+		self.map trace(trans_gen, "redNode2subNet");
+		self.map trace(trans_get_resource, "redNode2subNet");
+		self.map trace(trans_exec, "redNode2subNet");
+		self.map trace(trans_join, "redNode2subNet");
+}
+
+/*************************************************/
+/**
+	Transform the model to a closed net using the final node
+*/
+
+mapping UML::FinalNode::model2closedNet() {
+	
+	var source_list := self.incoming->asSequence();
+	assert fatal (source_list->size() = 1)
+	with log('A final node only accepts a single incoming ControlFlow arc');
+		
+	/* Close the net of the UML::Activity */
+	var activity = ad.scenario();
+	var activity_trans_end := activity.resolveoneIn(UML::Activity::activityDiagram2immTransEnd);
+
+	var source := source_list->first().source;
+	var red_phase := source;
+	var place_output_red := red_phase.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
+
+	var arc := map arc(place_output_red, activity_trans_end);	
+}
+
+ /*************************************************/
+/**
+	Transform a generic ForkNode into a subnet:
+... -> (source) place_output -> (target) trans_gen -> ...
+						|-----> (target) trans_gen -> ...
+*/
+
+mapping UML::ForkNode::forkNode2subNet() 
+	when { 
+		self.incoming->isEmpty().not() and
+		self.outgoing->isEmpty().not()
+		 } { 
+
+	assert warning (self.incoming->size() = 1)
+	with log ("Fork node '" + self.name.toString() + "' must have a single input ControlFlow");
+	
+	assert warning (self.outgoing->size() >= 1)
+	with log ("Fork node '" + self.name.toString() + "' must have one or more output ControlFlow");
+	
+	var source := self.incoming->asSequence()->first().source;
+	var place_in_output := source.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
+	
+	var trans_gen := self.map activityNode2immTransGen();
+	map arc(place_in_output, trans_gen);
+	
+	// Add tracing information
+	self.map trace(trans_gen, "forkNode2subNet");
+}
+
+ /*************************************************/
+/**
+	Transform a generic JoinNode into a subnet:
+... -> (source) place_output -> (joinnode) trans_gen -> (joinnode) place_output -> ...
+... -> (source) place_output -|
+*/
+
+mapping UML::JoinNode::joinNode2subNet() 
+	when { 
+		self.incoming->isEmpty().not() and
+		self.outgoing->isEmpty().not()
+		 } {
+
+	assert warning (self.incoming->size() >= 1)
+	with log ("Join node '" + self.name.toString() + "' must have one or more output ControlFlow");
+	
+	assert warning (self.outgoing->size() = 1)
+	with log ("Join node '" + self.name.toString() + "' must have a single output ControlFlow");
+	
+	var trans_gen := self.map activityNode2immTransGen();
+	var place_output := self.map activityNode2placeOutput();	
+	map arc(trans_gen, place_output);
+	
+	// Add tracing information
+	self.map trace(trans_gen, "joinNode2subNet");
+	self.map trace(place_output, "joinNode2subNet");
+}
+			
+/*************************************************/
+mapping UML::ControlFlow::controlFlow2tarc() disjuncts 
+UML::ControlFlow::basicControlFlow2arc,
+UML::ControlFlow::forkControlFlow2arc {};
+
+/**
+	Transforms a ControlFlow between two ActivityNodes.
+	The ControlFlow is transformed into an immediate transition connecting to the
+	place representing the output buffer of the previous bolt
+*/
+mapping UML::ControlFlow::basicControlFlow2arc() when {
+	self.source.oclIsKindOf(ForkNode).not() and
+	self.target.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(InitialNode).not() and
+	self.target.oclIsKindOf(FinalNode).not()
+}{
+    var source := self.source;
+	var target := self.target;
+	
+	var place_output := source.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
+	var trans_gen := target.resolveoneIn(UML::ActivityNode::activityNode2immTransGen);
+	map arc(place_output, trans_gen);
+}
+
+mapping UML::ControlFlow::forkControlFlow2arc() when {
+	self.source.oclIsKindOf(ForkNode) and
+	self.target.oclIsKindOf(ActivityNode) and
+	self.target.oclIsKindOf(InitialNode).not() and
+	self.target.oclIsKindOf(FinalNode).not()
+}{
+    var source := self.source;
+	var target := self.target;
+	
+	var trans_gen_source := source.resolveoneIn(UML::ActivityNode::activityNode2immTransGen);
+	var trans_gen_target := target.resolveoneIn(UML::ActivityNode::activityNode2immTransGen);
+	
+	var place_output := self.map controlFlow2placeOutput();
+
+	map arc(trans_gen_source, place_output);	 
+	map arc(place_output, trans_gen_target);
+	
+	// Add tracing information
+	self.map trace(place_output, "forkControlFlow2arc");
+}
+
+/*************************************************/
+
+/**
+	Transform a generic NamedElement into a Place 
+*/
+mapping UML::NamedElement::namedElement2place() : PNML::Place {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		if (self.name.oclIsUndefined().not()) {
+			name := object PNML::Name {
+				text := self.name;
+			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
+			};
+		};
+}
+
+/*************************************************/
+/**
+	Transform a generic ActivityPartition into a Place 
+*/
+mapping UML::ActivityPartition::activityPartition2placeRes() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Res";
+}
+
+//mapping UML::Device::device2placeRes() : PNML::Place 
+mapping UML::NamedElement::device2placeRes() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Res";
+}
+
+mapping UML::NamedElement::assignedCores2placeRes() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_AssignedCores";
+}
+
+
+/*************************************************/
+/**
+	Transform a generic ActivityNode into a Place 
+*/
+
+mapping UML::Activity::activityDiagram2place() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+}
+
+/**
+	Transform a generic ActivityNode into a Place representing the initial node
+*/
+
+mapping UML::Activity::activityDiagram2placeStart() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+	name.text := name.text + "_Start";
+}
+
+
+/*************************************************/
+/**
+	Transform a generic ActivityNode into a Place 
+*/
+
+mapping UML::ActivityNode::activityNode2place() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+}
+
+/**
+	Transform a generic ActivityNode into a Place representing the initial node
+*/
+
+mapping UML::ActivityNode::activityNode2placeStart() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+	name.text := name.text + "_Start";
+}
+
+/**
+	Transform a generic ActivityNode into a Place controlling the
+	generation of maps 
+*/
+
+mapping UML::ActivityNode::activityNode2placeGen() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Gen";
+}
+
+/**
+	Transform a generic ActivityNode into a Place representing 
+	the waiting phase of the map/reduce 
+*/
+
+mapping UML::ActivityNode::activityNode2placeWait() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Wait";
+}
+
+/**
+	Transform a generic ActivityNode into a Place representing
+	the execution phase of the map/reduce 
+*/
+
+mapping UML::ActivityNode::activityNode2placeExec() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Exec";
+}
+
+/**
+	Transform a generic ActivityNode into a Place representing
+	the final phase of the map/reduce 
+*/
+
+mapping UML::ActivityNode::activityNode2placeDone() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Done";
+}
+
+/**
+	Transform a generic ActivityNode into a Place representing
+	the result of the map/reduce phase 
+*/
+
+mapping UML::ActivityNode::activityNode2placeOutput() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Output";
+}
+
+mapping UML::ControlFlow::controlFlow2placeOutput() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_Output";
+}
+/***********************************************************************/
+/**
+	Transform a generic NamedElement into a Transition 
+*/
+
+mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
+		containerPage := resolveoneIn(UML::NamedElement::model2page);
+		id := createRandomUniqueId();
+		if (self.name.oclIsUndefined().not()) {
+			name := object PNML::Name {
+				text := self.name;
+			};
+		} else {
+			name := object PNML::Name {
+				text := id.toString();
+			};
+		};
+}
+
+/**
+	Transform a generic NamedElement into a Transition 
+*/
+
+mapping UML::NamedElement::namedElement2immediateTransition() : PNML::Transition
+inherits UML::NamedElement::namedElement2transition{
+		name.text := self.name + "_trans";
+}
+
+/***********************************************************************/
+/**
+	Transform a generic ActivityNode into a Transition 
+*/
+
+mapping UML::Activity::activityDiagram2immediateTransition() : PNML::Transition
+inherits UML::NamedElement::namedElement2immediateTransition {
+}
+
+/**
+	Transform a generic ActivityNode into a Transition
+	representing the start of the DAG 
+*/
+
+mapping UML::Activity::activityDiagram2immTransStart() : PNML::Transition
+inherits UML::Activity::activityDiagram2immediateTransition {
+				name.text := name.text + "_Start";
+}
+
+/**
+	Transform a generic Activity into a Transition
+	representing the end of the DAG 
+*/
+
+mapping UML::Activity::activityDiagram2immTransEnd() : PNML::Transition
+inherits UML::Activity::activityDiagram2immediateTransition {
+				name.text := name.text + "_End";
+}
+
+/***********************************************************************/
+/**
+	Transform a generic ActivityNode into a Transition 
+*/
+
+mapping UML::ActivityNode::activityNode2immediateTransition() : PNML::Transition
+inherits UML::NamedElement::namedElement2immediateTransition {
+}
+
+/**
+	Transform a generic ActivityNode into a Transition
+	representing the generation of subtasks in a map/reduce 
+*/
+
+mapping UML::ActivityNode::activityNode2immTransGen() : PNML::Transition
+inherits UML::ActivityNode::activityNode2immediateTransition {
+				name.text := name.text + "_Gen";
+}
+
+/**
+	Transform a generic ActivityNode into a Transition
+	representing the adquisition of the resource in a map/reduce 
+*/
+
+mapping UML::ActivityNode::activityNode2immTransRes() : PNML::Transition
+inherits UML::ActivityNode::activityNode2immediateTransition {
+				name.text := name.text + "_Res";
+}
+
+/**
+	Transform a generic ActivityNode into a Transition
+	representing the join of subtasks in a map/reduce 
+*/
+
+mapping UML::ActivityNode::activityNode2immTransJoin() : PNML::Transition
+inherits UML::ActivityNode::activityNode2immediateTransition {
+				name.text := name.text + "_Join";
+}
+
+/***********************************************************************/
+/**
+	Transform a generic ActivityNode into a Transition and 
+	creates any additional ToolInfo depending on the ActivityNode
+	subtype (e.g., OpaqueActions with hostDemand may create 
+	exponential transitions) 
+*/
+mapping UML::ActivityNode::activityNode2timedTransition() : PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+}
+
+/***********************************************************************/
+
+/**
+	Transforms an OpaqueAction with a hostDemand annotation to a ToolInfo element
+*/
+
+mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
+when {
+		self.getSparkOperation_hostDemand().oclIsUndefined().not();
+}{
+	var hostDemand := self.getSparkOperation_hostDemand();
+	result += expTransitionToolInfo( 1 / hostDemand.value());
+	result += infServerTransitionToolInfo();
+}
+
+/**
+	Creates an Arc from 'src' to 'tgt'
+*/
+mapping arc(in src : PNML::Node, in tgt : PNML::Node) : PNML::Arc {
+	containerPage := resolveoneIn(UML::NamedElement::model2page);
+	id := createRandomUniqueId();
+	source := src;
+	target := tgt;
+}
+
+/*******************************************************************************
+  Traceability mappings
+*******************************************************************************/
+
+mapping OclAny::trace(to : OclAny) : TRACE::Trace {
+	init {
+		result := object TRACE::Trace {
+			fromDomainElement := self.eObject();
+			toAnalyzableElement := to.eObject();
+		}
+	}
+}
+
+mapping OclAny::trace(to : OclAny, text : String) : TRACE::Trace {
+	init {
+		result := object TRACE::Trace {
+			fromDomainElement := self.eObject();
+			toAnalyzableElement := to.eObject();
+			rule := text;
+		}
+	}
+}
+
+/*******************************************************************************
+  Navigation helpers
+  Helpers on domains are only valid in the context of a transformations and
+  cannot be moved to a library
+*******************************************************************************/
+
+helper UML::scenario() : UML::Activity {
+	// When running the transformation from the simulation tool, the UML domain must 
+	// contain a single activity at its root 
+	assert warning (self.rootObjects()[UML::Activity]->size() = 1) with log ("No single Activity instance was found at the root of the UML input model, trying to use the first Activity in the model instead");
+	
+	if (self.rootObjects()[UML::Activity]->isEmpty().not()) {
+		return self.rootObjects()[UML::Activity]->asOrderedSet()->first();
+	};
+	// This execution path is useful when running the transformation at development time
+	return self.objectsOfType(UML::Activity)->asOrderedSet()->first();
+}
+
+helper TYPES::vars() : Set ( PrimitiveVariableAssignment ) {
+	return self.rootObjects()[PrimitiveVariableAssignment];
+}
+
+helper TYPES::PrimitiveVariableAssignment::asDict() : Dict(String, Real) {
+	var vars : Dict (String, Real) := Dict {};
+	self->forEach(assignment) {
+		vars->put(assignment.variable, assignment.value.toString().toReal());
+	};
+	return vars;
+}
+
+helper TRACE::set() : TRACE::TraceSet {
+	return self.rootObjects()[TRACE::TraceSet]->asSequence()->first();
+}
+
+/*******************************************************************************
+  Intermediate classes
+  Sadly, intermediate classes cannot be shared among libraries or 
+  transformations.
+*******************************************************************************/
+intermediate class ArrivalPattern {
+	_rawExpression : String;
+}
+
+intermediate class ClosedPattern extends ArrivalPattern {
+	population_ : NFP_Integer;
+	extDelay : NFP_Real;
+}
+
+intermediate class NFP_CommonType {
+	_rawExpression : String;
+	expr : String;
+	source : String;
+	statQ : String;
+	dir : String;
+	mode : String;
+}
+
+intermediate class NFP_Integer extends NFP_CommonType {
+	value : Integer;
+}
+
+intermediate class NFP_Real extends NFP_CommonType{
+	value : Real;
+}
+
+intermediate class NFP_Duration extends NFP_Real {
+	unit : String;
+	clock : String;
+	precision : Real;
+	worst : Real;
+	best : Real;
+}
+
+/*******************************************************************************
+  Tagged values utilities
+*******************************************************************************/
+
+/**
+	Helper that parses a VSL tuple containing a NFP_CommonType
+*/
+helper String::toNfpCommonType() : NFP_CommonType {
+	var res := object NFP_CommonType {
+		_rawExpression := self;
+		statQ := null;
+		expr := null;
+		source := null;
+		dir := null;
+		mode := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.expr := entries->get("expr");
+		res.statQ := entries->get("statQ");
+		res.source := entries->get("source");
+		res.dir := entries->get("dir");
+		res.mode := entries->get("mode");
+	} else {
+		res.expr := self;
+	};
+	assert warning (res.statQ.oclIsUndefined() or res.statQ = 'mean') 
+		with log ("Expression '" + self + "' defines an unknown 'statQ' value, expected empty or 'mean'");
+	assert warning (res.source.oclIsUndefined() or res.source = 'est' or res.source = 'meas')
+		with log ("Expression '" + self + "' defines an unsupported 'source' for an input parameter, expected 'est' or 'meas'.");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'dir' property");
+	assert warning (res.mode.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'mode' property");
+	return res;
+}
+
+/**
+	Helper that parses a VSL tuple containing a NFP_Integer
+*/
+helper String::toNfpInteger() : NFP_Integer {
+	var nfp := self.toNfpCommonType();
+	var res := object NFP_Integer {
+		_rawExpression := nfp._rawExpression;
+		expr := nfp.expr;
+		statQ := nfp.statQ;
+		source := nfp.source;
+		dir := nfp.dir;
+		mode := nfp.mode;
+		value := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.value := entries->get("value").toInteger();
+	};
+	assert fatal (res.value.oclIsUndefined() xor res.expr.oclIsUndefined())
+		with log ("Expression '" + self + "' must define either a valid 'value' or a valid 'expr'");
+	return res;
+}
+
+/**
+	Helper that parses a VSL tuple containing a NFP_Real
+*/
+helper String::toNfpReal() : NFP_Real {
+	var nfp := self.toNfpCommonType();
+	var res := object NFP_Real {
+		_rawExpression := nfp._rawExpression;
+		expr := nfp.expr;
+		statQ := nfp.statQ;
+		source := nfp.source;
+		dir := nfp.dir;
+		mode := nfp.mode;
+		value := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.value := entries->get("value").toReal();
+	};
+	assert fatal (res.value.oclIsUndefined() xor res.expr.oclIsUndefined())
+		with log ("Expression '" + self + "' must define either a valid 'value' or a valid 'expr'");
+	return res;
+}
+
+
+/**
+	Helper that parses a VSL tuple containing a NFP_Duration
+*/
+helper String::toNfpDuration() : NFP_Duration {
+	var nfp := self.toNfpReal();
+	var res := object NFP_Duration {
+		_rawExpression := nfp._rawExpression;
+		value := nfp.value;
+		expr := nfp.expr;
+		statQ := nfp.statQ;
+		source := nfp.source;
+		dir := nfp.dir;
+		mode := nfp.mode;
+		unit := null;
+		clock := null;
+		precision := null;
+		worst := null;
+		best := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.unit := entries->get("unit");
+		res.clock := entries->get("clock");
+		res.precision := entries->get("precision").toReal();
+		res.worst := entries->get("worst").toReal();
+		res.best := entries->get("best").toReal();
+	};
+	assert warning (res.unit.oclIsUndefined().not())
+		with log ("Expression '" + self + "' does not define a 'unit', assumming the default base unit (see complete log)");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'clock' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'precision' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'worst' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'best' property");
+	
+	return res;
+}
+
+helper NFP_Integer::value() : Integer {
+	if (self.value.oclIsUndefined().not()) {
+		return self.value;
+	};
+	return self.expr.eval(vars.vars()).toInteger();
+}
+
+helper NFP_Real::value() : Real {
+	if (self.value.oclIsUndefined().not()) {
+		return self.value;
+	};
+	return self.expr.eval(vars.vars()).toReal();
+}
+
+helper NFP_Duration::value() : Real {
+	var value : Real;	
+	if (self.value.oclIsUndefined().not()) {
+		value := self.value;
+	};
+	value := self.expr.eval(vars.vars()).toReal();
+	if (self.unit.oclIsUndefined().not()) {
+		map baseTimeUnit("s");			
+		value := value.convert(self.unit, "s");
+	};
+	return value;
+}
+
+/*******************************************************************************
+  Getters for tagged values
+******************************************************************************/
+
+helper UML::Element::getSparkOperation_hostDemand() : NFP_Duration {
+	if (self.getSparkMap().oclIsUndefined().not()){
+		return self.getSparkMap_hostDemand();	
+	} else if (self.getSparkReduce().oclIsUndefined().not()){ 
+		return self.getSparkReduce_hostDemand();
+	} else if (self.getSparkOperation().oclIsUndefined().not()){ 
+		return self.getSparkStandard_hostDemand();
+	} else {
+		return null;
+	}
+}
+
+helper UML::Element::getSparkStandard_hostDemand() : NFP_Duration {
+	if (self.getSparkOperation() = null) {
+		return null;
+	};
+	var hostDemandStrings := self.getValue(self.getSparkOperation(), "hostDemand").oclAsType(Collection(String));
+	assert warning (hostDemandStrings->size() = 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected = 1. "+
+					"The first 'mean' value will be used by default (if more than a hostDemand is found). " +
+					"The context element is '" + self.toString() + "'");
+	var hostDemandTime := hostDemandStrings->asSequence()->first();
+	return hostDemandTime.toNfpDuration()->
+			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
+			asSequence()->first();
+}
+
+helper UML::Element::getSparkMap_hostDemand() : NFP_Duration {
+	if (self.getSparkMap() = null) {
+		return null;
+	};
+	var hostDemandStrings := self.getValue(self.getSparkMap(), "hostDemand").oclAsType(Collection(String));
+	assert warning (hostDemandStrings->size() = 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected = 1. "+
+					"The first 'mean' value will be used by default (if more than a hostDemand is found). " +
+					"The context element is '" + self.toString() + "'");
+	var hostDemandTime := hostDemandStrings->asSequence()->first();
+	return hostDemandTime.toNfpDuration()->
+			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
+			asSequence()->first();
+}
+
+helper UML::Element::getSparkReduce_hostDemand() : NFP_Duration {
+	if (self.getSparkReduce() = null) {
+		return null;
+	};
+	var hostDemandStrings := self.getValue(self.getSparkReduce(), "hostDemand").oclAsType(Collection(String));
+	assert warning (hostDemandStrings->size() = 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected = 1. "+
+					"The first 'mean' value will be used by default (if more than a hostDemand is found). " + 
+					"The context element is '" + self.toString() + "'");
+	var hostDemandTime := hostDemandStrings->asSequence()->first();
+	return hostDemandTime.toNfpDuration()->
+			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
+			asSequence()->first();
+}
+
+/******************************************************************/
+helper UML::Element::getMapType() : DBET::SparkMap {
+	if (self.getSparkMap() = null) {
+		return null;
+	};
+	var mapType := self.getValue(self.getSparkMap(), "MapType").oclAsType(DBET::SparkMap);
+	assert warning (mapType->size() = 1)
+		with log ("Unexpected number of 'MapType' tagged values found, expected 1. "+
+					"The context element is '" + self.toString() + "'");
+					
+	return mapType;
+}
+
+helper UML::Element::getReduceType() : DBET::SparkReduce {
+	if (self.getSparkReduce() = null) {
+		return null;
+	};
+	var reduceType := self.getValue(self.getSparkReduce(), "ReduceType").oclAsType(DBET::SparkReduce);
+	assert warning (reduceType->size() = 1)
+		with log ("Unexpected number of 'ReduceType' tagged values found, expected 1. "+
+					"The context element is '" + self.toString() + "'");
+					
+	return reduceType;
+}
+
+/******************************************************************/
+query isSetOperation(in mapType : DBET::SparkMap) : Boolean {
+	return (mapType = DBET::SparkMap::RDDSetOperation) or 
+		   (mapType = DBET::SparkMap::Union) or 
+		   (mapType = DBET::SparkMap::Intersection) or 
+		   (mapType = DBET::SparkMap::Substraction) or 
+		   (mapType = DBET::SparkMap::Distinct) or 
+		   (mapType = DBET::SparkMap::Cartesian) ;
+}
+
+query isByKeyOperation(in mapType : DBET::SparkMap) : Boolean {
+	return (mapType = DBET::SparkMap::ByKey);
+}
+
+query isByKeyOperation(in redType : DBET::SparkReduce) : Boolean {
+	return (redType = DBET::SparkReduce::CountByKey);
+}
+
+query isJoinOperation(in mapType : DBET::SparkMap) : Boolean {
+	return (mapType = DBET::SparkMap::Join);
+}
+
+query isRepartitionOperation(in mapType : DBET::SparkMap) : Boolean {
+	return (mapType = DBET::SparkMap::Repartition);
+}
+
+/******************************************************************/
+helper UML::Element::isSetOperation() : Boolean {
+	var setOperation := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		setOperation := isSetOperation(mapType);
+	}/* else 	if (self.getSparkReduce().oclIsUndefined().not()) {
+		var redType := self.getReduceType(); 
+		setOperation := isSetOperation(redType);
+	}*/;
+	return setOperation;
+}
+
+helper UML::Element::isByKeyOperation() : Boolean {
+	var setOperation := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		setOperation := isByKeyOperation(mapType);
+	} else if (self.getSparkReduce().oclIsUndefined().not()) {
+		var redType := self.getReduceType(); 
+		setOperation := isByKeyOperation(redType);
+	};	
+	return setOperation;
+}
+
+helper UML::Element::isJoinOperation() : Boolean {
+	var setOperation := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		setOperation := isJoinOperation(mapType);
+	};	
+	return setOperation;
+}
+
+helper UML::Element::isRepartitionOperation() : Boolean {
+	var setOperation := false;
+	if (self.getSparkMap().oclIsUndefined().not()) {
+		var mapType := self.getMapType(); 
+		setOperation := isRepartitionOperation(mapType);
+	};	
+	return setOperation;
+}
+
+/******************************************************************/
+helper UML::Element::getSparkOperation_nTasks() : NFP_Integer {
+	if (self.getSparkMap().oclIsUndefined().not()){
+		return self.getSparkMap_nTasks();	
+	} else if (self.getSparkReduce().oclIsUndefined().not()){ 
+		return self.getSparkReduce_nTasks();
+	} else if (self.getSparkOperation().oclIsUndefined().not()){ 
+		return self.getSparkStandard_nTasks();
+	} else {
+		return null; //
+	}
+}
+
+helper UML::Element::getSparkStandard_nTasks() : NFP_Integer { 
+	if (self.getSparkOperation() = null) {
+		return null;
+	};
+	var nTasks := self.getValue(self.getSparkOperation(), "numTasks").oclAsType(String);
+	assert warning (nTasks->size() >= 1)
+		with log ("Unexpected number of 'numTasks' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'"); 
+	return nTasks.toNfpInteger();
+}
+
+helper UML::Element::getSparkMap_nTasks() : NFP_Integer {
+	if (self.getSparkMap() = null) {
+		return null;
+	};
+	var nTasks := self.getValue(self.getSparkMap(), "numTasks").oclAsType(String);
+	assert warning (nTasks->size() >= 1)
+		with log ("Unexpected number of 'numTasks' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'"); 
+	return nTasks.toNfpInteger();
+}
+
+helper UML::Element::getSparkReduce_nTasks() : NFP_Integer {
+	if (self.getSparkReduce() = null) {
+		return null;
+	};
+	var nTasks := self.getValue(self.getSparkReduce(), "numTasks").oclAsType(String);
+	assert warning (nTasks->size() = 1)
+		with log ("Unexpected number of 'numTasks' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'"); 
+	return nTasks.toNfpInteger();
+}
+
+/******************************************************************/
+helper UML::Element::getGaExecHost_resMult() : NFP_Integer {
+	if (self.getGaExecHost() = null) {
+		return null;
+	};
+	var prob := self.getValue(self.getGaExecHost(), "resMult").oclAsType(String);
+	return prob.toNfpInteger();
+}
+/******************************************************************/	
+helper UML::Element::getSparkNode_nCores() : NFP_Integer {
+	if (self.getSparkNode() = null) {
+		return null;
+	};
+	var nCores := self.getValue(self.getSparkNode(), "nCores").oclAsType(String);
+	return nCores.toNfpInteger();
+}
+
+helper UML::Element::getSparkScenario_scheduler() : DBET::Scheduling {
+	if (self.getSparkScenario() = null) {
+		return null;
+	};
+	var jobscheduling := self.getValue(self.getSparkScenario(), "jobSchedule").oclAsType(DBET::Scheduling);
+	assert warning (jobscheduling->size() = 1)
+		with log ("Unexpected number of 'jobScheduling' tagged values found, expected 1. "+
+					"The context element is '" + self.toString() + "'");
+					
+	return jobscheduling;
+}
+
+helper UML::Element::getSparkScenario_nAssignedCores() : NFP_Integer {
+	if (self.getSparkScenario() = null) {
+		return null;
+	};
+	var assignCor := self.getValue(self.getSparkScenario(), "nAssignedCores").oclAsType(String);
+	assert warning (assignCor->size() = 1)
+		with log ("Unexpected number of 'nAssignedCores' tagged values found, expected 1. "+
+					"The context element is '" + self.toString() + "'");
+					
+	return assignCor.toNfpInteger();
+}
+
+helper UML::Element::getSparkScenario_nAssignedMemory() : NFP_Integer {
+	if (self.getSparkScenario() = null) {
+		return null;
+	};
+	var assignMem := self.getValue(self.getSparkScenario(), "nAssignedMemory").oclAsType(String);
+	assert warning (assignMem->size() = 1)
+		with log ("Unexpected number of 'nAssignedMemory' tagged values found, expected 1. "+
+					"The context element is '" + self.toString() + "'");
+					
+	return assignMem.toNfpInteger();
+}
+
+helper UML::Element::getSparkScenario_sparkDefaultParallelism() : NFP_Integer {
+	if (self.getSparkScenario() = null) {
+		return null;
+	};
+	var par := self.getValue(self.getSparkScenario(), "sparkDefaultParallelism").oclAsType(String);
+	
+	assert warning (par->size() >= 1)
+		with log ("Unexpected number of 'sparkDefaultParallelism' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'"); 
+	return par.toNfpInteger();
+}
+
+helper UML::Element::getSparkWorkloadEvent_sparkPopulation() : NFP_Integer {
+	if (self.getSparkWorkloadEvent() = null) {
+		return null;
+	};
+	var pop := self.getValue(self.getSparkWorkloadEvent(), "sparkPopulation").oclAsType(String);
+	
+	assert warning (pop->size() >= 1)
+		with log ("Unexpected number of 'sparkPopulation' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'"); 
+	return pop.toNfpInteger();
+}
+
+helper UML::Element::getSparkWorkloadEvent_sparkExtDelay() : NFP_Duration {
+	if (self.getSparkWorkloadEvent() = null) {
+		return null;
+	};
+	var extDelay := self.getValue(self.getSparkWorkloadEvent(), "sparkExtDelay").oclAsType(String);
+	
+	assert warning (extDelay->size() >= 1)
+		with log ("Unexpected number of 'sparkExtDelay' tagged values found, expected >= 1. "+
+					"The context element is '" + self.toString() + "'"); 
+	return extDelay.toNfpDuration()->
+			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
+			asSequence()->first();
+}
+
+/*******************************************************************************
+  ToolInfo utilities
+*******************************************************************************/
+
+
+/******************************************************************/
+query max(in a : Integer, b : Integer) : Integer {
+	if (a > b){
+	   return a;
+	};
+	return b;
+}
+
+/**
+	Infer the number of tasks according to the parent RDD
+*/
+
+//intermediate property UML::ActivityNode::numTasks : Integer;
+intermediate property UML::ActivityNode::numTasks : NFP_Integer;
+
+helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
+	self.numTasks := "1".toNfpInteger();
+	if (self.oclIsKindOf(InitialNode)) {
+		self.numTasks := self.oclAsType(InitialNode).getSparkWorkloadEvent_sparkPopulation();
+	} else if (self.oclIsKindOf(ForkNode) or
+		       self.oclIsKindOf(JoinNode)){	
+		var prevTasks := new Set(NFP_Integer)();
+		self.incoming->forEach(in_arc){
+			prevTasks += in_arc.source.inferNumTasks();
+		};
+		self.numTasks := prevTasks->asOrderedSet()->first();
+	} else if(self.oclIsKindOf(ActivityNode)){	
+		var defaultParallelism = ad.scenario().getSparkScenario_sparkDefaultParallelism().value();
+		assert fatal (defaultParallelism != null) with log ("Cannot read defaultParallelism attribute from " + self.toString() + ".");
+		
+		var prevTasks := new Set(NFP_Integer)();
+		self.incoming->forEach(in_arc){
+			prevTasks += in_arc.source.inferNumTasks();
+		};
+				
+		var mapType = self.oclAsType(ActivityNode).getMapType();
+		var redType = self.oclAsType(ActivityNode).getReduceType();
+			
+		var explicitTasks := self.oclAsType(ActivityNode).getSparkOperation_nTasks();
+
+		self.numTasks := prevTasks->asOrderedSet()->first();
+		
+		if (explicitTasks = null){			
+			if (self.oclAsType(ActivityNode).isByKeyOperation()){
+				assert warning (self.incoming->size() = 1) with log ("Activity Nodes reprepresenting ByKey operations work over a single RDD");
+				self.numTasks := prevTasks->asOrderedSet()->first();
+			};
+			
+			if (self.oclAsType(ActivityNode).isSetOperation()){
+				assert warning (self.incoming->size() <= 2) with log ("Activity Nodes reprepresenting set operations need two RDD");
+				var totalTasks := 1;
+				if (mapType = DBET::SparkMap::Union){			
+					prevTasks->forEach(prevNumTasks){
+						totalTasks := totalTasks + prevNumTasks.value() - 1;
+					}
+				} else if (mapType = DBET::SparkMap::Cartesian){
+					prevTasks->forEach(prevNumTasks){
+						totalTasks := totalTasks * prevNumTasks.value();
+					}
+				}  else if (mapType = DBET::SparkMap::Intersection){
+					prevTasks->forEach(prevNumTasks){
+						totalTasks := max(totalTasks, prevNumTasks.value());
+						totalTasks := max(totalTasks, defaultParallelism);
+					}
+				//} else if (mapType = DBET::SparkMap::Substraction){
+				} else {
+					assert warning (explicitTasks != null) with log ("Cannot infer the number of numTasks. Activity Node with Spark operation" + mapType.toString() + " requires an explicit number of numTasks.");
+				};
+				self.numTasks := totalTasks.toString().toNfpInteger();
+			}
+		} else {
+			self.numTasks := explicitTasks;
+		};
+		
+		if (self.oclAsType(ActivityNode).isJoinOperation() or
+			self.oclAsType(ActivityNode).isRepartitionOperation()){
+			assert warning (explicitTasks != null) with log ("Cannot infer the number of numTasks. Activity Node with Spark operation" + mapType.toString() + " requires an explicit number of numTasks");
+		};
+	};
+	return self.numTasks;
+	//return self.numTasks.toString().toNfpInteger();
+}
+
+/**
+	Get the initial node of the current activity node
+*/
+
+helper UML::ActivityNode::getInitialNode() : UML::InitialNode {
+	if (self.oclIsKindOf(InitialNode)) {
+		return self.oclAsType(InitialNode);
+	}
+	else {
+		var initialNodes := new Set(UML::InitialNode)();
+		self.incoming->forEach(in_arc){
+			initialNodes += in_arc.source.getInitialNode();
+		};
+		assert fatal (initialNodes->size() = 1) with log ("Only Activity Nodes with a single Initial Node are supported");
+		return initialNodes->asOrderedSet()->first();
+	};
+	return null;
+}
+
+/**
+	Get the initial node of the activity diagram
+*/
+
+helper getInitialNode2() : UML::InitialNode {
+	var initialNodes := ad.scenario().node[UML::InitialNode];
+	assert fatal (initialNodes->size() = 1) with log ("Only Activities with a single Initial Node are supported");
+	return initialNodes->asOrderedSet()->first();
+}
