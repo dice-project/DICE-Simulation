@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="es.unizar.disco.simulation.simulators">
+      <Simulator
+            id="es.unizar.disco.simulation.local.localSimulator"
+            name="Internal QoS analysis"
+            simulator="es.unizar.disco.simulation.local.simulator.EmptySimulator">
+      </Simulator>
+   </extension>
+   <extension
+         point="es.unizar.disco.simulation.models.supported_metrics">
+      <MetricTag
+            familyNFPproperty="RELIABILITY"
+            id="reliability">
+      </MetricTag>
+      <MetricTag
+            familyNFPproperty="RELIABILITY"
+            id="ssAvail">
+      </MetricTag>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario#reliability"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+            tag="reliability">
+         <Calculator
+               class="es.unizar.disco.simulation.local.calculators.ReliabilityCalculatorSpark"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+               toolResult="void">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario#ssAvail"
+            stereotype="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+            tag="ssAvail">
+         <Calculator
+               class="es.unizar.disco.simulation.local.calculators.AvailabilityCalculatorSpark"
+               scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
+               toolResult="void">
+         </Calculator>
+      </Metric>
+   </extension>
+
+</plugin>
