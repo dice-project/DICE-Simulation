@@ -81,8 +81,15 @@ mapping UML::NamedElement::model2doc() : PNML::PetriNetDoc {
 
 mapping UML::NamedElement::model2net() : PNML::PetriNet {
 	id := createRandomUniqueId();
+	var temp_text := id;
+	
+	if (self.name.oclIsUndefined().not() and
+		self.name.equalsIgnoreCase("").not()) {
+		temp_text := self.name;
+	};
+	
 	name := object PNML::Name {
-		text := self.name;
+		text := temp_text;
 	};
 	pages := self.map model2page();
 }
@@ -144,8 +151,8 @@ when {
 			// Get the resource transition
 			var trans_get_resource := node.resolveoneIn(UML::ActivityNode::activityNode2immTransRes);
 			assert fatal (trans_get_resource.oclIsUndefined().not()) with log ("Could not find a immediate transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
-			assert warning (trans_get_resource.InArcs->size() = 1) with log ("A single place required before the transition '" + trans_get_resource.name.toString() + "', obtained " + trans_get_resource.InArcs->size().toString());
-			assert warning (trans_get_resource.OutArcs->size() = 1) with log ("A single place required after the transition '" + trans_get_resource.name.toString() + "', obtained " + trans_get_resource.OutArcs->size().toString());
+			assert warning (trans_get_resource.InArcs->size() = 1) with log ("A single place required before the transition '" + trans_get_resource.toString() + "', obtained " + trans_get_resource.InArcs->size().toString());
+			assert warning (trans_get_resource.OutArcs->size() = 1) with log ("A single place required after the transition '" + trans_get_resource.toString() + "', obtained " + trans_get_resource.OutArcs->size().toString());
 			
 			/* Add an arc between the new resource place and the timed transition */
 			/* Add an arc between the resource transition and the new resource place */
@@ -463,10 +470,10 @@ mapping UML::ForkNode::forkNode2subNet()
 		 } { 
 
 	assert warning (self.incoming->size() = 1)
-	with log ("Fork node '" + self.name.toString() + "' must have a single input ControlFlow");
+	with log ("Fork node '" + self.toString() + "' must have a single input ControlFlow");
 	
 	assert warning (self.outgoing->size() >= 1)
-	with log ("Fork node '" + self.name.toString() + "' must have one or more output ControlFlow");
+	with log ("Fork node '" + self.toString() + "' must have one or more output ControlFlow");
 	
 	var source := self.incoming->asSequence()->first().source;
 	var place_in_output := source.resolveoneIn(UML::ActivityNode::activityNode2placeOutput);
@@ -492,10 +499,10 @@ mapping UML::JoinNode::joinNode2subNet()
 		 } {
 
 	assert warning (self.incoming->size() >= 1)
-	with log ("Join node '" + self.name.toString() + "' must have one or more output ControlFlow");
+	with log ("Join node '" + self.toString() + "' must have one or more output ControlFlow");
 	
 	assert warning (self.outgoing->size() = 1)
-	with log ("Join node '" + self.name.toString() + "' must have a single output ControlFlow");
+	with log ("Join node '" + self.toString() + "' must have a single output ControlFlow");
 	
 	var trans_gen := self.map activityNode2immTransGen();
 	var place_output := self.map activityNode2placeOutput();	
@@ -707,7 +714,8 @@ mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 
 mapping UML::NamedElement::namedElement2immediateTransition() : PNML::Transition
 inherits UML::NamedElement::namedElement2transition{
-		name.text := self.name + "_trans";
+		//name.text := self.name + "_trans";
+		name.text := name.text + self.name + "_trans";
 }
 
 /***********************************************************************/
