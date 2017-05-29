@@ -63,8 +63,15 @@ mapping UML::NamedElement::model2doc() : PNML::PetriNetDoc {
 
 mapping UML::NamedElement::model2net() : PNML::PetriNet {
 	id := createRandomUniqueId();
+	var temp_text := id;
+	
+	if (self.name.oclIsUndefined().not() and
+		self.name.equalsIgnoreCase("").not()) {
+		temp_text := self.name;
+	};
+	
 	name := object PNML::Name {
-		text := self.name;
+		text := temp_text;
 	};
 	pages := self.map model2page();
 }
@@ -119,7 +126,7 @@ when {
 	- a Reducer partition */
 	/* We process Mapper partition and Reducer partition in separate but consecutive instances */
 	var containedNodes := ad.objectsOfKind(UML::ActivityNode)->select(node : ActivityNode | self->intersection(node.inPartition)->notEmpty());
-	assert fatal (containedNodes->size() = 1) with log ("Current partition '" + self.name + "' does not have a single activity node: " + containedNodes->size().toString());
+	assert fatal (containedNodes->size() = 1) with log ("Current partition '" + self.toString() + "' does not have a single activity node: " + containedNodes->size().toString());
 
 	/* node = mapper or reducer */
 	var node := containedNodes->asList()->first();
@@ -129,9 +136,16 @@ when {
 	// - The timed transitions (execution of Map/Reduce) 
 	// - The immediate transitions (release of Map/Reduce)
 	
+	
+	var node_name_text := createRandomUniqueId();
+	if (node.name.oclIsUndefined().not() and
+		node.name.equalsIgnoreCase("").not()) {
+		node_name_text := node.name;
+	};
+	
 	var node_color := object Colour{
 		color_id := index;
-		colorset_id := node.name;
+		colorset_id := node_name_text;
 		numElements := 1;
 	};
 	
@@ -182,8 +196,8 @@ when {
 	var trans_get_res_list := node.resolveIn(UML::ActivityNode::activityNode2immTransResCol);
 	var trans_get_resource := findTransByColor(node_color, trans_get_res_list);
 	assert fatal (trans_get_resource.oclIsUndefined().not()) with log ("Could not find a immediate transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
-	assert warning (trans_get_resource.InArcs->size() = 1) with log ("A single place required before the transition '" + trans_get_resource.name.toString() + "', obtained " + trans_get_resource.InArcs->size().toString());
-	assert warning (trans_get_resource.OutArcs->size() = 1) with log ("A single place required after the transition '" + trans_get_resource.name.toString() + "', obtained " + trans_get_resource.OutArcs->size().toString());
+	assert warning (trans_get_resource.InArcs->size() = 1) with log ("A single place required before the transition '" + trans_get_resource.toString() + "', obtained " + trans_get_resource.InArcs->size().toString());
+	assert warning (trans_get_resource.OutArcs->size() = 1) with log ("A single place required after the transition '" + trans_get_resource.toString() + "', obtained " + trans_get_resource.OutArcs->size().toString());
 	
 	var place_pred := trans_get_resource.InArcs->asSequence()->first().source;
 	var place_post := trans_get_resource.OutArcs->asSequence()->first().target;
@@ -231,7 +245,7 @@ when {
 	- a Mapper  partition
 	- a Reducer partition */
 	var containedNodes := ad.objectsOfKind(UML::ActivityNode)->select(node : ActivityNode | self->intersection(node.inPartition)->notEmpty());
-	assert fatal (containedNodes->size() = 1) with log ("Current partition '" + self.name + "' has more than one activity node: " + containedNodes->size().toString());
+	assert fatal (containedNodes->size() = 1) with log ("Current partition '" + self.toString() + "' has more than one activity node: " + containedNodes->size().toString());
 
 	var node := containedNodes->asList()->first();
 	
@@ -239,7 +253,12 @@ when {
 	
 	/* Get a global unique name for avoid collision and replications */
 	var model := ad.objectsOfKind(UML::InitialNode)->asList()->first();
-	var model_name := model.name;
+
+	var model_name := createRandomUniqueId();	
+	if (model.name.oclIsUndefined().not() and
+		model.name.equalsIgnoreCase("").not()) {
+		model_name := model.name;
+	};
 	
 	var resources := object ColourSet {
 		colorset_id := getResName(model_name);
@@ -322,8 +341,14 @@ mapping UML::InitialNode::initialNode2subNet()
 	- Number of colors: nUsers
 	- Number of elements per color: nC1 for user class 1, nC2 for user class 2,... */
 	
+	var self_name_text := createRandomUniqueId();
+	if (self.name.oclIsUndefined().not() and
+		self.name.equalsIgnoreCase("").not()) {
+		self_name_text := self.name;
+	};
+		
 	var users := object ColourSet {
-		colorset_id := self.name;
+		colorset_id := self_name_text;
 		type :=  0; /*u*/ /*u, o*/
 	};
 	
@@ -447,9 +472,15 @@ mapping UML::ActivityNode::mapNode2subNet()
 		- Colorset: Mapper
 		- Number of colors: nTask
 		- Number of elements per color: nM1 for task 1, nM2 for task 2,... */
-		
+
+		var self_name_text := createRandomUniqueId();
+		if (self.name.oclIsUndefined().not() and
+			self.name.equalsIgnoreCase("").not()) {
+			self_name_text := self.name;
+		};
+			
 		var mapper := object ColourSet {
-			colorset_id := self.name;
+			colorset_id := self_name_text;
 			type :=  0; /*u, o*/
 		};
 		 
@@ -459,7 +490,7 @@ mapping UML::ActivityNode::mapNode2subNet()
 		listNumElemColor->forEach(numElemColor){
 			var temp_col := object Colour{
 				color_id := i;
-				colorset_id := self.name;
+				colorset_id := self_name_text;
 				numElements := numElemColor.value();
 			};
 			listColours += temp_col;
@@ -478,12 +509,18 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 		
 		assert warning (self.incoming->size() = 1) with log ("More than one initial node"); 
 		var initial_node := self.incoming->asOrderedSet()->first().source;
-		
+
+		var initial_node_name := createRandomUniqueId();
+		if (initial_node.name.oclIsUndefined().not() and
+			initial_node.name.equalsIgnoreCase("").not()) {
+			initial_node_name := initial_node.name;
+		};
+			
 		/* The color number colour.color_id of the colorset <Mapper> is assigned to the
 		same color number of the colorset <User> */
 		var place_user_color := object Colour{
 				color_id := map_color.color_id;
-				colorset_id := initial_node.name;
+				colorset_id := initial_node_name;
 				numElements := 0;
 		};
 		
@@ -529,7 +566,7 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 		
 		var arc_user_color := object Colour{
 			color_id := map_color.color_id;
-			colorset_id := initial_node.name;
+			colorset_id := initial_node_name;
 			numElements := 1;
 		};
 		
@@ -560,7 +597,7 @@ mapping UML::ActivityNode::mapNode2subNetColor(in map_color : Colour)
 			numElements := map_color.numElements;
 		};
 		
-		assert warning (place_gen.InArcs->size() = 1) with log ("A single incomming arc required before the place '" + place_gen.name.toString() + "', obtained " + place_gen.InArcs->size().toString());
+		assert warning (place_gen.InArcs->size() = 1) with log ("A single incomming arc required before the place '" + place_gen.toString() + "', obtained " + place_gen.InArcs->size().toString());
 		var arc_pred := place_gen.InArcs->asSequence()->first();
 		
 		/* Copy the labelling of the precedent arc: <map,fifo_index> */
@@ -592,9 +629,15 @@ mapping UML::ActivityNode::reduceNode2subNet()
 		- Colorset: Reducer
 		- Number of colors: nTask
 		- Number of elements per color: nR1 for task 1, nR2 for task 2,... ] */
-		
+
+		var self_name := createRandomUniqueId();
+		if (self.name.oclIsUndefined().not() and
+			self.name.equalsIgnoreCase("").not()) {
+			self_name := self.name;
+		};
+				
 		var reducer := object ColourSet {
-			colorset_id := self.name;
+			colorset_id := self_name;
 			type :=  0; /*u, o*/
 		};
 		 
@@ -604,7 +647,7 @@ mapping UML::ActivityNode::reduceNode2subNet()
 		listNumElemColor->forEach(numElemColor){
 			var temp_col := object Colour{
 				color_id := i;
-				colorset_id := self.name;
+				colorset_id := self_name;
 				numElements := numElemColor.value();
 			};
 			
@@ -630,11 +673,17 @@ mapping UML::ActivityNode::reduceNode2subNetColor(in red_color: Colour)
 		assert warning (map_phase.incoming->size() = 1) with log ("More than one initial node");
 		var initial_node := map_phase.incoming->asOrderedSet()->first().source;
 		
+		var initial_node_name := createRandomUniqueId();
+		if (initial_node.name.oclIsUndefined().not() and
+			initial_node.name.equalsIgnoreCase("").not()) {
+			initial_node_name := initial_node.name;
+		};
+				
 		/* The color number colour.color_id of the colorset <Reducer> is assigned to the
 		same color number of the colorset <User> */
 		var place_user_color := object Colour{
 				color_id := red_color.color_id;
-				colorset_id := initial_node.name;
+				colorset_id := initial_node_name;
 				numElements := 0;
 		};
 		
@@ -675,10 +724,10 @@ mapping UML::ActivityNode::reduceNode2subNetColor(in red_color: Colour)
 		var trans_join_red := self.map activityNode2immTransJoinCol(trans_red_color_2);
 		
 		/* trans_get_resource.toolspecifics += colorToolInfo(trans_color); */
-		
+				
 		var arc_user_color := object Colour{
 			color_id := red_color.color_id;
-			colorset_id := initial_node.name;
+			colorset_id := initial_node_name;
 			numElements := 1;
 		};
 		
@@ -744,6 +793,12 @@ mapping UML::FinalNode::model2closedNet() {
 		assert warning (red_phase.incoming->asOrderedSet()->size() = 1) with log ("More than one initial node found");
 		var initial_node := map_phase.incoming->asOrderedSet()->first().source;
 		
+		var initial_node_name := createRandomUniqueId();
+		if (initial_node.name.oclIsUndefined().not() and
+			initial_node.name.equalsIgnoreCase("").not()) {
+			initial_node_name := initial_node.name;
+		};
+		
 		var i := 0;					
 		var listNumElemColor := initial_node.getHadoopWorkloadEvent_hadoopPopulation();
 		listNumElemColor->forEach(numElemColor){
@@ -754,7 +809,7 @@ mapping UML::FinalNode::model2closedNet() {
 			
 			var user_color := object Colour{
 				color_id := i;
-				colorset_id := initial_node.name;
+				colorset_id := initial_node_name;
 				numElements := numElemColor.value();
 			};
 			
@@ -779,9 +834,15 @@ mapping UML::FinalNode::model2closedNetColor(in user_color: Colour) {
 		assert fatal (red_phase.incoming->asOrderedSet()->size() = 1) with log ("More than one initial node found");
 		var initial_node := map_phase.incoming->asOrderedSet()->first().source;
 
+		var red_phase_name := createRandomUniqueId();
+		if (red_phase.name.oclIsUndefined().not() and
+			red_phase.name.equalsIgnoreCase("").not()) {
+			red_phase_name := red_phase.name;
+		};
+		
 		var trans_red_color := object Colour{
 				color_id := user_color.color_id;
-				colorset_id := red_phase.name;
+				colorset_id := red_phase_name;
 				numElements := 2;
 		};
 
@@ -964,7 +1025,6 @@ mapping UML::NamedElement::namedElement2transitionCol(in colour : Colour) : PNML
 
 mapping UML::NamedElement::namedElement2immediateTransitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2transitionCol{
-		//name.text := name.text + "_trans";
 }
 
 /***********************************************************************/
@@ -1118,22 +1178,40 @@ mapping UML::ControlFlow::initialControlFlow2arc(in scheduler : DBET::Scheduling
 	
 	var i := 0;
 
+	var initial_node_name := createRandomUniqueId();
+	if (initial_node.name.oclIsUndefined().not() and
+		initial_node.name.equalsIgnoreCase("").not()) {
+		initial_node_name := initial_node.name;
+	};
+	
+	var map_phase_name := createRandomUniqueId();
+	if (map_phase.name.oclIsUndefined().not() and
+		map_phase.name.equalsIgnoreCase("").not()) {
+		map_phase_name := map_phase.name;
+	};
+	
+	var red_phase_name := createRandomUniqueId();
+	if (red_phase.name.oclIsUndefined().not() and
+		red_phase.name.equalsIgnoreCase("").not()) {
+		red_phase_name := red_phase.name;
+	};
+		
 	listNumElemUser->forEach(numElemUser){
 		var user_color := object Colour{
 			color_id := 0;
-			colorset_id := initial_node.name;
+			colorset_id := initial_node_name;
 			numElements := 1;
 		};
 		
 		var map_color := object Colour{
 			color_id := 0;
-			colorset_id := map_phase.name;
+			colorset_id := map_phase_name;
 			numElements := 1;
 		};
 		
 		var reduce_color := object Colour{
 			color_id := 0;
-			colorset_id := red_phase.name;
+			colorset_id := red_phase_name;
 			numElements := 1;
 		};
 		user_color.color_id := i;
