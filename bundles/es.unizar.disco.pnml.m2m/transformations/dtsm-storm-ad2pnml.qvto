@@ -53,8 +53,15 @@ mapping UML::NamedElement::model2doc() : PNML::PetriNetDoc {
 
 mapping UML::NamedElement::model2net() : PNML::PetriNet {
 	id := createRandomUniqueId();
+	var temp_text := id;
+	
+	if (self.name.oclIsUndefined().not() and
+		self.name.equalsIgnoreCase("").not()) {
+		temp_text := self.name;
+	};
+	
 	name := object PNML::Name {
-		text := self.name;
+		text := temp_text;
 	};
 	pages := self.map model2page();
 }
@@ -306,7 +313,8 @@ mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 
 mapping UML::NamedElement::namedElement2immediateTransition() : PNML::Transition
 inherits UML::NamedElement::namedElement2transition {
-		name.text := self.name + "_transition";
+		//name.text := self.name + "_transition";
+		name.text := name.text + "_transition";
 }
 
 /**
@@ -536,7 +544,7 @@ mapping UML::ControlFlow::joinControlFlow2arcGlobalField() when {
 	 */
 	assert warning ((self.getStormStreamStep_grouping()!=(DBET::StreamPolicy::global)) and
 				  (self.getStormStreamStep_grouping()!=(DBET::StreamPolicy::field)) )
-		with log ("Grouping '" + self.getStormStreamStep_grouping().toString() + "' in '" + self.name.toString() + "' is not compatible with a UML JoinNode");
+		with log ("Grouping '" + self.getStormStreamStep_grouping().toString() + "' in '" + self.toString() + "' is not compatible with a UML JoinNode");
 	if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::global) ) {
 		//self.map global_grouping_sync(bolt);
 	} else if (self.getStormStreamStep_grouping().=(DBET::StreamPolicy::field) ) {
