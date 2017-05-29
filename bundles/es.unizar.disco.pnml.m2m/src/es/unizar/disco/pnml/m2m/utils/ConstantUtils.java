@@ -12,6 +12,11 @@ public class ConstantUtils {
 	private final static String ALL_RESOURCES_FAILED = "AllResourcesFailed";
 	private final static String ALL_RESOURCES_EXPELLED = "ResourcesExpelled";
 	private final static String ALL_RESOURCES_NOT_EXPELLED = "ResourcesNotExpelled";
+	private final static String MASTER_FAILS = "MasterNodeFails";
+	private final static String MASTER_REPAIRS = "MasterNodeRepairs";
+	private final static String MISSION_TIME = "missionTime";
+	private final static String VMS_ACTIVE = "activeVms";
+	private final static String MTTF_VMS = "transitionWithMTTFvms";
 	
 	
 	@Operation
@@ -47,6 +52,31 @@ public class ConstantUtils {
 	@Operation
 	public static String getPlaceNotExpelled() {
 		return ALL_RESOURCES_NOT_EXPELLED;
+	}
+	
+	@Operation
+	public static String getTransitionMasterFails() {
+		return MASTER_FAILS;
+	}
+	
+	@Operation
+	public static String getTransitionMasterRepairs() {
+		return MASTER_REPAIRS;
+	}
+	
+	@Operation
+	public static String getMissionTime() {
+		return MISSION_TIME;
+	}
+	
+	@Operation
+	public static String getVmsActive(){
+		return VMS_ACTIVE;
+	}
+	
+	@Operation
+	public static String getMTTFvms(){
+		return MTTF_VMS;
 	}
 	
 }
