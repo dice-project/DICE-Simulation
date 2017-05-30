@@ -120,7 +120,8 @@ when {
 	containedNodes->forEach(node) {	
 		assert warning (node.getStormBolt().oclIsUndefined().not() or
 		                node.getStormSpout().oclIsUndefined().not()) with log ("Processing a node '" + node.toString() + "' in partition '" + self.toString() + "'");
-		if (node.getStormBolt().oclIsUndefined().not()){
+		if (node.getStormBolt().oclIsUndefined().not() or 
+			node.getStormSpout().oclIsUndefined().not()){
             // Timed transition 
 			var list_temp_trans := node.getTimedTrans_Node();
 			assert fatal (list_temp_trans->size() >= 1) with log ("Could not find a temporal transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
@@ -143,14 +144,15 @@ when {
 		            map arc(temp_trans, place);	
 				}
             };
-		} else if  (node.getStormSpout().oclIsUndefined().not()) {
+		}
+		/*else if  (node.getStormSpout().oclIsUndefined().not()) {
 			var list_temp_trans := node.getTimedTrans_Node();
 			assert fatal (list_temp_trans->size() >= 1) with log ("Could not find a temporal transition in the node '" + node.toString() + "' in partition '" + self.toString() + "'");
 			list_temp_trans->forEach(temp_trans){
 				var arc_1 := map arc(temp_trans, place);
 				var arc_2 := map arc(place, temp_trans);
 			}
-		}
+		}*/
 	};
 	
 	// Add tracing information
@@ -168,6 +170,30 @@ UML::ActivityNode::boltNode2subNet {};
 		              <\[place]</
 */
 mapping UML::ActivityNode::spoutNode2subNet()
+	when { (self.getStormSpout().oclIsUndefined().not()) }{
+		var imm_trans := self.map activityNode2immediateTransition();
+		var temp_trans := self.map activityNode2timedTransition();
+		var place_par := self.map activityNode2placeParallelism();
+		var place_working := self.map activityNode2place();
+
+		place_par.initialMarking := object PNML::PTMarking {
+			text := self.getStorm_parallelism().value();
+		};
+				
+		var arc_1 := map arc(temp_trans, place_par);
+		var arc_2 := map arc(place_par, imm_trans);
+		//var arc_2 := map arc(place_par, temp_trans);
+		var arc_3 := map arc(imm_trans, place_working);
+		var arc_4 := map arc(place_working, temp_trans);
+		
+		// Add tracing information
+		self.map trace(place_working, "spoutNode2subNet");
+		self.map trace(place_par, "spoutNode2subNet");
+		self.map trace(temp_trans, "spoutNode2subNet");
+		self.map trace(imm_trans, "spoutNode2subNet");
+}
+
+mapping UML::ActivityNode::spoutNode2subNet2()
 	when { (self.getStormSpout().oclIsUndefined().not()) }{
 		var transition := self.map activityNode2timedTransition();
 		var place := self.map activityNode2placeParallelism();
