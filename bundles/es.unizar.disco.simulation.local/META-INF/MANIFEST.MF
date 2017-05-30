@@ -7,7 +7,15 @@ Bundle-Activator: es.unizar.disco.simulation.local.LocalSimulationPlugin
 Require-Bundle: org.eclipse.core.runtime,
  org.apache.commons.io,
  es.unizar.disco.core,
- es.unizar.disco.simulation
+ es.unizar.disco.simulation,
+ org.eclipse.uml2.uml,
+ es.unizar.disco.pnml.m2m,
+ fr.lip6.pnml.framework.ptnet,
+ es.unizar.disco.pnml.m2t
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: DisCo - Unizar
+Import-Package: org.eclipse.uml2.uml
+Bundle-ClassPath: lib/bundles/unit-api-0.9.jar,
+ lib/bundles/unit-ri-0.9.jar,
+ .

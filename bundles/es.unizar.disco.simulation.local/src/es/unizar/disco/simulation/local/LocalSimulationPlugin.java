@@ -12,6 +12,8 @@ public class LocalSimulationPlugin extends Plugin {
 
 	private static LocalSimulationPlugin plugin;
 
+	//private static final String PLUGIN_ID = "es.unizar.disco.simulation.local";
+	
 	/**
 	 * The constructor.
 	 */

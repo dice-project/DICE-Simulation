@@ -26,7 +26,7 @@
          <Calculator
                class="es.unizar.disco.simulation.local.calculators.ReliabilityCalculatorSpark"
                scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
-               toolResult="void">
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
       </Metric>
       <Metric
@@ -36,7 +36,7 @@
          <Calculator
                class="es.unizar.disco.simulation.local.calculators.AvailabilityCalculatorSpark"
                scenario="DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario"
-               toolResult="void">
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
       </Metric>
    </extension>
