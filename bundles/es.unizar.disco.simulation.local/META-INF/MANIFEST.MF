@@ -19,3 +19,4 @@ Import-Package: org.eclipse.uml2.uml
 Bundle-ClassPath: lib/bundles/unit-api-0.9.jar,
  lib/bundles/unit-ri-0.9.jar,
  .
+Export-Package: es.unizar.disco.simulation.local.calculators

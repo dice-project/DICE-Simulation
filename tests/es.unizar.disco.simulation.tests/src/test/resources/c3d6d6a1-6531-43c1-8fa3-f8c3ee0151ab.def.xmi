@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ASCII"?>
+<definition:SimulationDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:definition="http://es.unizar.disco/simulation/definition/1.0" identifier="c3d6d6a1-6531-43c1-8fa3-f8c3ee0151ab" maxExecutionTime="1970-01-01T01:00:00.000+0100" measuresToCompute="//@declaredMeasures.1 //@declaredMeasures.3" backend="es.unizar.disco.simulation.local.localSimulator" activeConfigurations="//@possibleConfigurations.0" nfpToCompute="RELIABILITY">
+  <invocations href="86f60c62-46c3-4bdc-940b-408535b5e26b.inv.xmi#86f60c62-46c3-4bdc-940b-408535b5e26b"/>
+  <parameters key="-M" value="2000"/>
+  <parameters key="-m" value="1000"/>
+  <parameters key="-s" value="31415"/>
+  <parameters key="-t" value="1000"/>
+  <parameters key="binary_file_path" value="/usr/local/GreatSPN/bin/WNSIM"/>
+  <parameters key="-a" value="5"/>
+  <parameters key="-c" value="95"/>
+  <parameters key="-f" value="1000"/>
+  <activeScenario href="SparkReliability.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+  <inputVariables name="mapT" assignments="//@possibleConfigurations.0/@assignments.0">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.0"/>
+  </inputVariables>
+  <inputVariables name="nAssignedMem" assignments="//@possibleConfigurations.0/@assignments.1">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.1"/>
+  </inputVariables>
+  <inputVariables name="nP1" assignments="//@possibleConfigurations.0/@assignments.2">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.2"/>
+  </inputVariables>
+  <inputVariables name="nM1" assignments="//@possibleConfigurations.0/@assignments.3">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.3"/>
+  </inputVariables>
+  <inputVariables name="redT" assignments="//@possibleConfigurations.0/@assignments.4">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.4"/>
+  </inputVariables>
+  <inputVariables name="nAssignedCores" assignments="//@possibleConfigurations.0/@assignments.5">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.5"/>
+  </inputVariables>
+  <inputVariables name="th1" assignments="//@possibleConfigurations.0/@assignments.6">
+    <values value="2" assignments="//@possibleConfigurations.0/@assignments.6"/>
+  </inputVariables>
+  <inputVariables name="nC1" assignments="//@possibleConfigurations.0/@assignments.7">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.7"/>
+  </inputVariables>
+  <domainResource uri="SparkReliability.uml"/>
+  <outputVariables name="RT"/>
+  <outputVariables name="T"/>
+  <outputVariables name="U"/>
+  <outputVariables name="reliability"/>
+  <outputVariables name="availability"/>
+  <outputVariables name="U1"/>
+  <declaredMeasures measure="respT">
+    <measuredElement href="SparkReliability.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$RT"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="s"/>
+  </declaredMeasures>
+  <declaredMeasures measure="ssAvail">
+    <measuredElement href="SparkReliability.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$availability"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="SparkReliability.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$T"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="s"/>
+  </declaredMeasures>
+  <declaredMeasures measure="reliability">
+    <measuredElement href="SparkReliability.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$reliability"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="SparkReliability.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
+    <vslExpressionEntries key="expr" value="$U"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <possibleConfigurations>
+    <assignments value="//@inputVariables.0/@values.0" variable="mapT"/>
+    <assignments value="//@inputVariables.1/@values.0" variable="nAssignedMem"/>
+    <assignments value="//@inputVariables.2/@values.0" variable="nP1"/>
+    <assignments value="//@inputVariables.3/@values.0" variable="nM1"/>
+    <assignments value="//@inputVariables.4/@values.0" variable="redT"/>
+    <assignments value="//@inputVariables.5/@values.0" variable="nAssignedCores"/>
+    <assignments value="//@inputVariables.6/@values.0" variable="th1"/>
+    <assignments value="//@inputVariables.7/@values.0" variable="nC1"/>
+  </possibleConfigurations>
+  <scenarioStereotypes>DICE::DICE_UML_Extensions::DTSM::Spark::SparkScenario</scenarioStereotypes>
+</definition:SimulationDefinition>

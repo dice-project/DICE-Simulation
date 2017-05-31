@@ -34,3 +34,9 @@ Files
 f388179a-3dfc-4567-a002-f786fd9bd813.def.xmi
 reliabilityHadoop.uml
 are used for teh reliability DTSM Hadoop tests
+
+Files
+86f60c62-46c3-4bdc-940b-408535b5e26b.inv.xmi
+c3d6d6a1-6531-43c1-8fa3-f8c3ee0151ab.def.xmi
+SparkReliability.uml
+are used for teh reliability DTSM Spark tests in local. 
