@@ -7,8 +7,6 @@ import javax.measure.Unit;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.uml2.uml.Activity;
-import org.eclipse.uml2.uml.Element;
-import org.eclipse.uml2.uml.Model;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.pnml.m2m.utils.ConstantUtils;
@@ -57,7 +55,7 @@ public class AvailabilityCalculatorSpark extends AbstractCalculator implements M
 				Transition trans = ((Transition)trace.getToAnalyzableElement());
 				
 			
-				if(pnmlutils.isExponential(trans)){
+				if(PnmlToolInfoUtils.isExponential(trans)){
 					rateFail = pnmlutils.getTransitionRate(trans);
 				}
 			}
@@ -65,7 +63,7 @@ public class AvailabilityCalculatorSpark extends AbstractCalculator implements M
 				//get the repair rate
 				Transition trans = ((Transition)trace.getToAnalyzableElement());
 				
-				if(pnmlutils.isExponential(trans)){
+				if(PnmlToolInfoUtils.isExponential(trans)){
 					rateRepair=pnmlutils.getTransitionRate(trans);
 				}
 				

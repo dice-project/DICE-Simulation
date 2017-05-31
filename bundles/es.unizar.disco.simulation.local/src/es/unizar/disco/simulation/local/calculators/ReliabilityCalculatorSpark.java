@@ -55,7 +55,7 @@ public class ReliabilityCalculatorSpark implements MeasureCalculator {
 						Transition trans = ((Transition)trace.getToAnalyzableElement());
 						
 					
-						if(pnmlutils.isExponential(trans)){
+						if(PnmlToolInfoUtils.isExponential(trans)){
 							rateFail = pnmlutils.getTransitionRate(trans);
 						}
 					}
