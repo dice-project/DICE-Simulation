@@ -1043,7 +1043,8 @@ inherits UML::NamedElement::namedElement2immediateTransitionCol {
 
 mapping UML::ActivityNode::activityNode2immediateTransitionCol(in colour : Colour) : PNML::Transition
 inherits UML::NamedElement::namedElement2immediateTransitionCol {
-			name.text := name.text + "_place";
+			//name.text := name.text + "_place";
+			name.text := name.text + "_trans";
 }
 
 /**
