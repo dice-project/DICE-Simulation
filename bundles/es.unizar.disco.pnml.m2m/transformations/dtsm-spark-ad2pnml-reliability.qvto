@@ -1,0 +1,769 @@
+import es.unizar.disco.pnml.utils.PnmlDiceUtils;
+
+import helpers;
+
+modeltype UML uses 'http://www.eclipse.org/uml2/5.0.0/UML';
+modeltype PNML uses 'http:///ptnet.ecore';
+modeltype TYPES uses 'http://es.unizar.disco/simulation/datatypes/1.0';
+modeltype TRACE uses 'http://es.unizar.disco/simulation/traces/1.0';
+modeltype CONST uses 'http://es.unizar.disco/pnconstants/1.0';
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+modeltype DAM_COMPLEX_DATA_TYPES uses 'http://com.masdes.dam/libraries/Complex_Data_Types/1.0';
+	
+
+transformation ad2pnml(in ad : UML, in vars : TYPES, out res : PNML, out traces : TRACE); 
+
+/**
+	Main method:
+		1.- Create the root elements (PetriNetDoc, PetriNet, Page)
+		2.- Transform ActivityNodes, creating subnets of places and transitions
+		2.- Transform ControlFlows, linking the previously created subnets
+		2.- Complete transformation with the information of the workload in the initial nodes
+*/
+main() {
+	// Transform top-level elements
+	ad.scenario().map model2doc();
+	
+	
+	
+	ad.nodes()->flatten()[Node] -> map node2subnet();
+	
+	assert fatal (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found SparkNodes well defined in this Topology");
+		
+	
+	//If not MTTR (if MTTR is possible in this system it will require to extend the transformation)
+	ad.scenario().map closeNet();
+	
+
+	// Set time metadata
+	if (resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet).toolspecifics->notEmpty()) {
+		log("Base time unit is 's'");
+		log("Base frequency unit is 'Hz'");
+	} else {
+		log("Base time unit is 'tick'");
+		log("Base frequency unit is 'events per tick'");
+	}
+}
+
+/**
+	Create the PetriNetDoc and the PetriNet
+*/
+mapping UML::NamedElement::model2doc() : PNML::PetriNetDoc {
+	nets := self.map model2net();
+}
+
+mapping UML::NamedElement::model2net() : PNML::PetriNet {
+	id := createRandomUniqueId();
+	name := object PNML::Name {
+		text := self.name;
+	};
+	pages := self.map model2page();
+}
+
+/**
+	Create the page
+*/
+mapping UML::NamedElement::model2page() : PNML::Page {
+	id := createRandomUniqueId();
+}
+
+/**
+	Sets the metadata for the base time unit on the PNML file
+*/
+mapping baseTimeUnit(unit : String) {
+	var net := resolveoneIn(UML::NamedElement::model2net, PNML::PetriNet);
+	net.toolspecifics += baseTimeUnitToolInfo(unit);
+}
+
+
+
+
+mapping UML::Node::node2subnet() {
+
+self->closure(nestedNode) ->including(self) -> map sparkNode2subnet();
+
+
+}
+
+mapping UML::NamedElement::closeNet(){
+	var lastPlace := resolveoneIn(UML::Node::namedElement2placeVMsKO, p:Place | p.initialMarking.oclIsUndefined());
+	var resourcePlace := resolveoneIn(UML::Node::namedElement2placeVMs, p:Place | p.initialMarking.oclIsUndefined().not());
+	log("ID of last Place is : " + lastPlace.id);
+	log("ID of resourcePlace is: " + resourcePlace.id + " with num initial tokens " + resourcePlace.initialMarking.text.toString());
+	
+	var closeTransition := self.map namedElement2transition();
+	
+	var arcFromLastPlaceToCloseTransition := map arc(lastPlace, closeTransition);
+	arcFromLastPlaceToCloseTransition.inscription :=  object PNML::PTArcAnnotation {
+						text := resourcePlace.initialMarking.text;
+					};
+					
+	var arcFromCloseTransitionToResourcePlace := map arc(closeTransition, resourcePlace);
+	arcFromCloseTransitionToResourcePlace.inscription :=  object PNML::PTArcAnnotation {
+						text := resourcePlace.initialMarking.text;
+					};
+					
+	ad.scenario().map trace(closeTransition, getTransitionAllFailedTrace());
+}
+	
+	
+mapping UML::Node::virtualMachineFailure2subnet()
+when {self.getDaComponent().oclIsUndefined().not();}
+{
+	//log ("virtualMachineFailure2subnet is being called with element String " + self.toString());
+	//log ("virtualMachineFailure2subnet is being called with element Repr " + self.repr());
+	
+	var resMult := 1;
+	if(self.getDaComponent_resMult().oclIsUndefined().not()){
+		resMult := self.getDaComponent_resMult().value();	
+	};
+	
+	var mttf:=1.0;
+	if(self.getDaComponent_Failure_MTTF().oclIsUndefined().not()){
+		mttf := self.getDaComponent_Failure_MTTF().value();
+		log("Value of MTTF of node " + self.name + "is: " + mttf.toString());
+	};
+
+	var place := self.map namedElement2placeVMs();
+	place.initialMarking := object PNML::PTMarking {
+		text := resMult;
+	};
+	//log ("Created Place allVMsOK with marking " + place.initialMarking.text.toString() + " and repr of place " + place.repr());
+	self.map trace(place, getVmsActive());
+	
+	var transition := self.map namedElement2transition();
+	transition.toolspecifics += expTransitionToolInfo(1.0/mttf);
+	transition.toolspecifics += infServerTransitionToolInfo();
+	
+	self.map trace(transition, getMTTFvms());
+	self.map trace(transition, getMissionTime()+"_"+self.getDaComponent_missionTime().value().toString());
+	log("Value of Mission Time of node " + self.name + "is: " + self.getDaComponent_missionTime().value().toString());
+	map arc(place, transition);
+	
+	var placeFailed := self.map namedElement2placeVMsKO();
+	//log ("Created Place allVMsKO with marking (hopefully undefined): "); 
+	//log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
+	
+	map arc(transition, placeFailed);
+	}
+	
+	
+mapping UML::Node::spotVMexpulsion2subnet()
+when {self.getSparkNode().oclIsUndefined().not();}
+{
+	
+//log ("spotVMexpulsion2subnet is being called with element String " + self.toString());
+//	log ("spotVMexpulsion2subnet is being called with element Repr " + self.repr());
+	
+	
+	var mttf:=1.0;
+	if(self.getSparkNode_Failure_MTTF().oclIsUndefined().not()){
+		mttf := self.getSparkNode_Failure_MTTF().value();
+		log("Value of MTTF of node " + self.name + "is: " + mttf.toString());
+	};
+
+	var mttr:=1.0;
+	if(self.getSparkNode_Repair_MTTR().oclIsUndefined().not()){
+		mttr := self.getSparkNode_Repair_MTTR().value();
+		log("Value of MTTR of node " + self.name + "is: " + mttr.toString());
+	};
+	
+	//initial place 
+	var place := self.map notBlackout2place();
+	place.initialMarking := object PNML::PTMarking {
+		text := 1;
+	};
+	self.map trace(place, getPlaceNotExpelled());
+	//log ("Created Place not expulsed yet with marking " + place.initialMarking.text.toString() + " and repr of place " + place.repr());
+	
+	
+	//transition to fail
+	var transition := self.map namedElement2transitionExpulsion();
+	transition.toolspecifics += expTransitionToolInfo(1.0/mttf);
+	transition.toolspecifics += infServerTransitionToolInfo();
+	//log ("Created transition for expulsion with repr " + transition.repr());
+	self.map trace(transition, getTransitionMasterFails());
+	
+	
+	//arc from initial to transition to fail
+	map arc(place, transition);
+	
+	//place failed
+	var placeFailed := self.map blackout2place();
+	self.map trace(placeFailed, getPlaceAllExpelled());
+	//log ("Created Place AllExpulsed with marking (hopefully undefined): "); 
+	//log(placeFailed.initialMarking.text.toString()); log( " and repr of place " + placeFailed.repr());
+	
+	//arc from transition to fail to place failed
+	map arc(transition, placeFailed);
+
+	//trasition to repair
+	var transitionRepair := self.map namedElement2transitionRepairExpulsion();
+	transitionRepair.toolspecifics += expTransitionToolInfo(1.0/mttr);
+	transitionRepair.toolspecifics += infServerTransitionToolInfo();
+	//log ("Created transition for repair with repr " + transitionRepair.repr());
+	self.map trace(transitionRepair, getTransitionMasterRepairs());
+
+	
+	//arc from place failed to transition to repair
+	map arc(placeFailed, transitionRepair);
+	
+	//arc from repaired to initial
+	map arc(transitionRepair, place);
+
+
+	}
+
+	
+mapping UML::Node::sparkNode2subnet() 
+when {self.getSparkNode().oclIsUndefined().not();
+	
+}{
+	
+	self.map virtualMachineFailure2subnet();
+	assert warning (resolve(PNML::Place)->size()>1) with log ("there were not created at least 2 places for the VM failures. Created " + resolve(p:Place)->size().toString());
+	assert warning (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found any place with initial marking after VM failure transformation");
+	self.map spotVMexpulsion2subnet();
+	assert warning (resolve(p:Place)->size()>3) with log ("there were not created at least 4 places for the VM failures and expulsion. Created " + resolve(p:Place)->size().toString());
+	assert warning (resolveone(p:Place | p.initialMarking.oclIsUndefined().not()).oclIsUndefined().not()) with log ("It was not found any place with initial marking after VM failure and expulsion transformations");
+	
+}
+
+
+
+
+
+
+/**
+	Transform a generic NamedElement into a Place 
+*/
+mapping UML::NamedElement::namedElement2place() : PNML::Place {
+	containerPage := resolveoneIn(UML::NamedElement::model2page);
+	id := createRandomUniqueId();
+	if (self.name.oclIsUndefined().not()) {
+	result.name := object PNML::Name {
+			
+			text := self.name;
+		};
+	};
+}
+
+
+mapping UML::Node::blackout2place() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+}
+
+mapping UML::Node::notBlackout2place() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+}
+
+mapping UML::Node::namedElement2placeVMs() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+	
+	result.name.text := result.name.text.toString() + "_plaveVMs"
+}
+
+mapping UML::Node::namedElement2placeVMsKO() : PNML::Place 
+inherits UML::NamedElement::namedElement2place {
+	
+	result.name.text := result.name.text.toString() + "_placeVMsKO"
+}
+
+mapping UML::NamedElement::namedElement2placeAlreadyFailed() : PNML::Place 
+	inherits UML::NamedElement::namedElement2place {
+		
+	if (self.name.oclIsUndefined().not()) {name.text := "AlreadyFailedExecution"}
+	else{
+		name:= object PNML::Name { text := "AlreadyFailedExecution";};
+		};
+	
+}
+
+/**
+	Transform a generic NamedElement into a Transition 
+*/
+mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
+	containerPage := resolveoneIn(UML::NamedElement::model2page);
+	id := createRandomUniqueId();
+	if (self.name.oclIsUndefined().not()) {
+		result.name := object PNML::Name {
+		
+		text := self.name;
+		};
+	};
+}
+
+
+mapping UML::NamedElement::namedElement2transitionExpulsion(): PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+}
+
+mapping UML::NamedElement::namedElement2transitionRepairExpulsion(): PNML::Transition 
+inherits UML::NamedElement::namedElement2transition {
+}
+
+/**
+	Creates an Arc from 'src' to 'tgt'
+*/
+mapping arc(in src : PNML::Node, in tgt : PNML::Node) : PNML::Arc {
+	containerPage := resolveoneIn(UML::NamedElement::model2page);
+	id := createRandomUniqueId();
+	source := src;
+	target := tgt;
+}
+
+
+
+
+/*******************************************************************************
+  Traceability mappings
+*******************************************************************************/
+
+mapping OclAny::trace(to : OclAny) : TRACE::Trace {
+	init {
+		result := object TRACE::Trace {
+			fromDomainElement := self.eObject();
+			toAnalyzableElement := to.eObject();
+		}
+	}
+}
+
+mapping OclAny::trace(to : OclAny, text : String) : TRACE::Trace {
+	init {
+		result := object TRACE::Trace {
+			fromDomainElement := self.eObject();
+			toAnalyzableElement := to.eObject();
+			rule := text;
+		}
+	}
+}
+
+/*******************************************************************************
+  Navigation helpers
+  Helpers on domains are only valid in the context of a transformations and
+  cannot be moved to a library
+*******************************************************************************/
+
+helper UML::scenario() : UML::Activity {
+	// When running the transformation from the simulation tool, the UML domain must 
+	// contain a single activity at its root 
+	assert warning (self.rootObjects()[UML::Activity]->size() = 1) with log ("No single Activity instance was found at the root of the UML input model, trying to use the first Activity in the model instead");
+	
+	if (self.rootObjects()[UML::Activity]->isEmpty().not()) {
+		return self.rootObjects()[UML::Activity]->asOrderedSet()->first();
+	};
+	// This execution path is useful when running the transformation at development time
+	return self.objectsOfType(UML::Activity)->asOrderedSet()->first();
+}
+
+helper TYPES::vars() : Set ( PrimitiveVariableAssignment ) {
+	return self.rootObjects()[PrimitiveVariableAssignment];
+}
+
+
+
+helper UML::nodes() : Set(UML::Node) {
+
+	assert warning (self.rootObjects()[UML::Activity]->size() = 1) with log ("No single Activity instance was found at the root of the UML input model, trying to use the first Activity in the model instead");
+	
+	if (self.rootObjects()[UML::Activity]->isEmpty().not()) {
+		return self.rootObjects()[UML::Activity]->asOrderedSet()->first().owner.ownedElement[UML::Node];
+	};
+	// TODO: The behavior of part oclAsType(UML) is not fully understood.
+	return self.objectsOfType(UML::Activity)->asOrderedSet()->first().owner.oclAsType(UML).objectsOfKind(UML::Node);	
+}
+
+
+helper TYPES::PrimitiveVariableAssignment::asDict() : Dict(String, Real) {
+	var vars : Dict (String, Real) := Dict {};
+	self->forEach(assignment) {
+		vars->put(assignment.variable, assignment.value.toString().toReal());
+	};
+	return vars;
+}
+
+helper TRACE::set() : TRACE::TraceSet {
+	return self.rootObjects()[TRACE::TraceSet]->asSequence()->first();
+}
+
+/*******************************************************************************
+  Intermediate classes
+  Sadly, intermediate classes cannot be shared among libraries or 
+  transformations.
+*******************************************************************************/
+   
+intermediate class ArrivalPattern {
+	_rawExpression : String;
+}
+
+intermediate class ClosedPattern extends ArrivalPattern {
+	population_ : NFP_Integer;
+	extDelay : NFP_Real;
+}
+
+intermediate class OpenPattern extends ArrivalPattern {
+	interArrivalTime : NFP_Duration;
+	arrivalRate : NFP_Frequency;
+	arrivalProcess : String;
+}
+
+intermediate class NFP_CommonType {
+	_rawExpression : String;
+	expr : String;
+	source : String;
+	statQ : String;
+	dir : String;
+	mode : String;
+}
+
+intermediate class NFP_Integer extends NFP_CommonType {
+	value : Integer;
+}
+
+intermediate class NFP_Real extends NFP_CommonType{
+	value : Real;
+}
+
+intermediate class NFP_Duration extends NFP_Real {
+	unit : String;
+	clock : String;
+	precision : Real;
+	worst : Real;
+	best : Real;
+}
+
+intermediate class NFP_Frequency extends NFP_Real {
+	unit : String;
+	precision : Real;
+}
+
+/*******************************************************************************
+  Tagged values utilities
+*******************************************************************************/
+
+/**
+	Helper that parses a VSL tuple containing a NFP_CommonType
+*/
+helper String::toNfpCommonType() : NFP_CommonType {
+	var res := object NFP_CommonType {
+		_rawExpression := self;
+		statQ := null;
+		expr := null;
+		source := null;
+		dir := null;
+		mode := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.expr := entries->get("expr");
+		res.statQ := entries->get("statQ");
+		res.source := entries->get("source");
+		res.dir := entries->get("dir");
+		res.mode := entries->get("mode");
+	} else {
+		res.expr := self;
+	};
+	assert warning (res.statQ.oclIsUndefined() or res.statQ = 'mean') 
+		with log ("Expression '" + self + "' defines an unknown 'statQ' value, expected empty or 'mean'");
+	assert warning (res.source.oclIsUndefined() or res.source = 'est' or res.source = 'meas')
+		with log ("Expression '" + self + "' defines an unsupported 'source' for an input parameter, expected 'est' or 'meas'.");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'dir' property");
+	assert warning (res.mode.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'mode' property");
+	return res;
+}
+
+/**
+	Helper that parses a VSL tuple containing a NFP_Integer
+*/
+helper String::toNfpInteger() : NFP_Integer {
+	var nfp := self.toNfpCommonType();
+	var res := object NFP_Integer {
+		_rawExpression := nfp._rawExpression;
+		expr := nfp.expr;
+		statQ := nfp.statQ;
+		source := nfp.source;
+		dir := nfp.dir;
+		mode := nfp.mode;
+		value := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.value := entries->get("value").toInteger();
+	};
+	assert fatal (res.value.oclIsUndefined() xor res.expr.oclIsUndefined())
+		with log ("Expression '" + self + "' must define either a valid 'value' or a valid 'expr'");
+	return res;
+}
+
+/**
+	Helper that parses a VSL tuple containing a NFP_Real
+*/
+helper String::toNfpReal() : NFP_Real {
+	var nfp := self.toNfpCommonType();
+	var res := object NFP_Real {
+		_rawExpression := nfp._rawExpression;
+		expr := nfp.expr;
+		statQ := nfp.statQ;
+		source := nfp.source;
+		dir := nfp.dir;
+		mode := nfp.mode;
+		value := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.value := entries->get("value").toReal();
+	};
+	assert fatal (res.value.oclIsUndefined() xor res.expr.oclIsUndefined())
+		with log ("Expression '" + self + "' must define either a valid 'value' or a valid 'expr'");
+	return res;
+}
+
+
+/**
+	Helper that parses a VSL tuple containing a NFP_Duration
+*/
+helper String::toNfpDuration() : NFP_Duration {
+	var nfp := self.toNfpReal();
+	var res := object NFP_Duration {
+		_rawExpression := nfp._rawExpression;
+		value := nfp.value;
+		expr := nfp.expr;
+		statQ := nfp.statQ;
+		source := nfp.source;
+		dir := nfp.dir;
+		mode := nfp.mode;
+		unit := null;
+		clock := null;
+		precision := null;
+		worst := null;
+		best := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.unit := entries->get("unit");
+		res.clock := entries->get("clock");
+		res.precision := entries->get("precision").toReal();
+		res.worst := entries->get("worst").toReal();
+		res.best := entries->get("best").toReal();
+	};
+	assert warning (res.unit.oclIsUndefined().not())
+		with log ("Expression '" + self + "' does not define a 'unit', assumming the default base unit (see complete log)");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'clock' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'precision' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'worst' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'best' property");
+	
+	return res;
+}
+
+/**
+	Helper that parses a VSL tuple containing a NFP_Frequency
+*/
+helper String::toNfpFrequency() : NFP_Frequency {
+	var nfp := self.toNfpReal();
+	var res := object NFP_Frequency {
+		_rawExpression := nfp._rawExpression;
+		value := nfp.value;
+		expr := nfp.expr;
+		statQ := nfp.statQ;
+		source := nfp.source;
+		dir := nfp.dir;
+		mode := nfp.mode;
+		unit := null;
+		precision := null;
+	};
+	if (self.isTuple()) {
+		var entries := self.asTuple();
+		res.unit := entries->get("unit");
+		res.precision := entries->get("precision").toReal();
+	};
+	assert warning (res.unit.oclIsUndefined().not())
+		with log ("Expression '" + self + "' does not define a 'unit', assumming the default base unit (see complete log)");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'clock' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'precision' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'worst' property");
+	assert warning (res.dir.oclIsUndefined())
+		with log ("Expression '" + self + "' defines a value for the unsupported 'best' property");
+	
+	return res;
+}
+
+helper NFP_Integer::value() : Integer {
+	if (self.value.oclIsUndefined().not()) {
+		return self.value;
+	};
+	return self.expr.eval(vars.vars()).toInteger();
+}
+
+helper NFP_CommonType::value() : Real {
+
+	return self.expr.eval(vars.vars()).toReal();
+}
+
+
+helper NFP_Real::value() : Real {
+	if (self.value.oclIsUndefined().not()) {
+		return self.value;
+	};
+	return self.expr.eval(vars.vars()).toReal();
+}
+
+helper NFP_Duration::value() : Real {
+	var value : Real;	
+	if (self.value.oclIsUndefined().not()) {
+		value := self.value;
+	};
+	value := self.expr.eval(vars.vars()).toReal();
+	if (self.unit.oclIsUndefined().not()) {
+		map baseTimeUnit("s");			
+		value := value.convert(self.unit, "s");
+	};
+	return value;
+}
+
+helper NFP_Frequency::value() : Real {
+	var value : Real;	
+	if (self.value.oclIsUndefined().not()) {
+		value := self.value;
+	};
+	value := self.expr.eval(vars.vars()).toReal();
+	if (self.unit.oclIsUndefined().not()) {
+		map baseTimeUnit("s");
+		value := value.convert(self.unit, "Hz");
+	};
+	return value;
+}
+
+/*******************************************************************************
+  Getters for tagged values
+******************************************************************************/
+
+helper UML::Element::getGaWorkloadEvent_pattern() : ArrivalPattern {
+	if (self.getGaWorkloadEvent() = null) {
+		return null;
+	};
+	var patternString := self.getValue(self.getGaWorkloadEvent(), "pattern").oclAsType(String);
+	var patternName := patternString.key();
+	var patternValue := patternString.value();
+	switch {
+		case (patternName = "closed") {
+			return object ClosedPattern {
+				_rawExpression := patternValue;
+				population_ := patternValue.asTuple()->get("population").toNfpInteger();
+				extDelay := patternValue.asTuple()->get("extDelay").toNfpDuration();
+			};
+		} case (patternString.key() = "open") {
+			return object OpenPattern {
+				_rawExpression := patternValue;
+				interArrivalTime := patternValue.asTuple()->get("interArrivalTime").toNfpDuration();
+				arrivalRate := patternValue.asTuple()->get("arrivalRate").toNfpFrequency();
+				arrivalProcess := patternValue.asTuple()->get("arrivalProcess");
+			};
+		} else {
+			assert fatal (false) with log ("Unknown ArrivalPattern: " + patternString);
+		}
+	};
+	return null;
+}
+
+helper UML::Element::getGaStep_hostDemand() : NFP_Duration {
+	if (self.getGaStep() = null) {
+		return null;
+	};
+	var hostDemandStrings := self.getValue(self.getGaStep(), "hostDemand").oclAsType(Collection(String));
+	assert warning (hostDemandStrings->size() = 1)
+		with log ("Unexpected number of 'hostDemand' tagged values found, expected 1. "+
+					"Only the first 'mean' value will be used (if found). " + 
+					"The context element is '" + self.toString() + "'"); 
+	return hostDemandStrings.toNfpDuration()->
+			select(demand | demand.statQ.oclIsUndefined() or demand.statQ = 'mean')->
+			asSequence()->first();
+}
+
+helper UML::Element::getGaStep_prob() : NFP_Real {
+	if (self.getGaStep() = null) {
+		return null;
+	};
+	var prob := self.getValue(self.getGaStep(), "prob").oclAsType(String);
+	return prob.toNfpReal();
+}
+
+
+helper UML::NamedElement::getDaStep_Failure_Occurrenceprob() : NFP_Real {
+	if (self.getDaStep() = null) {
+
+		return null;
+	};
+	//TODO: I'm not sure about the 'oclAsType'- Check it
+	var firstFailureInformation := self.getValue(self.getDaStep(), "failure").oclAsSet()->flatten()->selectByKind(DAM_COMPLEX_DATA_TYPES::DaFailure)->asSequence()->first();
+	return firstFailureInformation.occurrenceProb->asSequence()->first().toString().toNfpReal();
+
+}
+
+helper UML::Node::getDaComponent_resMult() : NFP_Integer {
+	if(self.getDaComponent()=null){
+		return null;
+	};
+	
+	var resmult := self.getValue(self.getDaComponent(),"resMult").oclAsType(String);
+	return resmult.toNfpInteger();
+
+}
+
+//TODO: Instead of NFP_Real, it should be NFP_CommonType, but there are issues with the value(). 
+helper UML::Node::getDaComponent_missionTime() : NFP_Duration {
+	if(self.getDaComponent()=null){
+		return null;
+	};
+	
+	var missionTime := self.getValue(self.getDaComponent(),"missionTime").oclAsSet()->flatten()->asSequence()->first().oclAsType(String);
+	log("Found mission time with value " + missionTime.toString());
+	return missionTime.toNfpDuration();
+
+}
+
+
+helper UML::Element::getPaLogicalResource_poolSize() : NFP_Integer {
+	if (self.getPaLogicalResource() = null) {
+		return null;
+	};
+	var prob := self.getValue(self.getPaLogicalResource(), "poolSize").oclAsType(String);
+	return prob.toNfpInteger();
+}
+
+helper UML::Node::getDaComponent_Failure_MTTF() : NFP_Duration {
+	if(self.getDaComponent()=null){
+		return null;
+	};
+
+	var failureInformation := self.getValue(self.getDaComponent(),"failure").oclAsSet()->flatten()->selectByKind(DAM_COMPLEX_DATA_TYPES::DaFailure)->asSequence()->first();
+	return failureInformation.MTTF->asSequence()->first().toString().toNfpDuration();
+}
+
+helper UML::Node::getSparkNode_Failure_MTTF() : NFP_Duration {
+	if(self.getSparkNode()=null){
+		return null;
+	};
+	
+	var failureInformation := self.getValue(self.getSparkNode(),"failure").oclAsSet()->flatten()->selectByKind(DAM_COMPLEX_DATA_TYPES::DaFailure)->asSequence()->first();
+	return failureInformation.MTTF->asSequence()->first().toString().toNfpDuration();
+
+}
+
+helper UML::Node::getSparkNode_Repair_MTTR() : NFP_Duration {
+	if(self.getSparkNode()=null){
+		return null;
+	};
+	
+	var repairInformation := self.getValue(self.getSparkNode(),"repair").oclAsSet()->flatten()->selectByKind(DAM_COMPLEX_DATA_TYPES::DaRepair)->asSequence()->first();
+	return repairInformation.MTTR->asSequence()->first().toString().toNfpDuration();
+}

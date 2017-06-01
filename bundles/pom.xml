@@ -20,6 +20,7 @@
 		<module>es.unizar.disco.pnextensions</module>
 		<module>es.unizar.disco.pnml.m2t</module>
 		<module>es.unizar.disco.simulation.greatspn.ssh</module>
+		<module>es.unizar.disco.simulation.local</module>
 		<module>es.unizar.disco.simulation.models</module>
 		<module>es.unizar.disco.simulation.models.edit</module>
 		<module>es.unizar.disco.simulation.quickstart</module>

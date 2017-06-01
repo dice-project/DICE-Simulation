@@ -12,7 +12,9 @@ Require-Bundle: org.junit;bundle-version="4.12.0",
  es.unizar.disco.pnml.m2t,
  es.unizar.disco.dice.static.profile,
  fr.lip6.pnml.framework.ptnet,
- com.masdes.dam.static.profile
+ com.masdes.dam.static.profile,
+ es.unizar.disco.pnml.m2m,
+ es.unizar.disco.simulation.local
 Import-Package: es.unizar.disco.simulation.greatspn.ssh.calculators,
  es.unizar.disco.simulation.models.invocation,
  fr.lip6.move.pnml.pnmlcoremodel,

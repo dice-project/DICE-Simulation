@@ -198,7 +198,7 @@ helper UML::Element::getSparkWorkloadEvent() : UML::Stereotype {
 }
 
 helper UML::Element::getSparkNode() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode"))) { 
+	if (self.isStereotypeApplied(self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode"))) { 
 		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkNode");
 	};
 	return null;	
