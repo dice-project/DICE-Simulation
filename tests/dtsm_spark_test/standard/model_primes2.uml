@@ -204,7 +204,7 @@ source=est)}</body>
     <context>out$USpark</context>
     <context>$collectT</context>
   </GQAM:GaAnalysisContext>
-  <Spark:SparkScenario xmi:id="_1rOrQBfoEeePpehjS1zFvA" base_NamedElement="_puxdIBfkEeePpehjS1zFvA" base_Behavior="_puxdIBfkEeePpehjS1zFvA" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
+  <Spark:SparkScenario xmi:id="_1rOrQBfoEeePpehjS1zFvA" base_NamedElement="_puxdIBfkEeePpehjS1zFvA" usedResources="_8W8VUBfoEeePpehjS1zFvA" base_Behavior="_puxdIBfkEeePpehjS1zFvA" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
     <throughput>(expr=$T,statQ=mean,source=calc)</throughput>
     <respT>(expr=$RT,statQ=mean,source=calc,unit=ms)</respT>
     <utilization>(expr=$USpark,statQ=mean,source=calc)</utilization>
@@ -215,6 +215,6 @@ source=est)}</body>
     <hostDemand>(expr=$map2T,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkMap>
   <Spark:SparkReduce xmi:id="_oRBv8DoWEeeGuLHbg3prBg" base_NamedElement="_oQztgDoWEeeGuLHbg3prBg" base_Action="_oQztgDoWEeeGuLHbg3prBg" numTasks="$nC1" OpType="Action" ReduceType="Collect">
-    <hostDemand>(expr=$collect,unit=ms,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$collectT,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkReduce>
 </xmi:XMI>
