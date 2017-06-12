@@ -21,7 +21,7 @@ import fr.lip6.move.pnml.ptnet.Arc;
 import fr.lip6.move.pnml.ptnet.Place;
 import fr.lip6.move.pnml.ptnet.Transition;
 
-public class ThroughputCalculatorBolt extends AbstractCalculator implements MeasureCalculator {
+public class ThroughputCalculatorSpoutBolt extends AbstractCalculator implements MeasureCalculator {
 
 	@Override
 	public DomainMeasure calculate(EObject domainElement, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet) {

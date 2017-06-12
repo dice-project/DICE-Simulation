@@ -20,7 +20,7 @@ import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.wnsim.PlaceInfo;
 import fr.lip6.move.pnml.ptnet.Place;
 
-public class UtilizationCalculatorBolt extends AbstractCalculator implements MeasureCalculator {
+public class UtilizationCalculatorSpoutBolt extends AbstractCalculator implements MeasureCalculator {
 
 	@Override
 	public DomainMeasure calculate(EObject domainElement, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet) {

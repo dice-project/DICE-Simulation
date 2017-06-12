@@ -7,6 +7,7 @@ public class ConstantUtils {
 
 	private final static String TRANSITION_FAIL_TRACE = "FAIL";
 	private final static String TRANSITION_OK_TRACE = "OK";
+	private final static String TRANSITION_STORM_SPOUT = "TimedTransitionSpout";
 	private final static String PLACE_CONCURRENT_USERS_TRACE ="NumberOfConcurrentUsers";
 	private final static String USERS = "Users";
 	private final static String ALL_RESOURCES_FAILED = "AllResourcesFailed";
@@ -33,6 +34,12 @@ public class ConstantUtils {
 	public static String getOK() {
 		return TRANSITION_OK_TRACE;
 	}
+	
+	@Operation
+	public static String getTransitionStormSpout() {
+		return TRANSITION_STORM_SPOUT;
+	}
+
 	
 	@Operation
 	public static String getTransitionAllFailedTrace() {

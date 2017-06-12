@@ -189,24 +189,9 @@ mapping UML::ActivityNode::spoutNode2subNet()
 		// Add tracing information
 		self.map trace(place_working, "spoutNode2subNet");
 		self.map trace(place_par, "spoutNode2subNet");
-		self.map trace(temp_trans, "spoutNode2subNet");
+		//self.map trace(temp_trans, "spoutNode2subNet");
+		self.map trace(temp_trans, getTransitionStormSpout());
 		self.map trace(imm_trans, "spoutNode2subNet");
-}
-
-mapping UML::ActivityNode::spoutNode2subNet2()
-	when { (self.getStormSpout().oclIsUndefined().not()) }{
-		var transition := self.map activityNode2timedTransition();
-		var place := self.map activityNode2placeParallelism();
-				
-		place.initialMarking := object PNML::PTMarking {
-			text := self.getStorm_parallelism().value();
-		};
-				
-		var arc_1 := map arc(transition, place);
-		var arc_2 := map arc(place, transition);
-		// Add tracing information
-		self.map trace(place, "spoutNode2subNet");
-		self.map trace(transition, "spoutNode2subNet");
 }
 
 mapping UML::ActivityNode::boltNode2subNet()
