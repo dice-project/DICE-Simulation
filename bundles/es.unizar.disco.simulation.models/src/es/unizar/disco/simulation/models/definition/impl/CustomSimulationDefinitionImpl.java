@@ -431,6 +431,8 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 			for (Element element : elements) {
 				for (Entry<String, Collection<String>> stereotypeEntry : metricsMap.asMap().entrySet()) {
 					for (String taggedValueName : stereotypeEntry.getValue()) {
+						DomainMeasureDefinition measuredefinitioninList=null;
+						DomainMeasureDefinition slameasuredefinitioninList=null;
 						Object value = UMLUtil.getTaggedValue(element, stereotypeEntry.getKey(), taggedValueName);
 						if (value == null) {
 							continue;
@@ -438,37 +440,56 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 						if (value instanceof EList<?>) {
 							for (Object obj : (EList<?>) value) {
 								if (obj instanceof String && StringUtils.isNotBlank((String) obj)) {
-									//get only calculated values "source=calc". TODO: Maybe the blank "source" can be included. But the values with "source=req" should be omitted
-									DomainMeasureDefinition measuredefinition = createDomainMeasureDefinition(element, taggedValueName, (String) obj);
-									if("calc".equalsIgnoreCase(measuredefinition.getVslExpressionEntries().get("source"))){
-										newDefinitions.add(measuredefinition);
+									//get separated the "source=calc" and "source=req". TODO: Maybe the blank "source" can be included. But the values with "source=req" should be omitted
+									DomainMeasureDefinition currentMeasureDefinition = createDomainMeasureDefinition(element, taggedValueName, (String) obj);
+									if("calc".equalsIgnoreCase(currentMeasureDefinition.getVslExpressionEntries().get("source"))){
+										measuredefinitioninList=currentMeasureDefinition;
 									}
+									if("req".equalsIgnoreCase(currentMeasureDefinition.getVslExpressionEntries().get("source"))){
+										slameasuredefinitioninList=currentMeasureDefinition;
+									}
+									
 								}
 								else{//Treat the case of DaFailure, which is not defined as a string.
 									if(obj instanceof DaFailure){
 										//It may have also a list of MTTF fields. 
 										for(String mttf : ((DaFailure) obj).getMTTF()){
 											//get only calculated values "source=calc". TODO: Maybe the blank "source" can be included. But the values with "source=req" should be omitted
-											DomainMeasureDefinition measuredefinition = createDomainMeasureDefinition(element, taggedValueName, mttf);
-											if("calc".equalsIgnoreCase(measuredefinition.getVslExpressionEntries().get("source"))){
-												newDefinitions.add(measuredefinition);
-											}											
+											DomainMeasureDefinition currentMeasureDefinition = createDomainMeasureDefinition(element, taggedValueName, mttf);
+											if("calc".equalsIgnoreCase(currentMeasureDefinition.getVslExpressionEntries().get("source"))){
+												measuredefinitioninList=currentMeasureDefinition;
+											}
+											if("req".equalsIgnoreCase(currentMeasureDefinition.getVslExpressionEntries().get("source"))){
+												slameasuredefinitioninList=currentMeasureDefinition;
+											}
 										}
 									}									
 								}
-							}
+							}//for each element in the list of the taggedvalues							
+							
 						} else if (value instanceof String && StringUtils.isNotBlank((String) value)) {
 							//get only calculated values "source=calc". TODO: Maybe the blank "source" can be included. But the values with "source=req" should be omitted
-							DomainMeasureDefinition measuredefinition = createDomainMeasureDefinition(element, taggedValueName, (String) value);
-							if("calc".equalsIgnoreCase(measuredefinition.getVslExpressionEntries().get("source"))){
-								newDefinitions.add(measuredefinition);
+							DomainMeasureDefinition currentMeasureDefinition = createDomainMeasureDefinition(element, taggedValueName, (String) value);
+							if("calc".equalsIgnoreCase(currentMeasureDefinition.getVslExpressionEntries().get("source"))){
+								measuredefinitioninList=currentMeasureDefinition;
+							}
+							if("req".equalsIgnoreCase(currentMeasureDefinition.getVslExpressionEntries().get("source"))){
+								slameasuredefinitioninList=currentMeasureDefinition;
 							}
 						} else {
 							// Unknown value, do nothing
 						}
-					}
-				}
-			}
+						
+						if(measuredefinitioninList!=null){
+							if(slameasuredefinitioninList!=null){
+								measuredefinitioninList.setSlaVslExpression(slameasuredefinitioninList.getVslExpression());
+							}
+							newDefinitions.add(measuredefinitioninList);
+						}
+						
+					}// for each taggedvalue of the stereotype
+				}//for each estereotype of the element
+			}//for each element 
 
 			// Check if all the previous definitions were selected
 			boolean allSelected = getDeclaredMeasures().size() == getMeasuresToCompute().size();
