@@ -438,16 +438,31 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 						if (value instanceof EList<?>) {
 							for (Object obj : (EList<?>) value) {
 								if (obj instanceof String && StringUtils.isNotBlank((String) obj)) {
-									newDefinitions.add(createDomainMeasureDefinition(element, taggedValueName, (String) obj));
+									//get only calculated values "source=calc". TODO: Maybe the blank "source" can be included. But the values with "source=req" should be omitted
+									DomainMeasureDefinition measuredefinition = createDomainMeasureDefinition(element, taggedValueName, (String) obj);
+									if("calc".equalsIgnoreCase(measuredefinition.getVslExpressionEntries().get("source"))){
+										newDefinitions.add(measuredefinition);
+									}
 								}
-								else{//Treat the case of DaFailure, which is not defined as a string
+								else{//Treat the case of DaFailure, which is not defined as a string.
 									if(obj instanceof DaFailure){
-										newDefinitions.add(createDomainMeasureDefinition(element, taggedValueName, ((DaFailure) obj).getMTTF().get(0)));
+										//It may have also a list of MTTF fields. 
+										for(String mttf : ((DaFailure) obj).getMTTF()){
+											//get only calculated values "source=calc". TODO: Maybe the blank "source" can be included. But the values with "source=req" should be omitted
+											DomainMeasureDefinition measuredefinition = createDomainMeasureDefinition(element, taggedValueName, mttf);
+											if("calc".equalsIgnoreCase(measuredefinition.getVslExpressionEntries().get("source"))){
+												newDefinitions.add(measuredefinition);
+											}											
+										}
 									}									
 								}
 							}
 						} else if (value instanceof String && StringUtils.isNotBlank((String) value)) {
-							newDefinitions.add(createDomainMeasureDefinition(element, taggedValueName, (String) value));
+							//get only calculated values "source=calc". TODO: Maybe the blank "source" can be included. But the values with "source=req" should be omitted
+							DomainMeasureDefinition measuredefinition = createDomainMeasureDefinition(element, taggedValueName, (String) value);
+							if("calc".equalsIgnoreCase(measuredefinition.getVslExpressionEntries().get("source"))){
+								newDefinitions.add(measuredefinition);
+							}
 						} else {
 							// Unknown value, do nothing
 						}

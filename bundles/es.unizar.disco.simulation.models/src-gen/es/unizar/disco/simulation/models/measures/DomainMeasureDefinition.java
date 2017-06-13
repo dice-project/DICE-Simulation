@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getVslExpression <em>Vsl Expression</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getOutputVariable <em>Output Variable</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSimulationDefinition <em>Simulation Definition</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSlaVslExpression <em>Sla Vsl Expression</em>}</li>
  * </ul>
  *
  * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasureDefinition()
@@ -168,5 +169,31 @@ public interface DomainMeasureDefinition extends EObject {
 	 * @generated
 	 */
 	void setSimulationDefinition(SimulationDefinition value);
+
+	/**
+	 * Returns the value of the '<em><b>Sla Vsl Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sla Vsl Expression</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sla Vsl Expression</em>' attribute.
+	 * @see #setSlaVslExpression(String)
+	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasureDefinition_SlaVslExpression()
+	 * @model transient="true" volatile="true"
+	 * @generated
+	 */
+	String getSlaVslExpression();
+
+	/**
+	 * Sets the value of the '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSlaVslExpression <em>Sla Vsl Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Sla Vsl Expression</em>' attribute.
+	 * @see #getSlaVslExpression()
+	 * @generated
+	 */
+	void setSlaVslExpression(String value);
 
 } // DomainMeasureDefinition
