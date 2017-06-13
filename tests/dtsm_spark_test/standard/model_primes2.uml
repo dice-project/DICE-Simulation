@@ -1,7 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Spark="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:GQAM="http://www.eclipse.org/papyrus/GQAM/1" xmlns:Spark="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/GQAM/1 http://www.eclipse.org/papyrus/MARTE/1#//GQAM http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0 http://es.unizar.disco.dice/profiles/DICE/1.0#//Spark">
   <uml:Model xmi:id="_pmY9MBfkEeePpehjS1zFvA" name="RootElement">
     <packagedElement xmi:type="uml:Activity" xmi:id="_puxdIBfkEeePpehjS1zFvA" name="Activity1" node="_FexHYBfnEeePpehjS1zFvA _2w2sABfnEeePpehjS1zFvA _N5vTIBfoEeePpehjS1zFvA _QOIXoBfoEeePpehjS1zFvA _TVg_UBfoEeePpehjS1zFvA _G3HdkBfrEeePpehjS1zFvA _2np6kCUKEeeGiOkBV7ej3g _2nqhoCUKEeeGiOkBV7ej3g _oQztgDoWEeeGuLHbg3prBg" group="_c3AZIBfnEeePpehjS1zFvA _n_4yEBfnEeePpehjS1zFvA">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_dmB5oEVKEeeNJNO26xv_hg" annotatedElement="_N5vTIBfoEeePpehjS1zFvA">
+        <body>{MapType=Map
+numTasks=$nC1
+hostDemand=(expr=$map1T,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_gCCCAEVKEeeNJNO26xv_hg" annotatedElement="_puxdIBfkEeePpehjS1zFvA">
+        <body>{nAssignedCores=$nAssignedCores,
+nAssignedMemory=$nAssignedMemory,
+sparkDefaultParallelism=$defaultParallelism}</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_hwM0AEVKEeeNJNO26xv_hg" annotatedElement="_QOIXoBfoEeePpehjS1zFvA">
+        <body>{MapType=Repartition
+numTasks=$nC1
+hostDemand=(expr=$repT,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_tPN1AEVKEeeNJNO26xv_hg" annotatedElement="_TVg_UBfoEeePpehjS1zFvA">
+        <body>{MapType=Map
+numTasks=$nC1
+hostDemand=(expr=$flatmapT,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_t8OsAEVKEeeNJNO26xv_hg" annotatedElement="_2np6kCUKEeeGiOkBV7ej3g">
+        <body>{MapType=Map
+numTasks=$nC1
+hostDemand=(expr=$map2T,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_uamDAEVKEeeNJNO26xv_hg" annotatedElement="_2w2sABfnEeePpehjS1zFvA">
+        <body>{ReduceType=Substract
+numTasks=$nC1
+hostDemand=(expr=$substractT,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_uwbwIEVKEeeNJNO26xv_hg" annotatedElement="_oQztgDoWEeeGuLHbg3prBg">
+        <body>{ReduceType=Collect
+numTasks=$nC1
+hostDemand=(expr=$collectT,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_vrUEAEVKEeeNJNO26xv_hg" annotatedElement="_FexHYBfnEeePpehjS1zFvA">
+        <body>{sparkPopulation=$nC1
+sparkExtDelay=
+(expr=$th1,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+      </ownedComment>
+      <ownedComment xmi:type="uml:Comment" xmi:id="_wKSfAEVKEeeNJNO26xv_hg" annotatedElement="_2nqhoCUKEeeGiOkBV7ej3g">
+        <body>{sparkPopulation=$nC2
+sparkExtDelay=
+(expr=$th2,
+unit=ms,
+statQ=mean,
+source=est)}</body>
+      </ownedComment>
       <edge xmi:type="uml:ControlFlow" xmi:id="_on8bIBfoEeePpehjS1zFvA" target="_N5vTIBfoEeePpehjS1zFvA" source="_FexHYBfnEeePpehjS1zFvA"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_qKDHEBfoEeePpehjS1zFvA" target="_QOIXoBfoEeePpehjS1zFvA" source="_N5vTIBfoEeePpehjS1zFvA"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_ra0LYBfoEeePpehjS1zFvA" target="_TVg_UBfoEeePpehjS1zFvA" source="_QOIXoBfoEeePpehjS1zFvA"/>
@@ -28,19 +97,19 @@
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_y849EBflEeePpehjS1zFvA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_y9FKUBflEeePpehjS1zFvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DTSM/Spark/1.0#/"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//Spark"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_uVw8sPjzEeaT8NXWw3z-XA"/>
     </profileApplication>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_CrzF8BfmEeePpehjS1zFvA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Cr7o0BfmEeePpehjS1zFvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DPIM/1.0#/"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DPIM"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_gFr1YOebEeWj7ZPL8JeBTQ"/>
     </profileApplication>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_Cr8P4BfmEeePpehjS1zFvA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Cr828BfmEeePpehjS1zFvA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DDSM/1.0#/"/>
+        <references xmi:type="ecore:EPackage" href="http://es.unizar.disco.dice/profiles/DICE/1.0#//DDSM"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://DICE_PROFILES/DICE.profile.uml#_aYmS0Dx2EeaOH59TuV453g"/>
     </profileApplication>
@@ -108,7 +177,7 @@
   <Spark:SparkMap xmi:id="_hJdQUBfoEeePpehjS1zFvA" base_NamedElement="_N5vTIBfoEeePpehjS1zFvA" base_Action="_N5vTIBfoEeePpehjS1zFvA">
     <hostDemand>(expr=$map1T,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkMap>
-  <Spark:SparkMap xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$nC1" RDD="$nC1" MapType="Repartition">
+  <Spark:SparkMap xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$nC1" MapType="Repartition">
     <hostDemand>(expr=$repartitionT,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkMap>
   <Spark:SparkNode xmi:id="_8W8VUBfoEeePpehjS1zFvA" base_Classifier="_UIF9sBfmEeePpehjS1zFvA" base_NamedElement="_UIF9sBfmEeePpehjS1zFvA" nCores="$nP1" Memory="$nM1">
@@ -133,7 +202,7 @@
     <context>$flatmapT</context>
     <context>$defaultParallelism</context>
     <context>out$USpark</context>
-    <context>$collect</context>
+    <context>$collectT</context>
   </GQAM:GaAnalysisContext>
   <Spark:SparkScenario xmi:id="_1rOrQBfoEeePpehjS1zFvA" base_NamedElement="_puxdIBfkEeePpehjS1zFvA" usedResources="_8W8VUBfoEeePpehjS1zFvA" base_Behavior="_puxdIBfkEeePpehjS1zFvA" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
     <throughput>(expr=$T,statQ=mean,source=calc)</throughput>
@@ -145,7 +214,7 @@
   <Spark:SparkMap xmi:id="_20CJsCUKEeeGiOkBV7ej3g" base_NamedElement="_2np6kCUKEeeGiOkBV7ej3g" base_Action="_2np6kCUKEeeGiOkBV7ej3g">
     <hostDemand>(expr=$map2T,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkMap>
-  <Spark:SparkReduce xmi:id="_oRBv8DoWEeeGuLHbg3prBg" base_NamedElement="_oQztgDoWEeeGuLHbg3prBg" base_Action="_oQztgDoWEeeGuLHbg3prBg" numTasks="$nC1" OpType="Action">
-    <hostDemand>(expr=$collect,unit=ms,statQ=mean,source=est)</hostDemand>
+  <Spark:SparkReduce xmi:id="_oRBv8DoWEeeGuLHbg3prBg" base_NamedElement="_oQztgDoWEeeGuLHbg3prBg" base_Action="_oQztgDoWEeeGuLHbg3prBg" numTasks="$nC1" OpType="Action" ReduceType="Collect">
+    <hostDemand>(expr=$collectT,unit=ms,statQ=mean,source=est)</hostDemand>
   </Spark:SparkReduce>
 </xmi:XMI>
