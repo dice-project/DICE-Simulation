@@ -255,7 +255,7 @@
             stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt"
             tag="throughput">
          <Calculator
-               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculatorBolt"
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculatorSpoutBolt"
                scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
@@ -275,7 +275,7 @@
             stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormBolt"
             tag="utilization">
          <Calculator
-               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorBolt"
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorSpoutBolt"
                scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
@@ -285,7 +285,7 @@
             stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"
             tag="throughput">
          <Calculator
-               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculator"
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculatorSpoutBolt"
                scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
@@ -295,7 +295,7 @@
             stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"
             tag="respT">
          <Calculator
-               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActionResponseTimeCalculator"
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.ActionResponseTimeCalculatorSpout"
                scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
@@ -305,7 +305,7 @@
             stereotype="DICE::DICE_UML_Extensions::DTSM::Storm::StormSpout"
             tag="utilization">
          <Calculator
-               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculator"
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorSpoutBolt"
                scenario="DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
