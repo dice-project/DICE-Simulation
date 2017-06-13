@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import org.eclipse.birt.chart.device.IDeviceRenderer;
@@ -15,11 +16,14 @@ import org.eclipse.birt.chart.model.ChartWithAxes;
 import org.eclipse.birt.chart.model.attribute.AxisType;
 import org.eclipse.birt.chart.model.attribute.Bounds;
 import org.eclipse.birt.chart.model.attribute.IntersectionType;
+import org.eclipse.birt.chart.model.attribute.LegendItemType;
 import org.eclipse.birt.chart.model.attribute.LineStyle;
 import org.eclipse.birt.chart.model.attribute.MarkerType;
 import org.eclipse.birt.chart.model.attribute.TickStyle;
 import org.eclipse.birt.chart.model.attribute.impl.BoundsImpl;
 import org.eclipse.birt.chart.model.attribute.impl.ColorDefinitionImpl;
+import org.eclipse.birt.chart.model.attribute.impl.SizeImpl;
+import org.eclipse.birt.chart.model.attribute.impl.TextImpl;
 import org.eclipse.birt.chart.model.component.Axis;
 import org.eclipse.birt.chart.model.component.Series;
 import org.eclipse.birt.chart.model.component.impl.SeriesImpl;
@@ -100,7 +104,8 @@ public class PlotEditor extends MultiPageEditorPart {
 		setSite(site);
 		setPartName(input.getName());
 
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener, IResourceChangeEvent.POST_CHANGE);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener,
+				IResourceChangeEvent.POST_CHANGE);
 
 		firePropertyChange(IWorkbenchPartConstants.PROP_INPUT);
 		firePropertyChange(IWorkbenchPartConstants.PROP_TITLE);
@@ -174,9 +179,8 @@ public class PlotEditor extends MultiPageEditorPart {
 			} catch (IOException e) {
 				// Should not happen with the ByteArrayInputStream
 				DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
-			}
-			catch (ParseException e) {
-				//If the deserialize did not find correct format of numbers
+			} catch (ParseException e) {
+				// If the deserialize did not find correct format of numbers
 				DiceLogger.logException(DiceSimulationUiPlugin.getDefault(), e);
 			}
 		}
@@ -206,17 +210,26 @@ public class PlotEditor extends MultiPageEditorPart {
 
 		public void build() {
 			createChart();
-			buildTitle();
 			buildXAxis();
 			buildYAxis();
 			buildXSeries();
 			buildYSeries();
+			buildTitle();
 		}
 
 		private void buildTitle() {
 			chart.getTitle().getLabel().getCaption().setValue(String.valueOf(data.id()));
 			chart.getTitle().getLabel().getCaption().getFont().setSize(14);
-			chart.getLegend().setVisible(false);
+			
+			chart.getLegend().setText(TextImpl.create("mylegendtext"));
+			chart.getLegend().setMinSize(SizeImpl.create(1000, 2000));
+			chart.getLegend().setEllipsis(0);
+			chart.getLegend().setWrappingSize(1000);
+			//chart.getLegend().setPosition(Position.INSIDE_LITERAL);
+			chart.getLegend().setItemType(LegendItemType.SERIES_LITERAL);
+			chart.getLegend().setVisible(true);
+			
+
 		}
 
 		private void createChart() {
@@ -227,7 +240,8 @@ public class PlotEditor extends MultiPageEditorPart {
 			xAxis = chart.getPrimaryBaseAxes()[0];
 
 			xAxis.getTitle().setVisible(true);
-			xAxis.getTitle().getCaption().setValue(MessageFormat.format("{0}" + (data.xUnit() != null ? " ({1})" : ""), data.xLabel(), data.xUnit()));
+			xAxis.getTitle().getCaption().setValue(
+					MessageFormat.format("{0}" + (data.xUnit() != null ? " ({1})" : ""), data.xLabel(), data.xUnit()));
 			xAxis.getTitle().getCaption().getFont().setBold(false);
 			xAxis.getTitle().getCaption().getFont().setSize(13);
 
@@ -244,7 +258,8 @@ public class PlotEditor extends MultiPageEditorPart {
 			yAxis = chart.getPrimaryOrthogonalAxis(xAxis);
 
 			yAxis.getTitle().setVisible(true);
-			yAxis.getTitle().getCaption().setValue(MessageFormat.format("{0}" + (data.yUnit() != null ? " ({1})" : ""), data.yLabel(), data.yUnit()));
+			yAxis.getTitle().getCaption().setValue(
+					MessageFormat.format("{0}" + (data.yUnit() != null ? " ({1})" : ""), data.yLabel(), data.yUnit()));
 			yAxis.getTitle().getCaption().getFont().setBold(false);
 			yAxis.getTitle().getCaption().getFont().setRotation(90);
 			yAxis.getTitle().getCaption().getFont().setSize(13);
@@ -264,7 +279,8 @@ public class PlotEditor extends MultiPageEditorPart {
 
 		private void buildXSeries() {
 
-			NumberDataSet categoryValues = NumberDataSetImpl.create(data.data().stream().map(Pair::series).collect(Collectors.toList()));
+			NumberDataSet categoryValues = NumberDataSetImpl
+					.create(data.data().stream().map(Pair::series).collect(Collectors.toList()));
 
 			Series seCategory = SeriesImpl.create();
 			seCategory.setDataSet(categoryValues);
@@ -276,8 +292,9 @@ public class PlotEditor extends MultiPageEditorPart {
 
 		private void buildYSeries() {
 
-			NumberDataSet orthoValuesDataSet = NumberDataSetImpl.create(data.data().stream().map(Pair::value).collect(Collectors.toList()));
-
+			NumberDataSet orthoValuesDataSet = NumberDataSetImpl
+					.create(data.data().stream().map(Pair::value).collect(Collectors.toList()));
+			
 			LineSeries ls = (LineSeries) LineSeriesImpl.create();
 			ls.setPaletteLineColor(false);
 			ls.setDataSet(orthoValuesDataSet);
@@ -291,6 +308,26 @@ public class PlotEditor extends MultiPageEditorPart {
 			sdY.getSeriesPalette().update(ColorDefinitionImpl.RED());
 			yAxis.getSeriesDefinitions().add(sdY);
 			sdY.getSeries().add(ls);
+
+			if (data.slaValue() != null) {
+				LineSeries slaline = (LineSeries) LineSeriesImpl.create();
+				slaline.setDataSet(NumberDataSetImpl.create(Collections.nCopies(data.data().size(), Double.valueOf(data.slaValue()))));
+				slaline.getLineAttributes().setColor(ColorDefinitionImpl.GREEN());
+				SeriesDefinition sdYsla = SeriesDefinitionImpl.create();
+				
+				sdYsla.getSeriesPalette().update(ColorDefinitionImpl.GREEN().darker());
+				slaline.getMarkers().forEach(m -> m.setType(MarkerType.CROSS_LITERAL));
+				slaline.getMarkers().forEach(m -> m.setSize(4));
+				slaline.getLabel().setVisible(true);
+				slaline.setCurve(false);
+				yAxis.getSeriesDefinitions().add(sdYsla);
+				sdYsla.getSeries().add(slaline);
+				slaline.getLabel().setCaption(TextImpl.create("label of sla"));
+				slaline.setSeriesIdentifier("the identifier of the sla series");
+				
+				
+			}
+
 		}
 	}
 
@@ -302,13 +339,15 @@ public class PlotEditor extends MultiPageEditorPart {
 		@Override
 		public void run() {
 			Clipboard clipboard = new Clipboard(getSite().getShell().getDisplay());
-			clipboard.setContents(new ImageData[] { canvas.getImageData() }, new Transfer[] { ImageTransfer.getInstance() });
+			clipboard.setContents(new ImageData[] { canvas.getImageData() },
+					new Transfer[] { ImageTransfer.getInstance() });
 		}
 	}
 
 	private class ExportAction extends Action {
 		public ExportAction() {
-			super("&Export as image file...", DiceSimulationUiPlugin.getDefault().getImageRegistry().getDescriptor(DiceSimulationUiPlugin.IMG_ETOOL16_IMAGE));
+			super("&Export as image file...", DiceSimulationUiPlugin.getDefault().getImageRegistry()
+					.getDescriptor(DiceSimulationUiPlugin.IMG_ETOOL16_IMAGE));
 		}
 
 		@Override
@@ -323,10 +362,12 @@ public class PlotEditor extends MultiPageEditorPart {
 					render.setProperty(IDeviceRenderer.FILE_IDENTIFIER, exportData.getFile());
 					Bounds bounds = BoundsImpl.create(0, 0, exportData.getWidth(), exportData.getHeight());
 					bounds.scale(72d / render.getDisplayServer().getDpiResolution());
-					GeneratedChartState state = generator.build(render.getDisplayServer(), canvas.getChart(), bounds, null);
+					GeneratedChartState state = generator.build(render.getDisplayServer(), canvas.getChart(), bounds,
+							null);
 					generator.render(render, state);
 				} catch (ChartException e) {
-					StatusManager.getManager().handle(new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e),
+					StatusManager.getManager().handle(
+							new Status(IStatus.ERROR, DiceSimulationUiPlugin.PLUGIN_ID, e.getLocalizedMessage(), e),
 							StatusManager.LOG | StatusManager.SHOW);
 				}
 			}
