@@ -459,7 +459,7 @@ invoke('es.unizar.disco.pnml.m2t.utils.PlaceRegistry','priorityNotAdded(fr.lip6.
 /]
 
 [query public getIdColorSet(color : ToolInfo) : String = 
-	getColorSetNameColor(color).first(1)
+	getColorSetNameColor(color)
 /]
 
 [query public getnumElementsColor(color : ToolInfo) : Integer = 
