@@ -181,7 +181,7 @@ public interface DomainMeasureDefinition extends EObject {
 	 * @return the value of the '<em>Sla Vsl Expression</em>' attribute.
 	 * @see #setSlaVslExpression(String)
 	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasureDefinition_SlaVslExpression()
-	 * @model transient="true" volatile="true"
+	 * @model
 	 * @generated
 	 */
 	String getSlaVslExpression();

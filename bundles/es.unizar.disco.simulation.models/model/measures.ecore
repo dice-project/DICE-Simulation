@@ -34,8 +34,7 @@
         volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="simulationDefinition" lowerBound="1"
         eType="ecore:EClass definition.ecore#//SimulationDefinition" eOpposite="definition.ecore#//SimulationDefinition/declaredMeasures"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaVslExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="slaVslExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entry" instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
