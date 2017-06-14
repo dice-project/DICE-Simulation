@@ -16,14 +16,11 @@ import org.eclipse.birt.chart.model.ChartWithAxes;
 import org.eclipse.birt.chart.model.attribute.AxisType;
 import org.eclipse.birt.chart.model.attribute.Bounds;
 import org.eclipse.birt.chart.model.attribute.IntersectionType;
-import org.eclipse.birt.chart.model.attribute.LegendItemType;
 import org.eclipse.birt.chart.model.attribute.LineStyle;
 import org.eclipse.birt.chart.model.attribute.MarkerType;
 import org.eclipse.birt.chart.model.attribute.TickStyle;
 import org.eclipse.birt.chart.model.attribute.impl.BoundsImpl;
 import org.eclipse.birt.chart.model.attribute.impl.ColorDefinitionImpl;
-import org.eclipse.birt.chart.model.attribute.impl.SizeImpl;
-import org.eclipse.birt.chart.model.attribute.impl.TextImpl;
 import org.eclipse.birt.chart.model.component.Axis;
 import org.eclipse.birt.chart.model.component.Series;
 import org.eclipse.birt.chart.model.component.impl.SeriesImpl;
@@ -220,16 +217,8 @@ public class PlotEditor extends MultiPageEditorPart {
 		private void buildTitle() {
 			chart.getTitle().getLabel().getCaption().setValue(String.valueOf(data.id()));
 			chart.getTitle().getLabel().getCaption().getFont().setSize(14);
+			chart.getLegend().setVisible(data.slaValue() != null);
 			
-			chart.getLegend().setText(TextImpl.create("mylegendtext"));
-			chart.getLegend().setMinSize(SizeImpl.create(1000, 2000));
-			chart.getLegend().setEllipsis(0);
-			chart.getLegend().setWrappingSize(1000);
-			//chart.getLegend().setPosition(Position.INSIDE_LITERAL);
-			chart.getLegend().setItemType(LegendItemType.SERIES_LITERAL);
-			chart.getLegend().setVisible(true);
-			
-
 		}
 
 		private void createChart() {
@@ -308,11 +297,16 @@ public class PlotEditor extends MultiPageEditorPart {
 			sdY.getSeriesPalette().update(ColorDefinitionImpl.RED());
 			yAxis.getSeriesDefinitions().add(sdY);
 			sdY.getSeries().add(ls);
+			
+			
+			ls.getLineAttributes().setThickness(ls.getLineAttributes().getThickness()+1);
 
 			if (data.slaValue() != null) {
+				ls.setSeriesIdentifier("calculated "+ data.yLabel());
 				LineSeries slaline = (LineSeries) LineSeriesImpl.create();
 				slaline.setDataSet(NumberDataSetImpl.create(Collections.nCopies(data.data().size(), Double.valueOf(data.slaValue()))));
 				slaline.getLineAttributes().setColor(ColorDefinitionImpl.GREEN());
+				slaline.getLineAttributes().setThickness(slaline.getLineAttributes().getThickness()+1);
 				SeriesDefinition sdYsla = SeriesDefinitionImpl.create();
 				
 				sdYsla.getSeriesPalette().update(ColorDefinitionImpl.GREEN().darker());
@@ -322,8 +316,7 @@ public class PlotEditor extends MultiPageEditorPart {
 				slaline.setCurve(false);
 				yAxis.getSeriesDefinitions().add(sdYsla);
 				sdYsla.getSeries().add(slaline);
-				slaline.getLabel().setCaption(TextImpl.create("label of sla"));
-				slaline.setSeriesIdentifier("the identifier of the sla series");
+				slaline.setSeriesIdentifier("required sla");
 				
 				
 			}
