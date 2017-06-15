@@ -32,6 +32,7 @@ import es.unizar.disco.simulation.models.invocation.InvocationSet;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
+import es.unizar.disco.simulation.models.measures.MeasuresFactory;
 import es.unizar.disco.simulation.ui.DiceSimulationUiPlugin;
 import es.unizar.disco.simulation.ui.editors.PlotEditor;
 import es.unizar.disco.simulation.ui.plot.PlotData;
@@ -194,14 +195,27 @@ public class PlotWizard extends Wizard {
 				}
 			}
 			// @formatter:off
+			String slaValue = getSlaInfo(wizardData,"expr");
+			String slaUnit = getSlaInfo(wizardData,"unit");
 			collector.plotData = PlotData
 					.build(wizardData.invocationSet.getIdentifier())
 					.xLabel(wizardData.selectedVariable.getName())
 					.yLabel(wizardData.selectedMeasure.getMeasure())
 					.yUnit(yUnit)
+					.slaValue(slaValue)
+					.slaUnit(slaUnit)
 					.data(values);
 			// @formatter:on
 			return collector;
+		}
+
+		private static String getSlaInfo(WizardData wizardData, String field) {
+			DomainMeasureDefinition measureDefinition = MeasuresFactory.eINSTANCE.createDomainMeasureDefinition();
+			if(wizardData.selectedMeasure.getSlaVslExpression()!=null && !wizardData.selectedMeasure.getSlaVslExpression().isEmpty()){
+				measureDefinition.setVslExpression(wizardData.selectedMeasure.getSlaVslExpression());
+				return measureDefinition.getVslExpressionEntries().get(field);
+			}
+			return null;
 		}
 
 		public boolean error() {

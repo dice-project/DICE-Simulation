@@ -214,13 +214,22 @@ public interface MeasuresPackage extends EPackage {
 	int DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION = 5;
 
 	/**
+	 * The feature id for the '<em><b>Sla Vsl Expression</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION = 6;
+
+	/**
 	 * The number of structural features of the '<em>Domain Measure Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_MEASURE_DEFINITION_FEATURE_COUNT = 6;
+	int DOMAIN_MEASURE_DEFINITION_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Domain Measure Definition</em>' class.
@@ -419,6 +428,17 @@ public interface MeasuresPackage extends EPackage {
 	EReference getDomainMeasureDefinition_SimulationDefinition();
 
 	/**
+	 * Returns the meta object for the attribute '{@link es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSlaVslExpression <em>Sla Vsl Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sla Vsl Expression</em>'.
+	 * @see es.unizar.disco.simulation.models.measures.DomainMeasureDefinition#getSlaVslExpression()
+	 * @see #getDomainMeasureDefinition()
+	 * @generated
+	 */
+	EAttribute getDomainMeasureDefinition_SlaVslExpression();
+
+	/**
 	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -584,6 +604,14 @@ public interface MeasuresPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION = eINSTANCE.getDomainMeasureDefinition_SimulationDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Sla Vsl Expression</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION = eINSTANCE.getDomainMeasureDefinition_SlaVslExpression();
 
 		/**
 		 * The meta object literal for the '{@link es.unizar.disco.simulation.models.measures.impl.EntryImpl <em>Entry</em>}' class.

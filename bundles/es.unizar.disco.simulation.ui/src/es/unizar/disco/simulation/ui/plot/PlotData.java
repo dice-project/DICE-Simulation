@@ -46,6 +46,9 @@ public class PlotData implements Serializable {
 	private static final String SIM_X_UNIT = "# SIM # X Unit: ";
 	private static final String SIM_Y_LABEL = "# SIM # Y Label: ";
 	private static final String SIM_Y_UNIT = "# SIM # Y Unit: ";
+	private static final String SIM_SLA_VALUE = "# SIM # SLA value: ";
+	private static final String SIM_SLA_UNIT = "# SIM # SLA unit: ";
+	
 	private static final String SIM_END_RESERVED_COMMENTS = "# SIM # END-RESERVED-COMMENTS";
 
 	public static class Pair<S, V> implements Serializable {
@@ -82,6 +85,9 @@ public class PlotData implements Serializable {
 
 	private String xUnit;
 	private String yUnit;
+	
+	private String slaValue;
+	private String slaUnit;
 
 	private List<Pair<Number, Number>> data = new ArrayList<>();
 
@@ -115,6 +121,24 @@ public class PlotData implements Serializable {
 
 	public String yLabel() {
 		return yLabel;
+	}
+	
+	public PlotData slaValue(String value){
+		this.slaValue=value;
+		return this;
+	}
+	
+	public String slaValue(){
+		return slaValue;
+	}
+	
+	public PlotData slaUnit(String value){
+		this.slaUnit=value;
+		return this;
+	}
+	
+	public String slaUnit(){
+		return slaUnit;
 	}
 
 	public PlotData xUnit(String xUnit) {
@@ -186,6 +210,12 @@ public class PlotData implements Serializable {
 			writer.write(SIM_Y_UNIT);
 			writer.write(String.valueOf(yUnit));
 			writer.newLine();
+			writer.write(SIM_SLA_VALUE);
+			writer.write(String.valueOf(slaValue));
+			writer.newLine();
+			writer.write(SIM_SLA_UNIT);
+			writer.write(String.valueOf(slaUnit));
+			writer.newLine();
 			writer.write(SIM_END_RESERVED_COMMENTS);
 			writer.newLine();
 			writer.newLine();
@@ -235,7 +265,12 @@ public class PlotData implements Serializable {
 					plotData.yLabel = sanitize(line.replaceFirst(SIM_Y_LABEL, ""));
 				} else if (line.startsWith(SIM_Y_UNIT)) {
 					plotData.yUnit = sanitize(line.replaceFirst(SIM_Y_UNIT, ""));
+				} else if (line.startsWith(SIM_SLA_VALUE)){
+					plotData.slaValue=sanitize(line.replaceFirst(SIM_SLA_VALUE, ""));
+				} else if (line.startsWith(SIM_SLA_UNIT)){
+					plotData.slaUnit=sanitize(line.replaceFirst(SIM_SLA_UNIT, ""));
 				}
+				
 			} else {
 				Pattern pattern = Pattern.compile("\\s*(?<series>\\S+)\\s+(?<value>\\S+)\\s+\"(?<id>\\S+)\"$");
 				Matcher matcher = pattern.matcher(line);
