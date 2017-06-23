@@ -404,7 +404,7 @@ mapping UML::InitialNode::initialNode2subNet()
 	map addColorList(listColoursUser);
 }
 
-mapping UML::InitialNode::initialNode2subNetColor(in user_color : Colour, in counter_color : Colour, in delay : NFP_Integer ) 
+mapping UML::InitialNode::initialNode2subNetColor(in user_color : Colour, in counter_color : Colour, in delay : NFP_Duration )  
 	when { self.getHadoopWorkloadEvent().oclIsUndefined().not() } {
 	/* Create a subnet for each color (User 1,..., User n)
 	inside the class of User */
@@ -1751,7 +1751,7 @@ helper UML::Element::getHadoopWorkloadEvent_hadoopPopulation() : List(NFP_Intege
 	return res;
 }
 
-helper UML::Element::getHadoopWorkloadEvent_hadoopExtDelay() : List(NFP_Integer) {
+helper UML::Element::getHadoopWorkloadEvent_hadoopExtDelay() : List(NFP_Duration) {
 	if (self.getHadoopWorkloadEvent() = null) {
 		return null;
 	};
@@ -1761,9 +1761,9 @@ helper UML::Element::getHadoopWorkloadEvent_hadoopExtDelay() : List(NFP_Integer)
 		with log ("Unexpected number of 'hadoopExtDelay' tagged values found, expected >= 1. "+
 					"The context element is '" + self.toString() + "'"); 
 	var extDelayList := extDelayStrings->asSequence();
-	var res = new List(NFP_Integer)() ;
+	var res = new List(NFP_Duration)() ;
 	extDelayList->forEach(extDelay){
-		res += extDelay.toNfpInteger();
+		res += extDelay.toNfpDuration();
 	};
 	return res;
 }

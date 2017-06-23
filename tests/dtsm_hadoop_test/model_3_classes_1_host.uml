@@ -170,9 +170,9 @@ respT=(expr=$RT,statQ=mean,source=calc)}</body>
     <hadoopPopulation>$nC1</hadoopPopulation>
     <hadoopPopulation>$nC2</hadoopPopulation>
     <hadoopPopulation>$nC3</hadoopPopulation>
-    <hadoopExtDelay>$th1</hadoopExtDelay>
-    <hadoopExtDelay>$th2</hadoopExtDelay>
-    <hadoopExtDelay>$th3</hadoopExtDelay>
+    <hadoopExtDelay>(expr=$th1,unit=ms,statQ=mean,source=est)</hadoopExtDelay>
+    <hadoopExtDelay>(expr=$th2,unit=ms,statQ=mean,source=est)</hadoopExtDelay>
+    <hadoopExtDelay>(expr=$th3,unit=ms,statQ=mean,source=est)</hadoopExtDelay>
   </Hadoop:HadoopWorkloadEvent>
   <Hadoop:HadoopOperation xmi:id="_-5CVsDlcEeaE4deiM0Jlvg" base_NamedElement="_vVW-sDlXEeaE4deiM0Jlvg" base_Action="_vVW-sDlXEeaE4deiM0Jlvg">
     <hostDemand>(expr=$redT,unit=ms,statQ=mean,source=est)</hostDemand>

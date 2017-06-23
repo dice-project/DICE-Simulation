@@ -160,8 +160,8 @@ respT=(expr=$RT,statQ=mean,source=calc)}</body>
   <Hadoop:HadoopWorkloadEvent xmi:id="_CdyoIDlYEeaE4deiM0Jlvg" base_NamedElement="_p15FUDlXEeaE4deiM0Jlvg">
     <hadoopPopulation>$nC1</hadoopPopulation>
     <hadoopPopulation>$nC2</hadoopPopulation>
-    <hadoopExtDelay>$th1</hadoopExtDelay>
-    <hadoopExtDelay>$th2</hadoopExtDelay>
+    <hadoopExtDelay>(expr=$th1,unit=ms,statQ=mean,source=est)</hadoopExtDelay>
+    <hadoopExtDelay>(expr=$th2,unit=ms,statQ=mean,source=est)</hadoopExtDelay>
   </Hadoop:HadoopWorkloadEvent>
   <Hadoop:HadoopOperation xmi:id="_-5CVsDlcEeaE4deiM0Jlvg" base_NamedElement="_vVW-sDlXEeaE4deiM0Jlvg" base_Action="_vVW-sDlXEeaE4deiM0Jlvg">
     <hostDemand>(expr=$redT1,unit=ms,statQ=mean,source=est)</hostDemand>

@@ -36,7 +36,7 @@
             <element xmi:type="uml:InitialNode" href="model_2_classes_2_host.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
             <layoutConstraint xmi:type="notation:Location" xmi:id="_p2MnUzlXEeaE4deiM0Jlvg" x="-50" y="-14"/>
           </children>
-          <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_p2MAQTlXEeaE4deiM0Jlvg" diagramLink="_ptsE8KytEeaaULyQf1qYkA"/>
+          <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_p2MAQTlXEeaE4deiM0Jlvg"/>
           <element xmi:type="uml:InitialNode" href="model_2_classes_2_host.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_p2MAQjlXEeaE4deiM0Jlvg" x="49" y="185"/>
         </children>
@@ -163,7 +163,7 @@
                 <element xmi:type="uml:OpaqueAction" href="model_2_classes_2_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_vVjzAjlXEeaE4deiM0Jlvg" y="5"/>
               </children>
-              <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_vVjL8TlXEeaE4deiM0Jlvg" diagramLink="_LJHVcEjuEeauxYB8KYKtGg"/>
+              <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_vVjL8TlXEeaE4deiM0Jlvg"/>
               <element xmi:type="uml:OpaqueAction" href="model_2_classes_2_host.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_vVjL8jlXEeaE4deiM0Jlvg" x="54" y="55" width="151" height="44"/>
             </children>
