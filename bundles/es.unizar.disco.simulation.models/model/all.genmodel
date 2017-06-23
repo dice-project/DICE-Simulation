@@ -175,6 +175,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasureDefinition/vslExpression"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasureDefinition/outputVariable"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference measures.ecore#//DomainMeasureDefinition/simulationDefinition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//DomainMeasureDefinition/slaVslExpression"/>
     </genClasses>
     <genClasses ecoreClass="measures.ecore#//Entry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measures.ecore#//Entry/key"/>

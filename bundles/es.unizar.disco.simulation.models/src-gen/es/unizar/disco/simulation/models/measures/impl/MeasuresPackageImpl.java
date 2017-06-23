@@ -287,6 +287,15 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDomainMeasureDefinition_SlaVslExpression() {
+		return (EAttribute)domainMeasureDefinitionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEntry() {
 		return entryEClass;
 	}
@@ -352,6 +361,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		createEAttribute(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION);
 		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__OUTPUT_VARIABLE);
 		createEReference(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION);
+		createEAttribute(domainMeasureDefinitionEClass, DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION);
 
 		entryEClass = createEClass(ENTRY);
 		createEAttribute(entryEClass, ENTRY__KEY);
@@ -414,6 +424,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		initEAttribute(getDomainMeasureDefinition_VslExpression(), ecorePackage.getEString(), "vslExpression", null, 1, 1, DomainMeasureDefinition.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainMeasureDefinition_OutputVariable(), theDefinitionPackage.getOutputVariable(), null, "outputVariable", null, 1, 1, DomainMeasureDefinition.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainMeasureDefinition_SimulationDefinition(), theDefinitionPackage.getSimulationDefinition(), theDefinitionPackage.getSimulationDefinition_DeclaredMeasures(), "simulationDefinition", null, 1, 1, DomainMeasureDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainMeasureDefinition_SlaVslExpression(), ecorePackage.getEString(), "slaVslExpression", null, 0, 1, DomainMeasureDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(entryEClass, Map.Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEntry_Key(), ecorePackage.getEString(), "key", null, 1, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl#getVslExpression <em>Vsl Expression</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl#getOutputVariable <em>Output Variable</em>}</li>
  *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl#getSimulationDefinition <em>Simulation Definition</em>}</li>
+ *   <li>{@link es.unizar.disco.simulation.models.measures.impl.DomainMeasureDefinitionImpl#getSlaVslExpression <em>Sla Vsl Expression</em>}</li>
  * </ul>
  *
  * @generated
@@ -94,6 +95,26 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * @ordered
 	 */
 	protected static final String VSL_EXPRESSION_EDEFAULT = null;
+
+	/**
+	 * The default value of the '{@link #getSlaVslExpression() <em>Sla Vsl Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSlaVslExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SLA_VSL_EXPRESSION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSlaVslExpression() <em>Sla Vsl Expression</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSlaVslExpression()
+	 * @generated
+	 * @ordered
+	 */
+	protected String slaVslExpression = SLA_VSL_EXPRESSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -275,6 +296,27 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSlaVslExpression() {
+		return slaVslExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSlaVslExpression(String newSlaVslExpression) {
+		String oldSlaVslExpression = slaVslExpression;
+		slaVslExpression = newSlaVslExpression;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION, oldSlaVslExpression, slaVslExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -339,6 +381,8 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 				return basicGetOutputVariable();
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION:
 				return getSimulationDefinition();
+			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION:
+				return getSlaVslExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -365,6 +409,9 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 				return;
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION:
 				setSimulationDefinition((SimulationDefinition)newValue);
+				return;
+			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION:
+				setSlaVslExpression((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -393,6 +440,9 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION:
 				setSimulationDefinition((SimulationDefinition)null);
 				return;
+			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION:
+				setSlaVslExpression(SLA_VSL_EXPRESSION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -417,6 +467,8 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 				return basicGetOutputVariable() != null;
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION:
 				return getSimulationDefinition() != null;
+			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION:
+				return SLA_VSL_EXPRESSION_EDEFAULT == null ? slaVslExpression != null : !SLA_VSL_EXPRESSION_EDEFAULT.equals(slaVslExpression);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -433,6 +485,8 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (measure: ");
 		result.append(measure);
+		result.append(", slaVslExpression: ");
+		result.append(slaVslExpression);
 		result.append(')');
 		return result.toString();
 	}
