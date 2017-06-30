@@ -258,6 +258,7 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 		addEEnumLiteral(transitionKindEEnum, TransitionKind.EXPONENTIAL);
 		addEEnumLiteral(transitionKindEEnum, TransitionKind.DETERMINISTIC);
 		addEEnumLiteral(transitionKindEEnum, TransitionKind.IMMEDIATE_PRIORITY);
+		addEEnumLiteral(transitionKindEEnum, TransitionKind.ERLANG);
 
 		initEEnum(serverTypeEEnum, ServerType.class, "ServerType");
 		addEEnumLiteral(serverTypeEEnum, ServerType.INFINITE_SERVER);

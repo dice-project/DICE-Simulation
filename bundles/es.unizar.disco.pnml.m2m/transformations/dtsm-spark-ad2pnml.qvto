@@ -754,13 +754,21 @@ inherits UML::ActivityNode::activityNode2immediateTransition {
 */
 mapping UML::ActivityNode::activityNode2timedTransition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
-	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+	/**/
+	var nAssigned := ad.scenario().getSparkScenario_nAssignedCores();
+	if (self.numTasks.value() > nAssigned.value()) {
+		toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();	
+	}
+	else {
+		toolspecifics += self[OpaqueAction].map opaqueActionErlangHostDemand2toolInfo();
+	}
+	/**/
 }
 
 /***********************************************************************/
 
 /**
-	Transforms an OpaqueAction with a hostDemand annotation to a ToolInfo element
+	Transforms an OpaqueAction with a hostDemand annotation and Exponential distritution to a ToolInfo element
 */
 
 mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
@@ -769,6 +777,21 @@ when {
 }{
 	var hostDemand := self.getSparkOperation_hostDemand();
 	result += expTransitionToolInfo( 1 / hostDemand.value());
+	result += infServerTransitionToolInfo();
+}
+
+/**
+	Transforms an OpaqueAction with a hostDemand annotation and Erlang distritution to a ToolInfo element
+*/
+
+mapping UML::OpaqueAction::opaqueActionErlangHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
+when {
+		self.getSparkOperation_hostDemand().oclIsUndefined().not();
+}{
+	var hostDemand := self.getSparkOperation_hostDemand();
+	//var k := self.numTasks;
+	var k := ad.scenario().getSparkScenario_sparkDefaultParallelism();
+	result += erlangTransitionToolInfo(1 / hostDemand.value(), k.value() * k.value());
 	result += infServerTransitionToolInfo();
 }
 
@@ -1403,7 +1426,8 @@ helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
 		};
 		
 		if (self.oclAsType(ActivityNode).isJoinOperation() or
-			self.oclAsType(ActivityNode).isRepartitionOperation()){
+			self.oclAsType(ActivityNode).isRepartitionOperation() or
+			(mapType = DBET::SparkMap::Substraction)){
 			assert warning (explicitTasks != null) with log ("Cannot infer the number of numTasks. Activity Node with Spark operation" + mapType.toString() + " requires an explicit number of numTasks");
 		};
 	};

@@ -1,0 +1,70 @@
+[comment encoding = UTF-8 /]
+[module generateGspnDisFile('http:///ptnet.ecore')]
+
+[template public generateGspnDisFile(petriNet : PetriNet) post(trim())]
+[file (petriNet.id.concat('.dis'), false, 'Cp1252')]
+[rowDef(petriNet)/]
+[/file]
+[/template]
+
+[template public rowDef(petriNet : PetriNet) post (trim())]
+[comment ROW ::= TR_NAME FIRING_POL RESCHEDULE_POL DESCHEDULE_POL DISTRIB /]
+[for (trans : Transition | allTransitions(petriNet))]
+[if isDeterministic(trans)]
+[trans.id/] [tFire(trans)/] [tResche(trans)/] [tDesche(trans)/] [tDist(trans)/]
+[/if]
+[if isErlang(trans)]
+[trans.id/] [tFire(trans)/] [tResche(trans)/] [tDesche(trans)/] [tDist(trans)/]
+[/if][/for]
+[/template]
+
+[template public tFire(trans : Transition) post (trim())]
+[comment FIRING_POL ::= AGE | ENABLING /]
+ENABLING
+[/template]
+
+[template public tResche(trans : Transition) post (trim())]
+[comment POL ::= RANDOM | FIRST_DRAWN | LAST_DRAWN | FIRST_SCHED | LAST_SCHED /]
+RANDOM
+[/template]
+
+[template public tDesche(trans : Transition) post (trim())]
+[comment POL ::= RANDOM | FIRST_DRAWN | LAST_DRAWN | FIRST_SCHED | LAST_SCHED /]
+RANDOM
+[/template]
+
+[template public tDist(trans : Transition) post (trim())]
+[comment DISTRIB ::= DET | ERL N_STAGE |
+					 IPO N_STAGE #(N_STAGE) {RATE} |
+					 IPER N_STAGE #(N_STAGE) {PROB RATE} |
+					 UNIF LOWER_UPPER |
+					 NORM MEAN DEVSTD |
+					 BAR N_UNIF #(N_UNIF) {LOWER UPPER PROB} |
+ /]
+[if isDeterministic(trans)] DET [/if]
+[if isErlang(trans)] ERL [getTransitionErlangK(trans)/] [/if]
+[/template]
+
+[query public allTransitions(petriNet : PetriNet) : Collection(Transition) =
+	petriNet.pages.objects->flatten()->selectByKind(Transition)->sortedBy(id)
+/]
+
+[query public isExponential(trans : Transition) : Boolean =
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isExponential(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+[query public isDeterministic(trans : Transition) : Boolean =
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isDeterministic(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+[query public isErlang(trans : Transition) : Boolean =
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','isErlang(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]
+
+[query public getTransitionErlangK(trans : Transition) : Integer = 
+	-- ToolInfo-related queries are executed via the global utility methods
+	invoke('es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils','getTransitionErlangK(fr.lip6.move.pnml.ptnet.Transition)', Sequence{trans})
+/]

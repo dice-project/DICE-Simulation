@@ -624,8 +624,11 @@ public class GspnSshSimulator implements ISimulator {
 		GenerateGspn gspnGenerator = new GenerateGspn(model, targetDir, new ArrayList<EObject>());
 		AcceleoPreferences.switchForceDeactivationNotifications(true);
 		gspnGenerator.doGenerate(BasicMonitor.toMonitor(subMonitor.newChild(1)));
+		/*return new File[] { targetDir.toPath().resolve(model.getId() + ".net").toFile(),
+				targetDir.toPath().resolve(model.getId() + ".def").toFile() };*/
 		return new File[] { targetDir.toPath().resolve(model.getId() + ".net").toFile(),
-				targetDir.toPath().resolve(model.getId() + ".def").toFile() };
+		targetDir.toPath().resolve(model.getId() + ".def").toFile(),
+		targetDir.toPath().resolve(model.getId() + ".dis").toFile() };
 	}
 
 	private static final String VALUE_PATTERN = "<value grammar=\"(.+)\">(.+)</value>";
