@@ -377,7 +377,7 @@ helper String::value() : String {
 /**
 	Helper that determines if a given String represents a CallOperationExpression
 */
-/*helper String::isExpression() : Boolean {
+helper String::isExpression() : Boolean {
 	/*
 	distribution(mean:real,....)
 	*/
@@ -388,7 +388,7 @@ helper String::value() : String {
 }
 
 /**
-	Helper that parses a CallOperationExpression and returns a Dictionary
+	Helper that parses a CallOperationExpression and returns a Sequence
 */
 helper String::asExpresion() : Sequence (String) {
 	var lowercase := self.toLowerCase(); 
@@ -428,7 +428,7 @@ helper String::asExpresion() : Sequence (String) {
 		entries += entry;
 	};
 	return entries;
-}*/
+}
 
 /**
 	Helper that determines if a given String represents a Tuple
