@@ -525,7 +525,8 @@ mapping UML::ControlFlow::forkControlFlow2arc() when {
 mapping UML::NamedElement::namedElement2place() : PNML::Place {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+			self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -656,7 +657,8 @@ inherits UML::NamedElement::namedElement2place {
 mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
