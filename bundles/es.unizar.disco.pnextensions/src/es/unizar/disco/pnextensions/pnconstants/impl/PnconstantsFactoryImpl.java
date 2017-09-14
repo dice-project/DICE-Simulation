@@ -188,6 +188,15 @@ public class PnconstantsFactoryImpl extends EFactoryImpl implements PnconstantsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String convertBaseUnitsConstantsToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Color createColorFromString(EDataType eDataType, String initialValue) {
 		Color result = Color.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
@@ -220,15 +229,6 @@ public class PnconstantsFactoryImpl extends EFactoryImpl implements PnconstantsF
 	 * @generated
 	 */
 	public String convertArcKindToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
-	}
-	
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertBaseUnitsConstantsToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

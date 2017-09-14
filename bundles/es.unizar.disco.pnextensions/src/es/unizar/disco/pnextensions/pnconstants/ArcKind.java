@@ -26,7 +26,7 @@ public enum ArcKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	NORMAL(0, "Normal", "http://es.unizar.dsico/pnconstants/akind/normal"),
+	NORMAL(0, "Normal", "http://es.unizar.dsico/pnconstants/tkind/immediate"),
 
 	/**
 	 * The '<em><b>Inhibitor</b></em>' literal object.
@@ -36,7 +36,7 @@ public enum ArcKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	INHIBITOR(1, "Inhibitor", "http://es.unizar.dsico/pnconstants/akind/inhibitor");
+	INHIBITOR(1, "Inhibitor", "http://es.unizar.dsico/pnconstants/tkind/exponential");
 
 	/**
 	 * The '<em><b>Normal</b></em>' literal value.
@@ -47,7 +47,7 @@ public enum ArcKind implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #NORMAL
-	 * @model name="Normal" literal="http://es.unizar.dsico/pnconstants/akind/normal"
+	 * @model name="Normal" literal="http://es.unizar.dsico/pnconstants/tkind/immediate"
 	 * @generated
 	 * @ordered
 	 */
@@ -62,7 +62,7 @@ public enum ArcKind implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #INHIBITOR
-	 * @model name="Inhibitor" literal="http://es.unizar.dsico/pnconstants/akind/inhibitor"
+	 * @model name="Inhibitor" literal="http://es.unizar.dsico/pnconstants/tkind/exponential"
 	 * @generated
 	 * @ordered
 	 */

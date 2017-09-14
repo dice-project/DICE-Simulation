@@ -22,21 +22,21 @@ public enum Color implements Enumerator {
 	 * The '<em><b>Color</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #COLOR
+	 * @see #COLOR_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	COLOR(0, "Color", "http://es.unizar.dsico/pnconstants/color/color"),
+	COLOR(0, "Color", "http://es.unizar.dsico/pnconstants/color/numcolor"),
 
 	/**
-	 * The '<em><b>ColorSet</b></em>' literal object.
+	 * The '<em><b>Color Set</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #COLORSET
+	 * @see #COLOR_SET_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	COLORSET(1, "ColorSet", "http://es.unizar.dsico/pnconstants/color/colorset");
+	COLOR_SET(1, "ColorSet", "http://es.unizar.dsico/pnconstants/color/numelementscolor");
 
 	/**
 	 * The '<em><b>Color</b></em>' literal value.
@@ -47,26 +47,26 @@ public enum Color implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #COLOR
-	 * @model name="Color" literal="http://es.unizar.dsico/pnconstants/color/color"
+	 * @model name="Color" literal="http://es.unizar.dsico/pnconstants/color/numcolor"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int COLOR_VALUE = 0;
-	
+
 	/**
-	 * The '<em><b>ColorSet</b></em>' literal value.
+	 * The '<em><b>Color Set</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>ColorSet</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Color Set</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #COLORSET
-	 * @model name="ColorSet" literal="http://es.unizar.dsico/pnconstants/color/colorset"
+	 * @see #COLOR_SET
+	 * @model name="ColorSet" literal="http://es.unizar.dsico/pnconstants/color/numelementscolor"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int COLORSET_VALUE = 1;
+	public static final int COLOR_SET_VALUE = 1;
 
 	/**
 	 * An array of all the '<em><b>Color</b></em>' enumerators.
@@ -77,7 +77,7 @@ public enum Color implements Enumerator {
 	private static final Color[] VALUES_ARRAY =
 		new Color[] {
 			COLOR,
-			COLORSET,
+			COLOR_SET,
 		};
 
 	/**
@@ -135,7 +135,7 @@ public enum Color implements Enumerator {
 	public static Color get(int value) {
 		switch (value) {
 			case COLOR_VALUE: return COLOR;
-			case COLORSET_VALUE: return COLORSET;
+			case COLOR_SET_VALUE: return COLOR_SET;
 		}
 		return null;
 	}

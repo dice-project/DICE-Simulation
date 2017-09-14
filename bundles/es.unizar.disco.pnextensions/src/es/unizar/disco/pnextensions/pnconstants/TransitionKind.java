@@ -46,8 +46,8 @@ public enum TransitionKind implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	DETERMINISTIC(2, "Deterministic", "http://es.unizar.disco/pnconstants/tkind/deterministic"), 
-	
+	DETERMINISTIC(2, "Deterministic", "http://es.unizar.disco/pnconstants/tkind/deterministic"),
+
 	/**
 	 * The '<em><b>Immediate Priority</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -57,7 +57,7 @@ public enum TransitionKind implements Enumerator {
 	 * @ordered
 	 */
 	IMMEDIATE_PRIORITY(3, "ImmediatePriority", "http://es.unizar.disco/pnconstants/tkind/immediatepriority"),
-	
+
 	/**
 	 * The '<em><b>Erlang</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -67,7 +67,6 @@ public enum TransitionKind implements Enumerator {
 	 * @ordered
 	 */
 	ERLANG(4, "Erlang", "http://es.unizar.disco/pnconstants/tkind/erlang");
-	
 
 	/**
 	 * The '<em><b>Immediate</b></em>' literal value.
@@ -143,7 +142,7 @@ public enum TransitionKind implements Enumerator {
 	 * @ordered
 	 */
 	public static final int ERLANG_VALUE = 4;
-	
+
 	/**
 	 * An array of all the '<em><b>Transition Kind</b></em>' enumerators.
 	 * <!-- begin-user-doc -->

@@ -2,14 +2,14 @@
  */
 package es.unizar.disco.pnextensions.pnconstants.impl;
 
+import es.unizar.disco.pnextensions.pnconstants.ArcKind;
 import es.unizar.disco.pnextensions.pnconstants.BaseUnitsConstants;
+import es.unizar.disco.pnextensions.pnconstants.Color;
 import es.unizar.disco.pnextensions.pnconstants.PnconstantsFactory;
 import es.unizar.disco.pnextensions.pnconstants.PnconstantsPackage;
 import es.unizar.disco.pnextensions.pnconstants.ServerType;
 import es.unizar.disco.pnextensions.pnconstants.ToolInfoConstants;
 import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
-import es.unizar.disco.pnextensions.pnconstants.Color;
-import es.unizar.disco.pnextensions.pnconstants.ArcKind;
 
 import es.unizar.disco.pnextensions.pnutils.PnutilsPackage;
 
@@ -61,13 +61,14 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 	 * @generated
 	 */
 	private EEnum colorEEnum = null;
-		/**
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EEnum arcKindEEnum = null;
-	
+
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
@@ -178,8 +179,8 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 	public EEnum getColor() {
 		return colorEEnum;
 	}
-	
-		/**
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -187,7 +188,7 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 	public EEnum getArcKind() {
 		return arcKindEEnum;
 	}
-	
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -269,15 +270,15 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 		initEEnum(baseUnitsConstantsEEnum, BaseUnitsConstants.class, "BaseUnitsConstants");
 		addEEnumLiteral(baseUnitsConstantsEEnum, BaseUnitsConstants.BASE_TIME_UNIT);
 		addEEnumLiteral(baseUnitsConstantsEEnum, BaseUnitsConstants.BASE_FREQUENCY_UNIT);
-		
+
 		initEEnum(colorEEnum, Color.class, "Color");
 		addEEnumLiteral(colorEEnum, Color.COLOR);
-		addEEnumLiteral(colorEEnum, Color.COLORSET);
+		addEEnumLiteral(colorEEnum, Color.COLOR_SET);
 
 		initEEnum(arcKindEEnum, ArcKind.class, "ArcKind");
 		addEEnumLiteral(arcKindEEnum, ArcKind.NORMAL);
 		addEEnumLiteral(arcKindEEnum, ArcKind.INHIBITOR);
-		
+
 		// Create resource
 		createResource(eNS_URI);
 	}
