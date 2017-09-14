@@ -170,15 +170,21 @@ helper UML::Element::getSparkOperation() : UML::Stereotype {
 }
 
 helper UML::Element::getSparkMap() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkMap"))) { 
+	/*if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkMap"))) { 
 		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkMap");
+	};*/
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkTransformation"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkTransformation");
 	};
 	return null;	
 }
 
 helper UML::Element::getSparkReduce() : UML::Stereotype {
-	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkReduce"))) { 
+	/*if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkReduce"))) { 
 		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkReduce");
+	};*/
+	if (self.isStereotypeApplied(self.getApplicableStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkAction"))) { 
+		return self.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkAction");
 	};
 	return null;	
 }
