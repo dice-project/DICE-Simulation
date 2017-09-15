@@ -8,7 +8,8 @@
   <foreignModel>pnextensions.ecore</foreignModel>
   <genPackages prefix="Pnextensions" basePackage="es.unizar.disco" disposableProviderFactory="true"
       ecorePackage="pnextensions.ecore#/">
-    <nestedGenPackages prefix="Pnconstants" disposableProviderFactory="true" ecorePackage="pnextensions.ecore#//pnconstants">
+    <nestedGenPackages prefix="Pnconstants" basePackage="es.unizar.disco.pnextensions"
+        disposableProviderFactory="true" ecorePackage="pnextensions.ecore#//pnconstants">
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="pnextensions.ecore#//pnconstants/ToolInfoConstants">
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/ToolInfoConstants/toolName"/>
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/ToolInfoConstants/toolVersion"/>
@@ -18,6 +19,8 @@
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/TransitionKind/Immediate"/>
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/TransitionKind/Exponential"/>
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/TransitionKind/Deterministic"/>
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/TransitionKind/ImmediatePriority"/>
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/TransitionKind/Erlang"/>
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="pnextensions.ecore#//pnconstants/ServerType">
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/ServerType/InfiniteServer"/>
@@ -25,12 +28,24 @@
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/ServerType/LoadDependent"/>
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/ServerType/MarkingDependent"/>
       </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="pnextensions.ecore#//pnconstants/BaseUnitsConstants">
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/BaseUnitsConstants/baseTimeUnit"/>
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/BaseUnitsConstants/baseFrequencyUnit"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="pnextensions.ecore#//pnconstants/Color">
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/Color/Color"/>
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/Color/Colorset"/>
+      </genEnums>
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="pnextensions.ecore#//pnconstants/ArcKind">
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/ArcKind/Normal"/>
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/ArcKind/Inhibitor"/>
+      </genEnums>
     </nestedGenPackages>
-    <nestedGenPackages prefix="Pnutils" disposableProviderFactory="true" ecorePackage="pnextensions.ecore#//pnutils">
+    <nestedGenPackages prefix="Pnutils" basePackage="es.unizar.disco.pnextensions"
+        disposableProviderFactory="true" ecorePackage="pnextensions.ecore#//pnutils">
       <genDataTypes ecoreDataType="pnextensions.ecore#//pnutils/URI"/>
       <genDataTypes ecoreDataType="pnextensions.ecore#//pnutils/URISyntaxException"/>
       <genDataTypes ecoreDataType="pnextensions.ecore#//pnutils/StringBuffer"/>
-      <genDataTypes ecoreDataType="pnextensions.ecore#//pnutils/IllegalArgumentException"/>
       <genClasses ecoreClass="pnextensions.ecore#//pnutils/PnUtils">
         <genOperations ecoreOperation="pnextensions.ecore#//pnutils/PnUtils/layout">
           <genParameters ecoreParameter="pnextensions.ecore#//pnutils/PnUtils/layout/petriNet"/>
@@ -42,48 +57,6 @@
         </genOperations>
         <genOperations ecoreOperation="pnextensions.ecore#//pnutils/DataTypeUtils/createLongString">
           <genParameters ecoreParameter="pnextensions.ecore#//pnutils/DataTypeUtils/createLongString/string"/>
-        </genOperations>
-      </genClasses>
-      <genClasses ecoreClass="pnextensions.ecore#//pnutils/ToolInfoUtils">
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/isEObjectValidPnObject">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/isEObjectValidPnObject/eObject"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/isEObjectValidTransition">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/isEObjectValidTransition/eObject"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/getToolInfoEntryByGrammarUri">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/getToolInfoEntryByGrammarUri/pnObject"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/getToolInfoEntryByGrammarUri/uri"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/deleteToolInfoEntryByGrammarUri">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/deleteToolInfoEntryByGrammarUri/pnObject"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/deleteToolInfoEntryByGrammarUri/uri"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/setToolInfoEntryByGrammarUri">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setToolInfoEntryByGrammarUri/pnObject"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setToolInfoEntryByGrammarUri/uri"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setToolInfoEntryByGrammarUri/value"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/isTransitionKind">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/isTransitionKind/transition"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/isTransitionKind/transitionKind"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/isTransitionServerType">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/isTransitionServerType/transition"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/isTransitionServerType/serverType"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/setTransitionKind">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setTransitionKind/transition"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setTransitionKind/transitionKind"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setTransitionKind/value"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/setTransitionServerType">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setTransitionServerType/transition"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setTransitionServerType/serverType"/>
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/setTransitionServerType/value"/>
-        </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/ToolInfoUtils/getTransitionRate">
-          <genParameters ecoreParameter="pnextensions.ecore#//pnutils/ToolInfoUtils/getTransitionRate/transition"/>
         </genOperations>
       </genClasses>
     </nestedGenPackages>

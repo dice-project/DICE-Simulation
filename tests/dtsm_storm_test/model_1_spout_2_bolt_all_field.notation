@@ -223,7 +223,7 @@
                 <element xmi:type="uml:OpaqueAction" href="model_1_spout_2_bolt_all_field.uml#_LNmCcBXNEeaO9pVQNhbfJw"/>
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_LNy2xRXNEeaO9pVQNhbfJw" y="5"/>
               </children>
-              <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_LNy2wRXNEeaO9pVQNhbfJw"/>
+              <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_LNy2wRXNEeaO9pVQNhbfJw" diagramLink="_bBm0UFDrEee2dayUzLdxKQ"/>
               <element xmi:type="uml:OpaqueAction" href="model_1_spout_2_bolt_all_field.uml#_LNmCcBXNEeaO9pVQNhbfJw"/>
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LNy2whXNEeaO9pVQNhbfJw" x="416" y="57" width="87"/>
             </children>
@@ -235,7 +235,7 @@
                 <element xmi:type="uml:OpaqueAction" href="model_1_spout_2_bolt_all_field.uml#_0_YMUORrEeaMmL06d2O8_g"/>
                 <layoutConstraint xmi:type="notation:Location" xmi:id="_0_b2s-RrEeaMmL06d2O8_g" y="5"/>
               </children>
-              <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_0_b2tORrEeaMmL06d2O8_g" diagramLink="_359uIORrEeaMmL06d2O8_g"/>
+              <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_0_b2tORrEeaMmL06d2O8_g"/>
               <element xmi:type="uml:OpaqueAction" href="model_1_spout_2_bolt_all_field.uml#_0_YMUORrEeaMmL06d2O8_g"/>
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0_b36-RrEeaMmL06d2O8_g" x="411" y="179" width="87"/>
             </children>
@@ -514,5 +514,10 @@
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ektgp-RsEeaMmL06d2O8_g"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ektgqORsEeaMmL06d2O8_g"/>
     </edges>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_bBm0UFDrEee2dayUzLdxKQ" type="PapyrusUMLActivityDiagram" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_bBm0UVDrEee2dayUzLdxKQ" name="diagram_compatibility_version" stringValue="1.2.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_bBm0UlDrEee2dayUzLdxKQ"/>
+    <element xmi:type="uml:OpaqueAction" href="model_1_spout_2_bolt_all_field.uml#_LNmCcBXNEeaO9pVQNhbfJw"/>
   </notation:Diagram>
 </xmi:XMI>

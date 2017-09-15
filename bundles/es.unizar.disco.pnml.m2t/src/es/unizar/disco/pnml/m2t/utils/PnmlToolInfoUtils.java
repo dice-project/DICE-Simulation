@@ -26,8 +26,10 @@ public class PnmlToolInfoUtils {
 	public static final String VALUE_PATTERN = "<value grammar=\"(.+)\">(.+)</value>";
 	private static final String SERVER_TYPE_PATTERN = "<value grammar=\"(.+)\"/>";
 	private static final String COLOR_PATTERN = "<value grammar=\"([^>]+)\">([^<]+)</value>";
-	private static final String ARC_TYPE_PATTERN = "<value grammar=\"(.+)\"/>"; /**/
-
+	private static final String ARC_TYPE_PATTERN = "<value grammar=\"(.+)\"/>"; 
+	/**/
+	private static final String ERLANG_PATTERN = "<value grammar=\"([^>]+)\">([^<]+)</value>";
+	/**/
 	public PnmlToolInfoUtils() {
 	}
 
@@ -43,6 +45,29 @@ public class PnmlToolInfoUtils {
 		return false;
 	}
 
+	public static boolean isDeterministic(Transition transition) throws IllegalArgumentException {
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			if (matcher.matches()) {
+				if (TransitionKind.DETERMINISTIC.getLiteral().equals(matcher.group(1))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isErlang(Transition transition) throws IllegalArgumentException {
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(ERLANG_PATTERN).matcher(info.getFormattedXMLBuffer());
+			boolean find = matcher.find();
+			if ( find && TransitionKind.ERLANG.getLiteral().equals(matcher.group(1)) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static boolean isImmediatePriority(Transition transition) throws IllegalArgumentException {
 		for (ToolInfo info : transition.getToolspecifics()) {
 			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
@@ -59,6 +84,7 @@ public class PnmlToolInfoUtils {
 		Set<String> otherTransitionKinds = new HashSet<>();
 		otherTransitionKinds.add(TransitionKind.EXPONENTIAL.getLiteral());
 		otherTransitionKinds.add(TransitionKind.DETERMINISTIC.getLiteral());
+		otherTransitionKinds.add(TransitionKind.ERLANG.getLiteral());
 
 		for (ToolInfo info : transition.getToolspecifics()) {
 			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
@@ -106,6 +132,55 @@ public class PnmlToolInfoUtils {
 		return 1f;
 	}
 
+	public Float getTransitionDeterministicRate(Transition transition) throws IllegalArgumentException {
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			if (matcher.matches() && TransitionKind.DETERMINISTIC.getLiteral().equals(matcher.group(1))) {
+				return Float.valueOf(matcher.group(2));
+			}
+		}
+		return 1f;
+	}
+	
+	public Integer getTransitionErlangRate2(Transition transition) throws IllegalArgumentException {
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(ERLANG_PATTERN).matcher(info.getFormattedXMLBuffer());
+			//Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			if (matcher.matches() && TransitionKind.ERLANG.getLiteral().equals(matcher.group(1))) {
+				return Integer.valueOf(matcher.group(2));
+			}
+		}
+		return 1;
+	}
+	
+	public Float getTransitionErlangRate(Transition transition) throws IllegalArgumentException {
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(ERLANG_PATTERN).matcher(info.getFormattedXMLBuffer());
+			//Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			boolean find = matcher.find();
+			if (find && TransitionKind.ERLANG.getLiteral().equals(matcher.group(1))) {
+				float v1 = Float.valueOf(matcher.group(2)); 
+				return v1;
+			}
+		}
+		return 1f;
+	}
+	
+	public Integer getTransitionErlangK(Transition transition) throws IllegalArgumentException {
+		for (ToolInfo info : transition.getToolspecifics()) {
+			Matcher matcher = Pattern.compile(ERLANG_PATTERN).matcher(info.getFormattedXMLBuffer());
+			//Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());
+			matcher.find();
+			boolean find = matcher.find();
+			//matcher.find(2) 
+			if (find && TransitionKind.ERLANG.getLiteral().equals(matcher.group(1))) {
+				return Integer.valueOf(matcher.group(2));
+			}
+		}
+		return 1;
+	}
+	
+	
 	public Float getTransitionProbability(Transition transition) throws IllegalArgumentException {
 		for (ToolInfo info : transition.getToolspecifics()) {
 			Matcher matcher = Pattern.compile(VALUE_PATTERN).matcher(info.getFormattedXMLBuffer());

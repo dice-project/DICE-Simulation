@@ -77,23 +77,31 @@
   </uml:Model>
   <Storm:StormBolt xmi:id="_JiHcsDnrEeaBQNKHvmh8mQ" base_NamedElement="_LNmCcBXNEeaO9pVQNhbfJw" base_Action="_LNmCcBXNEeaO9pVQNhbfJw" parallelism="4">
     <hostDemand>(expr=5,unit=ms,statQ=mean,source=est)</hostDemand>
-    <utilization>(expr=$utilization, statQ=mean, source=calc)</utilization>
+    <utilization>(expr=$utilization1, statQ=mean, source=calc)</utilization>
   </Storm:StormBolt>
-  <Storm:StormSpout xmi:id="_UPvdADnrEeaBQNKHvmh8mQ" base_NamedElement="_CRMkoBXMEeaO9pVQNhbfJw" base_Action="_CRMkoBXMEeaO9pVQNhbfJw" targetTech="storm" parallelism="2&#xA;" avgEmitRate="&#xA;">
+  <Storm:StormSpout xmi:id="_UPvdADnrEeaBQNKHvmh8mQ" base_NamedElement="_CRMkoBXMEeaO9pVQNhbfJw" base_Action="_CRMkoBXMEeaO9pVQNhbfJw" targetTech="storm" parallelism="2" avgEmitRate="">
     <hostDemand>(expr=3.5,unit=ms,statQ=mean,source=est)</hostDemand>
+    <utilization>(expr=$utilization0, statQ=mean, source=calc)</utilization>
   </Storm:StormSpout>
   <Storm:StormSpout xmi:id="_Zb9z0DxoEea0n4gfxAdogA" base_NamedElement="_u6bKsB3CEeaAOqN-CPM2wA" base_Classifier="_u6bKsB3CEeaAOqN-CPM2wA"/>
   <Storm:StormBolt xmi:id="_cXeisDxoEea0n4gfxAdogA" base_NamedElement="_4W9h0jxnEea0n4gfxAdogA" base_Classifier="_4W9h0jxnEea0n4gfxAdogA"/>
-  <GQAM:GaExecHost xmi:id="_HVSzAD0QEea5BfFPxb1f8A" resMult="3" base_Classifier="_vdKrYB3CEeaAOqN-CPM2wA" schedPolicy="RoundRobin"/>
+  <GQAM:GaExecHost xmi:id="_HVSzAD0QEea5BfFPxb1f8A" resMult="3" base_Classifier="_vdKrYB3CEeaAOqN-CPM2wA" schedPolicy="RoundRobin">
+    <utilization>(expr=$utilization, statQ=mean, source=calc)</utilization>
+  </GQAM:GaExecHost>
   <GQAM:GaAnalysisContext xmi:id="_I0HA4H_sEea4le-Wr80mRQ" base_StructuredClassifier="_fhMfgBXCEeaO9pVQNhbfJw" base_NamedElement="_fhMfgBXCEeaO9pVQNhbfJw">
     <context>in$c1</context>
     <context>out$utilization</context>
+    <context>out$utilization1</context>
+    <context>out$utilization2</context>
+    <context>out$utilization0</context>
   </GQAM:GaAnalysisContext>
   <Storm:StormScenarioTopology xmi:id="_CuA7YGquEeaht-ghhLWJ8w" base_NamedElement="_fhMfgBXCEeaO9pVQNhbfJw" usedResources="_HVSzAD0QEea5BfFPxb1f8A" base_Behavior="_fhMfgBXCEeaO9pVQNhbfJw" base_Class="_fhMfgBXCEeaO9pVQNhbfJw"/>
-  <Storm:StormStreamStep xmi:id="_XGqN8LrbEeaDBsV1rRktkA" base_NamedElement="_QjYuMLrbEeaDBsV1rRktkA" numTuples="20" grouping="all"/>
+  <Storm:StormStreamStep xmi:id="_XGqN8LrbEeaDBsV1rRktkA" base_NamedElement="_QjYuMLrbEeaDBsV1rRktkA" numTuples="20"/>
   <Storm:StormBolt xmi:id="_0_e6AORrEeaMmL06d2O8_g" base_NamedElement="_0_YMUORrEeaMmL06d2O8_g" base_Action="_0_YMUORrEeaMmL06d2O8_g" parallelism="5">
     <hostDemand>(expr=5,unit=ms,statQ=mean,source=est)</hostDemand>
-    <utilization>(expr=$utilization, statQ=mean, source=calc)</utilization>
+    <utilization>(expr=$utilization2, statQ=mean, source=calc)</utilization>
   </Storm:StormBolt>
-  <Storm:StormStreamStep xmi:id="_ekYJcORsEeaMmL06d2O8_g" base_NamedElement="_H5bbgORsEeaMmL06d2O8_g" numTuples="6" grouping="field"/>
+  <Storm:StormStreamStep xmi:id="_ekYJcORsEeaMmL06d2O8_g" base_NamedElement="_H5bbgORsEeaMmL06d2O8_g" numTuples="6" grouping="field">
+    <probFields>0.2</probFields>
+  </Storm:StormStreamStep>
 </xmi:XMI>

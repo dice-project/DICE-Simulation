@@ -525,7 +525,8 @@ mapping UML::ControlFlow::forkControlFlow2arc() when {
 mapping UML::NamedElement::namedElement2place() : PNML::Place {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+			self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -656,7 +657,8 @@ inherits UML::NamedElement::namedElement2place {
 mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 		containerPage := resolveoneIn(UML::NamedElement::model2page);
 		id := createRandomUniqueId();
-		if (self.name.oclIsUndefined().not()) {
+		if (self.name.oclIsUndefined().not() and
+		 	self.name.equalsIgnoreCase("").not()) {
 			name := object PNML::Name {
 				text := self.name;
 			};
@@ -754,13 +756,21 @@ inherits UML::ActivityNode::activityNode2immediateTransition {
 */
 mapping UML::ActivityNode::activityNode2timedTransition() : PNML::Transition 
 inherits UML::NamedElement::namedElement2transition {
-	toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();
+	/**/
+	var nAssigned := ad.scenario().getSparkScenario_nAssignedCores();
+	if (self.numTasks.value() > nAssigned.value()) {
+		toolspecifics += self[OpaqueAction].map opaqueActionHostDemand2toolInfo();	
+	}
+	else {
+		toolspecifics += self[OpaqueAction].map opaqueActionErlangHostDemand2toolInfo();
+	}
+	/**/
 }
 
 /***********************************************************************/
 
 /**
-	Transforms an OpaqueAction with a hostDemand annotation to a ToolInfo element
+	Transforms an OpaqueAction with a hostDemand annotation and Exponential distritution to a ToolInfo element
 */
 
 mapping UML::OpaqueAction::opaqueActionHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
@@ -769,6 +779,21 @@ when {
 }{
 	var hostDemand := self.getSparkOperation_hostDemand();
 	result += expTransitionToolInfo( 1 / hostDemand.value());
+	result += infServerTransitionToolInfo();
+}
+
+/**
+	Transforms an OpaqueAction with a hostDemand annotation and Erlang distritution to a ToolInfo element
+*/
+
+mapping UML::OpaqueAction::opaqueActionErlangHostDemand2toolInfo() : List ( PNML::ToolInfo ) 
+when {
+		self.getSparkOperation_hostDemand().oclIsUndefined().not();
+}{
+	var hostDemand := self.getSparkOperation_hostDemand();
+	//var k := self.numTasks;
+	var k := ad.scenario().getSparkScenario_sparkDefaultParallelism();
+	result += erlangTransitionToolInfo(1 / hostDemand.value(), k.value() * k.value());
 	result += infServerTransitionToolInfo();
 }
 
@@ -1092,11 +1117,11 @@ helper UML::Element::getSparkReduce_hostDemand() : NFP_Duration {
 }
 
 /******************************************************************/
-helper UML::Element::getMapType() : DBET::SparkMap {
+helper UML::Element::getMapType() : DBET::SparkTransformation {
 	if (self.getSparkMap() = null) {
 		return null;
 	};
-	var mapType := self.getValue(self.getSparkMap(), "MapType").oclAsType(DBET::SparkMap);
+	var mapType := self.getValue(self.getSparkMap(), "MapType").oclAsType(DBET::SparkTransformation);
 	assert warning (mapType->size() = 1)
 		with log ("Unexpected number of 'MapType' tagged values found, expected 1. "+
 					"The context element is '" + self.toString() + "'");
@@ -1104,11 +1129,11 @@ helper UML::Element::getMapType() : DBET::SparkMap {
 	return mapType;
 }
 
-helper UML::Element::getReduceType() : DBET::SparkReduce {
+helper UML::Element::getReduceType() : DBET::SparkAction {
 	if (self.getSparkReduce() = null) {
 		return null;
 	};
-	var reduceType := self.getValue(self.getSparkReduce(), "ReduceType").oclAsType(DBET::SparkReduce);
+	var reduceType := self.getValue(self.getSparkReduce(), "ReduceType").oclAsType(DBET::SparkAction);
 	assert warning (reduceType->size() = 1)
 		with log ("Unexpected number of 'ReduceType' tagged values found, expected 1. "+
 					"The context element is '" + self.toString() + "'");
@@ -1117,29 +1142,29 @@ helper UML::Element::getReduceType() : DBET::SparkReduce {
 }
 
 /******************************************************************/
-query isSetOperation(in mapType : DBET::SparkMap) : Boolean {
-	return (mapType = DBET::SparkMap::RDDSetOperation) or 
-		   (mapType = DBET::SparkMap::Union) or 
-		   (mapType = DBET::SparkMap::Intersection) or 
-		   (mapType = DBET::SparkMap::Substraction) or 
-		   (mapType = DBET::SparkMap::Distinct) or 
-		   (mapType = DBET::SparkMap::Cartesian) ;
+query isSetOperation(in mapType : DBET::SparkTransformation) : Boolean {
+	return (mapType = DBET::SparkTransformation::RDDSetOperation) or 
+		   (mapType = DBET::SparkTransformation::Union) or 
+		   (mapType = DBET::SparkTransformation::Intersection) or 
+		   (mapType = DBET::SparkTransformation::Substraction) or 
+		   (mapType = DBET::SparkTransformation::Distinct) or 
+		   (mapType = DBET::SparkTransformation::Cartesian) ;
 }
 
-query isByKeyOperation(in mapType : DBET::SparkMap) : Boolean {
-	return (mapType = DBET::SparkMap::ByKey);
+query isByKeyOperation(in mapType : DBET::SparkTransformation) : Boolean {
+	return (mapType = DBET::SparkTransformation::ByKey);
 }
 
-query isByKeyOperation(in redType : DBET::SparkReduce) : Boolean {
-	return (redType = DBET::SparkReduce::CountByKey);
+query isByKeyOperation(in redType : DBET::SparkAction) : Boolean {
+	return (redType = DBET::SparkAction::CountByKey);
 }
 
-query isJoinOperation(in mapType : DBET::SparkMap) : Boolean {
-	return (mapType = DBET::SparkMap::Join);
+query isJoinOperation(in mapType : DBET::SparkTransformation) : Boolean {
+	return (mapType = DBET::SparkTransformation::Join);
 }
 
-query isRepartitionOperation(in mapType : DBET::SparkMap) : Boolean {
-	return (mapType = DBET::SparkMap::Repartition);
+query isRepartitionOperation(in mapType : DBET::SparkTransformation) : Boolean {
+	return (mapType = DBET::SparkTransformation::Repartition);
 }
 
 /******************************************************************/
@@ -1379,15 +1404,15 @@ helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
 			if (self.oclAsType(ActivityNode).isSetOperation()){
 				assert warning (self.incoming->size() <= 2) with log ("Activity Nodes reprepresenting set operations need two RDD");
 				var totalTasks := 1;
-				if (mapType = DBET::SparkMap::Union){			
+				if (mapType = DBET::SparkTransformation::Union){			
 					prevTasks->forEach(prevNumTasks){
 						totalTasks := totalTasks + prevNumTasks.value() - 1;
 					}
-				} else if (mapType = DBET::SparkMap::Cartesian){
+				} else if (mapType = DBET::SparkTransformation::Cartesian){
 					prevTasks->forEach(prevNumTasks){
 						totalTasks := totalTasks * prevNumTasks.value();
 					}
-				}  else if (mapType = DBET::SparkMap::Intersection){
+				}  else if (mapType = DBET::SparkTransformation::Intersection){
 					prevTasks->forEach(prevNumTasks){
 						totalTasks := max(totalTasks, prevNumTasks.value());
 						totalTasks := max(totalTasks, defaultParallelism);
@@ -1403,7 +1428,8 @@ helper UML::ActivityNode::inferNumTasks() : NFP_Integer {
 		};
 		
 		if (self.oclAsType(ActivityNode).isJoinOperation() or
-			self.oclAsType(ActivityNode).isRepartitionOperation()){
+			self.oclAsType(ActivityNode).isRepartitionOperation() or
+			(mapType = DBET::SparkTransformation::Subtract)){
 			assert warning (explicitTasks != null) with log ("Cannot infer the number of numTasks. Activity Node with Spark operation" + mapType.toString() + " requires an explicit number of numTasks");
 		};
 	};

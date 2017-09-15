@@ -93,18 +93,18 @@
       <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_6c2bkAPMEdyuUt-4qHuVvQ"/>
     </profileApplication>
   </uml:Model>
-  <Spark:SparkReduce xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" numTasks="$defaultParallelism" OpType="Action">
+  <Spark:SparkAction xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" numTasks="$defaultParallelism" OpType="Action">
     <hostDemand>(expr=$countT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkReduce>
-  <Spark:SparkMap xmi:id="_ezllIBfoEeePpehjS1zFvA" base_NamedElement="_TVg_UBfoEeePpehjS1zFvA" base_Action="_TVg_UBfoEeePpehjS1zFvA" numTasks="$nC1">
+  </Spark:SparkAction>
+  <Spark:SparkTransformation xmi:id="_ezllIBfoEeePpehjS1zFvA" base_NamedElement="_TVg_UBfoEeePpehjS1zFvA" base_Action="_TVg_UBfoEeePpehjS1zFvA" numTasks="$nC1">
     <hostDemand>(expr=$map2T,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
-  <Spark:SparkMap xmi:id="_hJdQUBfoEeePpehjS1zFvA" base_NamedElement="_N5vTIBfoEeePpehjS1zFvA" base_Action="_N5vTIBfoEeePpehjS1zFvA" numTasks="$nC1">
+  </Spark:SparkTransformation>
+  <Spark:SparkTransformation xmi:id="_hJdQUBfoEeePpehjS1zFvA" base_NamedElement="_N5vTIBfoEeePpehjS1zFvA" base_Action="_N5vTIBfoEeePpehjS1zFvA" numTasks="$nC1">
     <hostDemand>(expr=$map1T,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
-  <Spark:SparkMap xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$nC1">
+  </Spark:SparkTransformation>
+  <Spark:SparkTransformation xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$nC1">
     <hostDemand>(expr=$groupT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
+  </Spark:SparkTransformation>
   <Spark:SparkNode xmi:id="_8W8VUBfoEeePpehjS1zFvA" base_Classifier="_UIF9sBfmEeePpehjS1zFvA" base_NamedElement="_UIF9sBfmEeePpehjS1zFvA" nCores="$nP1" Memory="$nM1">
     <utilization>(expr=$UNode,statQ=mean,source=calc)</utilization>
   </Spark:SparkNode>

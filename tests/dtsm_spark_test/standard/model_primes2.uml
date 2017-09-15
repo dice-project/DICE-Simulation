@@ -40,9 +40,9 @@ statQ=mean,
 source=est)}</body>
       </ownedComment>
       <ownedComment xmi:type="uml:Comment" xmi:id="_uamDAEVKEeeNJNO26xv_hg" annotatedElement="_2w2sABfnEeePpehjS1zFvA">
-        <body>{ReduceType=Substract
+        <body>{ReduceType=Subtract
 numTasks=$nC1
-hostDemand=(expr=$substractT,
+hostDemand=(expr=$subtractT,
 unit=ms,
 statQ=mean,
 source=est)}</body>
@@ -82,7 +82,7 @@ source=est)}</body>
       <group xmi:type="uml:ActivityPartition" xmi:id="_c3AZIBfnEeePpehjS1zFvA" name="Transformation" node="_N5vTIBfoEeePpehjS1zFvA _QOIXoBfoEeePpehjS1zFvA _TVg_UBfoEeePpehjS1zFvA _2np6kCUKEeeGiOkBV7ej3g" represents="_eY8icBfmEeePpehjS1zFvA"/>
       <group xmi:type="uml:ActivityPartition" xmi:id="_n_4yEBfnEeePpehjS1zFvA" name="Action" node="_2w2sABfnEeePpehjS1zFvA _oQztgDoWEeeGuLHbg3prBg" represents="_ad_v0BfmEeePpehjS1zFvA"/>
       <node xmi:type="uml:InitialNode" xmi:id="_FexHYBfnEeePpehjS1zFvA" name="Composite" outgoing="_on8bIBfoEeePpehjS1zFvA"/>
-      <node xmi:type="uml:OpaqueAction" xmi:id="_2w2sABfnEeePpehjS1zFvA" name="Substract" incoming="_Igx4QCULEeeGiOkBV7ej3g _KI9-ECULEeeGiOkBV7ej3g" outgoing="_KyRrkBfrEeePpehjS1zFvA" inPartition="_n_4yEBfnEeePpehjS1zFvA"/>
+      <node xmi:type="uml:OpaqueAction" xmi:id="_2w2sABfnEeePpehjS1zFvA" name="Subtract" incoming="_Igx4QCULEeeGiOkBV7ej3g _KI9-ECULEeeGiOkBV7ej3g" outgoing="_KyRrkBfrEeePpehjS1zFvA" inPartition="_n_4yEBfnEeePpehjS1zFvA"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_N5vTIBfoEeePpehjS1zFvA" name="Map1" incoming="_on8bIBfoEeePpehjS1zFvA" outgoing="_qKDHEBfoEeePpehjS1zFvA" inPartition="_c3AZIBfnEeePpehjS1zFvA"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_QOIXoBfoEeePpehjS1zFvA" name="Repartition" incoming="_qKDHEBfoEeePpehjS1zFvA" outgoing="_ra0LYBfoEeePpehjS1zFvA" inPartition="_c3AZIBfnEeePpehjS1zFvA"/>
       <node xmi:type="uml:OpaqueAction" xmi:id="_TVg_UBfoEeePpehjS1zFvA" name="FlatMap" incoming="_ra0LYBfoEeePpehjS1zFvA" outgoing="_smtWwBfoEeePpehjS1zFvA" inPartition="_c3AZIBfnEeePpehjS1zFvA"/>
@@ -168,18 +168,18 @@ source=est)}</body>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_6c2bkAPMEdyuUt-4qHuVvQ"/>
     </profileApplication>
   </uml:Model>
-  <Spark:SparkReduce xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" OpType="Action">
-    <hostDemand>(expr=$substractT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkReduce>
-  <Spark:SparkMap xmi:id="_ezllIBfoEeePpehjS1zFvA" base_NamedElement="_TVg_UBfoEeePpehjS1zFvA" base_Action="_TVg_UBfoEeePpehjS1zFvA">
+  <Spark:SparkAction xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" OpType="Action">
+    <hostDemand>(expr=$subtractT,unit=ms,statQ=mean,source=est)</hostDemand>
+  </Spark:SparkAction>
+  <Spark:SparkTransformation xmi:id="_ezllIBfoEeePpehjS1zFvA" base_NamedElement="_TVg_UBfoEeePpehjS1zFvA" base_Action="_TVg_UBfoEeePpehjS1zFvA">
     <hostDemand>(expr=$flatmapT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
-  <Spark:SparkMap xmi:id="_hJdQUBfoEeePpehjS1zFvA" base_NamedElement="_N5vTIBfoEeePpehjS1zFvA" base_Action="_N5vTIBfoEeePpehjS1zFvA">
+  </Spark:SparkTransformation>
+  <Spark:SparkTransformation xmi:id="_hJdQUBfoEeePpehjS1zFvA" base_NamedElement="_N5vTIBfoEeePpehjS1zFvA" base_Action="_N5vTIBfoEeePpehjS1zFvA">
     <hostDemand>(expr=$map1T,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
-  <Spark:SparkMap xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$nC1" MapType="Repartition">
+  </Spark:SparkTransformation>
+  <Spark:SparkTransformation xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$nC1" MapType="Repartition">
     <hostDemand>(expr=$repartitionT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
+  </Spark:SparkTransformation>
   <Spark:SparkNode xmi:id="_8W8VUBfoEeePpehjS1zFvA" base_Classifier="_UIF9sBfmEeePpehjS1zFvA" base_NamedElement="_UIF9sBfmEeePpehjS1zFvA" nCores="$nP1" Memory="$nM1">
     <utilization>(expr=$UNode,statQ=mean,source=calc)</utilization>
   </Spark:SparkNode>
@@ -188,7 +188,7 @@ source=est)}</body>
     <context>$th1</context>
     <context>$map1T</context>
     <context>$map2T</context>
-    <context>$substractT</context>
+    <context>$subtractT</context>
     <context>$nP1</context>
     <context>$nM1</context>
     <context>$nAssignedCores</context>
@@ -211,10 +211,10 @@ source=est)}</body>
   </Spark:SparkScenario>
   <Spark:SparkWorkloadEvent xmi:id="_6RLtQBfpEeePpehjS1zFvA" base_NamedElement="_FexHYBfnEeePpehjS1zFvA" sparkPopulation="$nC1" sparkExtDelay="(expr=$th1,unit=ms,statQ=mean,source=est)"/>
   <Spark:SparkWorkloadEvent xmi:id="_2nsW0CUKEeeGiOkBV7ej3g" base_NamedElement="_2nqhoCUKEeeGiOkBV7ej3g" sparkPopulation="$nC2" sparkExtDelay="(expr=$th2,unit=ms,statQ=mean,source=est)"/>
-  <Spark:SparkMap xmi:id="_20CJsCUKEeeGiOkBV7ej3g" base_NamedElement="_2np6kCUKEeeGiOkBV7ej3g" base_Action="_2np6kCUKEeeGiOkBV7ej3g">
+  <Spark:SparkTransformation xmi:id="_20CJsCUKEeeGiOkBV7ej3g" base_NamedElement="_2np6kCUKEeeGiOkBV7ej3g" base_Action="_2np6kCUKEeeGiOkBV7ej3g">
     <hostDemand>(expr=$map2T,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
-  <Spark:SparkReduce xmi:id="_oRBv8DoWEeeGuLHbg3prBg" base_NamedElement="_oQztgDoWEeeGuLHbg3prBg" base_Action="_oQztgDoWEeeGuLHbg3prBg" numTasks="$nC1" OpType="Action" ReduceType="Collect">
+  </Spark:SparkTransformation>
+  <Spark:SparkAction xmi:id="_oRBv8DoWEeeGuLHbg3prBg" base_NamedElement="_oQztgDoWEeeGuLHbg3prBg" base_Action="_oQztgDoWEeeGuLHbg3prBg" numTasks="$nC1" OpType="Action" ReduceType="Collect">
     <hostDemand>(expr=$collectT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkReduce>
+  </Spark:SparkAction>
 </xmi:XMI>

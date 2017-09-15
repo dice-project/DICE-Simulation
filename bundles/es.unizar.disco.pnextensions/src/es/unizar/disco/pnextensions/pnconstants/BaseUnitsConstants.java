@@ -26,7 +26,9 @@ public enum BaseUnitsConstants implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	BASE_TIME_UNIT(0, "baseTimeUnit", "http://es.unizar.dsico/pnconstants/units/basetimeunit"), /**
+	BASE_TIME_UNIT(0, "baseTimeUnit", "http://es.unizar.dsico/pnconstants/units/basetimeunit"),
+
+	/**
 	 * The '<em><b>Base Frequency Unit</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

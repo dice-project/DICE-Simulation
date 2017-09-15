@@ -22,21 +22,21 @@ public enum Color implements Enumerator {
 	 * The '<em><b>Color</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #COLOR
+	 * @see #COLOR_VALUE
 	 * @generated
 	 * @ordered
 	 */
 	COLOR(0, "Color", "http://es.unizar.dsico/pnconstants/color/color"),
 
 	/**
-	 * The '<em><b>ColorSet</b></em>' literal object.
+	 * The '<em><b>Colorset</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #COLORSET
+	 * @see #COLORSET_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	COLORSET(1, "ColorSet", "http://es.unizar.dsico/pnconstants/color/colorset");
+	COLORSET(1, "Colorset", "http://es.unizar.dsico/pnconstants/color/colorset");
 
 	/**
 	 * The '<em><b>Color</b></em>' literal value.
@@ -52,17 +52,17 @@ public enum Color implements Enumerator {
 	 * @ordered
 	 */
 	public static final int COLOR_VALUE = 0;
-	
+
 	/**
-	 * The '<em><b>ColorSet</b></em>' literal value.
+	 * The '<em><b>Colorset</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>ColorSet</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>Colorset</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #COLORSET
-	 * @model name="ColorSet" literal="http://es.unizar.dsico/pnconstants/color/colorset"
+	 * @model name="Colorset" literal="http://es.unizar.dsico/pnconstants/color/colorset"
 	 * @generated
 	 * @ordered
 	 */

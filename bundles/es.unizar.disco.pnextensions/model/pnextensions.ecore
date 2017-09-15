@@ -14,6 +14,7 @@
       <eLiterals name="Exponential" value="1" literal="http://es.unizar.disco/pnconstants/tkind/exponential"/>
       <eLiterals name="Deterministic" value="2" literal="http://es.unizar.disco/pnconstants/tkind/deterministic"/>
       <eLiterals name="ImmediatePriority" value="3" literal="http://es.unizar.disco/pnconstants/tkind/immediatepriority"/>
+      <eLiterals name="Erlang" value="4" literal="http://es.unizar.disco/pnconstants/tkind/erlang"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ServerType">
       <eLiterals name="InfiniteServer" literal="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
@@ -26,12 +27,12 @@
       <eLiterals name="baseFrequencyUnit" value="1" literal="http://es.unizar.dsico/pnconstants/units/basefrequencyunit"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="Color">
-      <eLiterals name="Color" literal="http://es.unizar.dsico/pnconstants/color/numcolor"/>
-      <eLiterals name="ColorSet" value="1" literal="http://es.unizar.dsico/pnconstants/color/numelementscolor"/>
+      <eLiterals name="Color" literal="http://es.unizar.dsico/pnconstants/color/color"/>
+      <eLiterals name="Colorset" value="1" literal="http://es.unizar.dsico/pnconstants/color/colorset"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ArcKind">
-      <eLiterals name="Normal" literal="http://es.unizar.dsico/pnconstants/tkind/immediate"/>
-      <eLiterals name="Inhibitor" value="1" literal="http://es.unizar.dsico/pnconstants/tkind/exponential"/>
+      <eLiterals name="Normal" literal="http://es.unizar.dsico/pnconstants/akind/normal"/>
+      <eLiterals name="Inhibitor" value="1" literal="http://es.unizar.dsico/pnconstants/akind/inhibitor"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="pnutils" nsURI="http://es.unizar.disco/pnutils/1.0" nsPrefix="pnutils">
