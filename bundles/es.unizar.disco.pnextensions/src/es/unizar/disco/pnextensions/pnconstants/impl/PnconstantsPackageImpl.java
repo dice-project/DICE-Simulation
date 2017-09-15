@@ -273,7 +273,7 @@ public class PnconstantsPackageImpl extends EPackageImpl implements PnconstantsP
 
 		initEEnum(colorEEnum, Color.class, "Color");
 		addEEnumLiteral(colorEEnum, Color.COLOR);
-		addEEnumLiteral(colorEEnum, Color.COLOR_SET);
+		addEEnumLiteral(colorEEnum, Color.COLORSET);
 
 		initEEnum(arcKindEEnum, ArcKind.class, "ArcKind");
 		addEEnumLiteral(arcKindEEnum, ArcKind.NORMAL);
