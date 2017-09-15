@@ -1813,14 +1813,14 @@ helper colorSetToolInfo(colorset : ColourSet) : PNML::ToolInfo {
 	return object PNML::ToolInfo { 
 		tool := CONST::ToolInfoConstants::toolName.toString();
 		version := CONST::ToolInfoConstants::toolVersion.toString();
-		toolInfoGrammarURI := CONST::Color::ColorSet.toString().createURI();
+		toolInfoGrammarURI := CONST::Color::Colorset.toString().createURI();
 		formattedXMLBuffer := colorSet2String(colorset);
 	};		
 }
 
 helper colorSet2String(colorset : ColourSet) : LongString {
-	return ("<value grammar=\"" + CONST::Color::ColorSet.toString() + "\">" + colorset.colorset_id + "</value>" +
-		   "<value grammar=\"" + CONST::Color::ColorSet.toString() + "\">" + colorset.type.toString() + "</value>").createLongString();
+	return ("<value grammar=\"" + CONST::Color::Colorset.toString() + "\">" + colorset.colorset_id + "</value>" +
+		   "<value grammar=\"" + CONST::Color::Colorset.toString() + "\">" + colorset.type.toString() + "</value>").createLongString();
 }
 							   
 /**
