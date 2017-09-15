@@ -34,7 +34,7 @@
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="pnextensions.ecore#//pnconstants/Color">
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/Color/Color"/>
-        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/Color/ColorSet"/>
+        <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/Color/Colorset"/>
       </genEnums>
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="pnextensions.ecore#//pnconstants/ArcKind">
         <genEnumLiterals ecoreEnumLiteral="pnextensions.ecore#//pnconstants/ArcKind/Normal"/>
