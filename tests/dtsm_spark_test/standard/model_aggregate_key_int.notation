@@ -333,9 +333,4 @@
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_THhY0STcEeeGiOkBV7ej3g" id="(0.0,0.6666666666666666)"/>
     </edges>
   </notation:Diagram>
-  <notation:Diagram xmi:id="_H9eiQCTcEeeGiOkBV7ej3g" type="PapyrusUMLActivityDiagram" measurementUnit="Pixel">
-    <styles xmi:type="notation:StringValueStyle" xmi:id="_H9eiQSTcEeeGiOkBV7ej3g" name="diagram_compatibility_version" stringValue="1.2.0"/>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_H9eiQiTcEeeGiOkBV7ej3g"/>
-    <element xmi:type="uml:OpaqueAction" href="model_aggregate_key_int.uml#_QOIXoBfoEeePpehjS1zFvA"/>
-  </notation:Diagram>
 </xmi:XMI>

@@ -89,9 +89,9 @@
       <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_6c2bkAPMEdyuUt-4qHuVvQ"/>
     </profileApplication>
   </uml:Model>
-  <Spark:SparkReduce xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" numTasks="$nC1" OpType="Action">
+  <Spark:SparkAction xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" numTasks="$nC1" OpType="Action">
     <hostDemand>(expr=$countT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkReduce>
+  </Spark:SparkAction>
   <Spark:SparkNode xmi:id="_8W8VUBfoEeePpehjS1zFvA" base_Classifier="_UIF9sBfmEeePpehjS1zFvA" base_NamedElement="_UIF9sBfmEeePpehjS1zFvA" nCores="$nP1" Memory="$nM1">
     <utilization>(expr=$UNode,statQ=mean,source=calc)</utilization>
   </Spark:SparkNode>
@@ -116,7 +116,7 @@
     <utilization>(expr=$USpark,statQ=mean,source=calc)</utilization>
   </Spark:SparkScenario>
   <Spark:SparkWorkloadEvent xmi:id="_6RLtQBfpEeePpehjS1zFvA" base_NamedElement="_FexHYBfnEeePpehjS1zFvA" sparkPopulation="$nC1" sparkExtDelay="(expr=$th1,unit=ms,statQ=mean,source=est)"/>
-  <Spark:SparkMap xmi:id="_lQpE4CTdEeeGiOkBV7ej3g" base_NamedElement="_dKwi4CTdEeeGiOkBV7ej3g" base_Action="_dKwi4CTdEeeGiOkBV7ej3g" numTasks="$nC1" MapType="ByKey">
+  <Spark:SparkTransformation xmi:id="_lQpE4CTdEeeGiOkBV7ej3g" base_NamedElement="_dKwi4CTdEeeGiOkBV7ej3g" base_Action="_dKwi4CTdEeeGiOkBV7ej3g" numTasks="$nC1" MapType="ByKey">
     <hostDemand>(expr=$sortbykeyT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
+  </Spark:SparkTransformation>
 </xmi:XMI>

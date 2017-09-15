@@ -97,18 +97,18 @@
       <appliedProfile xmi:type="uml:Profile" href="pathmap://Papyrus_PROFILES/MARTE.profile.uml#_6c2bkAPMEdyuUt-4qHuVvQ"/>
     </profileApplication>
   </uml:Model>
-  <Spark:SparkReduce xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" OpType="Action">
+  <Spark:SparkAction xmi:id="_J2DbQBfoEeePpehjS1zFvA" base_NamedElement="_2w2sABfnEeePpehjS1zFvA" base_Action="_2w2sABfnEeePpehjS1zFvA" OpType="Action">
     <hostDemand>(expr=$substractT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkReduce>
-  <Spark:SparkMap xmi:id="_ezllIBfoEeePpehjS1zFvA" base_NamedElement="_TVg_UBfoEeePpehjS1zFvA" base_Action="_TVg_UBfoEeePpehjS1zFvA">
+  </Spark:SparkAction>
+  <Spark:SparkTransformation xmi:id="_ezllIBfoEeePpehjS1zFvA" base_NamedElement="_TVg_UBfoEeePpehjS1zFvA" base_Action="_TVg_UBfoEeePpehjS1zFvA">
     <hostDemand>(expr=$flatmapT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
-  <Spark:SparkMap xmi:id="_hJdQUBfoEeePpehjS1zFvA" base_NamedElement="_N5vTIBfoEeePpehjS1zFvA" base_Action="_N5vTIBfoEeePpehjS1zFvA">
+  </Spark:SparkTransformation>
+  <Spark:SparkTransformation xmi:id="_hJdQUBfoEeePpehjS1zFvA" base_NamedElement="_N5vTIBfoEeePpehjS1zFvA" base_Action="_N5vTIBfoEeePpehjS1zFvA">
     <hostDemand>(expr=$map1T,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
-  <Spark:SparkMap xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$defaultParallelism" MapType="Repartition">
+  </Spark:SparkTransformation>
+  <Spark:SparkTransformation xmi:id="_lkqQUBfoEeePpehjS1zFvA" base_NamedElement="_QOIXoBfoEeePpehjS1zFvA" base_Action="_QOIXoBfoEeePpehjS1zFvA" numTasks="$defaultParallelism" MapType="Repartition">
     <hostDemand>(expr=$repartitionT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
+  </Spark:SparkTransformation>
   <Spark:SparkNode xmi:id="_8W8VUBfoEeePpehjS1zFvA" base_Classifier="_UIF9sBfmEeePpehjS1zFvA" base_NamedElement="_UIF9sBfmEeePpehjS1zFvA" nCores="$nP1" Memory="$nM1">
     <utilization>(expr=$UNode,statQ=mean,source=calc)</utilization>
   </Spark:SparkNode>
@@ -139,7 +139,7 @@
   </Spark:SparkScenario>
   <Spark:SparkWorkloadEvent xmi:id="_6RLtQBfpEeePpehjS1zFvA" base_NamedElement="_FexHYBfnEeePpehjS1zFvA" sparkPopulation="$nC1" sparkExtDelay="(expr=$th1,unit=ms,statQ=mean,source=est)"/>
   <Spark:SparkWorkloadEvent xmi:id="_2nsW0CUKEeeGiOkBV7ej3g" base_NamedElement="_2nqhoCUKEeeGiOkBV7ej3g" sparkPopulation="$nC2" sparkExtDelay="(expr=$th2,unit=ms,statQ=mean,source=est)"/>
-  <Spark:SparkMap xmi:id="_20CJsCUKEeeGiOkBV7ej3g" base_NamedElement="_2np6kCUKEeeGiOkBV7ej3g" base_Action="_2np6kCUKEeeGiOkBV7ej3g">
+  <Spark:SparkTransformation xmi:id="_20CJsCUKEeeGiOkBV7ej3g" base_NamedElement="_2np6kCUKEeeGiOkBV7ej3g" base_Action="_2np6kCUKEeeGiOkBV7ej3g">
     <hostDemand>(expr=$map2T,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
+  </Spark:SparkTransformation>
 </xmi:XMI>

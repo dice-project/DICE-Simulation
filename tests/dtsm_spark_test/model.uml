@@ -155,9 +155,9 @@ sparkExtDelay=[$th1]}</body>
     <context>$defaultParallelism</context>
   </GQAM:GaAnalysisContext>
   <Spark:SparkWorkloadEvent xmi:id="_xAw4AAMzEeec2YL9FlAkDw" base_NamedElement="_p15FUDlXEeaE4deiM0Jlvg" sparkPopulation="$nC1" sparkExtDelay="$th1"/>
-  <Spark:SparkReduce xmi:id="_zhtKwAMzEeec2YL9FlAkDw" base_NamedElement="_vVW-sDlXEeaE4deiM0Jlvg" base_Action="_vVW-sDlXEeaE4deiM0Jlvg" OpType="Action">
+  <Spark:SparkAction xmi:id="_zhtKwAMzEeec2YL9FlAkDw" base_NamedElement="_vVW-sDlXEeaE4deiM0Jlvg" base_Action="_vVW-sDlXEeaE4deiM0Jlvg" OpType="Action">
     <hostDemand>(expr=$redT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkReduce>
+  </Spark:SparkAction>
   <Spark:SparkScenario xmi:id="_0_4Y8AMzEeec2YL9FlAkDw" base_NamedElement="_WuYo8DlXEeaE4deiM0Jlvg" usedResources="_6kBW8AMzEeec2YL9FlAkDw" base_Behavior="_WuYo8DlXEeaE4deiM0Jlvg" nAssignedCores="$nAssignedCores" nAssignedMemory="$nAssignedMem" sparkDefaultParallelism="$defaultParallelism">
     <throughput>(expr=$T,unit=s,statQ=mean,source=calc)</throughput>
     <respT>(expr=$RT,unit=s,statQ=mean,source=calc)</respT>
@@ -165,7 +165,7 @@ sparkExtDelay=[$th1]}</body>
   <Spark:SparkNode xmi:id="_6kBW8AMzEeec2YL9FlAkDw" base_Classifier="_LGzO4DlkEeaE4deiM0Jlvg" nCores="$nP1" Memory="$nM1">
     <utilization>(expr=$U,statQ=mean,source=calc)</utilization>
   </Spark:SparkNode>
-  <Spark:SparkMap xmi:id="_aNzKoANAEeeSnsiFmFrbqA" base_NamedElement="_uZmhEDlXEeaE4deiM0Jlvg" base_Action="_uZmhEDlXEeaE4deiM0Jlvg">
+  <Spark:SparkTransformation xmi:id="_aNzKoANAEeeSnsiFmFrbqA" base_NamedElement="_uZmhEDlXEeaE4deiM0Jlvg" base_Action="_uZmhEDlXEeaE4deiM0Jlvg">
     <hostDemand>(expr=$mapT,unit=ms,statQ=mean,source=est)</hostDemand>
-  </Spark:SparkMap>
+  </Spark:SparkTransformation>
 </xmi:XMI>
