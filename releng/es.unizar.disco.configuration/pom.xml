@@ -138,7 +138,7 @@
 				</executions>
 				<configuration>
 					<appArgLine>
-						-eclipse.keyring ${env.USERPROFILE}\.eclipse\org.eclipse.equinox.security\secure_storage -eclipse.password ${basedir}\src\test\resources\secure.preferences.properties
+						-eclipse.keyring ${env.HOME}/.eclipse/org.eclipse.equinox.security/secure_storage -eclipse.password ${basedir}/src/test/resources/secure.preferences.properties
 					</appArgLine>
 
 				</configuration>
