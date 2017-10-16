@@ -9,9 +9,9 @@
   <units size="37">
       <unit id="es.unizar.disco.simulation.greatspn.feature.feature.group"
             singleton="false"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <update id="es.unizar.disco.simulation.greatspn.feature.feature.group"
-                 range="[0.0.0,0.6.2.201709261556)"
+                 range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="org.eclipse.equinox.p2.name" value="GreatSPN-Through-SSH Simulator"/>
@@ -23,12 +23,12 @@
             <property name="org.eclipse.equinox.p2.type.group" value="true"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.greatspn.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="1">
             <provided name="es.unizar.disco.simulation.greatspn.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <requires size="10">
             <required name="org.apache.commons.lang" namespace="org.eclipse.equinox.p2.iu"
@@ -47,10 +47,10 @@
                       range="0.3.0"/>
             <required name="es.unizar.disco.simulation.greatspn.ssh"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.greatspn.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]">
+                      range="[0.6.1.201709261556,0.6.1.201709261556]">
                <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -270,20 +270,20 @@ any resulting litigation.
         DisCo Group - Universidad de Zaragoza
       </copyright>
       </unit>
-      <unit id="es.unizar.disco.core.ui" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.core.ui" range="[0.0.0,0.6.2.201709261556)" severity="0"/>
+      <unit id="es.unizar.disco.core.ui" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.core.ui" range="[0.0.0,0.6.1.201709261556)" severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="DICE Core UI"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.core.ui"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="6">
             <provided name="es.unizar.disco.core.ui" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.core.ui" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.core.ui" namespace="java.package" version="0.0.0"/>
             <provided name="es.unizar.disco.core.ui.dialogs" namespace="java.package" version="0.0.0"/>
             <provided name="es.unizar.disco.core.ui.util" namespace="java.package" version="0.0.0"/>
@@ -299,22 +299,22 @@ any resulting litigation.
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.core.ui"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.core.ui;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
       </unit>
       <unit id="es.unizar.disco.simulation.feature.feature.group" singleton="false"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <update id="es.unizar.disco.simulation.feature.feature.group"
-                 range="[0.0.0,0.6.2.201709261556)"
+                 range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation Tools"/>
@@ -326,12 +326,12 @@ Bundle-Version: 0.6.2.201709261556
             <property name="org.eclipse.equinox.p2.type.group" value="true"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="1">
             <provided name="es.unizar.disco.simulation.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <requires size="30">
             <required name="org.eclipse.core.runtime" namespace="org.eclipse.equinox.p2.iu"
@@ -372,30 +372,30 @@ Bundle-Version: 0.6.2.201709261556
                       namespace="org.eclipse.equinox.p2.iu"
                       range="1.2.0"/>
             <required name="com.masdes.dam.static.profile" namespace="org.eclipse.equinox.p2.iu"
-                      range="0.6.2"/>
+                      range="0.6.1"/>
             <required name="es.unizar.disco.dice.static.profile"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="0.6.2"/>
+                      range="0.6.1"/>
             <required name="es.unizar.disco.core" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.pnextensions" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.pnml.m2m" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.pnml.m2t" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.models" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.models.edit"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.local" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]">
+                      range="[0.6.1.201709261556,0.6.1.201709261556]">
                <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -617,9 +617,9 @@ any resulting litigation.
       </unit>
       <unit id="es.unizar.disco.simulation.quickstart.feature.feature.group"
             singleton="false"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <update id="es.unizar.disco.simulation.quickstart.feature.feature.group"
-                 range="[0.0.0,0.6.2.201709261556)"
+                 range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation Tools Quick Start"/>
@@ -631,12 +631,12 @@ any resulting litigation.
             <property name="org.eclipse.equinox.p2.type.group" value="true"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.quickstart.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="1">
             <provided name="es.unizar.disco.simulation.quickstart.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <requires size="13">
             <required name="org.eclipse.ui" namespace="org.eclipse.equinox.p2.iu" range="3.108.0"/>
@@ -659,10 +659,10 @@ any resulting litigation.
                       range="0.0.0"/>
             <required name="es.unizar.disco.simulation.quickstart"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.quickstart.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]">
+                      range="[0.6.1.201709261556,0.6.1.201709261556]">
                <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -1189,8 +1189,8 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       </copyright>
       </unit>
-      <unit id="es.unizar.disco.simulation.models" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.simulation.models" range="[0.0.0,0.6.2.201709261556)"
+      <unit id="es.unizar.disco.simulation.models" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.simulation.models" range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="df_LT.pluginName" value="DICE Simulation Models"/>
@@ -1200,13 +1200,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             <property name="org.eclipse.equinox.p2.bundle.localization" value="plugin"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.models"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="32">
             <provided name="es.unizar.disco.simulation.models" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.models" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.models" namespace="java.package"
                       version="0.0.0"/>
             <provided name="es.unizar.disco.simulation.models.builders" namespace="java.package"
@@ -1283,30 +1283,30 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             <required name="org.eclipse.papyrus.marte.static.profile" namespace="osgi.bundle"
                       range="1.2.0"/>
             <required name="org.apache.commons.lang" namespace="osgi.bundle" range="2.6.0"/>
-            <required name="com.masdes.dam.static.profile" namespace="osgi.bundle" range="0.6.2"/>
+            <required name="com.masdes.dam.static.profile" namespace="osgi.bundle" range="0.6.1"/>
             <required name="es.unizar.disco.dice.static.profile" namespace="osgi.bundle"
-                      range="0.6.2"/>
+                      range="0.6.1"/>
             <required name="es.unizar.disco.core" namespace="osgi.bundle" range="0.3.0"/>
             <required name="es.unizar.disco.core.collections" namespace="java.package" range="0.0.0"/>
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.simulation.models"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.simulation.models;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
       </unit>
       <unit id="es.unizar.disco.ssh.feature.feature.group" singleton="false"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <update id="es.unizar.disco.ssh.feature.feature.group"
-                 range="[0.0.0,0.6.2.201709261556)"
+                 range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="org.eclipse.equinox.p2.name" value="SSH Connection Provider"/>
@@ -1318,12 +1318,12 @@ Bundle-Version: 0.6.2.201709261556
             <property name="org.eclipse.equinox.p2.type.group" value="true"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.ssh.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="1">
             <provided name="es.unizar.disco.ssh.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <requires size="5">
             <required name="org.eclipse.core.runtime" namespace="org.eclipse.equinox.p2.iu"
@@ -1331,10 +1331,10 @@ Bundle-Version: 0.6.2.201709261556
             <required name="com.hierynomus.sshj" namespace="org.eclipse.equinox.p2.iu" range="0.16.0"/>
             <required name="es.unizar.disco.core" namespace="org.eclipse.equinox.p2.iu" range="0.3.0"/>
             <required name="es.unizar.disco.ssh" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.ssh.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]">
+                      range="[0.6.1.201709261556,0.6.1.201709261556]">
                <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -1863,7 +1863,7 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       </copyright>
       </unit>
-      <unit id="es.unizar.disco.ssh.ui.feature.feature.jar" version="0.6.2.201709261556">
+      <unit id="es.unizar.disco.ssh.ui.feature.feature.jar" version="0.6.1.201709261556">
          <properties size="7">
             <property name="org.eclipse.equinox.p2.name" value="SSH Connection UI Provider"/>
             <property name="org.eclipse.equinox.p2.description"
@@ -1873,22 +1873,22 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.ssh.ui.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="3">
             <provided name="es.unizar.disco.ssh.ui.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="feature" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
             <provided name="es.unizar.disco.ssh.ui.feature" namespace="org.eclipse.update.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <filter>
         (org.eclipse.update.install.features=true)
       </filter>
          <artifacts size="1">
             <artifact classifier="org.eclipse.update.feature" id="es.unizar.disco.ssh.ui.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
@@ -2111,22 +2111,22 @@ any resulting litigation.
         DisCo Group - Universidad de Zaragoza
       </copyright>
       </unit>
-      <unit id="es.unizar.disco.simulation.quickstart" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.simulation.quickstart" range="[0.0.0,0.6.2.201709261556)"
+      <unit id="es.unizar.disco.simulation.quickstart" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.simulation.quickstart" range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation Tools Quickstart"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.quickstart"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="3">
             <provided name="es.unizar.disco.simulation.quickstart"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.quickstart" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="bundle" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
          </provides>
          <requires size="11">
@@ -2144,32 +2144,32 @@ any resulting litigation.
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.simulation.quickstart"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.simulation.quickstart;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
       </unit>
-      <unit id="es.unizar.disco.pnml.m2m" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.pnml.m2m" range="[0.0.0,0.6.2.201709261556)" severity="0"/>
+      <unit id="es.unizar.disco.pnml.m2m" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.pnml.m2m" range="[0.0.0,0.6.1.201709261556)" severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="PNML M2M"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.pnml.m2m"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="6">
             <provided name="es.unizar.disco.pnml.m2m" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.pnml.m2m" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.pnml.m2m" namespace="java.package" version="0.0.0"/>
             <provided name="es.unizar.disco.pnml.m2m.builder" namespace="java.package"
                       version="0.0.0"/>
@@ -2187,32 +2187,32 @@ Bundle-Version: 0.6.2.201709261556
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.pnml.m2m"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.pnml.m2m;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
       </unit>
-      <unit id="es.unizar.disco.core" singleton="false" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.core" range="[0.0.0,0.6.2.201709261556)" severity="0"/>
+      <unit id="es.unizar.disco.core" singleton="false" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.core" range="[0.0.0,0.6.1.201709261556)" severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="DICE Core"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.core"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="5">
             <provided name="es.unizar.disco.core" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.core" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.core.collections" namespace="java.package"
                       version="0.0.0"/>
             <provided name="es.unizar.disco.core.logger" namespace="java.package" version="0.0.0"/>
@@ -2222,14 +2222,14 @@ Bundle-Version: 0.6.2.201709261556
             <required name="org.eclipse.core.runtime" namespace="osgi.bundle" range="3.12.0"/>
          </requires>
          <artifacts size="1">
-            <artifact classifier="osgi.bundle" id="es.unizar.disco.core" version="0.6.2.201709261556"/>
+            <artifact classifier="osgi.bundle" id="es.unizar.disco.core" version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.core
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
@@ -2286,21 +2286,21 @@ Bundle-Version: 0.6.2.201709261556
         %copyright
       </copyright>
       </unit>
-      <unit id="es.unizar.disco.simulation.local" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.simulation.local" range="[0.0.0,0.6.2.201709261556)"
+      <unit id="es.unizar.disco.simulation.local" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.simulation.local" range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="Internal QoS analysis"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.local"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="4">
             <provided name="es.unizar.disco.simulation.local" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.local" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.local.calculators" namespace="java.package"
                       version="0.0.0"/>
             <provided name="bundle" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
@@ -2318,33 +2318,33 @@ Bundle-Version: 0.6.2.201709261556
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.simulation.local"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.simulation.local;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
       </unit>
-      <unit id="es.unizar.disco.simulation.ui" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.simulation.ui" range="[0.0.0,0.6.2.201709261556)"
+      <unit id="es.unizar.disco.simulation.ui" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.simulation.ui" range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation UI Plugin"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.ui"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="16">
             <provided name="es.unizar.disco.simulation.ui" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.ui" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.ui" namespace="java.package" version="0.0.0"/>
             <provided name="es.unizar.disco.simulation.ui.adapters" namespace="java.package"
                       version="0.0.0"/>
@@ -2415,7 +2415,7 @@ Bundle-Version: 0.6.2.201709261556
             <required name="es.unizar.disco.simulation.models" namespace="osgi.bundle" range="0.3.0"/>
             <required name="es.unizar.disco.simulation.models.edit" namespace="osgi.bundle"
                       range="0.3.0"/>
-            <required name="es.unizar.disco.simulation" namespace="osgi.bundle" range="0.6.2"/>
+            <required name="es.unizar.disco.simulation" namespace="osgi.bundle" range="0.6.1"/>
             <required name="org.eclipse.birt.chart.device.extension" namespace="osgi.bundle"
                       range="4.6.0"/>
             <required name="org.eclipse.birt.chart.engine.extension" namespace="osgi.bundle"
@@ -2475,14 +2475,14 @@ Bundle-Version: 0.6.2.201709261556
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.simulation.ui"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.simulation.ui;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
@@ -2567,7 +2567,7 @@ Bundle-Version: 2.2.201606.201606280026
          </touchpointData>
       </unit>
       <unit id="es.unizar.disco.simulation.feature.feature.jar"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <properties size="7">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation Tools"/>
             <property name="org.eclipse.equinox.p2.description"
@@ -2577,23 +2577,23 @@ Bundle-Version: 2.2.201606.201606280026
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="3">
             <provided name="es.unizar.disco.simulation.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="feature" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
             <provided name="es.unizar.disco.simulation.feature"
                       namespace="org.eclipse.update.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <filter>
         (org.eclipse.update.install.features=true)
       </filter>
          <artifacts size="1">
             <artifact classifier="org.eclipse.update.feature" id="es.unizar.disco.simulation.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
@@ -2816,20 +2816,20 @@ any resulting litigation.
         DisCo Group - Universidad de Zaragoza
       </copyright>
       </unit>
-      <unit id="es.unizar.disco.ssh.ui" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.ssh.ui" range="[0.0.0,0.6.2.201709261556)" severity="0"/>
+      <unit id="es.unizar.disco.ssh.ui" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.ssh.ui" range="[0.0.0,0.6.1.201709261556)" severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="DICE SSH Connector UI"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.ssh.ui"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="5">
             <provided name="es.unizar.disco.ssh.ui" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.ssh.ui" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.ssh.ui" namespace="java.package" version="0.0.0"/>
             <provided name="es.unizar.disco.ssh.ui.preferences" namespace="java.package"
                       version="0.0.0"/>
@@ -2854,14 +2854,14 @@ any resulting litigation.
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.ssh.ui"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.ssh.ui;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
@@ -3175,8 +3175,8 @@ Bundle-Version: 0.16.0
             </instructions>
          </touchpointData>
       </unit>
-      <unit id="es.unizar.disco.pnextensions" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.pnextensions" range="[0.0.0,0.6.2.201709261556)"
+      <unit id="es.unizar.disco.pnextensions" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.pnextensions" range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="df_LT.pluginName" value="Extensions for Petri Net models"/>
@@ -3186,13 +3186,13 @@ Bundle-Version: 0.16.0
             <property name="org.eclipse.equinox.p2.bundle.localization" value="plugin"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.pnextensions"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="10">
             <provided name="es.unizar.disco.pnextensions" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.pnextensions" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.pnextensions" namespace="java.package" version="0.0.0"/>
             <provided name="es.unizar.disco.pnextensions.pnconstants" namespace="java.package"
                       version="0.0.0"/>
@@ -3216,14 +3216,14 @@ Bundle-Version: 0.16.0
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.pnextensions"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.pnextensions;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
@@ -3265,7 +3265,7 @@ Bundle-Version: 2.2.201606.201606280026
          </touchpointData>
       </unit>
       <unit id="es.unizar.disco.simulation.ui.feature.feature.jar"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <properties size="7">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation Tools UI"/>
             <property name="org.eclipse.equinox.p2.description"
@@ -3275,16 +3275,16 @@ Bundle-Version: 2.2.201606.201606280026
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.ui.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="3">
             <provided name="es.unizar.disco.simulation.ui.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="feature" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
             <provided name="es.unizar.disco.simulation.ui.feature"
                       namespace="org.eclipse.update.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <filter>
         (org.eclipse.update.install.features=true)
@@ -3292,7 +3292,7 @@ Bundle-Version: 2.2.201606.201606280026
          <artifacts size="1">
             <artifact classifier="org.eclipse.update.feature"
                       id="es.unizar.disco.simulation.ui.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
@@ -3515,8 +3515,8 @@ any resulting litigation.
         DisCo Group - Universidad de Zaragoza
       </copyright>
       </unit>
-      <unit id="es.unizar.disco.simulation.models.edit" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.simulation.models.edit" range="[0.0.0,0.6.2.201709261556)"
+      <unit id="es.unizar.disco.simulation.models.edit" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.simulation.models.edit" range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="df_LT.pluginName" value="DICE Simulation Models Edit Support"/>
@@ -3526,14 +3526,14 @@ any resulting litigation.
             <property name="org.eclipse.equinox.p2.bundle.localization" value="plugin"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.models.edit"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="13">
             <provided name="es.unizar.disco.simulation.models.edit"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.models.edit" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.models.datatypes.provider"
                       namespace="java.package"
                       version="0.0.0"/>
@@ -3572,14 +3572,14 @@ any resulting litigation.
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.simulation.models.edit"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.simulation.models.edit;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
@@ -3642,7 +3642,7 @@ Bundle-Version: 0.6.2.201709261556
       </copyright>
       </unit>
       <unit id="es.unizar.disco.simulation.quickstart.feature.feature.jar"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <properties size="7">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation Tools Quick Start"/>
             <property name="org.eclipse.equinox.p2.description"
@@ -3652,16 +3652,16 @@ Bundle-Version: 0.6.2.201709261556
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.quickstart.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="3">
             <provided name="es.unizar.disco.simulation.quickstart.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="feature" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
             <provided name="es.unizar.disco.simulation.quickstart.feature"
                       namespace="org.eclipse.update.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <filter>
         (org.eclipse.update.install.features=true)
@@ -3669,7 +3669,7 @@ Bundle-Version: 0.6.2.201709261556
          <artifacts size="1">
             <artifact classifier="org.eclipse.update.feature"
                       id="es.unizar.disco.simulation.quickstart.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
@@ -3904,25 +3904,25 @@ any resulting litigation.
          <requires size="8">
             <required name="es.unizar.disco.simulation.greatspn.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.quickstart.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.ssh.ui.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="com.hierynomus.sshj.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
                       range="[0.16.0,0.16.0]"/>
             <required name="es.unizar.disco.ssh.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.ui.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="com.abstratt.eclipsegraphviz.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
                       range="[2.2.201606.201606280026,2.2.201606.201606280026]"/>
@@ -3930,9 +3930,9 @@ any resulting litigation.
          <touchpoint id="null" version="0.0.0"/>
       </unit>
       <unit id="es.unizar.disco.ssh.ui.feature.feature.group" singleton="false"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <update id="es.unizar.disco.ssh.ui.feature.feature.group"
-                 range="[0.0.0,0.6.2.201709261556)"
+                 range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="org.eclipse.equinox.p2.name" value="SSH Connection UI Provider"/>
@@ -3944,12 +3944,12 @@ any resulting litigation.
             <property name="org.eclipse.equinox.p2.type.group" value="true"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.ssh.ui.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="1">
             <provided name="es.unizar.disco.ssh.ui.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <requires size="15">
             <required name="org.eclipse.equinox.security" namespace="org.eclipse.equinox.p2.iu"
@@ -3977,10 +3977,10 @@ any resulting litigation.
             <required name="es.unizar.disco.ssh" namespace="org.eclipse.equinox.p2.iu" range="0.3.0"/>
             <required name="es.unizar.disco.core" namespace="org.eclipse.equinox.p2.iu" range="0.3.0"/>
             <required name="es.unizar.disco.ssh.ui" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.ssh.ui.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]">
+                      range="[0.6.1.201709261556,0.6.1.201709261556]">
                <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -4245,7 +4245,7 @@ Bundle-Version: 2.2.201606.201606280026
             </instructions>
          </touchpointData>
       </unit>
-      <unit id="es.unizar.disco.ssh.feature.feature.jar" version="0.6.2.201709261556">
+      <unit id="es.unizar.disco.ssh.feature.feature.jar" version="0.6.1.201709261556">
          <properties size="7">
             <property name="org.eclipse.equinox.p2.name" value="SSH Connection Provider"/>
             <property name="org.eclipse.equinox.p2.description"
@@ -4255,22 +4255,22 @@ Bundle-Version: 2.2.201606.201606280026
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.ssh.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="3">
             <provided name="es.unizar.disco.ssh.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="feature" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
             <provided name="es.unizar.disco.ssh.feature" namespace="org.eclipse.update.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <filter>
         (org.eclipse.update.install.features=true)
       </filter>
          <artifacts size="1">
             <artifact classifier="org.eclipse.update.feature" id="es.unizar.disco.ssh.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
@@ -4493,22 +4493,22 @@ any resulting litigation.
         DisCo Group - Universidad de Zaragoza
       </copyright>
       </unit>
-      <unit id="es.unizar.disco.simulation.greatspn.ssh" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.simulation.greatspn.ssh" range="[0.0.0,0.6.2.201709261556)"
+      <unit id="es.unizar.disco.simulation.greatspn.ssh" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.simulation.greatspn.ssh" range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="GreatSPN-Through-SSH Simulator"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.greatspn.ssh"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="4">
             <provided name="es.unizar.disco.simulation.greatspn.ssh"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.greatspn.ssh" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation.greatspn.ssh.calculators"
                       namespace="java.package"
                       version="0.0.0"/>
@@ -4528,32 +4528,32 @@ any resulting litigation.
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.simulation.greatspn.ssh"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.simulation.greatspn.ssh;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
       </unit>
-      <unit id="es.unizar.disco.pnml.m2t" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.pnml.m2t" range="[0.0.0,0.6.2.201709261556)" severity="0"/>
+      <unit id="es.unizar.disco.pnml.m2t" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.pnml.m2t" range="[0.0.0,0.6.1.201709261556)" severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="PNML M2T"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.pnml.m2t"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="6">
             <provided name="es.unizar.disco.pnml.m2t" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.pnml.m2t" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.pnml.m2t" namespace="java.package" version="0.0.0"/>
             <provided name="es.unizar.disco.pnml.m2t.templates.gspn" namespace="java.package"
                       version="0.0.0"/>
@@ -4577,20 +4577,20 @@ Bundle-Version: 0.6.2.201709261556
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.pnml.m2t"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.pnml.m2t;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
       </unit>
       <unit id="es.unizar.disco.simulation.greatspn.feature.feature.jar"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <properties size="7">
             <property name="org.eclipse.equinox.p2.name" value="GreatSPN-Through-SSH Simulator"/>
             <property name="org.eclipse.equinox.p2.description"
@@ -4600,16 +4600,16 @@ Bundle-Version: 0.6.2.201709261556
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.greatspn.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="3">
             <provided name="es.unizar.disco.simulation.greatspn.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="feature" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
             <provided name="es.unizar.disco.simulation.greatspn.feature"
                       namespace="org.eclipse.update.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <filter>
         (org.eclipse.update.install.features=true)
@@ -4617,7 +4617,7 @@ Bundle-Version: 0.6.2.201709261556
          <artifacts size="1">
             <artifact classifier="org.eclipse.update.feature"
                       id="es.unizar.disco.simulation.greatspn.feature"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
@@ -4841,9 +4841,9 @@ any resulting litigation.
       </copyright>
       </unit>
       <unit id="es.unizar.disco.simulation.ui.feature.feature.group" singleton="false"
-            version="0.6.2.201709261556">
+            version="0.6.1.201709261556">
          <update id="es.unizar.disco.simulation.ui.feature.feature.group"
-                 range="[0.0.0,0.6.2.201709261556)"
+                 range="[0.0.0,0.6.1.201709261556)"
                  severity="0"/>
          <properties size="8">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation Tools UI"/>
@@ -4855,12 +4855,12 @@ any resulting litigation.
             <property name="org.eclipse.equinox.p2.type.group" value="true"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation.ui.feature"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="1">
             <provided name="es.unizar.disco.simulation.ui.feature.feature.group"
                       namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </provides>
          <requires size="35">
             <required name="org.eclipse.core.runtime" namespace="org.eclipse.equinox.p2.iu"
@@ -4928,12 +4928,12 @@ any resulting litigation.
                       namespace="org.eclipse.equinox.p2.iu"
                       range="0.0.0"/>
             <required name="es.unizar.disco.core.ui" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.ui" namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]"/>
+                      range="[0.6.1.201709261556,0.6.1.201709261556]"/>
             <required name="es.unizar.disco.simulation.ui.feature.feature.jar"
                       namespace="org.eclipse.equinox.p2.iu"
-                      range="[0.6.2.201709261556,0.6.2.201709261556]">
+                      range="[0.6.1.201709261556,0.6.1.201709261556]">
                <filter>
             (org.eclipse.update.install.features=true)
           </filter>
@@ -5195,20 +5195,20 @@ Bundle-Version: 2.2.201606.201606280026
             </instructions>
          </touchpointData>
       </unit>
-      <unit id="es.unizar.disco.simulation" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.simulation" range="[0.0.0,0.6.2.201709261556)" severity="0"/>
+      <unit id="es.unizar.disco.simulation" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.simulation" range="[0.0.0,0.6.1.201709261556)" severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="DICE Simulation"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.simulation"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="7">
             <provided name="es.unizar.disco.simulation" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation" namespace="osgi.bundle"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.simulation" namespace="java.package" version="0.0.0"/>
             <provided name="es.unizar.disco.simulation.launcher" namespace="java.package"
                       version="0.0.0"/>
@@ -5231,31 +5231,31 @@ Bundle-Version: 2.2.201606.201606280026
          </requires>
          <artifacts size="1">
             <artifact classifier="osgi.bundle" id="es.unizar.disco.simulation"
-                      version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.simulation;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
       </unit>
-      <unit id="es.unizar.disco.ssh" version="0.6.2.201709261556">
-         <update id="es.unizar.disco.ssh" range="[0.0.0,0.6.2.201709261556)" severity="0"/>
+      <unit id="es.unizar.disco.ssh" version="0.6.1.201709261556">
+         <update id="es.unizar.disco.ssh" range="[0.0.0,0.6.1.201709261556)" severity="0"/>
          <properties size="5">
             <property name="org.eclipse.equinox.p2.name" value="DICE SSH Connector"/>
             <property name="org.eclipse.equinox.p2.provider" value="DisCo - Unizar"/>
             <property name="maven-groupId" value="es.unizar.disco"/>
             <property name="maven-artifactId" value="es.unizar.disco.ssh"/>
-            <property name="maven-version" value="0.6.2-SNAPSHOT"/>
+            <property name="maven-version" value="0.6.1-SNAPSHOT"/>
          </properties>
          <provides size="4">
             <provided name="es.unizar.disco.ssh" namespace="org.eclipse.equinox.p2.iu"
-                      version="0.6.2.201709261556"/>
-            <provided name="es.unizar.disco.ssh" namespace="osgi.bundle" version="0.6.2.201709261556"/>
+                      version="0.6.1.201709261556"/>
+            <provided name="es.unizar.disco.ssh" namespace="osgi.bundle" version="0.6.1.201709261556"/>
             <provided name="es.unizar.disco.ssh.providers" namespace="java.package" version="0.0.0"/>
             <provided name="bundle" namespace="org.eclipse.equinox.p2.eclipse.type" version="1.0.0"/>
          </provides>
@@ -5265,14 +5265,14 @@ Bundle-Version: 0.6.2.201709261556
             <required name="es.unizar.disco.core" namespace="osgi.bundle" range="0.3.0"/>
          </requires>
          <artifacts size="1">
-            <artifact classifier="osgi.bundle" id="es.unizar.disco.ssh" version="0.6.2.201709261556"/>
+            <artifact classifier="osgi.bundle" id="es.unizar.disco.ssh" version="0.6.1.201709261556"/>
          </artifacts>
          <touchpoint id="org.eclipse.equinox.p2.osgi" version="1.0.0"/>
          <touchpointData size="1">
             <instructions size="1">
                <instruction key="manifest">
             Bundle-SymbolicName: es.unizar.disco.ssh;singleton:=true
-Bundle-Version: 0.6.2.201709261556
+Bundle-Version: 0.6.1.201709261556
           </instruction>
             </instructions>
          </touchpointData>
