@@ -197,14 +197,11 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="menu:org.dice.menu.tools">
-         <menu
-               id="es.unizar.disco.simulation.ui.menus.diceSimulationMenu"
-               label="Simulation Tools"
-               mnemonic="D">
             <command
                   commandId="es.unizar.disco.simulation.ui.commands.launchSimulation"
                   icon="icons/full/obj16/clock_running.png"
                   id="es.unizar.disco.simulation.ui.menus.launchSimulationCommand"
+                  label="DICE Simulation"
                   mnemonic="S">
                <visibleWhen
                      checkEnabled="true">
@@ -219,7 +216,7 @@
                   </equals>
                </with>
             </visibleWhen>
-         </menu>
+
       </menuContribution>
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
@@ -405,7 +402,7 @@
             categoryId="es.unizar.disco.simulation.ui.diceSimulationCategory"
             description="Launches a new DICE Simulation"
             id="es.unizar.disco.simulation.ui.commands.launchSimulation"
-            name="Launch DICE Simulation">
+            name="DICE Simulation Tool">
       </command>
       <category
             id="es.unizar.disco.simulation.ui.diceSimulationCategory"
@@ -494,7 +491,7 @@
       </category>
       <view
             allowMultiple="true"
-            category="es.unizar.disco.simulation.ui.views"
+            category="org.dice.ui.views.category"
             class="es.unizar.disco.simulation.ui.views.InvocationsView"
             icon="icons/full/eview16/simulation_registry.png"
             id="es.unizar.disco.simulation.ui.views.InvocationsView"
