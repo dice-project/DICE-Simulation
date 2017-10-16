@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: es.unizar.disco.simulation.models;singleton:=true
-Bundle-Version: 0.6.1.qualifier
+Bundle-Version: 0.6.2.qualifier
 Bundle-ClassPath: .,
  lib/bundles/guava-19.0.jar,
  lib/jars/commons-collections4-4.1.jar
@@ -42,8 +42,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
  org.eclipse.uml2.uml;bundle-version="5.2.0";visibility:=reexport,
  org.eclipse.papyrus.marte.static.profile;bundle-version="1.2.0";visibility:=reexport,
  org.apache.commons.lang;bundle-version="2.6.0",
- com.masdes.dam.static.profile;bundle-version="0.6.1";visibility:=reexport,
- es.unizar.disco.dice.static.profile;bundle-version="0.6.1";visibility:=reexport,
+ com.masdes.dam.static.profile;bundle-version="0.6.2";visibility:=reexport,
+ es.unizar.disco.dice.static.profile;bundle-version="0.6.2";visibility:=reexport,
  es.unizar.disco.core;bundle-version="0.3.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: es.unizar.disco.core.collections
