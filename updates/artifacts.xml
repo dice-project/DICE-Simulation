@@ -2,7 +2,7 @@
 <?artifactRepository version='1.1.0'?>
 <repository name='es.unizar.disco.update' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1'>
   <properties size='3'>
-    <property name='p2.timestamp' value='1508252526047'/>
+    <property name='p2.timestamp' value='1508259631487'/>
     <property name='p2.compressed' value='true'/>
     <property name='publishPackFilesAsSiblings' value='true'/>
   </properties>
@@ -14,58 +14,67 @@
     <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
   </mappings>
   <artifacts size='28'>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.pnml.m2m' version='0.6.2.201710171501'>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.local' version='0.6.2.201710171658'>
       <properties size='5'>
-        <property name='artifact.size' value='1811691'/>
-        <property name='download.size' value='1811691'/>
+        <property name='artifact.size' value='168040'/>
+        <property name='download.size' value='168040'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.pnml.m2m'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation.local'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
       </properties>
     </artifact>
-    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.simulation.feature' version='0.6.2.201710171501'>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.pnextensions' version='0.6.2.201710171658'>
+      <properties size='5'>
+        <property name='artifact.size' value='37445'/>
+        <property name='download.size' value='37445'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.pnextensions'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.models.edit' version='0.6.2.201710171658'>
+      <properties size='5'>
+        <property name='artifact.size' value='180924'/>
+        <property name='download.size' value='180924'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation.models.edit'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.pnml.m2t' version='0.6.2.201710171658'>
+      <properties size='5'>
+        <property name='artifact.size' value='84174'/>
+        <property name='download.size' value='84174'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.pnml.m2t'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='com.hierynomus.sshj' version='0.16.0'>
+      <properties size='5'>
+        <property name='artifact.size' value='3898525'/>
+        <property name='download.size' value='3898525'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='com.hierynomus.sshj'/>
+        <property name='maven-version' value='0.16.0'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.simulation.feature' version='0.6.2.201710171658'>
       <properties size='6'>
-        <property name='artifact.size' value='5559'/>
-        <property name='download.size' value='5559'/>
+        <property name='artifact.size' value='5620'/>
+        <property name='download.size' value='5620'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
         <property name='maven-artifactId' value='es.unizar.disco.simulation.feature'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.models' version='0.6.2.201710171501'>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.pnml.m2m' version='0.6.2.201710171658'>
       <properties size='5'>
-        <property name='artifact.size' value='2996552'/>
-        <property name='download.size' value='2996552'/>
+        <property name='artifact.size' value='1812896'/>
+        <property name='download.size' value='1812896'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation.models'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.pnextensions' version='0.6.2.201710171501'>
-      <properties size='5'>
-        <property name='artifact.size' value='37421'/>
-        <property name='download.size' value='37421'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.pnextensions'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='com.hierynomus.sshj' version='0.16.0'>
-      <properties size='5'>
-        <property name='artifact.size' value='3898520'/>
-        <property name='download.size' value='3898520'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='com.hierynomus.sshj'/>
-        <property name='maven-version' value='0.16.0'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.greatspn.ssh' version='0.6.2.201710171501'>
-      <properties size='5'>
-        <property name='artifact.size' value='260166'/>
-        <property name='download.size' value='260166'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation.greatspn.ssh'/>
+        <property name='maven-artifactId' value='es.unizar.disco.pnml.m2m'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
       </properties>
     </artifact>
@@ -84,12 +93,21 @@
         <property name='download.size' value='17238'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.pnml.m2t' version='0.6.2.201710171501'>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.greatspn.ssh' version='0.6.2.201710171658'>
       <properties size='5'>
-        <property name='artifact.size' value='84112'/>
-        <property name='download.size' value='84112'/>
+        <property name='artifact.size' value='260180'/>
+        <property name='download.size' value='260180'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.pnml.m2t'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation.greatspn.ssh'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.models' version='0.6.2.201710171658'>
+      <properties size='5'>
+        <property name='artifact.size' value='2996749'/>
+        <property name='download.size' value='2996749'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation.models'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
       </properties>
     </artifact>
@@ -103,30 +121,78 @@
         <property name='download.size' value='10782'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.ssh.ui' version='0.6.2.201710171501'>
-      <properties size='5'>
-        <property name='artifact.size' value='190009'/>
-        <property name='download.size' value='190009'/>
+    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.simulation.greatspn.feature' version='0.6.2.201710171658'>
+      <properties size='6'>
+        <property name='artifact.size' value='5338'/>
+        <property name='download.size' value='5338'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.ssh.ui'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation.greatspn.feature'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation' version='0.6.2.201710171658'>
+      <properties size='5'>
+        <property name='artifact.size' value='36019'/>
+        <property name='download.size' value='36019'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.core' version='0.6.2.201710171501'>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.ssh' version='0.6.2.201710171658'>
       <properties size='5'>
-        <property name='artifact.size' value='16585'/>
-        <property name='download.size' value='16585'/>
+        <property name='artifact.size' value='8510'/>
+        <property name='download.size' value='8510'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.core'/>
+        <property name='maven-artifactId' value='es.unizar.disco.ssh'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.ui' version='0.6.2.201710171501'>
+    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.simulation.quickstart.feature' version='0.6.2.201710171658'>
+      <properties size='6'>
+        <property name='artifact.size' value='5354'/>
+        <property name='download.size' value='5354'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation.quickstart.feature'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.ui' version='0.6.2.201710171658'>
       <properties size='5'>
-        <property name='artifact.size' value='228904'/>
-        <property name='download.size' value='228904'/>
+        <property name='artifact.size' value='228920'/>
+        <property name='download.size' value='228920'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
         <property name='maven-artifactId' value='es.unizar.disco.simulation.ui'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.core.ui' version='0.6.2.201710171658'>
+      <properties size='5'>
+        <property name='artifact.size' value='18191'/>
+        <property name='download.size' value='18191'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.core.ui'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+      </properties>
+    </artifact>
+    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.simulation.ui.feature' version='0.6.2.201710171658'>
+      <properties size='6'>
+        <property name='artifact.size' value='5572'/>
+        <property name='download.size' value='5572'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation.ui.feature'/>
+        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.quickstart' version='0.6.2.201710171658'>
+      <properties size='5'>
+        <property name='artifact.size' value='76723'/>
+        <property name='download.size' value='76723'/>
+        <property name='maven-groupId' value='es.unizar.disco'/>
+        <property name='maven-artifactId' value='es.unizar.disco.simulation.quickstart'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
       </properties>
     </artifact>
@@ -135,117 +201,51 @@
         <property name='download.size' value='6154'/>
       </properties>
     </artifact>
-    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.simulation.quickstart.feature' version='0.6.2.201710171501'>
-      <properties size='6'>
-        <property name='artifact.size' value='5296'/>
-        <property name='download.size' value='5296'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation.quickstart.feature'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.quickstart' version='0.6.2.201710171501'>
-      <properties size='5'>
-        <property name='artifact.size' value='76701'/>
-        <property name='download.size' value='76701'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation.quickstart'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-      </properties>
-    </artifact>
     <artifact classifier='org.eclipse.update.feature' id='com.hierynomus.sshj.feature' version='0.16.0'>
       <properties size='6'>
-        <property name='artifact.size' value='5946'/>
-        <property name='download.size' value='5946'/>
+        <property name='artifact.size' value='5973'/>
+        <property name='download.size' value='5973'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
         <property name='maven-artifactId' value='com.hierynomus.sshj.feature'/>
         <property name='maven-version' value='0.16.0'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
-    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.simulation.ui.feature' version='0.6.2.201710171501'>
+    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.ssh.feature' version='0.6.2.201710171658'>
       <properties size='6'>
-        <property name='artifact.size' value='5517'/>
-        <property name='download.size' value='5517'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation.ui.feature'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation' version='0.6.2.201710171501'>
-      <properties size='5'>
-        <property name='artifact.size' value='36005'/>
-        <property name='download.size' value='36005'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.ssh' version='0.6.2.201710171501'>
-      <properties size='5'>
-        <property name='artifact.size' value='8500'/>
-        <property name='download.size' value='8500'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.ssh'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-      </properties>
-    </artifact>
-    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.ssh.feature' version='0.6.2.201710171501'>
-      <properties size='6'>
-        <property name='artifact.size' value='5205'/>
-        <property name='download.size' value='5205'/>
+        <property name='artifact.size' value='5269'/>
+        <property name='download.size' value='5269'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
         <property name='maven-artifactId' value='es.unizar.disco.ssh.feature'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
-    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.ssh.ui.feature' version='0.6.2.201710171501'>
+    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.ssh.ui.feature' version='0.6.2.201710171658'>
       <properties size='6'>
-        <property name='artifact.size' value='5323'/>
-        <property name='download.size' value='5323'/>
+        <property name='artifact.size' value='5382'/>
+        <property name='download.size' value='5382'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
         <property name='maven-artifactId' value='es.unizar.disco.ssh.ui.feature'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
         <property name='download.contentType' value='application/zip'/>
       </properties>
     </artifact>
-    <artifact classifier='org.eclipse.update.feature' id='es.unizar.disco.simulation.greatspn.feature' version='0.6.2.201710171501'>
-      <properties size='6'>
-        <property name='artifact.size' value='5274'/>
-        <property name='download.size' value='5274'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation.greatspn.feature'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-        <property name='download.contentType' value='application/zip'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.models.edit' version='0.6.2.201710171501'>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.core' version='0.6.2.201710171658'>
       <properties size='5'>
-        <property name='artifact.size' value='180908'/>
-        <property name='download.size' value='180908'/>
+        <property name='artifact.size' value='16592'/>
+        <property name='download.size' value='16592'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation.models.edit'/>
+        <property name='maven-artifactId' value='es.unizar.disco.core'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
       </properties>
     </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.simulation.local' version='0.6.2.201710171501'>
+    <artifact classifier='osgi.bundle' id='es.unizar.disco.ssh.ui' version='0.6.2.201710171658'>
       <properties size='5'>
-        <property name='artifact.size' value='168029'/>
-        <property name='download.size' value='168029'/>
+        <property name='artifact.size' value='190021'/>
+        <property name='download.size' value='190021'/>
         <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.simulation.local'/>
-        <property name='maven-version' value='0.6.2-SNAPSHOT'/>
-      </properties>
-    </artifact>
-    <artifact classifier='osgi.bundle' id='es.unizar.disco.core.ui' version='0.6.2.201710171501'>
-      <properties size='5'>
-        <property name='artifact.size' value='18180'/>
-        <property name='download.size' value='18180'/>
-        <property name='maven-groupId' value='es.unizar.disco'/>
-        <property name='maven-artifactId' value='es.unizar.disco.core.ui'/>
+        <property name='maven-artifactId' value='es.unizar.disco.ssh.ui'/>
         <property name='maven-version' value='0.6.2-SNAPSHOT'/>
       </properties>
     </artifact>
