@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.unizar.disco</groupId>
 	<artifactId>es.unizar.disco.configuration</artifactId>
-	<version>0.6.1-SNAPSHOT</version>
+	<version>0.6.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
 		<tycho.version>0.25.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<neon-repo.url>http://download.eclipse.org/releases/neon</neon-repo.url>
-		<project.version>0.6.1-SNAPSHOT</project.version>
+		<project.version>0.6.2-SNAPSHOT</project.version>
 		<p2StatsURL>http://github.com/dice-project/DICE-Simulation/releases/download/v0.1.0</p2StatsURL>
 		<statsTrackedArtifacts>es.unizar.disco.simulation.feature,es.unizar.disco.simulation.greatspn.feature,es.unizar.disco.simulation.quickstart.feature,es.unizar.disco.simulation.ui.feature,es.unizar.disco.ssh.feature,es.unizar.disco.ssh.ui.feature</statsTrackedArtifacts>
 	</properties>
@@ -117,35 +117,78 @@
 						<artifact>
 							<groupId>es.unizar.disco</groupId>
 							<artifactId>es.unizar.disco.simulation.targetplatform</artifactId>
-							<version>0.6.1-SNAPSHOT</version>
+							<version>0.6.2-SNAPSHOT</version>
 						</artifact>
 					</target>
 				</configuration>
 			</plugin>
-
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
-				<version>0.25.0</version>
-				<executions>
-					<execution>
-						<id>default-test</id>
-						<phase>integration-test</phase>
-						<goals>
-							<goal>test</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<appArgLine>
-						-eclipse.keyring ${env.HOME}/.eclipse/org.eclipse.equinox.security/secure_storage -eclipse.password ${basedir}/src/test/resources/secure.preferences.properties
-					</appArgLine>
-
-				</configuration>
-			</plugin>
-
-
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+		    <id>platform-windows</id>
+		    <activation>
+		        <os>
+		            <family>windows</family>
+		        </os>
+		    </activation>
+			<build>
+			    <plugins>
+			    	<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-surefire-plugin</artifactId>
+						<version>0.25.0</version>
+						<executions>
+							<execution>
+								<id>default-test</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>test</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<appArgLine>
+								-eclipse.keyring ${env.USERPROFILE}\.eclipse\org.eclipse.equinox.security\secure_storage -eclipse.password ${basedir}\src\test\resources\secure.preferences.properties
+							</appArgLine>
+						</configuration>
+				    </plugin>
+			    </plugins>
+		    </build>
+		</profile>
+
+		<profile>
+		 	<id>platform-unix</id>
+		    <activation>
+		      <os>
+		        <family>unix</family>
+		      </os>
+		    </activation>
+		    <build>
+			    <plugins>
+				    <plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-surefire-plugin</artifactId>
+						<version>0.25.0</version>
+						<executions>
+							<execution>
+								<id>default-test</id>
+								<phase>integration-test</phase>
+								<goals>
+									<goal>test</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<appArgLine>
+								-eclipse.keyring ${env.HOME}/.eclipse/org.eclipse.equinox.security/secure_storage -eclipse.password ${basedir}/src/test/resources/secure.preferences.properties
+							</appArgLine>
+						</configuration>
+				    </plugin>
+			    </plugins>
+			</build>
+		</profile>
+ </profiles>
 
 </project>
