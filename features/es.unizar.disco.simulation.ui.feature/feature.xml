@@ -2,7 +2,7 @@
 <feature
       id="es.unizar.disco.simulation.ui.feature"
       label="DICE Simulation Tools UI"
-      version="0.6.2.qualifier"
+      version="0.6.3.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -262,14 +262,14 @@ any resulting litigation.
          id="es.unizar.disco.core.ui"
          download-size="0"
          install-size="0"
-         version="0.6.2.qualifier"
+         version="0.6.3.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation.ui"
          download-size="0"
          install-size="0"
-         version="0.6.2.qualifier"
+         version="0.6.3.qualifier"
          unpack="false"/>
 
 </feature>

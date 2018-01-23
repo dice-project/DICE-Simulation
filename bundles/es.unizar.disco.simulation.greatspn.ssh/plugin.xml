@@ -79,6 +79,11 @@
                scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.SequenceResponseTimeCalculator"
+               scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
       </Metric>
       <Metric
             name="MARTE::MARTE_AnalysisModel::GQAM::GaScenario#throughput"
@@ -92,6 +97,11 @@
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.ThroughputCalculator"
                scenario="DICE::DICE_UML_Extensions::DPIM::DpimScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.SequenceThroughputCalculator"
+               scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
       </Metric>
@@ -192,6 +202,16 @@
          <Calculator
                class="es.unizar.disco.simulation.greatspn.ssh.calculators.TotalUtilizationCalculatorHadoop"
                scenario="DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopScenario"
+               toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
+         </Calculator>
+      </Metric>
+      <Metric
+            name="MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance#utilization"
+            stereotype="MARTE::MARTE_AnalysisModel::PAM::PaRunTInstance"
+            tag="utilization">
+         <Calculator
+               class="es.unizar.disco.simulation.greatspn.ssh.calculators.SequenceUtilizationCalculator"
+               scenario="MARTE::MARTE_AnalysisModel::GQAM::GaScenario"
                toolResult="es.unizar.disco.simulation.models.wnsim.WnsimResult">
          </Calculator>
       </Metric>

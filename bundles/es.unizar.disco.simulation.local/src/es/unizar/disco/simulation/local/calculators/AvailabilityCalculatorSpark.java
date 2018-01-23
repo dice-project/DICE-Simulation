@@ -37,7 +37,8 @@ public class AvailabilityCalculatorSpark extends AbstractCalculator implements M
 		//Trace set has information. ToolResult is empty.
 		
 		// From other calculators:
-		if (!(domainElement instanceof Activity)) {
+		//if (!(domainElement instanceof Activity)) {
+		if (!isAdequateFor(domainElement)) {		
 			throw new IllegalArgumentException(MessageFormat
 					.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity' but type ''{1}''", domainElement, domainElement.getClass()));
 		}
@@ -104,6 +105,11 @@ public class AvailabilityCalculatorSpark extends AbstractCalculator implements M
 			}
 		}
 		return measure;
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof Activity);
 	}
 	
 	

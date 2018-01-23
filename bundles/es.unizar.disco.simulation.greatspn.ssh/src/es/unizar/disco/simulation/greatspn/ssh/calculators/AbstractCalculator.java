@@ -113,4 +113,45 @@ public abstract class AbstractCalculator {
 
 	}
 	
+	protected PlaceInfo findFirstPlaceInfoOfRuleInfo(String rule, TraceSet traceSet,
+			List<PlaceInfo> placeInfos) {
+
+		for (Trace trace : traceSet.getTraces()) {
+			if (rule.equals(trace.getRule())) {
+				for (PlaceInfo info : placeInfos) {
+					if (trace.getToAnalyzableElement().equals(info.getAnalyzedElement())) {
+						DiceLogger.logInfo(GspnSshSimulationPlugin.getDefault(),
+								MessageFormat.format("Found Place id ''{0}'' with mean number of tokes ''{1}''",
+										info.getAnalyzedElement().toString(), info.getMeanNumberOfTokens().doubleValue()));
+						return info;
+					}
+
+				}
+			}
+		}
+		throw new RuntimeException(
+				MessageFormat.format("Not found any Place created from the transformation rule ''{0}''", rule));
+
+	}
+	
+	protected TransitionInfo findFirstTransitionInfoOfRuleInfo(String rule, TraceSet traceSet,
+			List<TransitionInfo> transitionInfos) {
+
+		for (Trace trace : traceSet.getTraces()) {
+			if (rule.equals(trace.getRule())) {
+				for (TransitionInfo info : transitionInfos) {
+					if (trace.getToAnalyzableElement().equals(info.getAnalyzedElement())) {
+						DiceLogger.logInfo(GspnSshSimulationPlugin.getDefault(),
+								MessageFormat.format("Found Transition id ''{0}'' with throughput ''{1}''",
+										info.getAnalyzedElement().toString(), info.getThroughput().doubleValue()));
+						return info;
+					}
+
+				}
+			}
+		}
+		throw new RuntimeException(
+				MessageFormat.format("Not found any transition created from the transformation rule ''{0}''", rule));
+
+	}
 }

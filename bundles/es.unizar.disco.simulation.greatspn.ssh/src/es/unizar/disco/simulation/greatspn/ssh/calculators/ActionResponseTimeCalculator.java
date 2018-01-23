@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.measure.Unit;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.uml2.uml.ActivityNode;
 
 import es.unizar.disco.simulation.models.datatypes.NonStandardUnits;
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
@@ -102,6 +103,11 @@ public class ActionResponseTimeCalculator extends AbstractCalculator implements 
 			return measure;
 		}
 
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof ActivityNode);
 	}
 
 }

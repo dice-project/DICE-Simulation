@@ -20,4 +20,9 @@ public class ReliabilityMTTFCalculatorHadoop extends AbstractCalculator implemen
 
 		return (new ReliabilityMTTFCalculatorStorm()).calculate(domainElement, definition, toolResult, traceSet);
 	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (new ReliabilityMTTFCalculatorStorm()).isAdequateFor(domainElement);
+	}
 }

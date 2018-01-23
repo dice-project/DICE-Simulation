@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.uml2.uml.Activity;
+import org.eclipse.uml2.uml.ActivityNode;
 
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
 import es.unizar.disco.simulation.models.measures.DomainMeasureDefinition;
@@ -60,5 +62,11 @@ public class ThroughputCalculator extends AbstractCalculator implements MeasureC
 			}
 			return measure;
 		}
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return ((domainElement instanceof Activity) || 
+				(domainElement instanceof ActivityNode));
 	}
 }

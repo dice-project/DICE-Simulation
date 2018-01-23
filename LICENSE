@@ -2,11 +2,11 @@ Package								License
 -------								--------
 DICE Simulation Tools				Eclipse Public License - v 1.0
 DICE Simulation Tools UI			Eclipse Public License - v 1.0
-DICE Simulation Tools Quick Start	Eclipse Public License - v 1.0
-GreatSPN-Through-SSH Simulator		Eclipse Public License - v 1.0
+DICE Simulation Tools Quick Start		Eclipse Public License - v 1.0
+GreatSPN-Through-SSH Simulator			Eclipse Public License - v 1.0
 SSH Connection Provider				Eclipse Public License - v 1.0
 SSH Connection UI Provider			Eclipse Public License - v 1.0
-SSHv2 library for Java (v0.16.0)	Apache License - v 2.0
+SSHv2 library for Java (v0.16.0)		Apache License - v 2.0
 ---------------------------------------------------------------------------
 
 Eclipse Public License - v 1.0

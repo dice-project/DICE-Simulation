@@ -10,7 +10,9 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.uml2.uml.Device;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Node;
 import org.eclipse.uml2.uml.util.UMLUtil;
 
 import es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils;
@@ -102,5 +104,11 @@ public class TotalUtilizationCalculatorHadoop extends AbstractCalculator impleme
 			measure.setValue(result);
 			return measure;
 		}
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof Device) ||
+				(domainElement instanceof Node);
 	}
 }

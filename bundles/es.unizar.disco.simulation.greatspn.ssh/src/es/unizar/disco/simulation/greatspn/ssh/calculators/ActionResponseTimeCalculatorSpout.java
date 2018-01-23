@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javax.measure.Unit;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.uml2.uml.ActivityNode;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.pnml.m2m.utils.ConstantUtils;
@@ -178,5 +179,10 @@ public class ActionResponseTimeCalculatorSpout extends AbstractCalculator implem
 		throw new RuntimeException(
 				MessageFormat.format("Not found any transition created from the transformation rule ''{0}''", rule));
 
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof ActivityNode);
 	}
 }

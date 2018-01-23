@@ -36,7 +36,7 @@ public class AvailabilityCalculatorHadoop extends AbstractCalculator implements 
 			TraceSet traceSet) {
 
 		// From other calculators:
-		if (!(domainElement instanceof Activity)) {
+		if (!isAdequateFor(domainElement)) {
 			throw new IllegalArgumentException(MessageFormat
 					.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity' but type ''{1}''", domainElement, domainElement.getClass()));
 		}
@@ -88,5 +88,10 @@ public class AvailabilityCalculatorHadoop extends AbstractCalculator implements 
 			}
 		}
 		return measure;
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof Activity);
 	}
 }

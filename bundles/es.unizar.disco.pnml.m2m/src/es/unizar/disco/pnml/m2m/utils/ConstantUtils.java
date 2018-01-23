@@ -5,6 +5,7 @@ import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 
 public class ConstantUtils {
 
+	private final static String TRANSITION_END_SEQUENCE = "transitionEndSequenceDiagram";
 	private final static String TRANSITION_FAIL_TRACE = "FAIL";
 	private final static String TRANSITION_OK_TRACE = "OK";
 	private final static String TRANSITION_STORM_SPOUT = "TimedTransitionSpout";
@@ -31,6 +32,10 @@ public class ConstantUtils {
 	}
 
 	@Operation
+	public static String getTransitionEndSequence() {
+		return TRANSITION_END_SEQUENCE;
+	}
+	
 	public static String getFail() {
 		return TRANSITION_FAIL_TRACE;
 	}

@@ -99,7 +99,7 @@ mapping baseTimeUnit(unit : String) {
 
 mapping UML::Interaction::interaction2subnet() {
 	// Create a transition to close the non-actor lifelines	
-	self.map namedElement2transition();
+	var finalTransition := self.map namedElement2transition();
 	// Transform each one of the inner interaction fragments to their corresponding subnets
 	self.allSubobjectsOfKind(UML::InteractionFragment).map interactionFragment2subnet();
 	// Connect each one of the inner interaction fragments to the previous fragment
@@ -108,7 +108,8 @@ mapping UML::Interaction::interaction2subnet() {
 	self.message->map message2subnet();
 	// Transform the lifelines
 	self.lifeline->map lifeline2subnet();
-
+	
+	self.map trace(finalTransition, getTransitionEndSequence());
 }
 
 mapping UML::Lifeline::lifeline2subnet() disjuncts 
@@ -244,7 +245,8 @@ when {
 	
 	// Connect the last transtion to the initial place
 	map arc(finalTransition, initialPlace);
-		
+
+	self.map trace(initialPlace, getPlaceConcurrentUsersTrace());
 }
 
 mapping UML::InteractionFragment::connectToPrev()  {
@@ -269,13 +271,18 @@ mapping UML::InteractionFragment::genericInteractionFragment2subnet() {
 	var place := self.map namedElement2place();
 	var transition := self.map namedElement2transition();
 	var arc := map arc(place, transition);
-
+	
+	self.map trace(place, "InteractionFragment");
+	self.map trace(transition, "InteractionFragment");
 }
 
 mapping UML::ExecutionSpecification::executionSpecification2subnet() {
 	var place := self.map namedElement2place();
 	var transition := self.map executionSpecification2transition();
 	var arc := map arc(place, transition);
+	
+	self.map trace(place, "ExecutionSpecification");
+	self.map trace(transition, "ExecutionSpecification");
 }
 
 mapping UML::Message::message2subnet() when {

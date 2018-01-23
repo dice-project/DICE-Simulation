@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.uml2.uml.Activity;
 
 import es.unizar.disco.core.logger.DiceLogger;
 import es.unizar.disco.pnml.m2m.utils.ConstantUtils;
@@ -97,5 +98,10 @@ public class UtilizationCalculatorSparkScenario extends AbstractCalculator imple
 			measure.setValue(result);
 			return measure;
 		}
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof Activity);
 	}
 }

@@ -8,6 +8,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.uml2.uml.Artifact;
+import org.eclipse.uml2.uml.Device;
+import org.eclipse.uml2.uml.Node;
 
 import es.unizar.disco.simulation.models.datatypes.NonStandardUnits;
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
@@ -65,5 +68,12 @@ public class UtilizationCalculator extends AbstractCalculator implements Measure
 			measure.setValue(result);
 			return measure;
 		}
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof Device) || 
+				(domainElement instanceof Node) ||
+				(domainElement instanceof Artifact);
 	}
 }

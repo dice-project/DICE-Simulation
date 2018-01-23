@@ -67,7 +67,7 @@ public class DiceMetricsUtils {
 		return Collections.unmodifiableSet(metrics);
 	}
 
-	public static MeasureCalculator getCalculator(Element element, String measure, String scenarioStereotype,
+	/*public static MeasureCalculator getCalculator(Element element, String measure, String scenarioStereotype,
 			Class<? extends ToolResult> clazz) {
 		IConfigurationElement[] configElements = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor(EXTENSION_ID);
@@ -86,6 +86,48 @@ public class DiceMetricsUtils {
 											.isAssignableFrom(clazz)) {
 								return (MeasureCalculator) calculatorConfigElement
 										.createExecutableExtension(CALCULATOR_CLASS);
+							}
+
+						}
+					}
+				} catch (CoreException | ClassNotFoundException | InvalidRegistryObjectException e) {
+					// In case of error, log it and ignore the defective entry
+					DiceLogger.logException(DiceModelsPlugin.getDefault(), e);
+				}
+			}
+		}
+		return null;
+	}*/
+	
+	/*public static MeasureCalculator getCalculator(Element element, String measure, String scenarioStereotype, SimulationInvocation invocation) {
+		Class<? extends ToolResult> clazz = invocation.getToolResult().getClass();
+		EObject activeScenario = invocation.getDefinition().getActiveScenario();
+		if (activeScenario.equals()){}
+		*/
+	public static MeasureCalculator getCalculator(Element element, String measure, String scenarioStereotype,
+			Class<? extends ToolResult> clazz) {
+		IConfigurationElement[] configElements = Platform.getExtensionRegistry()
+				.getConfigurationElementsFor(EXTENSION_ID);
+		for (IConfigurationElement configElement : configElements) {
+			if (ELEMENT_METRIC.equals(configElement.getName())) {
+				try {
+					Stereotype stereotype = element
+							.getAppliedStereotype(configElement.getAttribute(METRIC_STEREOTYPE));
+					if (StringUtils.equals(measure, configElement.getAttribute(METRIC_TAG))
+							&& element.isStereotypeApplied(stereotype)) {
+
+						for (IConfigurationElement calculatorConfigElement : configElement.getChildren()) {
+							if (StringUtils.equals(scenarioStereotype,
+									calculatorConfigElement.getAttribute(CALCULATOR_SCENARIO))
+									&& Class.forName(calculatorConfigElement.getAttribute(CALCULATOR_TOOL_RESULT))
+											.isAssignableFrom(clazz)) {
+								Object cScenario = calculatorConfigElement.getAttribute(CALCULATOR_SCENARIO);//
+								/* return (MeasureCalculator) calculatorConfigElement
+										.createExecutableExtension(CALCULATOR_CLASS); */
+								MeasureCalculator mesCalc = (MeasureCalculator) calculatorConfigElement.createExecutableExtension(CALCULATOR_CLASS);
+								if (mesCalc.isAdequateFor(element)){
+									return mesCalc;
+								}
 							}
 
 						}

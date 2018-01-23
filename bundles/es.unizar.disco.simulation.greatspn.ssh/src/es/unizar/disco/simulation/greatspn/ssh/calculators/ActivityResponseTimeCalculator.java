@@ -58,7 +58,7 @@ public class ActivityResponseTimeCalculator extends AbstractCalculator implement
 		// @formatter:off
 		//
 
-		if (!(domainElement instanceof Activity)) {
+		if (!isAdequateFor(domainElement)) {
 			throw new IllegalArgumentException(MessageFormat.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity'", domainElement));
 		}
 		
@@ -373,5 +373,10 @@ public class ActivityResponseTimeCalculator extends AbstractCalculator implement
 			}
 		}
 		return measure;
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof Activity);
 	}
 }

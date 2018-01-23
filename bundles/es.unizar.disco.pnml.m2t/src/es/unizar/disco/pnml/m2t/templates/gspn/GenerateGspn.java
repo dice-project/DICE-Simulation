@@ -340,6 +340,9 @@ public class GenerateGspn extends AbstractAcceleoGenerator {
     @Override
     public void registerPackages(ResourceSet resourceSet) {
         super.registerPackages(resourceSet);
+        if (!isInWorkspace(fr.lip6.move.pnml.ptnet.PtnetPackage.class)) {
+            resourceSet.getPackageRegistry().put(fr.lip6.move.pnml.ptnet.PtnetPackage.eINSTANCE.getNsURI(), fr.lip6.move.pnml.ptnet.PtnetPackage.eINSTANCE);
+        }
         
         /*
          * If you want to change the content of this method, do NOT forget to change the "@generated"

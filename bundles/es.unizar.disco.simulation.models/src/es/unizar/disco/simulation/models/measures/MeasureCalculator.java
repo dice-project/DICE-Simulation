@@ -9,4 +9,5 @@ public interface MeasureCalculator {
 	
 	public DomainMeasure calculate(EObject domainElement, DomainMeasureDefinition definition, ToolResult toolResult, TraceSet traceSet);
 
+	public Boolean isAdequateFor(EObject domainElement);
 }

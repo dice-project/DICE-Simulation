@@ -257,6 +257,8 @@ public class SimulationLaunchConfigurationDelegate extends LaunchConfigurationDe
 				for (String scenarioName : invocation.getDefinition().getScenarioStereotypes()) {
 					calculator = DiceMetricsUtils.getCalculator((Element) measuredElement,
 							measureDefinition.getMeasure(), scenarioName, invocation.getToolResult().getClass());
+					/*calculator = DiceMetricsUtils.getCalculator((Element) measuredElement,
+							measureDefinition.getMeasure(), scenarioName, invocation);*/
 					if (calculator != null) {
 						break;
 					}

@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.uml2.uml.ActivityNode;
 
 import es.unizar.disco.simulation.models.datatypes.NonStandardUnits;
 import es.unizar.disco.simulation.models.measures.DomainMeasure;
@@ -77,5 +78,10 @@ public class UtilizationCalculatorSpoutBolt extends AbstractCalculator implement
 			measure.setValue(result);
 			return measure;
 		}
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof ActivityNode);
 	}
 }

@@ -140,7 +140,7 @@ public class UtilizationCalculatorHadoop extends AbstractCalculator implements M
 		// @formatter:on
 		//
 		
-		if (!(domainElement instanceof Activity)) {
+		if (!isAdequateFor(domainElement)) {
 			throw new IllegalArgumentException(MessageFormat.format("Domain element ''{0}'' is not of type 'org.eclipse.uml2.uml.Activity'", domainElement));
 		}
 		
@@ -274,5 +274,10 @@ public class UtilizationCalculatorHadoop extends AbstractCalculator implements M
 		measure.setUnit(NonStandardUnits.PERCENTAGE.getLiteral());
 		measure.setValue(result);
 		return measure;
+	}
+
+	@Override
+	public Boolean isAdequateFor(EObject domainElement) {
+		return (domainElement instanceof Activity);
 	}
 }
