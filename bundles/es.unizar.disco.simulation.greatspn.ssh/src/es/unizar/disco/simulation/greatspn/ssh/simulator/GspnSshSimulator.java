@@ -89,10 +89,6 @@ public class GspnSshSimulator implements ISimulator {
 
 		private class ResultBuilder extends Thread {
 
-			private static final String STR_HEADER_1 = "USE : WNSIM netname [-f first_tr_length][-t tr_length][-m min_btc][-M max_btc][-a approx][-c conf_level][-s seed][-o start]";
-			private static final String STR_HEADER_2 = "Send files netname.net, .def to e-mail address";
-			private static final String STR_HEADER_3 = "greatspn@di.unito.it if you find any bug.";
-
 			private static final String STR_PARSING_ERROR = "Syntax error while parsing";
 			private static final String STR_INITIAL_DEAD_MARKING = "ERROR : initial dead marking !";
 
@@ -107,7 +103,6 @@ public class GspnSshSimulator implements ISimulator {
 			private static final String STS_PUSH = "PUSH";
 			private static final String STS_POP = "POP";
 
-			private static final String REX_SEPARATOR = "^-+$";
 			private static final String REX_TRANSITION_INFO = "Throughput of (?<transition>\\S+) \\(\\S+ \\): (?<cilower>\\S+) <= X <= (?<ciupper>\\S+)";
 			private static final String REX_PLACE_INFO = "Mean n\\.of tokens in (?<place>\\S+) : (?<cilower>\\S+) <= mu <= (?<ciupper>\\S+)";
 			private static final String REX_VALUE = "Value (?<value>\\S+) Mean Value \\S+ Accuracy \\S+";
@@ -129,54 +124,12 @@ public class GspnSshSimulator implements ISimulator {
 			public void run() {
 				String line;
 				try {
-					// The header always is:
-					//
-					//
-					// --------------------------------------------------------------------------------------------------
-					// USE : WNSIM netname [-f first_tr_length][-t tr_length][-m
-					// min_btc][-M max_btc][-a approx][-c conf_level][-s
-					// seed][-o start]
-					// --------------------------------------------------------------------------------------------------
-					//
-					// Send files netname.net, .def to e-mail address
-					// greatspn@di.unito.it if you find any bug.
-					// --------------------------------------------------------------------------------------------------
-					//
-
-					// Check that the stream starts by the header:
-					boolean error = false;
-					try {
-						// @formatter:off
-						if (!reader.readLine().trim().isEmpty())
-							error = true;
-						if (!reader.readLine().trim().isEmpty())
-							error = true;
-						if (!reader.readLine().matches(REX_SEPARATOR))
-							error = true;
-						if (!reader.readLine().equals(STR_HEADER_1))
-							error = true;
-						if (!reader.readLine().matches(REX_SEPARATOR))
-							error = true;
-						if (!reader.readLine().trim().isEmpty())
-							error = true;
-						if (!reader.readLine().equals(STR_HEADER_2))
-							error = true;
-						if (!reader.readLine().equals(STR_HEADER_3))
-							error = true;
-						if (!reader.readLine().matches(REX_SEPARATOR))
-							error = true;
-						if (!reader.readLine().trim().isEmpty())
-							error = true;
-						// @formatter:on
-					} catch (NullPointerException e) {
-						error = true;
-					}
-
-					// Fatal error, the tool returned an unexpected result
-					if (error) {
-						throw new RuntimeException("Unexpected content found in WNSIM stdout");
-					}
-
+					do {
+						reader.mark(4096);
+						line = reader.readLine();
+					} while (line != null && !line.startsWith(STS_START_END));
+					reader.reset();
+					
 					Pattern transPattern = Pattern.compile(REX_TRANSITION_INFO);
 					Pattern placePattern = Pattern.compile(REX_PLACE_INFO);
 					Pattern valuePattern = Pattern.compile(REX_VALUE);
