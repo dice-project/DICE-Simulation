@@ -60,17 +60,17 @@ utilization= (expr=$UParser,source=calc)}</body>
       </ownedComment>
       <ownedComment xmi:type="uml:Comment" xmi:id="_XxfDMHBWEeawb7juPnk0jg" annotatedElement="_d5XBgGxSEeaaf9FvLD9bBw">
         <body>&lt;&lt;GaStep>>
-{hostDemand=(expr=$parser,unit=s,
+{hostDemand=(expr=$parser,unit=ms,
                         statQ=mean,source=est)}</body>
       </ownedComment>
       <ownedComment xmi:type="uml:Comment" xmi:id="_kZgToHBWEeawb7juPnk0jg" annotatedElement="_F9fBwGxTEeaaf9FvLD9bBw">
         <body>&lt;&lt;GaStep>>
-{hostDemand=(expr=$adapt,unit=s,
+{hostDemand=(expr=$adapt,unit=ms,
                         statQ=mean,source=est)}</body>
       </ownedComment>
       <ownedComment xmi:type="uml:Comment" xmi:id="_2jafUHBWEeawb7juPnk0jg" annotatedElement="_fiY_YGxTEeaaf9FvLD9bBw">
         <body>&lt;&lt;GaStep>>
-{hostDemand=(expr=$postProc,unit=s,
+{hostDemand=(expr=$postProc,unit=ms,
                         statQ=mean,source=est)</body>
       </ownedComment>
       <ownedComment xmi:type="uml:Comment" xmi:id="_MIqwgHBXEeawb7juPnk0jg">
@@ -255,32 +255,32 @@ utilization= (expr=$UParser,source=calc)}</body>
     <context>out$UParser</context>
   </GQAM:GaAnalysisContext>
   <GQAM:GaScenario xmi:id="_9v2HYGxREeaaf9FvLD9bBw" base_NamedElement="_WFR2oGxREeaaf9FvLD9bBw" base_Behavior="_WFR2oGxREeaaf9FvLD9bBw">
-    <throughput>(expr=$XParser,unit=Hz,source=calc)</throughput>
-    <respT>(expr=$RTParser,unit=s,source=calc)</respT>
+    <throughput>(expr=$XParser,unit=kHz,source=calc)</throughput>
+    <respT>(expr=$RTParser,unit=ms,source=calc)</respT>
   </GQAM:GaScenario>
   <GQAM:GaWorkloadEvent xmi:id="_VomFMGxSEeaaf9FvLD9bBw" pattern="open=(arrivalRate=(expr=$arrRateP,unit=Hz,statQ=mean,source=est))" base_NamedElement="_RrpugGxSEeaaf9FvLD9bBw"/>
   <GQAM:GaStep xmi:id="_lVGaUGxSEeaaf9FvLD9bBw" base_NamedElement="_d5XBgGxSEeaaf9FvLD9bBw">
-    <hostDemand>(expr=$parser,unit=s,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$parser,unit=ms,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_NorL0GxTEeaaf9FvLD9bBw" base_NamedElement="_F9fBwGxTEeaaf9FvLD9bBw">
-    <hostDemand>(expr=$adapt,unit=s,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$adapt,unit=ms,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_sPyfEGxTEeaaf9FvLD9bBw" base_NamedElement="_fiY_YGxTEeaaf9FvLD9bBw">
-    <hostDemand>(expr=$postProc,unit=s,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$postProc,unit=ms,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_KXEewI2dEeaEzJ8d3wMmSw" base_NamedElement="_45dx0GxSEeaaf9FvLD9bBw" base_Message="_45dx0GxSEeaaf9FvLD9bBw">
-    <hostDemand>(expr=$msgDelay1,unit=s,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$msgDelay1,unit=ms,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_XVfdAI2dEeaEzJ8d3wMmSw" base_NamedElement="__IZZQGxSEeaaf9FvLD9bBw" base_Message="__IZZQGxSEeaaf9FvLD9bBw">
-    <hostDemand>(expr=$msgDelay2,unit=s,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$msgDelay2,unit=ms,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_c2wGII2dEeaEzJ8d3wMmSw" base_NamedElement="_UorD0GxTEeaaf9FvLD9bBw" base_Message="_UorD0GxTEeaaf9FvLD9bBw">
-    <hostDemand>(expr=$msgDelay2,unit=s,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$msgDelay2,unit=ms,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_mQmKYI2dEeaEzJ8d3wMmSw" base_NamedElement="_bo92wGxTEeaaf9FvLD9bBw" base_Message="_bo92wGxTEeaaf9FvLD9bBw">
-    <hostDemand>(expr=$msgDelay2,unit=s,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$msgDelay2,unit=ms,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
   <GQAM:GaStep xmi:id="_o8QfYI2dEeaEzJ8d3wMmSw" base_NamedElement="_xpcEUGxTEeaaf9FvLD9bBw" base_Message="_xpcEUGxTEeaaf9FvLD9bBw">
-    <hostDemand>(expr=$msgDelay2,unit=s,statQ=mean,source=est)</hostDemand>
+    <hostDemand>(expr=$msgDelay2,unit=ms,statQ=mean,source=est)</hostDemand>
   </GQAM:GaStep>
 </xmi:XMI>

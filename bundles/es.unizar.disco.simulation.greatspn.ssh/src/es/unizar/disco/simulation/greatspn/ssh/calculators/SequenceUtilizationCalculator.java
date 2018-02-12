@@ -55,14 +55,9 @@ public class SequenceUtilizationCalculator extends AbstractCalculator implements
 					domainElement, interactionFragments.size()));
 		}
 
-		/*BigDecimal meanNumberToken = getMeanTokensLifeline(interactionFragments, toolResult, traceSet); //(placeInfo.getMeanNumberOfTokens().toString()) */
-		BigDecimal meanNumberTokenWorking = getMeanTokenstWorkingLifeline(interactionFragments, toolResult, traceSet); //(placeInfo.getMeanNumberOfTokens().toString())
-		//BigDecimal meanNumberTokenWaiting = getMeanTokenstWaitingQueueLifeline(interactionFragments, toolResult, traceSet); 
-		BigDecimal initialMarking = getInitialMarkingLifeline(lifeline, toolResult, traceSet); //(place.getInitialMarking().getText());
-
-		BigDecimal result = initialMarking.subtract(meanNumberTokenWorking).divide(initialMarking, MathContext.DECIMAL64).multiply(new BigDecimal(100));
-		/*BigDecimal result = initialMarking.subtract(meanNumberTokenWaiting);
-		result = result.subtract(meanNumberTokenWorking).divide(initialMarking, MathContext.DECIMAL64).multiply(new BigDecimal(100));*/
+		BigDecimal meanNumberTokenWorking = getMeanTokenstWorkingLifeline(interactionFragments, toolResult, traceSet);
+		BigDecimal initialMarking = getInitialMarkingLifeline(lifeline, toolResult, traceSet);
+		BigDecimal result = meanNumberTokenWorking.divide(initialMarking, MathContext.DECIMAL64).multiply(new BigDecimal(100));
 
 		// This is always a percentage, ignore whatever the
 		// DomainMeasureDefinition defines
@@ -81,36 +76,8 @@ public class SequenceUtilizationCalculator extends AbstractCalculator implements
 				List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
 						.map(i -> (PlaceInfo) i).collect(Collectors.toList());
 				for (PlaceInfo pInfo : placesInfos){
-					meanTokensPlaceInfoList = meanTokensPlaceInfoList.add(new BigDecimal(pInfo.getMeanNumberOfTokens().doubleValue()));
+					meanTokensPlaceInfoList = meanTokensPlaceInfoList.add(new BigDecimal(pInfo.getMeanNumberOfTokens().doubleValue(), MathContext.DECIMAL64));
 				}
-			}
-		}
-		return meanTokensPlaceInfoList;
-	}
-	
-	private BigDecimal getMeanTokenstWaitingQueueLifeline(List<InteractionFragment> interactionFragments, ToolResult toolResult, TraceSet traceSet) {
-		BigDecimal meanTokensPlaceInfoList = new BigDecimal(0.0, MathContext.DECIMAL64);
-		for (InteractionFragment interactionFragment : interactionFragments) {
-			if (!(interactionFragment instanceof ExecutionSpecification)) {
-				Set<AnalyzableElementInfo> infos = findInfosForDomainElement(interactionFragment, toolResult, traceSet);
-				List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
-						.map(i -> (PlaceInfo) i).collect(Collectors.toList());
-				for (PlaceInfo pInfo : placesInfos){
-					meanTokensPlaceInfoList = meanTokensPlaceInfoList.add(new BigDecimal(pInfo.getMeanNumberOfTokens().doubleValue()));
-				}
-			}
-		}
-		return meanTokensPlaceInfoList;
-	}
-	
-	private BigDecimal getMeanTokensLifeline(List<InteractionFragment> interactionFragments, ToolResult toolResult, TraceSet traceSet) {
-		BigDecimal meanTokensPlaceInfoList = new BigDecimal(0.0, MathContext.DECIMAL64);
-		for (InteractionFragment interactionFragment : interactionFragments) {
-			Set<AnalyzableElementInfo> infos = findInfosForDomainElement(interactionFragment, toolResult, traceSet);
-			List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
-					.map(i -> (PlaceInfo) i).collect(Collectors.toList());
-			for (PlaceInfo pInfo : placesInfos){
-				meanTokensPlaceInfoList = meanTokensPlaceInfoList.add(new BigDecimal(pInfo.getMeanNumberOfTokens().doubleValue()));
 			}
 		}
 		return meanTokensPlaceInfoList;
@@ -122,22 +89,17 @@ public class SequenceUtilizationCalculator extends AbstractCalculator implements
 		List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
 				.map(i -> (PlaceInfo) i).collect(Collectors.toList());
 		if (!placesInfos.isEmpty()) {
-			PlaceInfo placeInfo = findFirstPlaceInfoOfRuleInfo(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet, placesInfos);
-			Place place = (Place) placeInfo.getAnalyzedElement();
-			initialMarking = new BigDecimal(place.getInitialMarking().getText(), MathContext.DECIMAL64);
-		}	
-		//return  new BigDecimal(findFirstPlaceInfoOfRule(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet,	placesInfos).doubleValue());
+			try{
+				PlaceInfo placeInfo = findFirstPlaceInfoOfRuleInfo(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet, placesInfos);
+				Place place = (Place) placeInfo.getAnalyzedElement();
+				initialMarking = new BigDecimal(place.getInitialMarking().getText(), MathContext.DECIMAL64);
+			}catch(RuntimeException e1){
+				/* No initial place has been found */
+			}
+		}
 		return initialMarking;
 	}
 	
-	private BigDecimal getInitialMarkingLifeline2(Lifeline lifeLine, ToolResult toolResult, TraceSet traceSet) {
-		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(lifeLine, toolResult, traceSet);
-		List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
-				.map(i -> (PlaceInfo) i).collect(Collectors.toList());
-		
-		return  new BigDecimal(findFirstPlaceInfoOfRule(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet,	placesInfos).doubleValue());
-	}
-
 	@Override
 	public Boolean isAdequateFor(EObject domainElement) {
 		return (domainElement instanceof Lifeline);

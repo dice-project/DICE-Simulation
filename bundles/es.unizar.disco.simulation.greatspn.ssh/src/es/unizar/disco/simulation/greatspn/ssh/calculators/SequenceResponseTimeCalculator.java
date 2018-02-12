@@ -27,7 +27,6 @@ import es.unizar.disco.simulation.models.toolresult.ToolResult;
 import es.unizar.disco.simulation.models.traces.TraceSet;
 import es.unizar.disco.simulation.models.wnsim.PlaceInfo;
 import es.unizar.disco.simulation.models.wnsim.TransitionInfo;
-import fr.lip6.move.pnml.ptnet.Place;
 import tec.units.ri.format.SimpleUnitFormat;
 import tec.units.ri.format.SimpleUnitFormat.Flavor;
 import tec.units.ri.unit.Units;
@@ -46,7 +45,21 @@ public class SequenceResponseTimeCalculator extends AbstractCalculator implement
 		
 		Interaction interaction = (Interaction) domainElement;
 		// @formatter:off
-		List<Lifeline> lifeLines = interaction.getLifelines();
+		List<Lifeline> lifeLines = interaction.getLifelines();		
+		// @formatter:on
+
+		// Validate there's at least one lifeline
+		if (lifeLines.size() < 1) {
+			throw new RuntimeException(MessageFormat.format("Unexpected number of 'Lifelines' found in Interaction ''{0}''. Expected more than 1, but found ''{1}''",
+					domainElement, lifeLines.size()));
+		}
+		
+		BigDecimal meanThroughput = getMeanThrougputOfLifeLines(lifeLines, toolResult, traceSet);		
+		BigDecimal meanImplicitMarking = getMeanNumberOfTokensImplicitPlace(lifeLines, toolResult, traceSet);
+
+		BigDecimal responseTime = meanImplicitMarking.divide(meanThroughput, MathContext.DECIMAL64);
+		String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
+
 		List<InteractionFragment> interactionFragments = interaction.getFragments();
 		List<ExecutionSpecification> executionFragments = new ArrayList<ExecutionSpecification>();
 		for (InteractionFragment interactionFragment : interactionFragments){
@@ -54,43 +67,29 @@ public class SequenceResponseTimeCalculator extends AbstractCalculator implement
 				executionFragments.add((ExecutionSpecification) interactionFragment);
 			}
 		}
-		
-		// @formatter:on
 
-		// Validate there's only one initial node
-		if (lifeLines.size() < 1) {
-			throw new RuntimeException(MessageFormat.format("Unexpected number of 'Lifelines' found in Interaction ''{0}''. Expected more than 1, but found ''{1}''",
-					domainElement, lifeLines.size()));
-		}
-			
-		BigDecimal meanInitialMarking = getMeanNumberOfInitialMarkings(lifeLines, toolResult, traceSet);
-		BigDecimal meanThroughput = getMeanThrougputOfInteraction(interaction, toolResult, traceSet);
-
-		BigDecimal responseTime = meanInitialMarking.divide(meanThroughput, MathContext.DECIMAL64);
-		String targetUnit = definition.getVslExpressionEntries().get("unit") != null ? definition.getVslExpressionEntries().get("unit") : "s";
-
-		//DomainMeasure measure = buildMeasure(responseTime, getResultsUnit(interactionFragments.get(0),toolResult,traceSet), targetUnit);
-		//DomainMeasure measure = buildMeasure(responseTime, getResultsUnit(interactionActions.get(0),toolResult,traceSet), targetUnit);
 		DomainMeasure measure = buildMeasure(responseTime, getResultsUnit(executionFragments.get(0),toolResult,traceSet), targetUnit);
 		measure.setDefinition(definition);
 		return measure;
 	}
 	
-	private BigDecimal getMeanNumberOfInitialMarkings(List<Lifeline> lifeLines, ToolResult toolResult, TraceSet traceSet) {
+	private BigDecimal getMeanNumberOfTokensImplicitPlace(List<Lifeline> lifeLines, ToolResult toolResult, TraceSet traceSet) {
 		BigDecimal meanNumber = new BigDecimal(0.0, MathContext.DECIMAL64);
 		BigDecimal listSize = new BigDecimal(0.0, MathContext.DECIMAL64);
-		//BigDecimal listSize = new BigDecimal(lifeLines.size());
 
 		for (Lifeline lifeLine : lifeLines) {
 			Set<AnalyzableElementInfo> infos = findInfosForDomainElement(lifeLine, toolResult, traceSet);
 			List<PlaceInfo> placesInfos = infos.stream().filter(i -> i instanceof PlaceInfo)
 					.map(i -> (PlaceInfo) i).collect(Collectors.toList());
 			if (!placesInfos.isEmpty()) {
-				PlaceInfo placeInfo = findFirstPlaceInfoOfRuleInfo(ConstantUtils.getPlaceConcurrentUsersTrace(), traceSet, placesInfos);
-				Place place = (Place) placeInfo.getAnalyzedElement();
-				BigDecimal initialMarking = new BigDecimal(place.getInitialMarking().getText(), MathContext.DECIMAL64);
-				meanNumber = meanNumber.add(initialMarking, MathContext.DECIMAL64);
-				listSize = listSize.add(new BigDecimal(1.0, MathContext.DECIMAL64));
+				try{
+					PlaceInfo placeInfo = findFirstPlaceInfoOfRuleInfo(ConstantUtils.getImplicitPlaceSequenceDiagram(), traceSet, placesInfos);
+					BigDecimal meanMarking = new BigDecimal(placeInfo.getMeanNumberOfTokens().doubleValue(), MathContext.DECIMAL64);
+					meanNumber = meanNumber.add(meanMarking, MathContext.DECIMAL64);
+					listSize = listSize.add(new BigDecimal(1.0, MathContext.DECIMAL64));
+				}catch(RuntimeException e1){
+					/* No implicit place has been found */
+				}
 			}			
 		}
 		
@@ -101,23 +100,31 @@ public class SequenceResponseTimeCalculator extends AbstractCalculator implement
 		}
 	}
 	
-	private BigDecimal getMeanThrougputOfInteraction(Interaction interaction, ToolResult toolResult,TraceSet traceSet) {
-
-		BigDecimal throughput = new BigDecimal(0.0);
-		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(interaction, toolResult, traceSet);
-		List<TransitionInfo> transitionInfos = infos
-				.stream()
-				.filter(i -> i instanceof TransitionInfo)
-				.map(i -> (TransitionInfo) i)
-				.collect(Collectors.toList());
-		for(TransitionInfo transitionInfo : transitionInfos){
-			throughput = throughput.add(new BigDecimal(transitionInfo.getThroughput().doubleValue()));
+	private BigDecimal getMeanThrougputOfLifeLines(List<Lifeline> lifelines, ToolResult toolResult,TraceSet traceSet) {
+		BigDecimal meanThru = new BigDecimal(0.0, MathContext.DECIMAL64);
+		BigDecimal listSize = new BigDecimal(0.0, MathContext.DECIMAL64);
+		
+		for (Lifeline lifeline : lifelines){	
+			Set<AnalyzableElementInfo> infos = findInfosForDomainElement(lifeline, toolResult, traceSet);
+			List<TransitionInfo> transitionInfos = infos
+					.stream()
+					.filter(i -> i instanceof TransitionInfo)
+					.map(i -> (TransitionInfo) i)
+					.collect(Collectors.toList());
+			if (!transitionInfos.isEmpty()) {
+				TransitionInfo transitionInfo = findFirstTransitionInfoOfRuleInfo(ConstantUtils.getTransitionEndSequence(), traceSet, transitionInfos);
+				meanThru = meanThru.add(new BigDecimal(transitionInfo.getThroughput().doubleValue(), MathContext.DECIMAL64));
+				listSize = listSize.add(new BigDecimal(1.0, MathContext.DECIMAL64));
+			}
 		}
-		return throughput;
+		
+		if (listSize.doubleValue() > 0.0){
+			return meanThru.divide(listSize, MathContext.DECIMAL64);
+		} else {
+			return listSize;
+		}
 	}
-
-	//private String getResultsUnit(InteractionFragment interactionFragment, ToolResult toolResult, TraceSet traceSet) {
-	//private String getResultsUnit(Action interactionAction, ToolResult toolResult, TraceSet traceSet) {
+	
 	private String getResultsUnit(ExecutionSpecification executionFragment, ToolResult toolResult, TraceSet traceSet) {
 		Set<AnalyzableElementInfo> infos = findInfosForDomainElement(executionFragment, toolResult, traceSet);
 		List<TransitionInfo> transitionInfos = infos

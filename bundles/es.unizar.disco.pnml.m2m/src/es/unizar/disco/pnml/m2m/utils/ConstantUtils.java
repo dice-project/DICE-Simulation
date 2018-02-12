@@ -10,6 +10,7 @@ public class ConstantUtils {
 	private final static String TRANSITION_OK_TRACE = "OK";
 	private final static String TRANSITION_STORM_SPOUT = "TimedTransitionSpout";
 	private final static String PLACE_CONCURRENT_USERS_TRACE ="NumberOfConcurrentUsers";
+	private final static String PLACE_INMPLICIT_SEQUENCE_DIAGRAM ="ImplicitPlace";
 	private final static String USERS = "Users";
 	private final static String ALL_RESOURCES_FAILED = "AllResourcesFailed";
 	private final static String ALL_RESOURCES_EXPELLED = "ResourcesExpelled";
@@ -27,6 +28,10 @@ public class ConstantUtils {
 	}
 
 	@Operation
+	public static String getImplicitPlaceSequenceDiagram() {
+		return PLACE_INMPLICIT_SEQUENCE_DIAGRAM;
+	}
+	
 	public static String getPlaceConcurrentUsersTrace() {
 		return PLACE_CONCURRENT_USERS_TRACE;
 	}

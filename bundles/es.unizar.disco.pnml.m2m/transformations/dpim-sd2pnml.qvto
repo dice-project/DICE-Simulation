@@ -53,6 +53,11 @@ main() {
 	// Transform net contents
 	sd.scenario().map interaction2subnet();
 	
+	// Select the Lifeline that starts the first interaction (i.e., sends a message)
+	// and adds trace information for metric computation 
+	var first := sd.scenario().fragment->asOrderedSet()->first().oclAsType(UML::MessageOccurrenceSpecification);
+	first.getLifeline().map metric2subnet();
+
 	// Transform deployment
 	
 	// Transform workload descriptions
@@ -108,8 +113,6 @@ mapping UML::Interaction::interaction2subnet() {
 	self.message->map message2subnet();
 	// Transform the lifelines
 	self.lifeline->map lifeline2subnet();
-	
-	self.map trace(finalTransition, getTransitionEndSequence());
 }
 
 mapping UML::Lifeline::lifeline2subnet() disjuncts 
@@ -120,23 +123,14 @@ mapping UML::Lifeline::actorLifeline2subnet()
 when {
 	self.isActor();
 }{
-	// Create the lifeline's initial transition
-	var initialTransition := object PNML::Transition {
-		containerPage := resolveoneIn(UML::NamedElement::model2page);
-		id := createRandomUniqueId();
-	};
+	// Create the lifeline's initial transition	
+	var initialTransition := self.map namedElement2Inittransition();
 
 	// Create the lifeline's last place
-	var finalPlace := object PNML::Place {
-		containerPage := resolveoneIn(UML::NamedElement::model2page);
-		id := createRandomUniqueId();
-		name := object PNML::Name {
-			text := self.name + '_last';
-		};
-	};
-
+	var finalPlace := self.map namedElement2Endplace();
+	
 	// Create the final transition representing the lifeline
-	var finalTransition := self.map namedElement2transition();
+	var finalTransition := self.map namedElement2Endtransition();
 	
 	// Connect the initial transition to the first element subnet
 	var firstElementPlace := self.fragments()->first().resolveoneIn(UML::NamedElement::namedElement2place);
@@ -163,15 +157,9 @@ when {
 		// Closed pattern: Create the initial place with the population, set 
 		// the first transition's delay and connect with the rest of the subnet
 		var closedPattern := pattern.oclAsType(ClosedPattern);
-		var initialPlace := object PNML::Place {
-			containerPage := resolveoneIn(UML::NamedElement::model2page);
-			id := createRandomUniqueId();
-			name := object PNML::Name {
-				text := self.name;
-			};
-			initialMarking := object PNML::PTMarking {
+		var initialPlace := self.map namedElement2Initplace(); 
+		initialPlace.initialMarking := object PNML::PTMarking {
 				text := closedPattern.population_.value();
-			};
 		};
 		initialTransition.toolspecifics += expTransitionToolInfo(1 / closedPattern.extDelay.value());		
 		initialTransition.toolspecifics += infServerTransitionToolInfo();		
@@ -200,32 +188,18 @@ when {
 }{
 	assert fatal (self.getPaRunTInstance_poolSize().oclIsUndefined().not()) with log ("Lifeline '" + self.toString() + "' does not define a poolSize");
 	
-	var initialPlace := object PNML::Place {
-		containerPage := resolveoneIn(UML::NamedElement::model2page);
-		id := createRandomUniqueId();
-		name := object PNML::Name {
-			text := self.name;
-		};
-		initialMarking := object PNML::PTMarking {
+	// Create the lifeline's initial place
+	var initialPlace := self.map namedElement2Initplace();
+	initialPlace.initialMarking := object PNML::PTMarking {
 			text := self.getPaRunTInstance_poolSize().value();
-		};
 	};
-
+	
 	// Create the lifeline's initial transition
-	var initialTransition := object PNML::Transition {
-		containerPage := resolveoneIn(UML::NamedElement::model2page);
-		id := createRandomUniqueId();
-	};
+	var initialTransition := self.map namedElement2Inittransition();
 
 	// Create the lifeline's last place
-	var finalPlace := object PNML::Place {
-		containerPage := resolveoneIn(UML::NamedElement::model2page);
-		id := createRandomUniqueId();
-		name := object PNML::Name {
-			text := self.name + '_last';
-		};
-	};
-
+	var finalPlace := self.map namedElement2Endplace();
+	
 	// Retrieve the final transition that synchronizes the lifelines
 	var finalTransition := self.interaction.resolveoneIn(UML::NamedElement::namedElement2transition);
 	
@@ -247,6 +221,50 @@ when {
 	map arc(finalTransition, initialPlace);
 
 	self.map trace(initialPlace, getPlaceConcurrentUsersTrace());
+}
+
+mapping UML::Lifeline::metric2subnet() disjuncts 
+UML::Lifeline::actorLifelineMetric2subnet,
+UML::Lifeline::regularLifelineMetric2subnet {};
+
+mapping UML::Lifeline::actorLifelineMetric2subnet() 
+when {
+	self.isActor();	
+}{
+	// Create the lifeline's implicit place
+	var implicitPlace := self.map namedElement2Implicitplace();
+	
+	// Retrieve the initial transition
+	var initialTransition := self.resolveoneIn(UML::NamedElement::namedElement2Inittransition);
+	
+	// Retrieve the final transition that synchronizes the lifelines
+	var finalTransition := self.resolveoneIn(UML::NamedElement::namedElement2Endtransition);
+	
+	map arc(initialTransition, implicitPlace);
+	map arc(implicitPlace, finalTransition);
+	self.map trace(implicitPlace, getImplicitPlaceSequenceDiagram());	
+	self.map trace(finalTransition, getTransitionEndSequence());
+	
+}
+
+mapping UML::Lifeline::regularLifelineMetric2subnet() 
+when {
+	self.isActor().not();	
+}{
+	// Create the lifeline's implicit place
+	var implicitPlace := self.map namedElement2Implicitplace();
+	
+	// Retrieve the initial transition
+	var initialTransition := self.resolveoneIn(UML::NamedElement::namedElement2Inittransition);
+		
+	// Retrieve the final transition that synchronizes the lifelines
+	var finalTransition := self.interaction.resolveoneIn(UML::NamedElement::namedElement2transition);
+	
+	map arc(initialTransition, implicitPlace);
+	map arc(implicitPlace, finalTransition);
+	self.map trace(implicitPlace, getImplicitPlaceSequenceDiagram());	
+	self.map trace(finalTransition, getTransitionEndSequence());
+	
 }
 
 mapping UML::InteractionFragment::connectToPrev()  {
@@ -333,6 +351,21 @@ mapping UML::NamedElement::namedElement2place() : PNML::Place {
 	};
 }
 
+mapping UML::NamedElement::namedElement2Implicitplace() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_implicit";
+}
+
+mapping UML::NamedElement::namedElement2Initplace() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_init";
+}
+
+mapping UML::NamedElement::namedElement2Endplace() : PNML::Place
+inherits UML::NamedElement::namedElement2place {
+			name.text := name.text + "_end";
+}
+
 mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 	containerPage := resolveoneIn(UML::NamedElement::model2page);
 	id := createRandomUniqueId();
@@ -341,6 +374,16 @@ mapping UML::NamedElement::namedElement2transition() : PNML::Transition {
 			text := self.name;
 		};
 	};
+}
+
+mapping UML::NamedElement::namedElement2Inittransition() : PNML::Transition
+inherits UML::NamedElement::namedElement2transition {
+			name.text := name.text + "_init";
+}
+
+mapping UML::NamedElement::namedElement2Endtransition() : PNML::Transition
+inherits UML::NamedElement::namedElement2transition {
+			name.text := name.text + "_end";
 }
 
 /**
