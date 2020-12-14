@@ -5,9 +5,51 @@ Simulation tool for DICE.
 
 A demonstration video can be found at https://www.youtube.com/watch?v=lZX6IoHgHc0
 
+# Requirements
+
+In order to execute simulations, the DICE Simulation Tools requires an installation of GreatSPN running on a Linux server and accessible via SSH.
+Fortunately, we provide a Docker image to execute GreatSPN, which can be executed in any of the supported platforms (Linux, Windows and MacOSX).
+
+See https://docs.docker.com/get-docker/ for the Docker installation instructions.
+
+Once you have Docker up and running in your system, simply start a docker image by running:
+
+```
+docker run --publish 2222:22 --env SSH_USERNAME=user --env SSH_USERPASS=password abelgomez/greatspn
+```
+
+After that, GreatSPN will be accessible via SSH on `localhost`, on port `2222`, using the user `user` and the password `password`.
+See https://github.com/abelgomez/greatspn.docker for more details.
+
 # Installing the Simulation Tools
 
 In Eclipse, go to `Help -> Install New Software...` and use http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
+
+# Building the Simulation Tool
+
+To build the plugins and create an update site, simply execute:
+
+```
+mvn clean verify
+```
+
+The build process also includes test. Some of them, however, require a running GreatSPN instance. Tests requiring GreatSPN are disabled by default.
+Remember that you can use Docker. In such a case, first launch the GreatSPN instance as explained above, and then you can directly ask for the execution of the integration tests by running:
+
+```
+mvn clean verify -Pintegration-tests
+```
+
+If you changed any of the above configuration to run GreatSPN, you can update the connection data used for the tests by editing the file [tests/es.unizar.disco.simulation.tests/src/test/resources/config.properties](tests/es.unizar.disco.simulation.tests/src/test/resources/config.properties).
+
+In order to prepare a new release, it is necessary to change the version of all plugins, features, and pom.xml files at a time. To do this, simply execute (where x.x.x must be replaced by the desired version number):
+
+```
+mvn clean tycho-versions:set-version -Dnewversion=x.x.x-SNAPSHOT
+```
+
+
+
 
 # Summary of contents
 
@@ -64,17 +106,3 @@ This project provides a simple extension point contribution to access a remote h
 This project contains the *sshj - SSHv2 library for Java* as an OSGi-friendly bundle.
 
 This module is required by ```es.unizar.disco.simulation.greatspn.ssh``` to access a remote *GreatSPN* instance using SSH/SFTP.
-
-# Building the Simulation Tool
-
-To build the plugins and create an update site, simply execute:
-
-```
-mvn clean verify
-```
-
-To update the version of all plugins, features, and pom.xml files, simply execute (where x.x.x must be replaced by the desired version number):
-
-```
-mvn clean tycho-versions:set-version -Dnewversion=x.x.x-SNAPSHOT
-```
