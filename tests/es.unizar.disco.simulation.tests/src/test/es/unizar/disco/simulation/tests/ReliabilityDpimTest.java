@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
 import es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlReliabilityResourceBuilder;
@@ -128,6 +129,7 @@ public class ReliabilityDpimTest extends AbstractTest{
 	}
 
 	@Test
+	@Category(IntegrationTest.class)
 	public void testSucccesAndFailureProbabilitySumOne()
 			throws SimulationException, CoreException, InterruptedException, IOException {
 

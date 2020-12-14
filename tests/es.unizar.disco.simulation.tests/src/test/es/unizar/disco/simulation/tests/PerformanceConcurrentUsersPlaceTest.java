@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlResourceBuilder;
 import es.unizar.disco.pnml.m2m.utils.ConstantUtils;
@@ -118,6 +119,7 @@ public class PerformanceConcurrentUsersPlaceTest extends AbstractTest {
 	}
 
 	@Test
+	@Category(IntegrationTest.class)
 	public void testRespTimeResultIsCalculated()
 			throws SimulationException, CoreException, InterruptedException, IOException {
 

@@ -23,7 +23,7 @@ import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.experimental.categories.Category;
 
 import es.unizar.disco.pnml.m2m.builder.StormScenario2PnmlReliabilityResourceBuilder;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
@@ -98,6 +98,7 @@ public class ReliabilityStormTest extends AbstractTest {
 
 
 	@Test
+	@Category(IntegrationTest.class)
 	public void testResults()
 			throws SimulationException, CoreException, InterruptedException, IOException {
 

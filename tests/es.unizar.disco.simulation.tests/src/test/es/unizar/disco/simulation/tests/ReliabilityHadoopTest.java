@@ -23,6 +23,7 @@ import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import com.masdes.dam.Complex_Data_Types.DaFailure;
 import com.masdes.dam.Complex_Data_Types.DaRepair;
@@ -106,6 +107,7 @@ public class ReliabilityHadoopTest extends AbstractTest {
 
 
 	@Test
+	@Category(IntegrationTest.class)
 	public void testResults()
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
