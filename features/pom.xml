@@ -1,18 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<artifactId>es.unizar.disco.features</artifactId>
-
-	<packaging>pom</packaging>
-
 	<parent>
 		<groupId>es.unizar.disco</groupId>
-		<artifactId>es.unizar.disco.root</artifactId>
+		<artifactId>root</artifactId>
 		<version>0.6.5-SNAPSHOT</version>
 	</parent>
-
-
+	<groupId>es.unizar.disco</groupId>
+	<artifactId>features</artifactId>
+	<packaging>pom</packaging>
 	<modules>
 		<module>com.hierynomus.sshj.feature</module>
 		<module>es.unizar.disco.simulation.feature</module>
@@ -22,6 +18,4 @@
 		<module>es.unizar.disco.ssh.feature</module>
 		<module>es.unizar.disco.ssh.ui.feature</module>
 	</modules>
-
-
 </project>

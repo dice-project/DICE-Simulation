@@ -64,3 +64,17 @@ This project provides a simple extension point contribution to access a remote h
 This project contains the *sshj - SSHv2 library for Java* as an OSGi-friendly bundle.
 
 This module is required by ```es.unizar.disco.simulation.greatspn.ssh``` to access a remote *GreatSPN* instance using SSH/SFTP.
+
+# Building the Simulation Tool
+
+To build the plugins and create an update site, simply execute:
+
+```
+mvn clean verify
+```
+
+To update the version of all plugins, features, and pom.xml files, simply execute (where x.x.x must be replaced by the desired version number):
+
+```
+mvn clean tycho-versions:set-version -Dnewversion=x.x.x-SNAPSHOT
+```
