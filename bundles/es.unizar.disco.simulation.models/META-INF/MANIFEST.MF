@@ -40,11 +40,12 @@ Export-Package: es.unizar.disco.simulation.models,
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
  org.eclipse.emf.ecore;bundle-version="2.12.0";visibility:=reexport,
  org.eclipse.uml2.uml;bundle-version="5.2.0";visibility:=reexport,
- org.eclipse.papyrus.marte.static.profile;bundle-version="1.2.0";visibility:=reexport,
  org.apache.commons.lang;bundle-version="2.6.0",
- com.masdes.dam.static.profile;bundle-version="0.6.5";visibility:=reexport,
- es.unizar.disco.dice.static.profile;bundle-version="0.6.5";visibility:=reexport,
- es.unizar.disco.core;bundle-version="0.3.0"
+ es.unizar.disco.core;bundle-version="0.6.5",
+ org.eclipse.papyrus.marte.static.profile;bundle-version="1.2.0";visibility:=reexport,
+ com.masdes.dam.static.profile;bundle-version="0.13.1";visibility:=reexport,
+ es.unizar.disco.dice.static.profile;bundle-version="0.13.1";visibility:=reexport,
+ ro.ieat.secureuml.profile;bundle-version="0.13.1"
 Bundle-ActivationPolicy: lazy
 Import-Package: es.unizar.disco.core.collections
 Bundle-Activator: es.unizar.disco.simulation.models.DiceModelsPlugin

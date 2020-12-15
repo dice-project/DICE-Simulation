@@ -223,6 +223,22 @@ any resulting litigation.
       <update label="DICE Simulation Tools Update Site" url="http://dice-project.github.io/DICE-Simulation/updates"/>
    </url>
 
+   <includes
+         id="com.masdes.dam.profile.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="es.unizar.disco.dice.profile.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="ro.ieat.secureuml.profile.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.papyrus.extra.marte.feature"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.12.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore" version="2.12.0" match="greaterOrEqual"/>
@@ -243,8 +259,9 @@ any resulting litigation.
       <import plugin="org.apache.commons.io" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.uml2.uml" version="5.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.marte.static.profile" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="com.masdes.dam.static.profile" version="0.6.5" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.dice.static.profile" version="0.6.5" match="greaterOrEqual"/>
+      <import plugin="com.masdes.dam.static.profile" version="0.13.1" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.dice.static.profile" version="0.13.1" match="greaterOrEqual"/>
+      <import plugin="ro.ieat.secureuml.profile" version="0.13.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin

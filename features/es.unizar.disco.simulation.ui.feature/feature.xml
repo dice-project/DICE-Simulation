@@ -223,14 +223,20 @@ any resulting litigation.
       <update label="DICE Simulation Tools Update Site" url="http://dice-project.github.io/DICE-Simulation/updates"/>
    </url>
 
+   <includes
+         id="com.masdes.dam.profile.ui.feature"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.12.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.11.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swt" version="3.115.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.108.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.12.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface" version="3.12.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.core" version="0.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.console" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.editors" version="3.10.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.views.log" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.debug.ui" version="3.11.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jdt.ui" version="3.12.0" match="greaterOrEqual"/>
@@ -251,22 +257,20 @@ any resulting litigation.
       <import plugin="org.eclipse.papyrus.uml.tools" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.infra.services.resourceloading" version="2.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.uml.perspective" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.simulation.models" version="0.3.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.simulation.models.edit" version="0.3.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.papyrus.sdk.feature" version="2.0.0.201606080854"/>
-      <import plugin="org.eclipse.swt" version="3.115.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.editors" version="3.10.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.chart.engine" version="4.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.chart.device.swt" version="4.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.chart.device.pdf" version="4.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.chart.device.svg" version="4.6.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.simulation.models" version="0.3.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.simulation.models.edit" version="0.3.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.simulation" version="0.6.5" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.chart.device.extension" version="4.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.chart.engine.extension" version="4.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.chart.ui" version="4.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.chart.ui.extension" version="4.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.core.ui" version="4.6.0" match="greaterOrEqual"/>
+      <import feature="org.eclipse.papyrus.sdk.feature" version="2.0.0.201606080854"/>
    </requires>
 
    <plugin
