@@ -7,7 +7,7 @@ A demonstration video can be found at https://www.youtube.com/watch?v=lZX6IoHgHc
 
 # Requirements
 
-In order to execute simulations, the DICE Simulation Tools requires an installation of GreatSPN running on a Linux server and accessible via SSH.
+In order to execute simulations, the DICE Simulation Tool requires an installation of GreatSPN running on a Linux server and accessible via SSH.
 Fortunately, we provide a Docker image to execute GreatSPN, which can be executed in any of the supported platforms (Linux, Windows and MacOSX).
 
 See https://docs.docker.com/get-docker/ for the Docker installation instructions.
@@ -21,9 +21,41 @@ docker run --publish 2222:22 --env SSH_USERNAME=user --env SSH_USERPASS=password
 After that, GreatSPN will be accessible via SSH on `localhost`, on port `2222`, using the user `user` and the password `password`.
 See https://github.com/abelgomez/greatspn.docker for more details.
 
+# Compatibility between Eclipse versions and the DICE Simulation Tools
+
+DICE Simulation Tool version | Eclipse version name                                                                         | Eclipse version number | Minimum Java Version | Supported platforms                             |
+:---------------------------:|:--------------------------------------------------------------------------------------------:|:----------------------:|:--------------------:|:-----------------------------------------------:|
+v0.1.x                       | [Eclipse Mars](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.5-201506032000/)     | 4.5                    | Java 7               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.2.x                       | [Eclipse Mars](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.5-201506032000/)     | 4.5                    | Java 7               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.3.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.4.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.5.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.6.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v1.0.x                       | [Eclipse 2020-09](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.17-202009021800/) | 4.17                   | Java 11              | Windows, Linux, MacOS X (64 bits only)          |
+
 # Installing the Simulation Tools
 
 In Eclipse, go to `Help -> Install New Software...` and use http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
+
+## Archived Updates Sites
+
+* http://dice-project.github.io/DICE-Simulation/updates/0.1
+* http://dice-project.github.io/DICE-Simulation/updates/0.2
+* http://dice-project.github.io/DICE-Simulation/updates/0.3.3
+* http://dice-project.github.io/DICE-Simulation/updates/0.3.4
+* http://dice-project.github.io/DICE-Simulation/updates/0.3.5
+* http://dice-project.github.io/DICE-Simulation/updates/0.4.0
+* http://dice-project.github.io/DICE-Simulation/updates/0.4.1
+* http://dice-project.github.io/DICE-Simulation/updates/0.4.2
+* http://dice-project.github.io/DICE-Simulation/updates/0.5.0
+* http://dice-project.github.io/DICE-Simulation/updates/0.5.1
+* http://dice-project.github.io/DICE-Simulation/updates/0.5.2
+* http://dice-project.github.io/DICE-Simulation/updates/0.6.0
+* http://dice-project.github.io/DICE-Simulation/updates/0.6.1
+* http://dice-project.github.io/DICE-Simulation/updates/0.6.2
+* http://dice-project.github.io/DICE-Simulation/updates/0.6.3
+* http://dice-project.github.io/DICE-Simulation/updates/0.6.4
+* http://dice-project.github.io/DICE-Simulation/updates/0.6.5
 
 # Building the Simulation Tool
 
