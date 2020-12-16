@@ -171,20 +171,20 @@
          <enabledWhen>
             <with
                   variable="selection">
+               <count
+                     value="1">
+               </count>
                <iterate>
                   <and>
+                     <instanceof
+                           value="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
+                     </instanceof>
                      <test
                            forcePluginActivation="true"
                            property="es.unizar.disco.simulation.ui.tester.hasResult">
                      </test>
-                     <instanceof
-                           value="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
-                     </instanceof>
                   </and>
                </iterate>
-               <count
-                     value="1">
-               </count>
             </with>
          </enabledWhen>
       </handler>
