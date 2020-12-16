@@ -4,7 +4,7 @@ Bundle-Name: Internal QoS analysis
 Bundle-SymbolicName: es.unizar.disco.simulation.local;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: es.unizar.disco.simulation.local.LocalSimulationPlugin
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.19.0",
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.18.0",
  org.apache.commons.io;bundle-version="2.6.0",
  org.eclipse.uml2.uml;bundle-version="5.5.0",
  fr.lip6.pnml.framework.ptnet;bundle-version="2.2.0",

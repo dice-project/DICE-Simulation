@@ -58,7 +58,7 @@
 								<target.eclipse.version>${target.version}</target.eclipse.version>
 							</symbols>
 							<associateSites>
-								<site>http://download.eclipse.org/tools/orbit/downloads/drops/R20201130205003/repository/</site>
+								<site>https://download.eclipse.org/tools/orbit/downloads/drops/R20200529191137/repository/</site>
 								<site>http://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/</site>
 								<site>https://dice-project.github.io/eclipsegraphviz/updates/2.9.0/</site>
 								<site>https://dice-project.github.io/DICE-Profiles/updates/</site>

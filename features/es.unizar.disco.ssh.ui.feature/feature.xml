@@ -225,18 +225,18 @@ any resulting litigation.
 
    <requires>
       <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.equinox.security" version="1.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.19.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding" version="1.10.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.beans" version="1.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.observable" version="1.10.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.property" version="1.8.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface.databinding" version="1.12.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui" version="3.118.0" match="greaterOrEqual"/>
-      <import plugin="com.ibm.icu" version="67.1.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.io" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.ssh" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.core" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.equinox.security" version="1.3.500" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.18.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding" version="1.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding.beans" version="1.6.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding.observable" version="1.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding.property" version="1.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.databinding" version="1.11.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.117.0" match="greaterOrEqual"/>
+      <import plugin="com.ibm.icu" version="64.2.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

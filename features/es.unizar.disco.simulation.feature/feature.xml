@@ -224,21 +224,12 @@ any resulting litigation.
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime" version="3.19.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore" version="2.23.0" match="greaterOrEqual"/>
       <import plugin="fr.lip6.pnml.framework.coremodel" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="fr.lip6.pnml.framework.ptnet" version="2.2.0" match="greaterOrEqual"/>
       <import plugin="fr.lip6.pnml.framework.utils" version="2.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.m2m.qvt.oml" version="3.10.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.xmi" version="2.16.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ocl" version="3.15.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ocl.ecore" version="3.15.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.common" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.model" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.profiler" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.engine" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.12.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.debug.core" version="3.16.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.edit" version="2.16.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.io" version="2.6.0" match="greaterOrEqual"/>
@@ -252,6 +243,14 @@ any resulting litigation.
       <import feature="ro.ieat.secureuml.profile.feature" version="0.13.1.201801221725"/>
       <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.2.0.201703081153"/>
       <import feature="com.masdes.dam.profile.feature" version="0.13.1.201801221725"/>
+      <import plugin="org.eclipse.core.runtime" version="3.18.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.22.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.m2m.qvt.oml" version="3.10.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.common" version="3.7.10" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.model" version="3.7.10" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.profiler" version="3.7.10" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.engine" version="3.7.10" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.core" version="3.15.100" match="greaterOrEqual"/>
    </requires>
 
    <plugin

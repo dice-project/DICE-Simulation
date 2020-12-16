@@ -8,7 +8,7 @@
 		<io.fabric8.docker-maven-plugin.version>0.34.1</io.fabric8.docker-maven-plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<site.name>DICE Simulation Tool</site.name>
-		<target.version>2020-09</target.version>
+		<target.version>2020-06</target.version>
 	</properties>
 	<groupId>es.unizar.disco</groupId>
 	<artifactId>root</artifactId>

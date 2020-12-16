@@ -5,14 +5,14 @@ Bundle-SymbolicName: es.unizar.disco.simulation.quickstart;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: es.unizar.disco.simulation.quickstart.DiceQuickStartUiPlugin
 Bundle-Vendor: DisCo - Unizar
-Require-Bundle: org.eclipse.ui;bundle-version="3.118.0",
- org.eclipse.core.runtime;bundle-version="3.19.0",
- org.eclipse.core.resources;bundle-version="3.13.0",
- org.eclipse.ui.ide;bundle-version="3.17.000",
- org.eclipse.ui.intro;bundle-version="3.5.0",
- org.eclipse.ui.intro.universal;bundle-version="3.4.0",
+Require-Bundle: org.eclipse.ui;bundle-version="3.117.0",
+ org.eclipse.core.runtime;bundle-version="3.18.0",
+ org.eclipse.core.resources;bundle-version="3.13.700",
+ org.eclipse.ui.ide;bundle-version="3.17.100",
+ org.eclipse.ui.intro;bundle-version="3.5.1000",
+ org.eclipse.ui.intro.universal;bundle-version="3.3.900",
  org.apache.commons.io;bundle-version="2.6.0",
- org.eclipse.ui.intro.quicklinks;bundle-version="1.1.0",
+ org.eclipse.ui.intro.quicklinks;bundle-version="1.0.500",
  es.unizar.disco.core;bundle-version="1.0.0",
  es.unizar.disco.pnml.m2m;bundle-version="1.0.0",
  es.unizar.disco.ssh.ui;bundle-version="1.0.0"

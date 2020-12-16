@@ -225,8 +225,8 @@ any resulting litigation.
 
    <requires>
       <import plugin="com.hierynomus.sshj" version="0.16.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.19.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.core" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.18.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
