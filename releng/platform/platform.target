@@ -7,7 +7,7 @@
 		<unit id="org.eclipse.sdk.ide" version="4.17.0.I20200902-1800"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="https://download.eclipse.org/releases/2020-09"/>
+		<repository location="http://download.eclipse.org/releases/2020-09"/>
 		<unit id="org.eclipse.acceleo.feature.group" version="3.7.10.202002210922"/>
 		<unit id="org.eclipse.birt.chart.feature.group" version="4.7.0.v201706222054"/>
 		<unit id="org.eclipse.egit.feature.group" version="5.9.0.202009080501-r"/>
@@ -18,7 +18,7 @@
 		<unit id="org.eclipse.papyrus.sdk.feature.feature.group" version="4.8.0.202006100749"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="https://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/"/>
+		<repository location="http://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/"/>
 		<unit id="org.eclipse.papyrus.extra.marte.feature.feature.group" version="1.2.0.201703081153"/>
 		<unit id="org.eclipse.papyrus.extra.marte.feature.source.feature.group" version="1.2.0.201703081153"/>
 		<unit id="org.eclipse.papyrus.extra.marte.properties.feature.feature.group" version="1.2.0.201703081153"/>
@@ -27,7 +27,7 @@
 		<unit id="org.eclipse.papyrus.extra.marte.textedit.feature.source.feature.group" version="1.2.0.201703081153"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20201130205003/repository"/>
+		<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20201130205003/repository"/>
 		<unit id="com.google.guava" version="27.1.0.v20190517-1946"/>
 		<unit id="com.google.guava.source" version="27.1.0.v20190517-1946"/>
 		<unit id="org.apache.commons.collections" version="3.2.2.v201511171945"/>
