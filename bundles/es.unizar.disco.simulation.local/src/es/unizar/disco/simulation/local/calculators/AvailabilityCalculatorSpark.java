@@ -45,8 +45,8 @@ public class AvailabilityCalculatorSpark extends AbstractCalculator implements M
 		
 		//Look for SparkNode element. Look its info in DaComponent. Get the MTTF and MTTR. Calculate availability from them
 		
-		Float rateFail = new Float(1);
-		Float rateRepair= new Float(1);
+		Float rateFail = Float.valueOf(1);
+		Float rateRepair= Float.valueOf(1);
 		PnmlToolInfoUtils pnmlutils = new PnmlToolInfoUtils();
 		//get from trace the transition information of the closing transition
 		for (Trace trace : traceSet.getTraces()) {

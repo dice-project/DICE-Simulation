@@ -156,6 +156,7 @@ public abstract class AbstractTest {
 	}
 	
 	
+	@SuppressWarnings("unused")
 	private static void loadProfilesAndRegisterTheirPackages() {
 
 		Object o = DICEPackage.eINSTANCE;

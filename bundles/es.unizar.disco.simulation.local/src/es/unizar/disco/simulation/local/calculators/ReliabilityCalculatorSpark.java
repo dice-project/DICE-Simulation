@@ -43,7 +43,7 @@ public class ReliabilityCalculatorSpark implements MeasureCalculator {
 				
 				//Look for SparkNode element. Look its info in DaComponent. Get the MTTF and MTTR. Calculate availability from them
 				
-				Float rateFail = new Float(1);
+				Float rateFail = Float.valueOf(1);
 				double missionTime= 0.0;
 				int numServers = 1;
 				PnmlToolInfoUtils pnmlutils = new PnmlToolInfoUtils();
