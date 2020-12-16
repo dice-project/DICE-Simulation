@@ -7,15 +7,15 @@ Bundle-Activator: es.unizar.disco.simulation.greatspn.ssh.GspnSshSimulationPlugi
 Bundle-Vendor: DisCo - Unizar
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
  org.apache.commons.lang;bundle-version="2.6.0",
- org.apache.commons.io;bundle-version="2.2.0",
- es.unizar.disco.core;bundle-version="0.3.0",
- es.unizar.disco.ssh;bundle-version="0.3.0",
- es.unizar.disco.simulation;bundle-version="0.3.0",
- es.unizar.disco.pnml.m2t;bundle-version="0.3.0",
- es.unizar.disco.pnextensions;bundle-version="0.3.0",
- es.unizar.disco.pnml.m2m;bundle-version="0.3.0",
+ org.apache.commons.io;bundle-version="2.6.0",
+ es.unizar.disco.core;bundle-version="0.6.5",
+ es.unizar.disco.ssh;bundle-version="0.6.5",
+ es.unizar.disco.simulation;bundle-version="0.6.5",
+ es.unizar.disco.pnml.m2t;bundle-version="0.6.5",
+ es.unizar.disco.pnextensions;bundle-version="0.6.5",
+ es.unizar.disco.pnml.m2m;bundle-version="0.6.5",
  org.eclipse.uml2.uml
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/bundles/unit-api-0.9.jar,
@@ -24,3 +24,4 @@ Bundle-ClassPath: .,
 Import-Package: es.unizar.disco.pnml.m2m.utils,
  es.unizar.disco.simulation.ui.editors
 Export-Package: es.unizar.disco.simulation.greatspn.ssh.calculators
+Automatic-Module-Name: es.unizar.disco.simulation.greatspn.ssh

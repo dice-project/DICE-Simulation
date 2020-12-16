@@ -8,7 +8,7 @@ Bundle-ClassPath: .,
  lib/jars/commons-collections4-4.1.jar
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: es.unizar.disco.simulation.models,
  es.unizar.disco.simulation.models.builders,
  es.unizar.disco.simulation.models.datatypes,
@@ -37,15 +37,16 @@ Export-Package: es.unizar.disco.simulation.models,
  es.unizar.disco.simulation.models.wnsim,
  es.unizar.disco.simulation.models.wnsim.impl,
  es.unizar.disco.simulation.models.wnsim.util
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
- org.eclipse.emf.ecore;bundle-version="2.12.0";visibility:=reexport,
- org.eclipse.uml2.uml;bundle-version="5.2.0";visibility:=reexport,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.19.0",
+ org.eclipse.emf.ecore;bundle-version="2.23.0";visibility:=reexport,
+ org.eclipse.uml2.uml;bundle-version="5.5.0";visibility:=reexport,
  org.apache.commons.lang;bundle-version="2.6.0",
- es.unizar.disco.core;bundle-version="0.6.5",
  org.eclipse.papyrus.marte.static.profile;bundle-version="1.2.0";visibility:=reexport,
  com.masdes.dam.static.profile;bundle-version="0.13.1";visibility:=reexport,
+ ro.ieat.secureuml.profile;bundle-version="0.13.1";visibility:=reexport,
  es.unizar.disco.dice.static.profile;bundle-version="0.13.1";visibility:=reexport,
- ro.ieat.secureuml.profile;bundle-version="0.13.1"
+ es.unizar.disco.core;bundle-version="0.6.5"
 Bundle-ActivationPolicy: lazy
 Import-Package: es.unizar.disco.core.collections
 Bundle-Activator: es.unizar.disco.simulation.models.DiceModelsPlugin
+Automatic-Module-Name: es.unizar.disco.simulation.models
