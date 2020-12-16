@@ -3,9 +3,6 @@
    <feature url="features/com.hierynomus.sshj.feature_0.16.0.jar" id="com.hierynomus.sshj.feature" version="0.16.0">
       <category name="DICE Simulation"/>
    </feature>
-   <feature url="features/com.abstratt.eclipsegraphviz.feature_2.9.0.jar" id="com.abstratt.eclipsegraphviz.feature" version="2.9.0">
-      <category name="DICE Simulation"/>
-   </feature>
    <feature url="features/es.unizar.disco.simulation.feature_1.0.0.qualifier.jar" id="es.unizar.disco.simulation.feature" version="1.0.0.qualifier">
       <category name="DICE Simulation"/>
    </feature>
