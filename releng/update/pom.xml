@@ -60,8 +60,8 @@
 							<associateSites>
 								<site>http://download.eclipse.org/tools/orbit/downloads/drops/R20201130205003/repository/</site>
 								<site>http://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/</site>
+								<site>https://dice-project.github.io/eclipsegraphviz/updates/2.9.0/</site>
 								<site>https://dice-project.github.io/DICE-Profiles/updates/</site>
-								<site>https://abelgomez.github.io/eclipsegraphviz/updates/2.9.0/</site>
 								<site>https://lip6.github.io/pnmlframework/</site>
 							</associateSites>
 						</configuration>

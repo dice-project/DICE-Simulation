@@ -51,7 +51,7 @@
 		<unit id="fr.lip6.pnml.nupn.toolinfo.feature.source.feature.group" version="2.2.15"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="https://abelgomez.github.io/eclipsegraphviz/updates/2.9.0"/>
+		<repository location="https://dice-project.github.io/eclipsegraphviz/updates/2.9.0"/>
 		<unit id="com.abstratt.eclipsegraphviz.feature.feature.group" version="2.9.0"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
