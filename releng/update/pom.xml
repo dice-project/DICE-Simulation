@@ -28,6 +28,18 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<!--
+					The use of this plug-in may not be necessary in the future
+					and this plugin tag may be completely removed when bug
+					https://bugs.eclipse.org/bugs/show_bug.cgi?id=453708 is
+					finally fixed and "repository-reference" tags are correctly
+					managed by the tycho-p2-repository-plugin
+					
+					It seems that it is also important that Update Sites in the 
+					eclipse.org domain remain referenced using HTTP and not HTTPS.
+					When HTTPS is used, installation fails with unresolved
+					dependencies errors.
+				-->
 				<groupId>org.jboss.tools.tycho-plugins</groupId>
 				<artifactId>repository-utils</artifactId>
 				<version>${jboss.tycho-plugins.version}</version>
