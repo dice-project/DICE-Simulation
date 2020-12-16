@@ -4,24 +4,7 @@
 		<p2.composite.repository>
 			<repository compressed="false" location="${basedir}/updates" name="DICE Simulation Composite Update Site" />
 			<add>
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.1" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.2" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.3.3" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.3.4" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.3.5" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.4.0" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.4.1" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.4.2" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.5.0" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.5.1" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.5.2" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.6.0" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.6.1" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.6.2" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.6.3" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.6.4" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/0.6.5" kind="A" />
-				<repository location="http://abelgomez.github.io/DICE-Simulation/updates/1.0.0" kind="A" />
+				<repository location="https://abelgomez.github.io/DICE-Simulation/updates/1.0.0"/>
 			</add>
 		</p2.composite.repository>
 	</target>
