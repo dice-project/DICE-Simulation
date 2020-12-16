@@ -268,7 +268,6 @@ any resulting litigation.
       <import plugin="es.unizar.disco.simulation" version="1.0.0" match="greaterOrEqual"/>
       <import feature="com.masdes.dam.profile.ui.feature" version="0.13.1.201801221725"/>
       <import feature="org.eclipse.papyrus.sdk.feature" version="4.8.0.202006100749"/>
-      <import feature="com.abstratt.eclipsegraphviz.feature" version="2.9.0"/>
    </requires>
 
    <plugin
