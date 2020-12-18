@@ -6,6 +6,7 @@
 		<tycho.version>2.1.0</tycho.version>
 		<jboss.tycho-plugins.version>1.6.0</jboss.tycho-plugins.version>
 		<io.fabric8.docker-maven-plugin.version>0.34.1</io.fabric8.docker-maven-plugin.version>
+		<org.eclipse.acceleo.maven.version>3.5.0-SNAPSHOT</org.eclipse.acceleo.maven.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<site.name>DICE Simulation Tool</site.name>
 		<target.version>2020-12</target.version>
@@ -20,6 +21,16 @@
 		<module>tests</module>
 		<module>releng</module>
 	</modules>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>Acceleo Snapshots</id>
+			<url>https://repo.eclipse.org/content/repositories/acceleo-snapshots</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>Acceleo Releases</id>
+			<url>https://repo.eclipse.org/content/repositories/acceleo-releases</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
