@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.pnextensions.pnconstants;
 
@@ -41,10 +54,6 @@ public enum ArcKind implements Enumerator {
 	/**
 	 * The '<em><b>Normal</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Normal</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #NORMAL
 	 * @model name="Normal" literal="http://es.unizar.dsico/pnconstants/akind/normal"
@@ -56,10 +65,6 @@ public enum ArcKind implements Enumerator {
 	/**
 	 * The '<em><b>Inhibitor</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Inhibitor</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #INHIBITOR
 	 * @model name="Inhibitor" literal="http://es.unizar.dsico/pnconstants/akind/inhibitor"
@@ -178,6 +183,7 @@ public enum ArcKind implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -187,6 +193,7 @@ public enum ArcKind implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -196,6 +203,7 @@ public enum ArcKind implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}

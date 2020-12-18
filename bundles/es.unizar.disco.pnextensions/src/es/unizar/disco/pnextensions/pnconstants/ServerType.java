@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.pnextensions.pnconstants;
 
@@ -61,10 +74,6 @@ public enum ServerType implements Enumerator {
 	/**
 	 * The '<em><b>Infinite Server</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Infinite Server</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #INFINITE_SERVER
 	 * @model name="InfiniteServer" literal="http://es.unizar.dsico/pnconstants/tserv/infinite"
@@ -76,10 +85,6 @@ public enum ServerType implements Enumerator {
 	/**
 	 * The '<em><b>One Server</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>One Server</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #ONE_SERVER
 	 * @model name="OneServer" literal="http://es.unizar.dsico/pnconstants/tserv/one"
@@ -91,10 +96,6 @@ public enum ServerType implements Enumerator {
 	/**
 	 * The '<em><b>Load Dependent</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Load Dependent</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #LOAD_DEPENDENT
 	 * @model name="LoadDependent" literal="http://es.unizar.dsico/pnconstants/tserv/loaddep"
@@ -106,10 +107,6 @@ public enum ServerType implements Enumerator {
 	/**
 	 * The '<em><b>Marking Dependent</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Marking Dependent</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MARKING_DEPENDENT
 	 * @model name="MarkingDependent" literal="http://es.unizar.dsico/pnconstants/tserv/markingddep"
@@ -232,6 +229,7 @@ public enum ServerType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -241,6 +239,7 @@ public enum ServerType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -250,6 +249,7 @@ public enum ServerType implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}

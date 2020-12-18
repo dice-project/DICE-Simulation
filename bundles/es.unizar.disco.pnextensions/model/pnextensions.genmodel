@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    copyrightText="Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.&#xA;&#xA;This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License 1.0&#xA;which accompanies this distribution, and is available at&#xA;https://www.eclipse.org/legal/epl-1.0/&#xA;&#xA;SPDX-License-Identifier: EPL-1.0&#xA;&#xA;Contributors:&#xA;    Abel Gómez&#xA;    Ignacio Requeno&#xA;    Diego Pérez"
     modelDirectory="/es.unizar.disco.pnextensions/src" modelPluginID="es.unizar.disco.pnextensions"
     modelName="Pnextensions" modelPluginClass="es.unizar.disco.pnextensions.PnextensionsPlugin"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
@@ -52,10 +53,12 @@
         </genOperations>
       </genClasses>
       <genClasses ecoreClass="pnextensions.ecore#//pnutils/DataTypeUtils">
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/DataTypeUtils/createURI">
+        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/DataTypeUtils/createURI"
+            body="return new URI(stringUri);">
           <genParameters ecoreParameter="pnextensions.ecore#//pnutils/DataTypeUtils/createURI/stringUri"/>
         </genOperations>
-        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/DataTypeUtils/createLongString">
+        <genOperations ecoreOperation="pnextensions.ecore#//pnutils/DataTypeUtils/createLongString"
+            body="return new StringBuffer(string);">
           <genParameters ecoreParameter="pnextensions.ecore#//pnutils/DataTypeUtils/createLongString/string"/>
         </genOperations>
       </genClasses>
