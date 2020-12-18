@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ *
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ *
+ * SPDX-License-Identifier: EPL-1.0
+ *
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
+ *******************************************************************************/
 package es.unizar.disco.pnml.m2t.utils;
 
 import java.util.HashMap;
@@ -18,7 +33,7 @@ import fr.lip6.move.pnml.ptnet.Transition;
  * Acceleo transformation. This is required since GreatSPN identifies elements
  * in the <code>.net</code> file by their order in it.
  * 
- * @author Abel G�mez <abel.gomez@unizar.es>
+ * @author Abel G�mez <abel.gomez@unizar.es>
  *
  */
 public class PlaceRegistry {

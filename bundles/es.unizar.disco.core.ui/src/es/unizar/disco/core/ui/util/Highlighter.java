@@ -7,7 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
- *     Abel Gómez - refactoring to a new class 
+ *     Abel GÃ³mez - refactoring to a new class 
  *******************************************************************************/
 
 package es.unizar.disco.core.ui.util;
