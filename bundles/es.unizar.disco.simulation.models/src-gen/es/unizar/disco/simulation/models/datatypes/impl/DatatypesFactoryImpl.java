@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.datatypes.impl;
 
@@ -123,6 +136,7 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Resource createResource() {
 		ResourceImpl resource = new ResourceImpl();
 		return resource;
@@ -133,6 +147,7 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrimitiveVariableAssignment createPrimitiveVariableAssignment() {
 		PrimitiveVariableAssignmentImpl primitiveVariableAssignment = new PrimitiveVariableAssignmentImpl();
 		return primitiveVariableAssignment;
@@ -257,6 +272,7 @@ public class DatatypesFactoryImpl extends EFactoryImpl implements DatatypesFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DatatypesPackage getDatatypesPackage() {
 		return (DatatypesPackage)getEPackage();
 	}

@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.invocation.impl;
 
@@ -259,6 +272,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIdentifier() {
 		return identifier;
 	}
@@ -268,6 +282,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIdentifier(String newIdentifier) {
 		String oldIdentifier = identifier;
 		identifier = newIdentifier;
@@ -280,6 +295,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TraceSet getTraceSet() {
 		if (traceSet != null && traceSet.eIsProxy()) {
 			InternalEObject oldTraceSet = (InternalEObject)traceSet;
@@ -306,6 +322,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTraceSet(TraceSet newTraceSet) {
 		TraceSet oldTraceSet = traceSet;
 		traceSet = newTraceSet;
@@ -318,6 +335,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ToolResult getToolResult() {
 		if (toolResult != null && toolResult.eIsProxy()) {
 			InternalEObject oldToolResult = (InternalEObject)toolResult;
@@ -344,6 +362,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToolResult(ToolResult newToolResult) {
 		ToolResult oldToolResult = toolResult;
 		toolResult = newToolResult;
@@ -356,6 +375,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimulationDefinition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
@@ -397,6 +417,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefinition(SimulationDefinition newDefinition) {
 		if (newDefinition != definition) {
 			NotificationChain msgs = null;
@@ -416,6 +437,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimulationResult getResult() {
 		if (result != null && result.eIsProxy()) {
 			InternalEObject oldResult = (InternalEObject)result;
@@ -457,6 +479,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResult(SimulationResult newResult) {
 		if (newResult != result) {
 			NotificationChain msgs = null;
@@ -476,6 +499,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getStart() {
 		return start;
 	}
@@ -485,6 +509,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStart(Date newStart) {
 		Date oldStart = start;
 		start = newStart;
@@ -497,6 +522,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getEnd() {
 		return end;
 	}
@@ -506,6 +532,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEnd(Date newEnd) {
 		Date oldEnd = end;
 		end = newEnd;
@@ -518,6 +545,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimulationStatus getStatus() {
 		return status;
 	}
@@ -527,6 +555,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setStatus(SimulationStatus newStatus) {
 		SimulationStatus oldStatus = status;
 		status = newStatus == null ? STATUS_EDEFAULT : newStatus;
@@ -539,6 +568,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableConfiguration getVariableConfiguration() {
 		if (variableConfiguration != null && variableConfiguration.eIsProxy()) {
 			InternalEObject oldVariableConfiguration = (InternalEObject)variableConfiguration;
@@ -565,6 +595,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVariableConfiguration(VariableConfiguration newVariableConfiguration) {
 		VariableConfiguration oldVariableConfiguration = variableConfiguration;
 		variableConfiguration = newVariableConfiguration;
@@ -577,6 +608,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EObject> getAnalyzableModel() {
 		if (analyzableModel == null) {
 			analyzableModel = new EObjectResolvingEList<EObject>(EObject.class, this, InvocationPackage.SIMULATION_INVOCATION__ANALYZABLE_MODEL);
@@ -589,6 +621,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAutoBuild() {
 		return autoBuild;
 	}
@@ -598,6 +631,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAutoBuild(boolean newAutoBuild) {
 		boolean oldAutoBuild = autoBuild;
 		autoBuild = newAutoBuild;
@@ -610,6 +644,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InvocationSet getInvocationSet() {
 		if (invocationSet != null && invocationSet.eIsProxy()) {
 			InternalEObject oldInvocationSet = (InternalEObject)invocationSet;
@@ -651,6 +686,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInvocationSet(InvocationSet newInvocationSet) {
 		if (newInvocationSet != invocationSet) {
 			NotificationChain msgs = null;
@@ -670,6 +706,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public IStatus buildAnalyzableModel() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -917,7 +954,7 @@ public class SimulationInvocationImpl extends MinimalEObjectImpl.Container imple
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (identifier: ");
 		result.append(identifier);
 		result.append(", start: ");

@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.traces.impl;
 
@@ -94,6 +107,7 @@ public class TraceImpl extends MinimalEObjectImpl.Container implements Trace {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getFromDomainElement() {
 		if (fromDomainElement != null && fromDomainElement.eIsProxy()) {
 			InternalEObject oldFromDomainElement = (InternalEObject)fromDomainElement;
@@ -120,6 +134,7 @@ public class TraceImpl extends MinimalEObjectImpl.Container implements Trace {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFromDomainElement(EObject newFromDomainElement) {
 		EObject oldFromDomainElement = fromDomainElement;
 		fromDomainElement = newFromDomainElement;
@@ -132,6 +147,7 @@ public class TraceImpl extends MinimalEObjectImpl.Container implements Trace {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getToAnalyzableElement() {
 		if (toAnalyzableElement != null && toAnalyzableElement.eIsProxy()) {
 			InternalEObject oldToAnalyzableElement = (InternalEObject)toAnalyzableElement;
@@ -158,6 +174,7 @@ public class TraceImpl extends MinimalEObjectImpl.Container implements Trace {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setToAnalyzableElement(EObject newToAnalyzableElement) {
 		EObject oldToAnalyzableElement = toAnalyzableElement;
 		toAnalyzableElement = newToAnalyzableElement;
@@ -170,6 +187,7 @@ public class TraceImpl extends MinimalEObjectImpl.Container implements Trace {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getRule() {
 		return rule;
 	}
@@ -179,6 +197,7 @@ public class TraceImpl extends MinimalEObjectImpl.Container implements Trace {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRule(String newRule) {
 		String oldRule = rule;
 		rule = newRule;
@@ -275,7 +294,7 @@ public class TraceImpl extends MinimalEObjectImpl.Container implements Trace {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (rule: ");
 		result.append(rule);
 		result.append(')');

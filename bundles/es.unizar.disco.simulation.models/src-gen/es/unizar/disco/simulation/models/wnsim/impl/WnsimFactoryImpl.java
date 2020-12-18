@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.wnsim.impl;
 
@@ -100,6 +113,7 @@ public class WnsimFactoryImpl extends EFactoryImpl implements WnsimFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WnsimResult createWnsimResult() {
 		WnsimResultImpl wnsimResult = new WnsimResultImpl();
 		return wnsimResult;
@@ -110,6 +124,7 @@ public class WnsimFactoryImpl extends EFactoryImpl implements WnsimFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PlaceInfo createPlaceInfo() {
 		PlaceInfoImpl placeInfo = new PlaceInfoImpl();
 		return placeInfo;
@@ -120,6 +135,7 @@ public class WnsimFactoryImpl extends EFactoryImpl implements WnsimFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TransitionInfo createTransitionInfo() {
 		TransitionInfoImpl transitionInfo = new TransitionInfoImpl();
 		return transitionInfo;
@@ -150,6 +166,7 @@ public class WnsimFactoryImpl extends EFactoryImpl implements WnsimFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WnsimPackage getWnsimPackage() {
 		return (WnsimPackage)getEPackage();
 	}

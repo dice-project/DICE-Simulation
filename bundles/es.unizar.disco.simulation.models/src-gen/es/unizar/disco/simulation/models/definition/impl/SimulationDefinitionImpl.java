@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.definition.impl;
 
@@ -322,6 +335,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIdentifier() {
 		return identifier;
 	}
@@ -331,6 +345,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIdentifier(String newIdentifier) {
 		String oldIdentifier = identifier;
 		identifier = newIdentifier;
@@ -343,6 +358,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SimulationInvocation> getInvocations() {
 		if (invocations == null) {
 			invocations = new EObjectWithInverseResolvingEList<SimulationInvocation>(SimulationInvocation.class, this, DefinitionPackage.SIMULATION_DEFINITION__INVOCATIONS, InvocationPackage.SIMULATION_INVOCATION__DEFINITION);
@@ -355,6 +371,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EMap<String, String> getParameters() {
 		if (parameters == null) {
 			parameters = new EcoreEMap<String,String>(DefinitionPackage.Literals.SIMULATION_PARAMETER, SimulationParameterImpl.class, this, DefinitionPackage.SIMULATION_DEFINITION__PARAMETERS);
@@ -367,6 +384,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getActiveScenario() {
 		if (activeScenario != null && activeScenario.eIsProxy()) {
 			InternalEObject oldActiveScenario = (InternalEObject)activeScenario;
@@ -393,6 +411,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setActiveScenario(EObject newActiveScenario) {
 		EObject oldActiveScenario = activeScenario;
 		activeScenario = newActiveScenario;
@@ -405,6 +424,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EObject> getScenarios() {
 		if (scenarios == null) {
 			scenarios = new EObjectResolvingEList<EObject>(EObject.class, this, DefinitionPackage.SIMULATION_DEFINITION__SCENARIOS);
@@ -417,6 +437,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<InputVariable> getInputVariables() {
 		if (inputVariables == null) {
 			inputVariables = new EObjectContainmentEList<InputVariable>(InputVariable.class, this, DefinitionPackage.SIMULATION_DEFINITION__INPUT_VARIABLES);
@@ -429,6 +450,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Resource getDomainResource() {
 		return domainResource;
 	}
@@ -453,6 +475,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomainResource(Resource newDomainResource) {
 		if (newDomainResource != domainResource) {
 			NotificationChain msgs = null;
@@ -472,6 +495,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getMaxExecutionTime() {
 		return maxExecutionTime;
 	}
@@ -481,6 +505,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMaxExecutionTime(Date newMaxExecutionTime) {
 		Date oldMaxExecutionTime = maxExecutionTime;
 		maxExecutionTime = newMaxExecutionTime;
@@ -493,6 +518,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OutputVariable> getOutputVariables() {
 		if (outputVariables == null) {
 			outputVariables = new EObjectContainmentEList<OutputVariable>(OutputVariable.class, this, DefinitionPackage.SIMULATION_DEFINITION__OUTPUT_VARIABLES);
@@ -505,6 +531,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DomainMeasureDefinition> getDeclaredMeasures() {
 		if (declaredMeasures == null) {
 			declaredMeasures = new EObjectContainmentWithInverseEList<DomainMeasureDefinition>(DomainMeasureDefinition.class, this, DefinitionPackage.SIMULATION_DEFINITION__DECLARED_MEASURES, MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION);
@@ -517,6 +544,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DomainMeasureDefinition> getMeasuresToCompute() {
 		if (measuresToCompute == null) {
 			measuresToCompute = new EObjectResolvingEList<DomainMeasureDefinition>(DomainMeasureDefinition.class, this, DefinitionPackage.SIMULATION_DEFINITION__MEASURES_TO_COMPUTE);
@@ -529,6 +557,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getBackend() {
 		return backend;
 	}
@@ -538,6 +567,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBackend(String newBackend) {
 		String oldBackend = backend;
 		backend = newBackend;
@@ -550,6 +580,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<VariableConfiguration> getPossibleConfigurations() {
 		if (possibleConfigurations == null) {
 			possibleConfigurations = new EObjectContainmentEList<VariableConfiguration>(VariableConfiguration.class, this, DefinitionPackage.SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS);
@@ -562,6 +593,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<VariableConfiguration> getActiveConfigurations() {
 		if (activeConfigurations == null) {
 			activeConfigurations = new EObjectResolvingEList<VariableConfiguration>(VariableConfiguration.class, this, DefinitionPackage.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS);
@@ -574,6 +606,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isAutoSync() {
 		return autoSync;
 	}
@@ -583,6 +616,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAutoSync(boolean newAutoSync) {
 		boolean oldAutoSync = autoSync;
 		autoSync = newAutoSync;
@@ -595,6 +629,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<String> getScenarioStereotypes() {
 		if (scenarioStereotypes == null) {
 			scenarioStereotypes = new EDataTypeUniqueEList<String>(String.class, this, DefinitionPackage.SIMULATION_DEFINITION__SCENARIO_STEREOTYPES);
@@ -607,6 +642,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComputableNFPtype getNfpToCompute() {
 		return nfpToCompute;
 	}
@@ -616,6 +652,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNfpToCompute(ComputableNFPtype newNfpToCompute) {
 		ComputableNFPtype oldNfpToCompute = nfpToCompute;
 		nfpToCompute = newNfpToCompute == null ? NFP_TO_COMPUTE_EDEFAULT : newNfpToCompute;
@@ -628,6 +665,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Collection<Variable> getVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -639,6 +677,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Map<String, Variable> getVariablesMap() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -650,6 +689,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Map<String, InputVariable> getInputVariablesMap() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -661,6 +701,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Map<String, OutputVariable> getOutputVariablesMap() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -672,6 +713,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void syncScenarios() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -683,6 +725,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void syncVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -694,6 +737,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void syncDomainMeasureDefinitions() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -705,6 +749,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void syncPossibleVariableConfigurations() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -1025,7 +1070,7 @@ public class SimulationDefinitionImpl extends MinimalEObjectImpl.Container imple
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (identifier: ");
 		result.append(identifier);
 		result.append(", maxExecutionTime: ");

@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.measures;
 
@@ -35,10 +48,6 @@ public interface DomainMeasureDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Measured Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Measured Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Measured Element</em>' reference.
 	 * @see #setMeasuredElement(EObject)
@@ -61,10 +70,6 @@ public interface DomainMeasureDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Measure</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Measure</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Measure</em>' attribute.
 	 * @see #setMeasure(String)
@@ -89,14 +94,10 @@ public interface DomainMeasureDefinition extends EObject {
 	 * The key is of type {@link java.lang.String},
 	 * and the value is of type {@link java.lang.String},
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Vsl Expression Entries</em>' map isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Vsl Expression Entries</em>' map.
 	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasureDefinition_VslExpressionEntries()
-	 * @model mapType="es.unizar.disco.simulation.models.measures.Entry<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString>"
+	 * @model mapType="es.unizar.disco.simulation.models.measures.Entry&lt;org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EString&gt;"
 	 * @generated
 	 */
 	EMap<String, String> getVslExpressionEntries();
@@ -104,10 +105,6 @@ public interface DomainMeasureDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Vsl Expression</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Vsl Expression</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Vsl Expression</em>' attribute.
 	 * @see #setVslExpression(String)
@@ -130,10 +127,6 @@ public interface DomainMeasureDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Output Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Output Variable</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Output Variable</em>' reference.
 	 * @see es.unizar.disco.simulation.models.measures.MeasuresPackage#getDomainMeasureDefinition_OutputVariable()
@@ -146,10 +139,6 @@ public interface DomainMeasureDefinition extends EObject {
 	 * Returns the value of the '<em><b>Simulation Definition</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getDeclaredMeasures <em>Declared Measures</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Simulation Definition</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Simulation Definition</em>' container reference.
 	 * @see #setSimulationDefinition(SimulationDefinition)
@@ -173,10 +162,6 @@ public interface DomainMeasureDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Sla Vsl Expression</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sla Vsl Expression</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sla Vsl Expression</em>' attribute.
 	 * @see #setSlaVslExpression(String)

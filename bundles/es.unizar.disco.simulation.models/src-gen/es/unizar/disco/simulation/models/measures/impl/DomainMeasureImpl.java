@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.measures.impl;
 
@@ -104,6 +117,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Number getValue() {
 		return value;
 	}
@@ -113,6 +127,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Number newValue) {
 		Number oldValue = value;
 		value = newValue;
@@ -125,6 +140,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUnit() {
 		return unit;
 	}
@@ -134,6 +150,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUnit(String newUnit) {
 		String oldUnit = unit;
 		unit = newUnit;
@@ -146,6 +163,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DomainMeasureDefinition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
@@ -172,6 +190,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefinition(DomainMeasureDefinition newDefinition) {
 		DomainMeasureDefinition oldDefinition = definition;
 		definition = newDefinition;
@@ -267,7 +286,7 @@ public class DomainMeasureImpl extends MinimalEObjectImpl.Container implements D
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (value: ");
 		result.append(value);
 		result.append(", unit: ");

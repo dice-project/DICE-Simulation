@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.toolresult.impl;
 
@@ -92,6 +105,7 @@ public abstract class ToolResultImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getTimestamp() {
 		return timestamp;
 	}
@@ -101,6 +115,7 @@ public abstract class ToolResultImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTimestamp(Date newTimestamp) {
 		Date oldTimestamp = timestamp;
 		timestamp = newTimestamp;
@@ -113,6 +128,7 @@ public abstract class ToolResultImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<AnalyzableElementInfo> getInfos() {
 		if (infos == null) {
 			infos = new EObjectContainmentEList<AnalyzableElementInfo>(AnalyzableElementInfo.class, this, ToolresultPackage.TOOL_RESULT__INFOS);
@@ -213,7 +229,7 @@ public abstract class ToolResultImpl extends MinimalEObjectImpl.Container implem
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (timestamp: ");
 		result.append(timestamp);
 		result.append(')');

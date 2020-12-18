@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.measures.impl;
 
@@ -208,7 +221,7 @@ public class EntryImpl extends MinimalEObjectImpl.Container implements BasicEMap
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (key: ");
 		result.append(key);
 		result.append(", value: ");
@@ -229,6 +242,7 @@ public class EntryImpl extends MinimalEObjectImpl.Container implements BasicEMap
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getHash() {
 		if (hash == -1) {
 			Object theKey = getKey();
@@ -242,6 +256,7 @@ public class EntryImpl extends MinimalEObjectImpl.Container implements BasicEMap
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setHash(int hash) {
 		this.hash = hash;
 	}
@@ -251,6 +266,7 @@ public class EntryImpl extends MinimalEObjectImpl.Container implements BasicEMap
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getKey() {
 		return getTypedKey();
 	}
@@ -260,6 +276,7 @@ public class EntryImpl extends MinimalEObjectImpl.Container implements BasicEMap
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKey(String key) {
 		setTypedKey(key);
 	}
@@ -269,6 +286,7 @@ public class EntryImpl extends MinimalEObjectImpl.Container implements BasicEMap
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return getTypedValue();
 	}
@@ -278,6 +296,7 @@ public class EntryImpl extends MinimalEObjectImpl.Container implements BasicEMap
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String setValue(String value) {
 		String oldValue = getValue();
 		setTypedValue(value);

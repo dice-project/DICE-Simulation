@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.definition.impl;
 
@@ -79,6 +92,7 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InputVariableValue getValue() {
 		if (value != null && value.eIsProxy()) {
 			InternalEObject oldValue = (InternalEObject)value;
@@ -120,6 +134,7 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(InputVariableValue newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -139,6 +154,7 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableConfiguration getConfiguration() {
 		if (eContainerFeatureID() != DefinitionPackage.VARIABLE_ASSIGNMENT__CONFIGURATION) return null;
 		return (VariableConfiguration)eInternalContainer();
@@ -159,6 +175,7 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConfiguration(VariableConfiguration newConfiguration) {
 		if (newConfiguration != eInternalContainer() || (eContainerFeatureID() != DefinitionPackage.VARIABLE_ASSIGNMENT__CONFIGURATION && newConfiguration != null)) {
 			if (EcoreUtil.isAncestor(this, newConfiguration))
@@ -180,6 +197,7 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InputVariable getVariable() {
 		if (variable != null && variable.eIsProxy()) {
 			InternalEObject oldVariable = (InternalEObject)variable;
@@ -221,6 +239,7 @@ public class VariableAssignmentImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVariable(InputVariable newVariable) {
 		if (newVariable != variable) {
 			NotificationChain msgs = null;

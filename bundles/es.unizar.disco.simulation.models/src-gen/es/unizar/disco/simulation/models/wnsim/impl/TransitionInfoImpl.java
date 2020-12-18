@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.wnsim.impl;
 
@@ -73,6 +86,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Number getThroughput() {
 		return throughput;
 	}
@@ -82,6 +96,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThroughput(Number newThroughput) {
 		Number oldThroughput = throughput;
 		throughput = newThroughput;
@@ -94,6 +109,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Number getValue() {
 		return throughput;
 	}
@@ -179,7 +195,7 @@ public class TransitionInfoImpl extends WnsimElementInfoImpl implements Transiti
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (throughput: ");
 		result.append(throughput);
 		result.append(')');

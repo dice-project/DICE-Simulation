@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.toolresult.impl;
 
@@ -91,7 +104,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ToolresultPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -105,18 +118,26 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 		if (isInited) return (ToolresultPackage)EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ToolresultPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ToolresultPackageImpl());
+		Object registeredToolresultPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ToolresultPackageImpl theToolresultPackage = registeredToolresultPackage instanceof ToolresultPackageImpl ? (ToolresultPackageImpl)registeredToolresultPackage : new ToolresultPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) : DatatypesPackage.eINSTANCE);
-		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) instanceof DefinitionPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) : DefinitionPackage.eINSTANCE);
-		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) instanceof InvocationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) : InvocationPackage.eINSTANCE);
-		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) instanceof MeasuresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) : MeasuresPackage.eINSTANCE);
-		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) instanceof SimresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) : SimresultPackage.eINSTANCE);
-		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) instanceof TracesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) : TracesPackage.eINSTANCE);
-		WnsimPackageImpl theWnsimPackage = (WnsimPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI) instanceof WnsimPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI) : WnsimPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
+		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(registeredPackage instanceof DatatypesPackageImpl ? registeredPackage : DatatypesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI);
+		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(registeredPackage instanceof DefinitionPackageImpl ? registeredPackage : DefinitionPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI);
+		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(registeredPackage instanceof InvocationPackageImpl ? registeredPackage : InvocationPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI);
+		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(registeredPackage instanceof MeasuresPackageImpl ? registeredPackage : MeasuresPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI);
+		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(registeredPackage instanceof SimresultPackageImpl ? registeredPackage : SimresultPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI);
+		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(registeredPackage instanceof TracesPackageImpl ? registeredPackage : TracesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI);
+		WnsimPackageImpl theWnsimPackage = (WnsimPackageImpl)(registeredPackage instanceof WnsimPackageImpl ? registeredPackage : WnsimPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theToolresultPackage.createPackageContents();
@@ -141,7 +162,6 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 		// Mark meta-data to indicate it can't be changed
 		theToolresultPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ToolresultPackage.eNS_URI, theToolresultPackage);
 		return theToolresultPackage;
@@ -152,6 +172,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getToolResult() {
 		return toolResultEClass;
 	}
@@ -161,6 +182,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getToolResult_Timestamp() {
 		return (EAttribute)toolResultEClass.getEStructuralFeatures().get(0);
 	}
@@ -170,6 +192,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getToolResult_Infos() {
 		return (EReference)toolResultEClass.getEStructuralFeatures().get(1);
 	}
@@ -179,6 +202,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAnalyzableElementInfo() {
 		return analyzableElementInfoEClass;
 	}
@@ -188,6 +212,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnalyzableElementInfo_Value() {
 		return (EAttribute)analyzableElementInfoEClass.getEStructuralFeatures().get(0);
 	}
@@ -197,6 +222,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAnalyzableElementInfo_AnalyzedElement() {
 		return (EReference)analyzableElementInfoEClass.getEStructuralFeatures().get(1);
 	}
@@ -206,6 +232,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnalyzableElementInfo_Unit() {
 		return (EAttribute)analyzableElementInfoEClass.getEStructuralFeatures().get(2);
 	}
@@ -215,6 +242,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAnalyzableElementInfo_ConfidenceInterval() {
 		return (EAttribute)analyzableElementInfoEClass.getEStructuralFeatures().get(3);
 	}
@@ -224,6 +252,7 @@ public class ToolresultPackageImpl extends EPackageImpl implements ToolresultPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ToolresultFactory getToolresultFactory() {
 		return (ToolresultFactory)getEFactoryInstance();
 	}

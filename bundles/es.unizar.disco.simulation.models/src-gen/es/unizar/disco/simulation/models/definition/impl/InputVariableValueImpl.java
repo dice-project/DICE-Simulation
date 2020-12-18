@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.definition.impl;
 
@@ -94,6 +107,7 @@ public class InputVariableValueImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Number getValue() {
 		return value;
 	}
@@ -103,6 +117,7 @@ public class InputVariableValueImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Number newValue) {
 		Number oldValue = value;
 		value = newValue;
@@ -115,6 +130,7 @@ public class InputVariableValueImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<VariableAssignment> getAssignments() {
 		if (assignments == null) {
 			assignments = new EObjectWithInverseResolvingEList<VariableAssignment>(VariableAssignment.class, this, DefinitionPackage.INPUT_VARIABLE_VALUE__ASSIGNMENTS, DefinitionPackage.VARIABLE_ASSIGNMENT__VALUE);
@@ -127,6 +143,7 @@ public class InputVariableValueImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InputVariable getVariable() {
 		if (eContainerFeatureID() != DefinitionPackage.INPUT_VARIABLE_VALUE__VARIABLE) return null;
 		return (InputVariable)eInternalContainer();
@@ -147,6 +164,7 @@ public class InputVariableValueImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVariable(InputVariable newVariable) {
 		if (newVariable != eInternalContainer() || (eContainerFeatureID() != DefinitionPackage.INPUT_VARIABLE_VALUE__VARIABLE && newVariable != null)) {
 			if (EcoreUtil.isAncestor(this, newVariable))
@@ -301,7 +319,7 @@ public class InputVariableValueImpl extends MinimalEObjectImpl.Container impleme
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (value: ");
 		result.append(value);
 		result.append(')');

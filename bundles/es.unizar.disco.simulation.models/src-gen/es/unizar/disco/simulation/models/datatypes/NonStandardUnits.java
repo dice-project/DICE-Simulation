@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.datatypes;
 
@@ -61,10 +74,6 @@ public enum NonStandardUnits implements Enumerator {
 	/**
 	 * The '<em><b>Unspecified</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Unspecified</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED
 	 * @model name="unspecified"
@@ -76,10 +85,6 @@ public enum NonStandardUnits implements Enumerator {
 	/**
 	 * The '<em><b>Percentage</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Percentage</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #PERCENTAGE
 	 * @model name="percentage"
@@ -91,10 +96,6 @@ public enum NonStandardUnits implements Enumerator {
 	/**
 	 * The '<em><b>Tick</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Tick</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #TICK
 	 * @model name="tick"
@@ -106,10 +107,6 @@ public enum NonStandardUnits implements Enumerator {
 	/**
 	 * The '<em><b>Events per tick</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Events per tick</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #EVENTS_PER_TICK
 	 * @model name="events_per_tick"
@@ -232,6 +229,7 @@ public enum NonStandardUnits implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -241,6 +239,7 @@ public enum NonStandardUnits implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -250,6 +249,7 @@ public enum NonStandardUnits implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}

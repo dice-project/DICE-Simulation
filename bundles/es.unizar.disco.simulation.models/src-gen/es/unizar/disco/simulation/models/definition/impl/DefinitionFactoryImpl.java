@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.definition.impl;
 
@@ -75,6 +88,7 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimulationDefinition createSimulationDefinition() {
 		SimulationDefinitionImpl simulationDefinition = new SimulationDefinitionImpl();
 		return simulationDefinition;
@@ -95,6 +109,7 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InputVariable createInputVariable() {
 		InputVariableImpl inputVariable = new InputVariableImpl();
 		return inputVariable;
@@ -105,6 +120,7 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OutputVariable createOutputVariable() {
 		OutputVariableImpl outputVariable = new OutputVariableImpl();
 		return outputVariable;
@@ -115,6 +131,7 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InputVariableValue createInputVariableValue() {
 		InputVariableValueImpl inputVariableValue = new InputVariableValueImpl();
 		return inputVariableValue;
@@ -125,6 +142,7 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableAssignment createVariableAssignment() {
 		VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
 		return variableAssignment;
@@ -135,6 +153,7 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableConfiguration createVariableConfiguration() {
 		VariableConfigurationImpl variableConfiguration = new VariableConfigurationImpl();
 		return variableConfiguration;
@@ -145,6 +164,7 @@ public class DefinitionFactoryImpl extends EFactoryImpl implements DefinitionFac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefinitionPackage getDefinitionPackage() {
 		return (DefinitionPackage)getEPackage();
 	}

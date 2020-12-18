@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.traces;
 
@@ -26,10 +39,6 @@ public interface Trace extends EObject {
 	/**
 	 * Returns the value of the '<em><b>From Domain Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>From Domain Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>From Domain Element</em>' reference.
 	 * @see #setFromDomainElement(EObject)
@@ -52,10 +61,6 @@ public interface Trace extends EObject {
 	/**
 	 * Returns the value of the '<em><b>To Analyzable Element</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>To Analyzable Element</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>To Analyzable Element</em>' reference.
 	 * @see #setToAnalyzableElement(EObject)
@@ -78,10 +83,6 @@ public interface Trace extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Rule</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rule</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Rule</em>' attribute.
 	 * @see #setRule(String)

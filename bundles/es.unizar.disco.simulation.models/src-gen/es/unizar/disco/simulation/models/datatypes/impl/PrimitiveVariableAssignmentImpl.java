@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.datatypes.impl;
 
@@ -91,6 +104,7 @@ public class PrimitiveVariableAssignmentImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getVariable() {
 		return variable;
 	}
@@ -100,6 +114,7 @@ public class PrimitiveVariableAssignmentImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVariable(String newVariable) {
 		String oldVariable = variable;
 		variable = newVariable;
@@ -112,6 +127,7 @@ public class PrimitiveVariableAssignmentImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Number getValue() {
 		return value;
 	}
@@ -121,6 +137,7 @@ public class PrimitiveVariableAssignmentImpl extends MinimalEObjectImpl.Containe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(Number newValue) {
 		Number oldValue = value;
 		value = newValue;
@@ -205,7 +222,7 @@ public class PrimitiveVariableAssignmentImpl extends MinimalEObjectImpl.Containe
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (variable: ");
 		result.append(variable);
 		result.append(", value: ");

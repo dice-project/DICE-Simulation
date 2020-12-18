@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.invocation;
 
@@ -27,10 +40,6 @@ public interface InvocationsRegistry extends EObject {
 	 * Returns the value of the '<em><b>Invocation Sets</b></em>' containment reference list.
 	 * The list contents are of type {@link es.unizar.disco.simulation.models.invocation.InvocationSet}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Invocation Sets</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Invocation Sets</em>' containment reference list.
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getInvocationsRegistry_InvocationSets()

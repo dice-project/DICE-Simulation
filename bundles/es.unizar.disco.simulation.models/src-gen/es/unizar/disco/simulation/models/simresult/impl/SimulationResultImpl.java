@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.simresult.impl;
 
@@ -85,6 +98,7 @@ public class SimulationResultImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimulationInvocation getInvocation() {
 		if (invocation != null && invocation.eIsProxy()) {
 			InternalEObject oldInvocation = (InternalEObject)invocation;
@@ -126,6 +140,7 @@ public class SimulationResultImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInvocation(SimulationInvocation newInvocation) {
 		if (newInvocation != invocation) {
 			NotificationChain msgs = null;
@@ -145,6 +160,7 @@ public class SimulationResultImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<DomainMeasure> getMeasures() {
 		if (measures == null) {
 			measures = new EObjectContainmentEList<DomainMeasure>(DomainMeasure.class, this, SimresultPackage.SIMULATION_RESULT__MEASURES);

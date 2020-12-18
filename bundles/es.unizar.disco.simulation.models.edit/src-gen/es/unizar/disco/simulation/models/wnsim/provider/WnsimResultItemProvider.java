@@ -1,7 +1,26 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.wnsim.provider;
 
+
+import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
+
+import es.unizar.disco.simulation.models.toolresult.provider.ToolResultItemProvider;
+
+import es.unizar.disco.simulation.models.wnsim.WnsimResult;
 
 import java.util.Collection;
 import java.util.Date;
@@ -9,12 +28,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
-import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
-import es.unizar.disco.simulation.models.toolresult.provider.ToolResultItemProvider;
-import es.unizar.disco.simulation.models.wnsim.WnsimResult;
+import org.eclipse.emf.common.util.ResourceLocator;
+
+import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 
 /**
  * This is the item provider adapter for a {@link es.unizar.disco.simulation.models.wnsim.WnsimResult} object.
@@ -73,7 +90,7 @@ public class WnsimResultItemProvider extends ToolResultItemProvider {
 			getString("_UI_WnsimResult_type") :
 			getString("_UI_WnsimResult_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

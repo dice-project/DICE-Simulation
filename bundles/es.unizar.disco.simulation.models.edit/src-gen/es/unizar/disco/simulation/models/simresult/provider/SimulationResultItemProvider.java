@@ -1,15 +1,38 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.simresult.provider;
 
+
+import es.unizar.disco.simulation.models.measures.MeasuresFactory;
+
+import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
+
+import es.unizar.disco.simulation.models.simresult.SimresultPackage;
+import es.unizar.disco.simulation.models.simresult.SimulationResult;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -19,11 +42,6 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
-import es.unizar.disco.simulation.models.measures.MeasuresFactory;
-import es.unizar.disco.simulation.models.provider.DiceSimulationModelsEditPlugin;
-import es.unizar.disco.simulation.models.simresult.SimresultPackage;
-import es.unizar.disco.simulation.models.simresult.SimulationResult;
 
 /**
  * This is the item provider adapter for a {@link es.unizar.disco.simulation.models.simresult.SimulationResult} object.
@@ -138,7 +156,7 @@ public class SimulationResultItemProvider
 	public String getText(Object object) {
 		return getString("_UI_SimulationResult_type");
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached

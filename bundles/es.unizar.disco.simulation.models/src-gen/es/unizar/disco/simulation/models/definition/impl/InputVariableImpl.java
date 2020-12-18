@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.definition.impl;
 
@@ -81,6 +94,7 @@ public class InputVariableImpl extends VariableImpl implements InputVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<InputVariableValue> getValues() {
 		if (values == null) {
 			values = new EObjectContainmentWithInverseEList<InputVariableValue>(InputVariableValue.class, this, DefinitionPackage.INPUT_VARIABLE__VALUES, DefinitionPackage.INPUT_VARIABLE_VALUE__VARIABLE);
@@ -93,6 +107,7 @@ public class InputVariableImpl extends VariableImpl implements InputVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<VariableAssignment> getAssignments() {
 		if (assignments == null) {
 			assignments = new EObjectWithInverseResolvingEList<VariableAssignment>(VariableAssignment.class, this, DefinitionPackage.INPUT_VARIABLE__ASSIGNMENTS, DefinitionPackage.VARIABLE_ASSIGNMENT__VARIABLE);
@@ -105,6 +120,7 @@ public class InputVariableImpl extends VariableImpl implements InputVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void deserializeValues(String values) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -116,6 +132,7 @@ public class InputVariableImpl extends VariableImpl implements InputVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String serializeValues() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
