@@ -5,12 +5,12 @@ Bundle-SymbolicName: es.unizar.disco.core.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.18.0",
- org.eclipse.core.resources;bundle-version="3.13.700",
- org.eclipse.swt;bundle-version="3.114.100",
- org.eclipse.ui;bundle-version="3.117.0",
- org.eclipse.ui.ide;bundle-version="3.17.100",
- org.eclipse.jface;bundle-version="3.20.0",
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.20.0",
+ org.eclipse.core.resources;bundle-version="3.13.900",
+ org.eclipse.swt;bundle-version="3.115.100",
+ org.eclipse.ui;bundle-version="3.118.100",
+ org.eclipse.ui.ide;bundle-version="3.18.0",
+ org.eclipse.jface;bundle-version="3.22.0",
  es.unizar.disco.core;bundle-version="1.0.0"
 Export-Package: es.unizar.disco.core.ui,
  es.unizar.disco.core.ui.dialogs,

@@ -225,49 +225,33 @@ any resulting litigation.
 
    <requires>
       <import plugin="es.unizar.disco.core" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding.property" version="1.8.100" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore.editor" version="2.17.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.edit.ui" version="2.18.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.uml2.uml" version="5.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.property" version="1.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.text" version="3.16.500" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.databinding" version="1.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.databinding.edit" version="1.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.papyrus.infra.onefile" version="2.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.papyrus.uml.tools" version="4.3.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.papyrus.infra.services.resourceloading" version="3.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.papyrus.uml.perspective" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.engine" version="4.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.device.swt" version="4.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.device.pdf" version="4.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.device.svg" version="4.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.device.extension" version="4.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.engine.extension" version="4.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.ui" version="4.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.ui.extension" version="4.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.core.ui" version="4.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.birt.chart.ui" version="4.6.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.simulation.models" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.simulation.models.edit" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.simulation" version="1.0.0" match="greaterOrEqual"/>
-      <import feature="com.masdes.dam.profile.ui.feature" version="0.13.1.201801221725"/>
-      <import feature="org.eclipse.papyrus.sdk.feature" version="4.8.0.202006100749"/>
-      <import plugin="org.eclipse.core.runtime" version="3.18.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.resources" version="3.13.700" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.swt" version="3.114.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui" version="3.117.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.ide" version="3.17.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface" version="3.20.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.console" version="3.9.200" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.editors" version="3.13.200" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.views.log" version="1.2.1100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.debug.ui" version="3.14.500" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jdt.ui" version="3.21.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore" version="2.22.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.expressions" version="3.6.800" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface.databinding" version="1.11.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding" version="1.9.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.beans" version="1.6.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.observable" version="1.9.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.papyrus.infra.core" version="3.1.100" match="greaterOrEqual"/>
+      <import feature="com.masdes.dam.profile.ui.feature" version="0.13.1.201801221725" match="greaterOrEqual"/>
+      <import feature="org.eclipse.papyrus.sdk.feature" version="5.0.0.202012091059" match="compatible"/>
+      <import plugin="org.eclipse.core.runtime" version="3.20.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.13.900" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swt" version="3.115.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.118.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.18.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface" version="3.22.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.expressions" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.console" version="3.10.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.editors" version="3.13.400" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.views.log" version="1.2.1300" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.ui" version="3.14.700" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.ui" version="3.22.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.databinding" version="1.12.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.papyrus.infra.onefile" version="3.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.papyrus.infra.core" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.papyrus.uml.tools" version="5.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.papyrus.infra.services.resourceloading" version="4.0.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

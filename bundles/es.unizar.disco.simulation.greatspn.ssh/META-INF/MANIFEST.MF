@@ -5,7 +5,7 @@ Bundle-SymbolicName: es.unizar.disco.simulation.greatspn.ssh;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: es.unizar.disco.simulation.greatspn.ssh.GspnSshSimulationPlugin
 Bundle-Vendor: DisCo - Unizar
-Require-Bundle: org.eclipse.core.runtime;bundle-version="3.18.0",
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.20.0",
  org.apache.commons.lang;bundle-version="2.6.0",
  org.apache.commons.io;bundle-version="2.6.0",
  org.eclipse.uml2.uml;bundle-version="5.5.0",
