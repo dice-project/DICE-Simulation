@@ -27,8 +27,8 @@
       </detail>
     </annotation>
     <version
-        name="1.0.0"
-        label="1.0.0"
+        name="0.7.0"
+        label="0.7.0"
         requiredJavaVersion="11">
       <annotation
           source="http://www.eclipse.org/oomph/setup/BrandingInfo">
@@ -78,7 +78,7 @@
         <requirement
             name="com.abstratt.eclipsegraphviz.feature.feature.group"/>
         <repository
-            url="https://dice-project.github.io/DICE-Simulation/updates/1.0.0"/>
+            url="https://dice-project.github.io/DICE-Simulation/updates/0.7.0"/>
       </setupTask>
     </version>
     <description>Package suited to perform performance evaluation based on the Eclipse Platform adding the DICE Simulation Tool, Papyrus, and the MARTE, DAM and DICE profiles, among other utilities.</description>
