@@ -31,7 +31,7 @@ v0.3.x                       | [Eclipse Neon](https://archive.eclipse.org/eclips
 v0.4.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
 v0.5.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
 v0.6.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
-v1.0.x                       | [Eclipse 2020-09](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.17-202009021800/) | 4.17                   | Java 11              | Windows, Linux, MacOS X (64 bits only)          |
+v0.7.x                       | [Eclipse 2020-12](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.18-202012021800/) | 4.18                   | Java 11              | Windows, Linux, MacOS X (64 bits only)          |
 
 # Installing the Simulation Tools
 
@@ -56,6 +56,7 @@ In Eclipse, go to `Help -> Install New Software...` and use http://dice-project.
 * http://dice-project.github.io/DICE-Simulation/updates/0.6.3
 * http://dice-project.github.io/DICE-Simulation/updates/0.6.4
 * http://dice-project.github.io/DICE-Simulation/updates/0.6.5
+* http://dice-project.github.io/DICE-Simulation/updates/0.7.0
 
 # Building the Simulation Tool
 
