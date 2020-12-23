@@ -15,8 +15,9 @@
  */
 package es.unizar.disco.simulation.models.provider;
 
-import org.eclipse.emf.common.EMFPlugin;
+import java.io.IOException;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 /**
@@ -81,7 +82,7 @@ public final class DiceSimulationModelsEditPlugin extends EMFPlugin {
 	 * The actual implementation of the Eclipse <b>Plugin</b>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated not
 	 */
 	public static class Implementation extends EclipsePlugin {
 		/**
@@ -96,6 +97,18 @@ public final class DiceSimulationModelsEditPlugin extends EMFPlugin {
 			// Remember the static instance.
 			//
 			plugin = this;
+		}
+
+		@Override
+		protected Object doGetImage(String key) throws IOException {
+			Object obj;
+			try {
+				// Give precedence to to PNG over GIF files
+				obj = super.doGetImage(key.concat(".png"));
+			} catch (Exception e) {
+				obj = super.doGetImage(key);
+			}
+			return obj;
 		}
 	}
 
