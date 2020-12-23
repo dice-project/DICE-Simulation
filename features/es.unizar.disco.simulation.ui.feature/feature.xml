@@ -14,7 +14,6 @@
         Ignacio Requeno
         Diego Pérez
  -->
-
 <feature
       id="es.unizar.disco.simulation.ui.feature"
       label="DICE Simulation Tools UI"
@@ -240,34 +239,33 @@ any resulting litigation.
    </url>
 
    <requires>
-      <import plugin="es.unizar.disco.core" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.databinding.property" version="1.8.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore.editor" version="2.17.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface.text" version="3.16.500" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.databinding" version="1.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.birt.chart.ui" version="4.6.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.simulation.models.edit" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.simulation" version="1.0.0" match="greaterOrEqual"/>
-      <import feature="com.masdes.dam.profile.ui.feature" version="0.13.1.201801221725" match="greaterOrEqual"/>
-      <import feature="org.eclipse.papyrus.sdk.feature" version="5.0.0.202012091059" match="compatible"/>
       <import plugin="org.eclipse.core.runtime" version="3.20.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.13.900" match="greaterOrEqual"/>
       <import plugin="org.eclipse.swt" version="3.115.100" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.118.100" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.18.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface" version="3.22.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.core" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.expressions" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.databinding.property" version="1.8.100" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.console" version="3.10.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.editors" version="3.13.400" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.views.log" version="1.2.1300" match="greaterOrEqual"/>
       <import plugin="org.eclipse.debug.ui" version="3.14.700" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jdt.ui" version="3.22.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.editor" version="2.17.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface.text" version="3.16.500" match="greaterOrEqual"/>
       <import plugin="org.eclipse.jface.databinding" version="1.12.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.databinding" version="1.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.infra.onefile" version="3.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.infra.core" version="4.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.uml.tools" version="5.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.infra.services.resourceloading" version="4.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.birt.chart.ui" version="4.6.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.simulation.models.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.simulation" version="1.0.0" match="greaterOrEqual"/>
+      <import feature="com.masdes.dam.profile.ui.feature" version="0.13.1.201801221725" match="greaterOrEqual"/>
+      <import feature="org.eclipse.papyrus.sdk.feature" version="5.0.0.202012091059" match="compatible"/>
    </requires>
 
    <plugin

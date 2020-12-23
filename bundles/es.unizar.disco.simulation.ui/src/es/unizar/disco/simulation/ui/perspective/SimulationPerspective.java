@@ -15,7 +15,6 @@
  *******************************************************************************/
 package es.unizar.disco.simulation.ui.perspective;
 
-import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
@@ -67,12 +66,12 @@ public class SimulationPerspective implements IPerspectiveFactory {
 
 	private void addPerspectiveShortcuts() {
 		factory.addPerspectiveShortcut("org.eclipse.papyrus.infra.core.perspective");
-		factory.addPerspectiveShortcut(JavaUI.ID_PERSPECTIVE);
+		factory.addPerspectiveShortcut("org.eclipse.jdt.ui.JavaPerspective");
 	}
 
 	private void addViewShortcuts() {
 		factory.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
-		factory.addShowViewShortcut(JavaUI.ID_PACKAGES);
+		factory.addShowViewShortcut("org.eclipse.jdt.ui.PackageExplorer");
 		factory.addShowViewShortcut("org.eclipse.pde.runtime.LogView");
 	}
 
