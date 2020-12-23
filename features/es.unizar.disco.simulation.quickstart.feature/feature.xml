@@ -14,7 +14,6 @@
         Ignacio Requeno
         Diego Pérez
  -->
-
 <feature
       id="es.unizar.disco.simulation.quickstart.feature"
       label="DICE Simulation Tools Quick Start"
@@ -258,6 +257,14 @@ any resulting litigation.
          download-size="0"
          install-size="0"
          version="1.0.0.qualifier"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.ui.intro.fragment"
+         download-size="0"
+         install-size="0"
+         version="1.0.0.qualifier"
+         fragment="true"
          unpack="false"/>
 
 </feature>

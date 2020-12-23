@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Enable Quicklinks in Welcome Framework Fragment
+Bundle-SymbolicName: org.eclipse.ui.intro.fragment;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: org.eclipse.ui.intro;bundle-version="3.6.0"
+Automatic-Module-Name: org.eclipse.ui.intro.fragment
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-Vendor: DisCo - Unizar
