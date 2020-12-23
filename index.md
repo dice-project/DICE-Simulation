@@ -1,6 +1,9 @@
-# DICE-Simulation
-Simulation tool for DICE.
+# DICE Simulation Tool
 
-# Installing the Simulation Tools
+The Simulation Tool for DICE.
 
-In Eclipse, go to `Help -> Install New Software...` and use http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
+# Installing the Simulation Tool
+
+Yo can install the DICE Simulation Tool in Eclipse by going to `Help -> Install New Software...` and using http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
+
+**To install the DICE Simulation Tool from scratch, checkout [our wiki](https://github.com/dice-project/DICE-Simulation/wiki) for more installation methods.**
