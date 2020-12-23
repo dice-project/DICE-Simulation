@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.measures.impl;
 
@@ -140,6 +153,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getMeasuredElement() {
 		if (measuredElement != null && measuredElement.eIsProxy()) {
 			InternalEObject oldMeasuredElement = (InternalEObject)measuredElement;
@@ -166,6 +180,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMeasuredElement(EObject newMeasuredElement) {
 		EObject oldMeasuredElement = measuredElement;
 		measuredElement = newMeasuredElement;
@@ -178,6 +193,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getMeasure() {
 		return measure;
 	}
@@ -187,6 +203,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMeasure(String newMeasure) {
 		String oldMeasure = measure;
 		measure = newMeasure;
@@ -199,6 +216,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EMap<String, String> getVslExpressionEntries() {
 		if (vslExpressionEntries == null) {
 			vslExpressionEntries = new EcoreEMap<String,String>(MeasuresPackage.Literals.ENTRY, EntryImpl.class, this, MeasuresPackage.DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION_ENTRIES);
@@ -211,6 +229,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getVslExpression() {
 		// TODO: implement this method to return the 'Vsl Expression' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -222,6 +241,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVslExpression(String newVslExpression) {
 		// TODO: implement this method to set the 'Vsl Expression' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -233,6 +253,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OutputVariable getOutputVariable() {
 		OutputVariable outputVariable = basicGetOutputVariable();
 		return outputVariable != null && outputVariable.eIsProxy() ? (OutputVariable)eResolveProxy((InternalEObject)outputVariable) : outputVariable;
@@ -255,6 +276,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimulationDefinition getSimulationDefinition() {
 		if (eContainerFeatureID() != MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION) return null;
 		return (SimulationDefinition)eInternalContainer();
@@ -275,6 +297,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSimulationDefinition(SimulationDefinition newSimulationDefinition) {
 		if (newSimulationDefinition != eInternalContainer() || (eContainerFeatureID() != MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SIMULATION_DEFINITION && newSimulationDefinition != null)) {
 			if (EcoreUtil.isAncestor(this, newSimulationDefinition))
@@ -296,6 +319,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSlaVslExpression() {
 		return slaVslExpression;
 	}
@@ -305,6 +329,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSlaVslExpression(String newSlaVslExpression) {
 		String oldSlaVslExpression = slaVslExpression;
 		slaVslExpression = newSlaVslExpression;
@@ -482,7 +507,7 @@ public class DomainMeasureDefinitionImpl extends MinimalEObjectImpl.Container im
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (measure: ");
 		result.append(measure);
 		result.append(", slaVslExpression: ");

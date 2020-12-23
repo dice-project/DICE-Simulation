@@ -215,3 +215,4 @@ Export-Package: com.hierynomus.sshj.backport,
  org.bouncycastle.x509,
  org.bouncycastle.x509.extension,
  org.bouncycastle.x509.util
+Automatic-Module-Name: com.hierynomus.sshj

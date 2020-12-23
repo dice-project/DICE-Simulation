@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.invocation.impl;
 
@@ -130,6 +143,7 @@ public class InvocationSetImpl extends MinimalEObjectImpl.Container implements I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<SimulationInvocation> getInvocations() {
 		if (invocations == null) {
 			invocations = new EObjectWithInverseResolvingEList<SimulationInvocation>(SimulationInvocation.class, this, InvocationPackage.INVOCATION_SET__INVOCATIONS, InvocationPackage.SIMULATION_INVOCATION__INVOCATION_SET);
@@ -142,6 +156,7 @@ public class InvocationSetImpl extends MinimalEObjectImpl.Container implements I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimulationDefinition getDefinition() {
 		if (definition != null && definition.eIsProxy()) {
 			InternalEObject oldDefinition = (InternalEObject)definition;
@@ -168,6 +183,7 @@ public class InvocationSetImpl extends MinimalEObjectImpl.Container implements I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDefinition(SimulationDefinition newDefinition) {
 		SimulationDefinition oldDefinition = definition;
 		definition = newDefinition;
@@ -180,6 +196,7 @@ public class InvocationSetImpl extends MinimalEObjectImpl.Container implements I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getIdentifier() {
 		// TODO: implement this method to return the 'Identifier' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -191,6 +208,7 @@ public class InvocationSetImpl extends MinimalEObjectImpl.Container implements I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getStart() {
 		// TODO: implement this method to return the 'Start' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -202,6 +220,7 @@ public class InvocationSetImpl extends MinimalEObjectImpl.Container implements I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getEnd() {
 		// TODO: implement this method to return the 'End' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -213,6 +232,7 @@ public class InvocationSetImpl extends MinimalEObjectImpl.Container implements I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimulationStatus getStatus() {
 		// TODO: implement this method to return the 'Status' attribute
 		// Ensure that you remove @generated or mark it @generated NOT

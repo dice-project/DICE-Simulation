@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.pnextensions.pnconstants;
 
@@ -51,10 +64,6 @@ public enum ToolInfoConstants implements Enumerator {
 	/**
 	 * The '<em><b>Tool Name</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Tool Name</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #TOOL_NAME
 	 * @model name="toolName" literal="DICE PNML Extensions"
@@ -66,10 +75,6 @@ public enum ToolInfoConstants implements Enumerator {
 	/**
 	 * The '<em><b>Tool Version</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Tool Version</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #TOOL_VERSION
 	 * @model name="toolVersion" literal="0.1"
@@ -81,10 +86,6 @@ public enum ToolInfoConstants implements Enumerator {
 	/**
 	 * The '<em><b>Uri</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Uri</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #URI
 	 * @model name="uri" literal="http://es.unizar.disco/DICE"
@@ -205,6 +206,7 @@ public enum ToolInfoConstants implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -214,6 +216,7 @@ public enum ToolInfoConstants implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -223,6 +226,7 @@ public enum ToolInfoConstants implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}

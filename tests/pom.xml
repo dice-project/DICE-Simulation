@@ -1,26 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<!--
+    Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+   
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 1.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-1.0/
+   
+    SPDX-License-Identifier: EPL-1.0
+   
+    Contributors:
+        Abel Gómez
+        Ignacio Requeno
+        Diego Pérez
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-        <modelVersion>4.0.0</modelVersion>
-        <groupId>es.unizar.disco</groupId>
-        <artifactId>es.unizar.disco.tests</artifactId>
-        <packaging>pom</packaging>
-
-        <parent>
-                <groupId>es.unizar.disco</groupId>
-                <artifactId>es.unizar.disco.root</artifactId>
-                <version>0.6.5-SNAPSHOT</version>
-                <relativePath>../pom.xml</relativePath>
-        </parent>
-
-        <modules>
-                <module>es.unizar.disco.simulation.tests</module>
-        </modules>
-        
-            <build>
-<!--      <resources>
-    	<resource>
-    		<directory>../../bundles/es.unizar.disco.pnml.m2t/src</directory>
-    	</resource>
-    </resources> -->
-    </build>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>es.unizar.disco</groupId>
+		<artifactId>root</artifactId>
+		<version>0.7.0-SNAPSHOT</version>
+	</parent>
+	<groupId>es.unizar.disco</groupId>
+	<artifactId>tests</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>es.unizar.disco.simulation.tests</module>
+	</modules>
 </project>

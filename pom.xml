@@ -1,94 +1,121 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<!--
+    Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+   
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 1.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-1.0/
+   
+    SPDX-License-Identifier: EPL-1.0
+   
+    Contributors:
+        Abel Gómez
+        Ignacio Requeno
+        Diego Pérez
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<artifactId>es.unizar.disco.root</artifactId>
-
-	<name>Simulation Tool</name>
-	<packaging>pom</packaging>
-
-	<parent>
-		<groupId>es.unizar.disco</groupId>
-		<artifactId>es.unizar.disco.configuration</artifactId>
-		<version>0.6.5-SNAPSHOT</version>
-		<relativePath>.\releng\es.unizar.disco.configuration</relativePath>
-	</parent>
-
 	<properties>
-		<pnml.version>2.2.11</pnml.version>
+		<tycho.version>2.1.0</tycho.version>
+		<jboss.tycho-plugins.version>1.6.0</jboss.tycho-plugins.version>
+		<io.fabric8.docker-maven-plugin.version>0.34.1</io.fabric8.docker-maven-plugin.version>
+		<org.eclipse.acceleo.maven.version>3.5.0-SNAPSHOT</org.eclipse.acceleo.maven.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<site.name>DICE Simulation Tool</site.name>
+		<target.version>2020-12</target.version>
 	</properties>
-
+	<groupId>es.unizar.disco</groupId>
+	<artifactId>root</artifactId>
+	<version>0.7.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<modules>
-		<module>es.unizar.disco.simulation.targetplatform</module>
 		<module>bundles</module>
-		<module>tests</module>
 		<module>features</module>
+		<module>tests</module>
 		<module>releng</module>
-
 	</modules>
-
-	<!-- <repositories> <repository> <id>pnml.framework</id> <url>http://miage11.u-paris10.fr:8081/nexus/content/groups/public/</url> 
-		<releases> <enabled>true</enabled> </releases> <snapshots> <enabled>true</enabled> 
-		</snapshots> </repository> </repositories> -->
-
 	<pluginRepositories>
 		<pluginRepository>
-			<id>pnml.plugin</id>
-			<name>Repo for pnml plugin</name>
-			<url>http://pnml.lip6.fr/pnmlframework/updatesite/</url>
-			<layout>default</layout>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<id>Acceleo Snapshots</id>
+			<url>https://repo.eclipse.org/content/repositories/acceleo-snapshots</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>Acceleo Releases</id>
+			<url>https://repo.eclipse.org/content/repositories/acceleo-releases</url>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<dependencies>
-		<!-- <dependency> <groupId>fr.lip6.pnml</groupId> <artifactId>fr.lip6.pnml.framework.3rdpartimports</artifactId> 
-			<version>${pnml.version}</version> </dependency> -->
-		<dependency>
-			<groupId>fr.lip6.pnml</groupId>
-			<artifactId>fr.lip6.pnml.framework.utils</artifactId>
-			<version>${pnml.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.lip6.pnml</groupId>
-			<artifactId>fr.lip6.pnml.framework.coremodel</artifactId>
-			<version>${pnml.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.lip6.pnml</groupId>
-			<artifactId>fr.lip6.pnml.framework.ptnet</artifactId>
-			<version>${pnml.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.lip6.pnml</groupId>
-			<artifactId>fr.lip6.pnml.framework.symmetricnet</artifactId>
-			<version>${pnml.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.lip6.pnml</groupId>
-			<artifactId>fr.lip6.pnml.framework.hlpn</artifactId>
-			<version>${pnml.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>fr.lip6.pnml</groupId>
-			<artifactId>fr.lip6.pnml.framework.pthlpng</artifactId>
-			<version>${pnml.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.7</version>
-		</dependency>
-
-
-	</dependencies>
-	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-versions-plugin</artifactId>
+				<version>${tycho.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<excludedGroups>test.es.unizar.disco.simulation.tests.IntegrationTest</excludedGroups>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<executionEnvironment>JavaSE-11</executionEnvironment>
+					<target>
+						<artifact>
+							<groupId>es.unizar.disco</groupId>
+							<artifactId>platform</artifactId>
+							<version>0.7.0-SNAPSHOT</version>
+						</artifact>
+					</target>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>integration-tests</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-surefire-plugin</artifactId>
+						<version>${tycho.version}</version>
+						<configuration>
+							<excludedGroups combine.self="override"></excludedGroups>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+   
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 1.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-1.0/
+   
+    SPDX-License-Identifier: EPL-1.0
+   
+    Contributors:
+        Abel Gómez
+        Ignacio Requeno
+        Diego Pérez
+ -->
 <feature
       id="es.unizar.disco.simulation.feature"
       label="DICE Simulation Tools"
-      version="0.6.5.qualifier"
+      version="0.7.0.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -224,83 +239,88 @@ any resulting litigation.
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime" version="3.12.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore" version="2.12.0" match="greaterOrEqual"/>
-      <import plugin="fr.lip6.pnml.framework.coremodel" version="2.2.12" match="greaterOrEqual"/>
-      <import plugin="fr.lip6.pnml.framework.ptnet" version="2.2.12" match="greaterOrEqual"/>
-      <import plugin="fr.lip6.pnml.framework.utils" version="2.2.12" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.m2m.qvt.oml" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.ecore.xmi" version="2.12.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ocl" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ocl.ecore" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.common" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.model" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.profiler" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.acceleo.engine" version="3.6.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.debug.core" version="3.10.100" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.emf.edit" version="2.12.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.20.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore" version="2.23.0" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.coremodel" version="2.2.15" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.ptnet" version="2.2.15" match="greaterOrEqual"/>
+      <import plugin="fr.lip6.pnml.framework.utils" version="2.2.15" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.m2m.qvt.oml" version="3.10.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.16.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl" version="3.15.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl.ecore" version="3.15.100" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.common" version="3.7.10" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.model" version="3.7.10" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.profiler" version="3.7.10" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.acceleo.engine" version="3.7.10" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.core" version="3.17.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.edit" version="2.16.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.lang" version="2.6.0" match="greaterOrEqual"/>
-      <import plugin="org.apache.commons.io" version="2.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.uml2.uml" version="5.2.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.io" version="2.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.uml2.uml" version="5.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.papyrus.marte.static.profile" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="com.masdes.dam.static.profile" version="0.6.5" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.dice.static.profile" version="0.6.5" match="greaterOrEqual"/>
+      <import plugin="com.masdes.dam.static.profile" version="0.13.1" match="greaterOrEqual"/>
+      <import plugin="ro.ieat.secureuml.profile" version="0.13.1" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.dice.static.profile" version="0.13.1" match="greaterOrEqual"/>
+      <import feature="es.unizar.disco.dice.profile.feature" version="0.13.1.201801221725" match="greaterOrEqual"/>
+      <import feature="ro.ieat.secureuml.profile.feature" version="0.13.1.201801221725" match="greaterOrEqual"/>
+      <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.2.0.201703081153"/>
+      <import feature="com.masdes.dam.profile.feature" version="0.13.1.201801221725" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="es.unizar.disco.core"
          download-size="0"
          install-size="0"
-         version="0.6.5.qualifier"
+         version="0.7.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnextensions"
          download-size="0"
          install-size="0"
-         version="0.6.5.qualifier"
+         version="0.7.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2m"
          download-size="0"
          install-size="0"
-         version="0.6.5.qualifier"
+         version="0.7.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2t"
          download-size="0"
          install-size="0"
-         version="0.6.5.qualifier"
+         version="0.7.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation"
          download-size="0"
          install-size="0"
-         version="0.6.5.qualifier"
+         version="0.7.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation.models"
          download-size="0"
          install-size="0"
-         version="0.6.5.qualifier"
+         version="0.7.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation.models.edit"
          download-size="0"
          install-size="0"
-         version="0.6.5.qualifier"
+         version="0.7.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation.local"
          download-size="0"
          install-size="0"
-         version="0.6.5.qualifier"
+         version="0.7.0.qualifier"
          unpack="false"/>
 
 </feature>

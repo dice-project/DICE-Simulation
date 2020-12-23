@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.definition.impl;
 
@@ -142,7 +155,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link DefinitionPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -156,18 +169,26 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		if (isInited) return (DefinitionPackage)EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI);
 
 		// Obtain or create and register package
-		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DefinitionPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DefinitionPackageImpl());
+		Object registeredDefinitionPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		DefinitionPackageImpl theDefinitionPackage = registeredDefinitionPackage instanceof DefinitionPackageImpl ? (DefinitionPackageImpl)registeredDefinitionPackage : new DefinitionPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) : DatatypesPackage.eINSTANCE);
-		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) instanceof InvocationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) : InvocationPackage.eINSTANCE);
-		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) instanceof MeasuresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) : MeasuresPackage.eINSTANCE);
-		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) instanceof SimresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) : SimresultPackage.eINSTANCE);
-		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) instanceof ToolresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) : ToolresultPackage.eINSTANCE);
-		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) instanceof TracesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) : TracesPackage.eINSTANCE);
-		WnsimPackageImpl theWnsimPackage = (WnsimPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI) instanceof WnsimPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI) : WnsimPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
+		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(registeredPackage instanceof DatatypesPackageImpl ? registeredPackage : DatatypesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI);
+		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(registeredPackage instanceof InvocationPackageImpl ? registeredPackage : InvocationPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI);
+		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(registeredPackage instanceof MeasuresPackageImpl ? registeredPackage : MeasuresPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI);
+		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(registeredPackage instanceof SimresultPackageImpl ? registeredPackage : SimresultPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI);
+		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(registeredPackage instanceof ToolresultPackageImpl ? registeredPackage : ToolresultPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI);
+		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(registeredPackage instanceof TracesPackageImpl ? registeredPackage : TracesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI);
+		WnsimPackageImpl theWnsimPackage = (WnsimPackageImpl)(registeredPackage instanceof WnsimPackageImpl ? registeredPackage : WnsimPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theDefinitionPackage.createPackageContents();
@@ -192,7 +213,6 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 		// Mark meta-data to indicate it can't be changed
 		theDefinitionPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(DefinitionPackage.eNS_URI, theDefinitionPackage);
 		return theDefinitionPackage;
@@ -203,6 +223,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSimulationDefinition() {
 		return simulationDefinitionEClass;
 	}
@@ -212,6 +233,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationDefinition_Identifier() {
 		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -221,6 +243,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_Invocations() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -230,6 +253,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_Parameters() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(2);
 	}
@@ -239,6 +263,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_ActiveScenario() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(3);
 	}
@@ -248,6 +273,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_Scenarios() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(4);
 	}
@@ -257,6 +283,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_InputVariables() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(5);
 	}
@@ -266,6 +293,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_DomainResource() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(6);
 	}
@@ -275,6 +303,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationDefinition_MaxExecutionTime() {
 		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(7);
 	}
@@ -284,6 +313,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_OutputVariables() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(8);
 	}
@@ -293,6 +323,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_DeclaredMeasures() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(9);
 	}
@@ -302,6 +333,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_MeasuresToCompute() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(10);
 	}
@@ -311,6 +343,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationDefinition_Backend() {
 		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(11);
 	}
@@ -320,6 +353,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_PossibleConfigurations() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(12);
 	}
@@ -329,6 +363,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationDefinition_ActiveConfigurations() {
 		return (EReference)simulationDefinitionEClass.getEStructuralFeatures().get(13);
 	}
@@ -338,6 +373,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationDefinition_AutoSync() {
 		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(14);
 	}
@@ -347,6 +383,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationDefinition_ScenarioStereotypes() {
 		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(15);
 	}
@@ -356,6 +393,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationDefinition_NfpToCompute() {
 		return (EAttribute)simulationDefinitionEClass.getEStructuralFeatures().get(16);
 	}
@@ -365,6 +403,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationDefinition__GetVariables() {
 		return simulationDefinitionEClass.getEOperations().get(0);
 	}
@@ -374,6 +413,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationDefinition__GetVariablesMap() {
 		return simulationDefinitionEClass.getEOperations().get(1);
 	}
@@ -383,6 +423,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationDefinition__GetInputVariablesMap() {
 		return simulationDefinitionEClass.getEOperations().get(2);
 	}
@@ -392,6 +433,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationDefinition__GetOutputVariablesMap() {
 		return simulationDefinitionEClass.getEOperations().get(3);
 	}
@@ -401,6 +443,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationDefinition__SyncScenarios() {
 		return simulationDefinitionEClass.getEOperations().get(4);
 	}
@@ -410,6 +453,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationDefinition__SyncVariables() {
 		return simulationDefinitionEClass.getEOperations().get(5);
 	}
@@ -419,6 +463,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationDefinition__SyncDomainMeasureDefinitions() {
 		return simulationDefinitionEClass.getEOperations().get(6);
 	}
@@ -428,6 +473,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationDefinition__SyncPossibleVariableConfigurations() {
 		return simulationDefinitionEClass.getEOperations().get(7);
 	}
@@ -437,6 +483,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSimulationParameter() {
 		return simulationParameterEClass;
 	}
@@ -446,6 +493,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationParameter_Key() {
 		return (EAttribute)simulationParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -455,6 +503,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationParameter_Value() {
 		return (EAttribute)simulationParameterEClass.getEStructuralFeatures().get(1);
 	}
@@ -464,6 +513,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVariable() {
 		return variableEClass;
 	}
@@ -473,6 +523,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getVariable_Name() {
 		return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
 	}
@@ -482,6 +533,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInputVariable() {
 		return inputVariableEClass;
 	}
@@ -491,6 +543,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInputVariable_Values() {
 		return (EReference)inputVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -500,6 +553,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInputVariable_Assignments() {
 		return (EReference)inputVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -509,6 +563,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getInputVariable__DeserializeValues__String() {
 		return inputVariableEClass.getEOperations().get(0);
 	}
@@ -518,6 +573,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getInputVariable__SerializeValues() {
 		return inputVariableEClass.getEOperations().get(1);
 	}
@@ -527,6 +583,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getOutputVariable() {
 		return outputVariableEClass;
 	}
@@ -536,6 +593,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInputVariableValue() {
 		return inputVariableValueEClass;
 	}
@@ -545,6 +603,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInputVariableValue_Value() {
 		return (EAttribute)inputVariableValueEClass.getEStructuralFeatures().get(0);
 	}
@@ -554,6 +613,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInputVariableValue_Assignments() {
 		return (EReference)inputVariableValueEClass.getEStructuralFeatures().get(1);
 	}
@@ -563,6 +623,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInputVariableValue_Variable() {
 		return (EReference)inputVariableValueEClass.getEStructuralFeatures().get(2);
 	}
@@ -572,6 +633,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVariableAssignment() {
 		return variableAssignmentEClass;
 	}
@@ -581,6 +643,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVariableAssignment_Value() {
 		return (EReference)variableAssignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -590,6 +653,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVariableAssignment_Configuration() {
 		return (EReference)variableAssignmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -599,6 +663,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVariableAssignment_Variable() {
 		return (EReference)variableAssignmentEClass.getEStructuralFeatures().get(2);
 	}
@@ -608,6 +673,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVariableConfiguration() {
 		return variableConfigurationEClass;
 	}
@@ -617,6 +683,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVariableConfiguration_Assignments() {
 		return (EReference)variableConfigurationEClass.getEStructuralFeatures().get(0);
 	}
@@ -626,6 +693,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getVariableConfiguration__IsEquivalent__VariableConfiguration() {
 		return variableConfigurationEClass.getEOperations().get(0);
 	}
@@ -635,6 +703,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getVariableConfiguration__ToPrimitiveAssignments() {
 		return variableConfigurationEClass.getEOperations().get(1);
 	}
@@ -644,6 +713,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getVariableConfiguration__FindAssignment__InputVariable() {
 		return variableConfigurationEClass.getEOperations().get(2);
 	}
@@ -653,6 +723,7 @@ public class DefinitionPackageImpl extends EPackageImpl implements DefinitionPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DefinitionFactory getDefinitionFactory() {
 		return (DefinitionFactory)getEFactoryInstance();
 	}

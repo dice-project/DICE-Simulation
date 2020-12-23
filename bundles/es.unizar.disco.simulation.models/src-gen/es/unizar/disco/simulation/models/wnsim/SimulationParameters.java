@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.wnsim;
 
@@ -96,7 +109,9 @@ public enum SimulationParameters implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	START(7, "start", "-o"), /**
+	START(7, "start", "-o"),
+
+	/**
 	 * The '<em><b>Binary file path</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,10 +124,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>First tr length</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>First tr length</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #FIRST_TR_LENGTH
 	 * @model name="first_tr_length" literal="-f"
@@ -124,10 +135,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>Tr length</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Tr length</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #TR_LENGTH
 	 * @model name="tr_length" literal="-t"
@@ -139,10 +146,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>Min btc</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Min btc</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MIN_BTC
 	 * @model name="min_btc" literal="-m"
@@ -154,10 +157,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>Max btc</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Max btc</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #MAX_BTC
 	 * @model name="max_btc" literal="-M"
@@ -169,10 +168,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>Approx</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Approx</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #APPROX
 	 * @model name="approx" literal="-a"
@@ -184,10 +179,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>Conf level</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Conf level</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #CONF_LEVEL
 	 * @model name="conf_level" literal="-c"
@@ -199,10 +190,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>Seed</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Seed</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #SEED
 	 * @model name="seed" literal="-s"
@@ -214,10 +201,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>Start</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Start</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #START
 	 * @model name="start" literal="-o"
@@ -229,10 +212,6 @@ public enum SimulationParameters implements Enumerator {
 	/**
 	 * The '<em><b>Binary file path</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Binary file path</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #BINARY_FILE_PATH
 	 * @model name="binary_file_path"
@@ -365,6 +344,7 @@ public enum SimulationParameters implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -374,6 +354,7 @@ public enum SimulationParameters implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -383,6 +364,7 @@ public enum SimulationParameters implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}

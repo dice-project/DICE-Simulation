@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ *
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ *
+ * SPDX-License-Identifier: EPL-1.0
+ *
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
+ *******************************************************************************/
 
 package test.es.unizar.disco.simulation.tests;
 
@@ -12,7 +27,6 @@ import java.io.InputStreamReader;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,10 +36,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import es.unizar.disco.pnextensions.pnconstants.TransitionKind;
 import es.unizar.disco.pnml.m2m.builder.ActivityDiagram2PnmlReliabilityResourceBuilder;
@@ -128,6 +142,7 @@ public class ReliabilityDpimTest extends AbstractTest{
 	}
 
 	@Test
+	@Category(IntegrationTest.class)
 	public void testSucccesAndFailureProbabilitySumOne()
 			throws SimulationException, CoreException, InterruptedException, IOException {
 

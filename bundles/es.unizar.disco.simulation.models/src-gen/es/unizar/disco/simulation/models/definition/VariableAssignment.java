@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.definition;
 
@@ -27,10 +40,6 @@ public interface VariableAssignment extends EObject {
 	 * Returns the value of the '<em><b>Value</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.definition.InputVariableValue#getAssignments <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Value</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' reference.
 	 * @see #setValue(InputVariableValue)
@@ -55,10 +64,6 @@ public interface VariableAssignment extends EObject {
 	 * Returns the value of the '<em><b>Configuration</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.definition.VariableConfiguration#getAssignments <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Configuration</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Configuration</em>' container reference.
 	 * @see #setConfiguration(VariableConfiguration)
@@ -83,10 +88,6 @@ public interface VariableAssignment extends EObject {
 	 * Returns the value of the '<em><b>Variable</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.definition.InputVariable#getAssignments <em>Assignments</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Variable</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variable</em>' reference.
 	 * @see #setVariable(InputVariable)

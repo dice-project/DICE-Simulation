@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.toolresult.impl;
 
@@ -111,6 +124,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Number getValue() {
 		// TODO: implement this method to return the 'Value' attribute
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -122,6 +136,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EObject getAnalyzedElement() {
 		if (analyzedElement != null && analyzedElement.eIsProxy()) {
 			InternalEObject oldAnalyzedElement = (InternalEObject)analyzedElement;
@@ -148,6 +163,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setAnalyzedElement(EObject newAnalyzedElement) {
 		EObject oldAnalyzedElement = analyzedElement;
 		analyzedElement = newAnalyzedElement;
@@ -160,6 +176,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUnit() {
 		return unit;
 	}
@@ -169,6 +186,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUnit(String newUnit) {
 		String oldUnit = unit;
 		unit = newUnit;
@@ -181,6 +199,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Number> getConfidenceInterval() {
 		if (confidenceInterval == null) {
 			confidenceInterval = new EDataTypeEList<Number>(Number.class, this, ToolresultPackage.ANALYZABLE_ELEMENT_INFO__CONFIDENCE_INTERVAL);
@@ -282,7 +301,7 @@ public abstract class AnalyzableElementInfoImpl extends MinimalEObjectImpl.Conta
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (unit: ");
 		result.append(unit);
 		result.append(", confidenceInterval: ");

@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.definition.impl;
 
@@ -73,6 +86,7 @@ public class VariableConfigurationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<VariableAssignment> getAssignments() {
 		if (assignments == null) {
 			assignments = new EObjectContainmentWithInverseEList<VariableAssignment>(VariableAssignment.class, this, DefinitionPackage.VARIABLE_CONFIGURATION__ASSIGNMENTS, DefinitionPackage.VARIABLE_ASSIGNMENT__CONFIGURATION);
@@ -85,6 +99,7 @@ public class VariableConfigurationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isEquivalent(VariableConfiguration config) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -96,6 +111,7 @@ public class VariableConfigurationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PrimitiveVariableAssignment> toPrimitiveAssignments() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -107,6 +123,7 @@ public class VariableConfigurationImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableAssignment findAssignment(InputVariable variable) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

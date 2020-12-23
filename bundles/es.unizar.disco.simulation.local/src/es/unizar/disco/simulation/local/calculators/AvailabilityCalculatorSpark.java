@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ *
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ *
+ * SPDX-License-Identifier: EPL-1.0
+ *
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
+ *******************************************************************************/
 package es.unizar.disco.simulation.local.calculators;
 
 import java.math.BigDecimal;
@@ -45,8 +60,8 @@ public class AvailabilityCalculatorSpark extends AbstractCalculator implements M
 		
 		//Look for SparkNode element. Look its info in DaComponent. Get the MTTF and MTTR. Calculate availability from them
 		
-		Float rateFail = new Float(1);
-		Float rateRepair= new Float(1);
+		Float rateFail = Float.valueOf(1);
+		Float rateRepair= Float.valueOf(1);
 		PnmlToolInfoUtils pnmlutils = new PnmlToolInfoUtils();
 		//get from trace the transition information of the closing transition
 		for (Trace trace : traceSet.getTraces()) {

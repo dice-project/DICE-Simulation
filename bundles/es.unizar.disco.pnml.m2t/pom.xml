@@ -1,29 +1,66 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>es.unizar.disco</groupId>
-    <artifactId>es.unizar.disco.pnml.m2t</artifactId>
-    <packaging>eclipse-plugin</packaging>
-
-
-    <parent>
-        <groupId>es.unizar.disco</groupId>
-        <artifactId>es.unizar.disco.bundles</artifactId>
-        <version>0.6.5-SNAPSHOT</version>
-    </parent>
-    
-   <build>
-        <resources>
-      <resource>
-        <directory>./src/</directory>
-      </resource>
-      <resource>
-        <directory>./bin/</directory>
-        <includes>
-        <include>**/*.emtl</include>
-        </includes>
-      </resource>
-    </resources>
-    </build>
-    
-    </project>
+<!--
+    Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+   
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 1.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-1.0/
+   
+    SPDX-License-Identifier: EPL-1.0
+   
+    Contributors:
+        Abel Gómez
+        Ignacio Requeno
+        Diego Pérez
+ -->
+<!--
+	This plugin requires an explicit pom.xml since Tycho does not call the Acceleo
+	builder by default
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>es.unizar.disco</groupId>
+		<artifactId>bundles</artifactId>
+		<version>0.7.0-SNAPSHOT</version>
+	</parent>
+	<groupId>es.unizar.disco</groupId>
+	<artifactId>es.unizar.disco.pnml.m2t</artifactId>
+	<packaging>eclipse-plugin</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.acceleo</groupId>
+				<artifactId>org.eclipse.acceleo.maven</artifactId>
+				<version>${org.eclipse.acceleo.maven.version}</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>acceleo-compile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<useBinaryResources>false</useBinaryResources>
+					<usePlatformResourcePath>true</usePlatformResourcePath>
+					<acceleoProject>
+						<root>${project.basedir}</root>
+						<entries>
+							<entry>
+								<input>src</input>
+								<output>target/classes</output>
+							</entry>
+						</entries>
+					</acceleoProject>
+					<packagesToRegister>
+						<packageToRegister>es.unizar.disco.pnextensions.pnconstants.PnconstantsPackage</packageToRegister>
+						<packageToRegister>fr.lip6.move.pnml.ptnet.PtnetPackage</packageToRegister>
+					</packagesToRegister>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

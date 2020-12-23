@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.pnextensions.pnutils.impl;
 
@@ -90,7 +103,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link PnutilsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -104,12 +117,14 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 		if (isInited) return (PnutilsPackage)EPackage.Registry.INSTANCE.getEPackage(PnutilsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		PnutilsPackageImpl thePnutilsPackage = (PnutilsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof PnutilsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new PnutilsPackageImpl());
+		Object registeredPnutilsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		PnutilsPackageImpl thePnutilsPackage = registeredPnutilsPackage instanceof PnutilsPackageImpl ? (PnutilsPackageImpl)registeredPnutilsPackage : new PnutilsPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		PnconstantsPackageImpl thePnconstantsPackage = (PnconstantsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PnconstantsPackage.eNS_URI) instanceof PnconstantsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PnconstantsPackage.eNS_URI) : PnconstantsPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(PnconstantsPackage.eNS_URI);
+		PnconstantsPackageImpl thePnconstantsPackage = (PnconstantsPackageImpl)(registeredPackage instanceof PnconstantsPackageImpl ? registeredPackage : PnconstantsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		thePnutilsPackage.createPackageContents();
@@ -122,7 +137,6 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 		// Mark meta-data to indicate it can't be changed
 		thePnutilsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(PnutilsPackage.eNS_URI, thePnutilsPackage);
 		return thePnutilsPackage;
@@ -133,6 +147,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPnUtils() {
 		return pnUtilsEClass;
 	}
@@ -142,6 +157,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getPnUtils__Layout__EObject() {
 		return pnUtilsEClass.getEOperations().get(0);
 	}
@@ -151,6 +167,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDataTypeUtils() {
 		return dataTypeUtilsEClass;
 	}
@@ -160,6 +177,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getDataTypeUtils__CreateURI__String() {
 		return dataTypeUtilsEClass.getEOperations().get(0);
 	}
@@ -169,6 +187,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getDataTypeUtils__CreateLongString__String() {
 		return dataTypeUtilsEClass.getEOperations().get(1);
 	}
@@ -178,6 +197,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getURI() {
 		return uriEDataType;
 	}
@@ -187,6 +207,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getURISyntaxException() {
 		return uriSyntaxExceptionEDataType;
 	}
@@ -196,6 +217,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EDataType getStringBuffer() {
 		return stringBufferEDataType;
 	}
@@ -205,6 +227,7 @@ public class PnutilsPackageImpl extends EPackageImpl implements PnutilsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PnutilsFactory getPnutilsFactory() {
 		return (PnutilsFactory)getEFactoryInstance();
 	}

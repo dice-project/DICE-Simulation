@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.invocation;
 
@@ -52,10 +65,6 @@ public interface SimulationInvocation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Identifier</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Identifier</em>' attribute.
 	 * @see #setIdentifier(String)
@@ -78,10 +87,6 @@ public interface SimulationInvocation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Trace Set</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Trace Set</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Trace Set</em>' reference.
 	 * @see #setTraceSet(TraceSet)
@@ -104,10 +109,6 @@ public interface SimulationInvocation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Tool Result</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Tool Result</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Tool Result</em>' reference.
 	 * @see #setToolResult(ToolResult)
@@ -131,10 +132,6 @@ public interface SimulationInvocation extends EObject {
 	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.definition.SimulationDefinition#getInvocations <em>Invocations</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Definition</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Definition</em>' reference.
 	 * @see #setDefinition(SimulationDefinition)
@@ -159,10 +156,6 @@ public interface SimulationInvocation extends EObject {
 	 * Returns the value of the '<em><b>Result</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.simresult.SimulationResult#getInvocation <em>Invocation</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Result</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Result</em>' reference.
 	 * @see #setResult(SimulationResult)
@@ -186,10 +179,6 @@ public interface SimulationInvocation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Start</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Start</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Start</em>' attribute.
 	 * @see #setStart(Date)
@@ -212,10 +201,6 @@ public interface SimulationInvocation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>End</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>End</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>End</em>' attribute.
 	 * @see #setEnd(Date)
@@ -239,10 +224,6 @@ public interface SimulationInvocation extends EObject {
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
 	 * The literals are from the enumeration {@link es.unizar.disco.simulation.models.datatypes.SimulationStatus}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Status</em>' attribute.
 	 * @see es.unizar.disco.simulation.models.datatypes.SimulationStatus
@@ -267,10 +248,6 @@ public interface SimulationInvocation extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Variable Configuration</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Variable Configuration</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variable Configuration</em>' reference.
 	 * @see #setVariableConfiguration(VariableConfiguration)
@@ -294,10 +271,6 @@ public interface SimulationInvocation extends EObject {
 	 * Returns the value of the '<em><b>Analyzable Model</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Analyzable Model</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Analyzable Model</em>' reference list.
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getSimulationInvocation_AnalyzableModel()
@@ -310,10 +283,6 @@ public interface SimulationInvocation extends EObject {
 	 * Returns the value of the '<em><b>Auto Build</b></em>' attribute.
 	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Auto Build</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Auto Build</em>' attribute.
 	 * @see #setAutoBuild(boolean)
@@ -337,10 +306,6 @@ public interface SimulationInvocation extends EObject {
 	 * Returns the value of the '<em><b>Invocation Set</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.invocation.InvocationSet#getInvocations <em>Invocations</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Invocation Set</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Invocation Set</em>' reference.
 	 * @see #setInvocationSet(InvocationSet)

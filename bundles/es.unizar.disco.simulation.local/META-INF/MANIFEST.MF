@@ -2,17 +2,17 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Internal QoS analysis
 Bundle-SymbolicName: es.unizar.disco.simulation.local;singleton:=true
-Bundle-Version: 0.6.5.qualifier
+Bundle-Version: 0.7.0.qualifier
 Bundle-Activator: es.unizar.disco.simulation.local.LocalSimulationPlugin
-Require-Bundle: org.eclipse.core.runtime,
- org.apache.commons.io,
- es.unizar.disco.core,
- es.unizar.disco.simulation,
- org.eclipse.uml2.uml,
- es.unizar.disco.pnml.m2m,
- fr.lip6.pnml.framework.ptnet,
- es.unizar.disco.pnml.m2t
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.20.0",
+ org.apache.commons.io;bundle-version="2.6.0",
+ org.eclipse.uml2.uml;bundle-version="5.5.0",
+ fr.lip6.pnml.framework.ptnet;bundle-version="2.2.15",
+ es.unizar.disco.core;bundle-version="0.7.0",
+ es.unizar.disco.simulation;bundle-version="0.7.0",
+ es.unizar.disco.pnml.m2m;bundle-version="0.7.0",
+ es.unizar.disco.pnml.m2t;bundle-version="0.7.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: DisCo - Unizar
 Import-Package: org.eclipse.uml2.uml
@@ -20,3 +20,4 @@ Bundle-ClassPath: lib/bundles/unit-api-0.9.jar,
  lib/bundles/unit-ri-0.9.jar,
  .
 Export-Package: es.unizar.disco.simulation.local.calculators
+Automatic-Module-Name: es.unizar.disco.simulation.local

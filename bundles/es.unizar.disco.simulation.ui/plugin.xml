@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
+<!--
+    Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+   
+    This program and the accompanying materials
+    are made available under the terms of the Eclipse Public License 1.0
+    which accompanies this distribution, and is available at
+    https://www.eclipse.org/legal/epl-1.0/
+   
+    SPDX-License-Identifier: EPL-1.0
+   
+    Contributors:
+        Abel Gómez
+        Ignacio Requeno
+        Diego Pérez
+ -->
+
 <plugin>
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
@@ -171,20 +187,20 @@
          <enabledWhen>
             <with
                   variable="selection">
+               <count
+                     value="1">
+               </count>
                <iterate>
                   <and>
+                     <instanceof
+                           value="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
+                     </instanceof>
                      <test
                            forcePluginActivation="true"
                            property="es.unizar.disco.simulation.ui.tester.hasResult">
                      </test>
-                     <instanceof
-                           value="es.unizar.disco.simulation.models.invocation.SimulationInvocation">
-                     </instanceof>
                   </and>
                </iterate>
-               <count
-                     value="1">
-               </count>
             </with>
          </enabledWhen>
       </handler>
@@ -216,7 +232,6 @@
                   </equals>
                </with>
             </visibleWhen>
-
       </menuContribution>
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">

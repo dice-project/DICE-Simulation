@@ -1,6 +1,20 @@
+/*******************************************************************************
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ *
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ *
+ * SPDX-License-Identifier: EPL-1.0
+ *
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
+ *******************************************************************************/
 package es.unizar.disco.simulation.ui.perspective;
 
-import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
@@ -52,12 +66,12 @@ public class SimulationPerspective implements IPerspectiveFactory {
 
 	private void addPerspectiveShortcuts() {
 		factory.addPerspectiveShortcut("org.eclipse.papyrus.infra.core.perspective");
-		factory.addPerspectiveShortcut(JavaUI.ID_PERSPECTIVE);
+		factory.addPerspectiveShortcut("org.eclipse.jdt.ui.JavaPerspective");
 	}
 
 	private void addViewShortcuts() {
 		factory.addShowViewShortcut(IConsoleConstants.ID_CONSOLE_VIEW);
-		factory.addShowViewShortcut(JavaUI.ID_PACKAGES);
+		factory.addShowViewShortcut("org.eclipse.jdt.ui.PackageExplorer");
 		factory.addShowViewShortcut("org.eclipse.pde.runtime.LogView");
 	}
 

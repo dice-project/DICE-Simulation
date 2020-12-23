@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.traces.impl;
 
@@ -68,6 +81,7 @@ public class TracesFactoryImpl extends EFactoryImpl implements TracesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TraceSet createTraceSet() {
 		TraceSetImpl traceSet = new TraceSetImpl();
 		return traceSet;
@@ -78,6 +92,7 @@ public class TracesFactoryImpl extends EFactoryImpl implements TracesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Trace createTrace() {
 		TraceImpl trace = new TraceImpl();
 		return trace;
@@ -88,6 +103,7 @@ public class TracesFactoryImpl extends EFactoryImpl implements TracesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TracesPackage getTracesPackage() {
 		return (TracesPackage)getEPackage();
 	}

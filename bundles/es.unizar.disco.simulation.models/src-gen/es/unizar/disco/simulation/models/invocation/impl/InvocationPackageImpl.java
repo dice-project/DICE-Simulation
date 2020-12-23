@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.invocation.impl;
 
@@ -100,7 +113,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link InvocationPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -114,18 +127,26 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 		if (isInited) return (InvocationPackage)EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI);
 
 		// Obtain or create and register package
-		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof InvocationPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new InvocationPackageImpl());
+		Object registeredInvocationPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		InvocationPackageImpl theInvocationPackage = registeredInvocationPackage instanceof InvocationPackageImpl ? (InvocationPackageImpl)registeredInvocationPackage : new InvocationPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) : DatatypesPackage.eINSTANCE);
-		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) instanceof DefinitionPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) : DefinitionPackage.eINSTANCE);
-		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) instanceof MeasuresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI) : MeasuresPackage.eINSTANCE);
-		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) instanceof SimresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) : SimresultPackage.eINSTANCE);
-		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) instanceof ToolresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) : ToolresultPackage.eINSTANCE);
-		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) instanceof TracesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) : TracesPackage.eINSTANCE);
-		WnsimPackageImpl theWnsimPackage = (WnsimPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI) instanceof WnsimPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI) : WnsimPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
+		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(registeredPackage instanceof DatatypesPackageImpl ? registeredPackage : DatatypesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI);
+		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(registeredPackage instanceof DefinitionPackageImpl ? registeredPackage : DefinitionPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI);
+		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(registeredPackage instanceof MeasuresPackageImpl ? registeredPackage : MeasuresPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI);
+		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(registeredPackage instanceof SimresultPackageImpl ? registeredPackage : SimresultPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI);
+		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(registeredPackage instanceof ToolresultPackageImpl ? registeredPackage : ToolresultPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI);
+		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(registeredPackage instanceof TracesPackageImpl ? registeredPackage : TracesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI);
+		WnsimPackageImpl theWnsimPackage = (WnsimPackageImpl)(registeredPackage instanceof WnsimPackageImpl ? registeredPackage : WnsimPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theInvocationPackage.createPackageContents();
@@ -150,7 +171,6 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 		// Mark meta-data to indicate it can't be changed
 		theInvocationPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(InvocationPackage.eNS_URI, theInvocationPackage);
 		return theInvocationPackage;
@@ -161,6 +181,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getSimulationInvocation() {
 		return simulationInvocationEClass;
 	}
@@ -170,6 +191,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationInvocation_Identifier() {
 		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(0);
 	}
@@ -179,6 +201,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationInvocation_TraceSet() {
 		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(1);
 	}
@@ -188,6 +211,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationInvocation_ToolResult() {
 		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(2);
 	}
@@ -197,6 +221,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationInvocation_Definition() {
 		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(3);
 	}
@@ -206,6 +231,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationInvocation_Result() {
 		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(4);
 	}
@@ -215,6 +241,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationInvocation_Start() {
 		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(5);
 	}
@@ -224,6 +251,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationInvocation_End() {
 		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(6);
 	}
@@ -233,6 +261,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationInvocation_Status() {
 		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(7);
 	}
@@ -242,6 +271,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationInvocation_VariableConfiguration() {
 		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(8);
 	}
@@ -251,6 +281,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationInvocation_AnalyzableModel() {
 		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(9);
 	}
@@ -260,6 +291,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getSimulationInvocation_AutoBuild() {
 		return (EAttribute)simulationInvocationEClass.getEStructuralFeatures().get(10);
 	}
@@ -269,6 +301,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getSimulationInvocation_InvocationSet() {
 		return (EReference)simulationInvocationEClass.getEStructuralFeatures().get(11);
 	}
@@ -278,6 +311,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getSimulationInvocation__BuildAnalyzableModel() {
 		return simulationInvocationEClass.getEOperations().get(0);
 	}
@@ -287,6 +321,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInvocationsRegistry() {
 		return invocationsRegistryEClass;
 	}
@@ -296,6 +331,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInvocationsRegistry_InvocationSets() {
 		return (EReference)invocationsRegistryEClass.getEStructuralFeatures().get(0);
 	}
@@ -305,6 +341,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getInvocationSet() {
 		return invocationSetEClass;
 	}
@@ -314,6 +351,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInvocationSet_Invocations() {
 		return (EReference)invocationSetEClass.getEStructuralFeatures().get(0);
 	}
@@ -323,6 +361,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getInvocationSet_Definition() {
 		return (EReference)invocationSetEClass.getEStructuralFeatures().get(1);
 	}
@@ -332,6 +371,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInvocationSet_Identifier() {
 		return (EAttribute)invocationSetEClass.getEStructuralFeatures().get(2);
 	}
@@ -341,6 +381,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInvocationSet_Start() {
 		return (EAttribute)invocationSetEClass.getEStructuralFeatures().get(3);
 	}
@@ -350,6 +391,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInvocationSet_End() {
 		return (EAttribute)invocationSetEClass.getEStructuralFeatures().get(4);
 	}
@@ -359,6 +401,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getInvocationSet_Status() {
 		return (EAttribute)invocationSetEClass.getEStructuralFeatures().get(5);
 	}
@@ -368,6 +411,7 @@ public class InvocationPackageImpl extends EPackageImpl implements InvocationPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InvocationFactory getInvocationFactory() {
 		return (InvocationFactory)getEFactoryInstance();
 	}

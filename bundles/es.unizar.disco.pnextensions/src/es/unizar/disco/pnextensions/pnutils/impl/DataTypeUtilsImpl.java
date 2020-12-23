@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.pnextensions.pnutils.impl;
 
@@ -48,6 +61,7 @@ public class DataTypeUtilsImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public URI createURI(final String stringUri) throws URISyntaxException {
 		return new URI(stringUri);
 	}
@@ -57,6 +71,7 @@ public class DataTypeUtilsImpl extends MinimalEObjectImpl.Container implements D
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StringBuffer createLongString(final String string) {
 		return new StringBuffer(string);
 	}

@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.measures.impl;
 
@@ -109,7 +122,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link MeasuresPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -123,18 +136,26 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		if (isInited) return (MeasuresPackage)EPackage.Registry.INSTANCE.getEPackage(MeasuresPackage.eNS_URI);
 
 		// Obtain or create and register package
-		MeasuresPackageImpl theMeasuresPackage = (MeasuresPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof MeasuresPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new MeasuresPackageImpl());
+		Object registeredMeasuresPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		MeasuresPackageImpl theMeasuresPackage = registeredMeasuresPackage instanceof MeasuresPackageImpl ? (MeasuresPackageImpl)registeredMeasuresPackage : new MeasuresPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) instanceof DatatypesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI) : DatatypesPackage.eINSTANCE);
-		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) instanceof DefinitionPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI) : DefinitionPackage.eINSTANCE);
-		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) instanceof InvocationPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI) : InvocationPackage.eINSTANCE);
-		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) instanceof SimresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI) : SimresultPackage.eINSTANCE);
-		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) instanceof ToolresultPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI) : ToolresultPackage.eINSTANCE);
-		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) instanceof TracesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI) : TracesPackage.eINSTANCE);
-		WnsimPackageImpl theWnsimPackage = (WnsimPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI) instanceof WnsimPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI) : WnsimPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DatatypesPackage.eNS_URI);
+		DatatypesPackageImpl theDatatypesPackage = (DatatypesPackageImpl)(registeredPackage instanceof DatatypesPackageImpl ? registeredPackage : DatatypesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DefinitionPackage.eNS_URI);
+		DefinitionPackageImpl theDefinitionPackage = (DefinitionPackageImpl)(registeredPackage instanceof DefinitionPackageImpl ? registeredPackage : DefinitionPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(InvocationPackage.eNS_URI);
+		InvocationPackageImpl theInvocationPackage = (InvocationPackageImpl)(registeredPackage instanceof InvocationPackageImpl ? registeredPackage : InvocationPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimresultPackage.eNS_URI);
+		SimresultPackageImpl theSimresultPackage = (SimresultPackageImpl)(registeredPackage instanceof SimresultPackageImpl ? registeredPackage : SimresultPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ToolresultPackage.eNS_URI);
+		ToolresultPackageImpl theToolresultPackage = (ToolresultPackageImpl)(registeredPackage instanceof ToolresultPackageImpl ? registeredPackage : ToolresultPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TracesPackage.eNS_URI);
+		TracesPackageImpl theTracesPackage = (TracesPackageImpl)(registeredPackage instanceof TracesPackageImpl ? registeredPackage : TracesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(WnsimPackage.eNS_URI);
+		WnsimPackageImpl theWnsimPackage = (WnsimPackageImpl)(registeredPackage instanceof WnsimPackageImpl ? registeredPackage : WnsimPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theMeasuresPackage.createPackageContents();
@@ -159,7 +180,6 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 		// Mark meta-data to indicate it can't be changed
 		theMeasuresPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(MeasuresPackage.eNS_URI, theMeasuresPackage);
 		return theMeasuresPackage;
@@ -170,6 +190,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomainMeasure() {
 		return domainMeasureEClass;
 	}
@@ -179,6 +200,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainMeasure_Value() {
 		return (EAttribute)domainMeasureEClass.getEStructuralFeatures().get(0);
 	}
@@ -188,6 +210,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainMeasure_Unit() {
 		return (EAttribute)domainMeasureEClass.getEStructuralFeatures().get(1);
 	}
@@ -197,6 +220,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDomainMeasure_Definition() {
 		return (EReference)domainMeasureEClass.getEStructuralFeatures().get(2);
 	}
@@ -206,6 +230,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMeasureCalculator() {
 		return measureCalculatorEClass;
 	}
@@ -215,6 +240,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EOperation getMeasureCalculator__Calculate__EObject_DomainMeasureDefinition_ToolResult_TraceSet() {
 		return measureCalculatorEClass.getEOperations().get(0);
 	}
@@ -224,6 +250,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomainMeasureDefinition() {
 		return domainMeasureDefinitionEClass;
 	}
@@ -233,6 +260,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDomainMeasureDefinition_MeasuredElement() {
 		return (EReference)domainMeasureDefinitionEClass.getEStructuralFeatures().get(0);
 	}
@@ -242,6 +270,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainMeasureDefinition_Measure() {
 		return (EAttribute)domainMeasureDefinitionEClass.getEStructuralFeatures().get(1);
 	}
@@ -251,6 +280,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDomainMeasureDefinition_VslExpressionEntries() {
 		return (EReference)domainMeasureDefinitionEClass.getEStructuralFeatures().get(2);
 	}
@@ -260,6 +290,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainMeasureDefinition_VslExpression() {
 		return (EAttribute)domainMeasureDefinitionEClass.getEStructuralFeatures().get(3);
 	}
@@ -269,6 +300,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDomainMeasureDefinition_OutputVariable() {
 		return (EReference)domainMeasureDefinitionEClass.getEStructuralFeatures().get(4);
 	}
@@ -278,6 +310,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDomainMeasureDefinition_SimulationDefinition() {
 		return (EReference)domainMeasureDefinitionEClass.getEStructuralFeatures().get(5);
 	}
@@ -287,6 +320,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomainMeasureDefinition_SlaVslExpression() {
 		return (EAttribute)domainMeasureDefinitionEClass.getEStructuralFeatures().get(6);
 	}
@@ -296,6 +330,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEntry() {
 		return entryEClass;
 	}
@@ -305,6 +340,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEntry_Key() {
 		return (EAttribute)entryEClass.getEStructuralFeatures().get(0);
 	}
@@ -314,6 +350,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEntry_Value() {
 		return (EAttribute)entryEClass.getEStructuralFeatures().get(1);
 	}
@@ -323,6 +360,7 @@ public class MeasuresPackageImpl extends EPackageImpl implements MeasuresPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MeasuresFactory getMeasuresFactory() {
 		return (MeasuresFactory)getEFactoryInstance();
 	}

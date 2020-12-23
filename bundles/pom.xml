@@ -1,21 +1,25 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<!-- Copyright (c) 2020 DisCo Group - Universidad de Zaragoza. This program 
+	and the accompanying materials are made available under the terms of the 
+	Eclipse Public License 1.0 which accompanies this distribution, and is available 
+	at https://www.eclipse.org/legal/epl-1.0/ SPDX-License-Identifier: EPL-1.0 
+	Contributors: Abel Gómez Ignacio Requeno Diego Pérez -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>es.unizar.disco</groupId>
-	<artifactId>es.unizar.disco.bundles</artifactId>
-	<packaging>pom</packaging>
-
 	<parent>
 		<groupId>es.unizar.disco</groupId>
-		<artifactId>es.unizar.disco.root</artifactId>
-		<version>0.6.5-SNAPSHOT</version>
+		<artifactId>root</artifactId>
+		<version>0.7.0-SNAPSHOT</version>
 	</parent>
-
+	<groupId>es.unizar.disco</groupId>
+	<artifactId>bundles</artifactId>
+	<packaging>pom</packaging>
 	<modules>
+		<module>com.hierynomus.sshj</module>
 		<module>es.unizar.disco.simulation</module>
 		<module>es.unizar.disco.core</module>
 		<module>es.unizar.disco.pnml.m2m</module>
-		<module>com.hierynomus.sshj</module>
 		<module>es.unizar.disco.core.ui</module>
 		<module>es.unizar.disco.pnextensions</module>
 		<module>es.unizar.disco.pnml.m2t</module>
@@ -27,7 +31,6 @@
 		<module>es.unizar.disco.simulation.ui</module>
 		<module>es.unizar.disco.ssh</module>
 		<module>es.unizar.disco.ssh.ui</module>
+		<module>org.eclipse.ui.intro.fragment</module>
 	</modules>
-	
-
 </project>

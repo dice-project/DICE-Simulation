@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.measures.provider;
 
@@ -18,6 +31,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -68,6 +82,7 @@ public class DomainMeasureDefinitionItemProvider
 			addMeasurePropertyDescriptor(object);
 			addVslExpressionPropertyDescriptor(object);
 			addOutputVariablePropertyDescriptor(object);
+			addSlaVslExpressionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -90,6 +105,28 @@ public class DomainMeasureDefinitionItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Measure feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addMeasurePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DomainMeasureDefinition_measure_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DomainMeasureDefinition_measure_feature", "_UI_DomainMeasureDefinition_type"),
+				 MeasuresPackage.Literals.DOMAIN_MEASURE_DEFINITION__MEASURE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -139,6 +176,28 @@ public class DomainMeasureDefinitionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Sla Vsl Expression feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSlaVslExpressionPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DomainMeasureDefinition_slaVslExpression_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DomainMeasureDefinition_slaVslExpression_feature", "_UI_DomainMeasureDefinition_type"),
+				 MeasuresPackage.Literals.DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -169,28 +228,6 @@ public class DomainMeasureDefinitionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Measure feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addMeasurePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_DomainMeasureDefinition_measure_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_DomainMeasureDefinition_measure_feature", "_UI_DomainMeasureDefinition_type"),
-				 MeasuresPackage.Literals.DOMAIN_MEASURE_DEFINITION__MEASURE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This returns DomainMeasureDefinition.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -214,7 +251,7 @@ public class DomainMeasureDefinitionItemProvider
 			getString("_UI_DomainMeasureDefinition_type") :
 			getString("_UI_DomainMeasureDefinition_type") + " " + label;
 	}
-	
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -230,6 +267,7 @@ public class DomainMeasureDefinitionItemProvider
 		switch (notification.getFeatureID(DomainMeasureDefinition.class)) {
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__MEASURE:
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION:
+			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__SLA_VSL_EXPRESSION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case MeasuresPackage.DOMAIN_MEASURE_DEFINITION__VSL_EXPRESSION_ENTRIES:

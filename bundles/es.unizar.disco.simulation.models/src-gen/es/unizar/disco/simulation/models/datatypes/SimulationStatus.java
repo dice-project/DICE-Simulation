@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.datatypes;
 
@@ -81,10 +94,6 @@ public enum SimulationStatus implements Enumerator {
 	/**
 	 * The '<em><b>Unknown</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Unknown</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNKNOWN
 	 * @model name="unknown" literal="Unknown"
@@ -96,10 +105,6 @@ public enum SimulationStatus implements Enumerator {
 	/**
 	 * The '<em><b>Running</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Running</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #RUNNING
 	 * @model name="running" literal="Running"
@@ -111,10 +116,6 @@ public enum SimulationStatus implements Enumerator {
 	/**
 	 * The '<em><b>Finished</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Finished</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #FINISHED
 	 * @model name="finished" literal="Finished"
@@ -126,10 +127,6 @@ public enum SimulationStatus implements Enumerator {
 	/**
 	 * The '<em><b>Killed</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Killed</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #KILLED
 	 * @model name="killed" literal="Killed"
@@ -141,10 +138,6 @@ public enum SimulationStatus implements Enumerator {
 	/**
 	 * The '<em><b>Waiting</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Waiting</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #WAITING
 	 * @model name="waiting" literal="Waiting"
@@ -156,10 +149,6 @@ public enum SimulationStatus implements Enumerator {
 	/**
 	 * The '<em><b>Failed</b></em>' literal value.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of '<em><b>Failed</b></em>' literal object isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #FAILED
 	 * @model name="failed" literal="Failed"
@@ -286,6 +275,7 @@ public enum SimulationStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getValue() {
 	  return value;
 	}
@@ -295,6 +285,7 @@ public enum SimulationStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 	  return name;
 	}
@@ -304,6 +295,7 @@ public enum SimulationStatus implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLiteral() {
 	  return literal;
 	}

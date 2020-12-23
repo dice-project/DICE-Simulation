@@ -1,4 +1,17 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.invocation;
 
@@ -39,10 +52,6 @@ public interface InvocationSet extends EObject {
 	 * The list contents are of type {@link es.unizar.disco.simulation.models.invocation.SimulationInvocation}.
 	 * It is bidirectional and its opposite is '{@link es.unizar.disco.simulation.models.invocation.SimulationInvocation#getInvocationSet <em>Invocation Set</em>}'.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Invocations</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Invocations</em>' reference list.
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getInvocationSet_Invocations()
@@ -55,10 +64,6 @@ public interface InvocationSet extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Definition</b></em>' reference.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Definition</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Definition</em>' reference.
 	 * @see #setDefinition(SimulationDefinition)
@@ -81,10 +86,6 @@ public interface InvocationSet extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Identifier</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Identifier</em>' attribute.
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getInvocationSet_Identifier()
@@ -96,10 +97,6 @@ public interface InvocationSet extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Start</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Start</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Start</em>' attribute.
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getInvocationSet_Start()
@@ -111,10 +108,6 @@ public interface InvocationSet extends EObject {
 	/**
 	 * Returns the value of the '<em><b>End</b></em>' attribute.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>End</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>End</em>' attribute.
 	 * @see es.unizar.disco.simulation.models.invocation.InvocationPackage#getInvocationSet_End()
@@ -127,10 +120,6 @@ public interface InvocationSet extends EObject {
 	 * Returns the value of the '<em><b>Status</b></em>' attribute.
 	 * The literals are from the enumeration {@link es.unizar.disco.simulation.models.datatypes.SimulationStatus}.
 	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Status</em>' attribute.
 	 * @see es.unizar.disco.simulation.models.datatypes.SimulationStatus

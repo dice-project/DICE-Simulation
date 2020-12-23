@@ -1,3 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ *
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ *
+ * SPDX-License-Identifier: EPL-1.0
+ *
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
+ *******************************************************************************/
 /**
  * 
  */
@@ -95,7 +110,8 @@ public class GspnSshSimulator implements ISimulator {
 			private static final String STS_SEPARATOR = "--";
 			private static final String STS_BATCH_HEADER = "| ";
 			private static final String STS_DEAD_MARKING = "ERROR : Dead marking reached at simulation step";
-			private static final String STS_START_END = "Start batch number";
+			private static final String STS_START = "Start batch number";
+			private static final String STS_END = "End batch number";
 			private static final String STS_CURRENT_TIME = "Current time";
 			private static final String STS_EFFICIENCY = "Efficiency --->";
 			private static final String STS_TIME_REQUIRED = "Time required for";
@@ -127,7 +143,7 @@ public class GspnSshSimulator implements ISimulator {
 					do {
 						reader.mark(4096);
 						line = reader.readLine();
-					} while (line != null && !line.startsWith(STS_START_END));
+					} while (line != null && !line.startsWith(STS_START));
 					reader.reset();
 					
 					Pattern transPattern = Pattern.compile(REX_TRANSITION_INFO);
@@ -145,7 +161,15 @@ public class GspnSshSimulator implements ISimulator {
 							continue;
 						} else if (line.startsWith(STS_CURRENT_TIME)) {
 							continue;
-						} else if (line.startsWith(STS_START_END)) {
+						} else if (line.startsWith(STS_END)) {
+							/*
+							 * It would make sense to look for STS_END rather than STS_START to detect the
+							 * end of the iteration and save the currentResult as we do below, however we
+							 * keep using STS_START for backwards compatibility, since earlier versions of
+							 * WNSIM lacked of a new line character between the lines STS_START and STS_END
+							 */
+							continue;
+						} else if (line.startsWith(STS_START)) {
 							latestResult = currentResult;
 							currentResult = WnsimFactory.eINSTANCE.createWnsimResult();
 							currentResult.setTimestamp(Calendar.getInstance().getTime());

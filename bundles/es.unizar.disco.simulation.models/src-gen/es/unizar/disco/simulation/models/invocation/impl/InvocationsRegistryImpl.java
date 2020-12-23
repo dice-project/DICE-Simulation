@@ -1,18 +1,33 @@
 /**
+ * Copyright (c) 2020 DisCo Group - Universidad de Zaragoza.
+ * 
+ * This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License 1.0
+ * which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-1.0/
+ * 
+ * SPDX-License-Identifier: EPL-1.0
+ * 
+ * Contributors:
+ *     Abel Gómez
+ *     Ignacio Requeno
+ *     Diego Pérez
  */
 package es.unizar.disco.simulation.models.invocation.impl;
 
 import es.unizar.disco.simulation.models.invocation.InvocationPackage;
 import es.unizar.disco.simulation.models.invocation.InvocationSet;
 import es.unizar.disco.simulation.models.invocation.InvocationsRegistry;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -41,6 +56,7 @@ public class InvocationsRegistryImpl extends MinimalEObjectImpl.Container implem
 	 * @ordered
 	 */
 	protected EList<InvocationSet> invocationSets;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,6 +81,7 @@ public class InvocationsRegistryImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<InvocationSet> getInvocationSets() {
 		if (invocationSets == null) {
 			invocationSets = new EObjectContainmentEList<InvocationSet>(InvocationSet.class, this, InvocationPackage.INVOCATIONS_REGISTRY__INVOCATION_SETS);
