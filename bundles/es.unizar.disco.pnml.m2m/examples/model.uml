@@ -118,12 +118,11 @@
   <GQAM:GaAnalysisContext xmi:id="_PJRgoDl2EeaSQIuawXa71A" base_StructuredClassifier="_UWw7IPDmEeWtuqq0TURTfw" base_NamedElement="_UWw7IPDmEeWtuqq0TURTfw">
     <context>out$throughput</context>
     <context>in$rate=0.1</context>
-    <context>in$a1=1</context>
-    <context>in$a2=2</context>
-    <context>in$a3=1</context>
     <context>in$threads=2</context>
-    <context>out$ServerUtil</context>
-    <context>out$RT</context>
+    <context>in$DBthreads=1</context>
+    <context>in$a1=1</context>
+    <context>in$a2=1</context>
+    <context>in$a3=1</context>
     <context>in$a4=1</context>
     <context>in$a5=1</context>
     <context>in$a6=1</context>
@@ -133,10 +132,11 @@
     <context>in$a10=1</context>
     <context>in$a11=1</context>
     <context>in$a12=1</context>
-    <context>out$DBUtil</context>
-    <context>in$DBthreads=1</context>
-    <context>out$DBThroughput</context>
+    <context>out$RT</context>
+    <context>out$ServerUtil</context>
     <context>out$ServerThroughput</context>
+    <context>out$DBUtil</context>
+    <context>out$DBThroughput</context>
   </GQAM:GaAnalysisContext>
   <GQAM:GaScenario xmi:id="_m1PbMDvfEeiX0J8RRaZ2Xg" base_NamedElement="_UWw7IPDmEeWtuqq0TURTfw" usedResources="_1Ki3gDzJEeiI94c8rYGjKg _ak59kEMiEeuGI7cdWXvGjg" base_Behavior="_UWw7IPDmEeWtuqq0TURTfw">
     <throughput>(expr=$throughput, statQ=mean, source=calc)</throughput>
