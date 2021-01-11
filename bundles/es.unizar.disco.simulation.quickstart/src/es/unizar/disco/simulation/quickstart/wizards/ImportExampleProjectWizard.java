@@ -51,6 +51,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -116,11 +117,12 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
 		
 		populateProject(newProject);
 
+		IPerspectiveDescriptor descriptor = getWorkbench().getPerspectiveRegistry().findPerspectiveWithId("org.eclipse.papyrus.infra.core.perspective");
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().setPerspective(descriptor);
+		
 		IWorkingSet[] workingSets = mainPage.getSelectedWorkingSets();
 		getWorkbench().getWorkingSetManager().addToWorkingSets(newProject, workingSets);
 
-		BasicNewProjectResourceWizard.selectAndReveal(newProject, getWorkbench().getActiveWorkbenchWindow());
-		
 		// If active view is maximized and is the "introview", restore it to
 		// reveal the newly created project
 		final IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
@@ -132,7 +134,10 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
                     page.setPartState(viewRef, IWorkbenchPage.STATE_RESTORED);
                 }
             });
-        }		
+        }
+
+        BasicNewProjectResourceWizard.selectAndReveal(newProject, getWorkbench().getActiveWorkbenchWindow());
+
 		return true;
 	}
 
