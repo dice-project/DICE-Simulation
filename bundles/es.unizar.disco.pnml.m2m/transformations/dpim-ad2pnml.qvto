@@ -290,8 +290,8 @@ when {
 		
 		// Ensure that we have a transition with a single outgoing arc
 		assert fatal (originalSourceTrans.oclIsUndefined().not()) with log ("Could not find a source transition while transforming edge '" + edge.toString() + "' in partition '" + self.toString() + "'");
-		assert warning (originalSourceTrans.OutArcs->size() = 1) with log ("Unexpected number of outgoing arcs in transition '" + originalSourceTrans.toString() + 
-		"' (" +originalSourceTrans.OutArcs->size().toString()+ " outgoing arcs)" + " for UML element '" +edge.repr()+ "' with values: " + outArcsRepr);
+		--assert warning (originalSourceTrans.OutArcs->size() = 1) with log ("Unexpected number of outgoing arcs in transition '" + originalSourceTrans.toString() + 
+		--"' (" +originalSourceTrans.OutArcs->size().toString()+ " outgoing arcs)" + " for UML element '" +edge.repr()+ "' with values: " + outArcsRepr);
 		
 		// Create the intermediate nodes
 		var intermediatePlace := object PNML::Place {
