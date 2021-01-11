@@ -91,9 +91,7 @@ public class FiltersLaunchConfigurationTab extends AbstractSimulationLaunchConfi
 			super.notifyChanged(notification);
 			if (notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__MEASURES_TO_COMPUTE
 					|| notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__ACTIVE_CONFIGURATIONS) {
-				if (FiltersLaunchConfigurationTab.this.isActive()) {
-					updateLaunchConfigurationDialog();
-				}
+				updateLaunchConfigurationDialog();
 			} else if (notification.getFeature() == DefinitionPackage.Literals.SIMULATION_DEFINITION__POSSIBLE_CONFIGURATIONS) {
 				MessageFormat format = new MessageFormat("{0,choice,0#No|1#Only {0}|1<{0}} possible configuration{0,choice,0#s|1#|1<s} available");
 				numberOfConfigs.setValue(format.format(new Object[] { simulationDefinition.getPossibleConfigurations().size() }));
