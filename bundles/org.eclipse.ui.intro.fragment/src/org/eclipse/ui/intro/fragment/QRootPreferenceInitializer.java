@@ -5,9 +5,9 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.ui.internal.intro.impl.IntroPlugin;
 
-public class QRootePreferenceInitializer extends AbstractPreferenceInitializer {
+public class QRootPreferenceInitializer extends AbstractPreferenceInitializer {
 
-	public QRootePreferenceInitializer() {
+	public QRootPreferenceInitializer() {
 	}
 
 	@Override
