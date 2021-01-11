@@ -50,16 +50,19 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IViewReference;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkingSet;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.ui.ide.undo.CreateProjectOperation;
 import org.eclipse.ui.ide.undo.WorkspaceUndoUtil;
+import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.statushandlers.IStatusAdapterConstants;
 import org.eclipse.ui.statushandlers.StatusAdapter;
 import org.eclipse.ui.statushandlers.StatusManager;
@@ -128,16 +131,18 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
 		final IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
         final IViewReference viewRef = page.findViewReference("org.eclipse.ui.internal.introview", null);
         if (viewRef != null && page.getPartState(viewRef) == IWorkbenchPage.STATE_MAXIMIZED) {
-            PlatformUI.getWorkbench().getDisplay().asyncExec(new Runnable() {
-                @Override
-                public void run() {
-                    page.setPartState(viewRef, IWorkbenchPage.STATE_RESTORED);
-                }
-            });
+            PlatformUI.getWorkbench().getDisplay().asyncExec(() -> page.setPartState(viewRef, IWorkbenchPage.STATE_RESTORED));
         }
 
         BasicNewProjectResourceWizard.selectAndReveal(newProject, getWorkbench().getActiveWorkbenchWindow());
-
+        try {
+        	final String modelFile = "model.di";
+        	IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(modelFile);
+			page.openEditor(new FileEditorInput(newProject.getFile(modelFile)), desc.getId());
+		} catch (PartInitException e) {
+			// Ignore if the file can't be opened
+		}
+        
 		return true;
 	}
 
