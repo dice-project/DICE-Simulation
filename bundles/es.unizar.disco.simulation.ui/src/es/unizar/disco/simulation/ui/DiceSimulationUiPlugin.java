@@ -15,6 +15,8 @@
  *******************************************************************************/
 package es.unizar.disco.simulation.ui;
 
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -25,6 +27,8 @@ import org.osgi.framework.BundleContext;
  */
 public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 
+	// Preferences
+	public static final String PREF_LAUNCH_PERSPECTIVES_OVERRIDEN = "PREF_LAUNCH_PERSPECTIVES_OVERRIDEN"; //$NON-NLS-1$
 	// Image constants
 	public static final String IMG_OBJ16_CLOCK = "IMG_OBJ16_CLOCK"; //$NON-NLS-1$
 	public static final String IMG_OBJ16_CLOCK_RUNNING = "IMG_OBJ16_CLOCK_RUNNING"; //$NON-NLS-1$
@@ -47,13 +51,13 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	public static final String IMG_ETOOL16_MAKE_VISIBLE = "IMG_ETOOL16_MAKE_VISIBLE"; //$NON-NLS-1$
 	public static final String IMG_ETOOL16_IMAGE = "IMG_ETOOL16_IMAGE"; //$NON-NLS-1$
 	public static final String IMG_EVIEW16_SIMULATION_REGISTRY = "IMG_EVIEW16_SIMULATION_REGISTRY"; //$NON-NLS-1$
-	
+
 	// The plug-in ID
 	public static final String PLUGIN_ID = "es.unizar.disco.simulation.ui"; //$NON-NLS-1$
 
 	// The shared instance
 	private static DiceSimulationUiPlugin plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -67,6 +71,15 @@ public class DiceSimulationUiPlugin extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		if (!getPreferenceStore().getBoolean(PREF_LAUNCH_PERSPECTIVES_OVERRIDEN)) {
+			// Eclipse no longer asks by default if a perspective should be activated when
+			// launching a run configuration.
+			// We override this default value the first time the DICE UI plug-in is loaded
+			getPreferenceStore().setValue(PREF_LAUNCH_PERSPECTIVES_OVERRIDEN, true);
+			IEclipsePreferences preferences = InstanceScope.INSTANCE.getNode("org.eclipse.debug.ui");
+			preferences.put("org.eclipse.debug.ui.switch_to_perspective", "prompt");
+			preferences.flush();
+		}
 	}
 
 	/*
