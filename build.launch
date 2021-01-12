@@ -3,7 +3,7 @@
     <booleanAttribute key="org.eclipse.ant.ui.DEFAULT_VM_INSTALL" value="false"/>
     <stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="${container}"/>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-        <listEntry value="/DICE-Simulation.gh-pages/build.xml"/>
+        <listEntry value="/es.unizar.disco.simulation.gh-pages/build.xml"/>
     </listAttribute>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="1"/>
@@ -14,6 +14,6 @@
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="DICE-Simulation.gh-pages"/>
     <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.ant.ui.AntClasspathProvider"/>
     <stringAttribute key="org.eclipse.ui.externaltools.ATTR_ANT_TARGETS" value="default,"/>
-    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/DICE-Simulation.gh-pages/build.xml}"/>
+    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/es.unizar.disco.simulation.gh-pages/build.xml}"/>
     <stringAttribute key="process_factory_id" value="org.eclipse.ant.ui.remoteAntProcessFactory"/>
 </launchConfiguration>
