@@ -4,7 +4,7 @@
 		<p2.composite.repository>
 			<repository compressed="false" location="${basedir}/updates" name="DICE Simulation Composite Update Site" />
 			<add>
-				<repository location="https://abelgomez.github.io/DICE-Simulation/updates/0.7.0"/>
+				<repository location="https://dice-project.github.io/DICE-Simulation/updates/0.7.0"/>
 			</add>
 		</p2.composite.repository>
 	</target>
