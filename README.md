@@ -1,10 +1,6 @@
 # DICE-Simulation
 Simulation tool for DICE.
 
-# The Simulation Tool in action
-
-A demonstration video can be found at https://www.youtube.com/watch?v=lZX6IoHgHc0
-
 # Requirements
 
 In order to execute simulations, the DICE Simulation Tool requires an installation of GreatSPN running on a Linux server and accessible via SSH.
@@ -24,21 +20,40 @@ See https://github.com/abelgomez/greatspn.docker for more details.
 Hint: use `docker ps` to check which docker containers are running, and `docker stop greatspn` to stop the docker container created above.
 The `greatspn` container will be automatically deleted after stopping it (see the `--rm`parameter).
 
-# Compatibility between Eclipse versions and the DICE Simulation Tools
-
-DICE Simulation Tool version | Eclipse version name                                                                         | Eclipse version number | Minimum Java Version | Supported platforms                             |
-:---------------------------:|:--------------------------------------------------------------------------------------------:|:----------------------:|:--------------------:|:-----------------------------------------------:|
-v0.1.x                       | [Eclipse Mars](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.5-201506032000/)     | 4.5                    | Java 7               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
-v0.2.x                       | [Eclipse Mars](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.5-201506032000/)     | 4.5                    | Java 7               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
-v0.3.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
-v0.4.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
-v0.5.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
-v0.6.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
-v0.7.x                       | [Eclipse 2020-12](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.18-202012021800/) | 4.18                   | Java 11              | Windows, Linux, MacOS X (64 bits only)          |
-
 # Installing the Simulation Tools
 
-In Eclipse, go to `Help -> Install New Software...` and use http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
+## Option A: Installing from scratch
+
+The recommended way to install the DICE Simulation Tool from scratch is just using the [Eclipse installer](https://www.eclipse.org/downloads/packages/installer).
+
+You have several alternative ways of using the Eclipse installer to install the DICE Simulation tool.
+
+### Option A1: Using the installer in portable mode
+
+* If your OS supports drag & drop of links from your browser (e.g., Windows), you can simply drag any of the setup links below (depending on the version you want to install) and drop it over the title area of the installer.
+
+* If your OS does not support drag & drop, simply copy any of the setup links below. While the link is in the clipboard, open the side menu of the installer (the three horizontal lines on the top right corner, or `CTRL + M` / `COMMAND + M`), and select the option *APPLY CONFIGURATION".
+
+#### Setup links
+
+* [https://github.com/dice-project/DICE-Simulation/raw/master/releng/setup/dice.simulation.configuration.latest.setup](https://github.com/dice-project/DICE-Simulation/raw/master/releng/setup/dice.simulation.configuration.latest.setup)
+* [https://github.com/dice-project/DICE-Simulation/raw/master/releng/setup/dice.simulation.configuration.0.7.0.setup](https://github.com/dice-project/DICE-Simulation/raw/master/releng/setup/dice.simulation.configuration.0.7.0.setup)
+
+### Option A2: Using a persistent installer or registering the installer to be persistent
+
+You can also opt for installing the installer in your system by opening the side menu of the installer (the three horizontal lines on the top right corner, or `CTRL + M` / `COMMAND + M`), and enabling the option *WEB LINKS...". The installer will ask for permission to register a handler for web links and to store itself in a permanent location.
+
+Once you already have a permanent installer in your system, you can simply open any of the following links (depending on the version of the DICE Simulation Tool you want to install):
+
+* [Install DICE Simulation Tool (Latest version)](eclipse+installer:https://github.com/dice-project/DICE-Simulation/raw/master/releng/setup/dice.simulation.configuration.latest.setup)
+* [Install DICE Simulation Tool (0.7.0)](eclipse+installer:https://github.com/dice-project/DICE-Simulation/raw/master/releng/setup/dice.simulation.configuration.0.7.0.setup)
+
+
+
+
+## Option B: Installing on top of an existing Eclipse installation
+
+In the running Eclipse instance, go to `Help -> Install New Software...` and use http://dice-project.github.io/DICE-Simulation/updates as the URL for the update site.
 
 ## Archived Updates Sites
 
@@ -60,6 +75,20 @@ In Eclipse, go to `Help -> Install New Software...` and use http://dice-project.
 * http://dice-project.github.io/DICE-Simulation/updates/0.6.4
 * http://dice-project.github.io/DICE-Simulation/updates/0.6.5
 * http://dice-project.github.io/DICE-Simulation/updates/0.7.0
+
+
+# Compatibility between Eclipse versions and the DICE Simulation Tools
+
+DICE Simulation Tool version | Eclipse version name                                                                         | Eclipse version number | Minimum Java Version | Supported platforms                             |
+:---------------------------:|:--------------------------------------------------------------------------------------------:|:----------------------:|:--------------------:|:-----------------------------------------------:|
+v0.1.x                       | [Eclipse Mars](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.5-201506032000/)     | 4.5                    | Java 7               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.2.x                       | [Eclipse Mars](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.5-201506032000/)     | 4.5                    | Java 7               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.3.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.4.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.5.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.6.x                       | [Eclipse Neon](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.6-201606061100/)     | 4.6                    | Java 8               | Windows, Linux, MacOS X (all 32 bits & 64 bits) |
+v0.7.x                       | [Eclipse 2020-12](https://archive.eclipse.org/eclipse/downloads/drops4/R-4.18-202012021800/) | 4.18                   | Java 11              | Windows, Linux, MacOS X (64 bits only)          |
+
 
 # Building the Simulation Tool
 
@@ -84,6 +113,9 @@ In order to prepare a new release, it is necessary to change the version of all 
 mvn clean tycho-versions:set-version -DnewVersion=x.x.x-SNAPSHOT
 ```
 
+# Additional resources
+
+A demonstration video of **an early version** of the DICE Simulation Tool can be found at https://www.youtube.com/watch?v=lZX6IoHgHc0. Please note that the GUI shown in the video may differ from the GUI of the latest versions.
 
 
 
