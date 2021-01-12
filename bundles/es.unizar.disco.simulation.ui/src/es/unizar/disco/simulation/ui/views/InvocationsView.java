@@ -286,7 +286,30 @@ public class InvocationsView extends ViewPart {
 		invocationsViewer.refresh(true);
 	}
 	
-	private class IdColumnLabelProvider extends DelegatedColumnLabelProvider {
+	
+	private class AbstractColumnLabelProvider extends DelegatedColumnLabelProvider {
+		public AbstractColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
+			super(delegatedLabelProvider);
+		}
+		
+		@Override
+		public Color getBackground(Object element) {
+			if (element instanceof InvocationSet) {
+				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND);
+			}
+			return super.getBackground(element);
+		}
+		
+		@Override
+		public Color getForeground(Object element) {
+			if (element instanceof InvocationSet) {
+				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_FOREGROUND);
+			}
+			return super.getForeground(element);
+		}
+	}
+	
+	private class IdColumnLabelProvider extends AbstractColumnLabelProvider {
 		public IdColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
 			super(delegatedLabelProvider);
 		}
@@ -339,25 +362,9 @@ public class InvocationsView extends ViewPart {
 			}
 			return null;
 		}
-
-		@Override
-		public Color getBackground(Object element) {
-			if (element instanceof InvocationSet) {
-				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND);
-			}
-			return super.getBackground(element);
-		}
-		
-		@Override
-		public Color getForeground(Object element) {
-			if (element instanceof InvocationSet) {
-				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_FOREGROUND);
-			}
-			return super.getForeground(element);
-		}
 	}
 
-	private class StartColumnLabelProvider extends DelegatedColumnLabelProvider {
+	private class StartColumnLabelProvider extends AbstractColumnLabelProvider {
 		public StartColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
 			super(delegatedLabelProvider);
 		}
@@ -378,17 +385,9 @@ public class InvocationsView extends ViewPart {
 		public Image getImage(Object element) {
 			return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_CLOCK);
 		}
-
-		@Override
-		public Color getBackground(Object element) {
-			if (element instanceof InvocationSet) {
-				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND);
-			}
-			return super.getBackground(element);
-		}
 	}
 
-	private class EndColumnLabelProvider extends DelegatedColumnLabelProvider {
+	private class EndColumnLabelProvider extends AbstractColumnLabelProvider {
 		public EndColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
 			super(delegatedLabelProvider);
 		}
@@ -409,17 +408,9 @@ public class InvocationsView extends ViewPart {
 		public Image getImage(Object element) {
 			return DiceSimulationUiPlugin.getDefault().getImageRegistry().get(DiceSimulationUiPlugin.IMG_OBJ16_CLOCK);
 		}
-
-		@Override
-		public Color getBackground(Object element) {
-			if (element instanceof InvocationSet) {
-				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND);
-			}
-			return super.getBackground(element);
-		}
 	}
 
-	private class StatusColumnLabelProvider extends DelegatedColumnLabelProvider {
+	private class StatusColumnLabelProvider extends AbstractColumnLabelProvider {
 		public StatusColumnLabelProvider(ILabelProvider delegatedLabelProvider) {
 			super(delegatedLabelProvider);
 		}
@@ -466,29 +457,28 @@ public class InvocationsView extends ViewPart {
 						.get(DiceSimulationUiPlugin.IMG_OBJ16_UNKNOWN);
 			}
 		}
-
-		@Override
-		public Color getBackground(Object element) {
-			if (element instanceof InvocationSet) {
-				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND);
-			}
-			return super.getBackground(element);
-		}
 	}
 
 	private class DummyColumnLabelProvider extends ColumnLabelProvider {
-
 		@Override
 		public String getText(Object element) {
 			return null;
 		}
-
+		
 		@Override
 		public Color getBackground(Object element) {
 			if (element instanceof InvocationSet) {
 				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_BACKGROUND);
 			}
 			return super.getBackground(element);
+		}
+		
+		@Override
+		public Color getForeground(Object element) {
+			if (element instanceof InvocationSet) {
+				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_FOREGROUND);
+			}
+			return super.getForeground(element);
 		}
 	}
 
