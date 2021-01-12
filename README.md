@@ -41,14 +41,9 @@ You have several alternative ways of using the Eclipse installer to install the 
 
 ### Option A2: Using a persistent installer or registering the installer to be persistent
 
-You can also opt for installing the installer in your system by opening the side menu of the installer (the three horizontal lines on the top right corner, or `CTRL + M` / `COMMAND + M`), and enabling the option *WEB LINKS...". The installer will ask for permission to register a handler for web links and to store itself in a permanent location.
+You can also opt for installing the installer in your system (if you have not done it before). This can be done by opening the side menu of the installer (the three horizontal lines on the top right corner, or `CTRL + M` / `COMMAND + M`), and enabling the option *WEB LINKS...". The installer will ask for permission to register a handler for web links and to store itself in a permanent location.
 
-Once you already have a permanent installer in your system, you can simply open any of the following links (depending on the version of the DICE Simulation Tool you want to install):
-
-* [Install DICE Simulation Tool (Latest version)](eclipse+installer:https://github.com/dice-project/DICE-Simulation/raw/master/releng/setup/dice.simulation.configuration.latest.setup)
-* [Install DICE Simulation Tool (0.7.0)](eclipse+installer:https://github.com/dice-project/DICE-Simulation/raw/master/releng/setup/dice.simulation.configuration.0.7.0.setup)
-
-
+Once you already have a permanent installer in your system, you can simply open any of the installation links available at https://dice-project.github.io/DICE-Simulation/static/installation-links.html
 
 
 ## Option B: Installing on top of an existing Eclipse installation
