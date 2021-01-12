@@ -12,14 +12,17 @@ Fortunately, we provide a Docker image to execute GreatSPN, which can be execute
 
 See https://docs.docker.com/get-docker/ for the Docker installation instructions.
 
-Once you have Docker up and running in your system, simply start a docker image by running:
+Once you have Docker up and running in your system, simply start a docker image by running (you may need to execute docker commands as root using `sudo`):
 
 ```
-docker run --publish 2222:22 --env SSH_USERNAME=user --env SSH_USERPASS=password abelgomez/greatspn
+docker run --rm --publish 2222:22 --env SSH_USERNAME=user --env SSH_USERPASS=password --name greatspn abelgomez/greatspn 
 ```
 
-After that, GreatSPN will be accessible via SSH on `localhost`, on port `2222`, using the user `user` and the password `password`.
+After that, a docker container called `greatspn`, with GreatSPN, will be accessible via SSH on `localhost`, on port `2222`, using the user `user` and the password `password`.
 See https://github.com/abelgomez/greatspn.docker for more details.
+
+Hint: use `docker ps` to check which docker containers are running, and `docker stop greatspn` to stop the docker container created above.
+The `greatspn` container will be automatically deleted after stopping it (see the `--rm`parameter).
 
 # Compatibility between Eclipse versions and the DICE Simulation Tools
 
