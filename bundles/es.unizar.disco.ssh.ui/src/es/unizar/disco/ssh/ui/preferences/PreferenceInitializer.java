@@ -34,7 +34,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		IPreferenceStore store = DiceSshConnectorUiPlugin.getDefault().getPreferenceStore();
 		store.setDefault(PreferenceConstants.HOST.toString(), "localhost"); //$NON-NLS-1$
 		store.setDefault(PreferenceConstants.PORT.toString(), 22);
-		store.setDefault(PreferenceConstants.PROVIDER.toString(), PreferenceConstants.KEY_PROVIDER.toString());
+		store.setDefault(PreferenceConstants.PROVIDER.toString(), PreferenceConstants.PASSWORD_PROVIDER.toString());
 		store.setDefault(PreferenceConstants.USERNAME.toString(), "");
 		store.setDefault(PreferenceConstants.KEY.toString(), "");
 		store.setDefault(PreferenceConstants.PASSWORD.toString(), "");
