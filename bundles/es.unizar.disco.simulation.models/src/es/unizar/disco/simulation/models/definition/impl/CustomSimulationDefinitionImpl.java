@@ -387,9 +387,18 @@ public class CustomSimulationDefinitionImpl extends SimulationDefinitionImpl {
 				} else {
 					variable = DefinitionFactoryImpl.eINSTANCE.createInputVariable();
 					if (value != null) {
-						InputVariableValue variableValue = DefinitionFactory.eINSTANCE.createInputVariableValue();
-						variableValue.setValue((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
-						((InputVariable) variable).getValues().add(variableValue);
+						if (value.trim().startsWith("{") && value.trim().endsWith("}")) {
+							String[] values = StringUtils.split(StringUtils.removeEnd(StringUtils.removeStart(value, "{"), "}"), ',');
+							for (String v : values) {
+								InputVariableValue variableValue = DefinitionFactory.eINSTANCE.createInputVariableValue();
+								variableValue.setValue((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, v.trim()));
+								((InputVariable) variable).getValues().add(variableValue);
+							}
+						} else {
+							InputVariableValue variableValue = DefinitionFactory.eINSTANCE.createInputVariableValue();
+							variableValue.setValue((Number) EcoreUtil.createFromString(DatatypesPackage.Literals.NUMBER, value));
+							((InputVariable) variable).getValues().add(variableValue);
+						}
 					}
 				}
 				variable.setName(name);

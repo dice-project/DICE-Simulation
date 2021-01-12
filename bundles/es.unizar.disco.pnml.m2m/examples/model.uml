@@ -117,7 +117,7 @@
   <GQAM:GaWorkloadEvent xmi:id="_dXwnYPRQEeWjOZc1J1pNnQ" pattern="open=(arrivalRate=(expr=$rate, unit=Hz, statQ=mean, source=est))" base_NamedElement="_Z24fUPDnEeWtuqq0TURTfw"/>
   <GQAM:GaAnalysisContext xmi:id="_PJRgoDl2EeaSQIuawXa71A" base_StructuredClassifier="_UWw7IPDmEeWtuqq0TURTfw" base_NamedElement="_UWw7IPDmEeWtuqq0TURTfw">
     <context>out$throughput</context>
-    <context>in$rate=0.1</context>
+    <context>in$rate={0.1, 0.2, 0.3}</context>
     <context>in$threads=2</context>
     <context>in$DBthreads=1</context>
     <context>in$a1=1</context>
