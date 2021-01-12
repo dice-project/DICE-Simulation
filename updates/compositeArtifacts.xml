@@ -7,6 +7,5 @@
   </properties>
   <children size='2'>
     <child location='https://abelgomez.github.io/DICE-Simulation/updates/0.7.0'/>
-    <child location='http://dice-project.github.io/DICE-Simulation-Utils/updates'/>
   </children>
 </repository>
