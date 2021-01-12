@@ -563,7 +563,7 @@
             id="es.unizar.disco.simulation.ui.perspective"
             name="DICE Simulation">
          <description>
-            The DICE SImulation perspectice allows tracking the status of the running simulations more efficiently.
+            The DICE Simulation perspective allows tracking the status of the running simulations more efficiently.
          </description>
       </perspective>
    </extension>
