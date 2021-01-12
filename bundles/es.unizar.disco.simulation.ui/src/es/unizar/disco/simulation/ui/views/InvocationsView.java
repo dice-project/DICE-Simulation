@@ -347,6 +347,14 @@ public class InvocationsView extends ViewPart {
 			}
 			return super.getBackground(element);
 		}
+		
+		@Override
+		public Color getForeground(Object element) {
+			if (element instanceof InvocationSet) {
+				return getSite().getShell().getDisplay().getSystemColor(SWT.COLOR_INFO_FOREGROUND);
+			}
+			return super.getForeground(element);
+		}
 	}
 
 	private class StartColumnLabelProvider extends DelegatedColumnLabelProvider {
