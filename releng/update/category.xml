@@ -14,7 +14,6 @@
         Ignacio Requeno
         Diego Pérez
  -->
-
 <site>
    <feature url="features/com.hierynomus.sshj.feature_0.16.0.jar" id="com.hierynomus.sshj.feature" version="0.16.0">
       <category name="DICE - Simulation"/>
@@ -37,9 +36,5 @@
    <feature url="features/es.unizar.disco.ssh.ui.feature_0.7.0.qualifier.jar" id="es.unizar.disco.ssh.ui.feature" version="0.7.0.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature id="com.abstratt.eclipsegraphviz.feature">
-      <category name="DICE - Simulation (Optional 3rd party features)"/>
-   </feature>
    <category-def name="DICE - Simulation" label="DICE - Simulation"/>
-   <category-def name="DICE - Simulation (Optional 3rd party features)" label="DICE - Simulation (Optional 3rd party features)"/>
 </site>
