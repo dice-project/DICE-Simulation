@@ -15,7 +15,7 @@
 		<site.name>DICE Simulation Tool</site.name>
 		<target.version>2020-12</target.version>
 	</properties>
-	<groupId>es.unizar.disco</groupId>
+	<groupId>es.unizar.disco.simulation</groupId>
 	<artifactId>root</artifactId>
 	<version>0.7.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
@@ -64,7 +64,7 @@
 					<executionEnvironment>JavaSE-11</executionEnvironment>
 					<target>
 						<artifact>
-							<groupId>es.unizar.disco</groupId>
+							<groupId>es.unizar.disco.simulation</groupId>
 							<artifactId>platform</artifactId>
 							<version>0.7.0-SNAPSHOT</version>
 						</artifact>
