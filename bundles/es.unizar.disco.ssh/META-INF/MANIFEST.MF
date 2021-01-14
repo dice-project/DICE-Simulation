@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DICE SSH Connector
 Bundle-SymbolicName: es.unizar.disco.ssh;singleton:=true
-Bundle-Version: 0.7.0.qualifier
+Bundle-Version: 0.7.1.qualifier
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.20.0",
  com.hierynomus.sshj;bundle-version="0.16.0";visibility:=reexport,
  es.unizar.disco.core;bundle-version="0.7.0"

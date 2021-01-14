@@ -18,22 +18,22 @@
    <feature url="features/com.hierynomus.sshj.feature_0.16.0.jar" id="com.hierynomus.sshj.feature" version="0.16.0">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.feature_0.7.0.qualifier.jar" id="es.unizar.disco.simulation.feature" version="0.7.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.feature_0.7.1.qualifier.jar" id="es.unizar.disco.simulation.feature" version="0.7.1.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.7.0.qualifier.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.7.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.greatspn.feature_0.7.1.qualifier.jar" id="es.unizar.disco.simulation.greatspn.feature" version="0.7.1.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.7.0.qualifier.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.7.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.quickstart.feature_0.7.1.qualifier.jar" id="es.unizar.disco.simulation.quickstart.feature" version="0.7.1.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_0.7.0.qualifier.jar" id="es.unizar.disco.simulation.ui.feature" version="0.7.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.ui.feature_0.7.1.qualifier.jar" id="es.unizar.disco.simulation.ui.feature" version="0.7.1.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_0.7.0.qualifier.jar" id="es.unizar.disco.ssh.feature" version="0.7.0.qualifier">
+   <feature url="features/es.unizar.disco.ssh.feature_0.7.1.qualifier.jar" id="es.unizar.disco.ssh.feature" version="0.7.1.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.ssh.ui.feature_0.7.0.qualifier.jar" id="es.unizar.disco.ssh.ui.feature" version="0.7.0.qualifier">
+   <feature url="features/es.unizar.disco.ssh.ui.feature_0.7.1.qualifier.jar" id="es.unizar.disco.ssh.ui.feature" version="0.7.1.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
    <category-def name="DICE - Simulation" label="DICE - Simulation"/>
