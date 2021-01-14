@@ -34,7 +34,7 @@ First, download the [Eclipse installer](https://www.eclipse.org/downloads/packag
 
 * If your OS supports drag & drop of links from your browser (e.g., Windows), you can simply drag any of the setup links below (depending on the version you want to install) and drop it over the title area of the installer.
 
-* If your OS does not support drag & drop, simply copy any of the setup links below. While the link is in the clipboard, open the side menu of the installer (the three horizontal lines on the top right corner, or `CTRL + M` / `COMMAND + M`), and select the option "APPLY CONFIGURATION".
+* If your OS does not support drag & drop, simply copy any of the setup links below. While the link is in the clipboard, open the side menu of the installer (the three horizontal lines on the top right corner, or `CTRL + M` / `COMMAND + M`), and select the option *APPLY CONFIGURATION*.
 
 #### Setup links
 
@@ -43,7 +43,7 @@ First, download the [Eclipse installer](https://www.eclipse.org/downloads/packag
 
 ### Option A2: Using a persistent installer or registering the installer to be persistent
 
-You can also opt for installing the installer in your system (if you have not done it before). This can be done by opening the side menu of the installer (the three horizontal lines on the top right corner, or `CTRL + M` / `COMMAND + M`), and enabling the option *WEB LINKS...". The installer will ask for permission to register a handler for web links and to store itself in a permanent location.
+You can also opt for installing the installer in your system (if you have not done it before). This can be done by opening the side menu of the installer (the three horizontal lines on the top right corner, or `CTRL + M` / `COMMAND + M`), and enabling the option *WEB LINKS...*. The installer will ask for permission to register a handler for web links and to store itself in a permanent location.
 
 Once you already have a permanent installer in your system, you can simply open any of the installation links with the `eclipse+installer:` protocol available at https://dice-project.github.io/DICE-Simulation/static/installation-links.html
 
