@@ -6,7 +6,7 @@
     <property name='p2.atomic.composite.loading' value='true'/>
   </properties>
   <children size='2'>
-    <child location='https://dice-project.github.io/DICE-Simulation-Utils/updates/'/>
+    <child location='https://dice-project.github.io/DICE-Simulation-Utils/updates/0.4.0'/>
     <child location='https://dice-project.github.io/DICE-Simulation/updates/0.7.0/202101141325'/>
   </children>
 </repository>
