@@ -51,8 +51,7 @@
           xsi:type="setup.p2:P2Task"
           label="Eclipse Project Updates - 4.18">
         <requirement
-            name="org.eclipse.platform.ide"
-            versionRange="[4.18.0,4.18.1)"/>
+            name="org.eclipse.platform.ide"/>
         <repository
             url="http://download.eclipse.org/eclipse/updates/4.18/"/>
       </setupTask>
@@ -106,8 +105,7 @@
           xsi:type="setup.p2:P2Task"
           label="Eclipse Project Updates - Latest">
         <requirement
-            name="org.eclipse.platform.ide"
-            versionRange="[4.18.0,4.18.1)"/>
+            name="org.eclipse.platform.ide"/>
         <repository
             url="http://download.eclipse.org/eclipse/updates/latest/"/>
       </setupTask>
