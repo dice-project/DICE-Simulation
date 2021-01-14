@@ -74,8 +74,6 @@
             name="es.unizar.disco.ssh.ui.feature.feature.group"/>
         <requirement
             name="com.hierynomus.sshj.feature.feature.group"/>
-        <requirement
-            name="com.abstratt.eclipsegraphviz.feature.feature.group"/>
         <repository
             url="https://dice-project.github.io/DICE-Simulation/updates/0.7.0"/>
       </setupTask>
@@ -128,8 +126,6 @@
             name="es.unizar.disco.ssh.ui.feature.feature.group"/>
         <requirement
             name="com.hierynomus.sshj.feature.feature.group"/>
-        <requirement
-            name="com.abstratt.eclipsegraphviz.feature.feature.group"/>
         <repository
             url="https://dice-project.github.io/DICE-Simulation/updates/"/>
       </setupTask>
