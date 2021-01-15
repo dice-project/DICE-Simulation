@@ -18,7 +18,7 @@
 <feature
       id="es.unizar.disco.simulation.greatspn.feature"
       label="GreatSPN-Through-SSH Simulator"
-      version="0.7.1.qualifier"
+      version="0.7.2.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -257,7 +257,7 @@ any resulting litigation.
          id="es.unizar.disco.simulation.greatspn.ssh"
          download-size="0"
          install-size="0"
-         version="0.7.1.qualifier"
+         version="0.7.2.qualifier"
          unpack="false"/>
 
 </feature>

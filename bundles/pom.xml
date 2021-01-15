@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>es.unizar.disco.simulation</groupId>
 		<artifactId>root</artifactId>
-		<version>0.7.1-SNAPSHOT</version>
+		<version>0.7.2-SNAPSHOT</version>
 	</parent>
 	<groupId>es.unizar.disco.simulation</groupId>
 	<artifactId>bundles</artifactId>

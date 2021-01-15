@@ -27,7 +27,7 @@
 	</properties>
 	<groupId>es.unizar.disco.simulation</groupId>
 	<artifactId>root</artifactId>
-	<version>0.7.1-SNAPSHOT</version>
+	<version>0.7.2-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
 		<module>bundles</module>
@@ -76,7 +76,7 @@
 						<artifact>
 							<groupId>es.unizar.disco.simulation</groupId>
 							<artifactId>platform</artifactId>
-							<version>0.7.1-SNAPSHOT</version>
+							<version>0.7.2-SNAPSHOT</version>
 						</artifact>
 					</target>
 					<environments>
