@@ -142,6 +142,9 @@ public final class SimulationDefinitionConfigurationHandler {
 					definition.setActiveScenario(scenario);
 				}
 			}
+			if (definition.getActiveScenario() == null && definition.getScenarios().size() == 1) {
+				definition.setActiveScenario(definition.getScenarios().get(0));				
+			}
 		}
 	}
 
