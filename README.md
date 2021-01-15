@@ -33,5 +33,5 @@ Finally, other complementary functionalities of the tool for the end users are:
 * [The tool requirements](https://github.com/dice-project/DICE-Simulation/wiki/Prerequisites)
 * [How to install the tool](https://github.com/dice-project/DICE-Simulation/wiki/Installation)
 * [How to build the tool](https://github.com/dice-project/DICE-Simulation/wiki/Building-the-Simulation-Tool)
-* [How to use the tool](https://github.com/dice-project/DICE-Simulation/wiki/Getting-Started)
-* [Our publications and further resources](https://github.com/dice-project/DICE-Simulation/wiki/Links-and-References)
+* [How to configure](https://github.com/dice-project/DICE-Simulation/wiki/First-Steps) and [use the tool](https://github.com/dice-project/DICE-Simulation/wiki/Getting-Started)
+* [Our publications and further resources](https://github.com/dice-project/DICE-Simulation/wiki/Publications-and-Additional-Resources)
