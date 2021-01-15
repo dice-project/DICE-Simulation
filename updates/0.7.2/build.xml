@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="p2 composite repository" default="default">
+	<target name="default">
+		<p2.composite.repository>
+			<repository compressed="false" location="${basedir}" name="DICE Simulation Composite Update Site" />
+			<add>
+				<repository location="https://dice-project.github.io/DICE-Simulation-Utils/updates/0.4.1"/>
+				<repository location="https://dice-project.github.io/DICE-Simulation/updates/0.7.2/202101152114"/>
+			</add>
+		</p2.composite.repository>
+	</target>
+</project>

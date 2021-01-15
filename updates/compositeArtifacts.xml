@@ -2,12 +2,13 @@
 <?compositeArtifactRepository version='1.0.0'?>
 <repository name='DICE Simulation Composite Update Site' type='org.eclipse.equinox.internal.p2.artifact.repository.CompositeArtifactRepository' version='1'>
   <properties size='2'>
-    <property name='p2.timestamp' value='1610665274851'/>
+    <property name='p2.timestamp' value='1610744984793'/>
     <property name='p2.atomic.composite.loading' value='true'/>
   </properties>
-  <children size='3'>
+  <children size='4'>
     <child location='https://dice-project.github.io/DICE-Simulation-Utils/updates/'/>
-    <child location='https://dice-project.github.io/DICE-Simulation/updates/0.7.0'/>
+    <child location='https://dice-project.github.io/DICE-Simulation/updates/0.7.2'/>
     <child location='https://dice-project.github.io/DICE-Simulation/updates/0.7.1'/>
+    <child location='https://dice-project.github.io/DICE-Simulation/updates/0.7.0'/>
   </children>
 </repository>
