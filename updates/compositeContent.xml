@@ -8,6 +8,8 @@
   <children size='3'>
     <child location='https://dice-project.github.io/DICE-Simulation-Utils/updates/'/>
     <child location='https://dice-project.github.io/DICE-Simulation/updates/0.7.0'/>
+    <!-- 
     <child location='https://dice-project.github.io/DICE-Simulation/updates/0.7.1'/>
+    -->
   </children>
 </repository>
