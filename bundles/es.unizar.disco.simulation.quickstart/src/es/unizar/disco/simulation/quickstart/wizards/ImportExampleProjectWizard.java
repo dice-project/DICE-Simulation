@@ -139,7 +139,7 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
         	final String modelFile = "model.di";
         	IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(modelFile);
 			page.openEditor(new FileEditorInput(newProject.getFile(modelFile)), desc.getId());
-			BasicNewProjectResourceWizard.selectAndReveal(newProject.getFile("README.md"), getWorkbench().getActiveWorkbenchWindow());
+			BasicNewProjectResourceWizard.selectAndReveal(newProject.getFile("README.txt"), getWorkbench().getActiveWorkbenchWindow());
 		} catch (PartInitException e) {
 			// Ignore if the file can't be opened
 		}
