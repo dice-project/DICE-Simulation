@@ -1,9 +1,7 @@
 # The DICE Simulation Tool
 
-The ***DICE Simulation Tool*** is a tool for the performance analysis of software systems.
-The tool has been developed in the european [DICE project](https://github.com/dice-project).
-The tool has been developed for the Eclipse platform.
-It can be used as a standalone software, running on top of an standard Eclipse installation, or it can also be integrated with another tools as it is the case of the [DICE IDE](https://github.com/dice-project/DICE-Platform/releases).
+The ***DICE Simulation Tool*** is a tool for the performance analysis of software systems, initially developed as part of the toolset provided by the european [DICE project](https://github.com/dice-project).
+The tool has been developed for the Eclipse platform, and it can be used as a standalone software, running on top of an standard Eclipse installation; or it can also be integrated with another tools as it is the case of the [DICE IDE](https://github.com/dice-project/DICE-Platform/releases).
 For both cases, the  functionalities and software architecture remain the same.
 
 From the end user point of view, **the DICE Simulation Tool provides three main functionalities** that address the quatitative analysis of systems, in particular, performance and reliability:
