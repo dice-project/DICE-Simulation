@@ -1,7 +1,7 @@
 This folder contains the following projects:
 
 - Posidonia: Case study analyzed in the paper [1]
-- PosidoniaSimplied: illustrative example used in the wiki page "Getting Started: An illustrative example"
+- PosidoniaSimplified: illustrative example used in the wiki page "Getting Started: An illustrative example"
 
 
 
