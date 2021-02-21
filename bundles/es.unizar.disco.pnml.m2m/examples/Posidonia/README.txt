@@ -1,7 +1,6 @@
 Posidonia project
 =================
-This project includes the model used in [1]. 
-The model consists of the following diagrams:
+This project includes the model used in [1]. The model consists of the following diagrams:
 - Component diagram
 - Deployment diagram
 - Four performance scenarios that rely on the same deployment diagram.
@@ -15,9 +14,7 @@ The CEP scenarios are modelled with activity diagrams and represent the CEP beha
 - CEP scenario (high level view)
 - CEPScenario(AD)
 
-The four scenarios together with the Deployment Diagram are annotated with the MARTE profile and they can be used to 
-perform performance analysis with the GreatSPN simulator.
-
+The four scenarios together with the Deployment Diagram are properly annotated with the MARTE profile.
 
 
 Reference:
