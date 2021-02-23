@@ -18,8 +18,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<properties>
-		<tycho.version>2.1.0</tycho.version>
-		<jboss.tycho-plugins.version>1.6.0</jboss.tycho-plugins.version>
+		<tycho.version>2.2.0</tycho.version>
+		<jboss.tycho-plugins.version>2.2.0</jboss.tycho-plugins.version>
 		<org.eclipse.acceleo.maven.version>3.5.0-SNAPSHOT</org.eclipse.acceleo.maven.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<site.name>DICE Simulation Tool</site.name>
