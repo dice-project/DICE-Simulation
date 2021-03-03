@@ -17,7 +17,7 @@ Specifically we provide:
 **Please note that from the above, only the *Simplified Posidonia* case study is 
 designed to be executed out of the box.** The other case studies need to be
 properly parameterized according to the data provided in the corresponding
-publications. 
+publications, and may take long time to be simulated.
 
 
 # References
