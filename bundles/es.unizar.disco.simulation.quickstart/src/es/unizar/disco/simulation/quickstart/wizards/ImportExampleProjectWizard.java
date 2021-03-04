@@ -136,10 +136,13 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
 
         BasicNewProjectResourceWizard.selectAndReveal(newProject, getWorkbench().getActiveWorkbenchWindow());
         try {
-        	final String modelFile = "model.di";
-        	IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(modelFile);
-			page.openEditor(new FileEditorInput(newProject.getFile(modelFile)), desc.getId());
-			BasicNewProjectResourceWizard.selectAndReveal(newProject.getFile("README.txt"), getWorkbench().getActiveWorkbenchWindow());
+        	final String modelFile = "0 Simplified Posidonia/model.di";
+        	final String readmeFile = "0 Simplified Posidonia/README.txt";
+        	IEditorDescriptor descModel = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(modelFile);
+			page.openEditor(new FileEditorInput(newProject.getFile(modelFile)), descModel.getId());
+			IEditorDescriptor descReadme = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(readmeFile);
+			page.openEditor(new FileEditorInput(newProject.getFile(readmeFile)), descReadme.getId());
+			BasicNewProjectResourceWizard.selectAndReveal(newProject.getFile(readmeFile), getWorkbench().getActiveWorkbenchWindow());
 		} catch (PartInitException e) {
 			// Ignore if the file can't be opened
 		}
@@ -209,6 +212,11 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
 			return null;
 		}
 
+		try {
+			newProjectHandle.setDefaultCharset("UTF-8", new NullProgressMonitor());
+		} catch (CoreException e) {
+		}
+		
 		newProject = newProjectHandle;
 
 		return newProject;
@@ -228,7 +236,7 @@ public class ImportExampleProjectWizard extends Wizard implements INewWizard {
 				// It's an unjarred bundle
 				File examplesDir = new File(bundleFile.toURI().resolve(EXAMPLES_DIRECTORY));
 				for (File listedFile :FileUtils.listFiles(examplesDir, null, true)) {
-					filePaths.add(examplesDir.toURI().relativize(listedFile.toURI()).toString());
+					filePaths.add(examplesDir.toURI().relativize(listedFile.toURI()).getPath().toString());
 				}
 			} else {
 				// It's a jarred bundle

@@ -1,4 +1,4 @@
-# README FIRST!
+# DICE Simulation Example Project Contents
 
 This project contains the models of different case studies where the DICE 
 Simulation Tool has been used. These are provided as illustrative examples of 
@@ -6,13 +6,13 @@ the capabilities of the Simulation Tool.
 
 Specifically we provide:
 
-* Simplified Posidonia. START WITH THIS SIMPLIFIED CASE STUDY. You can find more 
+* _Simplified Posidonia_. START WITH THIS SIMPLIFIED CASE STUDY. You can find more 
   information in its dedicated [README.txt](0-Simplified-Posidonia/README.txt) 
   file and in the [Getting Started: An illustrative 
   example](https://github.com/dice-project/DICE-Simulation/wiki/Getting-Started) 
   wiki page. 
-* Posidonia. A more complex case study analyzed in the paper [1].
-* NewsAsset. Another complex case study whose results are presented in [2,3].
+* _Posidonia_. A more complex case study analyzed in the paper [1].
+* _NewsAsset_. Another complex case study whose results are presented in [2,3].
 
 **Please note that from the above, only the *Simplified Posidonia* case study is 
 designed to be executed out of the box.** The other case studies need to be
