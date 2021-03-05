@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
 Bundle-SymbolicName: es.unizar.disco.simulation.tests
-Bundle-Version: 0.7.2.qualifier
+Bundle-Version: 1.0.0.qualifier
 Fragment-Host: es.unizar.disco.simulation
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.junit;bundle-version="4.13.0",
@@ -14,10 +14,10 @@ Require-Bundle: org.junit;bundle-version="4.13.0",
  com.masdes.dam.static.profile;bundle-version="0.13.1",
  ro.ieat.secureuml.profile;bundle-version="0.13.1",
  es.unizar.disco.dice.static.profile;bundle-version="0.13.1",
- es.unizar.disco.ssh.ui;bundle-version="0.7.0",
- es.unizar.disco.pnextensions;bundle-version="0.7.0",
- es.unizar.disco.pnml.m2t;bundle-version="0.7.0",
- es.unizar.disco.simulation.greatspn.ssh;bundle-version="0.7.0",
- es.unizar.disco.pnml.m2m;bundle-version="0.7.0",
- es.unizar.disco.simulation.local;bundle-version="0.7.0"
+ es.unizar.disco.ssh.ui;bundle-version="1.0.0",
+ es.unizar.disco.pnextensions;bundle-version="1.0.0",
+ es.unizar.disco.pnml.m2t;bundle-version="1.0.0",
+ es.unizar.disco.simulation.greatspn.ssh;bundle-version="1.0.0",
+ es.unizar.disco.pnml.m2m;bundle-version="1.0.0",
+ es.unizar.disco.simulation.local;bundle-version="1.0.0"
 Automatic-Module-Name: es.unizar.disco.simulation.tests
