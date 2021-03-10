@@ -13,7 +13,7 @@
     label="DICE Simulation Developers Installation Configuration">
   <installation
       name="dice.simulation.installation.dev"
-      label="DICE Simulation Developers Installation ">
+      label="DICE Simulation Developers Installation">
     <setupTask
         xsi:type="git:GitCloneTask"
         location="${git.location/DICE-Simulation}"
@@ -45,7 +45,8 @@
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        label="IvyIDE">
+        label="IvyIDE"
+        licenseConfirmationDisabled="true">
       <requirement
           name="org.apache.ivy.feature.feature.group"/>
       <requirement
@@ -56,7 +57,7 @@
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
-          rootFolder="${installation.location/git/DICE-Simulation}"
+          rootFolder="${git.location/DICE-Simulation}"
           locateNestedProjects="true"/>
     </setupTask>
     <setupTask
