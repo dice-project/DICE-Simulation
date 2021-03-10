@@ -15,10 +15,13 @@
       name="dice.simulation.installation.dev"
       label="DICE Simulation Developers Installation">
     <setupTask
-        xsi:type="git:GitCloneTask"
-        location="${git.location/DICE-Simulation}"
-        remoteURI="https://github.com/dice-project/DICE-Simulation.git"
-        checkoutBranch="master"/>
+        xsi:type="setup:VariableTask"
+        type="FOLDER"
+        name="git.location"
+        value="${installation.location/git}"
+        label="Cloning location">
+      <description>Location to store git projects</description>
+    </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="Eclipse 2020-12">
@@ -55,6 +58,11 @@
           url="http://www.apache.org/dist/ant/ivyde/updatesite"/>
     </setupTask>
     <setupTask
+        xsi:type="git:GitCloneTask"
+        location="${git.location/DICE-Simulation}"
+        remoteURI="https://github.com/dice-project/DICE-Simulation.git"
+        checkoutBranch="master"/>
+    <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.location/DICE-Simulation}"
@@ -63,14 +71,6 @@
     <setupTask
         xsi:type="pde:TargetPlatformTask"
         name="DICE Simulation Tools SDK Target Platform"/>
-    <setupTask
-        xsi:type="setup:VariableTask"
-        type="FOLDER"
-        name="git.location"
-        value="${installation.location/git}"
-        label="Cloning location">
-      <description>Location to store git projects</description>
-    </setupTask>
     <setupTask
         xsi:type="jdt:JRETask"
         version="JavaSE-11"
