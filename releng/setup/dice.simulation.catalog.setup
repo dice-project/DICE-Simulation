@@ -288,5 +288,5 @@
     </version>
     <description>Package suited to perform performance evaluation based on the Eclipse Platform adding the DICE Simulation Tool, Papyrus, and the MARTE, DAM and DICE profiles, among other utilities.</description>
   </product>
-  <description>The catalog of products available as packaged downloads for the DICE Simulation tool.</description>
+  <description>The catalog of products available as packaged downloads for the DICE Simulation Tool.</description>
 </setup:ProductCatalog>

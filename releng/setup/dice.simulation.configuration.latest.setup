@@ -9,7 +9,7 @@
       label="DICE Simulation Installation">
     <productVersion
         href="dice.simulation.catalog.setup#//@products[name='es.unizar.disco.dice.simulation']/@versions[name='latest']"/>
-    <description>DICE Simulation Tool installation.</description>
+    <description>DICE Simulation Tool Installation.</description>
   </installation>
-  <description>The DICE Simulation configuration allows installing the DICE SImulation tool.</description>
+  <description>The DICE Simulation Configuration allows installing the DICE Simulation Tool.</description>
 </setup:Configuration>
