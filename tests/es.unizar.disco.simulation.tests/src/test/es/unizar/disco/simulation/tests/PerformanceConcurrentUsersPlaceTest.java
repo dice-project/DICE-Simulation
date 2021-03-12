@@ -63,9 +63,11 @@ public class PerformanceConcurrentUsersPlaceTest extends AbstractTest {
 	final static String DEFINITION_FILENAME = "15777ece-6c9b-46a3-89c5-a23c2edd99ab";
 	final static String INVOCATION_FILENAME = "fbd9fa21-dff8-448d-897a-7e51e07dc5f9";
 
+	final static String RELATIVE_PATH = "closedWorkload/";
+	
 	@Before
 	public void loadParticularModels() throws IOException {
-		loadModels(DEFINITION_FILENAME, INVOCATION_FILENAME);
+		loadModels(RELATIVE_PATH + DEFINITION_FILENAME, RELATIVE_PATH + INVOCATION_FILENAME);
 
 	}
 

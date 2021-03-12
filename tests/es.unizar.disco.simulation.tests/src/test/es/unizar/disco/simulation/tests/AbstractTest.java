@@ -73,6 +73,10 @@ public abstract class AbstractTest {
 	// final static URI baseUri =
 	// URI.createFileURI(SimulationInvocationsRegistry.FILES_DIRECTORY.getPath());
 	final static URI baseUri = URI.createFileURI(SimulationInvocationsRegistry.FILES_DIRECTORY.getPath());
+	
+	final static String RELATIVE_PATH = "reliabilityPosidonia/";
+	
+	final static String DEFINITION_UUID = "cb745d8a-44f7-46de-9167-7ce0e822f048";
 	final static String TEST_FILES_UUID = "cfcac620-a901-4526-b631-097bed907210";
 	static boolean firstTime = false;
 
@@ -115,7 +119,7 @@ public abstract class AbstractTest {
 
 		System.out.println("Loading models from registry");
 
-		loadModels("cb745d8a-44f7-46de-9167-7ce0e822f048", TEST_FILES_UUID);
+		loadModels(RELATIVE_PATH + DEFINITION_UUID, RELATIVE_PATH + TEST_FILES_UUID);
 
 	}
 

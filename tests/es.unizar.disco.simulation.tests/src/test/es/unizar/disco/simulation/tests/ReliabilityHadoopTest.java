@@ -68,7 +68,9 @@ public class ReliabilityHadoopTest extends AbstractTest {
 
 	final static String DEFINITION_FILENAME = "f388179a-3dfc-4567-a002-f786fd9bd813";
 	final static String INVOCATION_FILENAME = "9261cd96-6ea6-4e44-b003-253fe8d4cbb7";
-
+	
+	final static String RELATIVE_PATH = "reliabilityHadoop/";
+	
 	final static String UML_FILENAME = "reliabilityHadoop";
 
 
@@ -77,14 +79,14 @@ public class ReliabilityHadoopTest extends AbstractTest {
 	
 	@Before
 	public void loadParticularModels() throws IOException {
-		loadModels(DEFINITION_FILENAME, INVOCATION_FILENAME);
+		loadModels(RELATIVE_PATH + DEFINITION_FILENAME, RELATIVE_PATH + INVOCATION_FILENAME);
 
 	}
 
 	@Test
 	public void testLoadProfiledModel() throws IOException {
 
-		Model model = loadUMLModel(UML_FILENAME);
+		Model model = loadUMLModel(RELATIVE_PATH + UML_FILENAME);
 		
 	
 		assertTrue("The " + UML_FILENAME + " model does not contain zookeeper stereotype", contains(model.getPackagedElements(),"HadoopComputationNode"));

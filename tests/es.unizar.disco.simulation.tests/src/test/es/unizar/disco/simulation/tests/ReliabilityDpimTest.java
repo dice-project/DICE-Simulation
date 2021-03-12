@@ -147,7 +147,7 @@ public class ReliabilityDpimTest extends AbstractTest{
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
 		SimulationDefinition fullExecutionDefinition = (SimulationDefinition) loadResourceFromUri(
-				URI.createFileURI(Paths.get("src/test/resources/reliabilityResults/2d8afa5a-618c-465b-8a2a-d4dd2d8789ff"
+				URI.createFileURI(Paths.get("src/test/resources/reliabilityDpimResults/2d8afa5a-618c-465b-8a2a-d4dd2d8789ff"
 						+ ".def" + "." + XMIResource.XMI_NS).toFile().getAbsolutePath()));
 		DomainMeasure sum = launchAnalysis(fullExecutionDefinition);
 		assertTrue("The sum of Reliability and Unreliability is null", sum != null);

@@ -27,16 +27,17 @@ Files
 #93a71370-1141-4764-aa8e-bb6611def309.def.xmi
 6a008097-ebcb-42bf-99ca-05ecd190c14b.inv.xmi
 165d07a2-a8a0-4359-83c6-822b40f479cc.def.xmi
+wikistatsStorm.uml
 are used for the reliability DTSM Storm tests
 
 Files
 9261cd96-6ea6-4e44-b003-253fe8d4cbb7.inv.xmi
 f388179a-3dfc-4567-a002-f786fd9bd813.def.xmi
 reliabilityHadoop.uml
-are used for teh reliability DTSM Hadoop tests
+are used for the reliability DTSM Hadoop tests
 
 Files
 86f60c62-46c3-4bdc-940b-408535b5e26b.inv.xmi
 c3d6d6a1-6531-43c1-8fa3-f8c3ee0151ab.def.xmi
 SparkReliability.uml
-are used for teh reliability DTSM Spark tests in local. 
+are used for the reliability DTSM Spark tests in local. 

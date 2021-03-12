@@ -65,18 +65,20 @@ public class ReliabilityStormTest extends AbstractTest {
 	final static String DEFINITION_FILENAME = "165d07a2-a8a0-4359-83c6-822b40f479cc";
 	final static String INVOCATION_FILENAME = "6a008097-ebcb-42bf-99ca-05ecd190c14b";
 
+	final static String RELATIVE_PATH = "reliabilityStorm/";
+	
 	final static String UML_FILENAME = "wikistatsStorm";
 
 	@Before
 	public void loadParticularModels() throws IOException {
-		loadModels(DEFINITION_FILENAME, INVOCATION_FILENAME);
+		loadModels(RELATIVE_PATH + DEFINITION_FILENAME, RELATIVE_PATH + INVOCATION_FILENAME);
 
 	}
 
 	@Test
 	public void testLoadProfiledModel() throws IOException {
 
-		Model model = loadUMLModel(UML_FILENAME);
+		Model model = loadUMLModel(RELATIVE_PATH + UML_FILENAME);
 		int sessionTimeout = 30000;
 		
 	

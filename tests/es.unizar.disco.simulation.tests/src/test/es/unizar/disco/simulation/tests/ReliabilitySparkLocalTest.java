@@ -69,6 +69,8 @@ public class ReliabilitySparkLocalTest extends AbstractTest {
 	final static String DEFINITION_FILENAME = "c3d6d6a1-6531-43c1-8fa3-f8c3ee0151ab";
 	final static String INVOCATION_FILENAME = "86f60c62-46c3-4bdc-940b-408535b5e26b";
 
+	final static String RELATIVE_PATH = "reliabilitySpark/";
+	
 	final static String UML_FILENAME = "SparkReliability";
 
 
@@ -77,14 +79,14 @@ public class ReliabilitySparkLocalTest extends AbstractTest {
 	
 	@Before
 	public void loadParticularModels() throws IOException {
-		loadModels(DEFINITION_FILENAME, INVOCATION_FILENAME);
+		loadModels(RELATIVE_PATH + DEFINITION_FILENAME, RELATIVE_PATH + INVOCATION_FILENAME);
 
 	}
 
 	@Test
 	public void testLoadProfiledModel() throws IOException {
 
-		Model model = loadUMLModel(UML_FILENAME);
+		Model model = loadUMLModel(RELATIVE_PATH + UML_FILENAME);
 		
 	
 		assertTrue("The " + UML_FILENAME + " model does not contain zookeeper stereotype", contains(model.getPackagedElements(),"SparkNode"));

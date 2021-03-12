@@ -500,7 +500,7 @@ public class GspnSshSimulator implements ISimulator {
 			copy.setId(id);
 
 			File[] inputFiles = generateGspnFiles(copy, targetDir, subMonitor.newChild(1));
-
+			System.out.println("targetDir absolute path is: " + targetDir.getAbsolutePath() + " and canonical is: " + targetDir.getCanonicalPath());
 			IHostProvider hostProvider = null;
 			IAuthProvider authProvider = null;
 
