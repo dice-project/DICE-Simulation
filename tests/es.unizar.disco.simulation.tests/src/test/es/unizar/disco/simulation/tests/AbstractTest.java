@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.uml2.uml.Activity;
 import org.eclipse.uml2.uml.Artifact;
 import org.eclipse.uml2.uml.CommunicationPath;
 import org.eclipse.uml2.uml.Dependency;
@@ -315,6 +316,13 @@ public abstract class AbstractTest {
 				}
 			}
 			
+			if (e instanceof Activity) {
+				System.out.println("Activity " + e.getName() ); 
+				if(listContainStereotype(((Activity) e).getAppliedStereotypes(),stereotypeName)){
+					return  true;
+				}
+			}
+			
 			if (e instanceof CommunicationPath) {
 				System.out.println("Communication Path " + e.getName() );
 				if(listContainStereotype(((CommunicationPath) e).getAppliedStereotypes(),stereotypeName)){
@@ -381,6 +389,13 @@ public abstract class AbstractTest {
 				}
 				if(contains(((Artifact )e).getNestedArtifacts(),stereotypeName)){
 					return getStereotypedElement(((Artifact )e).getNestedArtifacts(),stereotypeName);
+				}
+			}
+			
+			if (e instanceof Activity) {
+				System.out.println("Activity " + e.getName() ); 
+				if(listContainStereotype(((Activity) e).getAppliedStereotypes(),stereotypeName)){
+					return  e;
 				}
 			}
 			

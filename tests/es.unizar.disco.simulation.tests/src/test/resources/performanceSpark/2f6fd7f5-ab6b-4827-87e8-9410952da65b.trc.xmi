@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traces:TraceSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:traces="http://es.unizar.disco/simulation/traces/1.0">
+  <traces rule="NumberOfConcurrentUsers">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F774QIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="activityDiagram2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F78fUIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="NumberOfConcurrentUsers">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F78fUYlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="initialNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_gwsIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="initialNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_hXwIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="initialNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_p15FUDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_hXwYlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_kbEIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_kbEYlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_lCIIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_lpMIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_lpMYlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_mQQIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_mQQYlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="redNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_vVW-sDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_39EIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_8OgIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_8OgYlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_81kIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_81kYlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_81kolcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_9coIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_F_9coYlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="mapNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_uZmhEDlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_GAK4AIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="Users">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_GAPwgIlcEeuaku5L1nLnDA"/>
+  </traces>
+  <traces rule="devices2resources">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
+    <toAnalyzableElement href="2f6fd7f5-ab6b-4827-87e8-9410952da65b.anm.xmi#_GASMwIlcEeuaku5L1nLnDA"/>
+  </traces>
+</traces:TraceSet>

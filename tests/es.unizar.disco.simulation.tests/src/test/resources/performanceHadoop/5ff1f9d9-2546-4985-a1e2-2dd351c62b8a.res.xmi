@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simresult:SimulationResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simresult="http://es.unizar.disco/simulation/simresult/1.0">
+  <invocation href="5ff1f9d9-2546-4985-a1e2-2dd351c62b8a.inv.xmi#5ff1f9d9-2546-4985-a1e2-2dd351c62b8a"/>
+  <measures value="17.53155478848889" unit="ms">
+    <definition href="e2cf4d45-6c15-46eb-97e6-0d7f86e76d2a.def.xmi#//@declaredMeasures.0"/>
+  </measures>
+  <measures value="87.7574736133333300" unit="percentage">
+    <definition href="e2cf4d45-6c15-46eb-97e6-0d7f86e76d2a.def.xmi#//@declaredMeasures.1"/>
+  </measures>
+  <measures value="146.0705727" unit="Hz">
+    <definition href="e2cf4d45-6c15-46eb-97e6-0d7f86e76d2a.def.xmi#//@declaredMeasures.2"/>
+  </measures>
+  <measures value="87.02581702900" unit="percentage">
+    <definition href="e2cf4d45-6c15-46eb-97e6-0d7f86e76d2a.def.xmi#//@declaredMeasures.3"/>
+  </measures>
+</simresult:SimulationResult>
