@@ -20,7 +20,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,14 +34,15 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Activity;
+import org.eclipse.uml2.uml.ActivityNode;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.PackageableElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import es.unizar.disco.pnml.m2m.builder.HadoopActivityDiagram2PnmlResourceBuilder;
-import es.unizar.disco.pnml.m2m.utils.ConstantUtils;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.ActivityResponseTimeCalculatorHadoop;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorHadoop;
@@ -58,7 +58,6 @@ import es.unizar.disco.simulation.models.simresult.SimresultFactory;
 import es.unizar.disco.simulation.simulators.ISimulator;
 import es.unizar.disco.simulation.simulators.SimulationException;
 import fr.lip6.move.pnml.ptnet.Arc;
-import fr.lip6.move.pnml.ptnet.PetriNet;
 import fr.lip6.move.pnml.ptnet.PetriNetDoc;
 import fr.lip6.move.pnml.ptnet.PnObject;
 import fr.lip6.move.pnml.ptnet.Transition;
@@ -68,9 +67,9 @@ public class PerformanceHadoopTest extends AbstractTest {
 
 	final static String DEFINITION_FILENAME = "e2cf4d45-6c15-46eb-97e6-0d7f86e76d2a";
 	final static String INVOCATION_FILENAME = "5ff1f9d9-2546-4985-a1e2-2dd351c62b8a";
-	
+
 	final static String RELATIVE_PATH = "performanceHadoop/";
-	
+
 	final static String UML_FILENAME = "model_3_classes_3_host";
 
 	@Before
@@ -78,31 +77,30 @@ public class PerformanceHadoopTest extends AbstractTest {
 		loadModels(RELATIVE_PATH + DEFINITION_FILENAME, RELATIVE_PATH + INVOCATION_FILENAME);
 
 	}
-	
+
 	@Test
 	public void testLoadProfiledModel() throws IOException {
 
 		Model model = loadUMLModel(RELATIVE_PATH + UML_FILENAME);
-	
-		/* assertTrue("The " + UML_FILENAME + " model does not contain hadoop operation stereotype", contains(model.getPackagedElements(),"HadoopOperation"));
-		Element hadoopOpElement = getStereotypedElement(model.getPackagedElements(),"HadoopOperation"); */
-		System.out.println("The " + UML_FILENAME + " contains : " + model.getPackagedElements());
-		
+
 		assertTrue("The " + UML_FILENAME + " model does not contain hadoop operation stereotype", contains(model.getPackagedElements(),"HadoopScenario"));
-		
+		System.out.println("The " + UML_FILENAME + " contains : " + model.getPackagedElements());
+
 		Activity hadoopScenario = (Activity) getStereotypedElement(model.getPackagedElements(),"HadoopScenario");
 		
 		System.out.println("The hadoop scenario contains: " + hadoopScenario);
 		System.out.println("The hadoop scenario contains stereotypes: " + hadoopScenario.getAppliedStereotypes()); 
-		System.out.println("The hadoop scenario contains nodes: " + hadoopScenario.getNodes()); 
-		
-		//contains(model.getPackagedElements(),"HadoopOperation");
-		
-		//Element hadoopOpElement = getStereotypedElement(hadoopScenario.get ,"HadoopOperation");
-		//System.out.println("HadoopElement " + hadoopOpElement);
-		
-		/* assertTrue("The " + UML_FILENAME + " model does not contain hadoop operation stereotype", listContainStereotype(model.getAppliedStereotypes(),"HadoopOperation"));
-		Element hadoopOpElement = getStereotypedElement(model.getPackagedElements(),"HadoopOperation"); */ 
+		System.out.println("The hadoop scenario contains nodes: " + hadoopScenario.getNodes());
+
+		//Element hadoopOpElement = getStereotypedElement(model.getPackagedElements(),"HadoopOperation");
+		int count = 0;
+		for (ActivityNode hadoopNode : hadoopScenario.getNodes()) {
+			if (hadoopNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopOperation") != null)
+				count++;
+        }
+
+		assertTrue("The " + UML_FILENAME + " model does not contain hadoop operation stereotype", count > 0);
+
 		Element computNode = getStereotypedElement(model.getPackagedElements(),"HadoopComputationNode");
 		System.out.println("The hadoop scenario contains HadoopComputationNode: " + computNode); 
 
@@ -112,12 +110,10 @@ public class PerformanceHadoopTest extends AbstractTest {
 
 	@Test
 	public void testCreationNet() throws IOException {
-		
 		// writing over the initial "definition"
 		definition = invocation.getDefinition();
 		IAnalyzableModelBuilder builder = new HadoopActivityDiagram2PnmlResourceBuilder();
 
-		
 		System.out.println("Definition: " + definition);
 		System.out.println("Model: " + invocation.getAnalyzableModel());
 		System.out.println("Measures: " + definition.getDeclaredMeasures());
@@ -130,21 +126,21 @@ public class PerformanceHadoopTest extends AbstractTest {
 				invocation.getVariableConfiguration().toPrimitiveAssignments());
 
 		IStatus status = result.getStatus();
+		System.out.println("Status of translation was: " + status.getSeverity() + "   " + status.getMessage() );
+		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
 		assertNotEquals("Status of translation was ERROR", IStatus.ERROR, status.getSeverity());
 		assertNotNull("The translated model in result was null", result.getModel());
 		assertFalse("The result had a list of translated models, but its size was 0", result.getModel().size() == 0);
 		assertNotNull("The first element in the list of translated models was null", result.getModel().get(0));
 
-		saveAnalyzbleModelResult(result,
-				"target/test/resources/outputModelHadoopResources.anm" + "." + XMIResource.XMI_NS);
 	}
 
 	@Test
-	public void testNetIsClosedByConcurrentUsersPlace() {
+	public void testNetIsClosed() {
 		definition = invocation.getDefinition();
 		IAnalyzableModelBuilder builder = new HadoopActivityDiagram2PnmlResourceBuilder();
 
-		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
+		ModelResult result = builder.createAnalyzableModel((Element) definition.getActiveScenario(),
 				invocation.getVariableConfiguration().toPrimitiveAssignments());
 
 		PetriNetDoc netresult = (PetriNetDoc) result.getModel().get(0);
@@ -155,16 +151,16 @@ public class PerformanceHadoopTest extends AbstractTest {
 		for (PnObject pnelement : listPNelements) {
 
 			Place place = null;
-			try {
+			Transition trans = null;
+			Arc ar = null;
+
+			/* All places have, at least, one input arc and one output arc */
+			if (pnelement instanceof Place) {
 				place = (Place) pnelement;
-			} catch (ClassCastException e) {// nothing to do, it was not a
-											// place
-			}
-			if (place != null && place.getName() != null) {
-				onePlaceFound=true;
-				if (place.getName().getText().equalsIgnoreCase(ConstantUtils.getUsers())) {
+				if (place != null && place.getName() != null) {
+    				onePlaceFound=true;
 					oneEntered=true;
-					assertTrue("The place did not contain exactly one input arc", place.getInArcs().size() == 1);
+					assertTrue("The place did not contain at least one input arc", place.getInArcs().size() >= 1);
 					assertTrue("The input arc of the place comes from a null element",
 							place.getInArcs().get(0).getSource() != null);
 					assertTrue("The place did not contain at least one output arc", place.getOutArcs().size() >= 1);
@@ -173,7 +169,24 @@ public class PerformanceHadoopTest extends AbstractTest {
 								arc.getTarget() != null);
 					}
 				}
-
+			}
+			/* All transition have, at least, one input arc and one output arc */
+			else if (pnelement instanceof Transition){
+				trans = (Transition) pnelement;
+				assertTrue("The transition did not contain at least one input arc", trans.getInArcs().size() >= 1);
+				assertTrue("The input arc of the transition comes from a null element",
+						trans.getInArcs().get(0).getSource() != null);
+				assertTrue("The transition did not contain at least one output arc", trans.getOutArcs().size() >= 1);
+				for (Arc arc : trans.getOutArcs()) {
+					assertTrue("The arc id " + arc.getId() + " originated in the transition goes to a null element",
+							arc.getTarget() != null);
+				}
+			}
+			/* All arcs have one source (place/transition) and one target (place/transition) */
+			else if (pnelement instanceof Arc){
+				ar = (Arc) pnelement;
+				assertTrue("The arc did not have a source", ar.getSource() != null);
+				assertTrue("The arc did not have a target", ar.getTarget() != null);
 			}
 		}
 		assertTrue("The was not found any place among the PN elements", onePlaceFound);
@@ -190,28 +203,30 @@ public class PerformanceHadoopTest extends AbstractTest {
 
 		IAnalyzableModelBuilder builder = new HadoopActivityDiagram2PnmlResourceBuilder();
 
-		System.out.println("Creating net of active scenario: " + invocation.getDefinition().getActiveScenario());
-		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
+		System.out.println("Creating net of active scenario: " + definition.getActiveScenario());
+		ModelResult result = builder.createAnalyzableModel((Element) definition.getActiveScenario(),
 				invocation.getVariableConfiguration().toPrimitiveAssignments());
-		// invocation.getAnalyzableModel().addAll(result.getModel());
+		invocation.getAnalyzableModel().addAll(result.getModel());
 		invocation.setTraceSet(result.getTraceSet());
+		saveAnalyzbleModelResult(result, RELATIVE_PATH + INVOCATION_FILENAME + ".anm" + "." + XMIResource.XMI_NS);
 
 		DomainMeasure respt = launchAnalysis(definition);
 		assertTrue("The response time measure is null ", respt != null);
 		assertTrue("The value of the response time measure is null", respt.getValue() != null);
 		assertTrue("The responseTime is NOT higher than 0. Concretely " + respt.getValue().doubleValue(),
 		respt.getValue().doubleValue() > 0.0);
+		assertTrue("The responseTime is NOT between 15 and 20 ms. Concretely " + respt.getValue().doubleValue(),
+		(respt.getValue().doubleValue() > 15.0) && (respt.getValue().doubleValue() < 20.0));
 	}
-
 
 	
 	private DomainMeasure launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
-		invocation.setAutoBuild(true);
-		invocation.setStatus(SimulationStatus.WAITING);
-
 		SimulationInvocation invocation = definition.getInvocations().get(0);
+
+		//invocation.setAutoBuild(true);
+		invocation.setStatus(SimulationStatus.WAITING);
 
 		try {
 			final ISimulator simulator = SimulatorsManager.INSTANCE.getSimulator(definition.getBackend());
@@ -223,12 +238,14 @@ public class PerformanceHadoopTest extends AbstractTest {
 			}
 			invocation.setStatus(SimulationStatus.RUNNING);
 
+			//invocation.getAnalyzableModel().remove(0);
+
 			// @formatter:off
 			Process simulationProcess = simulator.simulate(invocation.getIdentifier(), invocation.getAnalyzableModel(),
 					invocation.getTraceSet(), definition.getParameters().map(), new NullProgressMonitor());
 			// @formatter:on
 
-			System.out.println("Reliability test. Simulate call executed, now entering in the waitFor");
+			System.out.println("Performance test. Simulate call executed, now entering in the waitFor");
 
 			readOutputsThreads(simulationProcess);
 			simulationProcess.waitFor();

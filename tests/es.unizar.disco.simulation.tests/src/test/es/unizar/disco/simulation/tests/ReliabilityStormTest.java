@@ -40,6 +40,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils;
 import es.unizar.disco.pnml.m2m.builder.StormScenario2PnmlReliabilityResourceBuilder;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorStorm;
@@ -242,12 +243,22 @@ public class ReliabilityStormTest extends AbstractTest {
 		//There should be 
 		
 		//2 places and 2 transitions
+		List<Place> places = pnobjects.stream()
+				.filter(n -> n instanceof Place) 
+				.map(n -> (Place) n)
+				.collect(Collectors.toList());
+		
 		int numplaces = pnobjects.stream()
 		.filter(n -> n instanceof Place) 
 		.map(n -> (Place) n)
 		.collect(Collectors.toList())
 		.size();
 		assertEquals("Number of places found was " + numplaces, 2,  numplaces);
+		
+		List<Transition> transitions = pnobjects.stream()
+				.filter(n -> n instanceof Transition) 
+				.map(n -> (Transition) n)
+				.collect(Collectors.toList());
 		
 		int numtransitions = pnobjects.stream()
 				.filter(n -> n instanceof Transition) 
@@ -258,9 +269,26 @@ public class ReliabilityStormTest extends AbstractTest {
 		
 		//one of the places should contain as many tokens as resource multiplicity
 				//TODO
+		int hasResources = 0;
+		for (Place p : places) {
+			if (p.getInitialMarking() != null && 
+				p.getInitialMarking().getText() != null &&
+				p.getInitialMarking().getText().intValue() > 0) {
+				hasResources++;	
+			}
+		}
+		
 		//one of the transitions should be timed with rate the inverse of the MTTF
 				//TODO
-		return true;
+		int hasRate = 0;
+		PnmlToolInfoUtils pnutils = new PnmlToolInfoUtils();
+		for (Transition tr : transitions) {
+			if (tr.getToolspecifics() != null &&
+				pnutils.isExponential(tr)) {
+				hasRate++;	
+			}
+		}
+		return (numplaces == 2) && (numtransitions == 2) && (hasRate == 1) && (hasResources == 1);
 	}
 
 	private DomainMeasure calculateResults(SimulationInvocation invocation) {

@@ -163,6 +163,9 @@ public class ReliabilityHadoopTest extends AbstractTest {
 	private DomainMeasure[] launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
+		
+		
+		
 		SimulationInvocation invocation = definition.getInvocations().get(0);
 
 		try {

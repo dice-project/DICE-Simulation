@@ -9,7 +9,7 @@
   <parameters key="-a" value="5"/>
   <parameters key="-c" value="95"/>
   <parameters key="-f" value="1000"/>
-  <activeScenario href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceHadoop/model_3_classes_3_host.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+  <activeScenario href="./model_3_classes_3_host.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
   <inputVariables name="redT3" assignments="//@possibleConfigurations.0/@assignments.0">
     <values value="3" assignments="//@possibleConfigurations.0/@assignments.0"/>
   </inputVariables>
@@ -73,7 +73,7 @@
   <inputVariables name="th2" assignments="//@possibleConfigurations.0/@assignments.20">
     <values value="3" assignments="//@possibleConfigurations.0/@assignments.20"/>
   </inputVariables>
-  <domainResource uri="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceHadoop/model_3_classes_3_host.uml"/>
+  <domainResource uri="./model_3_classes_3_host.uml"/>
   <outputVariables name="RT1"/>
   <outputVariables name="RT3"/>
   <outputVariables name="RT2"/>
@@ -85,26 +85,26 @@
   <outputVariables name="U3"/>
   <outputVariables name="T3"/>
   <declaredMeasures measure="respT">
-    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceHadoop/model_3_classes_3_host.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="./model_3_classes_3_host.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$RT3"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
     <vslExpressionEntries key="unit" value="ms"/>
   </declaredMeasures>
   <declaredMeasures measure="utilization">
-    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceHadoop/model_3_classes_3_host.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="./model_3_classes_3_host.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$U3"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="throughput">
-    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceHadoop/model_3_classes_3_host.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="./model_3_classes_3_host.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$T3"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
   </declaredMeasures>
   <declaredMeasures measure="utilization">
-    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceHadoop/model_3_classes_3_host.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
+    <measuredElement href="./model_3_classes_3_host.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$U"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
