@@ -9,7 +9,7 @@
   <parameters key="-a" value="5"/>
   <parameters key="-c" value="95"/>
   <parameters key="-f" value="1000"/>
-  <activeScenario href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+  <activeScenario href="./model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
   <inputVariables name="mapT" assignments="//@possibleConfigurations.0/@assignments.0">
     <values value="5" assignments="//@possibleConfigurations.0/@assignments.0"/>
   </inputVariables>
@@ -37,27 +37,27 @@
   <inputVariables name="nC1" assignments="//@possibleConfigurations.0/@assignments.8">
     <values value="5" assignments="//@possibleConfigurations.0/@assignments.8"/>
   </inputVariables>
-  <domainResource uri="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml"/>
+  <domainResource uri="./model.uml"/>
   <outputVariables name="RT"/>
   <outputVariables name="T"/>
   <outputVariables name="U"/>
   <outputVariables name="U1"/>
   <declaredMeasures measure="respT">
-    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="./model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$RT"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
     <vslExpressionEntries key="unit" value="s"/>
   </declaredMeasures>
   <declaredMeasures measure="throughput">
-    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
+    <measuredElement href="./model.uml#_WuYo8DlXEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$T"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>
     <vslExpressionEntries key="unit" value="s"/>
   </declaredMeasures>
   <declaredMeasures measure="utilization">
-    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSpark/model.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
+    <measuredElement href="./model.uml#_LGzO4DlkEeaE4deiM0Jlvg"/>
     <vslExpressionEntries key="expr" value="$U"/>
     <vslExpressionEntries key="source" value="calc"/>
     <vslExpressionEntries key="statQ" value="mean"/>

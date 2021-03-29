@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<invocation:SimulationInvocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:invocation="http://es.unizar.disco/simulation/invocation/1.0" xmlns:wnsim="http://es.unizar.disco/simulation/tool/wnsim/1.0" identifier="5ff1f9d9-2546-4985-a1e2-2dd351c62b8a" start="2021-03-19T18:58:35.828+0100" end="2021-03-19T18:58:39.797+0100" status="Finished">
+  <traceSet href="5ff1f9d9-2546-4985-a1e2-2dd351c62b8a.trc.xmi#/"/>
+  <toolResult xsi:type="wnsim:WnsimResult" href="5ff1f9d9-2546-4985-a1e2-2dd351c62b8a.trs.xmi#/"/>
+  <definition href="e2cf4d45-6c15-46eb-97e6-0d7f86e76d2a.def.xmi#e2cf4d45-6c15-46eb-97e6-0d7f86e76d2a"/>
+  <result href="5ff1f9d9-2546-4985-a1e2-2dd351c62b8a.res.xmi#/"/>
+  <variableConfiguration href="e2cf4d45-6c15-46eb-97e6-0d7f86e76d2a.def.xmi#//@possibleConfigurations.0"/>
+  <analyzableModel href="5ff1f9d9-2546-4985-a1e2-2dd351c62b8a.anm.xmi#/"/>
+  <invocationSet href="../registry.xmi#//@invocationSets.0"/>
+</invocation:SimulationInvocation>

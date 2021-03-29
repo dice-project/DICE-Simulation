@@ -331,8 +331,8 @@ public class PerformanceSparkTest extends AbstractTest {
 					collect(Collectors.toList()).toString(),
 					measureDefinition.getMeasure().equalsIgnoreCase(chosenMeasure));
 
-		assertTrue("Measures to compute contains something different from two elements",
-				invocation.getDefinition().getMeasuresToCompute().size() == 2);
+		assertTrue("Measures to compute contains something different from three elements",
+				invocation.getDefinition().getMeasuresToCompute().size() == 3);
 
 		EObject measuredElement = measureDefinition.getMeasuredElement();
 

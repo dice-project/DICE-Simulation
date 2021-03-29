@@ -327,6 +327,9 @@ public class PerformanceHadoopTest extends AbstractTest {
 						.stream().map(i -> i.getMeasure()).collect(Collectors.toList()).toString(),
 				measureDefinition.getMeasure().equalsIgnoreCase(chosenMeasure));
 
+		assertTrue("Measures to compute contains something different from four elements",
+				invocation.getDefinition().getMeasuresToCompute().size() == 4);
+		
 		EObject measuredElement = measureDefinition.getMeasuredElement();
 
 		// Look for the first calculator that is able to handle
