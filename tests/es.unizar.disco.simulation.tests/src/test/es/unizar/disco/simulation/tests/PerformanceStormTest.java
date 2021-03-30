@@ -83,7 +83,7 @@ public class PerformanceStormTest extends AbstractTest {
 
 		Model model = loadUMLModel(RELATIVE_PATH + UML_FILENAME);
 
-		assertTrue("The " + UML_FILENAME + " model does not contain storm operation stereotype", contains(model.getPackagedElements(),"StormScenarioTopology"));
+		assertTrue("The " + UML_FILENAME + " model does not contain storm scenario stereotype", contains(model.getPackagedElements(),"StormScenarioTopology"));
 		System.out.println("The " + UML_FILENAME + " contains : " + model.getPackagedElements());
 
 		Activity stormScenario = (Activity) getStereotypedElement(model.getPackagedElements(),"StormScenarioTopology");

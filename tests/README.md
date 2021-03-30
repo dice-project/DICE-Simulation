@@ -6,7 +6,7 @@ This directory contains test projects. Please note that, as opposed to regular m
 
 Test plug-in containing unit tests. Please note that tests requiring a GreatSPN instance have been tagged in the group `test.es.unizar.disco.simulation.tests.IntegrationTest` to differentiate them from regular unit tests. This group is excluded by default. See the `integration-tests` profile in the [parent pom.xml](../pom.xml) file.
 
-The resources are organised in different subfolders according to the features to inspect. In particular, there are tests for checking the performance and reliability of a system which is described either at platform-independent (DPIM) or at technology-specific (DTSM) level. The technologies that are currently supported are Apache Hadoop, Apache Spark and Apache Storm.
+The resources are organised in different subfolders according to the features to inspect. In particular, there are tests for checking the performance and reliability of a system which is described either at platform-independent (DPIM) or at technology-specific (DTSM) level. The technologies that are currently supported are Apache Hadoop, Apache Spark and Apache Storm. The reliability tests for Apache Spark are executed locally in a built-in simulator and do not depend on GreatSPN.  
 
 1- Files in 'closedWorkload' are used for the definition of a closed workload: 
 15777ece-6c9b-46a3-89c5-a23c2edd99ab.def.xmi 

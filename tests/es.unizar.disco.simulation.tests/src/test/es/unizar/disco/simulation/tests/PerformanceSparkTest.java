@@ -220,7 +220,7 @@ public class PerformanceSparkTest extends AbstractTest {
 		(respt.getValue().doubleValue() > 0.5) && (respt.getValue().doubleValue() < 2.0));
 	}
 
-	
+
 	private DomainMeasure launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
 

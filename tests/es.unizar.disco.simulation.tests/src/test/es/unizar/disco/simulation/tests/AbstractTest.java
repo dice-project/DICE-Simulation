@@ -39,6 +39,7 @@ import org.eclipse.uml2.uml.Dependency;
 import org.eclipse.uml2.uml.Deployment;
 import org.eclipse.uml2.uml.Device;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Node;
 import org.eclipse.uml2.uml.PackageableElement;
@@ -329,6 +330,14 @@ public abstract class AbstractTest {
 					return true;
 				}
 			}
+			
+			if (e instanceof Interaction) {
+				System.out.println("Interaction " + e.getName() );
+				if(listContainStereotype(((Interaction) e).getAppliedStereotypes(),stereotypeName)){
+					return true;
+				}
+			}
+			
 			if (e instanceof Deployment) {
 				System.out.println("Deployment " + e.getName() ); 
 				if(listContainStereotype(((Deployment) e).getAppliedStereotypes(),stereotypeName)){
@@ -405,6 +414,14 @@ public abstract class AbstractTest {
 					return e;
 				}
 			}
+			
+			if (e instanceof Interaction) {
+				System.out.println("Interaction " + e.getName() );
+				if(listContainStereotype(((Interaction) e).getAppliedStereotypes(),stereotypeName)){
+					return e;
+				}
+			}
+			
 			if (e instanceof Deployment) {
 				System.out.println("Deployment " + e.getName() ); 
 				if(listContainStereotype(((Deployment) e).getAppliedStereotypes(),stereotypeName)){

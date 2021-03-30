@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simresult:SimulationResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:simresult="http://es.unizar.disco/simulation/simresult/1.0">
+  <invocation href="13eb9879-23c2-4e96-a2cc-629f482a40c6.inv.xmi#13eb9879-23c2-4e96-a2cc-629f482a40c6"/>
+</simresult:SimulationResult>

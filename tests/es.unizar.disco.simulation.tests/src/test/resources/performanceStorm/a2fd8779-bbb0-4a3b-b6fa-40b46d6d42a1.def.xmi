@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="ASCII"?>
+<definition:SimulationDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:definition="http://es.unizar.disco/simulation/definition/1.0" identifier="a2fd8779-bbb0-4a3b-b6fa-40b46d6d42a1" maxExecutionTime="1970-01-01T01:00:00.000+0100" measuresToCompute="//@declaredMeasures.0 //@declaredMeasures.1 //@declaredMeasures.2 //@declaredMeasures.3 //@declaredMeasures.4 //@declaredMeasures.5 //@declaredMeasures.6 //@declaredMeasures.7 //@declaredMeasures.8 //@declaredMeasures.9 //@declaredMeasures.10 //@declaredMeasures.11 //@declaredMeasures.12 //@declaredMeasures.13 //@declaredMeasures.14 //@declaredMeasures.15 //@declaredMeasures.16 //@declaredMeasures.17 //@declaredMeasures.18 //@declaredMeasures.19 //@declaredMeasures.20 //@declaredMeasures.21 //@declaredMeasures.22" backend="es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator" activeConfigurations="//@possibleConfigurations.0">
+  <invocations href="13eb9879-23c2-4e96-a2cc-629f482a40c6.inv.xmi#13eb9879-23c2-4e96-a2cc-629f482a40c6"/>
+  <parameters key="-M" value="2000"/>
+  <parameters key="-m" value="1000"/>
+  <parameters key="-s" value="31415"/>
+  <parameters key="-t" value="1000"/>
+  <parameters key="binary_file_path" value="/usr/local/GreatSPN/bin/WNSIM"/>
+  <parameters key="-a" value="5"/>
+  <parameters key="-c" value="95"/>
+  <parameters key="-f" value="1000"/>
+  <activeScenario href="./model.uml#_hiRF0LiZEea8eaFayFZqBQ"/>
+  <inputVariables name="pTopicsLabeler" assignments="//@possibleConfigurations.0/@assignments.0">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.0"/>
+  </inputVariables>
+  <inputVariables name="sClustMondoDB" assignments="//@possibleConfigurations.0/@assignments.1">
+    <values value="17" assignments="//@possibleConfigurations.0/@assignments.1"/>
+  </inputVariables>
+  <inputVariables name="tClustersMongoDBWriter" assignments="//@possibleConfigurations.0/@assignments.2">
+    <values value="0" assignments="//@possibleConfigurations.0/@assignments.2"/>
+  </inputVariables>
+  <inputVariables name="tTopicsLabeler" assignments="//@possibleConfigurations.0/@assignments.3">
+    <values value="0" assignments="//@possibleConfigurations.0/@assignments.3"/>
+  </inputVariables>
+  <inputVariables name="sT2" assignments="//@possibleConfigurations.0/@assignments.4">
+    <values value="2.5" assignments="//@possibleConfigurations.0/@assignments.4"/>
+  </inputVariables>
+  <inputVariables name="sT1" assignments="//@possibleConfigurations.0/@assignments.5">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.5"/>
+  </inputVariables>
+  <inputVariables name="prStream8" assignments="//@possibleConfigurations.0/@assignments.6">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.6"/>
+  </inputVariables>
+  <inputVariables name="tIntermediateRanker" assignments="//@possibleConfigurations.0/@assignments.7">
+    <values value="10.731" assignments="//@possibleConfigurations.0/@assignments.7"/>
+  </inputVariables>
+  <inputVariables name="prStream9_4" assignments="//@possibleConfigurations.0/@assignments.8">
+    <values value="0.29" assignments="//@possibleConfigurations.0/@assignments.8"/>
+  </inputVariables>
+  <inputVariables name="prStream9_1" assignments="//@possibleConfigurations.0/@assignments.9">
+    <values value="0.18" assignments="//@possibleConfigurations.0/@assignments.9"/>
+  </inputVariables>
+  <inputVariables name="prStream9_2" assignments="//@possibleConfigurations.0/@assignments.10">
+    <values value="0.26" assignments="//@possibleConfigurations.0/@assignments.10"/>
+  </inputVariables>
+  <inputVariables name="prStream9_3" assignments="//@possibleConfigurations.0/@assignments.11">
+    <values value="0.27" assignments="//@possibleConfigurations.0/@assignments.11"/>
+  </inputVariables>
+  <inputVariables name="pClustersLabeler" assignments="//@possibleConfigurations.0/@assignments.12">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.12"/>
+  </inputVariables>
+  <inputVariables name="sTopicMondoDB" assignments="//@possibleConfigurations.0/@assignments.13">
+    <values value="17" assignments="//@possibleConfigurations.0/@assignments.13"/>
+  </inputVariables>
+  <inputVariables name="tTermsExtraction" assignments="//@possibleConfigurations.0/@assignments.14">
+    <values value="10.441" assignments="//@possibleConfigurations.0/@assignments.14"/>
+  </inputVariables>
+  <inputVariables name="pTwitterSample" assignments="//@possibleConfigurations.0/@assignments.15">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.15"/>
+  </inputVariables>
+  <inputVariables name="tTwitterSample" assignments="//@possibleConfigurations.0/@assignments.16">
+    <values value="50" assignments="//@possibleConfigurations.0/@assignments.16"/>
+  </inputVariables>
+  <inputVariables name="pMinHashFinalRanker" assignments="//@possibleConfigurations.0/@assignments.17">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.17"/>
+  </inputVariables>
+  <inputVariables name="prStream6_1" assignments="//@possibleConfigurations.0/@assignments.18">
+    <values value="0.16" assignments="//@possibleConfigurations.0/@assignments.18"/>
+  </inputVariables>
+  <inputVariables name="tItemDeserealizer" assignments="//@possibleConfigurations.0/@assignments.19">
+    <values value="0.665" assignments="//@possibleConfigurations.0/@assignments.19"/>
+  </inputVariables>
+  <inputVariables name="prStream6_2" assignments="//@possibleConfigurations.0/@assignments.20">
+    <values value="0.24" assignments="//@possibleConfigurations.0/@assignments.20"/>
+  </inputVariables>
+  <inputVariables name="prStream6_3" assignments="//@possibleConfigurations.0/@assignments.21">
+    <values value="0.27" assignments="//@possibleConfigurations.0/@assignments.21"/>
+  </inputVariables>
+  <inputVariables name="prStream6_4" assignments="//@possibleConfigurations.0/@assignments.22">
+    <values value="0.33" assignments="//@possibleConfigurations.0/@assignments.22"/>
+  </inputVariables>
+  <inputVariables name="ntStream9" assignments="//@possibleConfigurations.0/@assignments.23">
+    <values value="27" assignments="//@possibleConfigurations.0/@assignments.23"/>
+  </inputVariables>
+  <inputVariables name="ntStream8" assignments="//@possibleConfigurations.0/@assignments.24">
+    <values value="59" assignments="//@possibleConfigurations.0/@assignments.24"/>
+  </inputVariables>
+  <inputVariables name="ntStream3" assignments="//@possibleConfigurations.0/@assignments.25">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.25"/>
+  </inputVariables>
+  <inputVariables name="ntStream2" assignments="//@possibleConfigurations.0/@assignments.26">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.26"/>
+  </inputVariables>
+  <inputVariables name="ntStream4" assignments="//@possibleConfigurations.0/@assignments.27">
+    <values value="10" assignments="//@possibleConfigurations.0/@assignments.27"/>
+  </inputVariables>
+  <inputVariables name="pItemDeserializer" assignments="//@possibleConfigurations.0/@assignments.28">
+    <values value="4" assignments="//@possibleConfigurations.0/@assignments.28"/>
+  </inputVariables>
+  <inputVariables name="tMinHashRollingCounter" assignments="//@possibleConfigurations.0/@assignments.29">
+    <values value="10.212" assignments="//@possibleConfigurations.0/@assignments.29"/>
+  </inputVariables>
+  <inputVariables name="ntStream1" assignments="//@possibleConfigurations.0/@assignments.30">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.30"/>
+  </inputVariables>
+  <inputVariables name="nCores" assignments="//@possibleConfigurations.0/@assignments.31">
+    <values value="16" assignments="//@possibleConfigurations.0/@assignments.31"/>
+  </inputVariables>
+  <inputVariables name="pTermsRollingCounter" assignments="//@possibleConfigurations.0/@assignments.32">
+    <values value="4" assignments="//@possibleConfigurations.0/@assignments.32"/>
+  </inputVariables>
+  <inputVariables name="sTermsExtraction" assignments="//@possibleConfigurations.0/@assignments.33">
+    <values value="2" assignments="//@possibleConfigurations.0/@assignments.33"/>
+  </inputVariables>
+  <inputVariables name="tTopicsMongoDBWriter" assignments="//@possibleConfigurations.0/@assignments.34">
+    <values value="0" assignments="//@possibleConfigurations.0/@assignments.34"/>
+  </inputVariables>
+  <inputVariables name="tSolrUpdater" assignments="//@possibleConfigurations.0/@assignments.35">
+    <values value="16.895" assignments="//@possibleConfigurations.0/@assignments.35"/>
+  </inputVariables>
+  <inputVariables name="pMinHashExtraction" assignments="//@possibleConfigurations.0/@assignments.36">
+    <values value="4" assignments="//@possibleConfigurations.0/@assignments.36"/>
+  </inputVariables>
+  <inputVariables name="pTermsExtraction" assignments="//@possibleConfigurations.0/@assignments.37">
+    <values value="2" assignments="//@possibleConfigurations.0/@assignments.37"/>
+  </inputVariables>
+  <inputVariables name="tTermsRollingCounter" assignments="//@possibleConfigurations.0/@assignments.38">
+    <values value="10.127" assignments="//@possibleConfigurations.0/@assignments.38"/>
+  </inputVariables>
+  <inputVariables name="ntStream15" assignments="//@possibleConfigurations.0/@assignments.39">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.39"/>
+  </inputVariables>
+  <inputVariables name="ntStream13" assignments="//@possibleConfigurations.0/@assignments.40">
+    <values value="0" assignments="//@possibleConfigurations.0/@assignments.40"/>
+  </inputVariables>
+  <inputVariables name="tFinalRanker" assignments="//@possibleConfigurations.0/@assignments.41">
+    <values value="16.308" assignments="//@possibleConfigurations.0/@assignments.41"/>
+  </inputVariables>
+  <inputVariables name="ntStream14" assignments="//@possibleConfigurations.0/@assignments.42">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.42"/>
+  </inputVariables>
+  <inputVariables name="prStream7_1" assignments="//@possibleConfigurations.0/@assignments.43">
+    <values value="0.12" assignments="//@possibleConfigurations.0/@assignments.43"/>
+  </inputVariables>
+  <inputVariables name="pClustersMongoDBWriter" assignments="//@possibleConfigurations.0/@assignments.44">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.44"/>
+  </inputVariables>
+  <inputVariables name="ntStream7_2" assignments="//@possibleConfigurations.0/@assignments.45">
+    <values value="0" assignments="//@possibleConfigurations.0/@assignments.45"/>
+  </inputVariables>
+  <inputVariables name="ntStream11" assignments="//@possibleConfigurations.0/@assignments.46">
+    <values value="3" assignments="//@possibleConfigurations.0/@assignments.46"/>
+  </inputVariables>
+  <inputVariables name="pTopicsMongoDBWriter" assignments="//@possibleConfigurations.0/@assignments.47">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.47"/>
+  </inputVariables>
+  <inputVariables name="prStream7_2" assignments="//@possibleConfigurations.0/@assignments.48">
+    <values value="0.12" assignments="//@possibleConfigurations.0/@assignments.48"/>
+  </inputVariables>
+  <inputVariables name="ntStream12" assignments="//@possibleConfigurations.0/@assignments.49">
+    <values value="0" assignments="//@possibleConfigurations.0/@assignments.49"/>
+  </inputVariables>
+  <inputVariables name="prStream7_3" assignments="//@possibleConfigurations.0/@assignments.50">
+    <values value="0.27" assignments="//@possibleConfigurations.0/@assignments.50"/>
+  </inputVariables>
+  <inputVariables name="prStream7_4" assignments="//@possibleConfigurations.0/@assignments.51">
+    <values value="0.49" assignments="//@possibleConfigurations.0/@assignments.51"/>
+  </inputVariables>
+  <inputVariables name="ntStream10" assignments="//@possibleConfigurations.0/@assignments.52">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.52"/>
+  </inputVariables>
+  <inputVariables name="tMinHashIntermediateRanker" assignments="//@possibleConfigurations.0/@assignments.53">
+    <values value="10.219" assignments="//@possibleConfigurations.0/@assignments.53"/>
+  </inputVariables>
+  <inputVariables name="tEntityExtraction" assignments="//@possibleConfigurations.0/@assignments.54">
+    <values value="21.683" assignments="//@possibleConfigurations.0/@assignments.54"/>
+  </inputVariables>
+  <inputVariables name="tMinHashFinalRanker" assignments="//@possibleConfigurations.0/@assignments.55">
+    <values value="19.6" assignments="//@possibleConfigurations.0/@assignments.55"/>
+  </inputVariables>
+  <inputVariables name="tMinHashExtraction" assignments="//@possibleConfigurations.0/@assignments.56">
+    <values value="10.219" assignments="//@possibleConfigurations.0/@assignments.56"/>
+  </inputVariables>
+  <inputVariables name="pEntityExtraction" assignments="//@possibleConfigurations.0/@assignments.57">
+    <values value="4" assignments="//@possibleConfigurations.0/@assignments.57"/>
+  </inputVariables>
+  <inputVariables name="tClustersLabeler" assignments="//@possibleConfigurations.0/@assignments.58">
+    <values value="0" assignments="//@possibleConfigurations.0/@assignments.58"/>
+  </inputVariables>
+  <inputVariables name="pIntermediateRanker" assignments="//@possibleConfigurations.0/@assignments.59">
+    <values value="4" assignments="//@possibleConfigurations.0/@assignments.59"/>
+  </inputVariables>
+  <inputVariables name="pMinHashRollingCounter" assignments="//@possibleConfigurations.0/@assignments.60">
+    <values value="4" assignments="//@possibleConfigurations.0/@assignments.60"/>
+  </inputVariables>
+  <inputVariables name="pMinHashIntermediateRanker" assignments="//@possibleConfigurations.0/@assignments.61">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.61"/>
+  </inputVariables>
+  <inputVariables name="pFinalRanker" assignments="//@possibleConfigurations.0/@assignments.62">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.62"/>
+  </inputVariables>
+  <inputVariables name="pSolrUpdater" assignments="//@possibleConfigurations.0/@assignments.63">
+    <values value="1" assignments="//@possibleConfigurations.0/@assignments.63"/>
+  </inputVariables>
+  <inputVariables name="ntStream6_2" assignments="//@possibleConfigurations.0/@assignments.64">
+    <values value="0" assignments="//@possibleConfigurations.0/@assignments.64"/>
+  </inputVariables>
+  <domainResource uri="./model.uml"/>
+  <outputVariables name="uSolrUpdater"/>
+  <outputVariables name="uTwitterSample"/>
+  <outputVariables name="uTopicsLabeler"/>
+  <outputVariables name="uTopicsMongoDBWriter"/>
+  <outputVariables name="uFinalRanker"/>
+  <outputVariables name="thruClustersLabeler"/>
+  <outputVariables name="uEntityExtraction"/>
+  <outputVariables name="uTermsExtraction"/>
+  <outputVariables name="uTermsRollingCounter"/>
+  <outputVariables name="uMinHashRollingCounter"/>
+  <outputVariables name="thruSolrUpdater"/>
+  <outputVariables name="uClustersMongoDBWriter"/>
+  <outputVariables name="thruClusterMongoDB"/>
+  <outputVariables name="uMinHashExtraction"/>
+  <outputVariables name="uItemDeserializer"/>
+  <outputVariables name="thruTopicsMongoDB"/>
+  <outputVariables name="uCores"/>
+  <outputVariables name="uClustersLabeler"/>
+  <outputVariables name="thruTopicsLabeler"/>
+  <outputVariables name="thruTwitterSample"/>
+  <outputVariables name="uMinHashIntermediateRanker"/>
+  <outputVariables name="uIntermediateRanker"/>
+  <outputVariables name="uMinHashFinalRanker"/>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_9NqO0LiZEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uEntityExtraction"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_-yHrMLiZEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uMinHashExtraction"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_Kz3l0LiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uTwitterSample"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="./model.uml#_Kz3l0LiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$thruTwitterSample"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="s"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_RSWFILiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uTermsExtraction"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_UpC7MLiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uSolrUpdater"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="./model.uml#_UpC7MLiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$thruSolrUpdater"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="s"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_qRoNMLiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uTermsRollingCounter"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_t3aoILiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uIntermediateRanker"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_wdMXkLiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uFinalRanker"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_1pxxMLiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uTopicsMongoDBWriter"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="./model.uml#_1pxxMLiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$thruTopicsMongoDB"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="s"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_59PxgLiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uTopicsLabeler"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="./model.uml#_59PxgLiaEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$thruTopicsLabeler"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="s"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_FIF5ULibEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uMinHashRollingCounter"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_JAOBcLibEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uMinHashIntermediateRanker"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_OihMYLibEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uMinHashFinalRanker"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_TNnpkLibEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uClustersMongoDBWriter"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="./model.uml#_TNnpkLibEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$thruClusterMongoDB"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="s"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_UrlcYLibEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uClustersLabeler"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="./model.uml#_UrlcYLibEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$thruClustersLabeler"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+    <vslExpressionEntries key="unit" value="s"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_1AzQ8P_8EeaC167qz4OFrg"/>
+    <vslExpressionEntries key="expr" value="$uItemDeserializer"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="./model.uml#_2U8UcLiiEea8eaFayFZqBQ"/>
+    <vslExpressionEntries key="expr" value="$uCores"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="statQ" value="mean"/>
+  </declaredMeasures>
+  <possibleConfigurations>
+    <assignments value="//@inputVariables.0/@values.0" variable="pTopicsLabeler"/>
+    <assignments value="//@inputVariables.1/@values.0" variable="sClustMondoDB"/>
+    <assignments value="//@inputVariables.2/@values.0" variable="tClustersMongoDBWriter"/>
+    <assignments value="//@inputVariables.3/@values.0" variable="tTopicsLabeler"/>
+    <assignments value="//@inputVariables.4/@values.0" variable="sT2"/>
+    <assignments value="//@inputVariables.5/@values.0" variable="sT1"/>
+    <assignments value="//@inputVariables.6/@values.0" variable="prStream8"/>
+    <assignments value="//@inputVariables.7/@values.0" variable="tIntermediateRanker"/>
+    <assignments value="//@inputVariables.8/@values.0" variable="prStream9_4"/>
+    <assignments value="//@inputVariables.9/@values.0" variable="prStream9_1"/>
+    <assignments value="//@inputVariables.10/@values.0" variable="prStream9_2"/>
+    <assignments value="//@inputVariables.11/@values.0" variable="prStream9_3"/>
+    <assignments value="//@inputVariables.12/@values.0" variable="pClustersLabeler"/>
+    <assignments value="//@inputVariables.13/@values.0" variable="sTopicMondoDB"/>
+    <assignments value="//@inputVariables.14/@values.0" variable="tTermsExtraction"/>
+    <assignments value="//@inputVariables.15/@values.0" variable="pTwitterSample"/>
+    <assignments value="//@inputVariables.16/@values.0" variable="tTwitterSample"/>
+    <assignments value="//@inputVariables.17/@values.0" variable="pMinHashFinalRanker"/>
+    <assignments value="//@inputVariables.18/@values.0" variable="prStream6_1"/>
+    <assignments value="//@inputVariables.19/@values.0" variable="tItemDeserealizer"/>
+    <assignments value="//@inputVariables.20/@values.0" variable="prStream6_2"/>
+    <assignments value="//@inputVariables.21/@values.0" variable="prStream6_3"/>
+    <assignments value="//@inputVariables.22/@values.0" variable="prStream6_4"/>
+    <assignments value="//@inputVariables.23/@values.0" variable="ntStream9"/>
+    <assignments value="//@inputVariables.24/@values.0" variable="ntStream8"/>
+    <assignments value="//@inputVariables.25/@values.0" variable="ntStream3"/>
+    <assignments value="//@inputVariables.26/@values.0" variable="ntStream2"/>
+    <assignments value="//@inputVariables.27/@values.0" variable="ntStream4"/>
+    <assignments value="//@inputVariables.28/@values.0" variable="pItemDeserializer"/>
+    <assignments value="//@inputVariables.29/@values.0" variable="tMinHashRollingCounter"/>
+    <assignments value="//@inputVariables.30/@values.0" variable="ntStream1"/>
+    <assignments value="//@inputVariables.31/@values.0" variable="nCores"/>
+    <assignments value="//@inputVariables.32/@values.0" variable="pTermsRollingCounter"/>
+    <assignments value="//@inputVariables.33/@values.0" variable="sTermsExtraction"/>
+    <assignments value="//@inputVariables.34/@values.0" variable="tTopicsMongoDBWriter"/>
+    <assignments value="//@inputVariables.35/@values.0" variable="tSolrUpdater"/>
+    <assignments value="//@inputVariables.36/@values.0" variable="pMinHashExtraction"/>
+    <assignments value="//@inputVariables.37/@values.0" variable="pTermsExtraction"/>
+    <assignments value="//@inputVariables.38/@values.0" variable="tTermsRollingCounter"/>
+    <assignments value="//@inputVariables.39/@values.0" variable="ntStream15"/>
+    <assignments value="//@inputVariables.40/@values.0" variable="ntStream13"/>
+    <assignments value="//@inputVariables.41/@values.0" variable="tFinalRanker"/>
+    <assignments value="//@inputVariables.42/@values.0" variable="ntStream14"/>
+    <assignments value="//@inputVariables.43/@values.0" variable="prStream7_1"/>
+    <assignments value="//@inputVariables.44/@values.0" variable="pClustersMongoDBWriter"/>
+    <assignments value="//@inputVariables.45/@values.0" variable="ntStream7_2"/>
+    <assignments value="//@inputVariables.46/@values.0" variable="ntStream11"/>
+    <assignments value="//@inputVariables.47/@values.0" variable="pTopicsMongoDBWriter"/>
+    <assignments value="//@inputVariables.48/@values.0" variable="prStream7_2"/>
+    <assignments value="//@inputVariables.49/@values.0" variable="ntStream12"/>
+    <assignments value="//@inputVariables.50/@values.0" variable="prStream7_3"/>
+    <assignments value="//@inputVariables.51/@values.0" variable="prStream7_4"/>
+    <assignments value="//@inputVariables.52/@values.0" variable="ntStream10"/>
+    <assignments value="//@inputVariables.53/@values.0" variable="tMinHashIntermediateRanker"/>
+    <assignments value="//@inputVariables.54/@values.0" variable="tEntityExtraction"/>
+    <assignments value="//@inputVariables.55/@values.0" variable="tMinHashFinalRanker"/>
+    <assignments value="//@inputVariables.56/@values.0" variable="tMinHashExtraction"/>
+    <assignments value="//@inputVariables.57/@values.0" variable="pEntityExtraction"/>
+    <assignments value="//@inputVariables.58/@values.0" variable="tClustersLabeler"/>
+    <assignments value="//@inputVariables.59/@values.0" variable="pIntermediateRanker"/>
+    <assignments value="//@inputVariables.60/@values.0" variable="pMinHashRollingCounter"/>
+    <assignments value="//@inputVariables.61/@values.0" variable="pMinHashIntermediateRanker"/>
+    <assignments value="//@inputVariables.62/@values.0" variable="pFinalRanker"/>
+    <assignments value="//@inputVariables.63/@values.0" variable="pSolrUpdater"/>
+    <assignments value="//@inputVariables.64/@values.0" variable="ntStream6_2"/>
+  </possibleConfigurations>
+  <scenarioStereotypes>DICE::DICE_UML_Extensions::DTSM::Storm::StormScenarioTopology</scenarioStereotypes>
+</definition:SimulationDefinition>

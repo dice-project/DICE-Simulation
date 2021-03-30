@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ptnet:PetriNetDoc xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ptnet="http:///ptnet.ecore">
+  <nets id="_sKnf0JBtEeuFbeFbcxBJpg">
+    <pages id="_sKrKMJBtEeuFbeFbcxBJpg">
+      <objects xsi:type="ptnet:Place" id="_sKwpwJBtEeuFbeFbcxBJpg" InArcs="_sRzF45BtEeuFbeFbcxBJpg" OutArcs="_sL2O4JBtEeuFbeFbcxBJpg">
+        <name text="MinHashExtraction"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sKxQ0JBtEeuFbeFbcxBJpg" InArcs="_sL218JBtEeuFbeFbcxBJpg" OutArcs="_sRzF4pBtEeuFbeFbcxBJpg">
+        <name text="MinHashExtraction_parallelism"/>
+        <initialMarking text="4"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sLg3sJBtEeuFbeFbcxBJpg" InArcs="_sL2O4JBtEeuFbeFbcxBJpg" OutArcs="_sL218JBtEeuFbeFbcxBJpg _sQRb4ZBtEeuFbeFbcxBJpg _sRGiUZBtEeuFbeFbcxBJpg _sSQ_8ZBtEeuFbeFbcxBJpg">
+        <name text="MinHashExtraction"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>97.85693316371466&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sL2O4JBtEeuFbeFbcxBJpg" source="_sKwpwJBtEeuFbeFbcxBJpg" target="_sLg3sJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sL218JBtEeuFbeFbcxBJpg" source="_sLg3sJBtEeuFbeFbcxBJpg" target="_sKxQ0JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sL4rIJBtEeuFbeFbcxBJpg" OutArcs="_sMKX8JBtEeuFbeFbcxBJpg">
+        <name text="IntermediateRanker"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sL4rIZBtEeuFbeFbcxBJpg" InArcs="_sMKX8ZBtEeuFbeFbcxBJpg _sP0v9JBtEeuFbeFbcxBJpg _sP6Ph5BtEeuFbeFbcxBJpg _sQAWJpBtEeuFbeFbcxBJpg _sQGcwZBtEeuFbeFbcxBJpg" OutArcs="_sP0v9ZBtEeuFbeFbcxBJpg _sP62kJBtEeuFbeFbcxBJpg _sQAWJ5BtEeuFbeFbcxBJpg _sQGcwpBtEeuFbeFbcxBJpg">
+        <name text="IntermediateRanker_parallelism"/>
+        <initialMarking text="4"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sL7HYJBtEeuFbeFbcxBJpg" InArcs="_sMKX8JBtEeuFbeFbcxBJpg" OutArcs="_sMKX8ZBtEeuFbeFbcxBJpg _sQIR8pBtEeuFbeFbcxBJpg">
+        <name text="IntermediateRanker"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>3.451405930205669&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sMKX8JBtEeuFbeFbcxBJpg" source="_sL4rIJBtEeuFbeFbcxBJpg" target="_sL7HYJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sMKX8ZBtEeuFbeFbcxBJpg" source="_sL7HYJBtEeuFbeFbcxBJpg" target="_sL4rIZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sMK_AJBtEeuFbeFbcxBJpg" InArcs="_sRot05BtEeuFbeFbcxBJpg" OutArcs="_sMdS4JBtEeuFbeFbcxBJpg">
+        <name text="TopicsMongoDBWriter"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sMLmEJBtEeuFbeFbcxBJpg" InArcs="_sMdS4ZBtEeuFbeFbcxBJpg" OutArcs="_sRot0pBtEeuFbeFbcxBJpg">
+        <name text="TopicsMongoDBWriter_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sMM0MJBtEeuFbeFbcxBJpg" InArcs="_sMdS4JBtEeuFbeFbcxBJpg" OutArcs="_sMdS4ZBtEeuFbeFbcxBJpg _sOhvcZBtEeuFbeFbcxBJpg _sSYUsZBtEeuFbeFbcxBJpg">
+        <name text="TopicsMongoDBWriter"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>1.6743407283382166&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sMdS4JBtEeuFbeFbcxBJpg" source="_sMK_AJBtEeuFbeFbcxBJpg" target="_sMM0MJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sMdS4ZBtEeuFbeFbcxBJpg" source="_sMM0MJBtEeuFbeFbcxBJpg" target="_sMLmEJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sMd58JBtEeuFbeFbcxBJpg" InArcs="_sRs_Q5BtEeuFbeFbcxBJpg" OutArcs="_sMo5EJBtEeuFbeFbcxBJpg">
+        <name text="ClustersLabeler"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sMehAJBtEeuFbeFbcxBJpg" InArcs="_sMo5EZBtEeuFbeFbcxBJpg" OutArcs="_sRs_QpBtEeuFbeFbcxBJpg">
+        <name text="ClustersLabeler_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sMgWMJBtEeuFbeFbcxBJpg" InArcs="_sMo5EJBtEeuFbeFbcxBJpg" OutArcs="_sMo5EZBtEeuFbeFbcxBJpg _sR3XUJBtEeuFbeFbcxBJpg _sSY7wZBtEeuFbeFbcxBJpg">
+        <name text="ClustersLabeler"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>2.896703551358554&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sMo5EJBtEeuFbeFbcxBJpg" source="_sMd58JBtEeuFbeFbcxBJpg" target="_sMgWMJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sMo5EZBtEeuFbeFbcxBJpg" source="_sMgWMJBtEeuFbeFbcxBJpg" target="_sMehAJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sMqHMJBtEeuFbeFbcxBJpg" InArcs="_sRPsQpBtEeuFbeFbcxBJpg" OutArcs="_sMz4MJBtEeuFbeFbcxBJpg">
+        <name text="ClustersMongoDBWriter"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sMqHMZBtEeuFbeFbcxBJpg" InArcs="_sMz4MZBtEeuFbeFbcxBJpg" OutArcs="_sRPsQZBtEeuFbeFbcxBJpg">
+        <name text="ClustersMongoDBWriter_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sMr8YJBtEeuFbeFbcxBJpg" InArcs="_sMz4MJBtEeuFbeFbcxBJpg" OutArcs="_sMz4MZBtEeuFbeFbcxBJpg _sQTREJBtEeuFbeFbcxBJpg _sSY7w5BtEeuFbeFbcxBJpg">
+        <name text="ClustersMongoDBWriter"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>2.2192632046160674&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sMz4MJBtEeuFbeFbcxBJpg" source="_sMqHMJBtEeuFbeFbcxBJpg" target="_sMr8YJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sMz4MZBtEeuFbeFbcxBJpg" source="_sMr8YJBtEeuFbeFbcxBJpg" target="_sMqHMZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sM1GUJBtEeuFbeFbcxBJpg" InArcs="_sRXoEJBtEeuFbeFbcxBJpg" OutArcs="_sM9pMJBtEeuFbeFbcxBJpg">
+        <name text="T2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sM1GUZBtEeuFbeFbcxBJpg" InArcs="_sM9pMZBtEeuFbeFbcxBJpg" OutArcs="_sRXBApBtEeuFbeFbcxBJpg">
+        <name text="T2_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sM27gJBtEeuFbeFbcxBJpg" InArcs="_sM9pMJBtEeuFbeFbcxBJpg" OutArcs="_sM9pMZBtEeuFbeFbcxBJpg _sQcbAZBtEeuFbeFbcxBJpg _sSSOFZBtEeuFbeFbcxBJpg">
+        <name text="T2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>99999.99999999999&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sM9pMJBtEeuFbeFbcxBJpg" source="_sM1GUJBtEeuFbeFbcxBJpg" target="_sM27gJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sM9pMZBtEeuFbeFbcxBJpg" source="_sM27gJBtEeuFbeFbcxBJpg" target="_sM1GUZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sM-QQJBtEeuFbeFbcxBJpg" InArcs="_sRgK85BtEeuFbeFbcxBJpg" OutArcs="_sNFlAJBtEeuFbeFbcxBJpg">
+        <name text="T1"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sM-QQZBtEeuFbeFbcxBJpg" InArcs="_sNFlAZBtEeuFbeFbcxBJpg" OutArcs="_sRgK8pBtEeuFbeFbcxBJpg">
+        <name text="T1_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sNAFcJBtEeuFbeFbcxBJpg" InArcs="_sNFlAJBtEeuFbeFbcxBJpg" OutArcs="_sNFlAZBtEeuFbeFbcxBJpg _sOi9kJBtEeuFbeFbcxBJpg _sSS1IZBtEeuFbeFbcxBJpg">
+        <name text="T1"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>99999.99999999999&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sNFlAJBtEeuFbeFbcxBJpg" source="_sM-QQJBtEeuFbeFbcxBJpg" target="_sNAFcJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sNFlAZBtEeuFbeFbcxBJpg" source="_sNAFcJBtEeuFbeFbcxBJpg" target="_sM-QQZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sNGMEJBtEeuFbeFbcxBJpg" InArcs="_sRcgkJBtEeuFbeFbcxBJpg" OutArcs="_sNOu8JBtEeuFbeFbcxBJpg">
+        <name text="EntityExtraction"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sNGzIJBtEeuFbeFbcxBJpg" InArcs="_sNOu8ZBtEeuFbeFbcxBJpg" OutArcs="_sRb5gpBtEeuFbeFbcxBJpg">
+        <name text="EntityExtraction_parallelism"/>
+        <initialMarking text="4"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sNIBQJBtEeuFbeFbcxBJpg" InArcs="_sNOu8JBtEeuFbeFbcxBJpg" OutArcs="_sNOu8ZBtEeuFbeFbcxBJpg _sRHJYZBtEeuFbeFbcxBJpg _sSS1I5BtEeuFbeFbcxBJpg">
+        <name text="EntityExtraction"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>46.11907946317391&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sNOu8JBtEeuFbeFbcxBJpg" source="_sNGMEJBtEeuFbeFbcxBJpg" target="_sNIBQJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sNOu8ZBtEeuFbeFbcxBJpg" source="_sNIBQJBtEeuFbeFbcxBJpg" target="_sNGzIJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sNPWAJBtEeuFbeFbcxBJpg" OutArcs="_sNX44JBtEeuFbeFbcxBJpg">
+        <name text="FinalRanker"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sNPWAZBtEeuFbeFbcxBJpg" InArcs="_sNX44ZBtEeuFbeFbcxBJpg _sQNxgJBtEeuFbeFbcxBJpg" OutArcs="_sQNxgZBtEeuFbeFbcxBJpg">
+        <name text="FinalRanker_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sNRLMJBtEeuFbeFbcxBJpg" InArcs="_sNX44JBtEeuFbeFbcxBJpg" OutArcs="_sNX44ZBtEeuFbeFbcxBJpg _sQSqAZBtEeuFbeFbcxBJpg">
+        <name text="FinalRanker"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>20.4398659144796&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sNX44JBtEeuFbeFbcxBJpg" source="_sNPWAJBtEeuFbeFbcxBJpg" target="_sNRLMJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sNX44ZBtEeuFbeFbcxBJpg" source="_sNRLMJBtEeuFbeFbcxBJpg" target="_sNPWAZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sNYf8JBtEeuFbeFbcxBJpg" OutArcs="_sNhp4JBtEeuFbeFbcxBJpg">
+        <name text="TermsRollingCounter"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sNYf8ZBtEeuFbeFbcxBJpg" InArcs="_sNhp4ZBtEeuFbeFbcxBJpg _sQs5tpBtEeuFbeFbcxBJpg _sQ1clJBtEeuFbeFbcxBJpg _sQ9_cJBtEeuFbeFbcxBJpg _sRFUNpBtEeuFbeFbcxBJpg" OutArcs="_sQs5t5BtEeuFbeFbcxBJpg _sQ1clZBtEeuFbeFbcxBJpg _sQ9_cZBtEeuFbeFbcxBJpg _sRF7QJBtEeuFbeFbcxBJpg">
+        <name text="TermsRollingCounter_parallelism"/>
+        <initialMarking text="4"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sNZuEJBtEeuFbeFbcxBJpg" InArcs="_sNhp4JBtEeuFbeFbcxBJpg" OutArcs="_sNhp4ZBtEeuFbeFbcxBJpg _sPk4UZBtEeuFbeFbcxBJpg">
+        <name text="TermsRollingCounter"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.22812439756623928&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sNhp4JBtEeuFbeFbcxBJpg" source="_sNYf8JBtEeuFbeFbcxBJpg" target="_sNZuEJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sNhp4ZBtEeuFbeFbcxBJpg" source="_sNZuEJBtEeuFbeFbcxBJpg" target="_sNYf8ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sNiQ8JBtEeuFbeFbcxBJpg" InArcs="_sRIXg5BtEeuFbeFbcxBJpg" OutArcs="_sNo-oJBtEeuFbeFbcxBJpg">
+        <name text="ItemDeserializer"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sNiQ8ZBtEeuFbeFbcxBJpg" InArcs="_sNplsJBtEeuFbeFbcxBJpg" OutArcs="_sRIXgpBtEeuFbeFbcxBJpg">
+        <name text="ItemDeserializer_parallelism"/>
+        <initialMarking text="4"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sNkGIJBtEeuFbeFbcxBJpg" InArcs="_sNo-oJBtEeuFbeFbcxBJpg" OutArcs="_sNplsJBtEeuFbeFbcxBJpg _sPkRQZBtEeuFbeFbcxBJpg _sSUqUJBtEeuFbeFbcxBJpg">
+        <name text="ItemDeserializer"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>1503.7593984962407&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sNo-oJBtEeuFbeFbcxBJpg" source="_sNiQ8JBtEeuFbeFbcxBJpg" target="_sNkGIJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sNplsJBtEeuFbeFbcxBJpg" source="_sNkGIJBtEeuFbeFbcxBJpg" target="_sNiQ8ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sNqMwJBtEeuFbeFbcxBJpg" InArcs="_sRlDc5BtEeuFbeFbcxBJpg" OutArcs="_sNwTYJBtEeuFbeFbcxBJpg">
+        <name text="TermsExtraction"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sNqMwZBtEeuFbeFbcxBJpg" InArcs="_sNw6cJBtEeuFbeFbcxBJpg" OutArcs="_sRlDcpBtEeuFbeFbcxBJpg">
+        <name text="TermsExtraction_parallelism"/>
+        <initialMarking text="2"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sNra4JBtEeuFbeFbcxBJpg" InArcs="_sNwTYJBtEeuFbeFbcxBJpg" OutArcs="_sNw6cJBtEeuFbeFbcxBJpg _sPjqMZBtEeuFbeFbcxBJpg _sQHD0ZBtEeuFbeFbcxBJpg _sSUqUpBtEeuFbeFbcxBJpg">
+        <name text="TermsExtraction"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>95.77626664112633&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sNwTYJBtEeuFbeFbcxBJpg" source="_sNqMwJBtEeuFbeFbcxBJpg" target="_sNra4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sNw6cJBtEeuFbeFbcxBJpg" source="_sNra4JBtEeuFbeFbcxBJpg" target="_sNqMwZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sNxhgJBtEeuFbeFbcxBJpg" InArcs="_sRMB4ZBtEeuFbeFbcxBJpg" OutArcs="_sN42QJBtEeuFbeFbcxBJpg">
+        <name text="TopicsLabeler"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sNxhgZBtEeuFbeFbcxBJpg" InArcs="_sN42QZBtEeuFbeFbcxBJpg" OutArcs="_sRMB4JBtEeuFbeFbcxBJpg">
+        <name text="TopicsLabeler_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sNyvoJBtEeuFbeFbcxBJpg" InArcs="_sN42QJBtEeuFbeFbcxBJpg" OutArcs="_sN42QZBtEeuFbeFbcxBJpg _sR3-YJBtEeuFbeFbcxBJpg _sSYUs5BtEeuFbeFbcxBJpg">
+        <name text="TopicsLabeler"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>3.0699236509987995&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sN42QJBtEeuFbeFbcxBJpg" source="_sNxhgJBtEeuFbeFbcxBJpg" target="_sNyvoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sN42QZBtEeuFbeFbcxBJpg" source="_sNyvoJBtEeuFbeFbcxBJpg" target="_sNxhgZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sN5dUJBtEeuFbeFbcxBJpg" InArcs="_sRwpoJBtEeuFbeFbcxBJpg" OutArcs="_sOALAJBtEeuFbeFbcxBJpg">
+        <name text="SolrUpdater"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sN5dUZBtEeuFbeFbcxBJpg" InArcs="_sOALAZBtEeuFbeFbcxBJpg" OutArcs="_sRwCkpBtEeuFbeFbcxBJpg">
+        <name text="SolrUpdater_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sN6rcJBtEeuFbeFbcxBJpg" InArcs="_sOALAJBtEeuFbeFbcxBJpg" OutArcs="_sOALAZBtEeuFbeFbcxBJpg _sR2wQJBtEeuFbeFbcxBJpg _sSZi0JBtEeuFbeFbcxBJpg">
+        <name text="SolrUpdater"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>5.9189109203906485&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sOALAJBtEeuFbeFbcxBJpg" source="_sN5dUJBtEeuFbeFbcxBJpg" target="_sN6rcJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sOALAZBtEeuFbeFbcxBJpg" source="_sN6rcJBtEeuFbeFbcxBJpg" target="_sN5dUZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sOAyEJBtEeuFbeFbcxBJpg" InArcs="_sOIG0ZBtEeuFbeFbcxBJpg _sSUqU5BtEeuFbeFbcxBJpg" OutArcs="_sOIG0pBtEeuFbeFbcxBJpg">
+        <name text="TwitterSample_transition"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sOAyEZBtEeuFbeFbcxBJpg" InArcs="_sOIt4JBtEeuFbeFbcxBJpg" OutArcs="_sOIG0JBtEeuFbeFbcxBJpg _sOghUZBtEeuFbeFbcxBJpg _sSUqVJBtEeuFbeFbcxBJpg">
+        <name text="TwitterSample"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>50.0&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sOG4sJBtEeuFbeFbcxBJpg" InArcs="_sOIG0JBtEeuFbeFbcxBJpg" OutArcs="_sOIG0ZBtEeuFbeFbcxBJpg">
+        <name text="TwitterSample_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sOG4sZBtEeuFbeFbcxBJpg" InArcs="_sOIG0pBtEeuFbeFbcxBJpg" OutArcs="_sOIt4JBtEeuFbeFbcxBJpg">
+        <name text="TwitterSample"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sOIG0JBtEeuFbeFbcxBJpg" source="_sOAyEZBtEeuFbeFbcxBJpg" target="_sOG4sJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sOIG0ZBtEeuFbeFbcxBJpg" source="_sOG4sJBtEeuFbeFbcxBJpg" target="_sOAyEJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sOIG0pBtEeuFbeFbcxBJpg" source="_sOAyEJBtEeuFbeFbcxBJpg" target="_sOG4sZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sOIt4JBtEeuFbeFbcxBJpg" source="_sOG4sZBtEeuFbeFbcxBJpg" target="_sOAyEZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sOJU8JBtEeuFbeFbcxBJpg" OutArcs="_sOO0gJBtEeuFbeFbcxBJpg">
+        <name text="MinHashFinalRanker"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sOJU8ZBtEeuFbeFbcxBJpg" InArcs="_sOO0gZBtEeuFbeFbcxBJpg _sQZXtJBtEeuFbeFbcxBJpg" OutArcs="_sQZXtZBtEeuFbeFbcxBJpg">
+        <name text="MinHashFinalRanker_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sOJ8AJBtEeuFbeFbcxBJpg" InArcs="_sOO0gJBtEeuFbeFbcxBJpg" OutArcs="_sOO0gZBtEeuFbeFbcxBJpg _sPTykJBtEeuFbeFbcxBJpg">
+        <name text="MinHashFinalRanker"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>51.0204081632653&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sOO0gJBtEeuFbeFbcxBJpg" source="_sOJU8JBtEeuFbeFbcxBJpg" target="_sOJ8AJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sOO0gZBtEeuFbeFbcxBJpg" source="_sOJ8AJBtEeuFbeFbcxBJpg" target="_sOJU8ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sOPbkJBtEeuFbeFbcxBJpg" OutArcs="_sOViMJBtEeuFbeFbcxBJpg">
+        <name text="MinHashIntermediateRanker"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sOQCoJBtEeuFbeFbcxBJpg" InArcs="_sOViMZBtEeuFbeFbcxBJpg _sPicFZBtEeuFbeFbcxBJpg" OutArcs="_sPicFpBtEeuFbeFbcxBJpg">
+        <name text="MinHashIntermediateRanker_parallelism"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sOQpsJBtEeuFbeFbcxBJpg" InArcs="_sOViMJBtEeuFbeFbcxBJpg" OutArcs="_sOViMZBtEeuFbeFbcxBJpg _sQT4IpBtEeuFbeFbcxBJpg">
+        <name text="MinHashIntermediateRanker"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>1.6585920875205875&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sOViMJBtEeuFbeFbcxBJpg" source="_sOPbkJBtEeuFbeFbcxBJpg" target="_sOQpsJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sOViMZBtEeuFbeFbcxBJpg" source="_sOQpsJBtEeuFbeFbcxBJpg" target="_sOQCoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sOWJQJBtEeuFbeFbcxBJpg" OutArcs="_sOeFEJBtEeuFbeFbcxBJpg">
+        <name text="MinHashRollingCounter"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sOWJQZBtEeuFbeFbcxBJpg" InArcs="_sOesIJBtEeuFbeFbcxBJpg _sO6xBJBtEeuFbeFbcxBJpg _sPFJFZBtEeuFbeFbcxBJpg _sPL2xpBtEeuFbeFbcxBJpg _sPSkcpBtEeuFbeFbcxBJpg" OutArcs="_sO7YEJBtEeuFbeFbcxBJpg _sPFJFpBtEeuFbeFbcxBJpg _sPMd0JBtEeuFbeFbcxBJpg _sPSkc5BtEeuFbeFbcxBJpg">
+        <name text="MinHashRollingCounter_parallelism"/>
+        <initialMarking text="4"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sOXXYJBtEeuFbeFbcxBJpg" InArcs="_sOeFEJBtEeuFbeFbcxBJpg" OutArcs="_sOesIJBtEeuFbeFbcxBJpg _sPUZo5BtEeuFbeFbcxBJpg">
+        <name text="MinHashRollingCounter"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.4838142834362116&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sOeFEJBtEeuFbeFbcxBJpg" source="_sOWJQJBtEeuFbeFbcxBJpg" target="_sOXXYJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sOesIJBtEeuFbeFbcxBJpg" source="_sOXXYJBtEeuFbeFbcxBJpg" target="_sOWJQZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sOghUJBtEeuFbeFbcxBJpg" InArcs="_sOghUZBtEeuFbeFbcxBJpg" OutArcs="_sRIXgZBtEeuFbeFbcxBJpg">
+        <name text="Stream1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sOghUZBtEeuFbeFbcxBJpg" source="_sOAyEZBtEeuFbeFbcxBJpg" target="_sOghUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sOhvcJBtEeuFbeFbcxBJpg" InArcs="_sOhvcZBtEeuFbeFbcxBJpg" OutArcs="_sRLa0ZBtEeuFbeFbcxBJpg">
+        <name text="Stream15"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sOhvcZBtEeuFbeFbcxBJpg" source="_sMM0MJBtEeuFbeFbcxBJpg" target="_sOhvcJBtEeuFbeFbcxBJpg">
+        <inscription text="17"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sOiWgJBtEeuFbeFbcxBJpg" InArcs="_sOi9kJBtEeuFbeFbcxBJpg" OutArcs="_sO5i4ZBtEeuFbeFbcxBJpg _sPFJEJBtEeuFbeFbcxBJpg _sPL2wZBtEeuFbeFbcxBJpg _sPR9YpBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sOi9kJBtEeuFbeFbcxBJpg" source="_sNAFcJBtEeuFbeFbcxBJpg" target="_sOiWgJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sOt8sJBtEeuFbeFbcxBJpg" InArcs="_sO6xAZBtEeuFbeFbcxBJpg" OutArcs="_sO6xApBtEeuFbeFbcxBJpg _sO6xBJBtEeuFbeFbcxBJpg _sPUZoZBtEeuFbeFbcxBJpg _sSV4cZBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.4838142834362116&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sO470JBtEeuFbeFbcxBJpg" InArcs="_sO5i4ZBtEeuFbeFbcxBJpg _sO6xA5BtEeuFbeFbcxBJpg _sO7YEJBtEeuFbeFbcxBJpg _sSV4cJBtEeuFbeFbcxBJpg" OutArcs="_sO6xAJBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.16&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sO470ZBtEeuFbeFbcxBJpg" InArcs="_sO6xAJBtEeuFbeFbcxBJpg" OutArcs="_sO6xAZBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sO5i4JBtEeuFbeFbcxBJpg" InArcs="_sO6xApBtEeuFbeFbcxBJpg" OutArcs="_sO6xA5BtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sO5i4ZBtEeuFbeFbcxBJpg" source="_sOiWgJBtEeuFbeFbcxBJpg" target="_sO470JBtEeuFbeFbcxBJpg">
+        <inscription text="203"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sO6xAJBtEeuFbeFbcxBJpg" source="_sO470JBtEeuFbeFbcxBJpg" target="_sO470ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sO6xAZBtEeuFbeFbcxBJpg" source="_sO470ZBtEeuFbeFbcxBJpg" target="_sOt8sJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sO6xApBtEeuFbeFbcxBJpg" source="_sOt8sJBtEeuFbeFbcxBJpg" target="_sO5i4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sO6xA5BtEeuFbeFbcxBJpg" source="_sO5i4JBtEeuFbeFbcxBJpg" target="_sO470JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sO6xBJBtEeuFbeFbcxBJpg" source="_sOt8sJBtEeuFbeFbcxBJpg" target="_sOWJQZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sO7YEJBtEeuFbeFbcxBJpg" source="_sOWJQZBtEeuFbeFbcxBJpg" target="_sO470JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sO7YEZBtEeuFbeFbcxBJpg" InArcs="_sPFJEpBtEeuFbeFbcxBJpg" OutArcs="_sPFJE5BtEeuFbeFbcxBJpg _sPFJFZBtEeuFbeFbcxBJpg _sPUZopBtEeuFbeFbcxBJpg _sSV4c5BtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.4838142834362116&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sPD68JBtEeuFbeFbcxBJpg" InArcs="_sPFJEJBtEeuFbeFbcxBJpg _sPFJFJBtEeuFbeFbcxBJpg _sPFJFpBtEeuFbeFbcxBJpg _sSV4cpBtEeuFbeFbcxBJpg" OutArcs="_sPFJEZBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.24&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPEiAJBtEeuFbeFbcxBJpg" InArcs="_sPFJEZBtEeuFbeFbcxBJpg" OutArcs="_sPFJEpBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPEiAZBtEeuFbeFbcxBJpg" InArcs="_sPFJE5BtEeuFbeFbcxBJpg" OutArcs="_sPFJFJBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPFJEJBtEeuFbeFbcxBJpg" source="_sOiWgJBtEeuFbeFbcxBJpg" target="_sPD68JBtEeuFbeFbcxBJpg">
+        <inscription text="203"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPFJEZBtEeuFbeFbcxBJpg" source="_sPD68JBtEeuFbeFbcxBJpg" target="_sPEiAJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPFJEpBtEeuFbeFbcxBJpg" source="_sPEiAJBtEeuFbeFbcxBJpg" target="_sO7YEZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPFJE5BtEeuFbeFbcxBJpg" source="_sO7YEZBtEeuFbeFbcxBJpg" target="_sPEiAZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPFJFJBtEeuFbeFbcxBJpg" source="_sPEiAZBtEeuFbeFbcxBJpg" target="_sPD68JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPFJFZBtEeuFbeFbcxBJpg" source="_sO7YEZBtEeuFbeFbcxBJpg" target="_sOWJQZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPFJFpBtEeuFbeFbcxBJpg" source="_sOWJQZBtEeuFbeFbcxBJpg" target="_sPD68JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sPFwIJBtEeuFbeFbcxBJpg" InArcs="_sPL2w5BtEeuFbeFbcxBJpg" OutArcs="_sPL2xJBtEeuFbeFbcxBJpg _sPL2xpBtEeuFbeFbcxBJpg _sPVAsZBtEeuFbeFbcxBJpg _sSWfg5BtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.4838142834362116&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sPLPsJBtEeuFbeFbcxBJpg" InArcs="_sPL2wZBtEeuFbeFbcxBJpg _sPL2xZBtEeuFbeFbcxBJpg _sPMd0JBtEeuFbeFbcxBJpg _sSWfgpBtEeuFbeFbcxBJpg" OutArcs="_sPL2wpBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.27&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPLPsZBtEeuFbeFbcxBJpg" InArcs="_sPL2wpBtEeuFbeFbcxBJpg" OutArcs="_sPL2w5BtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPL2wJBtEeuFbeFbcxBJpg" InArcs="_sPL2xJBtEeuFbeFbcxBJpg" OutArcs="_sPL2xZBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPL2wZBtEeuFbeFbcxBJpg" source="_sOiWgJBtEeuFbeFbcxBJpg" target="_sPLPsJBtEeuFbeFbcxBJpg">
+        <inscription text="203"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPL2wpBtEeuFbeFbcxBJpg" source="_sPLPsJBtEeuFbeFbcxBJpg" target="_sPLPsZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPL2w5BtEeuFbeFbcxBJpg" source="_sPLPsZBtEeuFbeFbcxBJpg" target="_sPFwIJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPL2xJBtEeuFbeFbcxBJpg" source="_sPFwIJBtEeuFbeFbcxBJpg" target="_sPL2wJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPL2xZBtEeuFbeFbcxBJpg" source="_sPL2wJBtEeuFbeFbcxBJpg" target="_sPLPsJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPL2xpBtEeuFbeFbcxBJpg" source="_sPFwIJBtEeuFbeFbcxBJpg" target="_sOWJQZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPMd0JBtEeuFbeFbcxBJpg" source="_sOWJQZBtEeuFbeFbcxBJpg" target="_sPLPsJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sPMd0ZBtEeuFbeFbcxBJpg" InArcs="_sPR9ZJBtEeuFbeFbcxBJpg" OutArcs="_sPSkcJBtEeuFbeFbcxBJpg _sPSkcpBtEeuFbeFbcxBJpg _sPVAsJBtEeuFbeFbcxBJpg _sSWfgZBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.4838142834362116&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sPRWUJBtEeuFbeFbcxBJpg" InArcs="_sPR9YpBtEeuFbeFbcxBJpg _sPSkcZBtEeuFbeFbcxBJpg _sPSkc5BtEeuFbeFbcxBJpg _sSWfgJBtEeuFbeFbcxBJpg" OutArcs="_sPR9Y5BtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.33&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPR9YJBtEeuFbeFbcxBJpg" InArcs="_sPR9Y5BtEeuFbeFbcxBJpg" OutArcs="_sPR9ZJBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPR9YZBtEeuFbeFbcxBJpg" InArcs="_sPSkcJBtEeuFbeFbcxBJpg" OutArcs="_sPSkcZBtEeuFbeFbcxBJpg">
+        <name text="Stream6_2"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPR9YpBtEeuFbeFbcxBJpg" source="_sOiWgJBtEeuFbeFbcxBJpg" target="_sPRWUJBtEeuFbeFbcxBJpg">
+        <inscription text="203"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPR9Y5BtEeuFbeFbcxBJpg" source="_sPRWUJBtEeuFbeFbcxBJpg" target="_sPR9YJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPR9ZJBtEeuFbeFbcxBJpg" source="_sPR9YJBtEeuFbeFbcxBJpg" target="_sPMd0ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPSkcJBtEeuFbeFbcxBJpg" source="_sPMd0ZBtEeuFbeFbcxBJpg" target="_sPR9YZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPSkcZBtEeuFbeFbcxBJpg" source="_sPR9YZBtEeuFbeFbcxBJpg" target="_sPRWUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPSkcpBtEeuFbeFbcxBJpg" source="_sPMd0ZBtEeuFbeFbcxBJpg" target="_sOWJQZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPSkc5BtEeuFbeFbcxBJpg" source="_sOWJQZBtEeuFbeFbcxBJpg" target="_sPRWUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sPTLgJBtEeuFbeFbcxBJpg" InArcs="_sPTykJBtEeuFbeFbcxBJpg _sRPFMJBtEeuFbeFbcxBJpg" OutArcs="_sRPsQJBtEeuFbeFbcxBJpg">
+        <name text="Stream12"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPTykJBtEeuFbeFbcxBJpg" source="_sOJ8AJBtEeuFbeFbcxBJpg" target="_sPTLgJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPUZoJBtEeuFbeFbcxBJpg" InArcs="_sPUZoZBtEeuFbeFbcxBJpg _sPUZopBtEeuFbeFbcxBJpg _sPUZo5BtEeuFbeFbcxBJpg _sPVAsJBtEeuFbeFbcxBJpg _sPVAsZBtEeuFbeFbcxBJpg" OutArcs="_sPicEJBtEeuFbeFbcxBJpg">
+        <name text="Stream8"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPUZoZBtEeuFbeFbcxBJpg" source="_sOt8sJBtEeuFbeFbcxBJpg" target="_sPUZoJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPUZopBtEeuFbeFbcxBJpg" source="_sO7YEZBtEeuFbeFbcxBJpg" target="_sPUZoJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPUZo5BtEeuFbeFbcxBJpg" source="_sOXXYJBtEeuFbeFbcxBJpg" target="_sPUZoJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPVAsJBtEeuFbeFbcxBJpg" source="_sPMd0ZBtEeuFbeFbcxBJpg" target="_sPUZoJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPVAsZBtEeuFbeFbcxBJpg" source="_sPFwIJBtEeuFbeFbcxBJpg" target="_sPUZoJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sPcVcJBtEeuFbeFbcxBJpg" InArcs="_sPicEpBtEeuFbeFbcxBJpg" OutArcs="_sPicE5BtEeuFbeFbcxBJpg _sPicFZBtEeuFbeFbcxBJpg _sQT4IZBtEeuFbeFbcxBJpg _sSVRY5BtEeuFbeFbcxBJpg">
+        <name text="Stream8"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>1.6585920875205875&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sPh1AJBtEeuFbeFbcxBJpg" InArcs="_sPicEJBtEeuFbeFbcxBJpg _sPicFJBtEeuFbeFbcxBJpg _sPicFpBtEeuFbeFbcxBJpg _sSVRYpBtEeuFbeFbcxBJpg" OutArcs="_sPicEZBtEeuFbeFbcxBJpg">
+        <name text="Stream8"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>1.0&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPh1AZBtEeuFbeFbcxBJpg" InArcs="_sPicEZBtEeuFbeFbcxBJpg" OutArcs="_sPicEpBtEeuFbeFbcxBJpg">
+        <name text="Stream8"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPh1ApBtEeuFbeFbcxBJpg" InArcs="_sPicE5BtEeuFbeFbcxBJpg" OutArcs="_sPicFJBtEeuFbeFbcxBJpg">
+        <name text="Stream8"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPicEJBtEeuFbeFbcxBJpg" source="_sPUZoJBtEeuFbeFbcxBJpg" target="_sPh1AJBtEeuFbeFbcxBJpg">
+        <inscription text="59"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPicEZBtEeuFbeFbcxBJpg" source="_sPh1AJBtEeuFbeFbcxBJpg" target="_sPh1AZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPicEpBtEeuFbeFbcxBJpg" source="_sPh1AZBtEeuFbeFbcxBJpg" target="_sPcVcJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPicE5BtEeuFbeFbcxBJpg" source="_sPcVcJBtEeuFbeFbcxBJpg" target="_sPh1ApBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPicFJBtEeuFbeFbcxBJpg" source="_sPh1ApBtEeuFbeFbcxBJpg" target="_sPh1AJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPicFZBtEeuFbeFbcxBJpg" source="_sPcVcJBtEeuFbeFbcxBJpg" target="_sOQCoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sPicFpBtEeuFbeFbcxBJpg" source="_sOQCoJBtEeuFbeFbcxBJpg" target="_sPh1AJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sPjqMJBtEeuFbeFbcxBJpg" InArcs="_sPjqMZBtEeuFbeFbcxBJpg" OutArcs="_sRXBAZBtEeuFbeFbcxBJpg">
+        <name text="Stream7_1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPjqMZBtEeuFbeFbcxBJpg" source="_sNra4JBtEeuFbeFbcxBJpg" target="_sPjqMJBtEeuFbeFbcxBJpg">
+        <inscription text="2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPkRQJBtEeuFbeFbcxBJpg" InArcs="_sPkRQZBtEeuFbeFbcxBJpg" OutArcs="_sRb5gZBtEeuFbeFbcxBJpg">
+        <name text="Stream2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPkRQZBtEeuFbeFbcxBJpg" source="_sNkGIJBtEeuFbeFbcxBJpg" target="_sPkRQJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sPk4UJBtEeuFbeFbcxBJpg" InArcs="_sPk4UZBtEeuFbeFbcxBJpg _sRe80JBtEeuFbeFbcxBJpg _sRe80ZBtEeuFbeFbcxBJpg _sRe80pBtEeuFbeFbcxBJpg _sRe805BtEeuFbeFbcxBJpg" OutArcs="_sP0I45BtEeuFbeFbcxBJpg _sP6PgpBtEeuFbeFbcxBJpg _sQAWIZBtEeuFbeFbcxBJpg _sQF1spBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sPk4UZBtEeuFbeFbcxBJpg" source="_sNZuEJBtEeuFbeFbcxBJpg" target="_sPk4UJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sPvQYJBtEeuFbeFbcxBJpg" InArcs="_sP0v8ZBtEeuFbeFbcxBJpg" OutArcs="_sP0v8pBtEeuFbeFbcxBJpg _sP0v9JBtEeuFbeFbcxBJpg _sQIR85BtEeuFbeFbcxBJpg _sSSOEZBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>3.451405930205669&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sP0I4JBtEeuFbeFbcxBJpg" InArcs="_sP0I45BtEeuFbeFbcxBJpg _sP0v85BtEeuFbeFbcxBJpg _sP0v9ZBtEeuFbeFbcxBJpg _sSSOEJBtEeuFbeFbcxBJpg" OutArcs="_sP0v8JBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.26&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sP0I4ZBtEeuFbeFbcxBJpg" InArcs="_sP0v8JBtEeuFbeFbcxBJpg" OutArcs="_sP0v8ZBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sP0I4pBtEeuFbeFbcxBJpg" InArcs="_sP0v8pBtEeuFbeFbcxBJpg" OutArcs="_sP0v85BtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sP0I45BtEeuFbeFbcxBJpg" source="_sPk4UJBtEeuFbeFbcxBJpg" target="_sP0I4JBtEeuFbeFbcxBJpg">
+        <inscription text="27"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sP0v8JBtEeuFbeFbcxBJpg" source="_sP0I4JBtEeuFbeFbcxBJpg" target="_sP0I4ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP0v8ZBtEeuFbeFbcxBJpg" source="_sP0I4ZBtEeuFbeFbcxBJpg" target="_sPvQYJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP0v8pBtEeuFbeFbcxBJpg" source="_sPvQYJBtEeuFbeFbcxBJpg" target="_sP0I4pBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP0v85BtEeuFbeFbcxBJpg" source="_sP0I4pBtEeuFbeFbcxBJpg" target="_sP0I4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP0v9JBtEeuFbeFbcxBJpg" source="_sPvQYJBtEeuFbeFbcxBJpg" target="_sL4rIZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP0v9ZBtEeuFbeFbcxBJpg" source="_sL4rIZBtEeuFbeFbcxBJpg" target="_sP0I4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sP1XAJBtEeuFbeFbcxBJpg" InArcs="_sP6PhJBtEeuFbeFbcxBJpg" OutArcs="_sP6PhZBtEeuFbeFbcxBJpg _sP6Ph5BtEeuFbeFbcxBJpg _sQIR8ZBtEeuFbeFbcxBJpg _sSRnA5BtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>3.451405930205669&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sP5ocJBtEeuFbeFbcxBJpg" InArcs="_sP6PgpBtEeuFbeFbcxBJpg _sP6PhpBtEeuFbeFbcxBJpg _sP62kJBtEeuFbeFbcxBJpg _sSRnApBtEeuFbeFbcxBJpg" OutArcs="_sP6Pg5BtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.18&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sP6PgJBtEeuFbeFbcxBJpg" InArcs="_sP6Pg5BtEeuFbeFbcxBJpg" OutArcs="_sP6PhJBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sP6PgZBtEeuFbeFbcxBJpg" InArcs="_sP6PhZBtEeuFbeFbcxBJpg" OutArcs="_sP6PhpBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sP6PgpBtEeuFbeFbcxBJpg" source="_sPk4UJBtEeuFbeFbcxBJpg" target="_sP5ocJBtEeuFbeFbcxBJpg">
+        <inscription text="27"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sP6Pg5BtEeuFbeFbcxBJpg" source="_sP5ocJBtEeuFbeFbcxBJpg" target="_sP6PgJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP6PhJBtEeuFbeFbcxBJpg" source="_sP6PgJBtEeuFbeFbcxBJpg" target="_sP1XAJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP6PhZBtEeuFbeFbcxBJpg" source="_sP1XAJBtEeuFbeFbcxBJpg" target="_sP6PgZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP6PhpBtEeuFbeFbcxBJpg" source="_sP6PgZBtEeuFbeFbcxBJpg" target="_sP5ocJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP6Ph5BtEeuFbeFbcxBJpg" source="_sP1XAJBtEeuFbeFbcxBJpg" target="_sL4rIZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sP62kJBtEeuFbeFbcxBJpg" source="_sL4rIZBtEeuFbeFbcxBJpg" target="_sP5ocJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sP62kZBtEeuFbeFbcxBJpg" InArcs="_sQAWI5BtEeuFbeFbcxBJpg" OutArcs="_sQAWJJBtEeuFbeFbcxBJpg _sQAWJpBtEeuFbeFbcxBJpg _sQIR9JBtEeuFbeFbcxBJpg _sSSOE5BtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>3.451405930205669&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sP_vEJBtEeuFbeFbcxBJpg" InArcs="_sQAWIZBtEeuFbeFbcxBJpg _sQAWJZBtEeuFbeFbcxBJpg _sQAWJ5BtEeuFbeFbcxBJpg _sSSOEpBtEeuFbeFbcxBJpg" OutArcs="_sQAWIpBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.27&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sP_vEZBtEeuFbeFbcxBJpg" InArcs="_sQAWIpBtEeuFbeFbcxBJpg" OutArcs="_sQAWI5BtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQAWIJBtEeuFbeFbcxBJpg" InArcs="_sQAWJJBtEeuFbeFbcxBJpg" OutArcs="_sQAWJZBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQAWIZBtEeuFbeFbcxBJpg" source="_sPk4UJBtEeuFbeFbcxBJpg" target="_sP_vEJBtEeuFbeFbcxBJpg">
+        <inscription text="27"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQAWIpBtEeuFbeFbcxBJpg" source="_sP_vEJBtEeuFbeFbcxBJpg" target="_sP_vEZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQAWI5BtEeuFbeFbcxBJpg" source="_sP_vEZBtEeuFbeFbcxBJpg" target="_sP62kZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQAWJJBtEeuFbeFbcxBJpg" source="_sP62kZBtEeuFbeFbcxBJpg" target="_sQAWIJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQAWJZBtEeuFbeFbcxBJpg" source="_sQAWIJBtEeuFbeFbcxBJpg" target="_sP_vEJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQAWJpBtEeuFbeFbcxBJpg" source="_sP62kZBtEeuFbeFbcxBJpg" target="_sL4rIZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQAWJ5BtEeuFbeFbcxBJpg" source="_sL4rIZBtEeuFbeFbcxBJpg" target="_sP_vEJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sQA9MJBtEeuFbeFbcxBJpg" InArcs="_sQF1tJBtEeuFbeFbcxBJpg" OutArcs="_sQF1tZBtEeuFbeFbcxBJpg _sQGcwZBtEeuFbeFbcxBJpg _sQIR8JBtEeuFbeFbcxBJpg _sSRnAZBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>3.451405930205669&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQFOoJBtEeuFbeFbcxBJpg" InArcs="_sQF1spBtEeuFbeFbcxBJpg _sQGcwJBtEeuFbeFbcxBJpg _sQGcwpBtEeuFbeFbcxBJpg _sSRnAJBtEeuFbeFbcxBJpg" OutArcs="_sQF1s5BtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.29&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQF1sJBtEeuFbeFbcxBJpg" InArcs="_sQF1s5BtEeuFbeFbcxBJpg" OutArcs="_sQF1tJBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQF1sZBtEeuFbeFbcxBJpg" InArcs="_sQF1tZBtEeuFbeFbcxBJpg" OutArcs="_sQGcwJBtEeuFbeFbcxBJpg">
+        <name text="Stream9"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQF1spBtEeuFbeFbcxBJpg" source="_sPk4UJBtEeuFbeFbcxBJpg" target="_sQFOoJBtEeuFbeFbcxBJpg">
+        <inscription text="27"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQF1s5BtEeuFbeFbcxBJpg" source="_sQFOoJBtEeuFbeFbcxBJpg" target="_sQF1sJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQF1tJBtEeuFbeFbcxBJpg" source="_sQF1sJBtEeuFbeFbcxBJpg" target="_sQA9MJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQF1tZBtEeuFbeFbcxBJpg" source="_sQA9MJBtEeuFbeFbcxBJpg" target="_sQF1sZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQGcwJBtEeuFbeFbcxBJpg" source="_sQF1sZBtEeuFbeFbcxBJpg" target="_sQFOoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQGcwZBtEeuFbeFbcxBJpg" source="_sQA9MJBtEeuFbeFbcxBJpg" target="_sL4rIZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQGcwpBtEeuFbeFbcxBJpg" source="_sL4rIZBtEeuFbeFbcxBJpg" target="_sQFOoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sQHD0JBtEeuFbeFbcxBJpg" InArcs="_sQHD0ZBtEeuFbeFbcxBJpg" OutArcs="_sRgK8ZBtEeuFbeFbcxBJpg">
+        <name text="Stream6_1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQHD0ZBtEeuFbeFbcxBJpg" source="_sNra4JBtEeuFbeFbcxBJpg" target="_sQHD0JBtEeuFbeFbcxBJpg">
+        <inscription text="2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQHq4JBtEeuFbeFbcxBJpg" InArcs="_sQIR8JBtEeuFbeFbcxBJpg _sQIR8ZBtEeuFbeFbcxBJpg _sQIR8pBtEeuFbeFbcxBJpg _sQIR85BtEeuFbeFbcxBJpg _sQIR9JBtEeuFbeFbcxBJpg" OutArcs="_sQNxgpBtEeuFbeFbcxBJpg">
+        <name text="Stream11"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQIR8JBtEeuFbeFbcxBJpg" source="_sQA9MJBtEeuFbeFbcxBJpg" target="_sQHq4JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQIR8ZBtEeuFbeFbcxBJpg" source="_sP1XAJBtEeuFbeFbcxBJpg" target="_sQHq4JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQIR8pBtEeuFbeFbcxBJpg" source="_sL7HYJBtEeuFbeFbcxBJpg" target="_sQHq4JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQIR85BtEeuFbeFbcxBJpg" source="_sPvQYJBtEeuFbeFbcxBJpg" target="_sQHq4JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQIR9JBtEeuFbeFbcxBJpg" source="_sP62kZBtEeuFbeFbcxBJpg" target="_sQHq4JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQI5AJBtEeuFbeFbcxBJpg" InArcs="_sQNKdJBtEeuFbeFbcxBJpg" OutArcs="_sQNKdZBtEeuFbeFbcxBJpg _sQNxgJBtEeuFbeFbcxBJpg _sQSqAJBtEeuFbeFbcxBJpg _sSTcMJBtEeuFbeFbcxBJpg">
+        <name text="FinalRanker"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>20.4398659144796&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQNKcJBtEeuFbeFbcxBJpg" InArcs="_sQNKdpBtEeuFbeFbcxBJpg _sQNxgZBtEeuFbeFbcxBJpg _sQNxgpBtEeuFbeFbcxBJpg _sSS1JJBtEeuFbeFbcxBJpg" OutArcs="_sQNKc5BtEeuFbeFbcxBJpg">
+        <name text="Stream11"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQNKcZBtEeuFbeFbcxBJpg" InArcs="_sQNKc5BtEeuFbeFbcxBJpg" OutArcs="_sQNKdJBtEeuFbeFbcxBJpg">
+        <name text="FinalRanker_global"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQNKcpBtEeuFbeFbcxBJpg" InArcs="_sQNKdZBtEeuFbeFbcxBJpg" OutArcs="_sQNKdpBtEeuFbeFbcxBJpg">
+        <name text="FinalRanker_parallelism_global"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQNKc5BtEeuFbeFbcxBJpg" source="_sQNKcJBtEeuFbeFbcxBJpg" target="_sQNKcZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQNKdJBtEeuFbeFbcxBJpg" source="_sQNKcZBtEeuFbeFbcxBJpg" target="_sQI5AJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQNKdZBtEeuFbeFbcxBJpg" source="_sQI5AJBtEeuFbeFbcxBJpg" target="_sQNKcpBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQNKdpBtEeuFbeFbcxBJpg" source="_sQNKcpBtEeuFbeFbcxBJpg" target="_sQNKcJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQNxgJBtEeuFbeFbcxBJpg" source="_sQI5AJBtEeuFbeFbcxBJpg" target="_sNPWAZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQNxgZBtEeuFbeFbcxBJpg" source="_sNPWAZBtEeuFbeFbcxBJpg" target="_sQNKcJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQNxgpBtEeuFbeFbcxBJpg" source="_sQHq4JBtEeuFbeFbcxBJpg" target="_sQNKcJBtEeuFbeFbcxBJpg">
+        <inscription text="3"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQRb4JBtEeuFbeFbcxBJpg" InArcs="_sQRb4ZBtEeuFbeFbcxBJpg" OutArcs="_sRlDcZBtEeuFbeFbcxBJpg">
+        <name text="Stream5"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQRb4ZBtEeuFbeFbcxBJpg" source="_sLg3sJBtEeuFbeFbcxBJpg" target="_sQRb4JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQSC8JBtEeuFbeFbcxBJpg" InArcs="_sQSqAJBtEeuFbeFbcxBJpg _sQSqAZBtEeuFbeFbcxBJpg" OutArcs="_sRot0ZBtEeuFbeFbcxBJpg">
+        <name text="Stream13"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQSqAJBtEeuFbeFbcxBJpg" source="_sQI5AJBtEeuFbeFbcxBJpg" target="_sQSC8JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQSqAZBtEeuFbeFbcxBJpg" source="_sNRLMJBtEeuFbeFbcxBJpg" target="_sQSC8JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQSqApBtEeuFbeFbcxBJpg" InArcs="_sQTREJBtEeuFbeFbcxBJpg" OutArcs="_sRs_QZBtEeuFbeFbcxBJpg">
+        <name text="Stream14"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQTREJBtEeuFbeFbcxBJpg" source="_sMr8YJBtEeuFbeFbcxBJpg" target="_sQSqApBtEeuFbeFbcxBJpg">
+        <inscription text="17"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQT4IJBtEeuFbeFbcxBJpg" InArcs="_sQT4IZBtEeuFbeFbcxBJpg _sQT4IpBtEeuFbeFbcxBJpg" OutArcs="_sQZ-wJBtEeuFbeFbcxBJpg">
+        <name text="Stream10"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQT4IZBtEeuFbeFbcxBJpg" source="_sPcVcJBtEeuFbeFbcxBJpg" target="_sQT4IJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQT4IpBtEeuFbeFbcxBJpg" source="_sOQpsJBtEeuFbeFbcxBJpg" target="_sQT4IJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQUfMJBtEeuFbeFbcxBJpg" InArcs="_sQZXsZBtEeuFbeFbcxBJpg" OutArcs="_sQZXspBtEeuFbeFbcxBJpg _sQZXtJBtEeuFbeFbcxBJpg _sRPFMJBtEeuFbeFbcxBJpg _sSVRYZBtEeuFbeFbcxBJpg">
+        <name text="MinHashFinalRanker"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>51.0204081632653&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQYwoJBtEeuFbeFbcxBJpg" InArcs="_sQZXs5BtEeuFbeFbcxBJpg _sQZXtZBtEeuFbeFbcxBJpg _sQZ-wJBtEeuFbeFbcxBJpg _sSVRYJBtEeuFbeFbcxBJpg" OutArcs="_sQZXsJBtEeuFbeFbcxBJpg">
+        <name text="Stream10"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQYwoZBtEeuFbeFbcxBJpg" InArcs="_sQZXsJBtEeuFbeFbcxBJpg" OutArcs="_sQZXsZBtEeuFbeFbcxBJpg">
+        <name text="MinHashFinalRanker_global"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQYwopBtEeuFbeFbcxBJpg" InArcs="_sQZXspBtEeuFbeFbcxBJpg" OutArcs="_sQZXs5BtEeuFbeFbcxBJpg">
+        <name text="MinHashFinalRanker_parallelism_global"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQZXsJBtEeuFbeFbcxBJpg" source="_sQYwoJBtEeuFbeFbcxBJpg" target="_sQYwoZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQZXsZBtEeuFbeFbcxBJpg" source="_sQYwoZBtEeuFbeFbcxBJpg" target="_sQUfMJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQZXspBtEeuFbeFbcxBJpg" source="_sQUfMJBtEeuFbeFbcxBJpg" target="_sQYwopBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQZXs5BtEeuFbeFbcxBJpg" source="_sQYwopBtEeuFbeFbcxBJpg" target="_sQYwoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQZXtJBtEeuFbeFbcxBJpg" source="_sQUfMJBtEeuFbeFbcxBJpg" target="_sOJU8ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQZXtZBtEeuFbeFbcxBJpg" source="_sOJU8ZBtEeuFbeFbcxBJpg" target="_sQYwoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQZ-wJBtEeuFbeFbcxBJpg" source="_sQT4IJBtEeuFbeFbcxBJpg" target="_sQYwoJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQcbAJBtEeuFbeFbcxBJpg" InArcs="_sQcbAZBtEeuFbeFbcxBJpg" OutArcs="_sQs5sZBtEeuFbeFbcxBJpg _sQ01g5BtEeuFbeFbcxBJpg _sQ9YYZBtEeuFbeFbcxBJpg _sRFUMZBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQcbAZBtEeuFbeFbcxBJpg" source="_sM27gJBtEeuFbeFbcxBJpg" target="_sQcbAJBtEeuFbeFbcxBJpg">
+        <inscription text="3"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQmMAJBtEeuFbeFbcxBJpg" InArcs="_sQs5s5BtEeuFbeFbcxBJpg" OutArcs="_sQs5tJBtEeuFbeFbcxBJpg _sQs5tpBtEeuFbeFbcxBJpg _sRe80pBtEeuFbeFbcxBJpg _sSUDQZBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.22812439756623928&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQsSoJBtEeuFbeFbcxBJpg" InArcs="_sQs5sZBtEeuFbeFbcxBJpg _sQs5tZBtEeuFbeFbcxBJpg _sQs5t5BtEeuFbeFbcxBJpg _sSUDQJBtEeuFbeFbcxBJpg" OutArcs="_sQs5spBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.12&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQsSoZBtEeuFbeFbcxBJpg" InArcs="_sQs5spBtEeuFbeFbcxBJpg" OutArcs="_sQs5s5BtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQs5sJBtEeuFbeFbcxBJpg" InArcs="_sQs5tJBtEeuFbeFbcxBJpg" OutArcs="_sQs5tZBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQs5sZBtEeuFbeFbcxBJpg" source="_sQcbAJBtEeuFbeFbcxBJpg" target="_sQsSoJBtEeuFbeFbcxBJpg">
+        <inscription text="451"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQs5spBtEeuFbeFbcxBJpg" source="_sQsSoJBtEeuFbeFbcxBJpg" target="_sQsSoZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQs5s5BtEeuFbeFbcxBJpg" source="_sQsSoZBtEeuFbeFbcxBJpg" target="_sQmMAJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQs5tJBtEeuFbeFbcxBJpg" source="_sQmMAJBtEeuFbeFbcxBJpg" target="_sQs5sJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQs5tZBtEeuFbeFbcxBJpg" source="_sQs5sJBtEeuFbeFbcxBJpg" target="_sQsSoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQs5tpBtEeuFbeFbcxBJpg" source="_sQmMAJBtEeuFbeFbcxBJpg" target="_sNYf8ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQs5t5BtEeuFbeFbcxBJpg" source="_sNYf8ZBtEeuFbeFbcxBJpg" target="_sQsSoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sQtgwJBtEeuFbeFbcxBJpg" InArcs="_sQ1ckZBtEeuFbeFbcxBJpg" OutArcs="_sQ1ckpBtEeuFbeFbcxBJpg _sQ1clJBtEeuFbeFbcxBJpg _sRe80JBtEeuFbeFbcxBJpg _sSTcMpBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.22812439756623928&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQ01gJBtEeuFbeFbcxBJpg" InArcs="_sQ01g5BtEeuFbeFbcxBJpg _sQ1ck5BtEeuFbeFbcxBJpg _sQ1clZBtEeuFbeFbcxBJpg _sSTcMZBtEeuFbeFbcxBJpg" OutArcs="_sQ1ckJBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.12&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQ01gZBtEeuFbeFbcxBJpg" InArcs="_sQ1ckJBtEeuFbeFbcxBJpg" OutArcs="_sQ1ckZBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQ01gpBtEeuFbeFbcxBJpg" InArcs="_sQ1ckpBtEeuFbeFbcxBJpg" OutArcs="_sQ1ck5BtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQ01g5BtEeuFbeFbcxBJpg" source="_sQcbAJBtEeuFbeFbcxBJpg" target="_sQ01gJBtEeuFbeFbcxBJpg">
+        <inscription text="451"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQ1ckJBtEeuFbeFbcxBJpg" source="_sQ01gJBtEeuFbeFbcxBJpg" target="_sQ01gZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ1ckZBtEeuFbeFbcxBJpg" source="_sQ01gZBtEeuFbeFbcxBJpg" target="_sQtgwJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ1ckpBtEeuFbeFbcxBJpg" source="_sQtgwJBtEeuFbeFbcxBJpg" target="_sQ01gpBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ1ck5BtEeuFbeFbcxBJpg" source="_sQ01gpBtEeuFbeFbcxBJpg" target="_sQ01gJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ1clJBtEeuFbeFbcxBJpg" source="_sQtgwJBtEeuFbeFbcxBJpg" target="_sNYf8ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ1clZBtEeuFbeFbcxBJpg" source="_sNYf8ZBtEeuFbeFbcxBJpg" target="_sQ01gJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sQ2DoJBtEeuFbeFbcxBJpg" InArcs="_sQ9YY5BtEeuFbeFbcxBJpg" OutArcs="_sQ9YZJBtEeuFbeFbcxBJpg _sQ9_cJBtEeuFbeFbcxBJpg _sRe80ZBtEeuFbeFbcxBJpg _sSTcNJBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.22812439756623928&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sQ8xUJBtEeuFbeFbcxBJpg" InArcs="_sQ9YYZBtEeuFbeFbcxBJpg _sQ9YZZBtEeuFbeFbcxBJpg _sQ9_cZBtEeuFbeFbcxBJpg _sSTcM5BtEeuFbeFbcxBJpg" OutArcs="_sQ9YYpBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.27&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQ8xUZBtEeuFbeFbcxBJpg" InArcs="_sQ9YYpBtEeuFbeFbcxBJpg" OutArcs="_sQ9YY5BtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sQ9YYJBtEeuFbeFbcxBJpg" InArcs="_sQ9YZJBtEeuFbeFbcxBJpg" OutArcs="_sQ9YZZBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQ9YYZBtEeuFbeFbcxBJpg" source="_sQcbAJBtEeuFbeFbcxBJpg" target="_sQ8xUJBtEeuFbeFbcxBJpg">
+        <inscription text="451"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sQ9YYpBtEeuFbeFbcxBJpg" source="_sQ8xUJBtEeuFbeFbcxBJpg" target="_sQ8xUZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ9YY5BtEeuFbeFbcxBJpg" source="_sQ8xUZBtEeuFbeFbcxBJpg" target="_sQ2DoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ9YZJBtEeuFbeFbcxBJpg" source="_sQ2DoJBtEeuFbeFbcxBJpg" target="_sQ9YYJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ9YZZBtEeuFbeFbcxBJpg" source="_sQ9YYJBtEeuFbeFbcxBJpg" target="_sQ8xUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ9_cJBtEeuFbeFbcxBJpg" source="_sQ2DoJBtEeuFbeFbcxBJpg" target="_sNYf8ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sQ9_cZBtEeuFbeFbcxBJpg" source="_sNYf8ZBtEeuFbeFbcxBJpg" target="_sQ8xUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sQ9_cpBtEeuFbeFbcxBJpg" InArcs="_sRFUM5BtEeuFbeFbcxBJpg" OutArcs="_sRFUNJBtEeuFbeFbcxBJpg _sRFUNpBtEeuFbeFbcxBJpg _sRe805BtEeuFbeFbcxBJpg _sSUDQ5BtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/tserv/infinite&quot;/>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/tserv/infinite"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/exponential&quot;>0.22812439756623928&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/exponential"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sREtIJBtEeuFbeFbcxBJpg" InArcs="_sRFUMZBtEeuFbeFbcxBJpg _sRFUNZBtEeuFbeFbcxBJpg _sRF7QJBtEeuFbeFbcxBJpg _sSUDQpBtEeuFbeFbcxBJpg" OutArcs="_sRFUMpBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.disco/pnconstants/tkind/immediate&quot;>0.49&lt;/value>" toolInfoGrammarURI="http://es.unizar.disco/pnconstants/tkind/immediate"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sREtIZBtEeuFbeFbcxBJpg" InArcs="_sRFUMpBtEeuFbeFbcxBJpg" OutArcs="_sRFUM5BtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sRFUMJBtEeuFbeFbcxBJpg" InArcs="_sRFUNJBtEeuFbeFbcxBJpg" OutArcs="_sRFUNZBtEeuFbeFbcxBJpg">
+        <name text="Stream7_2"/>
+        <initialMarking text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRFUMZBtEeuFbeFbcxBJpg" source="_sQcbAJBtEeuFbeFbcxBJpg" target="_sREtIJBtEeuFbeFbcxBJpg">
+        <inscription text="451"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRFUMpBtEeuFbeFbcxBJpg" source="_sREtIJBtEeuFbeFbcxBJpg" target="_sREtIZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRFUM5BtEeuFbeFbcxBJpg" source="_sREtIZBtEeuFbeFbcxBJpg" target="_sQ9_cpBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRFUNJBtEeuFbeFbcxBJpg" source="_sQ9_cpBtEeuFbeFbcxBJpg" target="_sRFUMJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRFUNZBtEeuFbeFbcxBJpg" source="_sRFUMJBtEeuFbeFbcxBJpg" target="_sREtIJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRFUNpBtEeuFbeFbcxBJpg" source="_sQ9_cpBtEeuFbeFbcxBJpg" target="_sNYf8ZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRF7QJBtEeuFbeFbcxBJpg" source="_sNYf8ZBtEeuFbeFbcxBJpg" target="_sREtIJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sRGiUJBtEeuFbeFbcxBJpg" InArcs="_sRGiUZBtEeuFbeFbcxBJpg" OutArcs="_sRwCkZBtEeuFbeFbcxBJpg">
+        <name text="Stream4"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRGiUZBtEeuFbeFbcxBJpg" source="_sLg3sJBtEeuFbeFbcxBJpg" target="_sRGiUJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sRHJYJBtEeuFbeFbcxBJpg" InArcs="_sRHJYZBtEeuFbeFbcxBJpg" OutArcs="_sRzF4ZBtEeuFbeFbcxBJpg">
+        <name text="Stream3"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRHJYZBtEeuFbeFbcxBJpg" source="_sNIBQJBtEeuFbeFbcxBJpg" target="_sRHJYJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sRIXgJBtEeuFbeFbcxBJpg" InArcs="_sRIXgZBtEeuFbeFbcxBJpg _sRIXgpBtEeuFbeFbcxBJpg _sSUDRJBtEeuFbeFbcxBJpg" OutArcs="_sRIXg5BtEeuFbeFbcxBJpg">
+        <name text="Stream1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRIXgZBtEeuFbeFbcxBJpg" source="_sOghUJBtEeuFbeFbcxBJpg" target="_sRIXgJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRIXgpBtEeuFbeFbcxBJpg" source="_sNiQ8ZBtEeuFbeFbcxBJpg" target="_sRIXgJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRIXg5BtEeuFbeFbcxBJpg" source="_sRIXgJBtEeuFbeFbcxBJpg" target="_sNiQ8JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sRLa0JBtEeuFbeFbcxBJpg" InArcs="_sRLa0ZBtEeuFbeFbcxBJpg _sRMB4JBtEeuFbeFbcxBJpg _sSYUspBtEeuFbeFbcxBJpg" OutArcs="_sRMB4ZBtEeuFbeFbcxBJpg">
+        <name text="Stream15"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRLa0ZBtEeuFbeFbcxBJpg" source="_sOhvcJBtEeuFbeFbcxBJpg" target="_sRLa0JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRMB4JBtEeuFbeFbcxBJpg" source="_sNxhgZBtEeuFbeFbcxBJpg" target="_sRLa0JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRMB4ZBtEeuFbeFbcxBJpg" source="_sRLa0JBtEeuFbeFbcxBJpg" target="_sNxhgJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRPFMJBtEeuFbeFbcxBJpg" source="_sQUfMJBtEeuFbeFbcxBJpg" target="_sPTLgJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sRPFMZBtEeuFbeFbcxBJpg" InArcs="_sRPsQJBtEeuFbeFbcxBJpg _sRPsQZBtEeuFbeFbcxBJpg _sSY7wpBtEeuFbeFbcxBJpg" OutArcs="_sRPsQpBtEeuFbeFbcxBJpg">
+        <name text="Stream12"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRPsQJBtEeuFbeFbcxBJpg" source="_sPTLgJBtEeuFbeFbcxBJpg" target="_sRPFMZBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRPsQZBtEeuFbeFbcxBJpg" source="_sMqHMZBtEeuFbeFbcxBJpg" target="_sRPFMZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRPsQpBtEeuFbeFbcxBJpg" source="_sRPFMZBtEeuFbeFbcxBJpg" target="_sMqHMJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sRXBAJBtEeuFbeFbcxBJpg" InArcs="_sRXBAZBtEeuFbeFbcxBJpg _sRXBApBtEeuFbeFbcxBJpg _sSSOFJBtEeuFbeFbcxBJpg" OutArcs="_sRXoEJBtEeuFbeFbcxBJpg">
+        <name text="Stream7_1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRXBAZBtEeuFbeFbcxBJpg" source="_sPjqMJBtEeuFbeFbcxBJpg" target="_sRXBAJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRXBApBtEeuFbeFbcxBJpg" source="_sM1GUZBtEeuFbeFbcxBJpg" target="_sRXBAJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRXoEJBtEeuFbeFbcxBJpg" source="_sRXBAJBtEeuFbeFbcxBJpg" target="_sM1GUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sRb5gJBtEeuFbeFbcxBJpg" InArcs="_sRb5gZBtEeuFbeFbcxBJpg _sRb5gpBtEeuFbeFbcxBJpg _sSS1IpBtEeuFbeFbcxBJpg" OutArcs="_sRcgkJBtEeuFbeFbcxBJpg">
+        <name text="Stream2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRb5gZBtEeuFbeFbcxBJpg" source="_sPkRQJBtEeuFbeFbcxBJpg" target="_sRb5gJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRb5gpBtEeuFbeFbcxBJpg" source="_sNGzIJBtEeuFbeFbcxBJpg" target="_sRb5gJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRcgkJBtEeuFbeFbcxBJpg" source="_sRb5gJBtEeuFbeFbcxBJpg" target="_sNGMEJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRe80JBtEeuFbeFbcxBJpg" source="_sQtgwJBtEeuFbeFbcxBJpg" target="_sPk4UJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRe80ZBtEeuFbeFbcxBJpg" source="_sQ2DoJBtEeuFbeFbcxBJpg" target="_sPk4UJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRe80pBtEeuFbeFbcxBJpg" source="_sQmMAJBtEeuFbeFbcxBJpg" target="_sPk4UJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRe805BtEeuFbeFbcxBJpg" source="_sQ9_cpBtEeuFbeFbcxBJpg" target="_sPk4UJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Transition" id="_sRgK8JBtEeuFbeFbcxBJpg" InArcs="_sRgK8ZBtEeuFbeFbcxBJpg _sRgK8pBtEeuFbeFbcxBJpg _sSS1IJBtEeuFbeFbcxBJpg" OutArcs="_sRgK85BtEeuFbeFbcxBJpg">
+        <name text="Stream6_1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRgK8ZBtEeuFbeFbcxBJpg" source="_sQHD0JBtEeuFbeFbcxBJpg" target="_sRgK8JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRgK8pBtEeuFbeFbcxBJpg" source="_sM-QQZBtEeuFbeFbcxBJpg" target="_sRgK8JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRgK85BtEeuFbeFbcxBJpg" source="_sRgK8JBtEeuFbeFbcxBJpg" target="_sM-QQJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sRlDcJBtEeuFbeFbcxBJpg" InArcs="_sRlDcZBtEeuFbeFbcxBJpg _sRlDcpBtEeuFbeFbcxBJpg _sSUqUZBtEeuFbeFbcxBJpg" OutArcs="_sRlDc5BtEeuFbeFbcxBJpg">
+        <name text="Stream5"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRlDcZBtEeuFbeFbcxBJpg" source="_sQRb4JBtEeuFbeFbcxBJpg" target="_sRlDcJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRlDcpBtEeuFbeFbcxBJpg" source="_sNqMwZBtEeuFbeFbcxBJpg" target="_sRlDcJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRlDc5BtEeuFbeFbcxBJpg" source="_sRlDcJBtEeuFbeFbcxBJpg" target="_sNqMwJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sRot0JBtEeuFbeFbcxBJpg" InArcs="_sRot0ZBtEeuFbeFbcxBJpg _sRot0pBtEeuFbeFbcxBJpg _sSYUsJBtEeuFbeFbcxBJpg" OutArcs="_sRot05BtEeuFbeFbcxBJpg">
+        <name text="Stream13"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRot0ZBtEeuFbeFbcxBJpg" source="_sQSC8JBtEeuFbeFbcxBJpg" target="_sRot0JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRot0pBtEeuFbeFbcxBJpg" source="_sMLmEJBtEeuFbeFbcxBJpg" target="_sRot0JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRot05BtEeuFbeFbcxBJpg" source="_sRot0JBtEeuFbeFbcxBJpg" target="_sMK_AJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sRs_QJBtEeuFbeFbcxBJpg" InArcs="_sRs_QZBtEeuFbeFbcxBJpg _sRs_QpBtEeuFbeFbcxBJpg _sSY7wJBtEeuFbeFbcxBJpg" OutArcs="_sRs_Q5BtEeuFbeFbcxBJpg">
+        <name text="Stream14"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRs_QZBtEeuFbeFbcxBJpg" source="_sQSqApBtEeuFbeFbcxBJpg" target="_sRs_QJBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRs_QpBtEeuFbeFbcxBJpg" source="_sMehAJBtEeuFbeFbcxBJpg" target="_sRs_QJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRs_Q5BtEeuFbeFbcxBJpg" source="_sRs_QJBtEeuFbeFbcxBJpg" target="_sMd58JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sRwCkJBtEeuFbeFbcxBJpg" InArcs="_sRwCkZBtEeuFbeFbcxBJpg _sRwCkpBtEeuFbeFbcxBJpg _sSY7xJBtEeuFbeFbcxBJpg" OutArcs="_sRwpoJBtEeuFbeFbcxBJpg">
+        <name text="Stream4"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRwCkZBtEeuFbeFbcxBJpg" source="_sRGiUJBtEeuFbeFbcxBJpg" target="_sRwCkJBtEeuFbeFbcxBJpg">
+        <inscription text="10"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRwCkpBtEeuFbeFbcxBJpg" source="_sN5dUZBtEeuFbeFbcxBJpg" target="_sRwCkJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRwpoJBtEeuFbeFbcxBJpg" source="_sRwCkJBtEeuFbeFbcxBJpg" target="_sN5dUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sRzF4JBtEeuFbeFbcxBJpg" InArcs="_sRzF4ZBtEeuFbeFbcxBJpg _sRzF4pBtEeuFbeFbcxBJpg _sSQ_8JBtEeuFbeFbcxBJpg" OutArcs="_sRzF45BtEeuFbeFbcxBJpg">
+        <name text="Stream3"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRzF4ZBtEeuFbeFbcxBJpg" source="_sRHJYJBtEeuFbeFbcxBJpg" target="_sRzF4JBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sRzF4pBtEeuFbeFbcxBJpg" source="_sKxQ0JBtEeuFbeFbcxBJpg" target="_sRzF4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sRzF45BtEeuFbeFbcxBJpg" source="_sRzF4JBtEeuFbeFbcxBJpg" target="_sKwpwJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sR2JMJBtEeuFbeFbcxBJpg" InArcs="_sR2wQZBtEeuFbeFbcxBJpg">
+        <name text="End1_transition"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sR2JMZBtEeuFbeFbcxBJpg" InArcs="_sR2wQJBtEeuFbeFbcxBJpg" OutArcs="_sR2wQZBtEeuFbeFbcxBJpg">
+        <name text="End1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sR2wQJBtEeuFbeFbcxBJpg" source="_sN6rcJBtEeuFbeFbcxBJpg" target="_sR2JMZBtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sR2wQZBtEeuFbeFbcxBJpg" source="_sR2JMZBtEeuFbeFbcxBJpg" target="_sR2JMJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sR2wQpBtEeuFbeFbcxBJpg" InArcs="_sR3XUZBtEeuFbeFbcxBJpg">
+        <name text="End3_transition"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sR2wQ5BtEeuFbeFbcxBJpg" InArcs="_sR3XUJBtEeuFbeFbcxBJpg" OutArcs="_sR3XUZBtEeuFbeFbcxBJpg">
+        <name text="End3"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sR3XUJBtEeuFbeFbcxBJpg" source="_sMgWMJBtEeuFbeFbcxBJpg" target="_sR2wQ5BtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sR3XUZBtEeuFbeFbcxBJpg" source="_sR2wQ5BtEeuFbeFbcxBJpg" target="_sR2wQpBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Transition" id="_sR3XUpBtEeuFbeFbcxBJpg" InArcs="_sR3-YZBtEeuFbeFbcxBJpg">
+        <name text="End2_transition"/>
+      </objects>
+      <objects xsi:type="ptnet:Place" id="_sR3XU5BtEeuFbeFbcxBJpg" InArcs="_sR3-YJBtEeuFbeFbcxBJpg" OutArcs="_sR3-YZBtEeuFbeFbcxBJpg">
+        <name text="End2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sR3-YJBtEeuFbeFbcxBJpg" source="_sNyvoJBtEeuFbeFbcxBJpg" target="_sR3XU5BtEeuFbeFbcxBJpg">
+        <inscription text="1"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sR3-YZBtEeuFbeFbcxBJpg" source="_sR3XU5BtEeuFbeFbcxBJpg" target="_sR3XUpBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sSQY4JBtEeuFbeFbcxBJpg" InArcs="_sSQ_8ZBtEeuFbeFbcxBJpg _sSRnAZBtEeuFbeFbcxBJpg _sSRnA5BtEeuFbeFbcxBJpg _sSSOEZBtEeuFbeFbcxBJpg _sSSOE5BtEeuFbeFbcxBJpg _sSSOFZBtEeuFbeFbcxBJpg _sSS1IZBtEeuFbeFbcxBJpg _sSS1I5BtEeuFbeFbcxBJpg _sSTcMJBtEeuFbeFbcxBJpg _sSTcMpBtEeuFbeFbcxBJpg _sSTcNJBtEeuFbeFbcxBJpg _sSUDQZBtEeuFbeFbcxBJpg _sSUDQ5BtEeuFbeFbcxBJpg _sSUqUJBtEeuFbeFbcxBJpg _sSUqUpBtEeuFbeFbcxBJpg _sSUqVJBtEeuFbeFbcxBJpg _sSVRYZBtEeuFbeFbcxBJpg _sSVRY5BtEeuFbeFbcxBJpg _sSV4cZBtEeuFbeFbcxBJpg _sSV4c5BtEeuFbeFbcxBJpg _sSWfgZBtEeuFbeFbcxBJpg _sSWfg5BtEeuFbeFbcxBJpg" OutArcs="_sSQ_8JBtEeuFbeFbcxBJpg _sSRnAJBtEeuFbeFbcxBJpg _sSRnApBtEeuFbeFbcxBJpg _sSSOEJBtEeuFbeFbcxBJpg _sSSOEpBtEeuFbeFbcxBJpg _sSSOFJBtEeuFbeFbcxBJpg _sSS1IJBtEeuFbeFbcxBJpg _sSS1IpBtEeuFbeFbcxBJpg _sSS1JJBtEeuFbeFbcxBJpg _sSTcMZBtEeuFbeFbcxBJpg _sSTcM5BtEeuFbeFbcxBJpg _sSUDQJBtEeuFbeFbcxBJpg _sSUDQpBtEeuFbeFbcxBJpg _sSUDRJBtEeuFbeFbcxBJpg _sSUqUZBtEeuFbeFbcxBJpg _sSUqU5BtEeuFbeFbcxBJpg _sSVRYJBtEeuFbeFbcxBJpg _sSVRYpBtEeuFbeFbcxBJpg _sSV4cJBtEeuFbeFbcxBJpg _sSV4cpBtEeuFbeFbcxBJpg _sSWfgJBtEeuFbeFbcxBJpg _sSWfgpBtEeuFbeFbcxBJpg">
+        <name text="Partition"/>
+        <initialMarking text="16"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sSQ_8JBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sRzF4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSQ_8ZBtEeuFbeFbcxBJpg" source="_sLg3sJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSRnAJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sQFOoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSRnAZBtEeuFbeFbcxBJpg" source="_sQA9MJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSRnApBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sP5ocJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSRnA5BtEeuFbeFbcxBJpg" source="_sP1XAJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSSOEJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sP0I4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSSOEZBtEeuFbeFbcxBJpg" source="_sPvQYJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSSOEpBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sP_vEJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSSOE5BtEeuFbeFbcxBJpg" source="_sP62kZBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSSOFJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sRXBAJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSSOFZBtEeuFbeFbcxBJpg" source="_sM27gJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSS1IJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sRgK8JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSS1IZBtEeuFbeFbcxBJpg" source="_sNAFcJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSS1IpBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sRb5gJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSS1I5BtEeuFbeFbcxBJpg" source="_sNIBQJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSS1JJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sQNKcJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSTcMJBtEeuFbeFbcxBJpg" source="_sQI5AJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSTcMZBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sQ01gJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSTcMpBtEeuFbeFbcxBJpg" source="_sQtgwJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSTcM5BtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sQ8xUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSTcNJBtEeuFbeFbcxBJpg" source="_sQ2DoJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUDQJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sQsSoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUDQZBtEeuFbeFbcxBJpg" source="_sQmMAJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUDQpBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sREtIJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUDQ5BtEeuFbeFbcxBJpg" source="_sQ9_cpBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUDRJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sRIXgJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUqUJBtEeuFbeFbcxBJpg" source="_sNkGIJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUqUZBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sRlDcJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUqUpBtEeuFbeFbcxBJpg" source="_sNra4JBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUqU5BtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sOAyEJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSUqVJBtEeuFbeFbcxBJpg" source="_sOAyEZBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSVRYJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sQYwoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSVRYZBtEeuFbeFbcxBJpg" source="_sQUfMJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSVRYpBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sPh1AJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSVRY5BtEeuFbeFbcxBJpg" source="_sPcVcJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSV4cJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sO470JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSV4cZBtEeuFbeFbcxBJpg" source="_sOt8sJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSV4cpBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sPD68JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSV4c5BtEeuFbeFbcxBJpg" source="_sO7YEZBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSWfgJBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sPRWUJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSWfgZBtEeuFbeFbcxBJpg" source="_sPMd0ZBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSWfgpBtEeuFbeFbcxBJpg" source="_sSQY4JBtEeuFbeFbcxBJpg" target="_sPLPsJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSWfg5BtEeuFbeFbcxBJpg" source="_sPFwIJBtEeuFbeFbcxBJpg" target="_sSQY4JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Place" id="_sSXtoJBtEeuFbeFbcxBJpg" InArcs="_sSYUsZBtEeuFbeFbcxBJpg _sSYUs5BtEeuFbeFbcxBJpg _sSY7wZBtEeuFbeFbcxBJpg _sSY7w5BtEeuFbeFbcxBJpg _sSZi0JBtEeuFbeFbcxBJpg" OutArcs="_sSYUsJBtEeuFbeFbcxBJpg _sSYUspBtEeuFbeFbcxBJpg _sSY7wJBtEeuFbeFbcxBJpg _sSY7wpBtEeuFbeFbcxBJpg _sSY7xJBtEeuFbeFbcxBJpg">
+        <name text="Partition2"/>
+        <initialMarking text="2"/>
+      </objects>
+      <objects xsi:type="ptnet:Arc" id="_sSYUsJBtEeuFbeFbcxBJpg" source="_sSXtoJBtEeuFbeFbcxBJpg" target="_sRot0JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSYUsZBtEeuFbeFbcxBJpg" source="_sMM0MJBtEeuFbeFbcxBJpg" target="_sSXtoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSYUspBtEeuFbeFbcxBJpg" source="_sSXtoJBtEeuFbeFbcxBJpg" target="_sRLa0JBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSYUs5BtEeuFbeFbcxBJpg" source="_sNyvoJBtEeuFbeFbcxBJpg" target="_sSXtoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSY7wJBtEeuFbeFbcxBJpg" source="_sSXtoJBtEeuFbeFbcxBJpg" target="_sRs_QJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSY7wZBtEeuFbeFbcxBJpg" source="_sMgWMJBtEeuFbeFbcxBJpg" target="_sSXtoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSY7wpBtEeuFbeFbcxBJpg" source="_sSXtoJBtEeuFbeFbcxBJpg" target="_sRPFMZBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSY7w5BtEeuFbeFbcxBJpg" source="_sMr8YJBtEeuFbeFbcxBJpg" target="_sSXtoJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSY7xJBtEeuFbeFbcxBJpg" source="_sSXtoJBtEeuFbeFbcxBJpg" target="_sRwCkJBtEeuFbeFbcxBJpg"/>
+      <objects xsi:type="ptnet:Arc" id="_sSZi0JBtEeuFbeFbcxBJpg" source="_sN6rcJBtEeuFbeFbcxBJpg" target="_sSXtoJBtEeuFbeFbcxBJpg"/>
+    </pages>
+    <name text="TD"/>
+    <toolspecifics tool="DICE PNML Extensions" version="0.1" formattedXMLBuffer="&lt;value grammar=&quot;http://es.unizar.dsico/pnconstants/units/basetimeunit&quot;>s&lt;/value>" toolInfoGrammarURI="http://es.unizar.dsico/pnconstants/units/basetimeunit"/>
+  </nets>
+</ptnet:PetriNetDoc>

@@ -69,7 +69,7 @@ public class ReliabilityDpimTest extends AbstractTest{
 	final static String DEFINITION_FILENAME = "2d8afa5a-618c-465b-8a2a-d4dd2d8789ff";
 	final static String INVOCATION_FILENAME = "4621530c-a96c-4db8-adbe-ba22ab68d40a";
 
-	final static String RELATIVE_PATH = "reliabilityDpimResults/";
+	final static String RELATIVE_PATH = "reliabilityDpim/";
 	
 	final static String UML_FILENAME = "modelPoseidoniaReliab";
 

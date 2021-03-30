@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traces:TraceSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:traces="http://es.unizar.disco/simulation/traces/1.0">
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_KO0zwGxWEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iya3UJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_KO0zwGxWEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iya3UZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_RrvOEGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyehsJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_RrvOEGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyfIwJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#__IbOcGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyfv0JGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#__IbOcGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyfv0ZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_1kyfkGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iygW4ZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_1kyfkGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iygW4pGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_45gOEGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyiMEJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_45gOEGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyizIJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_xpd5gGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iykBQJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_xpd5gGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iykBQZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_3DJ7AGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iykoUJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_3DJ7AGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iykoUZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_RrunAGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iylPYJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_RrunAGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iylPYZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_UotgEGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyl2cZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_UotgEGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyl2cpGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_bo_r8GxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iynEkJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_bo_r8GxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iynEkZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_w_LUcGxVEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iynroJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_w_LUcGxVEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iynroZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_UosR8GxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyoSsJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_UosR8GxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyo5wJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_bpATAGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyo5wpGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_bpATAGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iypg0JGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_45fnAGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyqH4JGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_45fnAGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyqH4ZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#__Ib1gGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyqu8JGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#__Ib1gGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyqu8ZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="ExecutionSpecification">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_fiY_YGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyrWAJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="ExecutionSpecification">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_fiY_YGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iyrWAZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="ExecutionSpecification">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_F9fBwGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iz76QJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="ExecutionSpecification">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_F9fBwGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_iz76QZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_1kxRcGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0HgcJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_1kxRcGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0HgcZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_3DIs4GxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0IHgJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_3DIs4GxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0IHgZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_40TTEGxUEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0IukJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_40TTEGxUEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0JVoJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="ExecutionSpecification">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_d5XBgGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0J8sJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="ExecutionSpecification">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_d5XBgGxSEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0J8sZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_xpfusGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0SfkJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="InteractionFragment">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_xpfusGxTEeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i0SfkZGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="NumberOfConcurrentUsers">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_p1HeUGxREeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i1ZS0JGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="NumberOfConcurrentUsers">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_r_u7wGxREeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i1fZcJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="NumberOfConcurrentUsers">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_gDfzQGxREeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i1jq4JGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="NumberOfConcurrentUsers">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_m6wmAGxREeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i1zigJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="ImplicitPlace">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_erVGcGxREeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i1_IsJGfEeuuCdeiZEWvtw"/>
+  </traces>
+  <traces rule="transitionEndSequenceDiagram">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_erVGcGxREeaaf9FvLD9bBw"/>
+    <toAnalyzableElement href="46a18768-0b41-4ce6-ba5f-7577b312a66b.anm.xmi#_i1muMZGfEeuuCdeiZEWvtw"/>
+  </traces>
+</traces:TraceSet>

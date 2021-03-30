@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ASCII"?>
+<definition:SimulationDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:definition="http://es.unizar.disco/simulation/definition/1.0" identifier="b9a0d79f-0159-40b5-ae1b-374d3e8b70d0" maxExecutionTime="1970-01-01T01:00:00.000+0100" measuresToCompute="//@declaredMeasures.0 //@declaredMeasures.1 //@declaredMeasures.2" backend="es.unizar.disco.simulation.greatspn.ssh.gspnSshSimulator" activeConfigurations="//@possibleConfigurations.0">
+  <invocations href="46a18768-0b41-4ce6-ba5f-7577b312a66b.inv.xmi#46a18768-0b41-4ce6-ba5f-7577b312a66b"/>
+  <parameters key="-M" value="2000"/>
+  <parameters key="-m" value="1000"/>
+  <parameters key="-s" value="31415"/>
+  <parameters key="-t" value="1000"/>
+  <parameters key="binary_file_path" value="/usr/local/GreatSPN/bin/WNSIM"/>
+  <parameters key="-a" value="5"/>
+  <parameters key="-c" value="95"/>
+  <parameters key="-f" value="1000"/>
+  <activeScenario href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_WFR2oGxREeaaf9FvLD9bBw"/>
+  <inputVariables name="parser" assignments="//@possibleConfigurations.0/@assignments.0">
+    <values value="20" assignments="//@possibleConfigurations.0/@assignments.0"/>
+  </inputVariables>
+  <inputVariables name="adapt" assignments="//@possibleConfigurations.0/@assignments.1">
+    <values value="10" assignments="//@possibleConfigurations.0/@assignments.1"/>
+  </inputVariables>
+  <inputVariables name="msgDelay2" assignments="//@possibleConfigurations.0/@assignments.2">
+    <values value="30" assignments="//@possibleConfigurations.0/@assignments.2"/>
+  </inputVariables>
+  <inputVariables name="msgDelay1" assignments="//@possibleConfigurations.0/@assignments.3">
+    <values value="13" assignments="//@possibleConfigurations.0/@assignments.3"/>
+  </inputVariables>
+  <inputVariables name="postProc" assignments="//@possibleConfigurations.0/@assignments.4">
+    <values value="80" assignments="//@possibleConfigurations.0/@assignments.4"/>
+  </inputVariables>
+  <inputVariables name="arrRateP" assignments="//@possibleConfigurations.0/@assignments.5">
+    <values value="20" assignments="//@possibleConfigurations.0/@assignments.5"/>
+  </inputVariables>
+  <domainResource uri="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml"/>
+  <outputVariables name="RTParser"/>
+  <outputVariables name="XParser"/>
+  <outputVariables name="UParser"/>
+  <declaredMeasures measure="respT">
+    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_WFR2oGxREeaaf9FvLD9bBw"/>
+    <vslExpressionEntries key="expr" value="$RTParser"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="unit" value="ms"/>
+  </declaredMeasures>
+  <declaredMeasures measure="throughput">
+    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_WFR2oGxREeaaf9FvLD9bBw"/>
+    <vslExpressionEntries key="expr" value="$XParser"/>
+    <vslExpressionEntries key="source" value="calc"/>
+    <vslExpressionEntries key="unit" value="kHz"/>
+  </declaredMeasures>
+  <declaredMeasures measure="utilization">
+    <measuredElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceSequence/model.uml#_gDfzQGxREeaaf9FvLD9bBw"/>
+    <vslExpressionEntries key="expr" value="$UParser"/>
+    <vslExpressionEntries key="source" value="calc"/>
+  </declaredMeasures>
+  <possibleConfigurations>
+    <assignments value="//@inputVariables.0/@values.0" variable="parser"/>
+    <assignments value="//@inputVariables.1/@values.0" variable="adapt"/>
+    <assignments value="//@inputVariables.2/@values.0" variable="msgDelay2"/>
+    <assignments value="//@inputVariables.3/@values.0" variable="msgDelay1"/>
+    <assignments value="//@inputVariables.4/@values.0" variable="postProc"/>
+    <assignments value="//@inputVariables.5/@values.0" variable="arrRateP"/>
+  </possibleConfigurations>
+  <scenarioStereotypes>MARTE::MARTE_AnalysisModel::GQAM::GaScenario</scenarioStereotypes>
+</definition:SimulationDefinition>

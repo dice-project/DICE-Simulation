@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:datatypes="http://es.unizar.disco/simulation/datatypes/1.0">
-  <datatypes:PrimitiveVariableAssignment variable="$c1" value="3"/>
-</xmi:XMI>

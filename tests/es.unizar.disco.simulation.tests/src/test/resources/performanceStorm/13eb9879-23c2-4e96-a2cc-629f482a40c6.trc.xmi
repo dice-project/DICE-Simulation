@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="ASCII"?>
+<traces:TraceSet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:traces="http://es.unizar.disco/simulation/traces/1.0">
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_-yHrMLiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sKwpwJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_-yHrMLiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sKxQ0JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_-yHrMLiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sLg3sJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_t3aoILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sL4rIJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_t3aoILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sL4rIZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_t3aoILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sL7HYJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_1pxxMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMK_AJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_1pxxMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMLmEJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_1pxxMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMM0MJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_UrlcYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMd58JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_UrlcYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMehAJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_UrlcYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMgWMJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_TNnpkLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMqHMJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_TNnpkLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMqHMZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_TNnpkLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sMr8YJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_Tf8I4Pd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sM1GUJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_Tf8I4Pd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sM1GUZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_Tf8I4Pd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sM27gJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_EhIAMPd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sM-QQJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_EhIAMPd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sM-QQZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_EhIAMPd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNAFcJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_9NqO0LiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNGMEJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_9NqO0LiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNGzIJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_9NqO0LiZEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNIBQJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_wdMXkLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNPWAJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_wdMXkLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNPWAZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_wdMXkLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNRLMJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_qRoNMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNYf8JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_qRoNMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNYf8ZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_qRoNMLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNZuEJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_1AzQ8P_8EeaC167qz4OFrg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNiQ8JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_1AzQ8P_8EeaC167qz4OFrg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNiQ8ZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_1AzQ8P_8EeaC167qz4OFrg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNkGIJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_RSWFILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNqMwJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_RSWFILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNqMwZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_RSWFILiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNra4JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_59PxgLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNxhgJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_59PxgLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNxhgZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_59PxgLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sNyvoJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_UpC7MLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sN5dUJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_UpC7MLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sN5dUZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_UpC7MLiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sN6rcJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="spoutNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_Kz3l0LiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOG4sZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="spoutNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_Kz3l0LiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOG4sJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="TimedTransitionSpout">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_Kz3l0LiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOAyEZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="spoutNode2subNet">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_Kz3l0LiaEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOAyEJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_OihMYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOJU8JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_OihMYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOJU8ZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_OihMYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOJ8AJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_JAOBcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOPbkJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_JAOBcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOQCoJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_JAOBcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOQpsJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2place">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_FIF5ULibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOWJQJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2placeParallelism">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_FIF5ULibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOWJQZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicActivityNode2timedTransition">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_FIF5ULibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOXXYJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_eDuQcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOghUJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_u3nEYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOhvcJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sO470JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOt8sJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sO470ZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sO5i4JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPD68JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sO7YEZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPEiAJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPEiAZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPLPsJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPFwIJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPLPsZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPL2wJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPRWUJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPMd0ZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPR9YJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPR9YZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8fuf4LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sOiWgJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_wC_SYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPTLgJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPh1AJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPcVcJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPh1AZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPh1ApBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_0c__kLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPUZoJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_ee80IPd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPjqMJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_m-hzkP_9EeaC167qz4OFrg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPkRQJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP0I4JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPvQYJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP0I4ZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP0I4pBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP5ocJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP1XAJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP6PgJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP6PgZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP_vEJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP62kZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sP_vEZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQAWIJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQFOoJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQA9MJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQF1sJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQF1sZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_05z3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sPk4UJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_d7I8cPd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQHD0JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQNKcJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQI5AJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQNKcZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQNKcpBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_ygJ4YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQHq4JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_IrAxQPd3EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQRb4JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_vf068LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQSC8JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_uPfUcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQSqApBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQYwoJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQUfMJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQYwoZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="globalGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQYwopBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_zEO10LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQT4IJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQsSoJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQmMAJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQsSoZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQs5sJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQ01gJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQtgwJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQ01gZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQ01gpBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQ8xUJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQ2DoJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQ8xUZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQ9YYJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sREtIJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQ9_cpBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sREtIZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="fieldGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRFUMJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_39H3YLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sQcbAJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8kOeALieEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRGiUJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="basicControlFlow2arc">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_f4dkgLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRHJYJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_eDuQcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRIXgJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_u3nEYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRLa0JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_wC_SYLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRPFMZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="allGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_ee80IPd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRXBAJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_m-hzkP_9EeaC167qz4OFrg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRb5gJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="allGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_d7I8cPd2EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRgK8JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_IrAxQPd3EeatOcLZxSJOdg"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRlDcJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_vf068LibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRot0JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_uPfUcLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRs_QJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_8kOeALieEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRwCkJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="shuffleGrouping">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_f4dkgLibEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sRzF4JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_EEyscLifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sR2JMZBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_EEyscLifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sR2JMJBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_IVYX4LifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sR2wQ5BtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_IVYX4LifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sR2wQpBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_GSAx8LifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sR3XU5BtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="finalNode">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_GSAx8LifEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sR3XUpBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="partitions2resources">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_2U8UcLiiEea8eaFayFZqBQ"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sSQY4JBtEeuFbeFbcxBJpg"/>
+  </traces>
+  <traces rule="partitions2resources">
+    <fromDomainElement href="platform:/resource/es.unizar.disco.simulation.root/tests/es.unizar.disco.simulation.tests/src/test/resources/performanceStorm/model.uml#_ygseYJlMEee0xNmnMU_62g"/>
+    <toAnalyzableElement href="13eb9879-23c2-4e96-a2cc-629f482a40c6.anm.xmi#_sSXtoJBtEeuFbeFbcxBJpg"/>
+  </traces>
+</traces:TraceSet>
