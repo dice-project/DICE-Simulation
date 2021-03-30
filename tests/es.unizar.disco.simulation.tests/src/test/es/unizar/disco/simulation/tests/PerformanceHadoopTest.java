@@ -37,7 +37,6 @@ import org.eclipse.uml2.uml.Activity;
 import org.eclipse.uml2.uml.ActivityNode;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
-import org.eclipse.uml2.uml.PackageableElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -45,7 +44,6 @@ import org.junit.experimental.categories.Category;
 import es.unizar.disco.pnml.m2m.builder.HadoopActivityDiagram2PnmlResourceBuilder;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.ActivityResponseTimeCalculatorHadoop;
-import es.unizar.disco.simulation.greatspn.ssh.calculators.UtilizationCalculatorHadoop;
 import es.unizar.disco.simulation.launcher.Messages;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder.ModelResult;
@@ -173,9 +171,11 @@ public class PerformanceHadoopTest extends AbstractTest {
 			/* All transition have, at least, one input arc and one output arc */
 			else if (pnelement instanceof Transition){
 				trans = (Transition) pnelement;
-				assertTrue("The transition did not contain at least one input arc", trans.getInArcs().size() >= 1);
 				assertTrue("The input arc of the transition comes from a null element",
 						trans.getInArcs().get(0).getSource() != null);
+				assertTrue("The output arc of the transition goes to a null element",
+						trans.getOutArcs().get(0).getTarget() != null);
+				assertTrue("The transition did not contain at least one input arc", trans.getInArcs().size() >= 1);
 				assertTrue("The transition did not contain at least one output arc", trans.getOutArcs().size() >= 1);
 				for (Arc arc : trans.getOutArcs()) {
 					assertTrue("The arc id " + arc.getId() + " originated in the transition goes to a null element",
@@ -219,7 +219,7 @@ public class PerformanceHadoopTest extends AbstractTest {
 		(respt.getValue().doubleValue() > 15.0) && (respt.getValue().doubleValue() < 20.0));
 	}
 
-	
+
 	private DomainMeasure launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
 

@@ -65,6 +65,8 @@ public class PerformanceConcurrentUsersPlaceTest extends AbstractTest {
 
 	final static String RELATIVE_PATH = "closedWorkload/";
 	
+	final static String UML_FILENAME = "modelPoseidoniaReliab";
+	
 	@Before
 	public void loadParticularModels() throws IOException {
 		loadModels(RELATIVE_PATH + DEFINITION_FILENAME, RELATIVE_PATH + INVOCATION_FILENAME);
@@ -249,11 +251,11 @@ public class PerformanceConcurrentUsersPlaceTest extends AbstractTest {
 		
 		for (int i = 0; i < invocation.getDefinition().getMeasuresToCompute().size(); i++) {
 			DomainMeasureDefinition measureDefinitioni = invocation.getDefinition().getMeasuresToCompute().get(i);
-			/*System.out.println("Measure definition: " + i + "  " + measureDefinitioni.getMeasure() + " to string:"
+			/* System.out.println("Measure definition: " + i + "  " + measureDefinitioni.getMeasure() + " to string:"
 					+ measureDefinitioni.toString() + " its measured element: ");
 			System.out.println("Trying to cast to Element and to print the getClass: "
-					+ ((Element) measureDefinition.getMeasuredElement()).getClass());
-*/			if(measureDefinitioni.getMeasure().equalsIgnoreCase(chosenMeasure)){
+					+ ((Element) measureDefinition.getMeasuredElement()).getClass()); */
+			if(measureDefinitioni.getMeasure().equalsIgnoreCase(chosenMeasure)){
 				measureDefinition=measureDefinitioni;
 			}
 			

@@ -34,10 +34,11 @@ import java.util.regex.Pattern;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Model;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -65,9 +66,32 @@ import fr.lip6.move.pnml.ptnet.Transition;
 
 public class ReliabilityDpimTest extends AbstractTest{
 
-	
+	final static String DEFINITION_FILENAME = "2d8afa5a-618c-465b-8a2a-d4dd2d8789ff";
+	final static String INVOCATION_FILENAME = "4621530c-a96c-4db8-adbe-ba22ab68d40a";
 
+	final static String RELATIVE_PATH = "reliabilityDpimResults/";
 	
+	final static String UML_FILENAME = "modelPoseidoniaReliab";
+
+	@Before
+	public void loadParticularModels() throws IOException {
+		loadModels(RELATIVE_PATH + DEFINITION_FILENAME, RELATIVE_PATH + INVOCATION_FILENAME);
+
+	}
+
+	@Test
+	public void testLoadProfiledModel() throws IOException {
+
+		Model model = loadUMLModel(RELATIVE_PATH + UML_FILENAME);
+		
+	
+		assertTrue("The " + UML_FILENAME + " model does not contain dpim scenario stereotype", contains(model.getPackagedElements(),"DpimScenario"));
+		Element dpimScenario = getStereotypedElement(model.getPackagedElements(),"DpimScenario");
+		assertTrue("The DpimScenario stereotype does not contatin contain reliability tag",
+					dpimScenario.getValue(dpimScenario.getAppliedStereotype("DICE::DICE_UML_Extensions::DPIM::DpimScenario"), "reliability") != null);
+				    // dpimScenario.getValue(dpimScenario.getAppliedStereotype("DICE::DICE_UML_Extensions::DPIM::DpimScenario"), "reliability") != null);
+	}
+
 
 	@Test
 	public void testCreationNet() throws IOException {
@@ -146,10 +170,22 @@ public class ReliabilityDpimTest extends AbstractTest{
 	public void testSucccesAndFailureProbabilitySumOne()
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
-		SimulationDefinition fullExecutionDefinition = (SimulationDefinition) loadResourceFromUri(
+		/* SimulationDefinition fullExecutionDefinition = (SimulationDefinition) loadResourceFromUri(
 				URI.createFileURI(Paths.get("src/test/resources/reliabilityDpimResults/2d8afa5a-618c-465b-8a2a-d4dd2d8789ff"
 						+ ".def" + "." + XMIResource.XMI_NS).toFile().getAbsolutePath()));
-		DomainMeasure sum = launchAnalysis(fullExecutionDefinition);
+			DomainMeasure sum = launchAnalysis(fullExecutionDefinition); */
+		
+		definition = invocation.getDefinition();
+		
+		IAnalyzableModelBuilder builder = new ActivityDiagram2PnmlReliabilityResourceBuilder();
+
+		System.out.println("Creating net of active scenario: " + definition.getActiveScenario());
+		ModelResult result = builder.createAnalyzableModel((Element) definition.getActiveScenario(),
+				invocation.getVariableConfiguration().toPrimitiveAssignments());
+		invocation.getAnalyzableModel().addAll(result.getModel());
+		invocation.setTraceSet(result.getTraceSet());
+		
+		DomainMeasure sum = launchAnalysis(definition);
 		assertTrue("The sum of Reliability and Unreliability is null", sum != null);
 		assertTrue("The sum of Reliability and Unreliability is less than 0.95. Concretely: "
 				+ sum.getValue().doubleValue(), sum.getValue().doubleValue() > 0.95);
@@ -157,7 +193,7 @@ public class ReliabilityDpimTest extends AbstractTest{
 				sum.getValue().doubleValue() < 1.05);
 
 	}
-	
+
 /*	public void testSuccessAndFilureProbabilitySumOneFindingExecutorsAutonomously(){
 		invocation.setToolResult(simulator.getToolResult());
 		invocationStatus.merge(buildResult(invocation));
@@ -182,7 +218,7 @@ public class ReliabilityDpimTest extends AbstractTest{
 			Process simulationProcess = simulator.simulate(invocation.getIdentifier(), invocation.getAnalyzableModel(),
 					invocation.getTraceSet(), definition.getParameters().map(), new NullProgressMonitor());
 			// @formatter:on
-			
+
 			System.out.println("Reliability test. Simulate call executed, now entering in the waitFor");
 			/*IProcess runtimeProcess = DebugPlugin.newProcess(launch, simulationProcess,
 					MessageFormat.format(Messages.SimulationLaunchConfigurationDelegate_simulationName, invocation.getIdentifier()), null);
@@ -205,7 +241,7 @@ public class ReliabilityDpimTest extends AbstractTest{
 
 	private void readOutputsThreads(Process simulationProcess) {
 		 Thread errorThread = new Thread(){
-			 
+
 			 @Override
 			 public void run()
 			    {
@@ -253,18 +289,12 @@ public class ReliabilityDpimTest extends AbstractTest{
 		 
 		 stdoutThread.start();
 
-		
 	}
-	
-
 
 	private boolean resultIsMeaningful(ModelResult result) {
 
-		// final URI anmURI = URI
-		// .createFileURI(Paths.get("src/test/resources/" + TEST_FILES_UUID +
-		// ".anm" + "." + XMIResource.XMI_NS)
-		// .toFile().getAbsolutePath());
-		EObject producedAnalyzableModel = result.getModel().get(0);
+
+		PetriNetDoc producedAnalyzableModel = (PetriNetDoc)  result.getModel().get(0);
 		System.out.println("produced model= " + producedAnalyzableModel.toString());
 		/*-TraceSet traceSet = TracesFactory.eINSTANCE.createTraceSet();
 			for (EObject trace : traces.getContents()) {
@@ -302,12 +332,12 @@ public class ReliabilityDpimTest extends AbstractTest{
 		DomainMeasure reliab = calculator.calculate(measuredElement, measureDefinition, invocation.getToolResult(),
 				invocation.getTraceSet());
 				
-						DomainMeasure unreliab = calculator.calculateUnreliability(measuredElement, measureDefinition,
+		DomainMeasure unreliab = calculator.calculateUnreliability(measuredElement, measureDefinition,
 				invocation.getToolResult(), invocation.getTraceSet());
 		DomainMeasure sum = MeasuresFactory.eINSTANCE.createDomainMeasure();
 		sum.setValue(reliab.getValue().doubleValue() + unreliab.getValue().doubleValue());
 		return sum;
-		
+
 		
 		/*MultiStatus status = new MultiStatus(DiceSimulationPlugin.PLUGIN_ID, 0, null, null);
 		System.out.println("Test CalculateREsults step1");

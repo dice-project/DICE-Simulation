@@ -37,7 +37,6 @@ import org.eclipse.uml2.uml.Activity;
 import org.eclipse.uml2.uml.ActivityNode;
 import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Model;
-import org.eclipse.uml2.uml.PackageableElement;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -91,7 +90,6 @@ public class PerformanceSparkTest extends AbstractTest {
 		System.out.println("The spark scenario contains stereotypes: " + sparkScenario.getAppliedStereotypes());
 		System.out.println("The spark scenario contains nodes: " + sparkScenario.getNodes());
 
-		//Element hadoopOpElement = getStereotypedElement(model.getPackagedElements(),"HadoopOperation");
 		int count = 0;
 		for (ActivityNode sparkNode : sparkScenario.getNodes()) {
 			if ((sparkNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Spark::SparkTransformation") != null) || 
@@ -174,9 +172,11 @@ public class PerformanceSparkTest extends AbstractTest {
 			/* All transition have, at least, one input arc and one output arc */
 			else if (pnelement instanceof Transition){
 				trans = (Transition) pnelement;
-				assertTrue("The transition did not contain at least one input arc", trans.getInArcs().size() >= 1);
 				assertTrue("The input arc of the transition comes from a null element",
 						trans.getInArcs().get(0).getSource() != null);
+				assertTrue("The output arc of the transition goes to a null element",
+						trans.getOutArcs().get(0).getTarget() != null);
+				assertTrue("The transition did not contain at least one input arc", trans.getInArcs().size() >= 1);
 				assertTrue("The transition did not contain at least one output arc", trans.getOutArcs().size() >= 1);
 				for (Arc arc : trans.getOutArcs()) {
 					assertTrue("The arc id " + arc.getId() + " originated in the transition goes to a null element",

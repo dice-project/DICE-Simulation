@@ -268,7 +268,6 @@ public class ReliabilityStormTest extends AbstractTest {
 				assertEquals("Number of transitions found was " + numtransitions, 2,  numtransitions);
 		
 		//one of the places should contain as many tokens as resource multiplicity
-				//TODO
 		int hasResources = 0;
 		for (Place p : places) {
 			if (p.getInitialMarking() != null && 
@@ -277,17 +276,18 @@ public class ReliabilityStormTest extends AbstractTest {
 				hasResources++;	
 			}
 		}
-		
+		assertEquals("Number of places with resource multiplicity: " + hasResources, 1,  hasResources);
+
 		//one of the transitions should be timed with rate the inverse of the MTTF
-				//TODO
 		int hasRate = 0;
-		PnmlToolInfoUtils pnutils = new PnmlToolInfoUtils();
 		for (Transition tr : transitions) {
 			if (tr.getToolspecifics() != null &&
-				pnutils.isExponential(tr)) {
+				PnmlToolInfoUtils.isExponential(tr)) {
 				hasRate++;	
 			}
 		}
+		assertEquals("Number of transitions with timed rate: " + hasRate, 1,  hasRate);
+		
 		return (numplaces == 2) && (numtransitions == 2) && (hasRate == 1) && (hasResources == 1);
 	}
 

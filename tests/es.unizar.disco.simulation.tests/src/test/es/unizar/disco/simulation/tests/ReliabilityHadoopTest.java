@@ -44,6 +44,7 @@ import com.masdes.dam.Complex_Data_Types.DaFailure;
 import com.masdes.dam.Complex_Data_Types.DaRepair;
 
 import es.unizar.disco.pnml.m2m.builder.HadoopScenario2PnmlReliabilityResourceBuilder;
+import es.unizar.disco.pnml.m2t.utils.PnmlToolInfoUtils;
 import es.unizar.disco.simulation.backend.SimulatorsManager;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.AvailabilityCalculatorHadoop;
 import es.unizar.disco.simulation.greatspn.ssh.calculators.ReliabilityMTTFCalculatorHadoop;
@@ -96,7 +97,7 @@ public class ReliabilityHadoopTest extends AbstractTest {
 		assertTrue("The HadoopComputationNode stereotype does not contatin  informationabout blackout recovering", 
 				(((List<DaRepair>)computNode.getValue(computNode.getAppliedStereotype("DICE::DICE_UML_Extensions::DTSM::Hadoop::HadoopComputationNode"), "repair")).get(0).getMTTR().get(0)!=null));
 	}
-	
+
 
 	@Test
 	public void testCreationNet() throws IOException {
@@ -139,7 +140,7 @@ public class ReliabilityHadoopTest extends AbstractTest {
 		System.out.println("Creating net of active scenario: " + invocation.getDefinition().getActiveScenario());
 		ModelResult result = builder.createAnalyzableModel((Element) invocation.getDefinition().getActiveScenario(),
 				invocation.getVariableConfiguration().toPrimitiveAssignments());
-		
+
 		invocation.getAnalyzableModel().set(0, result.getModel().get(0));
 		invocation.setTraceSet(result.getTraceSet());
 		
@@ -163,9 +164,6 @@ public class ReliabilityHadoopTest extends AbstractTest {
 	private DomainMeasure[] launchAnalysis(SimulationDefinition definition)
 			throws SimulationException, CoreException, InterruptedException, IOException {
 
-		
-		
-		
 		SimulationInvocation invocation = definition.getInvocations().get(0);
 
 		try {
@@ -191,14 +189,12 @@ public class ReliabilityHadoopTest extends AbstractTest {
 			if (simulator.getToolResult() != null) {
 				invocation.setToolResult(simulator.getToolResult());
 				return new DomainMeasure[] {calculateResultsMTTF(invocation), calculateResultsAvailability(invocation)};
-				
 			}
 		} finally {
 
 		}
 		return null;
 	}
-
 
 	private void readOutputsThreads(Process simulationProcess) {
 		Thread errorThread = new Thread() {
@@ -253,12 +249,22 @@ public class ReliabilityHadoopTest extends AbstractTest {
 		//There should be 
 		
 		//4 places and 4 transitions
+		List<Place> places = pnobjects.stream()
+				.filter(n -> n instanceof Place) 
+				.map(n -> (Place) n)
+				.collect(Collectors.toList());
+		
 		int numplaces = pnobjects.stream()
 		.filter(n -> n instanceof Place) 
 		.map(n -> (Place) n)
 		.collect(Collectors.toList())
 		.size();
 		assertEquals("Number of places found was " + numplaces, 4,  numplaces);
+
+		List<Transition> transitions = pnobjects.stream()
+				.filter(n -> n instanceof Transition) 
+				.map(n -> (Transition) n)
+				.collect(Collectors.toList());
 		
 		int numtransitions = pnobjects.stream()
 				.filter(n -> n instanceof Transition) 
@@ -266,16 +272,53 @@ public class ReliabilityHadoopTest extends AbstractTest {
 				.collect(Collectors.toList())
 				.size();
 				assertEquals("Number of transitions found was " + numtransitions, 4,  numtransitions);
+
 		
 		//one of the places should contain as many tokens as resource multiplicity
-				//TODO
+		int hasResources = 0;
+		for (Place p : places) {
+			if (p.getInitialMarking() != null && 
+				p.getInitialMarking().getText() != null &&
+				p.getInitialMarking().getText().intValue() > 1) {
+				hasResources++;	
+			}
+		}
+		assertEquals("Number of places with resource multiplicity: " + hasResources, 1,  hasResources);
+
 		//one of the places should contain one token
-				//TODO
+		int hasOneToken = 0;
+		for (Place p : places) {
+			if (p.getInitialMarking() != null && 
+				p.getInitialMarking().getText() != null &&
+				p.getInitialMarking().getText().intValue() == 1) {
+				hasOneToken++;	
+			}
+		}
+		assertEquals("Number of places with one token: " + hasOneToken, 1,  hasOneToken);
+		
 		//two of the places shouldn't contain any token
-				//TODO
+		int hasNoToken = 0;
+		for (Place p : places) {
+			if (p.getInitialMarking() != null && 
+				p.getInitialMarking().getText() != null &&
+				p.getInitialMarking().getText().intValue() > 1) {
+				hasNoToken++;	
+			}
+		}
+		assertEquals("Number of places with no token: " + hasNoToken, 2,  hasNoToken);
+		
 		//one of the transitions should be timed with rate the inverse of the MTTF
-				//TODO
-		return true;
+		int hasRate = 0;
+		for (Transition tr : transitions) {
+			if (tr.getToolspecifics() != null &&
+				PnmlToolInfoUtils.isExponential(tr)) {
+				hasRate++;	
+			}
+		}
+		assertEquals("Number of transitions with timed rate: " + hasRate, 1,  hasRate);
+
+		return (numplaces == 4) && (numtransitions == 4) && (hasResources == 1) &&
+				(hasOneToken == 1) && (hasNoToken == 2) && (hasRate == 1);
 	}
 
 	private DomainMeasure calculateResultsMTTF(SimulationInvocation invocation) {
