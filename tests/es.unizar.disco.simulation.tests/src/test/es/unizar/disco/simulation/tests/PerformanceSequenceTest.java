@@ -158,10 +158,9 @@ public class PerformanceSequenceTest extends AbstractTest {
 				if (place != null && place.getName() != null) {
     				onePlaceFound=true;
 					oneEntered=true;
-					/* By construction, StormStreams labeled with "group" or "field" tag generate a Place with 0 input arcs and 1 output arc */
-					/* assertTrue("The place " + place.toString() + " did not contain at least one input arc", place.getInArcs().size() >= 1);
+					assertTrue("The place " + place.toString() + " did not contain at least one input arc", place.getInArcs().size() >= 1);
 					assertTrue("The input arc of the place comes from a null element",
-							place.getInArcs().get(0).getSource() != null); */
+							place.getInArcs().get(0).getSource() != null);
 					if (place.getInArcs().size() >= 1) {
 						 assertTrue("The input arc of the place comes from a null element",
 							place.getInArcs().get(0).getSource() != null);
