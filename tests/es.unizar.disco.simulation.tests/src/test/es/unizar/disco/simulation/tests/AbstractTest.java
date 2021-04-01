@@ -44,8 +44,8 @@ import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.ProfileApplication;
 import org.eclipse.uml2.uml.Stereotype;
 import org.eclipse.uml2.uml.UMLPlugin;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.osgi.framework.BundleException;
 
 import com.masdes.dam.Basic_Data_Types.Basic_Data_TypesPackage;
 import com.masdes.dam.Complex_Data_Types.Complex_Data_TypesPackage;
@@ -80,16 +80,10 @@ public abstract class AbstractTest {
 	static boolean firstTime = false;
 
 	@BeforeClass
-	public static void configure() throws IOException, URISyntaxException {
-		TestConnectionProvider.enable();
+	public static void configureTests() throws IOException, URISyntaxException, BundleException {
+		TestConnectionProvider.register();
 		loadDefaultModels();
 	}
-
-	@AfterClass
-	public static void tearDown() throws IOException, URISyntaxException {
-		TestConnectionProvider.disable();
-	}
-
 	
 	public static void loadDefaultModels() throws IOException, URISyntaxException {
 
