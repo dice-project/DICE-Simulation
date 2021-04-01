@@ -25,6 +25,11 @@ import es.unizar.disco.ssh.providers.IUserPasswordAuthProvider;
 
 public class TestConnectionProvider implements IHostProvider, IUserPasswordAuthProvider {
 
+	// This class should only be globally enabled when running tests
+	// If it is generally enabled, it will interfere with the normal
+	// operation of the default SSH connection providers
+	private static boolean enabled = false;
+
 	private static final String CONFIG_FILE 	= "/test/resources/config.properties"; //$NON-NLS-1$
 	
 	private static final String HOST_PROPERTY 			= "host"; //$NON-NLS-1$
@@ -60,9 +65,17 @@ public class TestConnectionProvider implements IHostProvider, IUserPasswordAuthP
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return enabled;
+	}
+	
+	public static void disable() {
+		enabled = false;
 	}
 
+	public static void enable() {
+		enabled = true;
+	}
+	
 	@Override
 	public void configure() throws CoreException {
 		// Do nothing

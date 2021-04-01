@@ -44,6 +44,7 @@ import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.ProfileApplication;
 import org.eclipse.uml2.uml.Stereotype;
 import org.eclipse.uml2.uml.UMLPlugin;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 import com.masdes.dam.Basic_Data_Types.Basic_Data_TypesPackage;
@@ -57,6 +58,7 @@ import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder.ModelR
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
 import es.unizar.disco.simulation.registry.SimulationInvocationsRegistry;
+import test.es.unizar.disco.simulation.tests.connection.TestConnectionProvider;
 
 public abstract class AbstractTest {
 
@@ -78,11 +80,17 @@ public abstract class AbstractTest {
 	static boolean firstTime = false;
 
 	@BeforeClass
-	public static void configureTests() throws IOException, URISyntaxException {
+	public static void configure() throws IOException, URISyntaxException {
+		TestConnectionProvider.enable();
 		loadDefaultModels();
-
 	}
 
+	@AfterClass
+	public static void tearDown() throws IOException, URISyntaxException {
+		TestConnectionProvider.disable();
+	}
+
+	
 	public static void loadDefaultModels() throws IOException, URISyntaxException {
 
 		System.out.println("Loading models from registry");
