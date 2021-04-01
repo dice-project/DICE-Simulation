@@ -17,6 +17,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: DisCo - Unizar
 Export-Package: es.unizar.disco.simulation,
+ es.unizar.disco.simulation.backend,
  es.unizar.disco.simulation.launcher,
  es.unizar.disco.simulation.registry;x-friends:="es.unizar.disco.simulation.ui",
  es.unizar.disco.simulation.simulators
