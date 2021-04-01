@@ -31,22 +31,22 @@ import org.junit.Assert;
 import es.unizar.disco.ssh.providers.IHostProvider;
 import es.unizar.disco.ssh.providers.IUserPasswordAuthProvider;
 
-public class TestConnectionProvider
-		implements
-			IHostProvider,
-			IUserPasswordAuthProvider {
+public class TestConnectionProvider implements IHostProvider, IUserPasswordAuthProvider {
 
 	private static boolean registered = false;
 
-	private static final String BUNDLE_ID = "es.unizar.disco.simulation.tests";
+	private static final String BUNDLE_ID = "es.unizar.disco.simulation.tests"; //$NON-NLS-1$
 	private static final String CONFIG_FILE = "/test/resources/config.properties"; //$NON-NLS-1$
 
 	private static final String HOST_PROPERTY = "host"; //$NON-NLS-1$
 	private static final String PORT_PROPERTY = "port"; //$NON-NLS-1$
 	private static final String USER_PROPERTY = "user"; //$NON-NLS-1$
 	private static final String PASSWORD_PROPERTY = "password"; //$NON-NLS-1$
-
-	private static final String PLUGIN = "<plugin>" + "   <extension"
+	
+	// @formatter:off
+	private static final String PLUGIN = 
+			  "<plugin>"
+			+ "   <extension"
 			+ "         point=\"es.unizar.disco.ssh.connectionProviders\">"
 			+ "      <ConnectionProvider"
 			+ "            hostProvider=\"test.es.unizar.disco.simulation.tests.connection.TestConnectionProvider\""
@@ -56,7 +56,10 @@ public class TestConnectionProvider
 			+ "         <UserPasswordAuthProvider"
 			+ "               authProvider=\"test.es.unizar.disco.simulation.tests.connection.TestConnectionProvider\">"
 			+ "         </UserPasswordAuthProvider>"
-			+ "      </ConnectionProvider>" + "   </extension>" + "</plugin>";
+			+ "      </ConnectionProvider>"
+			+ "   </extension>"
+			+ "</plugin>";
+	// @formatter:on
 
 	private Properties properties = new Properties();
 
