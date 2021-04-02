@@ -314,8 +314,6 @@ public class ReliabilityHadoopTest extends AbstractTest {
 			if (tr.getToolspecifics() != null &&
 				PnmlToolInfoUtils.isExponential(tr) && 
 				pnutils.getTransitionRate(tr).compareTo(Float.valueOf((float) (1.0/3600.0))) == 0 ){
-				/* pnutils.getTransitionRate(tr).doubleValue() == (1.0/3600.0)) { */
-				/* Math.abs(pnutils.getTransitionRate(tr).doubleValue() - (1.0/3600.0)) < (1/10000) ) { */
 				hasRate++;	
 			}
 		}

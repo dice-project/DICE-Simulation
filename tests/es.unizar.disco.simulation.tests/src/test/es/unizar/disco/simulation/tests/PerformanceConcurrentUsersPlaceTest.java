@@ -90,7 +90,7 @@ public class PerformanceConcurrentUsersPlaceTest extends AbstractTest {
 		assertNotNull("The first element in the list of translated models was null", result.getModel().get(0));
 
 		/*saveAnalyzbleModelResult(result,
-				"target/test/resources/outputModelPoseidoniaResources.anm" + "." + XMIResource.XMI_NS);
+				"target/test/resources/outputModelPoseidoniaResources.anm" + "." + XMIResource.XMI_NS);*/
 	}
 
 	@Test
