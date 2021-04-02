@@ -44,4 +44,11 @@ public interface IHostProvider {
 	 */
 	public void configure() throws CoreException;
 
+	/**
+	 * Returns whether this {@link IHostProvider} is enabled and can be used to
+	 * connect to an SSH server
+	 * 
+	 * @return
+	 */
+	public boolean isEnabled();
 }

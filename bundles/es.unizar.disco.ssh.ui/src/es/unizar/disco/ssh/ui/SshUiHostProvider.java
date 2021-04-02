@@ -44,4 +44,9 @@ public class SshUiHostProvider implements IHostProvider {
 			}
 		});
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }

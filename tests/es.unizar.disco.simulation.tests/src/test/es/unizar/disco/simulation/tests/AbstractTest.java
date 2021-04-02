@@ -44,6 +44,7 @@ import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.ProfileApplication;
 import org.eclipse.uml2.uml.Stereotype;
 import org.eclipse.uml2.uml.UMLPlugin;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.osgi.framework.BundleException;
 
@@ -80,9 +81,14 @@ public abstract class AbstractTest {
 	static boolean firstTime = false;
 
 	@BeforeClass
-	public static void configureTests() throws IOException, URISyntaxException, BundleException {
-		TestConnectionProvider.register();
+	public static void configureTests() throws IOException, URISyntaxException {
+		TestConnectionProvider.enable();
 		loadDefaultModels();
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		TestConnectionProvider.disable();
 	}
 	
 	public static void loadDefaultModels() throws IOException, URISyntaxException {

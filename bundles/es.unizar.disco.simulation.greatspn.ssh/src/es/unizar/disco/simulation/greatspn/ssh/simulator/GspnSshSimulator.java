@@ -578,7 +578,7 @@ public class GspnSshSimulator implements ISimulator {
 		return mappings != null ? mappings.get(id) : null;
 	}
 
-	private IConfigurationElement getConnectionProvider() throws SimulationException {
+	private IConfigurationElement getConnectionProvider() throws CoreException {
 		IConfigurationElement[] configElements = Platform.getExtensionRegistry()
 				.getConfigurationElementsFor(SshConnectionProviderConstants.EXTENSION_ID);
 
@@ -587,7 +587,9 @@ public class GspnSshSimulator implements ISimulator {
 		for (IConfigurationElement configElement : configElements) {
 			int elementPriority = Integer
 					.valueOf(configElement.getAttribute(SshConnectionProviderConstants.PRIORITY_ATTR));
-			if (elementPriority > currentPriority) {
+			IHostProvider hostProvider = (IHostProvider) configElement
+					.createExecutableExtension(SshConnectionProviderConstants.HOST_PROVIDER_ATTR);
+			if (hostProvider.isEnabled() && elementPriority > currentPriority) {
 				currentPriority = elementPriority;
 				prioritaryElement = configElement;
 			}
