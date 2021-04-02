@@ -111,7 +111,6 @@ public class ReliabilityHadoopTest extends AbstractTest {
 
 		IStatus status = result.getStatus();
 		System.out.println("STatus of translation was: " + status.getSeverity() + "   " + status.getMessage() );
-		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
 		assertNotEquals("Status of translation was ERROR with message " + status.getMessage(), IStatus.ERROR, status.getSeverity());
 		assertNotNull("The translated model in result was null", result.getModel());
 		assertFalse("The result had a list of translated models, but its size was 0", result.getModel().size() == 0);
@@ -301,17 +300,22 @@ public class ReliabilityHadoopTest extends AbstractTest {
 		for (Place p : places) {
 			if (p.getInitialMarking() != null && 
 				p.getInitialMarking().getText() != null &&
-				p.getInitialMarking().getText().intValue() > 1) {
+				p.getInitialMarking().getText().intValue() > 0) {
 				hasNoToken++;	
 			}
 		}
 		assertEquals("Number of places with no token: " + hasNoToken, 2,  hasNoToken);
 		
-		//one of the transitions should be timed with rate the inverse of the MTTF
+		//one of the transitions should be timed with rate the inverse of the MTTF (1/3600)
 		int hasRate = 0;
+		PnmlToolInfoUtils pnutils = new PnmlToolInfoUtils();
+		
 		for (Transition tr : transitions) {
 			if (tr.getToolspecifics() != null &&
-				PnmlToolInfoUtils.isExponential(tr)) {
+				PnmlToolInfoUtils.isExponential(tr) && 
+				pnutils.getTransitionRate(tr).compareTo(Float.valueOf((float) (1.0/3600.0))) == 0 ){
+				/* pnutils.getTransitionRate(tr).doubleValue() == (1.0/3600.0)) { */
+				/* Math.abs(pnutils.getTransitionRate(tr).doubleValue() - (1.0/3600.0)) < (1/10000) ) { */
 				hasRate++;	
 			}
 		}

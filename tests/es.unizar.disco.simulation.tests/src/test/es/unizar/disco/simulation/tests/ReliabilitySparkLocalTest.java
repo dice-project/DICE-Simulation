@@ -110,7 +110,6 @@ public class ReliabilitySparkLocalTest extends AbstractTest {
 
 		IStatus status = result.getStatus();
 		System.out.println("STatus of translation was: " + status.getSeverity() + "   " + status.getMessage() );
-		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
 		assertNotEquals("Status of translation was ERROR with message " + status.getMessage(), IStatus.ERROR, status.getSeverity());
 		assertNotNull("The translated model in result was null", result.getModel());
 		assertFalse("The result had a list of translated models, but its size was 0", result.getModel().size() == 0);

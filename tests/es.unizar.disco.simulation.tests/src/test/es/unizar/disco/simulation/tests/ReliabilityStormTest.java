@@ -109,7 +109,6 @@ public class ReliabilityStormTest extends AbstractTest {
 		assertNotNull("The first element in the list of translated models was null", result.getModel().get(0));
 		assertTrue("The generated net did not contain the expected information", resultIsMeaningful(result));
 
-		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
 	}
 
 	

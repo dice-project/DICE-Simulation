@@ -89,7 +89,7 @@ public class PerformanceConcurrentUsersPlaceTest extends AbstractTest {
 		assertFalse("The result had a list of translated models, but its size was 0", result.getModel().size() == 0);
 		assertNotNull("The first element in the list of translated models was null", result.getModel().get(0));
 
-		saveAnalyzbleModelResult(result,
+		/*saveAnalyzbleModelResult(result,
 				"target/test/resources/outputModelPoseidoniaResources.anm" + "." + XMIResource.XMI_NS);
 	}
 
@@ -150,8 +150,6 @@ public class PerformanceConcurrentUsersPlaceTest extends AbstractTest {
 				invocation.getVariableConfiguration().toPrimitiveAssignments());
 		// invocation.getAnalyzableModel().addAll(result.getModel());
 		invocation.setTraceSet(result.getTraceSet());
-		saveAnalyzbleModelResult(result,
-				"target/test/resources/outputPosidoniaReliabClosed.anm" + "." + XMIResource.XMI_NS);
 
 		DomainMeasure respt = launchAnalysis(definition);
 		assertTrue("The response time measure is null ", respt != null);

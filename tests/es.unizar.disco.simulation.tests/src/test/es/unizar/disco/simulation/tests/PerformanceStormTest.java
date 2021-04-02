@@ -136,7 +136,6 @@ public class PerformanceStormTest extends AbstractTest {
 
 		IStatus status = result.getStatus();
 		System.out.println("Status of translation was: " + status.getSeverity() + "   " + status.getMessage() );
-		saveAnalyzbleModelResult(result, "target/test/resources/output"+UML_FILENAME+".anm" + "." + XMIResource.XMI_NS);
 		assertNotEquals("Status of translation was ERROR", IStatus.ERROR, status.getSeverity());
 		assertNotNull("The translated model in result was null", result.getModel());
 		assertFalse("The result had a list of translated models, but its size was 0", result.getModel().size() == 0);
@@ -225,7 +224,6 @@ public class PerformanceStormTest extends AbstractTest {
 		//invocation.getAnalyzableModel().set(0, result.getModel().get(0));
 		invocation.getAnalyzableModel().addAll(result.getModel());
 		invocation.setTraceSet(result.getTraceSet());
-		saveAnalyzbleModelResult(result, RELATIVE_PATH + INVOCATION_FILENAME + ".anm" + "." + XMIResource.XMI_NS);
 
 		List<DomainMeasure> utilizationList = launchAnalysis(definition);
 		for (DomainMeasure utilization : utilizationList) {
