@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4694077.svg)](https://doi.org/10.5281/zenodo.4694077)
+
 # The DICE Simulation Tool
 
 The ***DICE Simulation Tool*** is a tool for the performance analysis of software systems, initially developed as part of the toolset provided by the european [DICE project](https://github.com/dice-project).
