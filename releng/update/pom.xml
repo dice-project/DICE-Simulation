@@ -25,13 +25,6 @@
 	<groupId>es.unizar.disco.simulation</groupId>
 	<artifactId>update</artifactId>
 	<packaging>eclipse-repository</packaging>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>jboss</id>
-			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
-			<layout>default</layout>
-		</pluginRepository>
-	</pluginRepositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -42,48 +35,6 @@
 					<repositoryName>${site.name}</repositoryName>
 					<finalName>${buildQualifier}</finalName>
 				</configuration>
-			</plugin>
-			<plugin>
-				<!--
-					The use of this plug-in may not be necessary in the future
-					and this plugin tag may be completely removed when bug
-					https://bugs.eclipse.org/bugs/show_bug.cgi?id=453708 is
-					finally fixed and "repository-reference" tags are correctly
-					managed by the tycho-p2-repository-plugin
-					
-					It seems that it is also important that Update Sites in the 
-					eclipse.org domain remain referenced using HTTP and not HTTPS.
-					When HTTPS is used, installation fails with unresolved
-					dependencies errors.
-				-->
-				<groupId>org.jboss.tools.tycho-plugins</groupId>
-				<artifactId>repository-utils</artifactId>
-				<version>${jboss.tycho-plugins.version}</version>
-				<executions>
-					<execution>
-						<id>generate-facade</id>
-						<phase>package</phase>
-						<goals>
-							<goal>generate-repository-facade</goal>
-						</goals>
-						<configuration>
-							<siteTemplateFolder>template</siteTemplateFolder>
-							<symbols>
-								<update.site.name>${site.name}</update.site.name>
-								<update.site.version>${qualifiedVersion}</update.site.version>
-								<target.eclipse.version>${target.version}</target.eclipse.version>
-							</symbols>
-							<associateSites>
-								<site>http://download.eclipse.org/birt/update-site/4.6/</site>
-								<site>http://download.eclipse.org/tools/orbit/downloads/drops/R20201130205003/repository/</site>
-								<site>http://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/</site>
-								<site>https://lip6.github.io/pnmlframework/</site>
-								<site>https://dice-project.github.io/eclipsegraphviz/updates/2.9.0/</site>
-								<site>https://dice-project.github.io/DICE-Profiles/updates/</site>
-							</associateSites>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
