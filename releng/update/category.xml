@@ -18,23 +18,30 @@
    <feature url="features/com.hierynomus.sshj.feature_0.16.0.jar" id="com.hierynomus.sshj.feature" version="0.16.0">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.feature_1.0.0.qualifier.jar" id="es.unizar.disco.simulation.feature" version="1.0.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.feature_1.1.0.qualifier.jar" id="es.unizar.disco.simulation.feature" version="1.1.0.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.greatspn.feature_1.0.0.qualifier.jar" id="es.unizar.disco.simulation.greatspn.feature" version="1.0.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.greatspn.feature_1.1.0.qualifier.jar" id="es.unizar.disco.simulation.greatspn.feature" version="1.1.0.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.quickstart.feature_1.0.0.qualifier.jar" id="es.unizar.disco.simulation.quickstart.feature" version="1.0.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.quickstart.feature_1.1.0.qualifier.jar" id="es.unizar.disco.simulation.quickstart.feature" version="1.1.0.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.simulation.ui.feature_1.0.0.qualifier.jar" id="es.unizar.disco.simulation.ui.feature" version="1.0.0.qualifier">
+   <feature url="features/es.unizar.disco.simulation.ui.feature_1.1.0.qualifier.jar" id="es.unizar.disco.simulation.ui.feature" version="1.1.0.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.ssh.feature_1.0.0.qualifier.jar" id="es.unizar.disco.ssh.feature" version="1.0.0.qualifier">
+   <feature url="features/es.unizar.disco.ssh.feature_1.1.0.qualifier.jar" id="es.unizar.disco.ssh.feature" version="1.1.0.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
-   <feature url="features/es.unizar.disco.ssh.ui.feature_1.0.0.qualifier.jar" id="es.unizar.disco.ssh.ui.feature" version="1.0.0.qualifier">
+   <feature url="features/es.unizar.disco.ssh.ui.feature_1.1.0.qualifier.jar" id="es.unizar.disco.ssh.ui.feature" version="1.1.0.qualifier">
       <category name="DICE - Simulation"/>
    </feature>
    <category-def name="DICE - Simulation" label="DICE - Simulation"/>
+   <repository-reference location="http://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/" enabled="true" />
+   <repository-reference location="https://lip6.github.io/pnmlframework/" enabled="true" />
+   <repository-reference location="https://dice-project.github.io/DICE-Profiles/updates/" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/birt/update-site/4.6/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/xwt/milestones-1.7.0/1.7.0-S/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/modeling/mdt/papyrus/updates/releases/2021-09/" enabled="true" />
 </site>
