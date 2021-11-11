@@ -77,6 +77,14 @@
         <repository
             url="https://dice-project.github.io/DICE-Simulation/updates/"/>
       </setupTask>
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Papyrus - Latest">
+        <requirement
+            name="org.eclipse.papyrus.sdk.feature.feature.group"/>
+        <repository
+            url="https://download.eclipse.org/modeling/mdt/papyrus/updates/releases/latest/"/>
+      </setupTask>
     </version>
     <version
         name="0.7.2"
