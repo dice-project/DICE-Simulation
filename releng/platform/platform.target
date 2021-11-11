@@ -50,6 +50,7 @@
 		<unit id="org.eclipse.emf.sdk.feature.group" version="2.27.0.v20210816-1137"/>
 		<unit id="org.eclipse.ocl.examples.feature.group" version="6.16.0.v20210907-2013"/>
 		<unit id="org.eclipse.uml2.sdk.feature.group" version="5.5.2.v20210228-1829"/>
+		<unit id="org.eclipse.jdt.feature.group" version="3.18.900.v20210906-0500"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<repository location="https://download.eclipse.org/xwt/milestones-1.7.0/1.7.0-S/"/>
