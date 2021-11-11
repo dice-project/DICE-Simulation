@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Configuration
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    label="DICE Simulation Installation Configuration">
+  <installation
+      name="dice.simulation.installation"
+      label="DICE Simulation Installation">
+    <productVersion
+        href="dice.simulation.catalog.setup#//@products[name='es.unizar.disco.dice.simulation']/@versions[name='1.1.0']"/>
+    <description>DICE Simulation Tool Installation.</description>
+  </installation>
+  <description>The DICE Simulation Configuration allows installing the DICE Simulation Tool.</description>
+</setup:Configuration>
