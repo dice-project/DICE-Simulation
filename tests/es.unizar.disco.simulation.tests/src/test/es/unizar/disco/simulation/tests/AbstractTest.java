@@ -46,7 +46,6 @@ import org.eclipse.uml2.uml.Stereotype;
 import org.eclipse.uml2.uml.UMLPlugin;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.osgi.framework.BundleException;
 
 import com.masdes.dam.Basic_Data_Types.Basic_Data_TypesPackage;
 import com.masdes.dam.Complex_Data_Types.Complex_Data_TypesPackage;
@@ -58,7 +57,6 @@ import es.unizar.disco.dice.DPIM.DPIMPackage;
 import es.unizar.disco.simulation.models.builders.IAnalyzableModelBuilder.ModelResult;
 import es.unizar.disco.simulation.models.definition.SimulationDefinition;
 import es.unizar.disco.simulation.models.invocation.SimulationInvocation;
-import es.unizar.disco.simulation.registry.SimulationInvocationsRegistry;
 import test.es.unizar.disco.simulation.tests.connection.TestConnectionProvider;
 
 public abstract class AbstractTest {
@@ -70,10 +68,6 @@ public abstract class AbstractTest {
 	public static SimulationDefinition definition;
 	public static SimulationInvocation invocation;
 
-	// final static URI baseUri =
-	// URI.createFileURI(SimulationInvocationsRegistry.FILES_DIRECTORY.getPath());
-	final static URI baseUri = URI.createFileURI(SimulationInvocationsRegistry.FILES_DIRECTORY.getPath());
-	
 	final static String RELATIVE_PATH = "reliabilityPosidonia/";
 	
 	final static String DEFINITION_UUID = "cb745d8a-44f7-46de-9167-7ce0e822f048";
