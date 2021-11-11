@@ -18,7 +18,7 @@
 <feature
       id="es.unizar.disco.ssh.feature"
       label="SSH Connection Provider"
-      version="1.0.0.qualifier"
+      version="1.1.0.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -241,7 +241,7 @@ any resulting litigation.
 
    <requires>
       <import plugin="com.hierynomus.sshj" version="0.16.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.core" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.core" version="1.1.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.20.0" match="greaterOrEqual"/>
    </requires>
 
@@ -249,7 +249,7 @@ any resulting litigation.
          id="es.unizar.disco.ssh"
          download-size="0"
          install-size="0"
-         version="1.0.0.qualifier"
+         version="1.1.0.qualifier"
          unpack="false"/>
 
 </feature>
