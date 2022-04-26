@@ -1025,8 +1025,9 @@ helper NFP_Duration::value() : Real {
 	var value : Real;	
 	if (self.value.oclIsUndefined().not()) {
 		value := self.value;
+	} else {
+		value := self.expr.eval(vars.vars()).toReal();
 	};
-	value := self.expr.eval(vars.vars()).toReal();
 	if (self.unit.oclIsUndefined().not()) {
 		map baseTimeUnit("s");			
 		value := value.convert(self.unit, "s");
@@ -1038,8 +1039,9 @@ helper NFP_Frequency::value() : Real {
 	var value : Real;	
 	if (self.value.oclIsUndefined().not()) {
 		value := self.value;
+	} else {
+		value := self.expr.eval(vars.vars()).toReal();
 	};
-	value := self.expr.eval(vars.vars()).toReal();
 	if (self.unit.oclIsUndefined().not()) {
 		map baseTimeUnit("s");
 		value := value.convert(self.unit, "Hz");
