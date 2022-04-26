@@ -2,11 +2,12 @@
 <?compositeMetadataRepository version='1.0.0'?>
 <repository name='DICE Simulation Composite Update Site' type='org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository' version='1'>
   <properties size='2'>
-    <property name='p2.timestamp' value='1636634958217'/>
+    <property name='p2.timestamp' value='1650978787351'/>
     <property name='p2.atomic.composite.loading' value='true'/>
   </properties>
-  <children size='6'>
+  <children size='7'>
     <child location='https://dice-project.github.io/DICE-Simulation-Utils/updates/'/>
+    <child location='https://dice-project.github.io/DICE-Simulation/updates/1.1.1'/>
     <child location='https://dice-project.github.io/DICE-Simulation/updates/1.1.0'/>
     <child location='https://dice-project.github.io/DICE-Simulation/updates/1.0.0'/>
     <child location='https://dice-project.github.io/DICE-Simulation/updates/0.7.2'/>
