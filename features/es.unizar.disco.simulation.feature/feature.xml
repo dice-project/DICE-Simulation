@@ -17,7 +17,7 @@
 <feature
       id="es.unizar.disco.simulation.feature"
       label="DICE Simulation Tools"
-      version="1.1.0.qualifier"
+      version="1.1.1.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -265,62 +265,63 @@ any resulting litigation.
       <import feature="ro.ieat.secureuml.profile.feature" version="0.13.1.201801221725" match="greaterOrEqual"/>
       <import feature="org.eclipse.papyrus.extra.marte.feature" version="1.2.0.201703081153"/>
       <import feature="com.masdes.dam.profile.feature" version="0.13.1.201801221725" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.core"/>
    </requires>
 
    <plugin
          id="es.unizar.disco.core"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnextensions"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2m"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.pnml.m2t"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation.models"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation.models.edit"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
    <plugin
          id="es.unizar.disco.simulation.local"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="1.1.1.qualifier"
          unpack="false"/>
 
 </feature>
