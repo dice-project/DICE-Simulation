@@ -5,6 +5,7 @@
 			<repository compressed="false" location="${basedir}" name="DICE Simulation Composite Update Site" />
 			<add>
 				<repository location="https://dice-project.github.io/DICE-Simulation-Utils/updates/"/>
+				<repository location="https://dice-project.github.io/DICE-Simulation/updates/1.2.0"/>
 				<repository location="https://dice-project.github.io/DICE-Simulation/updates/1.1.1"/>
 				<repository location="https://dice-project.github.io/DICE-Simulation/updates/1.1.0"/>
 				<repository location="https://dice-project.github.io/DICE-Simulation/updates/1.0.0"/>
