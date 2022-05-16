@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
 Bundle-SymbolicName: es.unizar.disco.simulation.tests;singleton:=true
-Bundle-Version: 1.1.1.qualifier
+Bundle-Version: 1.2.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.junit;bundle-version="4.13.0",
  org.eclipse.core.runtime;bundle-version="3.20.0",
@@ -11,19 +11,19 @@ Require-Bundle: org.junit;bundle-version="4.13.0",
  org.eclipse.uml2.uml.resources;bundle-version="5.5.0",
  org.eclipse.papyrus.marte.static.profile;bundle-version="1.2.0",
  org.eclipse.jface;bundle-version="3.22.0",
- fr.lip6.pnml.framework.ptnet;bundle-version="2.2.15",
- fr.lip6.pnml.framework.coremodel;bundle-version="2.2.15",
+ fr.lip6.pnml.framework.ptnet;bundle-version="2.2.17",
+ fr.lip6.pnml.framework.coremodel;bundle-version="2.2.17",
  com.masdes.dam.static.profile;bundle-version="0.13.1",
  ro.ieat.secureuml.profile;bundle-version="0.13.1",
  es.unizar.disco.dice.static.profile;bundle-version="0.13.1",
- es.unizar.disco.ssh.ui;bundle-version="1.1.1",
- es.unizar.disco.pnextensions;bundle-version="1.1.1",
- es.unizar.disco.pnml.m2t;bundle-version="1.1.1",
- es.unizar.disco.simulation.greatspn.ssh;bundle-version="1.1.1",
- es.unizar.disco.pnml.m2m;bundle-version="1.1.1",
- es.unizar.disco.simulation.local;bundle-version="1.1.1",
- es.unizar.disco.simulation;bundle-version="1.1.1",
- es.unizar.disco.simulation.models;bundle-version="1.1.1",
- es.unizar.disco.ssh;bundle-version="1.1.1"
+ es.unizar.disco.ssh.ui;bundle-version="1.2.0",
+ es.unizar.disco.pnextensions;bundle-version="1.2.0",
+ es.unizar.disco.pnml.m2t;bundle-version="1.2.0",
+ es.unizar.disco.simulation.greatspn.ssh;bundle-version="1.2.0",
+ es.unizar.disco.pnml.m2m;bundle-version="1.2.0",
+ es.unizar.disco.simulation.local;bundle-version="1.2.0",
+ es.unizar.disco.simulation;bundle-version="1.2.0",
+ es.unizar.disco.simulation.models;bundle-version="1.2.0",
+ es.unizar.disco.ssh;bundle-version="1.2.0"
 Automatic-Module-Name: es.unizar.disco.simulation.tests
 Bundle-ActivationPolicy: lazy

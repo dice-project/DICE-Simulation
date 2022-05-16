@@ -17,7 +17,7 @@
 <feature
       id="es.unizar.disco.simulation.quickstart.feature"
       label="DICE Simulation Tools Quick Start"
-      version="1.1.1.qualifier"
+      version="1.2.0.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -247,23 +247,23 @@ any resulting litigation.
       <import plugin="org.eclipse.ui.intro.universal" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.io" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.intro.quicklinks" version="1.1.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.core" version="1.1.1" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.pnml.m2m" version="1.1.1" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.ssh.ui" version="1.1.1" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.core" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnml.m2m" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.ssh.ui" version="1.2.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="es.unizar.disco.simulation.quickstart"
          download-size="0"
          install-size="0"
-         version="1.1.1.qualifier"
+         version="1.2.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.eclipse.ui.intro.fragment"
          download-size="0"
          install-size="0"
-         version="1.1.1.qualifier"
+         version="1.2.0.qualifier"
          fragment="true"
          unpack="false"/>
 
