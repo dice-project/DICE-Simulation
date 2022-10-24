@@ -20,6 +20,7 @@
 	<properties>
 		<tycho.version>2.5.0</tycho.version>
 		<org.eclipse.acceleo.maven.version>3.5.0-SNAPSHOT</org.eclipse.acceleo.maven.version>
+		<maven.assembly.version>3.4.2</maven.assembly.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<site.name>DICE Simulation Tool</site.name>
 		<target.version>2020-12</target.version>

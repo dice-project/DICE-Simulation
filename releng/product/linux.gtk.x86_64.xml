@@ -1,0 +1,33 @@
+<assembly
+	xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	<id>linux.gtk.x86_64</id>
+	<formats>
+		<format>tar.gz</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<fileSets>
+		<fileSet>
+			<outputDirectory>.</outputDirectory>
+			<directory>${project.build.directory}/products/es.unizar.disco.simulation.product/linux/gtk/x86_64</directory>
+			<excludes>
+				<exclude>plugins/org.eclipse.justj.openjdk.hotspot.jre.full.*/jre/bin/**</exclude>
+				<exclude>plugins/org.eclipse.justj.openjdk.hotspot.jre.full.*/jre/lib/jexec</exclude>
+				<exclude>plugins/org.eclipse.justj.openjdk.hotspot.jre.full.*/jre/lib/jspawnhelper</exclude>
+				<exclude>dice-simulation</exclude>
+			</excludes>
+		</fileSet>
+		<fileSet>
+			<outputDirectory>.</outputDirectory>
+			<directory>${project.build.directory}/products/es.unizar.disco.simulation.product/linux/gtk/x86_64</directory>
+			<includes>
+				<include>plugins/org.eclipse.justj.openjdk.hotspot.jre.full.*/jre/bin/**</include>
+				<include>plugins/org.eclipse.justj.openjdk.hotspot.jre.full.*/jre/lib/jexec</include>
+				<include>plugins/org.eclipse.justj.openjdk.hotspot.jre.full.*/jre/lib/jspawnhelper</include>
+				<include>dice-simulation</include>
+			</includes>
+			<fileMode>0755</fileMode>
+		</fileSet>
+	</fileSets>
+</assembly>
