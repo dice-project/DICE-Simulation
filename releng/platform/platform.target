@@ -7,7 +7,7 @@ Remember to update the category.xml file and setup files with up-to-date Updates
 --><target includeMode="feature" name="DICE Simulation Tools SDK Target Platform" sequenceNumber="32">
 <locations>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="http://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/"/>
+		<repository location="https://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/"/>
 		<unit id="org.eclipse.papyrus.extra.marte.feature.feature.group" version="1.2.0.201703081153"/>
 		<unit id="org.eclipse.papyrus.extra.marte.feature.source.feature.group" version="1.2.0.201703081153"/>
 	</location>
@@ -35,7 +35,7 @@ Remember to update the category.xml file and setup files with up-to-date Updates
 		<unit id="org.junit" version="4.13.0.v20200204-1500"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="http://download.eclipse.org/releases/2021-09"/>
+		<repository location="https://download.eclipse.org/releases/2021-09"/>
 		<unit id="org.eclipse.acceleo.feature.group" version="3.7.11.202102190929"/>
 		<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.12.1.v20210218-2134"/>
 		<unit id="org.eclipse.emf.sdk.feature.group" version="2.27.0.v20210816-1137"/>
@@ -53,7 +53,7 @@ Remember to update the category.xml file and setup files with up-to-date Updates
 		<unit id="org.eclipse.papyrus.sdk.feature.feature.group" version="5.2.0.202109161249"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="http://download.eclipse.org/eclipse/updates/4.21"/>
+		<repository location="https://download.eclipse.org/eclipse/updates/4.21"/>
 		<unit id="org.eclipse.platform.sdk" version="4.21.0.I20210906-0500"/>
 		<unit id="org.eclipse.equinox.executable.feature.group" version="3.8.1300.v20210828-0802"/>
 	</location>
