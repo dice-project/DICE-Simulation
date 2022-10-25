@@ -12,17 +12,6 @@ Remember to update the category.xml file and setup files with up-to-date Updates
 		<unit id="org.eclipse.papyrus.extra.marte.feature.source.feature.group" version="1.2.0.201703081153"/>
 	</location>
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-		<repository location="https://lip6.github.io/pnmlframework/"/>
-		<unit id="fr.lip6.pnml.framework.sdk.feature.group" version="2.2.17.v20221018-145406"/>
-		<unit id="fr.lip6.pnml.framework.coremodel.feature.feature.group" version="2.2.17.v20221018-145406"/>
-		<unit id="fr.lip6.pnml.framework.hlpn.feature.feature.group" version="2.2.17.v20221018-145406"/>
-		<unit id="fr.lip6.pnml.framework.pthlpng.feature.feature.group" version="2.2.17.v20221018-145406"/>
-		<unit id="fr.lip6.pnml.framework.ptnet.feature.feature.group" version="2.2.17.v20221018-145406"/>
-		<unit id="fr.lip6.pnml.framework.symmetricnet.feature.feature.group" version="2.2.17.v20221018-145406"/>
-		<unit id="fr.lip6.pnml.nupn.toolinfo.feature.feature.group" version="2.2.17.v20221018-145406"/>
-		<unit id="fr.lip6.pnml.framework.utils.feature.feature.group" version="2.2.17.v20221018-145406"/>
-	</location>
-	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<repository location="https://dice-project.github.io/DICE-Profiles/updates"/>
 		<unit id="com.masdes.dam.profile.feature.feature.group" version="0.13.1.201801221725"/>
 		<unit id="com.masdes.dam.profile.ui.feature.feature.group" version="0.13.1.201801221725"/>
@@ -71,6 +60,10 @@ Remember to update the category.xml file and setup files with up-to-date Updates
 	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<repository location="https://download.eclipse.org/justj/jres/11/updates/release"/>
 		<unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="11.0.14.v20220201-1322"/>
+	</location>
+	<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<repository location="https://raw.githubusercontent.com/lip6/pnmlframework/2.2.16/"/>
+		<unit id="fr.lip6.pnml.framework.sdk.feature.group" version="2.2.16"/>
 	</location>
 </locations>
 </target>
