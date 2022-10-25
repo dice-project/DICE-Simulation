@@ -60,12 +60,12 @@ public class ExportDialog extends TitleAreaDialog {
 
 	public enum Device {
 		// @formatter:off
+//		PDF("dv.PDF"),
 		PNG("dv.PNG"),
 		BMP("dv.BMP"), 
 		GIF("dv.GIF"), 
 		JPG("dv.JPG"), 
-		SVG("dv.SVG"), 
-		PDF("dv.PDF");
+		SVG("dv.SVG"); 
 		// @formatter:on
 
 		private String device;
