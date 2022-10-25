@@ -40,7 +40,7 @@
    <repository-reference location="https://archive.eclipse.org/modeling/mdt/papyrus/updates/releases/neon/2.0.3/extra/" enabled="true" />
    <repository-reference location="https://raw.githubusercontent.com/lip6/pnmlframework/2.2.16/" enabled="true" />
    <repository-reference location="https://dice-project.github.io/DICE-Profiles/updates/" enabled="true" />
-   <repository-reference location="https://download.eclipse.org/birt/update-site/4.6/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/birt/update-site/4.10.0/" enabled="true" />
    <repository-reference location="https://download.eclipse.org/tools/orbit/downloads/drops/R20210825222808/repository/" enabled="true" />
    <repository-reference location="https://download.eclipse.org/xwt/milestones-1.7.0/1.7.0-S/" enabled="true" />
    <repository-reference location="https://download.eclipse.org/modeling/mdt/papyrus/updates/releases/2021-09/" enabled="true" />
