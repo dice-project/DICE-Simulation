@@ -17,7 +17,7 @@
 <feature
       id="es.unizar.disco.simulation.greatspn.feature"
       label="GreatSPN-Through-SSH Simulator"
-      version="1.2.0.qualifier"
+      version="1.3.0.qualifier"
       provider-name="DisCo - Unizar">
 
    <description url="https://github.com/dice-project/DICE-Simulation">
@@ -244,19 +244,19 @@ any resulting litigation.
       <import plugin="org.apache.commons.io" version="2.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.uml2.uml" version="5.5.0" match="greaterOrEqual"/>
       <import plugin="es.unizar.disco.simulation.ui"/>
-      <import plugin="es.unizar.disco.core" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.ssh" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.simulation" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.pnml.m2t" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.pnextensions" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="es.unizar.disco.pnml.m2m" version="1.2.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.core" version="1.3.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.ssh" version="1.3.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.simulation" version="1.3.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnml.m2t" version="1.3.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnextensions" version="1.3.0" match="greaterOrEqual"/>
+      <import plugin="es.unizar.disco.pnml.m2m" version="1.3.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="es.unizar.disco.simulation.greatspn.ssh"
          download-size="0"
          install-size="0"
-         version="1.2.0.qualifier"
+         version="1.3.0.qualifier"
          unpack="false"/>
 
 </feature>
